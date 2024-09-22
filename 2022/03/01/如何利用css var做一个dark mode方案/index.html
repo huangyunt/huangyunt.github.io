@@ -28,7 +28,7 @@
 <meta property="og:description" content="背景 希望利用 css 变量实现 dark 和 light 模式的切换 原有的工程都是 less 形式定义的 css，并且还有 less 的函数，比如 fade 等，不想手动改 less 的函数，希望该插件能支持解析 less 函数 需要支持局部不切换模式，比如某个区域是固定的 light 模式  步骤第一步：less 变量转换成 css 变量这一步比较简单，less 已经提供了字段用于转换，只需">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-03-01T02:00:00.000Z">
-<meta property="article:modified_time" content="2024-09-22T02:28:15.761Z">
+<meta property="article:modified_time" content="2024-09-22T08:38:59.580Z">
 <meta property="article:author" content="Huangyunze">
 <meta name="twitter:card" content="summary">
 
@@ -211,7 +211,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-09-22 10:28:15" itemprop="dateModified" datetime="2024-09-22T10:28:15+08:00">2024-09-22</time>
+      <time title="Modified: 2024-09-22 16:38:59" itemprop="dateModified" datetime="2024-09-22T16:38:59+08:00">2024-09-22</time>
     </span>
 
   
@@ -234,6 +234,7 @@
 
 <p><code>LessGlobalCSSVars</code>大概长这个样子</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">&quot;bg-body&quot;</span>: <span class="string">&quot;var(--bg-body)&quot;</span>,</span><br><span class="line">    <span class="string">&quot;static-white&quot;</span>: <span class="string">&quot;var(--static-white)&quot;</span>,</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
 
 <p>less 会将<code>LessGlobalCSSVars</code>的映射关系追加到 less 文件前，在进行变量查找的时候就会替换成相应的 css 变量</p>
 <p>比如，下面的 less 文件</p>
