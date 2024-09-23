@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha256-5eIC48iZUHmSlSUz9XtjRyK2mzQkHScZY1WdMaoz74E=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.21.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="写在前面最近看了两本书《CSS揭秘》和《CSS权威指南》恶补一下CSS（自己真是菜到天际），记录一些有意思的问题">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSS">
+<meta property="og:url" content="http://example.com/2021/02/07/CSS/index.html">
+<meta property="og:site_name" content="Learning Path">
+<meta property="og:description" content="写在前面最近看了两本书《CSS揭秘》和《CSS权威指南》恶补一下CSS（自己真是菜到天际），记录一些有意思的问题">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="c:\Users\H\AppData\Roaming\Typora\typora-user-images\image-20211120195130235.png">
+<meta property="og:image" content="c:\Users\H\AppData\Roaming\Typora\typora-user-images\image-20211120195056819.png">
+<meta property="og:image" content="c:\Users\H\AppData\Roaming\Typora\typora-user-images\image-20211120202203417.png">
+<meta property="og:image" content="c:\Users\H\AppData\Roaming\Typora\typora-user-images\image-20211120202344779.png">
+<meta property="og:image" content="c:\Users\H\AppData\Roaming\Typora\typora-user-images\image-20211120194334386.png">
+<meta property="article:published_time" content="2021-02-07T02:00:00.000Z">
+<meta property="article:modified_time" content="2024-09-23T04:24:25.692Z">
+<meta property="article:author" content="Huangyunze">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="c:\Users\H\AppData\Roaming\Typora\typora-user-images\image-20211120195130235.png">
+
+
+<link rel="canonical" href="http://example.com/2021/02/07/CSS/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2021/02/07/CSS/","path":"2021/02/07/CSS/","title":"CSS"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>CSS | Learning Path</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Learning Path</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Always learning</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-page"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Page</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">7</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">25</span></a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="tags fa-fw"></i>Tags<span class="badge">4</span></a></li><li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>Schedule</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="Searching..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%99%E5%9C%A8%E5%89%8D%E9%9D%A2"><span class="nav-number">1.</span> <span class="nav-text">写在前面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-CSS%E9%AB%98%E5%BA%A6%E7%94%B1%E4%BB%80%E4%B9%88%E5%86%B3%E5%AE%9A%EF%BC%9F"><span class="nav-number">2.</span> <span class="nav-text">1. CSS高度由什么决定？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9D%97%E7%BA%A7%E5%85%83%E7%B4%A0"><span class="nav-number">2.1.</span> <span class="nav-text">块级元素</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%9D%97%E7%BA%A7%E5%85%83%E7%B4%A0%E4%B8%8D%E8%AE%BE%E7%BD%AE%E9%AB%98%E5%BA%A6%EF%BC%8C%E5%86%85%E6%9C%89%E5%9D%97%E7%BA%A7%E5%85%83%E7%B4%A0%E6%97%B6"><span class="nav-number">2.1.1.</span> <span class="nav-text">块级元素不设置高度，内有块级元素时</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AD%90%E5%85%83%E7%B4%A0%E8%AE%BE%E7%BD%AEmargin%E6%97%B6"><span class="nav-number">2.1.2.</span> <span class="nav-text">子元素设置margin时</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-CSS%E5%AE%BD%E5%BA%A6%E7%94%B1%E4%BB%80%E4%B9%88%E5%86%B3%E5%AE%9A%EF%BC%9F"><span class="nav-number">3.</span> <span class="nav-text">2. CSS宽度由什么决定？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A1%8C%E5%86%85-%E8%A1%8C%E5%86%85%E5%9D%97%E5%85%83%E7%B4%A0"><span class="nav-number">3.1.</span> <span class="nav-text">行内&#x2F;行内块元素</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9D%97%E7%BA%A7%E5%85%83%E7%B4%A0-1"><span class="nav-number">3.2.</span> <span class="nav-text">块级元素</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E4%B8%BA%E4%BB%80%E4%B9%88margin-top-padding-top%E8%AE%BE%E7%BD%AE%E7%99%BE%E5%88%86%E6%AF%94%E5%9F%BA%E4%BA%8E%E7%88%B6%E5%85%83%E7%B4%A0%E7%9A%84%E5%AE%BD%E5%BA%A6%E8%AE%A1%E7%AE%97%E7%9A%84%EF%BC%9F"><span class="nav-number">4.</span> <span class="nav-text">3. 为什么margin-top&#x2F;padding-top设置百分比基于父元素的宽度计算的？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-flex%EF%BC%9A1"><span class="nav-number">5.</span> <span class="nav-text">4. flex：1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-display%EF%BC%9Anone%EF%BC%8Cvisibility%EF%BC%9Ahidden%EF%BC%8Copacity%EF%BC%9A0-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">6.</span> <span class="nav-text">5. display：none，visibility：hidden，opacity：0  的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#display-none"><span class="nav-number">6.1.</span> <span class="nav-text">display: none;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#visibility-hidden"><span class="nav-number">6.2.</span> <span class="nav-text">visibility: hidden;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#opacity-0"><span class="nav-number">6.3.</span> <span class="nav-text">opacity: 0;</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Huangyunze"
+      src="https://avatars.githubusercontent.com/u/73687768?v=4">
+  <p class="site-author-name" itemprop="name">Huangyunze</p>
+  <div class="site-description" itemprop="description">Code for a lifetime</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/huangyunt" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;huangyunt" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:973113137@qq.com" title="E-Mail → mailto:973113137@qq.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://example.com/" title="https:&#x2F;&#x2F;example.com">Title</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/02/07/CSS/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/73687768?v=4">
+      <meta itemprop="name" content="Huangyunze">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Learning Path">
+      <meta itemprop="description" content="Code for a lifetime">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="CSS | Learning Path">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          CSS
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-02-07 10:00:00" itemprop="dateCreated datePublished" datetime="2021-02-07T10:00:00+08:00">2021-02-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-09-23 12:24:25" itemprop="dateModified" datetime="2024-09-23T12:24:25+08:00">2024-09-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/CSS/" itemprop="url" rel="index"><span itemprop="name">CSS</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h3 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h3><p>最近看了两本书《CSS揭秘》和《CSS权威指南》恶补一下CSS（自己真是菜到天际），记录一些有意思的问题</p>
+<span id="more"></span>
+
+<h3 id="1-CSS高度由什么决定？"><a href="#1-CSS高度由什么决定？" class="headerlink" title="1. CSS高度由什么决定？"></a>1. CSS高度由什么决定？</h3><h4 id="块级元素"><a href="#块级元素" class="headerlink" title="块级元素"></a>块级元素</h4><p>一个块级元素div的高度一般是与自身的<strong>CSS样式</strong>和<strong>内部元素的高度总和</strong>有关</p>
+<ul>
+<li><code>div</code>设置了height后，整个盒模型的高度基本确定，其内部元素再高也无法改变<code>div</code>的高度</li>
+<li>当<code>div</code>不设置height时，其高度和内部文档流元素高度的总和有关</li>
+</ul>
+<h5 id="块级元素不设置高度，内有块级元素时"><a href="#块级元素不设置高度，内有块级元素时" class="headerlink" title="块级元素不设置高度，内有块级元素时"></a>块级元素不设置高度，内有块级元素时</h5><p>会被子元素的height、padding、border撑起来</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css">    *&#123;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">margin</span>: <span class="number">0</span>;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">padding</span>: <span class="number">0</span>;</span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css">    <span class="selector-class">.parent</span>&#123;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">outline</span>: <span class="number">5px</span> solid red;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">width</span>: <span class="number">300px</span>;</span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css">    <span class="selector-class">.child</span>&#123;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">height</span>:<span class="number">400px</span>;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">border</span>: <span class="number">5px</span> solid green;</span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;parent&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;child&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>如图，父级元素不设高度，高度为子元素height+border</p>
+<div style="display: flex; justify-content: center; align-items: center;">
+    <img src="C:\Users\H\AppData\Roaming\Typora\typora-user-images\image-20211120195130235.png"
+        alt="image-20211120195130235" style="zoom:50%;" />
+    <img src="C:\Users\H\AppData\Roaming\Typora\typora-user-images\image-20211120195056819.png"
+        alt="image-20211120195056819" style="zoom:50%;" />
+</div>
+
+
+
+<h5 id="子元素设置margin时"><a href="#子元素设置margin时" class="headerlink" title="子元素设置margin时"></a>子元素设置margin时</h5><p>父元素高度无法被子元素垂直方向上margin撑开</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css">    * &#123;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">margin</span>: <span class="number">0px</span>;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">padding</span>: <span class="number">0px</span>;</span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css"></span></span><br><span class="line"><span class="language-css">    <span class="selector-class">.parent</span> &#123;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">outline</span>: <span class="number">5px</span> solid red;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">width</span>: <span class="number">300px</span>;</span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css"></span></span><br><span class="line"><span class="language-css">    <span class="selector-class">.child</span> &#123;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">height</span>: <span class="number">400px</span>;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">border</span>: <span class="number">5px</span> solid green;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">margin</span>: <span class="number">20px</span>;</span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;parent&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;child&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<div style="display: flex; justify-content: center; align-items: center;">
+    <img src="C:\Users\H\AppData\Roaming\Typora\typora-user-images\image-20211120202203417.png"
+        alt="image-20211120202203417" style="zoom:50%;" />
+    <img src="C:\Users\H\AppData\Roaming\Typora\typora-user-images\image-20211120202344779.png"
+        alt="image-20211120202344779" style="zoom:50%;" />
+</div>
+
+<p><strong>解决方案：父元素设置border&#x2F;padding&#x2F;overflow：hidden</strong></p>
+<p><strong>总结：父元素高度能被子元素的height、border、padding撑开，如果父元元素在垂直方向上有<code>border</code>,<code>padding</code>（只要在逻辑上存在，不论大小）以及<code>overflow:hidden</code>，都能被子元素的<code>margin</code>撑开，否则只能撑开父元素的宽度</strong></p>
+<h3 id="2-CSS宽度由什么决定？"><a href="#2-CSS宽度由什么决定？" class="headerlink" title="2. CSS宽度由什么决定？"></a>2. CSS宽度由什么决定？</h3><h4 id="行内-行内块元素"><a href="#行内-行内块元素" class="headerlink" title="行内&#x2F;行内块元素"></a>行内&#x2F;行内块元素</h4><p>行内元素&#x2F;行内块的宽度是由它的内容决定的，行内元素不能设置宽高</p>
+<h4 id="块级元素-1"><a href="#块级元素-1" class="headerlink" title="块级元素"></a>块级元素</h4><p>一个块级元素宽度当不设置样式时默认为父级元素的100%<strong>（这个100%是自适应的，并不相当于width：100%）</strong></p>
+<h3 id="3-为什么margin-top-padding-top设置百分比基于父元素的宽度计算的？"><a href="#3-为什么margin-top-padding-top设置百分比基于父元素的宽度计算的？" class="headerlink" title="3. 为什么margin-top&#x2F;padding-top设置百分比基于父元素的宽度计算的？"></a>3. 为什么margin-top&#x2F;padding-top设置百分比基于父元素的宽度计算的？</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css">        <span class="selector-class">.parent</span> &#123;</span></span><br><span class="line"><span class="language-css">            <span class="attribute">width</span>: <span class="number">300px</span>;</span></span><br><span class="line"><span class="language-css">            <span class="attribute">height</span>: <span class="number">400px</span>;</span></span><br><span class="line"><span class="language-css">            <span class="attribute">border</span>: <span class="number">5px</span> solid red;</span></span><br><span class="line"><span class="language-css">        &#125;</span></span><br><span class="line"><span class="language-css">        <span class="selector-class">.child</span> &#123;</span></span><br><span class="line"><span class="language-css">            <span class="attribute">height</span>: <span class="number">200px</span>;</span></span><br><span class="line"><span class="language-css">            <span class="attribute">margin-top</span>: <span class="number">50%</span>;</span></span><br><span class="line"><span class="language-css">            <span class="attribute">background-color</span>: green;</span></span><br><span class="line"><span class="language-css">        &#125;</span></span><br><span class="line"><span class="language-css">    </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;parent&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;child&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<img src="C:\Users\H\AppData\Roaming\Typora\typora-user-images\image-20211120194334386.png" alt="image-20211120194334386" style="zoom:50%;" />
+
+<p>这里利用margin-top：50%将子元素挤到最下方贴底，然而这里的百分比是相对于父级宽度计算的。</p>
+<p>CSS权威指南中的解释：若是相对于父元素的高度计算会形成死循环。<br><em><strong>“我们认为，正常流中的大多数元素都会足够高以包含其后代元素（包括外边距），如果一个元素的上下外边距是父元素的height的百分数，就可能导致一个无限循环，父元素的height会增加，以适应后代元素上下外边距的增加，而相应的，上下外边距因为父元素height的增加也会增加，形成无限循环。”</strong></em></p>
+<p><strong>本质上是因为css中高度是可以自适应的，基于父级高度的百分比计算会导致无限循环的问题</strong>。</p>
+<h3 id="4-flex：1"><a href="#4-flex：1" class="headerlink" title="4. flex：1"></a>4. flex：1</h3><p><code>flex：x</code> 相当于 <code>flex-grow: x，flex-shrink：1，flex-basis：0%；</code></p>
+<p><code> flex-grow: 定义项目的放大比例,0为不放大</code></p>
+<p><code>flex-shrink: 定义了项目的缩小比例，默认为1，即如果空间不足，该项目将缩小。 </code></p>
+<p><code>flex-basis: 定义了在分配多余空间之前，项目占据的主轴空间。浏览器根据这个属性，计算主轴是否有多余空间。它的默认值为auto，即项目的本来大小。   </code></p>
+<figure class="highlight plaintext"><figcaption><span>``` 的含义是分配**主轴**方向上的剩余空间！</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">所以对于竖直的两栏布局，只需要改变一下主轴方向即可</span><br><span class="line"></span><br><span class="line">```html</span><br><span class="line">&lt;style&gt;</span><br><span class="line">    body &#123;</span><br><span class="line">        height: 100%;</span><br><span class="line">        width: 100%;</span><br><span class="line">    &#125;</span><br><span class="line">    .f-box &#123;</span><br><span class="line">        display: flex;</span><br><span class="line">        flex-direction: column;</span><br><span class="line">        border: 5px solid gray;</span><br><span class="line">        height: 100%;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    .top &#123;</span><br><span class="line">        height: 100px;</span><br><span class="line">        background-color: red;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    .bot &#123;</span><br><span class="line">        flex: 1;</span><br><span class="line">        background-color:blue;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line"></span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;div class=&quot;f-box&quot;&gt;</span><br><span class="line">    &lt;div class=&quot;top&quot;&gt;&lt;/div&gt;</span><br><span class="line">    &lt;div class=&quot;bot&quot;&gt;&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="5-display：none，visibility：hidden，opacity：0-的区别"><a href="#5-display：none，visibility：hidden，opacity：0-的区别" class="headerlink" title="5. display：none，visibility：hidden，opacity：0  的区别"></a>5. <code>display：none，visibility：hidden，opacity：0</code>  的区别</h3><h4 id="display-none"><a href="#display-none" class="headerlink" title="display: none;"></a>display: none;</h4><ol>
+<li>DOM 结构：浏览器不会渲染 display 属性为 none 的元素，不占据空间；</li>
+<li><strong>事件监听：无法进行 DOM 事件监听；</strong></li>
+<li>性能：动态改变此属性时会引起重排，性能较差；</li>
+<li>继承：不会被子元素继承，毕竟子类也不会被渲染；</li>
+<li>transition：transition 不支持 display。</li>
+</ol>
+<h4 id="visibility-hidden"><a href="#visibility-hidden" class="headerlink" title="visibility: hidden;"></a>visibility: hidden;</h4><ol>
+<li>DOM 结构：元素被隐藏，但是会被渲染不会消失，占据空间；</li>
+<li><strong>事件监听：无法进行 DOM 事件监听；</strong></li>
+<li>性 能：动态改变此属性时会引起重绘，性能较高；</li>
+<li>继 承：会被子元素继承，子元素可以通过设置 visibility: visible; 来取消隐藏；</li>
+<li>transition：visibility 会立即显示，隐藏时会延时</li>
+</ol>
+<h4 id="opacity-0"><a href="#opacity-0" class="headerlink" title="opacity: 0;"></a>opacity: 0;</h4><ol>
+<li>DOM 结构：透明度为 100%，元素隐藏，占据空间；</li>
+<li><strong>事件监听：可以进行 DOM 事件监听；</strong></li>
+<li>性 能：提升为合成层，不会触发重绘，性能较高；</li>
+<li>继 承：会被子元素继承,且，子元素并不能通过 opacity: 1 来取消隐藏；</li>
+<li>transition：opacity 可以延时显示和隐藏</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/02/17/Javascript%E7%9F%A5%E8%AF%86%E7%82%B9/" rel="next" title="JavaSrcipt知识点">
+                  JavaSrcipt知识点 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2021 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Huangyunze</span>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/huangyunt" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha256-5eIC48iZUHmSlSUz9XtjRyK2mzQkHScZY1WdMaoz74E=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.21.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="实现一个newnew的具体步骤  内存中创建一个新对象 新建对象的 _ proto _指向构造函数的prototype 调用构造函数，函数的this指向新创建的对象 执行构造函数内部的代码（给新对象添加属性） 如果构造函数返回非空对象，则返回该对象，否则，返回新创建的对象  12345678910111213141516171819202122232425262728293031function">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript手写题">
+<meta property="og:url" content="http://example.com/2021/03/02/Javascript%E6%89%8B%E5%86%99%E9%A2%98/index.html">
+<meta property="og:site_name" content="Learning Path">
+<meta property="og:description" content="实现一个newnew的具体步骤  内存中创建一个新对象 新建对象的 _ proto _指向构造函数的prototype 调用构造函数，函数的this指向新创建的对象 执行构造函数内部的代码（给新对象添加属性） 如果构造函数返回非空对象，则返回该对象，否则，返回新创建的对象  12345678910111213141516171819202122232425262728293031function">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-03-02T02:00:00.000Z">
+<meta property="article:modified_time" content="2024-09-23T04:25:00.089Z">
+<meta property="article:author" content="Huangyunze">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2021/03/02/Javascript%E6%89%8B%E5%86%99%E9%A2%98/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2021/03/02/Javascript%E6%89%8B%E5%86%99%E9%A2%98/","path":"2021/03/02/Javascript手写题/","title":"JavaScript手写题"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>JavaScript手写题 | Learning Path</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Learning Path</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Always learning</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-page"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Page</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">7</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">25</span></a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="tags fa-fw"></i>Tags<span class="badge">4</span></a></li><li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>Schedule</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="Searching..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AAnew"><span class="nav-number">1.</span> <span class="nav-text">实现一个new</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AAObject-create"><span class="nav-number">2.</span> <span class="nav-text">实现一个Object.create</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%99%BE%E7%9A%AE%E7%AC%94%E8%AF%95%E9%A2%98"><span class="nav-number">3.</span> <span class="nav-text">虾皮笔试题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E6%B6%88%E6%81%AF%E8%AE%A2%E9%98%85"><span class="nav-number">4.</span> <span class="nav-text">实现消息订阅</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AAJSONP"><span class="nav-number">5.</span> <span class="nav-text">实现一个JSONP</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Huangyunze"
+      src="https://avatars.githubusercontent.com/u/73687768?v=4">
+  <p class="site-author-name" itemprop="name">Huangyunze</p>
+  <div class="site-description" itemprop="description">Code for a lifetime</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/huangyunt" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;huangyunt" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:973113137@qq.com" title="E-Mail → mailto:973113137@qq.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://example.com/" title="https:&#x2F;&#x2F;example.com">Title</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/03/02/Javascript%E6%89%8B%E5%86%99%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/73687768?v=4">
+      <meta itemprop="name" content="Huangyunze">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Learning Path">
+      <meta itemprop="description" content="Code for a lifetime">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="JavaScript手写题 | Learning Path">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          JavaScript手写题
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-03-02 10:00:00" itemprop="dateCreated datePublished" datetime="2021-03-02T10:00:00+08:00">2021-03-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-09-23 12:25:00" itemprop="dateModified" datetime="2024-09-23T12:25:00+08:00">2024-09-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h4 id="实现一个new"><a href="#实现一个new" class="headerlink" title="实现一个new"></a>实现一个new</h4><p><strong>new的具体步骤</strong></p>
+<ol>
+<li>内存中创建一个新对象</li>
+<li>新建对象的 _ <em>proto</em> _指向构造函数的prototype</li>
+<li>调用构造函数，函数的this指向新创建的对象</li>
+<li>执行构造函数内部的代码（给新对象添加属性）</li>
+<li><strong>如果构造函数返回非空对象，则返回该对象，否则，返回新创建的对象</strong></li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Person</span>(<span class="params">age, name</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">age</span> = age;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">name</span> = name;</span><br><span class="line">&#125;</span><br><span class="line"><span class="title class_">Person</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">sayHello</span> = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">name</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">myNew</span>(<span class="params">fn, ...args</span>) &#123;</span><br><span class="line">    <span class="comment">// 修改obj.__proto__ = fn.prototype，如果直接obj = &#123;&#125;会出现没有对象标识的问题（对象标识为Object），还会使得方法没有被创建</span></span><br><span class="line">    <span class="keyword">const</span> obj = <span class="title class_">Object</span>.<span class="title function_">create</span>(fn.<span class="property"><span class="keyword">prototype</span></span>)  <span class="comment">//fn.prototype代表 用当前对象的原型去创建</span></span><br><span class="line">    <span class="comment">//现在obj就代表Dog了,但是参数和this指向没有修改</span></span><br><span class="line">    <span class="keyword">const</span> rel = fn.<span class="title function_">apply</span>(obj,args)</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">       正常规定,如何fn返回的是null或undefined(也就是不返回内容),我们返回的是obj,否则返回rel</span></span><br><span class="line"><span class="comment">       因为比如下面这个构造函数</span></span><br><span class="line"><span class="comment">       function Person(name, age) &#123;</span></span><br><span class="line"><span class="comment">            this.name = name;</span></span><br><span class="line"><span class="comment">            this.age = age;</span></span><br><span class="line"><span class="comment">            return &#123;</span></span><br><span class="line"><span class="comment">                a: 1,</span></span><br><span class="line"><span class="comment">                b: 2,</span></span><br><span class="line"><span class="comment">            &#125;</span></span><br><span class="line"><span class="comment">        &#125;</span></span><br><span class="line"><span class="comment">        const p = new Person(&#x27;h&#x27;, &#x27;y&#x27;);</span></span><br><span class="line"><span class="comment">        这里new会优先为构造函数的返回值</span></span><br><span class="line"><span class="comment">        所以p的值为&#123;a: 1,b: 2&#125;</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="keyword">return</span> rel <span class="keyword">instanceof</span> <span class="title class_">Object</span> ? rel : obj</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> p1 = <span class="title function_">myNew</span>(<span class="title class_">Person</span>, <span class="number">19</span>, <span class="string">&#x27;hyz&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<h4 id="实现一个Object-create"><a href="#实现一个Object-create" class="headerlink" title="实现一个Object.create"></a>实现一个Object.create</h4><p>Object.create(proto)创建一个空对象，proto为空对象的”<em><strong>proto</strong></em>“</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">create</span>(<span class="params">obj</span>) &#123;</span><br><span class="line">  <span class="comment">// Object.create(null) 返回一个__proto__指向空的干净对象</span></span><br><span class="line">  <span class="keyword">if</span> (obj === <span class="literal">null</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="title class_">Object</span>.<span class="title function_">setPrototypeOf</span>(&#123;&#125;, <span class="literal">null</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 非对象非null，抛出异常</span></span><br><span class="line">  <span class="keyword">if</span> (!(obj <span class="keyword">instanceof</span> <span class="title class_">Object</span>)) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">TypeError</span>();</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="title class_">Object</span>.<span class="title function_">setPrototypeOf</span>(&#123;&#125;, obj);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="虾皮笔试题"><a href="#虾皮笔试题" class="headerlink" title="虾皮笔试题"></a>虾皮笔试题</h4><p>十分有水平的一道题，综合了new原理，原型链+instanceof原理</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Person</span>(<span class="params"></span>) &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> person1 = <span class="keyword">new</span> <span class="title class_">Person</span>();</span><br><span class="line"><span class="title class_">Person</span>.<span class="property"><span class="keyword">prototype</span></span> = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;ee&#x27;</span>,</span><br><span class="line">    <span class="attr">sayName</span>: <span class="function">() =&gt;</span> &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;    </span><br><span class="line"><span class="comment">// Person 的 prototype 已经改变，而 person1.__proto__ 指向一开始的 Person.prototype</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;person1 instanceof Person: &#x27;</span>, person1 <span class="keyword">instanceof</span> <span class="title class_">Person</span>) <span class="comment">// 为啥是false</span></span><br><span class="line"><span class="comment">// 所有的对象都继承自 Object，除了 null 或者你把最顶层的 prototype 也给改了</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;person1 instanceof Object: &#x27;</span>, person1 <span class="keyword">instanceof</span> <span class="title class_">Object</span>) <span class="comment">// 为啥是true</span></span><br><span class="line"><span class="comment">// person1 本身没有 constructor, 会沿着原型链找，</span></span><br><span class="line"><span class="comment">// person1.constructor === person1.__proto__.constructor</span></span><br><span class="line"><span class="comment">// 而上面也说了 person1.__proto__ 并没有因为 Person.prototype 改变而改变</span></span><br><span class="line"><span class="comment">// 这里需要注意的是：</span></span><br><span class="line"><span class="comment">// Person 本身就是 constructor</span></span><br><span class="line"><span class="comment">// 初始情况下</span></span><br><span class="line"><span class="comment">// Person.prototype =&gt; Person.prototype</span></span><br><span class="line"><span class="comment">// Person.prototype.constructor =&gt; Person</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;person1.constructor == Person: &#x27;</span>, person1.<span class="property">constructor</span> == <span class="title class_">Person</span>) <span class="comment">// 为啥是true</span></span><br><span class="line"><span class="comment">// 上面是 true, 下面就好说了</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;person1.constructor == Object: &#x27;</span>, person1.<span class="property">constructor</span> == <span class="title class_">Object</span>) <span class="comment">// 为啥是false</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="实现消息订阅"><a href="#实现消息订阅" class="headerlink" title="实现消息订阅"></a>实现消息订阅</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">EventCenter</span> &#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> &#123;<span class="type">Map&lt;string, Array&lt;Function&gt;</span>&#125; <span class="variable">handlers</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="title function_">constructor</span>(<span class="params">handlers=<span class="keyword">new</span> <span class="built_in">Map</span>()</span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">handlers</span> = handlers;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> &#123;<span class="type">Function</span>&#125; <span class="variable">handler</span></span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> &#123;<span class="type">string</span>&#125; <span class="variable">type</span></span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="title function_">addEventListener</span>(<span class="params">type, newHandler</span>) &#123;</span><br><span class="line">        <span class="keyword">let</span> hanlder = <span class="variable language_">this</span>.<span class="property">handlers</span>.<span class="title function_">has</span>(type);</span><br><span class="line">        <span class="keyword">if</span> (hanlder) &#123;</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">handlers</span>.<span class="title function_">set</span>(type, [...<span class="variable language_">this</span>.<span class="property">handlers</span>.<span class="title function_">get</span>(type), newHandler]) </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">handlers</span>.<span class="title function_">set</span>(type, [newHandler]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> &#123;<span class="type">string</span>&#125; <span class="variable">type</span></span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> &#123;<span class="type">Array</span>&#125; <span class="variable">params</span></span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="title function_">dispatchEvent</span>(<span class="params">type, params=[]</span>) &#123;</span><br><span class="line">        <span class="keyword">const</span> handler = <span class="variable language_">this</span>.<span class="property">handlers</span>.<span class="title function_">get</span>(type);</span><br><span class="line">        handler &amp;&amp; handler.<span class="title function_">forEach</span>(<span class="function">(<span class="params">callback</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="title function_">callback</span>(...params);</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> &#123;<span class="type">string</span>&#125; type </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> &#123;<span class="type">Function</span>&#125; delHandler </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@returns</span> </span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="title function_">removeEventListener</span>(<span class="params">type, delHandler</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (!<span class="variable language_">this</span>.<span class="property">handlers</span>.<span class="title function_">has</span>(type)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Errow</span>(<span class="string">&quot;Unable to delete&quot;</span>)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (delHanlder) &#123;</span><br><span class="line">            <span class="keyword">const</span> oldHandlers = <span class="variable language_">this</span>.<span class="property">handlers</span>.<span class="title function_">get</span>(type);</span><br><span class="line">            <span class="keyword">const</span> ind = oldHandlers.<span class="title function_">indexOf</span>(delHandler);</span><br><span class="line">            <span class="keyword">if</span> (ind === -<span class="number">1</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Errow</span>(<span class="string">&quot;Unable to delete&quot;</span>)</span><br><span class="line">            &#125;</span><br><span class="line">            oldHandlers.<span class="title function_">splice</span>(ind, <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">handlers</span>.<span class="title function_">delete</span>(type);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="实现一个JSONP"><a href="#实现一个JSONP" class="headerlink" title="实现一个JSONP"></a>实现一个JSONP</h4><p>前端部分</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">jsonp</span>(<span class="params">url, options</span>) &#123;</span><br><span class="line">    <span class="comment">// 超时处理</span></span><br><span class="line">    <span class="keyword">const</span> &#123; timeout &#125; = options;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="comment">// 防止函数名冲突</span></span><br><span class="line">        <span class="keyword">let</span> funcName = <span class="string">`jsonp<span class="subst">$&#123;<span class="built_in">Date</span>.now()&#125;</span>`</span>;</span><br><span class="line">        <span class="keyword">let</span> time = <span class="literal">null</span>, scriptNode;</span><br><span class="line">        <span class="comment">// 定义callback</span></span><br><span class="line">        <span class="variable language_">window</span>[funcName] = <span class="keyword">function</span> (<span class="params">data</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (timeout) <span class="built_in">clearTimeout</span>(time);</span><br><span class="line">            <span class="title function_">resolve</span>(data);</span><br><span class="line">            <span class="comment">// 很重要的性能优化点</span></span><br><span class="line">            <span class="comment">// 清除本次请求产生的回调函数和script标签</span></span><br><span class="line">            <span class="keyword">delete</span> <span class="variable language_">window</span>[funcName];</span><br><span class="line">            <span class="variable language_">document</span>.<span class="property">body</span>.<span class="title function_">removeChild</span>(scriptNode);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 创建script标签</span></span><br><span class="line">        scriptNode = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&#x27;script&#x27;</span>);</span><br><span class="line">        <span class="comment">// 给script标签添加src属性</span></span><br><span class="line">        scriptNode.<span class="property">src</span> = <span class="string">`<span class="subst">$&#123;url&#125;</span>?callback=<span class="subst">$&#123;funcName&#125;</span>`</span>;</span><br><span class="line">        <span class="comment">// 发出请求</span></span><br><span class="line">        <span class="variable language_">document</span>.<span class="property">body</span>.<span class="title function_">appendChild</span>(scriptNode);</span><br><span class="line">        time = <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">            <span class="title function_">reject</span>(<span class="string">&#x27;network err, timeout&#x27;</span>)</span><br><span class="line">        &#125;, timeout)</span><br><span class="line">        <span class="comment">// 失败</span></span><br><span class="line">        scriptNode.<span class="property">onerror</span> = <span class="keyword">function</span> (<span class="params">err</span>) &#123;</span><br><span class="line">            <span class="title function_">reject</span>(err);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">jsonp</span>(<span class="string">&#x27;http://localhost:9090/api&#x27;</span>, &#123;</span><br><span class="line">    <span class="attr">callBack</span>: <span class="string">&#x27;res1&#x27;</span>,</span><br><span class="line">    <span class="comment">// 超时处理</span></span><br><span class="line">    <span class="attr">timeout</span>: <span class="number">3000</span></span><br><span class="line">&#125;)</span><br><span class="line">    <span class="comment">// 请求成功</span></span><br><span class="line">    .<span class="title function_">then</span>(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;jsonp-&gt;&#x27;</span>, res);</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="comment">// 请求失败</span></span><br><span class="line">    .<span class="title function_">catch</span>(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;network err!&quot;</span>)</span><br><span class="line">    &#125;)</span><br></pre></td></tr></table></figure>
+
+<p>后端部分</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 后端</span></span><br><span class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">&#x27;http&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> url = <span class="built_in">require</span>(<span class="string">&#x27;url&#x27;</span>);</span><br><span class="line">http.<span class="title function_">createServer</span>(<span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// /api?callback=onResponse</span></span><br><span class="line">  <span class="comment">// 解析前端请求url中的callback名</span></span><br><span class="line">  <span class="keyword">if</span>(req.<span class="property">url</span>.<span class="title function_">includes</span>(<span class="string">&#x27;/api&#x27;</span>)) &#123;</span><br><span class="line">    <span class="keyword">let</span> myurl = url.<span class="title function_">parse</span>(req.<span class="property">url</span>);</span><br><span class="line">    <span class="keyword">let</span> params = <span class="keyword">new</span> <span class="title class_">URLSearchParams</span>(myurl.<span class="property">query</span>)</span><br><span class="line">    <span class="keyword">let</span> posts = [<span class="string">&#x27;js&#x27;</span>, <span class="string">&#x27;php&#x27;</span>];</span><br><span class="line">    <span class="keyword">let</span> mathodName = params.<span class="title function_">get</span>(<span class="string">&#x27;callback&#x27;</span>);</span><br><span class="line">    res.<span class="title function_">end</span>(<span class="string">`<span class="subst">$&#123;mathodName&#125;</span>(<span class="subst">$&#123;<span class="built_in">JSON</span>.stringify(posts)&#125;</span>)`</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line">.<span class="title function_">listen</span>(<span class="number">9090</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">9090</span>);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/02/18/JavaStript%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" rel="prev" title="JavaScript垃圾回收">
+                  <i class="fa fa-angle-left"></i> JavaScript垃圾回收
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/08/21/require%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" rel="next" title="require() 源码解读">
+                  require() 源码解读 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2021 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Huangyunze</span>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/huangyunt" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
