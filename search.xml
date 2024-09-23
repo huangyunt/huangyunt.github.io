@@ -321,6 +321,26 @@
       </tags>
   </entry>
   <entry>
+    <title>Http2/Http3</title>
+    <url>/2021/09/18/Http2Http3/</url>
+    <content><![CDATA[<h4 id="为什么Http-1-1无法并发的发送多个请求（同时发多个请求，再同时接收）"><a href="#为什么Http-1-1无法并发的发送多个请求（同时发多个请求，再同时接收）" class="headerlink" title="为什么Http 1.1无法并发的发送多个请求（同时发多个请求，再同时接收）"></a>为什么Http 1.1无法并发的发送多个请求（同时发多个请求，再同时接收）</h4><p>因为http1.1是基于文本的协议，比如客户端向服务器发送了两个请求 <code>GET /query?q=A</code> 和 <code>GET /query?q=B</code>，服务器返回了两个结果，客户端是没有办法根据响应结果来判断响应对应于哪一个请求的，而http2基于二进制分帧实现多路复用，数据流以消息的形式发送，而消息又由一个或多个帧组成，多个帧之间可以乱序发送，<strong>因为根据帧首部的流标识可以重新组装。</strong></p>
+<span id="more"></span>
+
+
+
+
+
+]]></content>
+      <categories>
+        <category>ComputerNetwork</category>
+      </categories>
+      <tags>
+        <tag>Network</tag>
+        <tag>Http</tag>
+        <tag>Https</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Https</title>
     <url>/2021/09/13/Https/</url>
     <content><![CDATA[<h3 id="为什么需要加密？"><a href="#为什么需要加密？" class="headerlink" title="为什么需要加密？"></a><strong>为什么需要加密？</strong></h3><p>因为http的内容是明文传输的，明文数据会经过中间代理服务器、路由器、wifi热点、通信服务运营商等多个物理节点，如果信息在传输过程中被劫持，传输的内容就完全暴露了。劫持者还可以篡改传输的信息且不被双方察觉，这就是“中间人攻击”。</p>
@@ -397,26 +417,6 @@
       <tags>
         <tag>Network</tag>
         <tag>Https</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Http2/Http3</title>
-    <url>/2021/09/18/Http2Http3/</url>
-    <content><![CDATA[<h4 id="为什么Http-1-1无法并发的发送多个请求（同时发多个请求，再同时接收）"><a href="#为什么Http-1-1无法并发的发送多个请求（同时发多个请求，再同时接收）" class="headerlink" title="为什么Http 1.1无法并发的发送多个请求（同时发多个请求，再同时接收）"></a>为什么Http 1.1无法并发的发送多个请求（同时发多个请求，再同时接收）</h4><p>因为http1.1是基于文本的协议，比如客户端向服务器发送了两个请求 <code>GET /query?q=A</code> 和 <code>GET /query?q=B</code>，服务器返回了两个结果，客户端是没有办法根据响应结果来判断响应对应于哪一个请求的，而http2基于二进制分帧实现多路复用，数据流以消息的形式发送，而消息又由一个或多个帧组成，多个帧之间可以乱序发送，<strong>因为根据帧首部的流标识可以重新组装。</strong></p>
-<span id="more"></span>
-
-
-
-
-
-]]></content>
-      <categories>
-        <category>ComputerNetwork</category>
-      </categories>
-      <tags>
-        <tag>Network</tag>
-        <tag>Https</tag>
-        <tag>Http</tag>
       </tags>
   </entry>
   <entry>
@@ -553,6 +553,24 @@
       </tags>
   </entry>
   <entry>
+    <title>JavaSrcipt知识点</title>
+    <url>/2021/02/17/Javascript%E7%9F%A5%E8%AF%86%E7%82%B9/</url>
+    <content><![CDATA[<h4 id="1-script标签中async和defer的区别"><a href="#1-script标签中async和defer的区别" class="headerlink" title="1. script标签中async和defer的区别"></a>1. script标签中async和defer的区别</h4><p><img src="/../assets/Snipaste_2021-12-13_03-23-58.png" alt="image-20211025190555184"></p>
+<ul>
+<li>普通script标签：下载和执行都会阻塞Dom渲染</li>
+<li>defer：立即进行异步下载，等到HTML完全解析完后开始执行，有多个defer的标签时，会按照顺序下载执行</li>
+<li>async：立即进行异步下载，下载完后会立即执行同时阻塞Dom渲染，因为是下载完立即执行，不能保证多个加载时的先后顺序。</li>
+</ul>
+<span id="more"></span>
+]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>JavaScript执行上下文</title>
     <url>/2021/02/17/Javascript%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87/</url>
     <content><![CDATA[<h4 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h4><h4 id="在看js垃圾回收时遇到相关问题，感觉自己对上下文对象理解的还是不够透彻（实在是太菜了）这就回来恶补。"><a href="#在看js垃圾回收时遇到相关问题，感觉自己对上下文对象理解的还是不够透彻（实在是太菜了）这就回来恶补。" class="headerlink" title="在看js垃圾回收时遇到相关问题，感觉自己对上下文对象理解的还是不够透彻（实在是太菜了）这就回来恶补。"></a>在看js垃圾回收时遇到相关问题，感觉自己对上下文对象理解的还是不够透彻（实在是太菜了）这就回来恶补。</h4><h4 id="执行上下文（Execution-Context）"><a href="#执行上下文（Execution-Context）" class="headerlink" title="执行上下文（Execution Context）"></a>执行上下文（Execution Context）</h4><ul>
@@ -665,24 +683,6 @@
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Person</span>(<span class="params">name, age</span>) &#123;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">name</span> = name;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">age</span> = age;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> ttsy = <span class="keyword">new</span> <span class="title class_">Person</span>(<span class="string">&#x27;ttsy&#x27;</span>, <span class="number">24</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(ttsy.<span class="property">name</span>);  <span class="comment">// ttsy</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(ttsy.<span class="property">age</span>);  <span class="comment">// 24</span></span><br></pre></td></tr></table></figure>
 
 <h5 id="需要注意的是，在-ES6-中箭头函数中，this-是在函数声明的时候确定的-箭头函数不绑定this，会捕获上下文的this"><a href="#需要注意的是，在-ES6-中箭头函数中，this-是在函数声明的时候确定的-箭头函数不绑定this，会捕获上下文的this" class="headerlink" title="需要注意的是，在 ES6 中箭头函数中，this 是在函数声明的时候确定的(箭头函数不绑定this，会捕获上下文的this)"></a>需要注意的是，在 ES6 中箭头函数中，this 是在函数声明的时候确定的(箭头函数不绑定this，会捕获上下文的this)</h5>]]></content>
-      <categories>
-        <category>JavaScript</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>JavaSrcipt知识点</title>
-    <url>/2021/02/17/Javascript%E7%9F%A5%E8%AF%86%E7%82%B9/</url>
-    <content><![CDATA[<h4 id="1-script标签中async和defer的区别"><a href="#1-script标签中async和defer的区别" class="headerlink" title="1. script标签中async和defer的区别"></a>1. script标签中async和defer的区别</h4><p><img src="/../assets/Snipaste_2021-12-13_03-23-58.png" alt="image-20211025190555184"></p>
-<ul>
-<li>普通script标签：下载和执行都会阻塞Dom渲染</li>
-<li>defer：立即进行异步下载，等到HTML完全解析完后开始执行，有多个defer的标签时，会按照顺序下载执行</li>
-<li>async：立即进行异步下载，下载完后会立即执行同时阻塞Dom渲染，因为是下载完立即执行，不能保证多个加载时的先后顺序。</li>
-</ul>
-<span id="more"></span>
-]]></content>
       <categories>
         <category>JavaScript</category>
       </categories>
@@ -1237,6 +1237,68 @@ C组件: 读取A组件传入的数据显示 &#123;this.props.data&#125;
       </tags>
   </entry>
   <entry>
+    <title>React生态</title>
+    <url>/2021/09/30/React%E7%94%9F%E6%80%81/</url>
+    <content><![CDATA[<h3 id="React-DevTools"><a href="#React-DevTools" class="headerlink" title="React DevTools"></a>React DevTools</h3><h5 id="General-设置"><a href="#General-设置" class="headerlink" title="General 设置"></a>General 设置</h5><img src="../assets/image-20220222024702149.png" alt="image-20220222024702149" style="zoom:33%;" />
+
+<p>General 面板中最重要的功能就是 **”Highlight updates when components render”**。勾选上之后，可以查看 React 重绘时，页面哪些部分有更新。在遇到性能问题时，可以快速帮助决策在哪部分不需要重绘的组件部分添加 React.memo 阻止重绘。</p>
+<h5 id="Debugging-设置"><a href="#Debugging-设置" class="headerlink" title="Debugging 设置"></a>Debugging 设置</h5><img src="..\Picture\image-20220222024832097.png" alt="image-20220222024832097" style="zoom:33%;" />
+
+<p><strong>“Append components stacks to console warnings and errors.”</strong></p>
+<p>可以帮助我们定位 React 报错信息来自哪个组件</p>
+<span id="more"></span>
+
+
+<h5 id="Components-设置"><a href="#Components-设置" class="headerlink" title="Components 设置"></a>Components 设置</h5><img src="..\Picture\image-20220222024936104.png" alt="image-20220222024936104" style="zoom:33%;" />
+
+<p><strong>“Hide components where…”</strong></p>
+<p>此项在过滤组件树时有用。比如，大多数应用可能会在顶层有很多 Context.Provider，就可以过滤 Context 类型、不显示。当我们只关心业务逻辑层的组件时，可以过滤掉 DOM 组件，减少树的节点</p>
+<h5 id="Profiler-设置"><a href="#Profiler-设置" class="headerlink" title="Profiler 设置"></a>Profiler 设置</h5><img src="..\Picture\image-20220222025024293.png" alt="image-20220222025024293" style="zoom:33%;" />
+
+<p><strong>“Record why each component rendered while profiling”</strong></p>
+<img src="..\Picture\image-20220222025054509.png" alt="image-20220222025054509" style="zoom:33%;" />
+
+<p>勾选之后会在渲染火焰图的 hover 面板中看到 **”Why did this render”**。</p>
+<h5 id="现在有哪些-render-原因呢？"><a href="#现在有哪些-render-原因呢？" class="headerlink" title="现在有哪些 render 原因呢？"></a>现在有哪些 render 原因呢？</h5><ul>
+<li><p><strong>Props changed</strong></p>
+<p>​     顾名思义，传入组件的 props 变更</p>
+</li>
+<li><p><strong>The parent component rendered</strong></p>
+<p>​	父组件渲染导致的子组件渲染。一般要做性能优化都是找这类重绘原因的组件。但是要注意，如果组件中有用到 useContext，Provider 的 value 变更导致的重绘也是被标记为 The parent component rendered，需要注意</p>
+</li>
+<li><p><strong>Hooks changed</strong></p>
+<p>​	Hook 状态变更导致的重绘，一般就是指 useState 返回的更新函数被调用了</p>
+</li>
+<li><p><strong>State changed</strong></p>
+<p>​	这个只会在 class component 中有，大家忽略</p>
+</li>
+<li><p><strong>“Hide commits below xx (ms)”</strong></p>
+<p>​	设置一个更新耗时的阈值，低于该阈值的渲染不显示。用来快速过滤哪些渲染有性能问题</p>
+</li>
+</ul>
+<h5 id="React-组件检视器"><a href="#React-组件检视器" class="headerlink" title="React 组件检视器"></a>React 组件检视器</h5><p>用法和 DevTools 的元素面板类似，可以直接在页面上定位到元素对应的 React Component。并且可以实时查看当前组件内部的 hooks 状态，返回的组件树</p>
+<img src="..\Picture\image-20220222025129591.png" alt="image-20220222025129591" style="zoom:33%;" />
+
+<p>右上角的四个图标</p>
+<img src="..\Picture\image-20220222025154916.png" alt="image-20220222025154916" style="zoom:33%;" />
+
+<p>分别作用如下：</p>
+<ul>
+<li>模拟 ReactLazy 懒加载组件 Suspense 状态</li>
+<li>定位组件所渲染的 DOM 节点</li>
+<li>在 Console 中打印 Component 内部状态</li>
+<li>跳转到组件所在源文件（配合 sourcemap）</li>
+</ul>
+]]></content>
+      <categories>
+        <category>React</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>React</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>React的设计和实现</title>
     <url>/2021/09/29/React%E7%9A%84%E8%AE%BE%E8%AE%A1%E5%92%8C%E5%AE%9E%E7%8E%B0/</url>
     <content><![CDATA[<h4 id="本篇笔记的目的：站在更高的角度看待React"><a href="#本篇笔记的目的：站在更高的角度看待React" class="headerlink" title="本篇笔记的目的：站在更高的角度看待React"></a>本篇笔记的目的：站在更高的角度看待React</h4><h4 id="React的设计思路"><a href="#React的设计思路" class="headerlink" title="React的设计思路"></a>React的设计思路</h4><ul>
@@ -1300,146 +1362,6 @@ C组件: 读取A组件传入的数据显示 &#123;this.props.data&#125;
       <tags>
         <tag>JavaScript</tag>
         <tag>React</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>React生态</title>
-    <url>/2021/09/30/React%E7%94%9F%E6%80%81/</url>
-    <content><![CDATA[<h3 id="React-DevTools"><a href="#React-DevTools" class="headerlink" title="React DevTools"></a>React DevTools</h3><h5 id="General-设置"><a href="#General-设置" class="headerlink" title="General 设置"></a>General 设置</h5><img src="../assets/image-20220222024702149.png" alt="image-20220222024702149" style="zoom:33%;" />
-
-<p>General 面板中最重要的功能就是 **”Highlight updates when components render”**。勾选上之后，可以查看 React 重绘时，页面哪些部分有更新。在遇到性能问题时，可以快速帮助决策在哪部分不需要重绘的组件部分添加 React.memo 阻止重绘。</p>
-<h5 id="Debugging-设置"><a href="#Debugging-设置" class="headerlink" title="Debugging 设置"></a>Debugging 设置</h5><img src="..\Picture\image-20220222024832097.png" alt="image-20220222024832097" style="zoom:33%;" />
-
-<p><strong>“Append components stacks to console warnings and errors.”</strong></p>
-<p>可以帮助我们定位 React 报错信息来自哪个组件</p>
-<span id="more"></span>
-
-
-<h5 id="Components-设置"><a href="#Components-设置" class="headerlink" title="Components 设置"></a>Components 设置</h5><img src="..\Picture\image-20220222024936104.png" alt="image-20220222024936104" style="zoom:33%;" />
-
-<p><strong>“Hide components where…”</strong></p>
-<p>此项在过滤组件树时有用。比如，大多数应用可能会在顶层有很多 Context.Provider，就可以过滤 Context 类型、不显示。当我们只关心业务逻辑层的组件时，可以过滤掉 DOM 组件，减少树的节点</p>
-<h5 id="Profiler-设置"><a href="#Profiler-设置" class="headerlink" title="Profiler 设置"></a>Profiler 设置</h5><img src="..\Picture\image-20220222025024293.png" alt="image-20220222025024293" style="zoom:33%;" />
-
-<p><strong>“Record why each component rendered while profiling”</strong></p>
-<img src="..\Picture\image-20220222025054509.png" alt="image-20220222025054509" style="zoom:33%;" />
-
-<p>勾选之后会在渲染火焰图的 hover 面板中看到 **”Why did this render”**。</p>
-<h5 id="现在有哪些-render-原因呢？"><a href="#现在有哪些-render-原因呢？" class="headerlink" title="现在有哪些 render 原因呢？"></a>现在有哪些 render 原因呢？</h5><ul>
-<li><p><strong>Props changed</strong></p>
-<p>​     顾名思义，传入组件的 props 变更</p>
-</li>
-<li><p><strong>The parent component rendered</strong></p>
-<p>​	父组件渲染导致的子组件渲染。一般要做性能优化都是找这类重绘原因的组件。但是要注意，如果组件中有用到 useContext，Provider 的 value 变更导致的重绘也是被标记为 The parent component rendered，需要注意</p>
-</li>
-<li><p><strong>Hooks changed</strong></p>
-<p>​	Hook 状态变更导致的重绘，一般就是指 useState 返回的更新函数被调用了</p>
-</li>
-<li><p><strong>State changed</strong></p>
-<p>​	这个只会在 class component 中有，大家忽略</p>
-</li>
-<li><p><strong>“Hide commits below xx (ms)”</strong></p>
-<p>​	设置一个更新耗时的阈值，低于该阈值的渲染不显示。用来快速过滤哪些渲染有性能问题</p>
-</li>
-</ul>
-<h5 id="React-组件检视器"><a href="#React-组件检视器" class="headerlink" title="React 组件检视器"></a>React 组件检视器</h5><p>用法和 DevTools 的元素面板类似，可以直接在页面上定位到元素对应的 React Component。并且可以实时查看当前组件内部的 hooks 状态，返回的组件树</p>
-<img src="..\Picture\image-20220222025129591.png" alt="image-20220222025129591" style="zoom:33%;" />
-
-<p>右上角的四个图标</p>
-<img src="..\Picture\image-20220222025154916.png" alt="image-20220222025154916" style="zoom:33%;" />
-
-<p>分别作用如下：</p>
-<ul>
-<li>模拟 ReactLazy 懒加载组件 Suspense 状态</li>
-<li>定位组件所渲染的 DOM 节点</li>
-<li>在 Console 中打印 Component 内部状态</li>
-<li>跳转到组件所在源文件（配合 sourcemap）</li>
-</ul>
-]]></content>
-      <categories>
-        <category>React</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-        <tag>React</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Redux</title>
-    <url>/2021/10/11/Redux/</url>
-    <content><![CDATA[<ul>
-<li>Redux的设计思想</li>
-</ul>
-<p>（1）Web 应用是一个状态机，视图与状态是一一对应的。</p>
-<p>（2）所有的状态，保存在一个对象里面。</p>
-<h2 id="Action"><a href="#Action" class="headerlink" title="Action"></a>Action</h2><ol>
-<li><p>Action 就是 View 发出的通知，表示 State 应该要发生变化了。</p>
-</li>
-<li><p>Action 是一个对象，其中的<code>type</code>属性是必须的，表示 Action 的名称，Action 描述当前发生的事情。</p>
-</li>
-<li><p>改变 State 的唯一办法，就是使用 Action。</p>
-</li>
-</ol>
-<p>可以定义一个函数来生成 Action，这个函数就叫 Action Creator，示例如下</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">sendAction</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        <span class="attr">type</span>: <span class="string">&#x27;send_type&#x27;</span>,</span><br><span class="line">        <span class="attr">value</span>: <span class="string">&#x27;action hello&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<span id="more"></span>
-
-
-<h2 id="Reducer"><a href="#Reducer" class="headerlink" title="Reducer"></a>Reducer</h2><ol>
-<li><p>Store 收到 Action 以后，必须给出一个新的 State，这样 View 才会发生变化。这种 State 的计算过程就叫做 Reducer。</p>
-</li>
-<li><p>Reducer 是一个函数，它接受 Action 和当前 State 作为参数，返回一个新的 State。</p>
-</li>
-</ol>
-<p>Demo:</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> initState = &#123;</span><br><span class="line">    <span class="attr">value</span>: <span class="string">&#x27;init&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> <span class="title function_">reducer</span> = (<span class="params">state = initState, action</span>) =&gt; &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;reducer:&#x27;</span>, state, action);</span><br><span class="line">    <span class="keyword">switch</span>(action.<span class="property">type</span>)&#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;send_type&#x27;</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="title class_">Object</span>.<span class="title function_">assign</span>(&#123;&#125;, state, action);</span><br><span class="line">        <span class="attr">default</span>:</span><br><span class="line">            <span class="keyword">return</span> state;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="Store"><a href="#Store" class="headerlink" title="Store"></a>Store</h2><h3 id="StoreApi"><a href="#StoreApi" class="headerlink" title="StoreApi:"></a>StoreApi:</h3><ul>
-<li><p><code>store.subscribe()</code>: 添加一个变化监听器。每当 dispatch action 的时候就会执行，state 树中的一部分可能已经变化。你可以在回调函数里调用<code>getState()</code>来拿到当前 state。</p>
-</li>
-<li><p><code>store.dispatch()</code>是 View 发出 Action 的唯一方法，将使用当前 <code>getState()</code>的结果和传入的 <code>action</code> 以同步方式的调用 store 的 reduce 函数。它的返回值会被作为下一个 state。从现在开始，这就成为了 <code>getState()</code>的返回值，同时变化监听器(change listener)会被触发。</p>
-<blockquote>
-</blockquote>
-</li>
-<li><p>流程：</p>
-<p>组件 – <code>store.dispatch(action)</code> – 触发reducer的执行 – 根据type区分返回的state – 返回值给store – 更新state – <code>store.subscribe(listener)</code>中listener回调函数执行。</p>
-</li>
-</ul>
-<p><img src="/../assets/image-20210309183756689.png" alt="image-20210309183756689"></p>
-<h2 id="React-redux"><a href="#React-redux" class="headerlink" title="React-redux"></a>React-redux</h2><p><img src="/../assets/image-20210309200347890.png" alt="image-20210309200347890"></p>
-<h2 id="provider"><a href="#provider" class="headerlink" title="provider"></a>provider</h2><h2 id="connect"><a href="#connect" class="headerlink" title="connect"></a>connect</h2><p><code>connect</code>方法接受两个参数：<code>mapStateT.oProps</code>和<code>mapDispatchToProps</code>。它们定义了 UI 组件的业务逻辑。前者负责输入逻辑，即将<code>state</code>映射到 UI 组件的参数（<code>props</code>），后者负责输出逻辑，即将用户对 UI 组件的操作映射成 Action。</p>
-<ul>
-<li><h3 id="mapStateToProps"><a href="#mapStateToProps" class="headerlink" title="mapStateToProps"></a><code>mapStateToProps</code></h3><p><code>mapStateToProps</code>是一个函数。它的作用就是像它的名字那样，建立一个从（外部的）<code>state</code>对象到（UI 组件的）<code>props</code>对象的映射关系。</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">mapStateToProps</span> = (<span class="params">state</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    <span class="attr">todos</span>: <span class="title function_">getVisibleTodos</span>(state.<span class="property">todos</span>, state.<span class="property">visibilityFilter</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><code>mapStateToProps</code>会订阅 Store，每当<code>state</code>更新的时候，就会自动执行，重新计算 UI 组件的参数，从而触发 UI 组件的重新渲染。</p>
-<p><code>mapStateToProps</code>的第一个参数总是<code>state</code>对象，还可以使用第二个参数，代表容器组件的<code>props</code>对象。</p>
-<p><code>connect</code>方法可以省略<code>mapStateToProps</code>参数，那样的话，UI 组件就不会订阅Store，就是说 Store 的更新不会引起 UI 组件的更新。</p>
-</li>
-<li><h3 id="mapDispatchToProps"><a href="#mapDispatchToProps" class="headerlink" title="mapDispatchToProps"></a><code>mapDispatchToProps</code></h3><p><code>mapDispatchToProps</code>是<code>connect</code>函数的第二个参数，用来建立 UI 组件的参数到<code>store.dispatch</code>方法的映射</p>
-<p>如果<code>mapDispatchToProps</code>是一个函数，会得到<code>dispatch</code>和<code>ownProps</code></p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">mapDispatchToProps</span> = (<span class="params"></span></span><br><span class="line"><span class="params">  dispatch,</span></span><br><span class="line"><span class="params">  ownProps</span></span><br><span class="line"><span class="params"></span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    <span class="attr">onClick</span>: <span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="title function_">dispatch</span>(&#123;</span><br><span class="line">        <span class="attr">type</span>: <span class="string">&#x27;SET_VISIBILITY_FILTER&#x27;</span>,</span><br><span class="line">        <span class="attr">filter</span>: ownProps.<span class="property">filter</span></span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>如果<code>mapDispatchToProps</code>是一个对象，它的每个键名也是对应 UI 组件的同名参数，键值应该是一个函数，会被当作 Action creator ，返回的 Action 会由 Redux 自动发出(dispatch).</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> mapDispatchToProps = &#123;</span><br><span class="line">  <span class="attr">onClick</span>: <span class="function">(<span class="params">filter</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="attr">type</span>: <span class="string">&#x27;SET_VISIBILITY_FILTER&#x27;</span>,</span><br><span class="line">    <span class="attr">filter</span>: filter</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="计数器Demo："><a href="#计数器Demo：" class="headerlink" title="计数器Demo："></a>计数器Demo：</h2><p>两个组件，按钮ComA和文本ComB，点击按钮+1，用react-redux实现通信的过程</p>
-</li>
-</ul>
-<p><img src="/../assets/image-20210310173423401.png" alt="image-20210310173423401"></p>
-]]></content>
-      <categories>
-        <category>React</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-        <tag>React</tag>
-        <tag>Redux</tag>
       </tags>
   </entry>
   <entry>
@@ -1840,18 +1762,6 @@ module.exports = &#123;
       </tags>
   </entry>
   <entry>
-    <title>require() 源码解读</title>
-    <url>/2021/08/21/require%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/</url>
-    <content><![CDATA[<span id="more"></span>
-]]></content>
-      <categories>
-        <category>JavaScript</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Webpack</title>
     <url>/2022/11/14/Webpack/</url>
     <content><![CDATA[<h3 id="webpack-是什么"><a href="#webpack-是什么" class="headerlink" title="webpack 是什么"></a>webpack 是什么</h3><p>webpack 是一种<strong>前端资源构建工具</strong>，一个静态模块打包器(module bundler)。</p>
@@ -1876,6 +1786,96 @@ module.exports = &#123;
       </categories>
       <tags>
         <tag>Webpack</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Redux</title>
+    <url>/2021/10/11/Redux/</url>
+    <content><![CDATA[<ul>
+<li>Redux的设计思想</li>
+</ul>
+<p>（1）Web 应用是一个状态机，视图与状态是一一对应的。</p>
+<p>（2）所有的状态，保存在一个对象里面。</p>
+<h2 id="Action"><a href="#Action" class="headerlink" title="Action"></a>Action</h2><ol>
+<li><p>Action 就是 View 发出的通知，表示 State 应该要发生变化了。</p>
+</li>
+<li><p>Action 是一个对象，其中的<code>type</code>属性是必须的，表示 Action 的名称，Action 描述当前发生的事情。</p>
+</li>
+<li><p>改变 State 的唯一办法，就是使用 Action。</p>
+</li>
+</ol>
+<p>可以定义一个函数来生成 Action，这个函数就叫 Action Creator，示例如下</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">sendAction</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        <span class="attr">type</span>: <span class="string">&#x27;send_type&#x27;</span>,</span><br><span class="line">        <span class="attr">value</span>: <span class="string">&#x27;action hello&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+
+<h2 id="Reducer"><a href="#Reducer" class="headerlink" title="Reducer"></a>Reducer</h2><ol>
+<li><p>Store 收到 Action 以后，必须给出一个新的 State，这样 View 才会发生变化。这种 State 的计算过程就叫做 Reducer。</p>
+</li>
+<li><p>Reducer 是一个函数，它接受 Action 和当前 State 作为参数，返回一个新的 State。</p>
+</li>
+</ol>
+<p>Demo:</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> initState = &#123;</span><br><span class="line">    <span class="attr">value</span>: <span class="string">&#x27;init&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> <span class="title function_">reducer</span> = (<span class="params">state = initState, action</span>) =&gt; &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;reducer:&#x27;</span>, state, action);</span><br><span class="line">    <span class="keyword">switch</span>(action.<span class="property">type</span>)&#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;send_type&#x27;</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="title class_">Object</span>.<span class="title function_">assign</span>(&#123;&#125;, state, action);</span><br><span class="line">        <span class="attr">default</span>:</span><br><span class="line">            <span class="keyword">return</span> state;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Store"><a href="#Store" class="headerlink" title="Store"></a>Store</h2><h3 id="StoreApi"><a href="#StoreApi" class="headerlink" title="StoreApi:"></a>StoreApi:</h3><ul>
+<li><p><code>store.subscribe()</code>: 添加一个变化监听器。每当 dispatch action 的时候就会执行，state 树中的一部分可能已经变化。你可以在回调函数里调用<code>getState()</code>来拿到当前 state。</p>
+</li>
+<li><p><code>store.dispatch()</code>是 View 发出 Action 的唯一方法，将使用当前 <code>getState()</code>的结果和传入的 <code>action</code> 以同步方式的调用 store 的 reduce 函数。它的返回值会被作为下一个 state。从现在开始，这就成为了 <code>getState()</code>的返回值，同时变化监听器(change listener)会被触发。</p>
+<blockquote>
+</blockquote>
+</li>
+<li><p>流程：</p>
+<p>组件 – <code>store.dispatch(action)</code> – 触发reducer的执行 – 根据type区分返回的state – 返回值给store – 更新state – <code>store.subscribe(listener)</code>中listener回调函数执行。</p>
+</li>
+</ul>
+<p><img src="/../assets/image-20210309183756689.png" alt="image-20210309183756689"></p>
+<h2 id="React-redux"><a href="#React-redux" class="headerlink" title="React-redux"></a>React-redux</h2><p><img src="/../assets/image-20210309200347890.png" alt="image-20210309200347890"></p>
+<h2 id="provider"><a href="#provider" class="headerlink" title="provider"></a>provider</h2><h2 id="connect"><a href="#connect" class="headerlink" title="connect"></a>connect</h2><p><code>connect</code>方法接受两个参数：<code>mapStateT.oProps</code>和<code>mapDispatchToProps</code>。它们定义了 UI 组件的业务逻辑。前者负责输入逻辑，即将<code>state</code>映射到 UI 组件的参数（<code>props</code>），后者负责输出逻辑，即将用户对 UI 组件的操作映射成 Action。</p>
+<ul>
+<li><h3 id="mapStateToProps"><a href="#mapStateToProps" class="headerlink" title="mapStateToProps"></a><code>mapStateToProps</code></h3><p><code>mapStateToProps</code>是一个函数。它的作用就是像它的名字那样，建立一个从（外部的）<code>state</code>对象到（UI 组件的）<code>props</code>对象的映射关系。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">mapStateToProps</span> = (<span class="params">state</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    <span class="attr">todos</span>: <span class="title function_">getVisibleTodos</span>(state.<span class="property">todos</span>, state.<span class="property">visibilityFilter</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>mapStateToProps</code>会订阅 Store，每当<code>state</code>更新的时候，就会自动执行，重新计算 UI 组件的参数，从而触发 UI 组件的重新渲染。</p>
+<p><code>mapStateToProps</code>的第一个参数总是<code>state</code>对象，还可以使用第二个参数，代表容器组件的<code>props</code>对象。</p>
+<p><code>connect</code>方法可以省略<code>mapStateToProps</code>参数，那样的话，UI 组件就不会订阅Store，就是说 Store 的更新不会引起 UI 组件的更新。</p>
+</li>
+<li><h3 id="mapDispatchToProps"><a href="#mapDispatchToProps" class="headerlink" title="mapDispatchToProps"></a><code>mapDispatchToProps</code></h3><p><code>mapDispatchToProps</code>是<code>connect</code>函数的第二个参数，用来建立 UI 组件的参数到<code>store.dispatch</code>方法的映射</p>
+<p>如果<code>mapDispatchToProps</code>是一个函数，会得到<code>dispatch</code>和<code>ownProps</code></p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">mapDispatchToProps</span> = (<span class="params"></span></span><br><span class="line"><span class="params">  dispatch,</span></span><br><span class="line"><span class="params">  ownProps</span></span><br><span class="line"><span class="params"></span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    <span class="attr">onClick</span>: <span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="title function_">dispatch</span>(&#123;</span><br><span class="line">        <span class="attr">type</span>: <span class="string">&#x27;SET_VISIBILITY_FILTER&#x27;</span>,</span><br><span class="line">        <span class="attr">filter</span>: ownProps.<span class="property">filter</span></span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果<code>mapDispatchToProps</code>是一个对象，它的每个键名也是对应 UI 组件的同名参数，键值应该是一个函数，会被当作 Action creator ，返回的 Action 会由 Redux 自动发出(dispatch).</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> mapDispatchToProps = &#123;</span><br><span class="line">  <span class="attr">onClick</span>: <span class="function">(<span class="params">filter</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="attr">type</span>: <span class="string">&#x27;SET_VISIBILITY_FILTER&#x27;</span>,</span><br><span class="line">    <span class="attr">filter</span>: filter</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="计数器Demo："><a href="#计数器Demo：" class="headerlink" title="计数器Demo："></a>计数器Demo：</h2><p>两个组件，按钮ComA和文本ComB，点击按钮+1，用react-redux实现通信的过程</p>
+</li>
+</ul>
+<p><img src="/../assets/image-20210310173423401.png" alt="image-20210310173423401"></p>
+]]></content>
+      <categories>
+        <category>React</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>React</tag>
+        <tag>Redux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>require() 源码解读</title>
+    <url>/2021/08/21/require%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/</url>
+    <content><![CDATA[<span id="more"></span>
+]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
       </tags>
   </entry>
   <entry>
