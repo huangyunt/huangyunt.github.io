@@ -461,62 +461,6 @@
       </tags>
   </entry>
   <entry>
-    <title>JavaScript垃圾回收</title>
-    <url>/2021/02/18/JavaStript%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/</url>
-    <content><![CDATA[<h3 id="javascript垃圾回收主要分成两种方法："><a href="#javascript垃圾回收主要分成两种方法：" class="headerlink" title="javascript垃圾回收主要分成两种方法："></a>javascript垃圾回收主要分成两种方法：</h3><h3 id="1-引用计数"><a href="#1-引用计数" class="headerlink" title="1. 引用计数"></a>1. 引用计数</h3><h3 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h3><ul>
-<li><p>垃圾回收算法主要依赖于引用的概念。</p>
-</li>
-<li><p>在内存管理的环境中，一个对象如果有访问另一个对象的权限（隐式或者显式），叫做一个对象引用另一个对象。</p>
-</li>
-<li><p>例如，一个Javascript对象具有对它原型的引用（隐式引用）和对它属性的引用（显式引用）。</p>
-</li>
-<li><p>在这里，“对象”的概念不仅特指 JavaScript 对象，还包括函数作用域。</p>
-</li>
-</ul>
-<h3 id="引用计数垃圾收集"><a href="#引用计数垃圾收集" class="headerlink" title="引用计数垃圾收集"></a>引用计数垃圾收集</h3><p>这是最初级的垃圾收集算法。此算法把“对象是否不再需要”简化定义为“对象有没有其他对象引用到它”。如果没有引用指向该对象（零引用），对象将被垃圾回收机制回收。</p>
-<span id="more"></span>
-
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> o = &#123;</span><br><span class="line">  <span class="attr">a</span>: &#123;</span><br><span class="line">    <span class="attr">b</span>:<span class="number">2</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// 两个对象被创建，一个作为另一个的属性被引用，另一个被分配给变量o</span></span><br><span class="line"><span class="comment">// 很显然，没有一个可以被垃圾收集</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> o2 = o; <span class="comment">// o2变量是第二个对“这个对象”的引用</span></span><br><span class="line"></span><br><span class="line">o = <span class="number">1</span>;      <span class="comment">// 现在，“这个对象”只有一个o2变量的引用了，“这个对象”的原始引用o已经没有</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> oa = o2.<span class="property">a</span>; <span class="comment">// 引用“这个对象”的a属性</span></span><br><span class="line">               <span class="comment">// 现在，“这个对象”有两个引用了，一个是o2，一个是oa</span></span><br><span class="line"></span><br><span class="line">o2 = <span class="string">&quot;yo&quot;</span>; <span class="comment">// 虽然最初的对象现在已经是零引用了，可以被垃圾回收了</span></span><br><span class="line">           <span class="comment">// 但是它的属性a的对象还在被oa引用，所以还不能回收</span></span><br><span class="line"></span><br><span class="line">oa = <span class="literal">null</span>; <span class="comment">// a属性的那个对象现在也是零引用了</span></span><br><span class="line">           <span class="comment">// 它可以被垃圾回收了</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="2-标记清除"><a href="#2-标记清除" class="headerlink" title="2. 标记清除"></a>2. 标记清除</h3><p>JavaScript 中最常用的垃圾收集方式是标记清除。它的具体工作步骤如下：</p>
-<ol>
-<li>给存储在内存中的所有变量加上标记（当然可以使用任何标记方式）</li>
-<li>去掉当前执行环境中的变量，以及被执行环境中的变量引用的变量的标记</li>
-<li>第二步结束后仍被标记的变量将被视为准备删除的变量，因为此时的执行环境中的变量已经无法访问到这些变量了。</li>
-<li>完成内存清除工作，销毁那些带标记的值并回收它们所占用的内存空间。</li>
-</ol>
-<p>对于如下代码：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">1</span>,</span><br><span class="line">    b = <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">test1</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="keyword">var</span> c = <span class="number">3</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">test2</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="keyword">var</span> d = <span class="number">4</span>;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(a); </span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(b);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">test1</span>();</span><br><span class="line"></span><br><span class="line"><span class="title function_">test2</span>();</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>假设执行到test2()时，垃圾回收开始执行</p>
-<p>对于此时，内存情况为</p>
-<p><img src="/../assets/image-20210412150846546.png" alt="image-20210412150846546"></p>
-<p>开始第一步，将内存中的所有变量加上标记</p>
-<p><img src="/../assets/image-20210412151850990.png" alt="image-20210412151850990"></p>
-<p>去掉当前执行环境中的变量，以及被执行环境中的变量引用的变量的标记。简单分析一下，此时执行环境中可以访问的变量有 d ,然后我们通过作用域链可以访问到全局变量对象，因此 a 和 b 我们也是可以访问到的</p>
-<p><img src="/../assets/image-20210412152201055.png" alt="image-20210412152201055"></p>
-<p>此时只有 c 变量还保留有标记，说明 c 变量通过此时的环境已经访问不到了，所以 c 变量需要被清除掉来释放内存。</p>
-<p>最后垃圾收集器完成内存清除工作，销毁那些带标记的值并回收它们所占用的内存空间。</p>
-<p><img src="/../assets/image-20210412152245827.png" alt="image-20210412152245827"></p>
-<h3 id="缺点："><a href="#缺点：" class="headerlink" title="缺点："></a>缺点：</h3><ol>
-<li>标记清除法的第一个问题就是效率不高，因为在标记清除-阶段，整个程序将会等待，所有如果程序出现卡顿的情况你，那么就有可能是收集垃圾的情况。</li>
-<li>标记清除法的第二个问题是，从上面的例子我们可以看出，在清除之后内存空间不是连续的，即出现了内存碎片。如果后面需要一个比较大的连续的内存空间时，那将不能满足要求。而标记-整理方法可以有效地解决这个问题。与标记清除法相比，标记阶段没有什么不同，只是标记结束后，标记-整理方法会将活着的对象向内存的一边移动，最后清理掉边界的内存。不过可以想象，这种做法的效率没有标记-清除高。</li>
-</ol>
-<p>对比一下官方文档的解释:</p>
-<div><i>标记清除这个算法把“对象是否不再需要”简化定义为“对象是否可以获得”。这个算法假定设置一个叫做根（root）的对象（在Javascript里，根是全局对象）。垃圾回收器将定期从根开始，找所有从根开始引用的对象，然后找这些对象引用的对象……从根开始，垃圾回收器将找到所有可以获得的对象和收集所有不能获得的对象
-
-<h4 id="这里的‘根’指的应该是上下文对象"><a href="#这里的‘根’指的应该是上下文对象" class="headerlink" title="这里的‘根’指的应该是上下文对象"></a>这里的‘根’指的应该是上下文对象</h4><p>因为通过当前的执行上下文对象可以访问到当前环境中的变量，也可以通过作用域链去访问到其他上下文中的活动对象，从而可以判断得到所有可以获得的对象和所有不能获得的对象</p>
-]]></content>
-      <categories>
-        <category>JavaScript</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>JavaScript手写题</title>
     <url>/2021/03/02/Javascript%E6%89%8B%E5%86%99%E9%A2%98/</url>
     <content><![CDATA[<h4 id="实现一个new"><a href="#实现一个new" class="headerlink" title="实现一个new"></a>实现一个new</h4><p><strong>new的具体步骤</strong></p>
@@ -750,6 +694,62 @@
       </tags>
   </entry>
   <entry>
+    <title>JavaScript垃圾回收</title>
+    <url>/2021/02/18/JavaStript%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/</url>
+    <content><![CDATA[<h3 id="javascript垃圾回收主要分成两种方法："><a href="#javascript垃圾回收主要分成两种方法：" class="headerlink" title="javascript垃圾回收主要分成两种方法："></a>javascript垃圾回收主要分成两种方法：</h3><h3 id="1-引用计数"><a href="#1-引用计数" class="headerlink" title="1. 引用计数"></a>1. 引用计数</h3><h3 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h3><ul>
+<li><p>垃圾回收算法主要依赖于引用的概念。</p>
+</li>
+<li><p>在内存管理的环境中，一个对象如果有访问另一个对象的权限（隐式或者显式），叫做一个对象引用另一个对象。</p>
+</li>
+<li><p>例如，一个Javascript对象具有对它原型的引用（隐式引用）和对它属性的引用（显式引用）。</p>
+</li>
+<li><p>在这里，“对象”的概念不仅特指 JavaScript 对象，还包括函数作用域。</p>
+</li>
+</ul>
+<h3 id="引用计数垃圾收集"><a href="#引用计数垃圾收集" class="headerlink" title="引用计数垃圾收集"></a>引用计数垃圾收集</h3><p>这是最初级的垃圾收集算法。此算法把“对象是否不再需要”简化定义为“对象有没有其他对象引用到它”。如果没有引用指向该对象（零引用），对象将被垃圾回收机制回收。</p>
+<span id="more"></span>
+
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> o = &#123;</span><br><span class="line">  <span class="attr">a</span>: &#123;</span><br><span class="line">    <span class="attr">b</span>:<span class="number">2</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// 两个对象被创建，一个作为另一个的属性被引用，另一个被分配给变量o</span></span><br><span class="line"><span class="comment">// 很显然，没有一个可以被垃圾收集</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> o2 = o; <span class="comment">// o2变量是第二个对“这个对象”的引用</span></span><br><span class="line"></span><br><span class="line">o = <span class="number">1</span>;      <span class="comment">// 现在，“这个对象”只有一个o2变量的引用了，“这个对象”的原始引用o已经没有</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> oa = o2.<span class="property">a</span>; <span class="comment">// 引用“这个对象”的a属性</span></span><br><span class="line">               <span class="comment">// 现在，“这个对象”有两个引用了，一个是o2，一个是oa</span></span><br><span class="line"></span><br><span class="line">o2 = <span class="string">&quot;yo&quot;</span>; <span class="comment">// 虽然最初的对象现在已经是零引用了，可以被垃圾回收了</span></span><br><span class="line">           <span class="comment">// 但是它的属性a的对象还在被oa引用，所以还不能回收</span></span><br><span class="line"></span><br><span class="line">oa = <span class="literal">null</span>; <span class="comment">// a属性的那个对象现在也是零引用了</span></span><br><span class="line">           <span class="comment">// 它可以被垃圾回收了</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="2-标记清除"><a href="#2-标记清除" class="headerlink" title="2. 标记清除"></a>2. 标记清除</h3><p>JavaScript 中最常用的垃圾收集方式是标记清除。它的具体工作步骤如下：</p>
+<ol>
+<li>给存储在内存中的所有变量加上标记（当然可以使用任何标记方式）</li>
+<li>去掉当前执行环境中的变量，以及被执行环境中的变量引用的变量的标记</li>
+<li>第二步结束后仍被标记的变量将被视为准备删除的变量，因为此时的执行环境中的变量已经无法访问到这些变量了。</li>
+<li>完成内存清除工作，销毁那些带标记的值并回收它们所占用的内存空间。</li>
+</ol>
+<p>对于如下代码：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">1</span>,</span><br><span class="line">    b = <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">test1</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="keyword">var</span> c = <span class="number">3</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">test2</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="keyword">var</span> d = <span class="number">4</span>;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(a); </span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(b);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">test1</span>();</span><br><span class="line"></span><br><span class="line"><span class="title function_">test2</span>();</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>假设执行到test2()时，垃圾回收开始执行</p>
+<p>对于此时，内存情况为</p>
+<p><img src="/../assets/image-20210412150846546.png" alt="image-20210412150846546"></p>
+<p>开始第一步，将内存中的所有变量加上标记</p>
+<p><img src="/../assets/image-20210412151850990.png" alt="image-20210412151850990"></p>
+<p>去掉当前执行环境中的变量，以及被执行环境中的变量引用的变量的标记。简单分析一下，此时执行环境中可以访问的变量有 d ,然后我们通过作用域链可以访问到全局变量对象，因此 a 和 b 我们也是可以访问到的</p>
+<p><img src="/../assets/image-20210412152201055.png" alt="image-20210412152201055"></p>
+<p>此时只有 c 变量还保留有标记，说明 c 变量通过此时的环境已经访问不到了，所以 c 变量需要被清除掉来释放内存。</p>
+<p>最后垃圾收集器完成内存清除工作，销毁那些带标记的值并回收它们所占用的内存空间。</p>
+<p><img src="/../assets/image-20210412152245827.png" alt="image-20210412152245827"></p>
+<h3 id="缺点："><a href="#缺点：" class="headerlink" title="缺点："></a>缺点：</h3><ol>
+<li>标记清除法的第一个问题就是效率不高，因为在标记清除-阶段，整个程序将会等待，所有如果程序出现卡顿的情况你，那么就有可能是收集垃圾的情况。</li>
+<li>标记清除法的第二个问题是，从上面的例子我们可以看出，在清除之后内存空间不是连续的，即出现了内存碎片。如果后面需要一个比较大的连续的内存空间时，那将不能满足要求。而标记-整理方法可以有效地解决这个问题。与标记清除法相比，标记阶段没有什么不同，只是标记结束后，标记-整理方法会将活着的对象向内存的一边移动，最后清理掉边界的内存。不过可以想象，这种做法的效率没有标记-清除高。</li>
+</ol>
+<p>对比一下官方文档的解释:</p>
+<div><i>标记清除这个算法把“对象是否不再需要”简化定义为“对象是否可以获得”。这个算法假定设置一个叫做根（root）的对象（在Javascript里，根是全局对象）。垃圾回收器将定期从根开始，找所有从根开始引用的对象，然后找这些对象引用的对象……从根开始，垃圾回收器将找到所有可以获得的对象和收集所有不能获得的对象
+
+<h4 id="这里的‘根’指的应该是上下文对象"><a href="#这里的‘根’指的应该是上下文对象" class="headerlink" title="这里的‘根’指的应该是上下文对象"></a>这里的‘根’指的应该是上下文对象</h4><p>因为通过当前的执行上下文对象可以访问到当前环境中的变量，也可以通过作用域链去访问到其他上下文中的活动对象，从而可以判断得到所有可以获得的对象和所有不能获得的对象</p>
+]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Mini-React</title>
     <url>/2022/03/04/Mini-React/</url>
     <content><![CDATA[<h4 id="项目拆解："><a href="#项目拆解：" class="headerlink" title="项目拆解："></a>项目拆解：</h4><ol>
@@ -774,7 +774,7 @@
 
 <h5 id="createElement生成虚拟dom"><a href="#createElement生成虚拟dom" class="headerlink" title="createElement生成虚拟dom"></a>createElement生成虚拟dom</h5>]]></content>
       <categories>
-        <category>Chore</category>
+        <category>React</category>
       </categories>
       <tags>
         <tag>JavaScript</tag>
@@ -876,7 +876,7 @@
 <h5 id="NODE-ENV-的特殊内置环境变量"><a href="#NODE-ENV-的特殊内置环境变量" class="headerlink" title="NODE_ENV 的特殊内置环境变量"></a><code>NODE_ENV</code> 的特殊内置环境变量</h5><p>有一个名为 <code>NODE_ENV</code> 的特殊内置环境变量。可以从 <code>process.env.NODE_ENV</code> 中读取。运行 <code>npm start</code> 时，它总是等于 <code>&#39;development&#39;</code> ，运行 <code>npm test</code> 它总是等于 <code>&#39;test&#39;</code> ，运行 <code>npm run build</code> 来生成一个生产 bundle(包) 时，它总是等于 <code>&#39;production&#39;</code> 。**<code>NODE_ENV</code>无法手动覆盖。** </p>
 ]]></content>
       <categories>
-        <category>Chore</category>
+        <category>Node</category>
       </categories>
       <tags>
         <tag>JavaScript</tag>
@@ -2030,7 +2030,6 @@ module.exports = &#123;
 <blockquote>
 <p>注：这里需要注意，需要保证<code>html-webpack-plugin</code>插件一直是一个，不然会出现无法追加上 link 标签的情况</p>
 </blockquote>
-<h1 id="🧭-技术点快速导航："><a href="#🧭-技术点快速导航：" class="headerlink" title="🧭 技术点快速导航："></a>🧭 技术点快速导航：</h1><p>本文涉及了 less 插件、postcss 插件、和 webpack 插件的内容，对于没有插件背景的朋友会有点陌生，可以学习了解以下内容，方便补齐各个插件使用方式的信息。</p>
 ]]></content>
       <categories>
         <category>Chore</category>
