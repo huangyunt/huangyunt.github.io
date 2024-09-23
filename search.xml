@@ -78,6 +78,42 @@
       <categories>
         <category>CSS</category>
       </categories>
+      <tags>
+        <tag>CSS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hexo + Next + GitHub Page搭建个人博客</title>
+    <url>/2024/09/21/Hexo%20+%20Next%20+%20GitHub%20Page%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
+    <content><![CDATA[<h3 id="Hexo介绍"><a href="#Hexo介绍" class="headerlink" title="Hexo介绍"></a>Hexo介绍</h3><p>Hexo是一款基于Node.js的开源静态博客框架，用于快速、简单且高效地搭建静态博客网站。本质上是一个静态网站生成器，新增文章只需要编辑md文件，通过运行命令再生成像html的静态文件。</p>
+<h3 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 全局安装hexo脚手架</span><br><span class="line">npm install -g hexo-cli</span><br><span class="line"></span><br><span class="line"># 创建一blog项目</span><br><span class="line">hexo init blog</span><br><span class="line"></span><br><span class="line"># 进入项目</span><br><span class="line">cd blog</span><br><span class="line"></span><br><span class="line"># 安装依赖包</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
+
+<h3 id="其他操作"><a href="#其他操作" class="headerlink" title="其他操作"></a>其他操作</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 右键 Git Bush，用户项目自动化部署</span><br><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+
+<h3 id="项目预览"><a href="#项目预览" class="headerlink" title="项目预览"></a>项目预览</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 清理旧的静态文件</span><br><span class="line">hexo clean</span><br><span class="line"></span><br><span class="line"># 生成静态文件</span><br><span class="line">hexo g</span><br><span class="line"></span><br><span class="line"># 运行预览项目</span><br><span class="line">hexo s</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+
+<h3 id="Hexo配置文件详解（-config-yml）"><a href="#Hexo配置文件详解（-config-yml）" class="headerlink" title="Hexo配置文件详解（_config.yml）"></a>Hexo配置文件详解（_config.yml）</h3><h3 id="主题样式修改"><a href="#主题样式修改" class="headerlink" title="主题样式修改"></a>主题样式修改</h3><h5 id="Next主题样式"><a href="#Next主题样式" class="headerlink" title="Next主题样式"></a>Next主题样式</h5><p><a href="https://theme-next.js.org/docs/getting-started/configuration.html">https://theme-next.js.org/docs/getting-started/configuration.html</a></p>
+<p>With this way, all your theme configurations locate in config file <code>/_config.[name].yml</code>. Replace <code>[name]</code> with the value of theme option in Hexo config file. For NexT theme, the file name is <code>_config.next.yml</code> by default.</p>
+<p>Usage</p>
+<ol>
+<li><p>Please ensure you are using Hexo 5.0 or later.</p>
+</li>
+<li><p>Create the NexT config file named <code>_config.next.yml</code> in <span style="background-color: #5555;">site root directory</span>.</p>
+</li>
+</ol>
+<p>Copy needed <span style="background-color: #5555;">NexT theme</span> options from default theme config file into this config file. If it is the first time to install NexT, then copy the whole default theme config file by the following command:</p>
+]]></content>
+      <categories>
+        <category>Chore</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>Hexo</tag>
+        <tag>Github</tag>
+      </tags>
   </entry>
   <entry>
     <title>Hooks</title>
@@ -278,49 +314,11 @@
       <categories>
         <category>React</category>
       </categories>
-  </entry>
-  <entry>
-    <title>Hexo + Next + GitHub Page搭建个人博客</title>
-    <url>/2024/09/21/Hexo%20+%20Next%20+%20GitHub%20Page%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
-    <content><![CDATA[<h3 id="Hexo介绍"><a href="#Hexo介绍" class="headerlink" title="Hexo介绍"></a>Hexo介绍</h3><p>Hexo是一款基于Node.js的开源静态博客框架，用于快速、简单且高效地搭建静态博客网站。本质上是一个静态网站生成器，新增文章只需要编辑md文件，通过运行命令再生成像html的静态文件。</p>
-<h3 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 全局安装hexo脚手架</span><br><span class="line">npm install -g hexo-cli</span><br><span class="line"></span><br><span class="line"># 创建一blog项目</span><br><span class="line">hexo init blog</span><br><span class="line"></span><br><span class="line"># 进入项目</span><br><span class="line">cd blog</span><br><span class="line"></span><br><span class="line"># 安装依赖包</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
-
-<h3 id="其他操作"><a href="#其他操作" class="headerlink" title="其他操作"></a>其他操作</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 右键 Git Bush，用户项目自动化部署</span><br><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
-
-<h3 id="项目预览"><a href="#项目预览" class="headerlink" title="项目预览"></a>项目预览</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 清理旧的静态文件</span><br><span class="line">hexo clean</span><br><span class="line"></span><br><span class="line"># 生成静态文件</span><br><span class="line">hexo g</span><br><span class="line"></span><br><span class="line"># 运行预览项目</span><br><span class="line">hexo s</span><br></pre></td></tr></table></figure>
-
-<span id="more"></span>
-
-
-<h3 id="Hexo配置文件详解（-config-yml）"><a href="#Hexo配置文件详解（-config-yml）" class="headerlink" title="Hexo配置文件详解（_config.yml）"></a>Hexo配置文件详解（_config.yml）</h3><h3 id="主题样式修改"><a href="#主题样式修改" class="headerlink" title="主题样式修改"></a>主题样式修改</h3><h5 id="Next主题样式"><a href="#Next主题样式" class="headerlink" title="Next主题样式"></a>Next主题样式</h5><p><a href="https://theme-next.js.org/docs/getting-started/configuration.html">https://theme-next.js.org/docs/getting-started/configuration.html</a></p>
-<p>With this way, all your theme configurations locate in config file <code>/_config.[name].yml</code>. Replace <code>[name]</code> with the value of theme option in Hexo config file. For NexT theme, the file name is <code>_config.next.yml</code> by default.</p>
-<p>Usage</p>
-<ol>
-<li><p>Please ensure you are using Hexo 5.0 or later.</p>
-</li>
-<li><p>Create the NexT config file named <code>_config.next.yml</code> in <span style="background-color: #5555;">site root directory</span>.</p>
-</li>
-</ol>
-<p>Copy needed <span style="background-color: #5555;">NexT theme</span> options from default theme config file into this config file. If it is the first time to install NexT, then copy the whole default theme config file by the following command:</p>
-]]></content>
-      <categories>
-        <category>Chore</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Http2/Http3</title>
-    <url>/2021/09/18/Http2Http3/</url>
-    <content><![CDATA[<h4 id="为什么Http-1-1无法并发的发送多个请求（同时发多个请求，再同时接收）"><a href="#为什么Http-1-1无法并发的发送多个请求（同时发多个请求，再同时接收）" class="headerlink" title="为什么Http 1.1无法并发的发送多个请求（同时发多个请求，再同时接收）"></a>为什么Http 1.1无法并发的发送多个请求（同时发多个请求，再同时接收）</h4><p>因为http1.1是基于文本的协议，比如客户端向服务器发送了两个请求 <code>GET /query?q=A</code> 和 <code>GET /query?q=B</code>，服务器返回了两个结果，客户端是没有办法根据响应结果来判断响应对应于哪一个请求的，而http2基于二进制分帧实现多路复用，数据流以消息的形式发送，而消息又由一个或多个帧组成，多个帧之间可以乱序发送，<strong>因为根据帧首部的流标识可以重新组装。</strong></p>
-<span id="more"></span>
-
-
-
-
-
-]]></content>
-      <categories>
-        <category>ComputerNetwork</category>
-      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>Hooks</tag>
+        <tag>React</tag>
+      </tags>
   </entry>
   <entry>
     <title>Https</title>
@@ -396,6 +394,71 @@
       <categories>
         <category>ComputerNetwork</category>
       </categories>
+      <tags>
+        <tag>Network</tag>
+        <tag>Https</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Http2/Http3</title>
+    <url>/2021/09/18/Http2Http3/</url>
+    <content><![CDATA[<h4 id="为什么Http-1-1无法并发的发送多个请求（同时发多个请求，再同时接收）"><a href="#为什么Http-1-1无法并发的发送多个请求（同时发多个请求，再同时接收）" class="headerlink" title="为什么Http 1.1无法并发的发送多个请求（同时发多个请求，再同时接收）"></a>为什么Http 1.1无法并发的发送多个请求（同时发多个请求，再同时接收）</h4><p>因为http1.1是基于文本的协议，比如客户端向服务器发送了两个请求 <code>GET /query?q=A</code> 和 <code>GET /query?q=B</code>，服务器返回了两个结果，客户端是没有办法根据响应结果来判断响应对应于哪一个请求的，而http2基于二进制分帧实现多路复用，数据流以消息的形式发送，而消息又由一个或多个帧组成，多个帧之间可以乱序发送，<strong>因为根据帧首部的流标识可以重新组装。</strong></p>
+<span id="more"></span>
+
+
+
+
+
+]]></content>
+      <categories>
+        <category>ComputerNetwork</category>
+      </categories>
+      <tags>
+        <tag>Network</tag>
+        <tag>Https</tag>
+        <tag>Http</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JavaSrcipt原型</title>
+    <url>/2021/02/17/JavaScript%E5%8E%9F%E5%9E%8B/</url>
+    <content><![CDATA[<p>首先，要明确几个点：</p>
+<ol>
+<li><p>在JS里，万物皆对象。方法（Function）是对象，方法的原型(Function.prototype)是对象。因此，它们都会具有对象共有的特点。<br>即：对象具有属性__proto__，可称为隐式原型，一个对象的隐式原型指向构造该对象的构造函数的原型，这也保证了实例能够访问在构造函数原型中定义的属性和方法。</p>
+</li>
+<li><p>方法(Function)<br>方法这个特殊的对象，除了和其他对象一样有上述_proto_属性之外，还有自己特有的属性——原型属性（prototype），这个属性是一个指针，指向一个对象，这个对象的用途就是包含所有实例共享的属性和方法（我们把这个对象叫做原型对象）。原型对象也有一个属性，叫做constructor，这个属性包含了一个指针，指回原构造函数。</p>
+</li>
+</ol>
+<p>好啦，知道了这两个基本点，我们来看看上面这副图。</p>
+<ol>
+<li><p>构造函数Foo()<br>构造函数的原型属性Foo.prototype指向了原型对象，在原型对象里有共有的方法，所有构造函数声明的实例（这里是f1，f2）都可以共享这个方法。</p>
+</li>
+<li><p>原型对象Foo.prototype<br>Foo.prototype保存着实例共享的方法，有一个指针constructor指回构造函数。</p>
+</li>
+<li><p>实例<br>f1和f2是Foo这个对象的两个实例，这两个对象也有属性__proto__，指向构造函数的原型对象，这样子就可以像上面1所说的访问原型对象的所有方法啦。</p>
+<p><img src="/../assets/Snipaste_2021-08-08_20-48-18.png" alt="image-20210808204737157"></p>
+</li>
+</ol>
+<span id="more"></span>
+
+<p>另外：<br>构造函数Foo()除了是方法，也是对象啊，它也有__proto__属性，指向谁呢？<br>指向它的构造函数的原型对象呗。函数的构造函数不就是Function嘛，因此这里的__proto__指向了Function.prototype。<br>其实除了Foo()，Function(), Object()也是一样的道理。</p>
+<p>原型对象也是对象啊，它的__proto__属性，又指向谁呢？<br>同理，指向它的构造函数的原型对象呗。这里是Object.prototype.</p>
+<p>最后，Object.prototype的__proto__属性指向null（原型链的终点）</p>
+<p>总结：</p>
+<ol>
+<li>对象有属性__proto__,指向该对象的构造函数的原型对象。</li>
+<li>方法除了有属性__proto__,还有属性prototype，prototype指向该方法的原型对象。</li>
+<li>标准化获取对象的构造函数的原型：不要用obj.__proto__，用Object.getPrototypeof(obj)。</li>
+</ol>
+<h2 id="原型对象中的constructor"><a href="#原型对象中的constructor" class="headerlink" title="原型对象中的constructor"></a>原型对象中的constructor</h2><p>看一段代码:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function </span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+      </tags>
   </entry>
   <entry>
     <title>JavaScript垃圾回收</title>
@@ -449,44 +512,9 @@
       <categories>
         <category>JavaScript</category>
       </categories>
-  </entry>
-  <entry>
-    <title>JavaSrcipt原型</title>
-    <url>/2021/02/17/JavaScript%E5%8E%9F%E5%9E%8B/</url>
-    <content><![CDATA[<p>首先，要明确几个点：</p>
-<ol>
-<li><p>在JS里，万物皆对象。方法（Function）是对象，方法的原型(Function.prototype)是对象。因此，它们都会具有对象共有的特点。<br>即：对象具有属性__proto__，可称为隐式原型，一个对象的隐式原型指向构造该对象的构造函数的原型，这也保证了实例能够访问在构造函数原型中定义的属性和方法。</p>
-</li>
-<li><p>方法(Function)<br>方法这个特殊的对象，除了和其他对象一样有上述_proto_属性之外，还有自己特有的属性——原型属性（prototype），这个属性是一个指针，指向一个对象，这个对象的用途就是包含所有实例共享的属性和方法（我们把这个对象叫做原型对象）。原型对象也有一个属性，叫做constructor，这个属性包含了一个指针，指回原构造函数。</p>
-</li>
-</ol>
-<p>好啦，知道了这两个基本点，我们来看看上面这副图。</p>
-<ol>
-<li><p>构造函数Foo()<br>构造函数的原型属性Foo.prototype指向了原型对象，在原型对象里有共有的方法，所有构造函数声明的实例（这里是f1，f2）都可以共享这个方法。</p>
-</li>
-<li><p>原型对象Foo.prototype<br>Foo.prototype保存着实例共享的方法，有一个指针constructor指回构造函数。</p>
-</li>
-<li><p>实例<br>f1和f2是Foo这个对象的两个实例，这两个对象也有属性__proto__，指向构造函数的原型对象，这样子就可以像上面1所说的访问原型对象的所有方法啦。</p>
-<p><img src="/../assets/Snipaste_2021-08-08_20-48-18.png" alt="image-20210808204737157"></p>
-</li>
-</ol>
-<span id="more"></span>
-
-<p>另外：<br>构造函数Foo()除了是方法，也是对象啊，它也有__proto__属性，指向谁呢？<br>指向它的构造函数的原型对象呗。函数的构造函数不就是Function嘛，因此这里的__proto__指向了Function.prototype。<br>其实除了Foo()，Function(), Object()也是一样的道理。</p>
-<p>原型对象也是对象啊，它的__proto__属性，又指向谁呢？<br>同理，指向它的构造函数的原型对象呗。这里是Object.prototype.</p>
-<p>最后，Object.prototype的__proto__属性指向null（原型链的终点）</p>
-<p>总结：</p>
-<ol>
-<li>对象有属性__proto__,指向该对象的构造函数的原型对象。</li>
-<li>方法除了有属性__proto__,还有属性prototype，prototype指向该方法的原型对象。</li>
-<li>标准化获取对象的构造函数的原型：不要用obj.__proto__，用Object.getPrototypeof(obj)。</li>
-</ol>
-<h2 id="原型对象中的constructor"><a href="#原型对象中的constructor" class="headerlink" title="原型对象中的constructor"></a>原型对象中的constructor</h2><p>看一段代码:</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function </span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>JavaScript</category>
-      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+      </tags>
   </entry>
   <entry>
     <title>JavaScript手写题</title>
@@ -520,6 +548,9 @@
       <categories>
         <category>JavaScript</category>
       </categories>
+      <tags>
+        <tag>JavaScript</tag>
+      </tags>
   </entry>
   <entry>
     <title>JavaScript执行上下文</title>
@@ -637,6 +668,9 @@
       <categories>
         <category>JavaScript</category>
       </categories>
+      <tags>
+        <tag>JavaScript</tag>
+      </tags>
   </entry>
   <entry>
     <title>JavaSrcipt知识点</title>
@@ -652,34 +686,9 @@
       <categories>
         <category>JavaScript</category>
       </categories>
-  </entry>
-  <entry>
-    <title>Mini-React</title>
-    <url>/2022/03/04/Mini-React/</url>
-    <content><![CDATA[<h4 id="项目拆解："><a href="#项目拆解：" class="headerlink" title="项目拆解："></a>项目拆解：</h4><ol>
-<li><p>Jsx 和虚拟 DOM</p>
-</li>
-<li><p>组件和生命周期</p>
-</li>
-<li><p>Diff</p>
-</li>
-<li><p>异步的setState</p>
-</li>
-<li><p>hook支持</p>
-</li>
-</ol>
-<h4 id="具体思路"><a href="#具体思路" class="headerlink" title="具体思路"></a>具体思路</h4><h5 id="将jsx经过babel转成React-createElement的形式"><a href="#将jsx经过babel转成React-createElement的形式" class="headerlink" title="将jsx经过babel转成React.createElement的形式"></a>将jsx经过babel转成React.createElement的形式</h5><p>例如</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">class Hem extends React.Component &#123;</span><br><span class="line">    render() &#123;</span><br><span class="line">        return (</span><br><span class="line">            &lt;A&gt;</span><br><span class="line">                &lt;B&gt;</span><br><span class="line">                    &lt;C&gt;</span><br><span class="line">                        &lt;div /&gt;</span><br><span class="line">                        &lt;span /&gt;</span><br><span class="line">                    &lt;/C&gt;</span><br><span class="line">                    &lt;D /&gt;</span><br><span class="line">                &lt;/B&gt;</span><br><span class="line">                &lt;E /&gt;</span><br><span class="line">                &lt;F /&gt;</span><br><span class="line">            &lt;/A&gt;</span><br><span class="line">        );</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>经过babel转义后</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="title function_">_createClass</span>(<span class="title class_">Hem</span>, [</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">key</span>: <span class="string">&quot;render&quot;</span>,</span><br><span class="line">        <span class="attr">value</span>: <span class="keyword">function</span> <span class="title function_">render</span>(<span class="params"></span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="title class_">React</span>.<span class="title function_">createElement</span>(</span><br><span class="line">                A,</span><br><span class="line">                <span class="literal">null</span>,</span><br><span class="line">                <span class="comment">// A组件的亲儿子组件B</span></span><br><span class="line">                <span class="title class_">React</span>.<span class="title function_">createElement</span>(</span><br><span class="line">                    B,</span><br><span class="line">                    <span class="literal">null</span>,</span><br><span class="line">                    <span class="title class_">React</span>.<span class="title function_">createElement</span>(</span><br><span class="line">                        C,</span><br><span class="line">                        <span class="literal">null</span>,</span><br><span class="line">                        <span class="comment">// C组件的亲儿子 div</span></span><br><span class="line">                        <span class="title class_">React</span>.<span class="title function_">createElement</span>(<span class="string">&quot;div&quot;</span>, <span class="literal">null</span>),</span><br><span class="line">                        <span class="comment">// C组件的亲儿子 span</span></span><br><span class="line">                        <span class="title class_">React</span>.<span class="title function_">createElement</span>(<span class="string">&quot;span&quot;</span>, <span class="literal">null</span>)</span><br><span class="line">                    ),</span><br><span class="line">                    <span class="title class_">React</span>.<span class="title function_">createElement</span>(D, <span class="literal">null</span>)</span><br><span class="line">                ),</span><br><span class="line">                <span class="comment">// A组件的亲儿子组件E</span></span><br><span class="line">                <span class="title class_">React</span>.<span class="title function_">createElement</span>(E, <span class="literal">null</span>),</span><br><span class="line">                <span class="comment">// A组件的亲儿子组件F</span></span><br><span class="line">                <span class="title class_">React</span>.<span class="title function_">createElement</span>(F, <span class="literal">null</span>)</span><br><span class="line">            );</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">]);</span><br></pre></td></tr></table></figure>
-
-<span id="more"></span>
-
-<h5 id="createElement生成虚拟dom"><a href="#createElement生成虚拟dom" class="headerlink" title="createElement生成虚拟dom"></a>createElement生成虚拟dom</h5>]]></content>
-      <categories>
-        <category>Chore</category>
-      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+      </tags>
   </entry>
   <entry>
     <title>Jira项目</title>
@@ -736,6 +745,41 @@
       <categories>
         <category>Chore</category>
       </categories>
+      <tags>
+        <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Mini-React</title>
+    <url>/2022/03/04/Mini-React/</url>
+    <content><![CDATA[<h4 id="项目拆解："><a href="#项目拆解：" class="headerlink" title="项目拆解："></a>项目拆解：</h4><ol>
+<li><p>Jsx 和虚拟 DOM</p>
+</li>
+<li><p>组件和生命周期</p>
+</li>
+<li><p>Diff</p>
+</li>
+<li><p>异步的setState</p>
+</li>
+<li><p>hook支持</p>
+</li>
+</ol>
+<h4 id="具体思路"><a href="#具体思路" class="headerlink" title="具体思路"></a>具体思路</h4><h5 id="将jsx经过babel转成React-createElement的形式"><a href="#将jsx经过babel转成React-createElement的形式" class="headerlink" title="将jsx经过babel转成React.createElement的形式"></a>将jsx经过babel转成React.createElement的形式</h5><p>例如</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">class Hem extends React.Component &#123;</span><br><span class="line">    render() &#123;</span><br><span class="line">        return (</span><br><span class="line">            &lt;A&gt;</span><br><span class="line">                &lt;B&gt;</span><br><span class="line">                    &lt;C&gt;</span><br><span class="line">                        &lt;div /&gt;</span><br><span class="line">                        &lt;span /&gt;</span><br><span class="line">                    &lt;/C&gt;</span><br><span class="line">                    &lt;D /&gt;</span><br><span class="line">                &lt;/B&gt;</span><br><span class="line">                &lt;E /&gt;</span><br><span class="line">                &lt;F /&gt;</span><br><span class="line">            &lt;/A&gt;</span><br><span class="line">        );</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>经过babel转义后</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="title function_">_createClass</span>(<span class="title class_">Hem</span>, [</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">key</span>: <span class="string">&quot;render&quot;</span>,</span><br><span class="line">        <span class="attr">value</span>: <span class="keyword">function</span> <span class="title function_">render</span>(<span class="params"></span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="title class_">React</span>.<span class="title function_">createElement</span>(</span><br><span class="line">                A,</span><br><span class="line">                <span class="literal">null</span>,</span><br><span class="line">                <span class="comment">// A组件的亲儿子组件B</span></span><br><span class="line">                <span class="title class_">React</span>.<span class="title function_">createElement</span>(</span><br><span class="line">                    B,</span><br><span class="line">                    <span class="literal">null</span>,</span><br><span class="line">                    <span class="title class_">React</span>.<span class="title function_">createElement</span>(</span><br><span class="line">                        C,</span><br><span class="line">                        <span class="literal">null</span>,</span><br><span class="line">                        <span class="comment">// C组件的亲儿子 div</span></span><br><span class="line">                        <span class="title class_">React</span>.<span class="title function_">createElement</span>(<span class="string">&quot;div&quot;</span>, <span class="literal">null</span>),</span><br><span class="line">                        <span class="comment">// C组件的亲儿子 span</span></span><br><span class="line">                        <span class="title class_">React</span>.<span class="title function_">createElement</span>(<span class="string">&quot;span&quot;</span>, <span class="literal">null</span>)</span><br><span class="line">                    ),</span><br><span class="line">                    <span class="title class_">React</span>.<span class="title function_">createElement</span>(D, <span class="literal">null</span>)</span><br><span class="line">                ),</span><br><span class="line">                <span class="comment">// A组件的亲儿子组件E</span></span><br><span class="line">                <span class="title class_">React</span>.<span class="title function_">createElement</span>(E, <span class="literal">null</span>),</span><br><span class="line">                <span class="comment">// A组件的亲儿子组件F</span></span><br><span class="line">                <span class="title class_">React</span>.<span class="title function_">createElement</span>(F, <span class="literal">null</span>)</span><br><span class="line">            );</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">]);</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<h5 id="createElement生成虚拟dom"><a href="#createElement生成虚拟dom" class="headerlink" title="createElement生成虚拟dom"></a>createElement生成虚拟dom</h5>]]></content>
+      <categories>
+        <category>Chore</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>React</tag>
+      </tags>
   </entry>
   <entry>
     <title>Node中的process.env</title>
@@ -834,6 +878,10 @@
       <categories>
         <category>Chore</category>
       </categories>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>Node</tag>
+      </tags>
   </entry>
   <entry>
     <title>Promise</title>
@@ -928,96 +976,9 @@
       <categories>
         <category>JavaScript</category>
       </categories>
-  </entry>
-  <entry>
-    <title>React-Router</title>
-    <url>/2021/10/01/React-Router/</url>
-    <content><![CDATA[<h3 id="SPA的理解"><a href="#SPA的理解" class="headerlink" title="SPA的理解"></a>SPA的理解</h3><ol>
-<li><p>单页Web应用（single page web application，SPA）。</p>
-</li>
-<li><p>整个应用只有<strong>一个完整的页面</strong>。</p>
-</li>
-<li><p>点击页面中的链接<strong>不会刷新</strong>页面，只会做页面的<strong>局部更新。</strong></p>
-</li>
-<li><p>数据都需要通过ajax请求获取, 并在前端异步展现。</p>
-</li>
-</ol>
-<h3 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h3><ol>
-<li>后端路由：</li>
-</ol>
-<ul>
-<li><p>注册路由： router.get(path, function(req, res))</p>
-</li>
-<li><p>工作过程：当node接收到一个请求时, 根据请求路径找到匹配的路由, 调用路由中的函数来处理请求, 返回响应数据</p>
-</li>
-</ul>
-<ol start="2">
-<li>前端路由：</li>
-</ol>
-<ul>
-<li><p>注册路由: <Route path="/test" component={Test}></p>
-</li>
-<li><p>工作过程：当浏览器的path变为&#x2F;test时, 当前路由组件就会变为Test组件</p>
-</li>
-</ul>
-<span id="more"></span>
-
-<h3 id="react-router-dom相关API"><a href="#react-router-dom相关API" class="headerlink" title="react-router-dom相关API"></a>react-router-dom相关API</h3><h4 id="1-内置API"><a href="#1-内置API" class="headerlink" title="1.内置API"></a>1.内置API</h4><ul>
-<li><BrowserRouter>
-</li>
-<li><HashRouter></li>
-<li><Route></li>
-<li><Redirect></li>
-<li><Link></li>
-<li><NavLink></li>
-<li><Switch></li>
-</ul>
-<h4 id="2-其他"><a href="#2-其他" class="headerlink" title="2. 其他"></a>2. 其他</h4><ul>
-<li><p>history对象</p>
-</li>
-<li><p>match对象</p>
-</li>
-<li><p>withRouter函数</p>
-</li>
-</ul>
-<h3 id="路由组件与一般组件"><a href="#路由组件与一般组件" class="headerlink" title="路由组件与一般组件"></a>路由组件与一般组件</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="number">1.</span>写法不同：</span><br><span class="line">			一般组件：&lt;<span class="title class_">Demo</span>/&gt;</span><br><span class="line">			路由组件：&lt;<span class="title class_">Route</span> path=<span class="string">&quot;/demo&quot;</span> component=&#123;<span class="title class_">Demo</span>&#125;/&gt;</span><br><span class="line"><span class="number">2.</span>存放位置不同：</span><br><span class="line">			一般组件：components</span><br><span class="line">			路由组件：pages</span><br><span class="line"><span class="number">3.</span>接收到的props不同：</span><br><span class="line">			一般组件：写组件标签时传递了什么，就能收到什么</span><br><span class="line">			路由组件：接收到三个固定的属性</span><br><span class="line">								<span class="attr">history</span>:</span><br><span class="line">											<span class="attr">go</span>: ƒ <span class="title function_">go</span>(n)</span><br><span class="line">											<span class="attr">goBack</span>: ƒ <span class="title function_">goBack</span>()</span><br><span class="line">											<span class="attr">goForward</span>: ƒ <span class="title function_">goForward</span>()</span><br><span class="line">											<span class="attr">push</span>: ƒ <span class="title function_">push</span>(path, state)</span><br><span class="line">											<span class="attr">replace</span>: ƒ <span class="title function_">replace</span>(path, state)</span><br><span class="line">								<span class="attr">location</span>:</span><br><span class="line">											<span class="attr">pathname</span>: <span class="string">&quot;/about&quot;</span></span><br><span class="line">											<span class="attr">search</span>: <span class="string">&quot;&quot;</span></span><br><span class="line">											<span class="attr">state</span>: <span class="literal">undefined</span></span><br><span class="line">								<span class="attr">match</span>:</span><br><span class="line">											<span class="attr">params</span>: &#123;&#125;</span><br><span class="line">											<span class="attr">path</span>: <span class="string">&quot;/about&quot;</span></span><br><span class="line">											<span class="attr">url</span>: <span class="string">&quot;/about&quot;</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="NavLink与封装NavLink"><a href="#NavLink与封装NavLink" class="headerlink" title="NavLink与封装NavLink"></a>NavLink与封装NavLink</h3><pre><code>            1.NavLink可以实现路由链接的高亮，通过activeClassName指定样式名
-</code></pre>
-<h3 id="Switch的使用"><a href="#Switch的使用" class="headerlink" title="Switch的使用"></a>Switch的使用</h3><pre><code>            1.通常情况下，path和component是一一对应的关系。
-            2.Switch可以提高路由匹配效率(单一匹配)。
-</code></pre>
-<h3 id="解决多级路径刷新页面样式丢失的问题"><a href="#解决多级路径刷新页面样式丢失的问题" class="headerlink" title="解决多级路径刷新页面样式丢失的问题"></a>解决多级路径刷新页面样式丢失的问题</h3><pre><code>            1.public/index.html 中 引入样式时不写 ./ 写 / （常用）
-            2.public/index.html 中 引入样式时不写 ./ 写 %PUBLIC_URL% （常用）
-            3.使用HashRouter
-</code></pre>
-<h3 id="路由的严格匹配与模糊匹配"><a href="#路由的严格匹配与模糊匹配" class="headerlink" title="路由的严格匹配与模糊匹配"></a>路由的严格匹配与模糊匹配</h3><pre><code>            1.默认使用的是模糊匹配（简单记：【输入的路径】必须包含要【匹配的路径】，且顺序要一致）
-            2.开启严格匹配：&lt;Route exact=&#123;true&#125; path=&quot;/about&quot; component=&#123;About&#125;/&gt;
-            3.严格匹配不要随便开启，需要再开，有些时候开启会导致无法继续匹配二级路由
-</code></pre>
-<h3 id="Redirect的使用"><a href="#Redirect的使用" class="headerlink" title="Redirect的使用"></a>Redirect的使用</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1.一般写在所有路由注册的最下方，当所有路由都无法匹配时，跳转到Redirect指定的路由</span><br><span class="line">2.具体编码：</span><br><span class="line">		&lt;Switch&gt;</span><br><span class="line">			&lt;Route path=&quot;/about&quot; component=&#123;About&#125;/&gt;</span><br><span class="line">			&lt;Route path=&quot;/home&quot; component=&#123;Home&#125;/&gt;</span><br><span class="line">			&lt;Redirect to=&quot;/about&quot;/&gt;</span><br><span class="line">		&lt;/Switch&gt;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="嵌套路由"><a href="#嵌套路由" class="headerlink" title="嵌套路由"></a>嵌套路由</h3><pre><code>            1.注册子路由时要写上父路由的path值
-            2.路由的匹配是按照注册路由的顺序进行的
-</code></pre>
-<h3 id="向路由组件传递参数"><a href="#向路由组件传递参数" class="headerlink" title="向路由组件传递参数"></a>向路由组件传递参数</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1.params参数</span><br><span class="line">			路由链接(携带参数)：&lt;Link to=&#x27;/demo/test/tom/18&#x27;&#125;&gt;详情&lt;/Link&gt;</span><br><span class="line">			注册路由(声明接收)：&lt;Route path=&quot;/demo/test/:name/:age&quot; component=&#123;Test&#125;/&gt;</span><br><span class="line">			接收参数：this.props.match.params</span><br><span class="line">2.search参数</span><br><span class="line">			路由链接(携带参数)：&lt;Link to=&#x27;/demo/test?name=tom&amp;age=18&#x27;&#125;&gt;详情&lt;/Link&gt;</span><br><span class="line">			注册路由(无需声明，正常注册即可)：&lt;Route path=&quot;/demo/test&quot; component=&#123;Test&#125;/&gt;</span><br><span class="line">			接收参数：this.props.location.search</span><br><span class="line">			备注：获取到的search是urlencoded编码字符串，需要借助querystring解析</span><br><span class="line">3.state参数</span><br><span class="line">			路由链接(携带参数)：&lt;Link to=&#123;&#123;pathname:&#x27;/demo/test&#x27;,state:&#123;name:&#x27;tom&#x27;,age:18&#125;&#125;&#125;&gt;详情&lt;/Link&gt;</span><br><span class="line">			注册路由(无需声明，正常注册即可)：&lt;Route path=&quot;/demo/test&quot; component=&#123;Test&#125;/&gt;</span><br><span class="line">			接收参数：this.props.location.state</span><br><span class="line">			备注：刷新也可以保留住参数</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="编程式路由导航"><a href="#编程式路由导航" class="headerlink" title="编程式路由导航"></a>编程式路由导航</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">借助<span class="variable language_">this</span>.<span class="property">prosp</span>.<span class="property">history</span>对象上的<span class="variable constant_">API</span>对操作路由跳转、前进、后退</span><br><span class="line">		-<span class="variable language_">this</span>.<span class="property">prosp</span>.<span class="property">history</span>.<span class="title function_">push</span>()</span><br><span class="line">		-<span class="variable language_">this</span>.<span class="property">prosp</span>.<span class="property">history</span>.<span class="title function_">replace</span>()</span><br><span class="line">		-<span class="variable language_">this</span>.<span class="property">prosp</span>.<span class="property">history</span>.<span class="title function_">goBack</span>()</span><br><span class="line">		-<span class="variable language_">this</span>.<span class="property">prosp</span>.<span class="property">history</span>.<span class="title function_">goForward</span>()</span><br><span class="line">		-<span class="variable language_">this</span>.<span class="property">prosp</span>.<span class="property">history</span>.<span class="title function_">go</span>()</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="BrowserRouter与HashRouter的区别"><a href="#BrowserRouter与HashRouter的区别" class="headerlink" title="BrowserRouter与HashRouter的区别"></a>BrowserRouter与HashRouter的区别</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="number">1.</span>底层原理不一样：</span><br><span class="line">			<span class="title class_">BrowserRouter</span>使用的是<span class="variable constant_">H5</span>的history <span class="variable constant_">API</span>，不兼容<span class="title class_">IE9</span>及以下版本。</span><br><span class="line">			<span class="title class_">HashRouter</span>使用的是<span class="variable constant_">URL</span>的哈希值。</span><br><span class="line"><span class="number">2.</span>path表现形式不一样</span><br><span class="line">			<span class="title class_">BrowserRouter</span>的路径中没有#,例如：<span class="attr">localhost</span>:<span class="number">3000</span>/demo/test</span><br><span class="line">			<span class="title class_">HashRouter</span>的路径包含#,例如：<span class="attr">localhost</span>:<span class="number">3000</span>/#/demo/test</span><br><span class="line"><span class="number">3.</span>刷新后对路由state参数的影响</span><br><span class="line">			(<span class="number">1</span>).<span class="property">BrowserRouter</span>没有任何影响，因为state保存在history对象中。</span><br><span class="line">			(<span class="number">2</span>).<span class="property">HashRouter</span>刷新后会导致路由state参数的丢失！！！</span><br><span class="line"><span class="number">4.</span>备注：<span class="title class_">HashRouter</span>可以用于解决一些路径错误相关的问题。</span><br></pre></td></tr></table></figure>
-
-<h2 id=""><a href="#" class="headerlink" title=""></a></h2>]]></content>
-      <categories>
-        <category>React</category>
-      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+      </tags>
   </entry>
   <entry>
     <title>React</title>
@@ -1270,64 +1231,10 @@ C组件: 读取A组件传入的数据显示 &#123;this.props.data&#125;
       <categories>
         <category>React</category>
       </categories>
-  </entry>
-  <entry>
-    <title>React生态</title>
-    <url>/2021/09/30/React%E7%94%9F%E6%80%81/</url>
-    <content><![CDATA[<h3 id="React-DevTools"><a href="#React-DevTools" class="headerlink" title="React DevTools"></a>React DevTools</h3><h5 id="General-设置"><a href="#General-设置" class="headerlink" title="General 设置"></a>General 设置</h5><img src="../assets/image-20220222024702149.png" alt="image-20220222024702149" style="zoom:33%;" />
-
-<p>General 面板中最重要的功能就是 **”Highlight updates when components render”**。勾选上之后，可以查看 React 重绘时，页面哪些部分有更新。在遇到性能问题时，可以快速帮助决策在哪部分不需要重绘的组件部分添加 React.memo 阻止重绘。</p>
-<h5 id="Debugging-设置"><a href="#Debugging-设置" class="headerlink" title="Debugging 设置"></a>Debugging 设置</h5><img src="..\Picture\image-20220222024832097.png" alt="image-20220222024832097" style="zoom:33%;" />
-
-<p><strong>“Append components stacks to console warnings and errors.”</strong></p>
-<p>可以帮助我们定位 React 报错信息来自哪个组件</p>
-<span id="more"></span>
-
-
-<h5 id="Components-设置"><a href="#Components-设置" class="headerlink" title="Components 设置"></a>Components 设置</h5><img src="..\Picture\image-20220222024936104.png" alt="image-20220222024936104" style="zoom:33%;" />
-
-<p><strong>“Hide components where…”</strong></p>
-<p>此项在过滤组件树时有用。比如，大多数应用可能会在顶层有很多 Context.Provider，就可以过滤 Context 类型、不显示。当我们只关心业务逻辑层的组件时，可以过滤掉 DOM 组件，减少树的节点</p>
-<h5 id="Profiler-设置"><a href="#Profiler-设置" class="headerlink" title="Profiler 设置"></a>Profiler 设置</h5><img src="..\Picture\image-20220222025024293.png" alt="image-20220222025024293" style="zoom:33%;" />
-
-<p><strong>“Record why each component rendered while profiling”</strong></p>
-<img src="..\Picture\image-20220222025054509.png" alt="image-20220222025054509" style="zoom:33%;" />
-
-<p>勾选之后会在渲染火焰图的 hover 面板中看到 **”Why did this render”**。</p>
-<h5 id="现在有哪些-render-原因呢？"><a href="#现在有哪些-render-原因呢？" class="headerlink" title="现在有哪些 render 原因呢？"></a>现在有哪些 render 原因呢？</h5><ul>
-<li><p><strong>Props changed</strong></p>
-<p>​     顾名思义，传入组件的 props 变更</p>
-</li>
-<li><p><strong>The parent component rendered</strong></p>
-<p>​	父组件渲染导致的子组件渲染。一般要做性能优化都是找这类重绘原因的组件。但是要注意，如果组件中有用到 useContext，Provider 的 value 变更导致的重绘也是被标记为 The parent component rendered，需要注意</p>
-</li>
-<li><p><strong>Hooks changed</strong></p>
-<p>​	Hook 状态变更导致的重绘，一般就是指 useState 返回的更新函数被调用了</p>
-</li>
-<li><p><strong>State changed</strong></p>
-<p>​	这个只会在 class component 中有，大家忽略</p>
-</li>
-<li><p><strong>“Hide commits below xx (ms)”</strong></p>
-<p>​	设置一个更新耗时的阈值，低于该阈值的渲染不显示。用来快速过滤哪些渲染有性能问题</p>
-</li>
-</ul>
-<h5 id="React-组件检视器"><a href="#React-组件检视器" class="headerlink" title="React 组件检视器"></a>React 组件检视器</h5><p>用法和 DevTools 的元素面板类似，可以直接在页面上定位到元素对应的 React Component。并且可以实时查看当前组件内部的 hooks 状态，返回的组件树</p>
-<img src="..\Picture\image-20220222025129591.png" alt="image-20220222025129591" style="zoom:33%;" />
-
-<p>右上角的四个图标</p>
-<img src="..\Picture\image-20220222025154916.png" alt="image-20220222025154916" style="zoom:33%;" />
-
-<p>分别作用如下：</p>
-<ul>
-<li>模拟 ReactLazy 懒加载组件 Suspense 状态</li>
-<li>定位组件所渲染的 DOM 节点</li>
-<li>在 Console 中打印 Component 内部状态</li>
-<li>跳转到组件所在源文件（配合 sourcemap）</li>
-</ul>
-]]></content>
-      <categories>
-        <category>React</category>
-      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>React</tag>
+      </tags>
   </entry>
   <entry>
     <title>React的设计和实现</title>
@@ -1390,6 +1297,72 @@ C组件: 读取A组件传入的数据显示 &#123;this.props.data&#125;
       <categories>
         <category>React</category>
       </categories>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>React</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>React生态</title>
+    <url>/2021/09/30/React%E7%94%9F%E6%80%81/</url>
+    <content><![CDATA[<h3 id="React-DevTools"><a href="#React-DevTools" class="headerlink" title="React DevTools"></a>React DevTools</h3><h5 id="General-设置"><a href="#General-设置" class="headerlink" title="General 设置"></a>General 设置</h5><img src="../assets/image-20220222024702149.png" alt="image-20220222024702149" style="zoom:33%;" />
+
+<p>General 面板中最重要的功能就是 **”Highlight updates when components render”**。勾选上之后，可以查看 React 重绘时，页面哪些部分有更新。在遇到性能问题时，可以快速帮助决策在哪部分不需要重绘的组件部分添加 React.memo 阻止重绘。</p>
+<h5 id="Debugging-设置"><a href="#Debugging-设置" class="headerlink" title="Debugging 设置"></a>Debugging 设置</h5><img src="..\Picture\image-20220222024832097.png" alt="image-20220222024832097" style="zoom:33%;" />
+
+<p><strong>“Append components stacks to console warnings and errors.”</strong></p>
+<p>可以帮助我们定位 React 报错信息来自哪个组件</p>
+<span id="more"></span>
+
+
+<h5 id="Components-设置"><a href="#Components-设置" class="headerlink" title="Components 设置"></a>Components 设置</h5><img src="..\Picture\image-20220222024936104.png" alt="image-20220222024936104" style="zoom:33%;" />
+
+<p><strong>“Hide components where…”</strong></p>
+<p>此项在过滤组件树时有用。比如，大多数应用可能会在顶层有很多 Context.Provider，就可以过滤 Context 类型、不显示。当我们只关心业务逻辑层的组件时，可以过滤掉 DOM 组件，减少树的节点</p>
+<h5 id="Profiler-设置"><a href="#Profiler-设置" class="headerlink" title="Profiler 设置"></a>Profiler 设置</h5><img src="..\Picture\image-20220222025024293.png" alt="image-20220222025024293" style="zoom:33%;" />
+
+<p><strong>“Record why each component rendered while profiling”</strong></p>
+<img src="..\Picture\image-20220222025054509.png" alt="image-20220222025054509" style="zoom:33%;" />
+
+<p>勾选之后会在渲染火焰图的 hover 面板中看到 **”Why did this render”**。</p>
+<h5 id="现在有哪些-render-原因呢？"><a href="#现在有哪些-render-原因呢？" class="headerlink" title="现在有哪些 render 原因呢？"></a>现在有哪些 render 原因呢？</h5><ul>
+<li><p><strong>Props changed</strong></p>
+<p>​     顾名思义，传入组件的 props 变更</p>
+</li>
+<li><p><strong>The parent component rendered</strong></p>
+<p>​	父组件渲染导致的子组件渲染。一般要做性能优化都是找这类重绘原因的组件。但是要注意，如果组件中有用到 useContext，Provider 的 value 变更导致的重绘也是被标记为 The parent component rendered，需要注意</p>
+</li>
+<li><p><strong>Hooks changed</strong></p>
+<p>​	Hook 状态变更导致的重绘，一般就是指 useState 返回的更新函数被调用了</p>
+</li>
+<li><p><strong>State changed</strong></p>
+<p>​	这个只会在 class component 中有，大家忽略</p>
+</li>
+<li><p><strong>“Hide commits below xx (ms)”</strong></p>
+<p>​	设置一个更新耗时的阈值，低于该阈值的渲染不显示。用来快速过滤哪些渲染有性能问题</p>
+</li>
+</ul>
+<h5 id="React-组件检视器"><a href="#React-组件检视器" class="headerlink" title="React 组件检视器"></a>React 组件检视器</h5><p>用法和 DevTools 的元素面板类似，可以直接在页面上定位到元素对应的 React Component。并且可以实时查看当前组件内部的 hooks 状态，返回的组件树</p>
+<img src="..\Picture\image-20220222025129591.png" alt="image-20220222025129591" style="zoom:33%;" />
+
+<p>右上角的四个图标</p>
+<img src="..\Picture\image-20220222025154916.png" alt="image-20220222025154916" style="zoom:33%;" />
+
+<p>分别作用如下：</p>
+<ul>
+<li>模拟 ReactLazy 懒加载组件 Suspense 状态</li>
+<li>定位组件所渲染的 DOM 节点</li>
+<li>在 Console 中打印 Component 内部状态</li>
+<li>跳转到组件所在源文件（配合 sourcemap）</li>
+</ul>
+]]></content>
+      <categories>
+        <category>React</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>React</tag>
+      </tags>
   </entry>
   <entry>
     <title>Redux</title>
@@ -1463,6 +1436,11 @@ C组件: 读取A组件传入的数据显示 &#123;this.props.data&#125;
       <categories>
         <category>React</category>
       </categories>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>React</tag>
+        <tag>Redux</tag>
+      </tags>
   </entry>
   <entry>
     <title>TypeScript入门</title>
@@ -1857,6 +1835,21 @@ module.exports = &#123;
       <categories>
         <category>Typescript</category>
       </categories>
+      <tags>
+        <tag>TypeScript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>require() 源码解读</title>
+    <url>/2021/08/21/require%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/</url>
+    <content><![CDATA[<span id="more"></span>
+]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+      </tags>
   </entry>
   <entry>
     <title>Webpack</title>
@@ -1881,15 +1874,9 @@ module.exports = &#123;
       <categories>
         <category>Webpack</category>
       </categories>
-  </entry>
-  <entry>
-    <title>require() 源码解读</title>
-    <url>/2021/08/21/require%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/</url>
-    <content><![CDATA[<span id="more"></span>
-]]></content>
-      <categories>
-        <category>JavaScript</category>
-      </categories>
+      <tags>
+        <tag>Webpack</tag>
+      </tags>
   </entry>
   <entry>
     <title>函数式编程</title>
