@@ -27,7 +27,7 @@
 <meta property="og:description" content="项目拆解： Jsx 和虚拟 DOM  组件和生命周期  Diff  异步的setState  hook支持   具体思路将jsx经过babel转成React.createElement的形式例如 1234567891011121314151617class Hem extends React.Component &#123;    render() &#123;        return (">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-03-04T02:00:00.000Z">
-<meta property="article:modified_time" content="2024-09-23T13:41:09.844Z">
+<meta property="article:modified_time" content="2024-09-24T01:50:54.223Z">
 <meta property="article:author" content="Huangyunze">
 <meta property="article:tag" content="JavaScript">
 <meta property="article:tag" content="React">
@@ -89,7 +89,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-文章"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>文章</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">8</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">24</span></a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">15</span></a></li><li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-文章"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>文章</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">8</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">25</span></a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">15</span></a></li><li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -155,7 +155,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-count">25</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -237,7 +237,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-09-23 21:41:09" itemprop="dateModified" datetime="2024-09-23T21:41:09+08:00">2024-09-23</time>
+      <time title="修改时间：2024-09-24 09:50:54" itemprop="dateModified" datetime="2024-09-24T09:50:54+08:00">2024-09-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -250,6 +250,20 @@
     </span>
 
   
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>156</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
 </div>
 
         </div>
@@ -271,7 +285,7 @@
 </li>
 </ol>
 <h4 id="具体思路"><a href="#具体思路" class="headerlink" title="具体思路"></a>具体思路</h4><h5 id="将jsx经过babel转成React-createElement的形式"><a href="#将jsx经过babel转成React-createElement的形式" class="headerlink" title="将jsx经过babel转成React.createElement的形式"></a>将jsx经过babel转成React.createElement的形式</h5><p>例如</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">class Hem extends React.Component &#123;</span><br><span class="line">    render() &#123;</span><br><span class="line">        return (</span><br><span class="line">            &lt;A&gt;</span><br><span class="line">                &lt;B&gt;</span><br><span class="line">                    &lt;C&gt;</span><br><span class="line">                        &lt;div /&gt;</span><br><span class="line">                        &lt;span /&gt;</span><br><span class="line">                    &lt;/C&gt;</span><br><span class="line">                    &lt;D /&gt;</span><br><span class="line">                &lt;/B&gt;</span><br><span class="line">                &lt;E /&gt;</span><br><span class="line">                &lt;F /&gt;</span><br><span class="line">            &lt;/A&gt;</span><br><span class="line">        );</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Hem</span> <span class="keyword">extends</span> <span class="title class_ inherited__">React.Component</span> &#123;</span><br><span class="line">    <span class="title function_">render</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> (</span><br><span class="line">            <span class="language-xml"><span class="tag">&lt;<span class="name">A</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">                <span class="tag">&lt;<span class="name">B</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">                    <span class="tag">&lt;<span class="name">C</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">                        <span class="tag">&lt;<span class="name">div</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">                        <span class="tag">&lt;<span class="name">span</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">                    <span class="tag">&lt;/<span class="name">C</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">                    <span class="tag">&lt;<span class="name">D</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">                <span class="tag">&lt;/<span class="name">B</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">                <span class="tag">&lt;<span class="name">E</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">                <span class="tag">&lt;<span class="name">F</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;/<span class="name">A</span>&gt;</span></span></span><br><span class="line">        );</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>经过babel转义后</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">_createClass</span>(<span class="title class_">Hem</span>, [</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">key</span>: <span class="string">&quot;render&quot;</span>,</span><br><span class="line">        <span class="attr">value</span>: <span class="keyword">function</span> <span class="title function_">render</span>(<span class="params"></span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="title class_">React</span>.<span class="title function_">createElement</span>(</span><br><span class="line">                A,</span><br><span class="line">                <span class="literal">null</span>,</span><br><span class="line">                <span class="comment">// A组件的亲儿子组件B</span></span><br><span class="line">                <span class="title class_">React</span>.<span class="title function_">createElement</span>(</span><br><span class="line">                    B,</span><br><span class="line">                    <span class="literal">null</span>,</span><br><span class="line">                    <span class="title class_">React</span>.<span class="title function_">createElement</span>(</span><br><span class="line">                        C,</span><br><span class="line">                        <span class="literal">null</span>,</span><br><span class="line">                        <span class="comment">// C组件的亲儿子 div</span></span><br><span class="line">                        <span class="title class_">React</span>.<span class="title function_">createElement</span>(<span class="string">&quot;div&quot;</span>, <span class="literal">null</span>),</span><br><span class="line">                        <span class="comment">// C组件的亲儿子 span</span></span><br><span class="line">                        <span class="title class_">React</span>.<span class="title function_">createElement</span>(<span class="string">&quot;span&quot;</span>, <span class="literal">null</span>)</span><br><span class="line">                    ),</span><br><span class="line">                    <span class="title class_">React</span>.<span class="title function_">createElement</span>(D, <span class="literal">null</span>)</span><br><span class="line">                ),</span><br><span class="line">                <span class="comment">// A组件的亲儿子组件E</span></span><br><span class="line">                <span class="title class_">React</span>.<span class="title function_">createElement</span>(E, <span class="literal">null</span>),</span><br><span class="line">                <span class="comment">// A组件的亲儿子组件F</span></span><br><span class="line">                <span class="title class_">React</span>.<span class="title function_">createElement</span>(F, <span class="literal">null</span>)</span><br><span class="line">            );</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">]);</span><br></pre></td></tr></table></figure>
@@ -328,6 +342,20 @@
     </span>
     <span class="author" itemprop="copyrightHolder">Huangyunze</span>
   </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">30k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">1:50</span>
+  </span>
+</div>
 
     </div>
   </footer>
