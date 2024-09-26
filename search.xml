@@ -83,39 +83,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Hexo + Next + GitHub Page搭建个人博客</title>
-    <url>/2024/09/21/Hexo%20+%20Next%20+%20GitHub%20Page%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
-    <content><![CDATA[<h3 id="Hexo介绍"><a href="#Hexo介绍" class="headerlink" title="Hexo介绍"></a>Hexo介绍</h3><p>Hexo是一款基于Node.js的开源静态博客框架，用于快速、简单且高效地搭建静态博客网站。本质上是一个静态网站生成器，新增文章只需要编辑md文件，通过运行命令再生成像html的静态文件。</p>
-<h3 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 全局安装hexo脚手架</span><br><span class="line">npm install -g hexo-cli</span><br><span class="line"></span><br><span class="line"># 创建一blog项目</span><br><span class="line">hexo init blog</span><br><span class="line"></span><br><span class="line"># 进入项目</span><br><span class="line">cd blog</span><br><span class="line"></span><br><span class="line"># 安装依赖包</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
-
-<h3 id="其他操作"><a href="#其他操作" class="headerlink" title="其他操作"></a>其他操作</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 右键 Git Bush，用户项目自动化部署</span><br><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
-
-<h3 id="项目预览"><a href="#项目预览" class="headerlink" title="项目预览"></a>项目预览</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 清理旧的静态文件</span><br><span class="line">hexo clean</span><br><span class="line"></span><br><span class="line"># 生成静态文件</span><br><span class="line">hexo g</span><br><span class="line"></span><br><span class="line"># 运行预览项目</span><br><span class="line">hexo s</span><br></pre></td></tr></table></figure>
-
-<span id="more"></span>
-
-
-<h3 id="Hexo配置文件详解（-config-yml）"><a href="#Hexo配置文件详解（-config-yml）" class="headerlink" title="Hexo配置文件详解（_config.yml）"></a>Hexo配置文件详解（_config.yml）</h3><h3 id="主题样式修改"><a href="#主题样式修改" class="headerlink" title="主题样式修改"></a>主题样式修改</h3><h5 id="Next主题样式"><a href="#Next主题样式" class="headerlink" title="Next主题样式"></a>Next主题样式</h5><p><a href="https://theme-next.js.org/docs/getting-started/configuration.html">https://theme-next.js.org/docs/getting-started/configuration.html</a></p>
-<p>With this way, all your theme configurations locate in config file <code>/_config.[name].yml</code>. Replace <code>[name]</code> with the value of theme option in Hexo config file. For NexT theme, the file name is <code>_config.next.yml</code> by default.</p>
-<p>Usage</p>
-<ol>
-<li><p>Please ensure you are using Hexo 5.0 or later.</p>
-</li>
-<li><p>Create the NexT config file named <code>_config.next.yml</code> in <span style="background-color: #5555;">site root directory</span>.</p>
-</li>
-</ol>
-<p>Copy needed <span style="background-color: #5555;">NexT theme</span> options from default theme config file into this config file. If it is the first time to install NexT, then copy the whole default theme config file by the following command:</p>
-]]></content>
-      <categories>
-        <category>Chore</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-        <tag>Hexo</tag>
-        <tag>Github</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Hooks</title>
     <url>/2021/10/12/Hooks/</url>
     <content><![CDATA[<h3 id="hooks的作用"><a href="#hooks的作用" class="headerlink" title="hooks的作用"></a>hooks的作用</h3><p><strong>钩子（hook）就是 React 函数组件的副效应解决方案，用来为函数组件引入副效应。</strong> 函数组件的主体只应该用来返回组件的 HTML 代码，所有的其他操作（副效应）都必须通过钩子引入。</p>
@@ -321,6 +288,39 @@
       </tags>
   </entry>
   <entry>
+    <title>Hexo + Next + GitHub Page搭建个人博客</title>
+    <url>/2024/09/21/Hexo%20+%20Next%20+%20GitHub%20Page%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
+    <content><![CDATA[<h3 id="Hexo介绍"><a href="#Hexo介绍" class="headerlink" title="Hexo介绍"></a>Hexo介绍</h3><p>Hexo是一款基于Node.js的开源静态博客框架，用于快速、简单且高效地搭建静态博客网站。本质上是一个静态网站生成器，新增文章只需要编辑md文件，通过运行命令再生成像html的静态文件。</p>
+<h3 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 全局安装hexo脚手架</span><br><span class="line">npm install -g hexo-cli</span><br><span class="line"></span><br><span class="line"># 创建一blog项目</span><br><span class="line">hexo init blog</span><br><span class="line"></span><br><span class="line"># 进入项目</span><br><span class="line">cd blog</span><br><span class="line"></span><br><span class="line"># 安装依赖包</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
+
+<h3 id="其他操作"><a href="#其他操作" class="headerlink" title="其他操作"></a>其他操作</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 右键 Git Bush，用户项目自动化部署</span><br><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+
+<h3 id="项目预览"><a href="#项目预览" class="headerlink" title="项目预览"></a>项目预览</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 清理旧的静态文件</span><br><span class="line">hexo clean</span><br><span class="line"></span><br><span class="line"># 生成静态文件</span><br><span class="line">hexo g</span><br><span class="line"></span><br><span class="line"># 运行预览项目</span><br><span class="line">hexo s</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+
+<h3 id="Hexo配置文件详解（-config-yml）"><a href="#Hexo配置文件详解（-config-yml）" class="headerlink" title="Hexo配置文件详解（_config.yml）"></a>Hexo配置文件详解（_config.yml）</h3><h3 id="主题样式修改"><a href="#主题样式修改" class="headerlink" title="主题样式修改"></a>主题样式修改</h3><h5 id="Next主题样式"><a href="#Next主题样式" class="headerlink" title="Next主题样式"></a>Next主题样式</h5><p><a href="https://theme-next.js.org/docs/getting-started/configuration.html">https://theme-next.js.org/docs/getting-started/configuration.html</a></p>
+<p>With this way, all your theme configurations locate in config file <code>/_config.[name].yml</code>. Replace <code>[name]</code> with the value of theme option in Hexo config file. For NexT theme, the file name is <code>_config.next.yml</code> by default.</p>
+<p>Usage</p>
+<ol>
+<li><p>Please ensure you are using Hexo 5.0 or later.</p>
+</li>
+<li><p>Create the NexT config file named <code>_config.next.yml</code> in <span style="background-color: #5555;">site root directory</span>.</p>
+</li>
+</ol>
+<p>Copy needed <span style="background-color: #5555;">NexT theme</span> options from default theme config file into this config file. If it is the first time to install NexT, then copy the whole default theme config file by the following command:</p>
+]]></content>
+      <categories>
+        <category>Chore</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>Hexo</tag>
+        <tag>Github</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Http2/Http3</title>
     <url>/2021/09/18/Http2Http3/</url>
     <content><![CDATA[<h4 id="为什么Http-1-1无法并发的发送多个请求（同时发多个请求，再同时接收）"><a href="#为什么Http-1-1无法并发的发送多个请求（同时发多个请求，再同时接收）" class="headerlink" title="为什么Http 1.1无法并发的发送多个请求（同时发多个请求，再同时接收）"></a>为什么Http 1.1无法并发的发送多个请求（同时发多个请求，再同时接收）</h4><p>因为http1.1是基于文本的协议，比如客户端向服务器发送了两个请求 <code>GET /query?q=A</code> 和 <code>GET /query?q=B</code>，服务器返回了两个结果，客户端是没有办法根据响应结果来判断响应对应于哪一个请求的，而http2基于二进制分帧实现多路复用，数据流以消息的形式发送，而消息又由一个或多个帧组成，多个帧之间可以乱序发送，<strong>因为根据帧首部的流标识可以重新组装。</strong></p>
@@ -332,7 +332,7 @@
 
 ]]></content>
       <categories>
-        <category>ComputerNetwork</category>
+        <category>计算机网络协议</category>
       </categories>
       <tags>
         <tag>Network</tag>
@@ -412,7 +412,7 @@
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a><strong>总结</strong></h2><p>可以看下这张图，梳理一下整个流程（SSL、TLS握手有一些区别，不同版本间也有区别，不过大致过程就是这样）：</p>
 ]]></content>
       <categories>
-        <category>ComputerNetwork</category>
+        <category>计算机网络协议</category>
       </categories>
       <tags>
         <tag>Network</tag>
@@ -454,43 +454,7 @@
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function </span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
-        <category>JavaScript</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>JavaScript手写题</title>
-    <url>/2021/03/02/Javascript%E6%89%8B%E5%86%99%E9%A2%98/</url>
-    <content><![CDATA[<h4 id="实现一个new"><a href="#实现一个new" class="headerlink" title="实现一个new"></a>实现一个new</h4><p><strong>new的具体步骤</strong></p>
-<ol>
-<li>内存中创建一个新对象</li>
-<li>新建对象的 _ <em>proto</em> _指向构造函数的prototype</li>
-<li>调用构造函数，函数的this指向新创建的对象</li>
-<li>执行构造函数内部的代码（给新对象添加属性）</li>
-<li><strong>如果构造函数返回非空对象，则返回该对象，否则，返回新创建的对象</strong></li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Person</span>(<span class="params">age, name</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">age</span> = age;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">name</span> = name;</span><br><span class="line">&#125;</span><br><span class="line"><span class="title class_">Person</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">sayHello</span> = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">name</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">myNew</span>(<span class="params">fn, ...args</span>) &#123;</span><br><span class="line">    <span class="comment">// 修改obj.__proto__ = fn.prototype，如果直接obj = &#123;&#125;会出现没有对象标识的问题（对象标识为Object），还会使得方法没有被创建</span></span><br><span class="line">    <span class="keyword">const</span> obj = <span class="title class_">Object</span>.<span class="title function_">create</span>(fn.<span class="property"><span class="keyword">prototype</span></span>)  <span class="comment">//fn.prototype代表 用当前对象的原型去创建</span></span><br><span class="line">    <span class="comment">//现在obj就代表Dog了,但是参数和this指向没有修改</span></span><br><span class="line">    <span class="keyword">const</span> rel = fn.<span class="title function_">apply</span>(obj,args)</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">       正常规定,如何fn返回的是null或undefined(也就是不返回内容),我们返回的是obj,否则返回rel</span></span><br><span class="line"><span class="comment">       因为比如下面这个构造函数</span></span><br><span class="line"><span class="comment">       function Person(name, age) &#123;</span></span><br><span class="line"><span class="comment">            this.name = name;</span></span><br><span class="line"><span class="comment">            this.age = age;</span></span><br><span class="line"><span class="comment">            return &#123;</span></span><br><span class="line"><span class="comment">                a: 1,</span></span><br><span class="line"><span class="comment">                b: 2,</span></span><br><span class="line"><span class="comment">            &#125;</span></span><br><span class="line"><span class="comment">        &#125;</span></span><br><span class="line"><span class="comment">        const p = new Person(&#x27;h&#x27;, &#x27;y&#x27;);</span></span><br><span class="line"><span class="comment">        这里new会优先为构造函数的返回值</span></span><br><span class="line"><span class="comment">        所以p的值为&#123;a: 1,b: 2&#125;</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="keyword">return</span> rel <span class="keyword">instanceof</span> <span class="title class_">Object</span> ? rel : obj</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> p1 = <span class="title function_">myNew</span>(<span class="title class_">Person</span>, <span class="number">19</span>, <span class="string">&#x27;hyz&#x27;</span>);</span><br></pre></td></tr></table></figure>
-
-<span id="more"></span>
-
-<h4 id="实现一个Object-create"><a href="#实现一个Object-create" class="headerlink" title="实现一个Object.create"></a>实现一个Object.create</h4><p>Object.create(proto)创建一个空对象，proto为空对象的”<em><strong>proto</strong></em>“</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">create</span>(<span class="params">obj</span>) &#123;</span><br><span class="line">  <span class="comment">// Object.create(null) 返回一个__proto__指向空的干净对象</span></span><br><span class="line">  <span class="keyword">if</span> (obj === <span class="literal">null</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="title class_">Object</span>.<span class="title function_">setPrototypeOf</span>(&#123;&#125;, <span class="literal">null</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 非对象非null，抛出异常</span></span><br><span class="line">  <span class="keyword">if</span> (!(obj <span class="keyword">instanceof</span> <span class="title class_">Object</span>)) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">TypeError</span>();</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="title class_">Object</span>.<span class="title function_">setPrototypeOf</span>(&#123;&#125;, obj);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="虾皮笔试题"><a href="#虾皮笔试题" class="headerlink" title="虾皮笔试题"></a>虾皮笔试题</h4><p>十分有水平的一道题，综合了new原理，原型链+instanceof原理</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Person</span>(<span class="params"></span>) &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> person1 = <span class="keyword">new</span> <span class="title class_">Person</span>();</span><br><span class="line"><span class="title class_">Person</span>.<span class="property"><span class="keyword">prototype</span></span> = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;ee&#x27;</span>,</span><br><span class="line">    <span class="attr">sayName</span>: <span class="function">() =&gt;</span> &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;    </span><br><span class="line"><span class="comment">// Person 的 prototype 已经改变，而 person1.__proto__ 指向一开始的 Person.prototype</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;person1 instanceof Person: &#x27;</span>, person1 <span class="keyword">instanceof</span> <span class="title class_">Person</span>) <span class="comment">// 为啥是false</span></span><br><span class="line"><span class="comment">// 所有的对象都继承自 Object，除了 null 或者你把最顶层的 prototype 也给改了</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;person1 instanceof Object: &#x27;</span>, person1 <span class="keyword">instanceof</span> <span class="title class_">Object</span>) <span class="comment">// 为啥是true</span></span><br><span class="line"><span class="comment">// person1 本身没有 constructor, 会沿着原型链找，</span></span><br><span class="line"><span class="comment">// person1.constructor === person1.__proto__.constructor</span></span><br><span class="line"><span class="comment">// 而上面也说了 person1.__proto__ 并没有因为 Person.prototype 改变而改变</span></span><br><span class="line"><span class="comment">// 这里需要注意的是：</span></span><br><span class="line"><span class="comment">// Person 本身就是 constructor</span></span><br><span class="line"><span class="comment">// 初始情况下</span></span><br><span class="line"><span class="comment">// Person.prototype =&gt; Person.prototype</span></span><br><span class="line"><span class="comment">// Person.prototype.constructor =&gt; Person</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;person1.constructor == Person: &#x27;</span>, person1.<span class="property">constructor</span> == <span class="title class_">Person</span>) <span class="comment">// 为啥是true</span></span><br><span class="line"><span class="comment">// 上面是 true, 下面就好说了</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;person1.constructor == Object: &#x27;</span>, person1.<span class="property">constructor</span> == <span class="title class_">Object</span>) <span class="comment">// 为啥是false</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="实现消息订阅"><a href="#实现消息订阅" class="headerlink" title="实现消息订阅"></a>实现消息订阅</h4><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">EventCenter</span> &#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> &#123;<span class="type">Map&lt;string, Array&lt;Function&gt;</span>&#125; <span class="variable">handlers</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="title function_">constructor</span>(<span class="params">handlers=<span class="keyword">new</span> <span class="built_in">Map</span>()</span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">handlers</span> = handlers;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> &#123;<span class="type">Function</span>&#125; <span class="variable">handler</span></span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> &#123;<span class="type">string</span>&#125; <span class="variable">type</span></span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="title function_">addEventListener</span>(<span class="params">type, newHandler</span>) &#123;</span><br><span class="line">        <span class="keyword">let</span> hanlder = <span class="variable language_">this</span>.<span class="property">handlers</span>.<span class="title function_">has</span>(type);</span><br><span class="line">        <span class="keyword">if</span> (hanlder) &#123;</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">handlers</span>.<span class="title function_">set</span>(type, [...<span class="variable language_">this</span>.<span class="property">handlers</span>.<span class="title function_">get</span>(type), newHandler]) </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">handlers</span>.<span class="title function_">set</span>(type, [newHandler]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> &#123;<span class="type">string</span>&#125; <span class="variable">type</span></span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> &#123;<span class="type">Array</span>&#125; <span class="variable">params</span></span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="title function_">dispatchEvent</span>(<span class="params">type, params=[]</span>) &#123;</span><br><span class="line">        <span class="keyword">const</span> handler = <span class="variable language_">this</span>.<span class="property">handlers</span>.<span class="title function_">get</span>(type);</span><br><span class="line">        handler &amp;&amp; handler.<span class="title function_">forEach</span>(<span class="function">(<span class="params">callback</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="title function_">callback</span>(...params);</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> &#123;<span class="type">string</span>&#125; type </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> &#123;<span class="type">Function</span>&#125; delHandler </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@returns</span> </span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="title function_">removeEventListener</span>(<span class="params">type, delHandler</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (!<span class="variable language_">this</span>.<span class="property">handlers</span>.<span class="title function_">has</span>(type)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Errow</span>(<span class="string">&quot;Unable to delete&quot;</span>)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (delHanlder) &#123;</span><br><span class="line">            <span class="keyword">const</span> oldHandlers = <span class="variable language_">this</span>.<span class="property">handlers</span>.<span class="title function_">get</span>(type);</span><br><span class="line">            <span class="keyword">const</span> ind = oldHandlers.<span class="title function_">indexOf</span>(delHandler);</span><br><span class="line">            <span class="keyword">if</span> (ind === -<span class="number">1</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Errow</span>(<span class="string">&quot;Unable to delete&quot;</span>)</span><br><span class="line">            &#125;</span><br><span class="line">            oldHandlers.<span class="title function_">splice</span>(ind, <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">handlers</span>.<span class="title function_">delete</span>(type);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="实现一个JSONP"><a href="#实现一个JSONP" class="headerlink" title="实现一个JSONP"></a>实现一个JSONP</h4><p>前端部分</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">jsonp</span>(<span class="params">url, options</span>) &#123;</span><br><span class="line">    <span class="comment">// 超时处理</span></span><br><span class="line">    <span class="keyword">const</span> &#123; timeout &#125; = options;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="comment">// 防止函数名冲突</span></span><br><span class="line">        <span class="keyword">let</span> funcName = <span class="string">`jsonp<span class="subst">$&#123;<span class="built_in">Date</span>.now()&#125;</span>`</span>;</span><br><span class="line">        <span class="keyword">let</span> time = <span class="literal">null</span>, scriptNode;</span><br><span class="line">        <span class="comment">// 定义callback</span></span><br><span class="line">        <span class="variable language_">window</span>[funcName] = <span class="keyword">function</span> (<span class="params">data</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (timeout) <span class="built_in">clearTimeout</span>(time);</span><br><span class="line">            <span class="title function_">resolve</span>(data);</span><br><span class="line">            <span class="comment">// 很重要的性能优化点</span></span><br><span class="line">            <span class="comment">// 清除本次请求产生的回调函数和script标签</span></span><br><span class="line">            <span class="keyword">delete</span> <span class="variable language_">window</span>[funcName];</span><br><span class="line">            <span class="variable language_">document</span>.<span class="property">body</span>.<span class="title function_">removeChild</span>(scriptNode);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 创建script标签</span></span><br><span class="line">        scriptNode = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&#x27;script&#x27;</span>);</span><br><span class="line">        <span class="comment">// 给script标签添加src属性</span></span><br><span class="line">        scriptNode.<span class="property">src</span> = <span class="string">`<span class="subst">$&#123;url&#125;</span>?callback=<span class="subst">$&#123;funcName&#125;</span>`</span>;</span><br><span class="line">        <span class="comment">// 发出请求</span></span><br><span class="line">        <span class="variable language_">document</span>.<span class="property">body</span>.<span class="title function_">appendChild</span>(scriptNode);</span><br><span class="line">        time = <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">            <span class="title function_">reject</span>(<span class="string">&#x27;network err, timeout&#x27;</span>)</span><br><span class="line">        &#125;, timeout)</span><br><span class="line">        <span class="comment">// 失败</span></span><br><span class="line">        scriptNode.<span class="property">onerror</span> = <span class="keyword">function</span> (<span class="params">err</span>) &#123;</span><br><span class="line">            <span class="title function_">reject</span>(err);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">jsonp</span>(<span class="string">&#x27;http://localhost:9090/api&#x27;</span>, &#123;</span><br><span class="line">    <span class="attr">callBack</span>: <span class="string">&#x27;res1&#x27;</span>,</span><br><span class="line">    <span class="comment">// 超时处理</span></span><br><span class="line">    <span class="attr">timeout</span>: <span class="number">3000</span></span><br><span class="line">&#125;)</span><br><span class="line">    <span class="comment">// 请求成功</span></span><br><span class="line">    .<span class="title function_">then</span>(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;jsonp-&gt;&#x27;</span>, res);</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="comment">// 请求失败</span></span><br><span class="line">    .<span class="title function_">catch</span>(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;network err!&quot;</span>)</span><br><span class="line">    &#125;)</span><br></pre></td></tr></table></figure>
-
-<p>后端部分</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 后端</span></span><br><span class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">&#x27;http&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> url = <span class="built_in">require</span>(<span class="string">&#x27;url&#x27;</span>);</span><br><span class="line">http.<span class="title function_">createServer</span>(<span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// /api?callback=onResponse</span></span><br><span class="line">  <span class="comment">// 解析前端请求url中的callback名</span></span><br><span class="line">  <span class="keyword">if</span>(req.<span class="property">url</span>.<span class="title function_">includes</span>(<span class="string">&#x27;/api&#x27;</span>)) &#123;</span><br><span class="line">    <span class="keyword">let</span> myurl = url.<span class="title function_">parse</span>(req.<span class="property">url</span>);</span><br><span class="line">    <span class="keyword">let</span> params = <span class="keyword">new</span> <span class="title class_">URLSearchParams</span>(myurl.<span class="property">query</span>)</span><br><span class="line">    <span class="keyword">let</span> posts = [<span class="string">&#x27;js&#x27;</span>, <span class="string">&#x27;php&#x27;</span>];</span><br><span class="line">    <span class="keyword">let</span> mathodName = params.<span class="title function_">get</span>(<span class="string">&#x27;callback&#x27;</span>);</span><br><span class="line">    res.<span class="title function_">end</span>(<span class="string">`<span class="subst">$&#123;mathodName&#125;</span>(<span class="subst">$&#123;<span class="built_in">JSON</span>.stringify(posts)&#125;</span>)`</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line">.<span class="title function_">listen</span>(<span class="number">9090</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">9090</span>);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>JavaScript</category>
+        <category>JavaScript原理</category>
       </categories>
       <tags>
         <tag>JavaScript</tag>
@@ -544,6 +508,42 @@
 <div><i>标记清除这个算法把“对象是否不再需要”简化定义为“对象是否可以获得”。这个算法假定设置一个叫做根（root）的对象（在Javascript里，根是全局对象）。垃圾回收器将定期从根开始，找所有从根开始引用的对象，然后找这些对象引用的对象……从根开始，垃圾回收器将找到所有可以获得的对象和收集所有不能获得的对象
 
 <h4 id="这里的‘根’指的应该是上下文对象"><a href="#这里的‘根’指的应该是上下文对象" class="headerlink" title="这里的‘根’指的应该是上下文对象"></a>这里的‘根’指的应该是上下文对象</h4><p>因为通过当前的执行上下文对象可以访问到当前环境中的变量，也可以通过作用域链去访问到其他上下文中的活动对象，从而可以判断得到所有可以获得的对象和所有不能获得的对象</p>
+]]></content>
+      <categories>
+        <category>JavaScript原理</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JavaScript手写题</title>
+    <url>/2021/03/02/Javascript%E6%89%8B%E5%86%99%E9%A2%98/</url>
+    <content><![CDATA[<h4 id="实现一个new"><a href="#实现一个new" class="headerlink" title="实现一个new"></a>实现一个new</h4><p><strong>new的具体步骤</strong></p>
+<ol>
+<li>内存中创建一个新对象</li>
+<li>新建对象的 _ <em>proto</em> _指向构造函数的prototype</li>
+<li>调用构造函数，函数的this指向新创建的对象</li>
+<li>执行构造函数内部的代码（给新对象添加属性）</li>
+<li><strong>如果构造函数返回非空对象，则返回该对象，否则，返回新创建的对象</strong></li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Person</span>(<span class="params">age, name</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">age</span> = age;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">name</span> = name;</span><br><span class="line">&#125;</span><br><span class="line"><span class="title class_">Person</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">sayHello</span> = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">name</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">myNew</span>(<span class="params">fn, ...args</span>) &#123;</span><br><span class="line">    <span class="comment">// 修改obj.__proto__ = fn.prototype，如果直接obj = &#123;&#125;会出现没有对象标识的问题（对象标识为Object），还会使得方法没有被创建</span></span><br><span class="line">    <span class="keyword">const</span> obj = <span class="title class_">Object</span>.<span class="title function_">create</span>(fn.<span class="property"><span class="keyword">prototype</span></span>)  <span class="comment">//fn.prototype代表 用当前对象的原型去创建</span></span><br><span class="line">    <span class="comment">//现在obj就代表Dog了,但是参数和this指向没有修改</span></span><br><span class="line">    <span class="keyword">const</span> rel = fn.<span class="title function_">apply</span>(obj,args)</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">       正常规定,如何fn返回的是null或undefined(也就是不返回内容),我们返回的是obj,否则返回rel</span></span><br><span class="line"><span class="comment">       因为比如下面这个构造函数</span></span><br><span class="line"><span class="comment">       function Person(name, age) &#123;</span></span><br><span class="line"><span class="comment">            this.name = name;</span></span><br><span class="line"><span class="comment">            this.age = age;</span></span><br><span class="line"><span class="comment">            return &#123;</span></span><br><span class="line"><span class="comment">                a: 1,</span></span><br><span class="line"><span class="comment">                b: 2,</span></span><br><span class="line"><span class="comment">            &#125;</span></span><br><span class="line"><span class="comment">        &#125;</span></span><br><span class="line"><span class="comment">        const p = new Person(&#x27;h&#x27;, &#x27;y&#x27;);</span></span><br><span class="line"><span class="comment">        这里new会优先为构造函数的返回值</span></span><br><span class="line"><span class="comment">        所以p的值为&#123;a: 1,b: 2&#125;</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="keyword">return</span> rel <span class="keyword">instanceof</span> <span class="title class_">Object</span> ? rel : obj</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> p1 = <span class="title function_">myNew</span>(<span class="title class_">Person</span>, <span class="number">19</span>, <span class="string">&#x27;hyz&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<h4 id="实现一个Object-create"><a href="#实现一个Object-create" class="headerlink" title="实现一个Object.create"></a>实现一个Object.create</h4><p>Object.create(proto)创建一个空对象，proto为空对象的”<em><strong>proto</strong></em>“</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">create</span>(<span class="params">obj</span>) &#123;</span><br><span class="line">  <span class="comment">// Object.create(null) 返回一个__proto__指向空的干净对象</span></span><br><span class="line">  <span class="keyword">if</span> (obj === <span class="literal">null</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="title class_">Object</span>.<span class="title function_">setPrototypeOf</span>(&#123;&#125;, <span class="literal">null</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 非对象非null，抛出异常</span></span><br><span class="line">  <span class="keyword">if</span> (!(obj <span class="keyword">instanceof</span> <span class="title class_">Object</span>)) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">TypeError</span>();</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="title class_">Object</span>.<span class="title function_">setPrototypeOf</span>(&#123;&#125;, obj);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="虾皮笔试题"><a href="#虾皮笔试题" class="headerlink" title="虾皮笔试题"></a>虾皮笔试题</h4><p>十分有水平的一道题，综合了new原理，原型链+instanceof原理</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Person</span>(<span class="params"></span>) &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> person1 = <span class="keyword">new</span> <span class="title class_">Person</span>();</span><br><span class="line"><span class="title class_">Person</span>.<span class="property"><span class="keyword">prototype</span></span> = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;ee&#x27;</span>,</span><br><span class="line">    <span class="attr">sayName</span>: <span class="function">() =&gt;</span> &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;    </span><br><span class="line"><span class="comment">// Person 的 prototype 已经改变，而 person1.__proto__ 指向一开始的 Person.prototype</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;person1 instanceof Person: &#x27;</span>, person1 <span class="keyword">instanceof</span> <span class="title class_">Person</span>) <span class="comment">// 为啥是false</span></span><br><span class="line"><span class="comment">// 所有的对象都继承自 Object，除了 null 或者你把最顶层的 prototype 也给改了</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;person1 instanceof Object: &#x27;</span>, person1 <span class="keyword">instanceof</span> <span class="title class_">Object</span>) <span class="comment">// 为啥是true</span></span><br><span class="line"><span class="comment">// person1 本身没有 constructor, 会沿着原型链找，</span></span><br><span class="line"><span class="comment">// person1.constructor === person1.__proto__.constructor</span></span><br><span class="line"><span class="comment">// 而上面也说了 person1.__proto__ 并没有因为 Person.prototype 改变而改变</span></span><br><span class="line"><span class="comment">// 这里需要注意的是：</span></span><br><span class="line"><span class="comment">// Person 本身就是 constructor</span></span><br><span class="line"><span class="comment">// 初始情况下</span></span><br><span class="line"><span class="comment">// Person.prototype =&gt; Person.prototype</span></span><br><span class="line"><span class="comment">// Person.prototype.constructor =&gt; Person</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;person1.constructor == Person: &#x27;</span>, person1.<span class="property">constructor</span> == <span class="title class_">Person</span>) <span class="comment">// 为啥是true</span></span><br><span class="line"><span class="comment">// 上面是 true, 下面就好说了</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;person1.constructor == Object: &#x27;</span>, person1.<span class="property">constructor</span> == <span class="title class_">Object</span>) <span class="comment">// 为啥是false</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="实现消息订阅"><a href="#实现消息订阅" class="headerlink" title="实现消息订阅"></a>实现消息订阅</h4><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">EventCenter</span> &#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> &#123;<span class="type">Map&lt;string, Array&lt;Function&gt;</span>&#125; <span class="variable">handlers</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="title function_">constructor</span>(<span class="params">handlers=<span class="keyword">new</span> <span class="built_in">Map</span>()</span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">handlers</span> = handlers;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> &#123;<span class="type">Function</span>&#125; <span class="variable">handler</span></span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> &#123;<span class="type">string</span>&#125; <span class="variable">type</span></span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="title function_">addEventListener</span>(<span class="params">type, newHandler</span>) &#123;</span><br><span class="line">        <span class="keyword">let</span> hanlder = <span class="variable language_">this</span>.<span class="property">handlers</span>.<span class="title function_">has</span>(type);</span><br><span class="line">        <span class="keyword">if</span> (hanlder) &#123;</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">handlers</span>.<span class="title function_">set</span>(type, [...<span class="variable language_">this</span>.<span class="property">handlers</span>.<span class="title function_">get</span>(type), newHandler]) </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">handlers</span>.<span class="title function_">set</span>(type, [newHandler]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> &#123;<span class="type">string</span>&#125; <span class="variable">type</span></span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> &#123;<span class="type">Array</span>&#125; <span class="variable">params</span></span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="title function_">dispatchEvent</span>(<span class="params">type, params=[]</span>) &#123;</span><br><span class="line">        <span class="keyword">const</span> handler = <span class="variable language_">this</span>.<span class="property">handlers</span>.<span class="title function_">get</span>(type);</span><br><span class="line">        handler &amp;&amp; handler.<span class="title function_">forEach</span>(<span class="function">(<span class="params">callback</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="title function_">callback</span>(...params);</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> &#123;<span class="type">string</span>&#125; type </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> &#123;<span class="type">Function</span>&#125; delHandler </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@returns</span> </span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="title function_">removeEventListener</span>(<span class="params">type, delHandler</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (!<span class="variable language_">this</span>.<span class="property">handlers</span>.<span class="title function_">has</span>(type)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Errow</span>(<span class="string">&quot;Unable to delete&quot;</span>)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (delHanlder) &#123;</span><br><span class="line">            <span class="keyword">const</span> oldHandlers = <span class="variable language_">this</span>.<span class="property">handlers</span>.<span class="title function_">get</span>(type);</span><br><span class="line">            <span class="keyword">const</span> ind = oldHandlers.<span class="title function_">indexOf</span>(delHandler);</span><br><span class="line">            <span class="keyword">if</span> (ind === -<span class="number">1</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Errow</span>(<span class="string">&quot;Unable to delete&quot;</span>)</span><br><span class="line">            &#125;</span><br><span class="line">            oldHandlers.<span class="title function_">splice</span>(ind, <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">handlers</span>.<span class="title function_">delete</span>(type);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="实现一个JSONP"><a href="#实现一个JSONP" class="headerlink" title="实现一个JSONP"></a>实现一个JSONP</h4><p>前端部分</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">jsonp</span>(<span class="params">url, options</span>) &#123;</span><br><span class="line">    <span class="comment">// 超时处理</span></span><br><span class="line">    <span class="keyword">const</span> &#123; timeout &#125; = options;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="comment">// 防止函数名冲突</span></span><br><span class="line">        <span class="keyword">let</span> funcName = <span class="string">`jsonp<span class="subst">$&#123;<span class="built_in">Date</span>.now()&#125;</span>`</span>;</span><br><span class="line">        <span class="keyword">let</span> time = <span class="literal">null</span>, scriptNode;</span><br><span class="line">        <span class="comment">// 定义callback</span></span><br><span class="line">        <span class="variable language_">window</span>[funcName] = <span class="keyword">function</span> (<span class="params">data</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (timeout) <span class="built_in">clearTimeout</span>(time);</span><br><span class="line">            <span class="title function_">resolve</span>(data);</span><br><span class="line">            <span class="comment">// 很重要的性能优化点</span></span><br><span class="line">            <span class="comment">// 清除本次请求产生的回调函数和script标签</span></span><br><span class="line">            <span class="keyword">delete</span> <span class="variable language_">window</span>[funcName];</span><br><span class="line">            <span class="variable language_">document</span>.<span class="property">body</span>.<span class="title function_">removeChild</span>(scriptNode);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 创建script标签</span></span><br><span class="line">        scriptNode = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&#x27;script&#x27;</span>);</span><br><span class="line">        <span class="comment">// 给script标签添加src属性</span></span><br><span class="line">        scriptNode.<span class="property">src</span> = <span class="string">`<span class="subst">$&#123;url&#125;</span>?callback=<span class="subst">$&#123;funcName&#125;</span>`</span>;</span><br><span class="line">        <span class="comment">// 发出请求</span></span><br><span class="line">        <span class="variable language_">document</span>.<span class="property">body</span>.<span class="title function_">appendChild</span>(scriptNode);</span><br><span class="line">        time = <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">            <span class="title function_">reject</span>(<span class="string">&#x27;network err, timeout&#x27;</span>)</span><br><span class="line">        &#125;, timeout)</span><br><span class="line">        <span class="comment">// 失败</span></span><br><span class="line">        scriptNode.<span class="property">onerror</span> = <span class="keyword">function</span> (<span class="params">err</span>) &#123;</span><br><span class="line">            <span class="title function_">reject</span>(err);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">jsonp</span>(<span class="string">&#x27;http://localhost:9090/api&#x27;</span>, &#123;</span><br><span class="line">    <span class="attr">callBack</span>: <span class="string">&#x27;res1&#x27;</span>,</span><br><span class="line">    <span class="comment">// 超时处理</span></span><br><span class="line">    <span class="attr">timeout</span>: <span class="number">3000</span></span><br><span class="line">&#125;)</span><br><span class="line">    <span class="comment">// 请求成功</span></span><br><span class="line">    .<span class="title function_">then</span>(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;jsonp-&gt;&#x27;</span>, res);</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="comment">// 请求失败</span></span><br><span class="line">    .<span class="title function_">catch</span>(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;network err!&quot;</span>)</span><br><span class="line">    &#125;)</span><br></pre></td></tr></table></figure>
+
+<p>后端部分</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 后端</span></span><br><span class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">&#x27;http&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> url = <span class="built_in">require</span>(<span class="string">&#x27;url&#x27;</span>);</span><br><span class="line">http.<span class="title function_">createServer</span>(<span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// /api?callback=onResponse</span></span><br><span class="line">  <span class="comment">// 解析前端请求url中的callback名</span></span><br><span class="line">  <span class="keyword">if</span>(req.<span class="property">url</span>.<span class="title function_">includes</span>(<span class="string">&#x27;/api&#x27;</span>)) &#123;</span><br><span class="line">    <span class="keyword">let</span> myurl = url.<span class="title function_">parse</span>(req.<span class="property">url</span>);</span><br><span class="line">    <span class="keyword">let</span> params = <span class="keyword">new</span> <span class="title class_">URLSearchParams</span>(myurl.<span class="property">query</span>)</span><br><span class="line">    <span class="keyword">let</span> posts = [<span class="string">&#x27;js&#x27;</span>, <span class="string">&#x27;php&#x27;</span>];</span><br><span class="line">    <span class="keyword">let</span> mathodName = params.<span class="title function_">get</span>(<span class="string">&#x27;callback&#x27;</span>);</span><br><span class="line">    res.<span class="title function_">end</span>(<span class="string">`<span class="subst">$&#123;mathodName&#125;</span>(<span class="subst">$&#123;<span class="built_in">JSON</span>.stringify(posts)&#125;</span>)`</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line">.<span class="title function_">listen</span>(<span class="number">9090</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">9090</span>);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>JavaScript</category>
@@ -684,7 +684,7 @@
 
 <h5 id="需要注意的是，在-ES6-中箭头函数中，this-是在函数声明的时候确定的-箭头函数不绑定this，会捕获上下文的this"><a href="#需要注意的是，在-ES6-中箭头函数中，this-是在函数声明的时候确定的-箭头函数不绑定this，会捕获上下文的this" class="headerlink" title="需要注意的是，在 ES6 中箭头函数中，this 是在函数声明的时候确定的(箭头函数不绑定this，会捕获上下文的this)"></a>需要注意的是，在 ES6 中箭头函数中，this 是在函数声明的时候确定的(箭头函数不绑定this，会捕获上下文的this)</h5>]]></content>
       <categories>
-        <category>JavaScript</category>
+        <category>JavaScript原理</category>
       </categories>
       <tags>
         <tag>JavaScript</tag>
@@ -876,7 +876,7 @@
 <h5 id="NODE-ENV-的特殊内置环境变量"><a href="#NODE-ENV-的特殊内置环境变量" class="headerlink" title="NODE_ENV 的特殊内置环境变量"></a><code>NODE_ENV</code> 的特殊内置环境变量</h5><p>有一个名为 <code>NODE_ENV</code> 的特殊内置环境变量。可以从 <code>process.env.NODE_ENV</code> 中读取。运行 <code>npm start</code> 时，它总是等于 <code>&#39;development&#39;</code> ，运行 <code>npm test</code> 它总是等于 <code>&#39;test&#39;</code> ，运行 <code>npm run build</code> 来生成一个生产 bundle(包) 时，它总是等于 <code>&#39;production&#39;</code> 。**<code>NODE_ENV</code>无法手动覆盖。** </p>
 ]]></content>
       <categories>
-        <category>Node</category>
+        <category>NodeJS</category>
       </categories>
       <tags>
         <tag>JavaScript</tag>
@@ -978,6 +978,100 @@
       </categories>
       <tags>
         <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>React Router</title>
+    <url>/2021/09/11/React-Router/</url>
+    <content><![CDATA[<h3 id="SPA的理解"><a href="#SPA的理解" class="headerlink" title="SPA的理解"></a>SPA的理解</h3><ol>
+<li><p>单页Web应用（single page web application，SPA）。</p>
+</li>
+<li><p>整个应用只有<strong>一个完整的页面</strong>。</p>
+</li>
+<li><p>点击页面中的链接<strong>不会刷新</strong>页面，只会做页面的<strong>局部更新。</strong></p>
+</li>
+<li><p>数据都需要通过ajax请求获取, 并在前端异步展现。</p>
+</li>
+</ol>
+<h3 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h3><ol>
+<li>后端路由：</li>
+</ol>
+<ul>
+<li><p>注册路由： router.get(path, function(req, res))</p>
+</li>
+<li><p>工作过程：当node接收到一个请求时, 根据请求路径找到匹配的路由, 调用路由中的函数来处理请求, 返回响应数据</p>
+</li>
+</ul>
+<ol start="2">
+<li>前端路由：</li>
+</ol>
+<ul>
+<li><p>注册路由: <Route path="/test" component={Test}></p>
+</li>
+<li><p>工作过程：当浏览器的path变为&#x2F;test时, 当前路由组件就会变为Test组件</p>
+</li>
+</ul>
+<span id="more"></span>
+
+<h3 id="react-router-dom相关API"><a href="#react-router-dom相关API" class="headerlink" title="react-router-dom相关API"></a>react-router-dom相关API</h3><h4 id="1-内置API"><a href="#1-内置API" class="headerlink" title="1.内置API"></a>1.内置API</h4><ul>
+<li><BrowserRouter>
+</li>
+<li><HashRouter></li>
+<li><Route></li>
+<li><Redirect></li>
+<li><Link></li>
+<li><NavLink></li>
+<li><Switch></li>
+</ul>
+<h4 id="2-其他"><a href="#2-其他" class="headerlink" title="2. 其他"></a>2. 其他</h4><ul>
+<li><p>history对象</p>
+</li>
+<li><p>match对象</p>
+</li>
+<li><p>withRouter函数</p>
+</li>
+</ul>
+<h3 id="路由组件与一般组件"><a href="#路由组件与一般组件" class="headerlink" title="路由组件与一般组件"></a>路由组件与一般组件</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="number">1.</span>写法不同：</span><br><span class="line">			一般组件：&lt;<span class="title class_">Demo</span>/&gt;</span><br><span class="line">			路由组件：&lt;<span class="title class_">Route</span> path=<span class="string">&quot;/demo&quot;</span> component=&#123;<span class="title class_">Demo</span>&#125;/&gt;</span><br><span class="line"><span class="number">2.</span>存放位置不同：</span><br><span class="line">			一般组件：components</span><br><span class="line">			路由组件：pages</span><br><span class="line"><span class="number">3.</span>接收到的props不同：</span><br><span class="line">			一般组件：写组件标签时传递了什么，就能收到什么</span><br><span class="line">			路由组件：接收到三个固定的属性</span><br><span class="line">								<span class="attr">history</span>:</span><br><span class="line">											<span class="attr">go</span>: ƒ <span class="title function_">go</span>(n)</span><br><span class="line">											<span class="attr">goBack</span>: ƒ <span class="title function_">goBack</span>()</span><br><span class="line">											<span class="attr">goForward</span>: ƒ <span class="title function_">goForward</span>()</span><br><span class="line">											<span class="attr">push</span>: ƒ <span class="title function_">push</span>(path, state)</span><br><span class="line">											<span class="attr">replace</span>: ƒ <span class="title function_">replace</span>(path, state)</span><br><span class="line">								<span class="attr">location</span>:</span><br><span class="line">											<span class="attr">pathname</span>: <span class="string">&quot;/about&quot;</span></span><br><span class="line">											<span class="attr">search</span>: <span class="string">&quot;&quot;</span></span><br><span class="line">											<span class="attr">state</span>: <span class="literal">undefined</span></span><br><span class="line">								<span class="attr">match</span>:</span><br><span class="line">											<span class="attr">params</span>: &#123;&#125;</span><br><span class="line">											<span class="attr">path</span>: <span class="string">&quot;/about&quot;</span></span><br><span class="line">											<span class="attr">url</span>: <span class="string">&quot;/about&quot;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="NavLink与封装NavLink"><a href="#NavLink与封装NavLink" class="headerlink" title="NavLink与封装NavLink"></a>NavLink与封装NavLink</h3><pre><code>            1.NavLink可以实现路由链接的高亮，通过activeClassName指定样式名
+</code></pre>
+<h3 id="Switch的使用"><a href="#Switch的使用" class="headerlink" title="Switch的使用"></a>Switch的使用</h3><pre><code>            1.通常情况下，path和component是一一对应的关系。
+            2.Switch可以提高路由匹配效率(单一匹配)。
+</code></pre>
+<h3 id="解决多级路径刷新页面样式丢失的问题"><a href="#解决多级路径刷新页面样式丢失的问题" class="headerlink" title="解决多级路径刷新页面样式丢失的问题"></a>解决多级路径刷新页面样式丢失的问题</h3><pre><code>            1.public/index.html 中 引入样式时不写 ./ 写 / （常用）
+            2.public/index.html 中 引入样式时不写 ./ 写 %PUBLIC_URL% （常用）
+            3.使用HashRouter
+</code></pre>
+<h3 id="路由的严格匹配与模糊匹配"><a href="#路由的严格匹配与模糊匹配" class="headerlink" title="路由的严格匹配与模糊匹配"></a>路由的严格匹配与模糊匹配</h3><pre><code>            1.默认使用的是模糊匹配（简单记：【输入的路径】必须包含要【匹配的路径】，且顺序要一致）
+            2.开启严格匹配：&lt;Route exact=&#123;true&#125; path=&quot;/about&quot; component=&#123;About&#125;/&gt;
+            3.严格匹配不要随便开启，需要再开，有些时候开启会导致无法继续匹配二级路由
+</code></pre>
+<h3 id="Redirect的使用"><a href="#Redirect的使用" class="headerlink" title="Redirect的使用"></a>Redirect的使用</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1.一般写在所有路由注册的最下方，当所有路由都无法匹配时，跳转到Redirect指定的路由</span><br><span class="line">2.具体编码：</span><br><span class="line">		&lt;Switch&gt;</span><br><span class="line">			&lt;Route path=&quot;/about&quot; component=&#123;About&#125;/&gt;</span><br><span class="line">			&lt;Route path=&quot;/home&quot; component=&#123;Home&#125;/&gt;</span><br><span class="line">			&lt;Redirect to=&quot;/about&quot;/&gt;</span><br><span class="line">		&lt;/Switch&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="嵌套路由"><a href="#嵌套路由" class="headerlink" title="嵌套路由"></a>嵌套路由</h3><pre><code>            1.注册子路由时要写上父路由的path值
+            2.路由的匹配是按照注册路由的顺序进行的
+</code></pre>
+<h3 id="向路由组件传递参数"><a href="#向路由组件传递参数" class="headerlink" title="向路由组件传递参数"></a>向路由组件传递参数</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1.params参数</span><br><span class="line">			路由链接(携带参数)：&lt;Link to=&#x27;/demo/test/tom/18&#x27;&#125;&gt;详情&lt;/Link&gt;</span><br><span class="line">			注册路由(声明接收)：&lt;Route path=&quot;/demo/test/:name/:age&quot; component=&#123;Test&#125;/&gt;</span><br><span class="line">			接收参数：this.props.match.params</span><br><span class="line">2.search参数</span><br><span class="line">			路由链接(携带参数)：&lt;Link to=&#x27;/demo/test?name=tom&amp;age=18&#x27;&#125;&gt;详情&lt;/Link&gt;</span><br><span class="line">			注册路由(无需声明，正常注册即可)：&lt;Route path=&quot;/demo/test&quot; component=&#123;Test&#125;/&gt;</span><br><span class="line">			接收参数：this.props.location.search</span><br><span class="line">			备注：获取到的search是urlencoded编码字符串，需要借助querystring解析</span><br><span class="line">3.state参数</span><br><span class="line">			路由链接(携带参数)：&lt;Link to=&#123;&#123;pathname:&#x27;/demo/test&#x27;,state:&#123;name:&#x27;tom&#x27;,age:18&#125;&#125;&#125;&gt;详情&lt;/Link&gt;</span><br><span class="line">			注册路由(无需声明，正常注册即可)：&lt;Route path=&quot;/demo/test&quot; component=&#123;Test&#125;/&gt;</span><br><span class="line">			接收参数：this.props.location.state</span><br><span class="line">			备注：刷新也可以保留住参数</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="编程式路由导航"><a href="#编程式路由导航" class="headerlink" title="编程式路由导航"></a>编程式路由导航</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">借助<span class="variable language_">this</span>.<span class="property">prosp</span>.<span class="property">history</span>对象上的<span class="variable constant_">API</span>对操作路由跳转、前进、后退</span><br><span class="line">		-<span class="variable language_">this</span>.<span class="property">prosp</span>.<span class="property">history</span>.<span class="title function_">push</span>()</span><br><span class="line">		-<span class="variable language_">this</span>.<span class="property">prosp</span>.<span class="property">history</span>.<span class="title function_">replace</span>()</span><br><span class="line">		-<span class="variable language_">this</span>.<span class="property">prosp</span>.<span class="property">history</span>.<span class="title function_">goBack</span>()</span><br><span class="line">		-<span class="variable language_">this</span>.<span class="property">prosp</span>.<span class="property">history</span>.<span class="title function_">goForward</span>()</span><br><span class="line">		-<span class="variable language_">this</span>.<span class="property">prosp</span>.<span class="property">history</span>.<span class="title function_">go</span>()</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="BrowserRouter与HashRouter的区别"><a href="#BrowserRouter与HashRouter的区别" class="headerlink" title="BrowserRouter与HashRouter的区别"></a>BrowserRouter与HashRouter的区别</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="number">1.</span>底层原理不一样：</span><br><span class="line">			<span class="title class_">BrowserRouter</span>使用的是<span class="variable constant_">H5</span>的history <span class="variable constant_">API</span>，不兼容<span class="title class_">IE9</span>及以下版本。</span><br><span class="line">			<span class="title class_">HashRouter</span>使用的是<span class="variable constant_">URL</span>的哈希值。</span><br><span class="line"><span class="number">2.</span>path表现形式不一样</span><br><span class="line">			<span class="title class_">BrowserRouter</span>的路径中没有#,例如：<span class="attr">localhost</span>:<span class="number">3000</span>/demo/test</span><br><span class="line">			<span class="title class_">HashRouter</span>的路径包含#,例如：<span class="attr">localhost</span>:<span class="number">3000</span>/#/demo/test</span><br><span class="line"><span class="number">3.</span>刷新后对路由state参数的影响</span><br><span class="line">			(<span class="number">1</span>).<span class="property">BrowserRouter</span>没有任何影响，因为state保存在history对象中。</span><br><span class="line">			(<span class="number">2</span>).<span class="property">HashRouter</span>刷新后会导致路由state参数的丢失！！！</span><br><span class="line"><span class="number">4.</span>备注：<span class="title class_">HashRouter</span>可以用于解决一些路径错误相关的问题。</span><br></pre></td></tr></table></figure>
+
+<h2 id=""><a href="#" class="headerlink" title=""></a></h2>]]></content>
+      <categories>
+        <category>React</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>React</tag>
       </tags>
   </entry>
   <entry>
@@ -1237,91 +1331,59 @@ C组件: 读取A组件传入的数据显示 &#123;this.props.data&#125;
       </tags>
   </entry>
   <entry>
-    <title>React Router</title>
-    <url>/2021/09/11/React-Router/</url>
-    <content><![CDATA[<h3 id="SPA的理解"><a href="#SPA的理解" class="headerlink" title="SPA的理解"></a>SPA的理解</h3><ol>
-<li><p>单页Web应用（single page web application，SPA）。</p>
-</li>
-<li><p>整个应用只有<strong>一个完整的页面</strong>。</p>
-</li>
-<li><p>点击页面中的链接<strong>不会刷新</strong>页面，只会做页面的<strong>局部更新。</strong></p>
-</li>
-<li><p>数据都需要通过ajax请求获取, 并在前端异步展现。</p>
-</li>
-</ol>
-<h3 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h3><ol>
-<li>后端路由：</li>
-</ol>
-<ul>
-<li><p>注册路由： router.get(path, function(req, res))</p>
-</li>
-<li><p>工作过程：当node接收到一个请求时, 根据请求路径找到匹配的路由, 调用路由中的函数来处理请求, 返回响应数据</p>
-</li>
-</ul>
-<ol start="2">
-<li>前端路由：</li>
-</ol>
-<ul>
-<li><p>注册路由: <Route path="/test" component={Test}></p>
-</li>
-<li><p>工作过程：当浏览器的path变为&#x2F;test时, 当前路由组件就会变为Test组件</p>
-</li>
-</ul>
+    <title>React生态</title>
+    <url>/2021/09/30/React%E7%94%9F%E6%80%81/</url>
+    <content><![CDATA[<h3 id="React-DevTools"><a href="#React-DevTools" class="headerlink" title="React DevTools"></a>React DevTools</h3><h5 id="General-设置"><a href="#General-设置" class="headerlink" title="General 设置"></a>General 设置</h5><img src="../assets/image-20220222024702149.png" alt="image-20220222024702149" style="zoom:33%;" />
+
+<p>General 面板中最重要的功能就是 **”Highlight updates when components render”**。勾选上之后，可以查看 React 重绘时，页面哪些部分有更新。在遇到性能问题时，可以快速帮助决策在哪部分不需要重绘的组件部分添加 React.memo 阻止重绘。</p>
+<h5 id="Debugging-设置"><a href="#Debugging-设置" class="headerlink" title="Debugging 设置"></a>Debugging 设置</h5><img src="..\assets\image-20220222024832097.png" alt="image-20220222024832097" style="zoom:33%;" />
+
+<p><strong>“Append components stacks to console warnings and errors.”</strong></p>
+<p>可以帮助我们定位 React 报错信息来自哪个组件</p>
 <span id="more"></span>
 
-<h3 id="react-router-dom相关API"><a href="#react-router-dom相关API" class="headerlink" title="react-router-dom相关API"></a>react-router-dom相关API</h3><h4 id="1-内置API"><a href="#1-内置API" class="headerlink" title="1.内置API"></a>1.内置API</h4><ul>
-<li><BrowserRouter>
+
+<h5 id="Components-设置"><a href="#Components-设置" class="headerlink" title="Components 设置"></a>Components 设置</h5><img src="..\assets\image-20220222024936104.png" alt="image-20220222024936104" style="zoom:33%;" />
+
+<p><strong>“Hide components where…”</strong></p>
+<p>此项在过滤组件树时有用。比如，大多数应用可能会在顶层有很多 Context.Provider，就可以过滤 Context 类型、不显示。当我们只关心业务逻辑层的组件时，可以过滤掉 DOM 组件，减少树的节点</p>
+<h5 id="Profiler-设置"><a href="#Profiler-设置" class="headerlink" title="Profiler 设置"></a>Profiler 设置</h5><img src="..\assets\image-20220222025024293.png" alt="image-20220222025024293" style="zoom:33%;" />
+
+<p><strong>“Record why each component rendered while profiling”</strong></p>
+<img src="..\assets\image-20220222025054509.png" alt="image-20220222025054509" style="zoom:33%;" />
+
+<p>勾选之后会在渲染火焰图的 hover 面板中看到 **”Why did this render”**。</p>
+<h5 id="现在有哪些-render-原因呢？"><a href="#现在有哪些-render-原因呢？" class="headerlink" title="现在有哪些 render 原因呢？"></a>现在有哪些 render 原因呢？</h5><ul>
+<li><p><strong>Props changed</strong></p>
+<p>​     顾名思义，传入组件的 props 变更</p>
 </li>
-<li><HashRouter></li>
-<li><Route></li>
-<li><Redirect></li>
-<li><Link></li>
-<li><NavLink></li>
-<li><Switch></li>
+<li><p><strong>The parent component rendered</strong></p>
+<p>​	父组件渲染导致的子组件渲染。一般要做性能优化都是找这类重绘原因的组件。但是要注意，如果组件中有用到 useContext，Provider 的 value 变更导致的重绘也是被标记为 The parent component rendered，需要注意</p>
+</li>
+<li><p><strong>Hooks changed</strong></p>
+<p>​	Hook 状态变更导致的重绘，一般就是指 useState 返回的更新函数被调用了</p>
+</li>
+<li><p><strong>State changed</strong></p>
+<p>​	这个只会在 class component 中有，大家忽略</p>
+</li>
+<li><p><strong>“Hide commits below xx (ms)”</strong></p>
+<p>​	设置一个更新耗时的阈值，低于该阈值的渲染不显示。用来快速过滤哪些渲染有性能问题</p>
+</li>
 </ul>
-<h4 id="2-其他"><a href="#2-其他" class="headerlink" title="2. 其他"></a>2. 其他</h4><ul>
-<li><p>history对象</p>
-</li>
-<li><p>match对象</p>
-</li>
-<li><p>withRouter函数</p>
-</li>
+<h5 id="React-组件检视器"><a href="#React-组件检视器" class="headerlink" title="React 组件检视器"></a>React 组件检视器</h5><p>用法和 DevTools 的元素面板类似，可以直接在页面上定位到元素对应的 React Component。并且可以实时查看当前组件内部的 hooks 状态，返回的组件树</p>
+<img src="..\assets\image-20220222025129591.png" alt="image-20220222025129591" style="zoom:33%;" />
+
+<p>右上角的四个图标</p>
+<img src="..\assets\image-20220222025154916.png" alt="image-20220222025154916" style="zoom:33%;" />
+
+<p>分别作用如下：</p>
+<ul>
+<li>模拟 ReactLazy 懒加载组件 Suspense 状态</li>
+<li>定位组件所渲染的 DOM 节点</li>
+<li>在 Console 中打印 Component 内部状态</li>
+<li>跳转到组件所在源文件（配合 sourcemap）</li>
 </ul>
-<h3 id="路由组件与一般组件"><a href="#路由组件与一般组件" class="headerlink" title="路由组件与一般组件"></a>路由组件与一般组件</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="number">1.</span>写法不同：</span><br><span class="line">			一般组件：&lt;<span class="title class_">Demo</span>/&gt;</span><br><span class="line">			路由组件：&lt;<span class="title class_">Route</span> path=<span class="string">&quot;/demo&quot;</span> component=&#123;<span class="title class_">Demo</span>&#125;/&gt;</span><br><span class="line"><span class="number">2.</span>存放位置不同：</span><br><span class="line">			一般组件：components</span><br><span class="line">			路由组件：pages</span><br><span class="line"><span class="number">3.</span>接收到的props不同：</span><br><span class="line">			一般组件：写组件标签时传递了什么，就能收到什么</span><br><span class="line">			路由组件：接收到三个固定的属性</span><br><span class="line">								<span class="attr">history</span>:</span><br><span class="line">											<span class="attr">go</span>: ƒ <span class="title function_">go</span>(n)</span><br><span class="line">											<span class="attr">goBack</span>: ƒ <span class="title function_">goBack</span>()</span><br><span class="line">											<span class="attr">goForward</span>: ƒ <span class="title function_">goForward</span>()</span><br><span class="line">											<span class="attr">push</span>: ƒ <span class="title function_">push</span>(path, state)</span><br><span class="line">											<span class="attr">replace</span>: ƒ <span class="title function_">replace</span>(path, state)</span><br><span class="line">								<span class="attr">location</span>:</span><br><span class="line">											<span class="attr">pathname</span>: <span class="string">&quot;/about&quot;</span></span><br><span class="line">											<span class="attr">search</span>: <span class="string">&quot;&quot;</span></span><br><span class="line">											<span class="attr">state</span>: <span class="literal">undefined</span></span><br><span class="line">								<span class="attr">match</span>:</span><br><span class="line">											<span class="attr">params</span>: &#123;&#125;</span><br><span class="line">											<span class="attr">path</span>: <span class="string">&quot;/about&quot;</span></span><br><span class="line">											<span class="attr">url</span>: <span class="string">&quot;/about&quot;</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="NavLink与封装NavLink"><a href="#NavLink与封装NavLink" class="headerlink" title="NavLink与封装NavLink"></a>NavLink与封装NavLink</h3><pre><code>            1.NavLink可以实现路由链接的高亮，通过activeClassName指定样式名
-</code></pre>
-<h3 id="Switch的使用"><a href="#Switch的使用" class="headerlink" title="Switch的使用"></a>Switch的使用</h3><pre><code>            1.通常情况下，path和component是一一对应的关系。
-            2.Switch可以提高路由匹配效率(单一匹配)。
-</code></pre>
-<h3 id="解决多级路径刷新页面样式丢失的问题"><a href="#解决多级路径刷新页面样式丢失的问题" class="headerlink" title="解决多级路径刷新页面样式丢失的问题"></a>解决多级路径刷新页面样式丢失的问题</h3><pre><code>            1.public/index.html 中 引入样式时不写 ./ 写 / （常用）
-            2.public/index.html 中 引入样式时不写 ./ 写 %PUBLIC_URL% （常用）
-            3.使用HashRouter
-</code></pre>
-<h3 id="路由的严格匹配与模糊匹配"><a href="#路由的严格匹配与模糊匹配" class="headerlink" title="路由的严格匹配与模糊匹配"></a>路由的严格匹配与模糊匹配</h3><pre><code>            1.默认使用的是模糊匹配（简单记：【输入的路径】必须包含要【匹配的路径】，且顺序要一致）
-            2.开启严格匹配：&lt;Route exact=&#123;true&#125; path=&quot;/about&quot; component=&#123;About&#125;/&gt;
-            3.严格匹配不要随便开启，需要再开，有些时候开启会导致无法继续匹配二级路由
-</code></pre>
-<h3 id="Redirect的使用"><a href="#Redirect的使用" class="headerlink" title="Redirect的使用"></a>Redirect的使用</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1.一般写在所有路由注册的最下方，当所有路由都无法匹配时，跳转到Redirect指定的路由</span><br><span class="line">2.具体编码：</span><br><span class="line">		&lt;Switch&gt;</span><br><span class="line">			&lt;Route path=&quot;/about&quot; component=&#123;About&#125;/&gt;</span><br><span class="line">			&lt;Route path=&quot;/home&quot; component=&#123;Home&#125;/&gt;</span><br><span class="line">			&lt;Redirect to=&quot;/about&quot;/&gt;</span><br><span class="line">		&lt;/Switch&gt;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="嵌套路由"><a href="#嵌套路由" class="headerlink" title="嵌套路由"></a>嵌套路由</h3><pre><code>            1.注册子路由时要写上父路由的path值
-            2.路由的匹配是按照注册路由的顺序进行的
-</code></pre>
-<h3 id="向路由组件传递参数"><a href="#向路由组件传递参数" class="headerlink" title="向路由组件传递参数"></a>向路由组件传递参数</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1.params参数</span><br><span class="line">			路由链接(携带参数)：&lt;Link to=&#x27;/demo/test/tom/18&#x27;&#125;&gt;详情&lt;/Link&gt;</span><br><span class="line">			注册路由(声明接收)：&lt;Route path=&quot;/demo/test/:name/:age&quot; component=&#123;Test&#125;/&gt;</span><br><span class="line">			接收参数：this.props.match.params</span><br><span class="line">2.search参数</span><br><span class="line">			路由链接(携带参数)：&lt;Link to=&#x27;/demo/test?name=tom&amp;age=18&#x27;&#125;&gt;详情&lt;/Link&gt;</span><br><span class="line">			注册路由(无需声明，正常注册即可)：&lt;Route path=&quot;/demo/test&quot; component=&#123;Test&#125;/&gt;</span><br><span class="line">			接收参数：this.props.location.search</span><br><span class="line">			备注：获取到的search是urlencoded编码字符串，需要借助querystring解析</span><br><span class="line">3.state参数</span><br><span class="line">			路由链接(携带参数)：&lt;Link to=&#123;&#123;pathname:&#x27;/demo/test&#x27;,state:&#123;name:&#x27;tom&#x27;,age:18&#125;&#125;&#125;&gt;详情&lt;/Link&gt;</span><br><span class="line">			注册路由(无需声明，正常注册即可)：&lt;Route path=&quot;/demo/test&quot; component=&#123;Test&#125;/&gt;</span><br><span class="line">			接收参数：this.props.location.state</span><br><span class="line">			备注：刷新也可以保留住参数</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="编程式路由导航"><a href="#编程式路由导航" class="headerlink" title="编程式路由导航"></a>编程式路由导航</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">借助<span class="variable language_">this</span>.<span class="property">prosp</span>.<span class="property">history</span>对象上的<span class="variable constant_">API</span>对操作路由跳转、前进、后退</span><br><span class="line">		-<span class="variable language_">this</span>.<span class="property">prosp</span>.<span class="property">history</span>.<span class="title function_">push</span>()</span><br><span class="line">		-<span class="variable language_">this</span>.<span class="property">prosp</span>.<span class="property">history</span>.<span class="title function_">replace</span>()</span><br><span class="line">		-<span class="variable language_">this</span>.<span class="property">prosp</span>.<span class="property">history</span>.<span class="title function_">goBack</span>()</span><br><span class="line">		-<span class="variable language_">this</span>.<span class="property">prosp</span>.<span class="property">history</span>.<span class="title function_">goForward</span>()</span><br><span class="line">		-<span class="variable language_">this</span>.<span class="property">prosp</span>.<span class="property">history</span>.<span class="title function_">go</span>()</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="BrowserRouter与HashRouter的区别"><a href="#BrowserRouter与HashRouter的区别" class="headerlink" title="BrowserRouter与HashRouter的区别"></a>BrowserRouter与HashRouter的区别</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="number">1.</span>底层原理不一样：</span><br><span class="line">			<span class="title class_">BrowserRouter</span>使用的是<span class="variable constant_">H5</span>的history <span class="variable constant_">API</span>，不兼容<span class="title class_">IE9</span>及以下版本。</span><br><span class="line">			<span class="title class_">HashRouter</span>使用的是<span class="variable constant_">URL</span>的哈希值。</span><br><span class="line"><span class="number">2.</span>path表现形式不一样</span><br><span class="line">			<span class="title class_">BrowserRouter</span>的路径中没有#,例如：<span class="attr">localhost</span>:<span class="number">3000</span>/demo/test</span><br><span class="line">			<span class="title class_">HashRouter</span>的路径包含#,例如：<span class="attr">localhost</span>:<span class="number">3000</span>/#/demo/test</span><br><span class="line"><span class="number">3.</span>刷新后对路由state参数的影响</span><br><span class="line">			(<span class="number">1</span>).<span class="property">BrowserRouter</span>没有任何影响，因为state保存在history对象中。</span><br><span class="line">			(<span class="number">2</span>).<span class="property">HashRouter</span>刷新后会导致路由state参数的丢失！！！</span><br><span class="line"><span class="number">4.</span>备注：<span class="title class_">HashRouter</span>可以用于解决一些路径错误相关的问题。</span><br></pre></td></tr></table></figure>
-
-<h2 id=""><a href="#" class="headerlink" title=""></a></h2>]]></content>
+]]></content>
       <categories>
         <category>React</category>
       </categories>
@@ -1387,68 +1449,6 @@ C组件: 读取A组件传入的数据显示 &#123;this.props.data&#125;
 </ul>
 <p><strong>何时使用状态管理库？</strong></p>
 <p><strong>判断一个状态是不是只属于组件本身，如若是则不需要状态管理库</strong></p>
-]]></content>
-      <categories>
-        <category>React</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-        <tag>React</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>React生态</title>
-    <url>/2021/09/30/React%E7%94%9F%E6%80%81/</url>
-    <content><![CDATA[<h3 id="React-DevTools"><a href="#React-DevTools" class="headerlink" title="React DevTools"></a>React DevTools</h3><h5 id="General-设置"><a href="#General-设置" class="headerlink" title="General 设置"></a>General 设置</h5><img src="../assets/image-20220222024702149.png" alt="image-20220222024702149" style="zoom:33%;" />
-
-<p>General 面板中最重要的功能就是 **”Highlight updates when components render”**。勾选上之后，可以查看 React 重绘时，页面哪些部分有更新。在遇到性能问题时，可以快速帮助决策在哪部分不需要重绘的组件部分添加 React.memo 阻止重绘。</p>
-<h5 id="Debugging-设置"><a href="#Debugging-设置" class="headerlink" title="Debugging 设置"></a>Debugging 设置</h5><img src="..\assets\image-20220222024832097.png" alt="image-20220222024832097" style="zoom:33%;" />
-
-<p><strong>“Append components stacks to console warnings and errors.”</strong></p>
-<p>可以帮助我们定位 React 报错信息来自哪个组件</p>
-<span id="more"></span>
-
-
-<h5 id="Components-设置"><a href="#Components-设置" class="headerlink" title="Components 设置"></a>Components 设置</h5><img src="..\assets\image-20220222024936104.png" alt="image-20220222024936104" style="zoom:33%;" />
-
-<p><strong>“Hide components where…”</strong></p>
-<p>此项在过滤组件树时有用。比如，大多数应用可能会在顶层有很多 Context.Provider，就可以过滤 Context 类型、不显示。当我们只关心业务逻辑层的组件时，可以过滤掉 DOM 组件，减少树的节点</p>
-<h5 id="Profiler-设置"><a href="#Profiler-设置" class="headerlink" title="Profiler 设置"></a>Profiler 设置</h5><img src="..\assets\image-20220222025024293.png" alt="image-20220222025024293" style="zoom:33%;" />
-
-<p><strong>“Record why each component rendered while profiling”</strong></p>
-<img src="..\assets\image-20220222025054509.png" alt="image-20220222025054509" style="zoom:33%;" />
-
-<p>勾选之后会在渲染火焰图的 hover 面板中看到 **”Why did this render”**。</p>
-<h5 id="现在有哪些-render-原因呢？"><a href="#现在有哪些-render-原因呢？" class="headerlink" title="现在有哪些 render 原因呢？"></a>现在有哪些 render 原因呢？</h5><ul>
-<li><p><strong>Props changed</strong></p>
-<p>​     顾名思义，传入组件的 props 变更</p>
-</li>
-<li><p><strong>The parent component rendered</strong></p>
-<p>​	父组件渲染导致的子组件渲染。一般要做性能优化都是找这类重绘原因的组件。但是要注意，如果组件中有用到 useContext，Provider 的 value 变更导致的重绘也是被标记为 The parent component rendered，需要注意</p>
-</li>
-<li><p><strong>Hooks changed</strong></p>
-<p>​	Hook 状态变更导致的重绘，一般就是指 useState 返回的更新函数被调用了</p>
-</li>
-<li><p><strong>State changed</strong></p>
-<p>​	这个只会在 class component 中有，大家忽略</p>
-</li>
-<li><p><strong>“Hide commits below xx (ms)”</strong></p>
-<p>​	设置一个更新耗时的阈值，低于该阈值的渲染不显示。用来快速过滤哪些渲染有性能问题</p>
-</li>
-</ul>
-<h5 id="React-组件检视器"><a href="#React-组件检视器" class="headerlink" title="React 组件检视器"></a>React 组件检视器</h5><p>用法和 DevTools 的元素面板类似，可以直接在页面上定位到元素对应的 React Component。并且可以实时查看当前组件内部的 hooks 状态，返回的组件树</p>
-<img src="..\assets\image-20220222025129591.png" alt="image-20220222025129591" style="zoom:33%;" />
-
-<p>右上角的四个图标</p>
-<img src="..\assets\image-20220222025154916.png" alt="image-20220222025154916" style="zoom:33%;" />
-
-<p>分别作用如下：</p>
-<ul>
-<li>模拟 ReactLazy 懒加载组件 Suspense 状态</li>
-<li>定位组件所渲染的 DOM 节点</li>
-<li>在 Console 中打印 Component 内部状态</li>
-<li>跳转到组件所在源文件（配合 sourcemap）</li>
-</ul>
 ]]></content>
       <categories>
         <category>React</category>
@@ -1528,7 +1528,7 @@ C组件: 读取A组件传入的数据显示 &#123;this.props.data&#125;
 <p><img src="/../assets/image-20210310173423401.png" alt="image-20210310173423401"></p>
 ]]></content>
       <categories>
-        <category>React</category>
+        <category>状态管理</category>
       </categories>
       <tags>
         <tag>JavaScript</tag>
@@ -1922,7 +1922,7 @@ webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后�
 
 ]]></content>
       <categories>
-        <category>Webpack</category>
+        <category>打包工具</category>
       </categories>
       <tags>
         <tag>Webpack</tag>
@@ -2224,7 +2224,7 @@ webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后�
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;start&#x27;</span>)</span><br><span class="line"><span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;promise in timeout&#x27;</span>);</span><br><span class="line">            <span class="title function_">resolve</span>();</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;promise after timeout&#x27;</span>);</span><br><span class="line">    &#125;).<span class="title function_">then</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;promise4&#x27;</span>);</span><br><span class="line">        <span class="title class_">Promise</span>.<span class="title function_">resolve</span>().<span class="title function_">then</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;7777&#x27;</span>)</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;).<span class="title function_">then</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;promise5&#x27;</span>);</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;99999&#x27;</span>);</span><br><span class="line">    &#125;, <span class="number">0</span>);</span><br><span class="line">    <span class="title class_">Promise</span>.<span class="title function_">resolve</span>().<span class="title function_">then</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;promise3&#x27;</span>);</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;end&#x27;</span>);</span><br><span class="line"><span class="comment">// 输出：</span></span><br><span class="line"><span class="comment">// start</span></span><br><span class="line"><span class="comment">// promise after timeout</span></span><br><span class="line"><span class="comment">// end</span></span><br><span class="line"><span class="comment">// promise3</span></span><br><span class="line"><span class="comment">// promise in timeout</span></span><br><span class="line"><span class="comment">// promise4</span></span><br><span class="line"><span class="comment">// 7777</span></span><br><span class="line"><span class="comment">// promise5</span></span><br><span class="line"><span class="comment">// 99999</span></span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
-        <category>Chore</category>
+        <category>Browser</category>
       </categories>
       <tags>
         <tag>Chrome</tag>
