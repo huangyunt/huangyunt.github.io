@@ -83,6 +83,38 @@
       </tags>
   </entry>
   <entry>
+    <title>Hexo + Next + GitHub Page搭建个人博客</title>
+    <url>/2024/09/21/Hexo%20+%20Next%20+%20GitHub%20Page%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
+    <content><![CDATA[<h3 id="Hexo介绍"><a href="#Hexo介绍" class="headerlink" title="Hexo介绍"></a>Hexo介绍</h3><p>Hexo是一款基于Node.js的开源静态博客框架，用于快速、简单且高效地搭建静态博客网站。本质上是一个静态网站生成器，新增文章只需要编辑md文件，通过运行命令再生成像html的静态文件。</p>
+<h3 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">全局安装hexo脚手架</span></span><br><span class="line">npm install -g hexo-cli</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建一blog项目</span></span><br><span class="line">hexo init blog</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">进入项目</span></span><br><span class="line">cd blog</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">安装依赖包</span></span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
+
+<h3 id="其他操作"><a href="#其他操作" class="headerlink" title="其他操作"></a>其他操作</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">右键 Git Bush，用户项目自动化部署</span></span><br><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+
+<h3 id="项目预览"><a href="#项目预览" class="headerlink" title="项目预览"></a>项目预览</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">清理旧的静态文件</span></span><br><span class="line">hexo clean</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">生成静态文件</span></span><br><span class="line">hexo g</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">运行预览项目</span></span><br><span class="line">hexo s</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+
+<h3 id="Hexo配置文件详解（-config-yml）"><a href="#Hexo配置文件详解（-config-yml）" class="headerlink" title="Hexo配置文件详解（_config.yml）"></a>Hexo配置文件详解（_config.yml）</h3><h3 id="Next主题样式"><a href="#Next主题样式" class="headerlink" title="Next主题样式"></a>Next主题样式</h3><blockquote>
+<p>官方文档：<a href="https://theme-next.js.org/docs/getting-started/configuration.html">https://theme-next.js.org/docs/getting-started/configuration.html</a></p>
+</blockquote>
+<h5 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h5><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git clone https://github.com/next-theme/theme-next-docs</span><br><span class="line">cd theme-next-docs</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
+<h5 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h5><ol>
+<li>Hexo版本&gt;&#x3D;5.0</li>
+<li>在Hexo项目根目录下创建Next配置文件，命名为_config.next.yml</li>
+<li>首次创建Next配置文件时，可以直接复制theme-next-docs目录下的next默认配置文化<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Installed through npm</span></span><br><span class="line">cp node_modules/hexo-theme-next/_config.yml _config.next.yml</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Installed through Git</span></span><br><span class="line">cp themes/next/_config.yml _config.next.yml</span><br></pre></td></tr></table></figure></li>
+</ol>
+]]></content>
+      <categories>
+        <category>Chore</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>Hexo</tag>
+        <tag>Github</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Hooks</title>
     <url>/2021/10/12/Hooks/</url>
     <content><![CDATA[<h3 id="hooks的作用"><a href="#hooks的作用" class="headerlink" title="hooks的作用"></a>hooks的作用</h3><p><strong>钩子（hook）就是 React 函数组件的副效应解决方案，用来为函数组件引入副效应。</strong> 函数组件的主体只应该用来返回组件的 HTML 代码，所有的其他操作（副效应）都必须通过钩子引入。</p>
@@ -285,39 +317,6 @@
         <tag>JavaScript</tag>
         <tag>Hooks</tag>
         <tag>React</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hexo + Next + GitHub Page搭建个人博客</title>
-    <url>/2024/09/21/Hexo%20+%20Next%20+%20GitHub%20Page%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
-    <content><![CDATA[<h3 id="Hexo介绍"><a href="#Hexo介绍" class="headerlink" title="Hexo介绍"></a>Hexo介绍</h3><p>Hexo是一款基于Node.js的开源静态博客框架，用于快速、简单且高效地搭建静态博客网站。本质上是一个静态网站生成器，新增文章只需要编辑md文件，通过运行命令再生成像html的静态文件。</p>
-<h3 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 全局安装hexo脚手架</span><br><span class="line">npm install -g hexo-cli</span><br><span class="line"></span><br><span class="line"># 创建一blog项目</span><br><span class="line">hexo init blog</span><br><span class="line"></span><br><span class="line"># 进入项目</span><br><span class="line">cd blog</span><br><span class="line"></span><br><span class="line"># 安装依赖包</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
-
-<h3 id="其他操作"><a href="#其他操作" class="headerlink" title="其他操作"></a>其他操作</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 右键 Git Bush，用户项目自动化部署</span><br><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
-
-<h3 id="项目预览"><a href="#项目预览" class="headerlink" title="项目预览"></a>项目预览</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 清理旧的静态文件</span><br><span class="line">hexo clean</span><br><span class="line"></span><br><span class="line"># 生成静态文件</span><br><span class="line">hexo g</span><br><span class="line"></span><br><span class="line"># 运行预览项目</span><br><span class="line">hexo s</span><br></pre></td></tr></table></figure>
-
-<span id="more"></span>
-
-
-<h3 id="Hexo配置文件详解（-config-yml）"><a href="#Hexo配置文件详解（-config-yml）" class="headerlink" title="Hexo配置文件详解（_config.yml）"></a>Hexo配置文件详解（_config.yml）</h3><h3 id="主题样式修改"><a href="#主题样式修改" class="headerlink" title="主题样式修改"></a>主题样式修改</h3><h5 id="Next主题样式"><a href="#Next主题样式" class="headerlink" title="Next主题样式"></a>Next主题样式</h5><p><a href="https://theme-next.js.org/docs/getting-started/configuration.html">https://theme-next.js.org/docs/getting-started/configuration.html</a></p>
-<p>With this way, all your theme configurations locate in config file <code>/_config.[name].yml</code>. Replace <code>[name]</code> with the value of theme option in Hexo config file. For NexT theme, the file name is <code>_config.next.yml</code> by default.</p>
-<p>Usage</p>
-<ol>
-<li><p>Please ensure you are using Hexo 5.0 or later.</p>
-</li>
-<li><p>Create the NexT config file named <code>_config.next.yml</code> in <span style="background-color: #5555;">site root directory</span>.</p>
-</li>
-</ol>
-<p>Copy needed <span style="background-color: #5555;">NexT theme</span> options from default theme config file into this config file. If it is the first time to install NexT, then copy the whole default theme config file by the following command:</p>
-]]></content>
-      <categories>
-        <category>Chore</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-        <tag>Hexo</tag>
-        <tag>Github</tag>
       </tags>
   </entry>
   <entry>
@@ -553,24 +552,6 @@
       </tags>
   </entry>
   <entry>
-    <title>JavaSrcipt知识点</title>
-    <url>/2021/02/17/Javascript%E7%9F%A5%E8%AF%86%E7%82%B9/</url>
-    <content><![CDATA[<h4 id="1-script标签中async和defer的区别"><a href="#1-script标签中async和defer的区别" class="headerlink" title="1. script标签中async和defer的区别"></a>1. script标签中async和defer的区别</h4><p><img src="/../assets/Snipaste_2021-12-13_03-23-58.png" alt="image-20211025190555184"></p>
-<ul>
-<li>普通script标签：下载和执行都会阻塞Dom渲染</li>
-<li>defer：立即进行异步下载，等到HTML完全解析完后开始执行，有多个defer的标签时，会按照顺序下载执行</li>
-<li>async：立即进行异步下载，下载完后会立即执行同时阻塞Dom渲染，因为是下载完立即执行，不能保证多个加载时的先后顺序。</li>
-</ul>
-<span id="more"></span>
-]]></content>
-      <categories>
-        <category>JavaScript</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>JavaScript执行上下文</title>
     <url>/2021/02/17/Javascript%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87/</url>
     <content><![CDATA[<h4 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h4><h4 id="在看js垃圾回收时遇到相关问题，感觉自己对上下文对象理解的还是不够透彻（实在是太菜了）这就回来恶补。"><a href="#在看js垃圾回收时遇到相关问题，感觉自己对上下文对象理解的还是不够透彻（实在是太菜了）这就回来恶补。" class="headerlink" title="在看js垃圾回收时遇到相关问题，感觉自己对上下文对象理解的还是不够透彻（实在是太菜了）这就回来恶补。"></a>在看js垃圾回收时遇到相关问题，感觉自己对上下文对象理解的还是不够透彻（实在是太菜了）这就回来恶补。</h4><h4 id="执行上下文（Execution-Context）"><a href="#执行上下文（Execution-Context）" class="headerlink" title="执行上下文（Execution Context）"></a>执行上下文（Execution Context）</h4><ul>
@@ -691,6 +672,24 @@
       </tags>
   </entry>
   <entry>
+    <title>JavaSrcipt知识点</title>
+    <url>/2021/02/17/Javascript%E7%9F%A5%E8%AF%86%E7%82%B9/</url>
+    <content><![CDATA[<h4 id="1-script标签中async和defer的区别"><a href="#1-script标签中async和defer的区别" class="headerlink" title="1. script标签中async和defer的区别"></a>1. script标签中async和defer的区别</h4><p><img src="/../assets/Snipaste_2021-12-13_03-23-58.png" alt="image-20211025190555184"></p>
+<ul>
+<li>普通script标签：下载和执行都会阻塞Dom渲染</li>
+<li>defer：立即进行异步下载，等到HTML完全解析完后开始执行，有多个defer的标签时，会按照顺序下载执行</li>
+<li>async：立即进行异步下载，下载完后会立即执行同时阻塞Dom渲染，因为是下载完立即执行，不能保证多个加载时的先后顺序。</li>
+</ul>
+<span id="more"></span>
+]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Jira项目</title>
     <url>/2022/03/02/Jira%E9%A1%B9%E7%9B%AE/</url>
     <content><![CDATA[<h4 id="代码自动格式化工具：prettier"><a href="#代码自动格式化工具：prettier" class="headerlink" title="代码自动格式化工具：prettier"></a>代码自动格式化工具：prettier</h4><p>配置过程：<a href="https://prettier.io/docs/en/precommit.html">https://prettier.io/docs/en/precommit.html</a></p>
@@ -782,105 +781,97 @@
       </tags>
   </entry>
   <entry>
-    <title>Node中的process.env</title>
-    <url>/2022/03/11/Node%E4%B8%AD%E7%9A%84process.env/</url>
-    <content><![CDATA[<h4 id="process-env"><a href="#process-env" class="headerlink" title="process.env"></a>process.env</h4><p><code>process</code> 是 <code>Node.js</code> 中的 一个全局变量，提供来有关当前 Node.js 进程的信息并对其进行控制。而<code>process</code> 中的 <code>env</code> 则是返回包含用户环境的对象。可以通过 <code>process.env</code> 拿到当前项目运行环境的信息。</p>
-<h4 id="设置环境变量"><a href="#设置环境变量" class="headerlink" title="设置环境变量"></a>设置环境变量</h4><h5 id="通过cli的方式进行设置"><a href="#通过cli的方式进行设置" class="headerlink" title="通过cli的方式进行设置"></a>通过cli的方式进行设置</h5><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// index.js中</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(process.<span class="property">env</span>.<span class="property">PROT</span>)</span><br></pre></td></tr></table></figure>
-
-<p><strong>Windows (cmd.exe)</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">set</span> PROT=10086 &amp;&amp; node index.js</span><br></pre></td></tr></table></figure>
-
-<p><strong>Linux, macOS (Bash)</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">PROT=10086 node index.js</span><br></pre></td></tr></table></figure>
-
-<span id="more"></span>
-
-<h5 id="env文件"><a href="#env文件" class="headerlink" title=".env文件"></a><a name="env">.env文件</a></h5><ul>
-<li>创建</li>
-</ul>
-<p>直接在项目根目录中创建 <code>.env</code> 文件，然后键入环境变量及其值。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">NDOE_ENV=development</span><br><span class="line">PROT=10086</span><br><span class="line">APP_KEY=***********</span><br><span class="line">HOST_URL=**********</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
-
-<p><strong>⚠️注意</strong>：不要把<code>.env</code>文入放入代码版本管理中，因为这些环境变量都是项目中的隐私数据。</p>
-<ul>
-<li>读取</li>
-</ul>
-<p><strong>在cra创建的项目中，自带了dotenv解析.env，所以创建.env文件后即可</strong>。</p>
-<p>创建 <code>.env</code> 文件后，可以自己编写代码来查找解析文件并将其写入到你的项目中，或者利用第三方的<code>npm</code>包，比如 <a href="https://link.juejin.cn/?target=https://github.com/motdotla/dotenv"><code>dotenv</code></a> 。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">yarn add dotenv</span><br><span class="line"></span><br><span class="line"><span class="comment">// .env</span></span><br><span class="line"><span class="variable constant_">PROT</span>=<span class="number">10086</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// index.js</span></span><br><span class="line"><span class="keyword">const</span> dotenv = <span class="built_in">require</span>(<span class="string">&#x27;dotenv&#x27;</span>);</span><br><span class="line">dotenv.<span class="title function_">config</span>(); </span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(process.<span class="property">env</span>.<span class="property">PROT</span>); <span class="comment">// 10086</span></span><br></pre></td></tr></table></figure>
-
-<p>现在当你执行命令脚本的时候就不用传入环境变量及其值了，在 <code>.env</code> 文件里也能更直观的看到和管理各环境变量的配置。</p>
-<h5 id="更好的组织"><a href="#更好的组织" class="headerlink" title="更好的组织"></a>更好的组织</h5><p>一旦环境变量变多，就需要对所有环境变量进行集中式的管理，因为在所有需要使用的地直接引用变量与集中管理相比，重构和维护会更加困难。</p>
-<p>所以<strong>创建一个负责收集环境变量的模块</strong>是一个更好的方式，这样可以轻松地一次查看环境变量并将它们映射为可读的名称。</p>
-<ul>
-<li>手动整理</li>
-</ul>
-<p>创建一个名为 <code>config.js</code> 的文件，然后写入变量，将其命名为具有良好可读性的属性进行并导出它们。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> dotenv = <span class="built_in">require</span>（<span class="string">&#x27;dotenv&#x27;</span>）; </span><br><span class="line"></span><br><span class="line">dotenv.<span class="property">config</span>（）; </span><br><span class="line"></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123; </span><br><span class="line">  hostUrl：process.<span class="property">env</span>.<span class="property">HOST_URL</span>，</span><br><span class="line">  secretKey：process.<span class="property">env</span>.<span class="property">API_KEY</span>，</span><br><span class="line">  port：process.<span class="property">env</span>.<span class="property">PORT</span> </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>然后就可以这样进行使用：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123;port&#125; = <span class="built_in">require</span>（<span class="string">&#x27;./ config&#x27;</span>）; </span><br><span class="line"><span class="variable language_">console</span>.<span class="property">log</span>（<span class="string">`端口为：$ &#123;port&#125;`</span>）; <span class="comment">// 10086</span></span><br></pre></td></tr></table></figure>
-
-<p>这样有什么好处呢？</p>
-<ol>
-<li><p>项目文件组织更为直观合理</p>
+    <title>React Router</title>
+    <url>/2021/09/11/React-Router/</url>
+    <content><![CDATA[<h3 id="SPA的理解"><a href="#SPA的理解" class="headerlink" title="SPA的理解"></a>SPA的理解</h3><ol>
+<li><p>单页Web应用（single page web application，SPA）。</p>
 </li>
-<li><p>清楚的知道环境变量的映射关系</p>
+<li><p>整个应用只有<strong>一个完整的页面</strong>。</p>
 </li>
-<li><p>变量重命名为更具可读性的属性</p>
+<li><p>点击页面中的链接<strong>不会刷新</strong>页面，只会做页面的<strong>局部更新。</strong></p>
 </li>
-<li><p>可以添加其他非环境变量的配置属性</p>
+<li><p>数据都需要通过ajax请求获取, 并在前端异步展现。</p>
 </li>
 </ol>
-<p>但是如果要添加新的环境变量时，就必须将其添加到<code>config</code>模块中。</p>
+<h3 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h3><ol>
+<li>后端路由：</li>
+</ol>
 <ul>
-<li>自动整理</li>
+<li><p>注册路由： router.get(path, function(req, res))</p>
+</li>
+<li><p>工作过程：当node接收到一个请求时, 根据请求路径找到匹配的路由, 调用路由中的函数来处理请求, 返回响应数据</p>
+</li>
 </ul>
-<p>前面提到的第三方 <code>NPM</code> 包 <code>dotenv</code> 就可以做到。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// config.js </span></span><br><span class="line"><span class="keyword">const</span> dotenv = <span class="built_in">require</span>(<span class="string">&#x27;dotenv&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> result = dotenv.<span class="title function_">config</span>();</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (result.<span class="property">error</span>) &#123;</span><br><span class="line">  <span class="keyword">throw</span> result.<span class="property">error</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> &#123; <span class="attr">parsed</span>: envs &#125; = result;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(envs);</span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = envs;</span><br></pre></td></tr></table></figure>
-
-<p>然后就可以其他模块中这样引用：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123; <span class="variable constant_">HOST_URL</span>, <span class="variable constant_">API_KEY</span>, <span class="variable constant_">PROT</span> &#125; = <span class="built_in">require</span>(<span class="string">&#x27;./config&#x27;</span>);</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="CRA创建的项目使用环境变量"><a href="#CRA创建的项目使用环境变量" class="headerlink" title="CRA创建的项目使用环境变量"></a>CRA创建的项目使用环境变量</h4><p>必须以 <code>REACT_APP_</code> 开头创建自定义环境变量，环境变量在构建期间嵌入。</p>
-<h5 id="设置临时环境变量"><a href="#设置临时环境变量" class="headerlink" title="设置临时环境变量"></a>设置临时环境变量</h5><p><strong>Windows (cmd.exe)</strong></p>
-<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="built_in">set</span> <span class="string">&quot;REACT_APP_SECRET_CODE=abcdef&quot;</span> &amp;&amp; npm <span class="built_in">start</span></span><br></pre></td></tr></table></figure>
-
-<p>（注意：变量赋值需要用引号包裹，以避免尾随空格。）</p>
-<p><strong>Windows (Powershell)</strong></p>
-<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">(<span class="variable">$env:REACT_APP_SECRET_CODE</span> = <span class="string">&quot;abcdef&quot;</span>) <span class="operator">-and</span> (npm <span class="built_in">start</span>)</span><br></pre></td></tr></table></figure>
-
-<p><strong>Linux, macOS (Bash)</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">REACT_APP_SECRET_CODE=abcdef npm start</span><br></pre></td></tr></table></figure>
-
-
-
-<h5 id="env-中添加环境变量"><a href="#env-中添加环境变量" class="headerlink" title=".env 中添加环境变量"></a><code>.env</code> 中添加环境变量</h5><p>见<a href="#env">上文</a>设置。</p>
-<h5 id="其他-env-文件"><a href="#其他-env-文件" class="headerlink" title="其他 .env 文件"></a>其他 <code>.env</code> 文件</h5><blockquote>
-<p>注意：此功能 <strong>适用于 <code>react-scripts@1.0.0</code> 及更高版本</strong>。</p>
-</blockquote>
+<ol start="2">
+<li>前端路由：</li>
+</ol>
 <ul>
-<li><code>.env</code>：默认。</li>
-<li><code>.env.local</code>：本地覆盖。<strong>除 test 之外的所有环境都加载此文件</strong>。</li>
-<li><code>.env.development</code>, <code>.env.test</code>, <code>.env.production</code>：设置特定环境。</li>
-<li><code>.env.development.local</code>, <code>.env.test.local</code>, <code>.env.production.local</code>：设置特定环境的本地覆盖。</li>
+<li><p>注册路由: <Route path="/test" component={Test}></p>
+</li>
+<li><p>工作过程：当浏览器的path变为&#x2F;test时, 当前路由组件就会变为Test组件</p>
+</li>
 </ul>
-<p>左侧的文件比右侧的文件具有更高的优先级：</p>
-<ul>
-<li><code>npm start</code>: <code>.env.development.local</code>, <code>.env.development</code>, <code>.env.local</code>, <code>.env</code></li>
-<li><code>npm run build</code>: <code>.env.production.local</code>, <code>.env.production</code>, <code>.env.local</code>, <code>.env</code></li>
-<li><code>npm test</code>: <code>.env.test.local</code>, <code>.env.test</code>, <code>.env</code> (注意没有 <code>.env.local</code> )</li>
+<span id="more"></span>
+
+<h3 id="react-router-dom相关API"><a href="#react-router-dom相关API" class="headerlink" title="react-router-dom相关API"></a>react-router-dom相关API</h3><h4 id="1-内置API"><a href="#1-内置API" class="headerlink" title="1.内置API"></a>1.内置API</h4><ul>
+<li><BrowserRouter>
+</li>
+<li><HashRouter></li>
+<li><Route></li>
+<li><Redirect></li>
+<li><Link></li>
+<li><NavLink></li>
+<li><Switch></li>
 </ul>
-<h5 id="NODE-ENV-的特殊内置环境变量"><a href="#NODE-ENV-的特殊内置环境变量" class="headerlink" title="NODE_ENV 的特殊内置环境变量"></a><code>NODE_ENV</code> 的特殊内置环境变量</h5><p>有一个名为 <code>NODE_ENV</code> 的特殊内置环境变量。可以从 <code>process.env.NODE_ENV</code> 中读取。运行 <code>npm start</code> 时，它总是等于 <code>&#39;development&#39;</code> ，运行 <code>npm test</code> 它总是等于 <code>&#39;test&#39;</code> ，运行 <code>npm run build</code> 来生成一个生产 bundle(包) 时，它总是等于 <code>&#39;production&#39;</code> 。**<code>NODE_ENV</code>无法手动覆盖。** </p>
-]]></content>
+<h4 id="2-其他"><a href="#2-其他" class="headerlink" title="2. 其他"></a>2. 其他</h4><ul>
+<li><p>history对象</p>
+</li>
+<li><p>match对象</p>
+</li>
+<li><p>withRouter函数</p>
+</li>
+</ul>
+<h3 id="路由组件与一般组件"><a href="#路由组件与一般组件" class="headerlink" title="路由组件与一般组件"></a>路由组件与一般组件</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="number">1.</span>写法不同：</span><br><span class="line">			一般组件：&lt;<span class="title class_">Demo</span>/&gt;</span><br><span class="line">			路由组件：&lt;<span class="title class_">Route</span> path=<span class="string">&quot;/demo&quot;</span> component=&#123;<span class="title class_">Demo</span>&#125;/&gt;</span><br><span class="line"><span class="number">2.</span>存放位置不同：</span><br><span class="line">			一般组件：components</span><br><span class="line">			路由组件：pages</span><br><span class="line"><span class="number">3.</span>接收到的props不同：</span><br><span class="line">			一般组件：写组件标签时传递了什么，就能收到什么</span><br><span class="line">			路由组件：接收到三个固定的属性</span><br><span class="line">								<span class="attr">history</span>:</span><br><span class="line">											<span class="attr">go</span>: ƒ <span class="title function_">go</span>(n)</span><br><span class="line">											<span class="attr">goBack</span>: ƒ <span class="title function_">goBack</span>()</span><br><span class="line">											<span class="attr">goForward</span>: ƒ <span class="title function_">goForward</span>()</span><br><span class="line">											<span class="attr">push</span>: ƒ <span class="title function_">push</span>(path, state)</span><br><span class="line">											<span class="attr">replace</span>: ƒ <span class="title function_">replace</span>(path, state)</span><br><span class="line">								<span class="attr">location</span>:</span><br><span class="line">											<span class="attr">pathname</span>: <span class="string">&quot;/about&quot;</span></span><br><span class="line">											<span class="attr">search</span>: <span class="string">&quot;&quot;</span></span><br><span class="line">											<span class="attr">state</span>: <span class="literal">undefined</span></span><br><span class="line">								<span class="attr">match</span>:</span><br><span class="line">											<span class="attr">params</span>: &#123;&#125;</span><br><span class="line">											<span class="attr">path</span>: <span class="string">&quot;/about&quot;</span></span><br><span class="line">											<span class="attr">url</span>: <span class="string">&quot;/about&quot;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="NavLink与封装NavLink"><a href="#NavLink与封装NavLink" class="headerlink" title="NavLink与封装NavLink"></a>NavLink与封装NavLink</h3><pre><code>            1.NavLink可以实现路由链接的高亮，通过activeClassName指定样式名
+</code></pre>
+<h3 id="Switch的使用"><a href="#Switch的使用" class="headerlink" title="Switch的使用"></a>Switch的使用</h3><pre><code>            1.通常情况下，path和component是一一对应的关系。
+            2.Switch可以提高路由匹配效率(单一匹配)。
+</code></pre>
+<h3 id="解决多级路径刷新页面样式丢失的问题"><a href="#解决多级路径刷新页面样式丢失的问题" class="headerlink" title="解决多级路径刷新页面样式丢失的问题"></a>解决多级路径刷新页面样式丢失的问题</h3><pre><code>            1.public/index.html 中 引入样式时不写 ./ 写 / （常用）
+            2.public/index.html 中 引入样式时不写 ./ 写 %PUBLIC_URL% （常用）
+            3.使用HashRouter
+</code></pre>
+<h3 id="路由的严格匹配与模糊匹配"><a href="#路由的严格匹配与模糊匹配" class="headerlink" title="路由的严格匹配与模糊匹配"></a>路由的严格匹配与模糊匹配</h3><pre><code>            1.默认使用的是模糊匹配（简单记：【输入的路径】必须包含要【匹配的路径】，且顺序要一致）
+            2.开启严格匹配：&lt;Route exact=&#123;true&#125; path=&quot;/about&quot; component=&#123;About&#125;/&gt;
+            3.严格匹配不要随便开启，需要再开，有些时候开启会导致无法继续匹配二级路由
+</code></pre>
+<h3 id="Redirect的使用"><a href="#Redirect的使用" class="headerlink" title="Redirect的使用"></a>Redirect的使用</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1.一般写在所有路由注册的最下方，当所有路由都无法匹配时，跳转到Redirect指定的路由</span><br><span class="line">2.具体编码：</span><br><span class="line">		&lt;Switch&gt;</span><br><span class="line">			&lt;Route path=&quot;/about&quot; component=&#123;About&#125;/&gt;</span><br><span class="line">			&lt;Route path=&quot;/home&quot; component=&#123;Home&#125;/&gt;</span><br><span class="line">			&lt;Redirect to=&quot;/about&quot;/&gt;</span><br><span class="line">		&lt;/Switch&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="嵌套路由"><a href="#嵌套路由" class="headerlink" title="嵌套路由"></a>嵌套路由</h3><pre><code>            1.注册子路由时要写上父路由的path值
+            2.路由的匹配是按照注册路由的顺序进行的
+</code></pre>
+<h3 id="向路由组件传递参数"><a href="#向路由组件传递参数" class="headerlink" title="向路由组件传递参数"></a>向路由组件传递参数</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1.params参数</span><br><span class="line">			路由链接(携带参数)：&lt;Link to=&#x27;/demo/test/tom/18&#x27;&#125;&gt;详情&lt;/Link&gt;</span><br><span class="line">			注册路由(声明接收)：&lt;Route path=&quot;/demo/test/:name/:age&quot; component=&#123;Test&#125;/&gt;</span><br><span class="line">			接收参数：this.props.match.params</span><br><span class="line">2.search参数</span><br><span class="line">			路由链接(携带参数)：&lt;Link to=&#x27;/demo/test?name=tom&amp;age=18&#x27;&#125;&gt;详情&lt;/Link&gt;</span><br><span class="line">			注册路由(无需声明，正常注册即可)：&lt;Route path=&quot;/demo/test&quot; component=&#123;Test&#125;/&gt;</span><br><span class="line">			接收参数：this.props.location.search</span><br><span class="line">			备注：获取到的search是urlencoded编码字符串，需要借助querystring解析</span><br><span class="line">3.state参数</span><br><span class="line">			路由链接(携带参数)：&lt;Link to=&#123;&#123;pathname:&#x27;/demo/test&#x27;,state:&#123;name:&#x27;tom&#x27;,age:18&#125;&#125;&#125;&gt;详情&lt;/Link&gt;</span><br><span class="line">			注册路由(无需声明，正常注册即可)：&lt;Route path=&quot;/demo/test&quot; component=&#123;Test&#125;/&gt;</span><br><span class="line">			接收参数：this.props.location.state</span><br><span class="line">			备注：刷新也可以保留住参数</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="编程式路由导航"><a href="#编程式路由导航" class="headerlink" title="编程式路由导航"></a>编程式路由导航</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">借助<span class="variable language_">this</span>.<span class="property">prosp</span>.<span class="property">history</span>对象上的<span class="variable constant_">API</span>对操作路由跳转、前进、后退</span><br><span class="line">		-<span class="variable language_">this</span>.<span class="property">prosp</span>.<span class="property">history</span>.<span class="title function_">push</span>()</span><br><span class="line">		-<span class="variable language_">this</span>.<span class="property">prosp</span>.<span class="property">history</span>.<span class="title function_">replace</span>()</span><br><span class="line">		-<span class="variable language_">this</span>.<span class="property">prosp</span>.<span class="property">history</span>.<span class="title function_">goBack</span>()</span><br><span class="line">		-<span class="variable language_">this</span>.<span class="property">prosp</span>.<span class="property">history</span>.<span class="title function_">goForward</span>()</span><br><span class="line">		-<span class="variable language_">this</span>.<span class="property">prosp</span>.<span class="property">history</span>.<span class="title function_">go</span>()</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="BrowserRouter与HashRouter的区别"><a href="#BrowserRouter与HashRouter的区别" class="headerlink" title="BrowserRouter与HashRouter的区别"></a>BrowserRouter与HashRouter的区别</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="number">1.</span>底层原理不一样：</span><br><span class="line">			<span class="title class_">BrowserRouter</span>使用的是<span class="variable constant_">H5</span>的history <span class="variable constant_">API</span>，不兼容<span class="title class_">IE9</span>及以下版本。</span><br><span class="line">			<span class="title class_">HashRouter</span>使用的是<span class="variable constant_">URL</span>的哈希值。</span><br><span class="line"><span class="number">2.</span>path表现形式不一样</span><br><span class="line">			<span class="title class_">BrowserRouter</span>的路径中没有#,例如：<span class="attr">localhost</span>:<span class="number">3000</span>/demo/test</span><br><span class="line">			<span class="title class_">HashRouter</span>的路径包含#,例如：<span class="attr">localhost</span>:<span class="number">3000</span>/#/demo/test</span><br><span class="line"><span class="number">3.</span>刷新后对路由state参数的影响</span><br><span class="line">			(<span class="number">1</span>).<span class="property">BrowserRouter</span>没有任何影响，因为state保存在history对象中。</span><br><span class="line">			(<span class="number">2</span>).<span class="property">HashRouter</span>刷新后会导致路由state参数的丢失！！！</span><br><span class="line"><span class="number">4.</span>备注：<span class="title class_">HashRouter</span>可以用于解决一些路径错误相关的问题。</span><br></pre></td></tr></table></figure>
+
+<h2 id=""><a href="#" class="headerlink" title=""></a></h2>]]></content>
       <categories>
-        <category>NodeJS</category>
+        <category>React</category>
       </categories>
       <tags>
         <tag>JavaScript</tag>
-        <tag>Node</tag>
+        <tag>React</tag>
       </tags>
   </entry>
   <entry>
@@ -978,100 +969,6 @@
       </categories>
       <tags>
         <tag>JavaScript</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>React Router</title>
-    <url>/2021/09/11/React-Router/</url>
-    <content><![CDATA[<h3 id="SPA的理解"><a href="#SPA的理解" class="headerlink" title="SPA的理解"></a>SPA的理解</h3><ol>
-<li><p>单页Web应用（single page web application，SPA）。</p>
-</li>
-<li><p>整个应用只有<strong>一个完整的页面</strong>。</p>
-</li>
-<li><p>点击页面中的链接<strong>不会刷新</strong>页面，只会做页面的<strong>局部更新。</strong></p>
-</li>
-<li><p>数据都需要通过ajax请求获取, 并在前端异步展现。</p>
-</li>
-</ol>
-<h3 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h3><ol>
-<li>后端路由：</li>
-</ol>
-<ul>
-<li><p>注册路由： router.get(path, function(req, res))</p>
-</li>
-<li><p>工作过程：当node接收到一个请求时, 根据请求路径找到匹配的路由, 调用路由中的函数来处理请求, 返回响应数据</p>
-</li>
-</ul>
-<ol start="2">
-<li>前端路由：</li>
-</ol>
-<ul>
-<li><p>注册路由: <Route path="/test" component={Test}></p>
-</li>
-<li><p>工作过程：当浏览器的path变为&#x2F;test时, 当前路由组件就会变为Test组件</p>
-</li>
-</ul>
-<span id="more"></span>
-
-<h3 id="react-router-dom相关API"><a href="#react-router-dom相关API" class="headerlink" title="react-router-dom相关API"></a>react-router-dom相关API</h3><h4 id="1-内置API"><a href="#1-内置API" class="headerlink" title="1.内置API"></a>1.内置API</h4><ul>
-<li><BrowserRouter>
-</li>
-<li><HashRouter></li>
-<li><Route></li>
-<li><Redirect></li>
-<li><Link></li>
-<li><NavLink></li>
-<li><Switch></li>
-</ul>
-<h4 id="2-其他"><a href="#2-其他" class="headerlink" title="2. 其他"></a>2. 其他</h4><ul>
-<li><p>history对象</p>
-</li>
-<li><p>match对象</p>
-</li>
-<li><p>withRouter函数</p>
-</li>
-</ul>
-<h3 id="路由组件与一般组件"><a href="#路由组件与一般组件" class="headerlink" title="路由组件与一般组件"></a>路由组件与一般组件</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="number">1.</span>写法不同：</span><br><span class="line">			一般组件：&lt;<span class="title class_">Demo</span>/&gt;</span><br><span class="line">			路由组件：&lt;<span class="title class_">Route</span> path=<span class="string">&quot;/demo&quot;</span> component=&#123;<span class="title class_">Demo</span>&#125;/&gt;</span><br><span class="line"><span class="number">2.</span>存放位置不同：</span><br><span class="line">			一般组件：components</span><br><span class="line">			路由组件：pages</span><br><span class="line"><span class="number">3.</span>接收到的props不同：</span><br><span class="line">			一般组件：写组件标签时传递了什么，就能收到什么</span><br><span class="line">			路由组件：接收到三个固定的属性</span><br><span class="line">								<span class="attr">history</span>:</span><br><span class="line">											<span class="attr">go</span>: ƒ <span class="title function_">go</span>(n)</span><br><span class="line">											<span class="attr">goBack</span>: ƒ <span class="title function_">goBack</span>()</span><br><span class="line">											<span class="attr">goForward</span>: ƒ <span class="title function_">goForward</span>()</span><br><span class="line">											<span class="attr">push</span>: ƒ <span class="title function_">push</span>(path, state)</span><br><span class="line">											<span class="attr">replace</span>: ƒ <span class="title function_">replace</span>(path, state)</span><br><span class="line">								<span class="attr">location</span>:</span><br><span class="line">											<span class="attr">pathname</span>: <span class="string">&quot;/about&quot;</span></span><br><span class="line">											<span class="attr">search</span>: <span class="string">&quot;&quot;</span></span><br><span class="line">											<span class="attr">state</span>: <span class="literal">undefined</span></span><br><span class="line">								<span class="attr">match</span>:</span><br><span class="line">											<span class="attr">params</span>: &#123;&#125;</span><br><span class="line">											<span class="attr">path</span>: <span class="string">&quot;/about&quot;</span></span><br><span class="line">											<span class="attr">url</span>: <span class="string">&quot;/about&quot;</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="NavLink与封装NavLink"><a href="#NavLink与封装NavLink" class="headerlink" title="NavLink与封装NavLink"></a>NavLink与封装NavLink</h3><pre><code>            1.NavLink可以实现路由链接的高亮，通过activeClassName指定样式名
-</code></pre>
-<h3 id="Switch的使用"><a href="#Switch的使用" class="headerlink" title="Switch的使用"></a>Switch的使用</h3><pre><code>            1.通常情况下，path和component是一一对应的关系。
-            2.Switch可以提高路由匹配效率(单一匹配)。
-</code></pre>
-<h3 id="解决多级路径刷新页面样式丢失的问题"><a href="#解决多级路径刷新页面样式丢失的问题" class="headerlink" title="解决多级路径刷新页面样式丢失的问题"></a>解决多级路径刷新页面样式丢失的问题</h3><pre><code>            1.public/index.html 中 引入样式时不写 ./ 写 / （常用）
-            2.public/index.html 中 引入样式时不写 ./ 写 %PUBLIC_URL% （常用）
-            3.使用HashRouter
-</code></pre>
-<h3 id="路由的严格匹配与模糊匹配"><a href="#路由的严格匹配与模糊匹配" class="headerlink" title="路由的严格匹配与模糊匹配"></a>路由的严格匹配与模糊匹配</h3><pre><code>            1.默认使用的是模糊匹配（简单记：【输入的路径】必须包含要【匹配的路径】，且顺序要一致）
-            2.开启严格匹配：&lt;Route exact=&#123;true&#125; path=&quot;/about&quot; component=&#123;About&#125;/&gt;
-            3.严格匹配不要随便开启，需要再开，有些时候开启会导致无法继续匹配二级路由
-</code></pre>
-<h3 id="Redirect的使用"><a href="#Redirect的使用" class="headerlink" title="Redirect的使用"></a>Redirect的使用</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1.一般写在所有路由注册的最下方，当所有路由都无法匹配时，跳转到Redirect指定的路由</span><br><span class="line">2.具体编码：</span><br><span class="line">		&lt;Switch&gt;</span><br><span class="line">			&lt;Route path=&quot;/about&quot; component=&#123;About&#125;/&gt;</span><br><span class="line">			&lt;Route path=&quot;/home&quot; component=&#123;Home&#125;/&gt;</span><br><span class="line">			&lt;Redirect to=&quot;/about&quot;/&gt;</span><br><span class="line">		&lt;/Switch&gt;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="嵌套路由"><a href="#嵌套路由" class="headerlink" title="嵌套路由"></a>嵌套路由</h3><pre><code>            1.注册子路由时要写上父路由的path值
-            2.路由的匹配是按照注册路由的顺序进行的
-</code></pre>
-<h3 id="向路由组件传递参数"><a href="#向路由组件传递参数" class="headerlink" title="向路由组件传递参数"></a>向路由组件传递参数</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1.params参数</span><br><span class="line">			路由链接(携带参数)：&lt;Link to=&#x27;/demo/test/tom/18&#x27;&#125;&gt;详情&lt;/Link&gt;</span><br><span class="line">			注册路由(声明接收)：&lt;Route path=&quot;/demo/test/:name/:age&quot; component=&#123;Test&#125;/&gt;</span><br><span class="line">			接收参数：this.props.match.params</span><br><span class="line">2.search参数</span><br><span class="line">			路由链接(携带参数)：&lt;Link to=&#x27;/demo/test?name=tom&amp;age=18&#x27;&#125;&gt;详情&lt;/Link&gt;</span><br><span class="line">			注册路由(无需声明，正常注册即可)：&lt;Route path=&quot;/demo/test&quot; component=&#123;Test&#125;/&gt;</span><br><span class="line">			接收参数：this.props.location.search</span><br><span class="line">			备注：获取到的search是urlencoded编码字符串，需要借助querystring解析</span><br><span class="line">3.state参数</span><br><span class="line">			路由链接(携带参数)：&lt;Link to=&#123;&#123;pathname:&#x27;/demo/test&#x27;,state:&#123;name:&#x27;tom&#x27;,age:18&#125;&#125;&#125;&gt;详情&lt;/Link&gt;</span><br><span class="line">			注册路由(无需声明，正常注册即可)：&lt;Route path=&quot;/demo/test&quot; component=&#123;Test&#125;/&gt;</span><br><span class="line">			接收参数：this.props.location.state</span><br><span class="line">			备注：刷新也可以保留住参数</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="编程式路由导航"><a href="#编程式路由导航" class="headerlink" title="编程式路由导航"></a>编程式路由导航</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">借助<span class="variable language_">this</span>.<span class="property">prosp</span>.<span class="property">history</span>对象上的<span class="variable constant_">API</span>对操作路由跳转、前进、后退</span><br><span class="line">		-<span class="variable language_">this</span>.<span class="property">prosp</span>.<span class="property">history</span>.<span class="title function_">push</span>()</span><br><span class="line">		-<span class="variable language_">this</span>.<span class="property">prosp</span>.<span class="property">history</span>.<span class="title function_">replace</span>()</span><br><span class="line">		-<span class="variable language_">this</span>.<span class="property">prosp</span>.<span class="property">history</span>.<span class="title function_">goBack</span>()</span><br><span class="line">		-<span class="variable language_">this</span>.<span class="property">prosp</span>.<span class="property">history</span>.<span class="title function_">goForward</span>()</span><br><span class="line">		-<span class="variable language_">this</span>.<span class="property">prosp</span>.<span class="property">history</span>.<span class="title function_">go</span>()</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="BrowserRouter与HashRouter的区别"><a href="#BrowserRouter与HashRouter的区别" class="headerlink" title="BrowserRouter与HashRouter的区别"></a>BrowserRouter与HashRouter的区别</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="number">1.</span>底层原理不一样：</span><br><span class="line">			<span class="title class_">BrowserRouter</span>使用的是<span class="variable constant_">H5</span>的history <span class="variable constant_">API</span>，不兼容<span class="title class_">IE9</span>及以下版本。</span><br><span class="line">			<span class="title class_">HashRouter</span>使用的是<span class="variable constant_">URL</span>的哈希值。</span><br><span class="line"><span class="number">2.</span>path表现形式不一样</span><br><span class="line">			<span class="title class_">BrowserRouter</span>的路径中没有#,例如：<span class="attr">localhost</span>:<span class="number">3000</span>/demo/test</span><br><span class="line">			<span class="title class_">HashRouter</span>的路径包含#,例如：<span class="attr">localhost</span>:<span class="number">3000</span>/#/demo/test</span><br><span class="line"><span class="number">3.</span>刷新后对路由state参数的影响</span><br><span class="line">			(<span class="number">1</span>).<span class="property">BrowserRouter</span>没有任何影响，因为state保存在history对象中。</span><br><span class="line">			(<span class="number">2</span>).<span class="property">HashRouter</span>刷新后会导致路由state参数的丢失！！！</span><br><span class="line"><span class="number">4.</span>备注：<span class="title class_">HashRouter</span>可以用于解决一些路径错误相关的问题。</span><br></pre></td></tr></table></figure>
-
-<h2 id=""><a href="#" class="headerlink" title=""></a></h2>]]></content>
-      <categories>
-        <category>React</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-        <tag>React</tag>
       </tags>
   </entry>
   <entry>
@@ -1331,6 +1228,108 @@ C组件: 读取A组件传入的数据显示 &#123;this.props.data&#125;
       </tags>
   </entry>
   <entry>
+    <title>Node中的process.env</title>
+    <url>/2022/03/11/Node%E4%B8%AD%E7%9A%84process.env/</url>
+    <content><![CDATA[<h4 id="process-env"><a href="#process-env" class="headerlink" title="process.env"></a>process.env</h4><p><code>process</code> 是 <code>Node.js</code> 中的 一个全局变量，提供来有关当前 Node.js 进程的信息并对其进行控制。而<code>process</code> 中的 <code>env</code> 则是返回包含用户环境的对象。可以通过 <code>process.env</code> 拿到当前项目运行环境的信息。</p>
+<h4 id="设置环境变量"><a href="#设置环境变量" class="headerlink" title="设置环境变量"></a>设置环境变量</h4><h5 id="通过cli的方式进行设置"><a href="#通过cli的方式进行设置" class="headerlink" title="通过cli的方式进行设置"></a>通过cli的方式进行设置</h5><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// index.js中</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(process.<span class="property">env</span>.<span class="property">PROT</span>)</span><br></pre></td></tr></table></figure>
+
+<p><strong>Windows (cmd.exe)</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">set</span> PROT=10086 &amp;&amp; node index.js</span><br></pre></td></tr></table></figure>
+
+<p><strong>Linux, macOS (Bash)</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">PROT=10086 node index.js</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<h5 id="env文件"><a href="#env文件" class="headerlink" title=".env文件"></a><a name="env">.env文件</a></h5><ul>
+<li>创建</li>
+</ul>
+<p>直接在项目根目录中创建 <code>.env</code> 文件，然后键入环境变量及其值。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">NDOE_ENV=development</span><br><span class="line">PROT=10086</span><br><span class="line">APP_KEY=***********</span><br><span class="line">HOST_URL=**********</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p><strong>⚠️注意</strong>：不要把<code>.env</code>文入放入代码版本管理中，因为这些环境变量都是项目中的隐私数据。</p>
+<ul>
+<li>读取</li>
+</ul>
+<p><strong>在cra创建的项目中，自带了dotenv解析.env，所以创建.env文件后即可</strong>。</p>
+<p>创建 <code>.env</code> 文件后，可以自己编写代码来查找解析文件并将其写入到你的项目中，或者利用第三方的<code>npm</code>包，比如 <a href="https://link.juejin.cn/?target=https://github.com/motdotla/dotenv"><code>dotenv</code></a> 。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">yarn add dotenv</span><br><span class="line"></span><br><span class="line"><span class="comment">// .env</span></span><br><span class="line"><span class="variable constant_">PROT</span>=<span class="number">10086</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// index.js</span></span><br><span class="line"><span class="keyword">const</span> dotenv = <span class="built_in">require</span>(<span class="string">&#x27;dotenv&#x27;</span>);</span><br><span class="line">dotenv.<span class="title function_">config</span>(); </span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(process.<span class="property">env</span>.<span class="property">PROT</span>); <span class="comment">// 10086</span></span><br></pre></td></tr></table></figure>
+
+<p>现在当你执行命令脚本的时候就不用传入环境变量及其值了，在 <code>.env</code> 文件里也能更直观的看到和管理各环境变量的配置。</p>
+<h5 id="更好的组织"><a href="#更好的组织" class="headerlink" title="更好的组织"></a>更好的组织</h5><p>一旦环境变量变多，就需要对所有环境变量进行集中式的管理，因为在所有需要使用的地直接引用变量与集中管理相比，重构和维护会更加困难。</p>
+<p>所以<strong>创建一个负责收集环境变量的模块</strong>是一个更好的方式，这样可以轻松地一次查看环境变量并将它们映射为可读的名称。</p>
+<ul>
+<li>手动整理</li>
+</ul>
+<p>创建一个名为 <code>config.js</code> 的文件，然后写入变量，将其命名为具有良好可读性的属性进行并导出它们。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> dotenv = <span class="built_in">require</span>（<span class="string">&#x27;dotenv&#x27;</span>）; </span><br><span class="line"></span><br><span class="line">dotenv.<span class="property">config</span>（）; </span><br><span class="line"></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123; </span><br><span class="line">  hostUrl：process.<span class="property">env</span>.<span class="property">HOST_URL</span>，</span><br><span class="line">  secretKey：process.<span class="property">env</span>.<span class="property">API_KEY</span>，</span><br><span class="line">  port：process.<span class="property">env</span>.<span class="property">PORT</span> </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>然后就可以这样进行使用：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123;port&#125; = <span class="built_in">require</span>（<span class="string">&#x27;./ config&#x27;</span>）; </span><br><span class="line"><span class="variable language_">console</span>.<span class="property">log</span>（<span class="string">`端口为：$ &#123;port&#125;`</span>）; <span class="comment">// 10086</span></span><br></pre></td></tr></table></figure>
+
+<p>这样有什么好处呢？</p>
+<ol>
+<li><p>项目文件组织更为直观合理</p>
+</li>
+<li><p>清楚的知道环境变量的映射关系</p>
+</li>
+<li><p>变量重命名为更具可读性的属性</p>
+</li>
+<li><p>可以添加其他非环境变量的配置属性</p>
+</li>
+</ol>
+<p>但是如果要添加新的环境变量时，就必须将其添加到<code>config</code>模块中。</p>
+<ul>
+<li>自动整理</li>
+</ul>
+<p>前面提到的第三方 <code>NPM</code> 包 <code>dotenv</code> 就可以做到。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// config.js </span></span><br><span class="line"><span class="keyword">const</span> dotenv = <span class="built_in">require</span>(<span class="string">&#x27;dotenv&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> result = dotenv.<span class="title function_">config</span>();</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (result.<span class="property">error</span>) &#123;</span><br><span class="line">  <span class="keyword">throw</span> result.<span class="property">error</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> &#123; <span class="attr">parsed</span>: envs &#125; = result;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(envs);</span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = envs;</span><br></pre></td></tr></table></figure>
+
+<p>然后就可以其他模块中这样引用：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123; <span class="variable constant_">HOST_URL</span>, <span class="variable constant_">API_KEY</span>, <span class="variable constant_">PROT</span> &#125; = <span class="built_in">require</span>(<span class="string">&#x27;./config&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="CRA创建的项目使用环境变量"><a href="#CRA创建的项目使用环境变量" class="headerlink" title="CRA创建的项目使用环境变量"></a>CRA创建的项目使用环境变量</h4><p>必须以 <code>REACT_APP_</code> 开头创建自定义环境变量，环境变量在构建期间嵌入。</p>
+<h5 id="设置临时环境变量"><a href="#设置临时环境变量" class="headerlink" title="设置临时环境变量"></a>设置临时环境变量</h5><p><strong>Windows (cmd.exe)</strong></p>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="built_in">set</span> <span class="string">&quot;REACT_APP_SECRET_CODE=abcdef&quot;</span> &amp;&amp; npm <span class="built_in">start</span></span><br></pre></td></tr></table></figure>
+
+<p>（注意：变量赋值需要用引号包裹，以避免尾随空格。）</p>
+<p><strong>Windows (Powershell)</strong></p>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">(<span class="variable">$env:REACT_APP_SECRET_CODE</span> = <span class="string">&quot;abcdef&quot;</span>) <span class="operator">-and</span> (npm <span class="built_in">start</span>)</span><br></pre></td></tr></table></figure>
+
+<p><strong>Linux, macOS (Bash)</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">REACT_APP_SECRET_CODE=abcdef npm start</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="env-中添加环境变量"><a href="#env-中添加环境变量" class="headerlink" title=".env 中添加环境变量"></a><code>.env</code> 中添加环境变量</h5><p>见<a href="#env">上文</a>设置。</p>
+<h5 id="其他-env-文件"><a href="#其他-env-文件" class="headerlink" title="其他 .env 文件"></a>其他 <code>.env</code> 文件</h5><blockquote>
+<p>注意：此功能 <strong>适用于 <code>react-scripts@1.0.0</code> 及更高版本</strong>。</p>
+</blockquote>
+<ul>
+<li><code>.env</code>：默认。</li>
+<li><code>.env.local</code>：本地覆盖。<strong>除 test 之外的所有环境都加载此文件</strong>。</li>
+<li><code>.env.development</code>, <code>.env.test</code>, <code>.env.production</code>：设置特定环境。</li>
+<li><code>.env.development.local</code>, <code>.env.test.local</code>, <code>.env.production.local</code>：设置特定环境的本地覆盖。</li>
+</ul>
+<p>左侧的文件比右侧的文件具有更高的优先级：</p>
+<ul>
+<li><code>npm start</code>: <code>.env.development.local</code>, <code>.env.development</code>, <code>.env.local</code>, <code>.env</code></li>
+<li><code>npm run build</code>: <code>.env.production.local</code>, <code>.env.production</code>, <code>.env.local</code>, <code>.env</code></li>
+<li><code>npm test</code>: <code>.env.test.local</code>, <code>.env.test</code>, <code>.env</code> (注意没有 <code>.env.local</code> )</li>
+</ul>
+<h5 id="NODE-ENV-的特殊内置环境变量"><a href="#NODE-ENV-的特殊内置环境变量" class="headerlink" title="NODE_ENV 的特殊内置环境变量"></a><code>NODE_ENV</code> 的特殊内置环境变量</h5><p>有一个名为 <code>NODE_ENV</code> 的特殊内置环境变量。可以从 <code>process.env.NODE_ENV</code> 中读取。运行 <code>npm start</code> 时，它总是等于 <code>&#39;development&#39;</code> ，运行 <code>npm test</code> 它总是等于 <code>&#39;test&#39;</code> ，运行 <code>npm run build</code> 来生成一个生产 bundle(包) 时，它总是等于 <code>&#39;production&#39;</code> 。**<code>NODE_ENV</code>无法手动覆盖。** </p>
+]]></content>
+      <categories>
+        <category>NodeJS</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>Node</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>React生态</title>
     <url>/2021/09/30/React%E7%94%9F%E6%80%81/</url>
     <content><![CDATA[<h3 id="React-DevTools"><a href="#React-DevTools" class="headerlink" title="React DevTools"></a>React DevTools</h3><h5 id="General-设置"><a href="#General-设置" class="headerlink" title="General 设置"></a>General 设置</h5><img src="../assets/image-20220222024702149.png" alt="image-20220222024702149" style="zoom:33%;" />
@@ -1383,72 +1382,6 @@ C组件: 读取A组件传入的数据显示 &#123;this.props.data&#125;
 <li>在 Console 中打印 Component 内部状态</li>
 <li>跳转到组件所在源文件（配合 sourcemap）</li>
 </ul>
-]]></content>
-      <categories>
-        <category>React</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-        <tag>React</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>React的设计和实现</title>
-    <url>/2021/09/29/React%E7%9A%84%E8%AE%BE%E8%AE%A1%E5%92%8C%E5%AE%9E%E7%8E%B0/</url>
-    <content><![CDATA[<h4 id="本篇笔记的目的：站在更高的角度看待React"><a href="#本篇笔记的目的：站在更高的角度看待React" class="headerlink" title="本篇笔记的目的：站在更高的角度看待React"></a>本篇笔记的目的：站在更高的角度看待React</h4><h4 id="React的设计思路"><a href="#React的设计思路" class="headerlink" title="React的设计思路"></a>React的设计思路</h4><ul>
-<li><p>解决UI编程的痛点</p>
-<ol>
-<li><p>状态更新，UI不会自动更新，需要手动调dom api进行更新</p>
-<ol start="2">
-<li>欠缺基本代码的封装和隔离，代码层面没有组件化</li>
-<li>UI之间数据依赖，需要手动维护，如果依赖链路过长，会有 callback hell的问题</li>
-</ol>
-</li>
-</ol>
-</li>
-<li><p>响应式编程</p>
-</li>
-</ul>
-<p><img src="/../assets/image-20220210203412954.png" alt="image-20220210203412954"></p>
-<ul>
-<li><p>期望能</p>
-<pre><code>1. 状态更新，UI自动更新
-2. 前端代码组件化，可复用，可封装
-3. 状态之间的依赖关系，只需要声明即可
-</code></pre>
-</li>
-<li><p>组件化</p>
-<pre><code>1. 组件是组件的组合/原子组件
-2. 组件内拥有状态，外部不可见
-3. 父组件可将状态传入组件内部
-</code></pre>
-</li>
-<li><p>状态归属问题</p>
-<pre><code>1. react是单向数据流，只能父组件将状态传递给子组件（但可以将改变父组件状态的方法传递给子组件实现父子组件通信）
-2. 如何解决不合理的状态上升问题？
-3. 组件状态改变后，如何更新dom
-</code></pre>
-</li>
-</ul>
-<span id="more"></span>
-
-
-<h4 id="React的实现"><a href="#React的实现" class="headerlink" title="React的实现"></a>React的实现</h4><ul>
-<li>DIff算法</li>
-</ul>
-<img src="../assets/image-20220210212319207.png" alt="image-20220210212319207" style="zoom:40%;" />
-
-
-
-<h3 id="React解决状态管理问题"><a href="#React解决状态管理问题" class="headerlink" title="React解决状态管理问题"></a>React解决状态管理问题</h3><p>先说结论：使用状态管理库</p>
-<ul>
-<li><p>状态管理库核心思想：将状态抽离到ui外部进行统一管理。</p>
-</li>
-<li><p>将状态抽离到ui外部的问题：降低了组件复用性，组件跟外部状态强耦合</p>
-</li>
-</ul>
-<p><strong>何时使用状态管理库？</strong></p>
-<p><strong>判断一个状态是不是只属于组件本身，如若是则不需要状态管理库</strong></p>
 ]]></content>
       <categories>
         <category>React</category>
@@ -1534,6 +1467,72 @@ C组件: 读取A组件传入的数据显示 &#123;this.props.data&#125;
         <tag>JavaScript</tag>
         <tag>React</tag>
         <tag>Redux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>React的设计和实现</title>
+    <url>/2021/09/29/React%E7%9A%84%E8%AE%BE%E8%AE%A1%E5%92%8C%E5%AE%9E%E7%8E%B0/</url>
+    <content><![CDATA[<h4 id="本篇笔记的目的：站在更高的角度看待React"><a href="#本篇笔记的目的：站在更高的角度看待React" class="headerlink" title="本篇笔记的目的：站在更高的角度看待React"></a>本篇笔记的目的：站在更高的角度看待React</h4><h4 id="React的设计思路"><a href="#React的设计思路" class="headerlink" title="React的设计思路"></a>React的设计思路</h4><ul>
+<li><p>解决UI编程的痛点</p>
+<ol>
+<li><p>状态更新，UI不会自动更新，需要手动调dom api进行更新</p>
+<ol start="2">
+<li>欠缺基本代码的封装和隔离，代码层面没有组件化</li>
+<li>UI之间数据依赖，需要手动维护，如果依赖链路过长，会有 callback hell的问题</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><p>响应式编程</p>
+</li>
+</ul>
+<p><img src="/../assets/image-20220210203412954.png" alt="image-20220210203412954"></p>
+<ul>
+<li><p>期望能</p>
+<pre><code>1. 状态更新，UI自动更新
+2. 前端代码组件化，可复用，可封装
+3. 状态之间的依赖关系，只需要声明即可
+</code></pre>
+</li>
+<li><p>组件化</p>
+<pre><code>1. 组件是组件的组合/原子组件
+2. 组件内拥有状态，外部不可见
+3. 父组件可将状态传入组件内部
+</code></pre>
+</li>
+<li><p>状态归属问题</p>
+<pre><code>1. react是单向数据流，只能父组件将状态传递给子组件（但可以将改变父组件状态的方法传递给子组件实现父子组件通信）
+2. 如何解决不合理的状态上升问题？
+3. 组件状态改变后，如何更新dom
+</code></pre>
+</li>
+</ul>
+<span id="more"></span>
+
+
+<h4 id="React的实现"><a href="#React的实现" class="headerlink" title="React的实现"></a>React的实现</h4><ul>
+<li>DIff算法</li>
+</ul>
+<img src="../assets/image-20220210212319207.png" alt="image-20220210212319207" style="zoom:40%;" />
+
+
+
+<h3 id="React解决状态管理问题"><a href="#React解决状态管理问题" class="headerlink" title="React解决状态管理问题"></a>React解决状态管理问题</h3><p>先说结论：使用状态管理库</p>
+<ul>
+<li><p>状态管理库核心思想：将状态抽离到ui外部进行统一管理。</p>
+</li>
+<li><p>将状态抽离到ui外部的问题：降低了组件复用性，组件跟外部状态强耦合</p>
+</li>
+</ul>
+<p><strong>何时使用状态管理库？</strong></p>
+<p><strong>判断一个状态是不是只属于组件本身，如若是则不需要状态管理库</strong></p>
+]]></content>
+      <categories>
+        <category>React</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>React</tag>
       </tags>
   </entry>
   <entry>
@@ -1892,9 +1891,9 @@ module: &#123;
   <entry>
     <title>Webpack</title>
     <url>/2022/11/14/Webpack/</url>
-    <content><![CDATA[<h3 id="webpack-是什么"><a href="#webpack-是什么" class="headerlink" title="webpack 是什么"></a>webpack 是什么</h3><p>webpack 是一种<strong>前端资源构建工具</strong>，一个静态模块打包器(module bundler)。</p>
+    <content><![CDATA[<h3 id="Webpack-是什么"><a href="#Webpack-是什么" class="headerlink" title="Webpack 是什么"></a>Webpack 是什么</h3><p>webpack 是一种<strong>前端资源构建工具</strong>，一个静态模块打包器(module bundler)。</p>
 <p>在webpack 看来, 前端的所有资源文件(js&#x2F;json&#x2F;css&#x2F;img&#x2F;less&#x2F;…)都会作为模块处理。<br>它将根据模块的依赖关系进行静态分析，打包生成对应的静态资源(bundle)。</p>
-<h3 id="webpack-五个核心概念"><a href="#webpack-五个核心概念" class="headerlink" title="webpack 五个核心概念"></a>webpack 五个核心概念</h3><h4 id="Entry"><a href="#Entry" class="headerlink" title="Entry"></a>Entry</h4><p>入口(Entry)：指示 webpack 以哪个文件为入口起点开始打包，分析构建内部依赖图。</p>
+<h3 id="Webpack-五个核心概念"><a href="#Webpack-五个核心概念" class="headerlink" title="Webpack 五个核心概念"></a>Webpack 五个核心概念</h3><h4 id="Entry"><a href="#Entry" class="headerlink" title="Entry"></a>Entry</h4><p>入口(Entry)：指示 webpack 以哪个文件为入口起点开始打包，分析构建内部依赖图。</p>
 <h4 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h4><p>输出(Output)：指示 webpack 打包后的资源 bundles 输出到哪里去，以及如何命名。</p>
 <h4 id="Loader"><a href="#Loader" class="headerlink" title="Loader"></a>Loader</h4><p>Loader：让 webpack 能够去处理那些非 JS 的文件，比如样式文件、图片文件(webpack 自身只理解<br>JS)</p>
 <h4 id="Plugins"><a href="#Plugins" class="headerlink" title="Plugins"></a>Plugins</h4><p>插件(Plugins)：可以用于执行范围更广的任务。插件的范围包括，从打包优化和压缩，<br>一直到重新定义环境中的变量等。</p>
