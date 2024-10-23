@@ -611,38 +611,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Mini-React</title>
-    <url>/2022/03/04/Mini-React/</url>
-    <content><![CDATA[<h4 id="项目拆解："><a href="#项目拆解：" class="headerlink" title="项目拆解："></a>项目拆解：</h4><ol>
-<li><p>Jsx 和虚拟 DOM</p>
-</li>
-<li><p>组件和生命周期</p>
-</li>
-<li><p>Diff</p>
-</li>
-<li><p>异步的setState</p>
-</li>
-<li><p>hook支持</p>
-</li>
-</ol>
-<h4 id="具体思路"><a href="#具体思路" class="headerlink" title="具体思路"></a>具体思路</h4><h5 id="将jsx经过babel转成React-createElement的形式"><a href="#将jsx经过babel转成React-createElement的形式" class="headerlink" title="将jsx经过babel转成React.createElement的形式"></a>将jsx经过babel转成React.createElement的形式</h5><p>例如</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Hem</span> <span class="keyword">extends</span> <span class="title class_ inherited__">React.Component</span> &#123;</span><br><span class="line">    <span class="title function_">render</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> (</span><br><span class="line">            <span class="language-xml"><span class="tag">&lt;<span class="name">A</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">                <span class="tag">&lt;<span class="name">B</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">                    <span class="tag">&lt;<span class="name">C</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">                        <span class="tag">&lt;<span class="name">div</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">                        <span class="tag">&lt;<span class="name">span</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">                    <span class="tag">&lt;/<span class="name">C</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">                    <span class="tag">&lt;<span class="name">D</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">                <span class="tag">&lt;/<span class="name">B</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">                <span class="tag">&lt;<span class="name">E</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">                <span class="tag">&lt;<span class="name">F</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;/<span class="name">A</span>&gt;</span></span></span><br><span class="line">        );</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>经过babel转义后</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="title function_">_createClass</span>(<span class="title class_">Hem</span>, [</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">key</span>: <span class="string">&quot;render&quot;</span>,</span><br><span class="line">        <span class="attr">value</span>: <span class="keyword">function</span> <span class="title function_">render</span>(<span class="params"></span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="title class_">React</span>.<span class="title function_">createElement</span>(</span><br><span class="line">                A,</span><br><span class="line">                <span class="literal">null</span>,</span><br><span class="line">                <span class="comment">// A组件的亲儿子组件B</span></span><br><span class="line">                <span class="title class_">React</span>.<span class="title function_">createElement</span>(</span><br><span class="line">                    B,</span><br><span class="line">                    <span class="literal">null</span>,</span><br><span class="line">                    <span class="title class_">React</span>.<span class="title function_">createElement</span>(</span><br><span class="line">                        C,</span><br><span class="line">                        <span class="literal">null</span>,</span><br><span class="line">                        <span class="comment">// C组件的亲儿子 div</span></span><br><span class="line">                        <span class="title class_">React</span>.<span class="title function_">createElement</span>(<span class="string">&quot;div&quot;</span>, <span class="literal">null</span>),</span><br><span class="line">                        <span class="comment">// C组件的亲儿子 span</span></span><br><span class="line">                        <span class="title class_">React</span>.<span class="title function_">createElement</span>(<span class="string">&quot;span&quot;</span>, <span class="literal">null</span>)</span><br><span class="line">                    ),</span><br><span class="line">                    <span class="title class_">React</span>.<span class="title function_">createElement</span>(D, <span class="literal">null</span>)</span><br><span class="line">                ),</span><br><span class="line">                <span class="comment">// A组件的亲儿子组件E</span></span><br><span class="line">                <span class="title class_">React</span>.<span class="title function_">createElement</span>(E, <span class="literal">null</span>),</span><br><span class="line">                <span class="comment">// A组件的亲儿子组件F</span></span><br><span class="line">                <span class="title class_">React</span>.<span class="title function_">createElement</span>(F, <span class="literal">null</span>)</span><br><span class="line">            );</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">]);</span><br></pre></td></tr></table></figure>
-
-<span id="more"></span>
-
-<h5 id="createElement生成虚拟dom"><a href="#createElement生成虚拟dom" class="headerlink" title="createElement生成虚拟dom"></a>createElement生成虚拟dom</h5>]]></content>
-      <categories>
-        <category>React</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-        <tag>React</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Jira项目</title>
     <url>/2022/03/02/Jira%E9%A1%B9%E7%9B%AE/</url>
     <content><![CDATA[<h4 id="代码自动格式化工具：prettier"><a href="#代码自动格式化工具：prettier" class="headerlink" title="代码自动格式化工具：prettier"></a>代码自动格式化工具：prettier</h4><p>配置过程：<a href="https://prettier.io/docs/en/precommit.html">https://prettier.io/docs/en/precommit.html</a></p>
@@ -699,6 +667,38 @@
       </categories>
       <tags>
         <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Mini-React</title>
+    <url>/2022/03/04/Mini-React/</url>
+    <content><![CDATA[<h4 id="项目拆解："><a href="#项目拆解：" class="headerlink" title="项目拆解："></a>项目拆解：</h4><ol>
+<li><p>Jsx 和虚拟 DOM</p>
+</li>
+<li><p>组件和生命周期</p>
+</li>
+<li><p>Diff</p>
+</li>
+<li><p>异步的setState</p>
+</li>
+<li><p>hook支持</p>
+</li>
+</ol>
+<h4 id="具体思路"><a href="#具体思路" class="headerlink" title="具体思路"></a>具体思路</h4><h5 id="将jsx经过babel转成React-createElement的形式"><a href="#将jsx经过babel转成React-createElement的形式" class="headerlink" title="将jsx经过babel转成React.createElement的形式"></a>将jsx经过babel转成React.createElement的形式</h5><p>例如</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Hem</span> <span class="keyword">extends</span> <span class="title class_ inherited__">React.Component</span> &#123;</span><br><span class="line">    <span class="title function_">render</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> (</span><br><span class="line">            <span class="language-xml"><span class="tag">&lt;<span class="name">A</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">                <span class="tag">&lt;<span class="name">B</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">                    <span class="tag">&lt;<span class="name">C</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">                        <span class="tag">&lt;<span class="name">div</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">                        <span class="tag">&lt;<span class="name">span</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">                    <span class="tag">&lt;/<span class="name">C</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">                    <span class="tag">&lt;<span class="name">D</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">                <span class="tag">&lt;/<span class="name">B</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">                <span class="tag">&lt;<span class="name">E</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">                <span class="tag">&lt;<span class="name">F</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;/<span class="name">A</span>&gt;</span></span></span><br><span class="line">        );</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>经过babel转义后</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="title function_">_createClass</span>(<span class="title class_">Hem</span>, [</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">key</span>: <span class="string">&quot;render&quot;</span>,</span><br><span class="line">        <span class="attr">value</span>: <span class="keyword">function</span> <span class="title function_">render</span>(<span class="params"></span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="title class_">React</span>.<span class="title function_">createElement</span>(</span><br><span class="line">                A,</span><br><span class="line">                <span class="literal">null</span>,</span><br><span class="line">                <span class="comment">// A组件的亲儿子组件B</span></span><br><span class="line">                <span class="title class_">React</span>.<span class="title function_">createElement</span>(</span><br><span class="line">                    B,</span><br><span class="line">                    <span class="literal">null</span>,</span><br><span class="line">                    <span class="title class_">React</span>.<span class="title function_">createElement</span>(</span><br><span class="line">                        C,</span><br><span class="line">                        <span class="literal">null</span>,</span><br><span class="line">                        <span class="comment">// C组件的亲儿子 div</span></span><br><span class="line">                        <span class="title class_">React</span>.<span class="title function_">createElement</span>(<span class="string">&quot;div&quot;</span>, <span class="literal">null</span>),</span><br><span class="line">                        <span class="comment">// C组件的亲儿子 span</span></span><br><span class="line">                        <span class="title class_">React</span>.<span class="title function_">createElement</span>(<span class="string">&quot;span&quot;</span>, <span class="literal">null</span>)</span><br><span class="line">                    ),</span><br><span class="line">                    <span class="title class_">React</span>.<span class="title function_">createElement</span>(D, <span class="literal">null</span>)</span><br><span class="line">                ),</span><br><span class="line">                <span class="comment">// A组件的亲儿子组件E</span></span><br><span class="line">                <span class="title class_">React</span>.<span class="title function_">createElement</span>(E, <span class="literal">null</span>),</span><br><span class="line">                <span class="comment">// A组件的亲儿子组件F</span></span><br><span class="line">                <span class="title class_">React</span>.<span class="title function_">createElement</span>(F, <span class="literal">null</span>)</span><br><span class="line">            );</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">]);</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<h5 id="createElement生成虚拟dom"><a href="#createElement生成虚拟dom" class="headerlink" title="createElement生成虚拟dom"></a>createElement生成虚拟dom</h5>]]></content>
+      <categories>
+        <category>React</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>React</tag>
       </tags>
   </entry>
   <entry>
@@ -1371,81 +1371,141 @@ C组件: 读取A组件传入的数据显示 &#123;this.props.data&#125;
       </tags>
   </entry>
   <entry>
-    <title>Redux</title>
-    <url>/2021/10/11/Redux/</url>
-    <content><![CDATA[<ul>
-<li>Redux的设计思想</li>
-</ul>
-<p>（1）Web 应用是一个状态机，视图与状态是一一对应的。</p>
-<p>（2）所有的状态，保存在一个对象里面。</p>
-<h2 id="Action"><a href="#Action" class="headerlink" title="Action"></a>Action</h2><ol>
-<li><p>Action 就是 View 发出的通知，表示 State 应该要发生变化了。</p>
-</li>
-<li><p>Action 是一个对象，其中的<code>type</code>属性是必须的，表示 Action 的名称，Action 描述当前发生的事情。</p>
-</li>
-<li><p>改变 State 的唯一办法，就是使用 Action。</p>
-</li>
+    <title>React组件性能优化</title>
+    <url>/2021/10/14/React%E7%BB%84%E4%BB%B6%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</url>
+    <content><![CDATA[<h3 id="React-性能优化思路"><a href="#React-性能优化思路" class="headerlink" title="React 性能优化思路"></a>React 性能优化思路</h3><p>我觉得React 性能优化的理念的主要方向就是这两个：</p>
+<ol>
+<li><strong>减少重新 render 的次数。因为在 React 里最重(花时间最长)的一块就是 reconciliation(简单的可以理解为 diff)，如果不 render，就不会 reconciliation。</strong></li>
+<li><strong>减少计算的量。主要是减少重复计算，对于函数式组件来说，每次 render 都会重新从头开始执行函数调用。</strong></li>
 </ol>
-<p>可以定义一个函数来生成 Action，这个函数就叫 Action Creator，示例如下</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">sendAction</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        <span class="attr">type</span>: <span class="string">&#x27;send_type&#x27;</span>,</span><br><span class="line">        <span class="attr">value</span>: <span class="string">&#x27;action hello&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<span id="more"></span>
-
-
-<h2 id="Reducer"><a href="#Reducer" class="headerlink" title="Reducer"></a>Reducer</h2><ol>
-<li><p>Store 收到 Action 以后，必须给出一个新的 State，这样 View 才会发生变化。这种 State 的计算过程就叫做 Reducer。</p>
-</li>
-<li><p>Reducer 是一个函数，它接受 Action 和当前 State 作为参数，返回一个新的 State。</p>
-</li>
+<p>在使用类组件的时候，使用的 React 优化 API 主要是：<code>shouldComponentUpdate</code>和  <code>PureComponent</code>，这两个 API 所提供的解决思路都是为了<strong>减少重新 render 的次数</strong>，主要是减少父组件更新而子组件也更新的情况。</p>
+<p>但是在函数式组件里面没有声明周期也没有类，那如何来做性能优化呢？</p>
+<p><strong>先分个类，组件什么时候会重新执行？</strong></p>
+<ol>
+<li><strong>组件自己的状态改变</strong></li>
+<li><strong>父组件重新渲染，导致子组件重新渲染，但是父组件的 props 没有改变</strong></li>
+<li><strong>父组件重新渲染，导致子组件重新渲染，但是父组件传递的 props 改变</strong></li>
 </ol>
-<p>Demo:</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> initState = &#123;</span><br><span class="line">    <span class="attr">value</span>: <span class="string">&#x27;init&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> <span class="title function_">reducer</span> = (<span class="params">state = initState, action</span>) =&gt; &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;reducer:&#x27;</span>, state, action);</span><br><span class="line">    <span class="keyword">switch</span>(action.<span class="property">type</span>)&#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;send_type&#x27;</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="title class_">Object</span>.<span class="title function_">assign</span>(&#123;&#125;, state, action);</span><br><span class="line">        <span class="attr">default</span>:</span><br><span class="line">            <span class="keyword">return</span> state;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>针对第二点，在FC中，可以通过memo减少rerender</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Component</span>(<span class="params">props</span>) &#123;</span><br><span class="line">   <span class="comment">/* 使用 props 渲染 */</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> <span class="title class_">MyComponent</span> = <span class="title class_">React</span>.<span class="title function_">memo</span>(<span class="title class_">Component</span>);</span><br></pre></td></tr></table></figure>
 
+<p>通过 <code>React.memo</code> 包裹的组件在 props 不变的情况下，这个被包裹的组件是不会重新渲染的(相当于PureComonent)</p>
+<p>默认情况下其只会对 props 的复杂对象做浅层对比(浅层对比就是只会对比前后两次 props 对象引用是否相同，不会对比对象里面的内容是否相同)，如果你想要控制对比过程，那么请将自定义的比较函数通过第二个参数传入来实现。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">MyComponent</span>(<span class="params">props</span>) &#123;</span><br><span class="line">  <span class="comment">/* 使用 props 渲染 */</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">areEqual</span>(<span class="params">prevProps, nextProps</span>) &#123;</span><br><span class="line">  <span class="comment">/*</span></span><br><span class="line"><span class="comment">  如果把 nextProps 传入 render 方法的返回结果与</span></span><br><span class="line"><span class="comment">  将 prevProps 传入 render 方法的返回结果一致则返回 true，</span></span><br><span class="line"><span class="comment">  否则返回 false</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">React</span>.<span class="title function_">memo</span>(<span class="title class_">MyComponent</span>, areEqual);</span><br></pre></td></tr></table></figure>
 
-
-<h2 id="Store"><a href="#Store" class="headerlink" title="Store"></a>Store</h2><h3 id="StoreApi"><a href="#StoreApi" class="headerlink" title="StoreApi:"></a>StoreApi:</h3><ul>
-<li><p><code>store.subscribe()</code>: 添加一个变化监听器。每当 dispatch action 的时候就会执行，state 树中的一部分可能已经变化。你可以在回调函数里调用<code>getState()</code>来拿到当前 state。</p>
-</li>
-<li><p><code>store.dispatch()</code>是 View 发出 Action 的唯一方法，将使用当前 <code>getState()</code>的结果和传入的 <code>action</code> 以同步方式的调用 store 的 reduce 函数。它的返回值会被作为下一个 state。从现在开始，这就成为了 <code>getState()</code>的返回值，同时变化监听器(change listener)会被触发。</p>
-<blockquote>
-</blockquote>
-</li>
-<li><p>流程：</p>
-<p>组件 – <code>store.dispatch(action)</code> – 触发reducer的执行 – 根据type区分返回的state – 返回值给store – 更新state – <code>store.subscribe(listener)</code>中listener回调函数执行。</p>
-</li>
-</ul>
-<p><img src="/../assets/image-20210309183756689.png" alt="image-20210309183756689"></p>
-<h2 id="React-redux"><a href="#React-redux" class="headerlink" title="React-redux"></a>React-redux</h2><p><img src="/../assets/image-20210309200347890.png" alt="image-20210309200347890"></p>
-<h2 id="provider"><a href="#provider" class="headerlink" title="provider"></a>provider</h2><h2 id="connect"><a href="#connect" class="headerlink" title="connect"></a>connect</h2><p><code>connect</code>方法接受两个参数：<code>mapStateT.oProps</code>和<code>mapDispatchToProps</code>。它们定义了 UI 组件的业务逻辑。前者负责输入逻辑，即将<code>state</code>映射到 UI 组件的参数（<code>props</code>），后者负责输出逻辑，即将用户对 UI 组件的操作映射成 Action。</p>
+<h3 id="组件性能优化"><a href="#组件性能优化" class="headerlink" title="组件性能优化"></a>组件性能优化</h3><p>React 组件是一个树形结构，且每个节点都是懒计算的（类似于 Thunk 的概念）。当一个节点不需要重新计算（重绘）时，他的子树都不会计算（重绘）。<strong>所以我们做性能优化的目标，就是在尽量离根节点近的位置，拦截不必要的节点重算，从而减少重绘的计算量。</strong></p>
+<h5 id="React-memo"><a href="#React-memo" class="headerlink" title="React.memo"></a>React.memo</h5><p>阻止节点重绘主要通过 React.memo 方法生成特殊的组件节点。它接受两个传参：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="title class_">React</span>.<span class="title function_">memo</span>(<span class="title class_">Component</span>, areEqual);</span><br></pre></td></tr></table></figure>
 <ul>
-<li><h3 id="mapStateToProps"><a href="#mapStateToProps" class="headerlink" title="mapStateToProps"></a><code>mapStateToProps</code></h3><p><code>mapStateToProps</code>是一个函数。它的作用就是像它的名字那样，建立一个从（外部的）<code>state</code>对象到（UI 组件的）<code>props</code>对象的映射关系。</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">mapStateToProps</span> = (<span class="params">state</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    <span class="attr">todos</span>: <span class="title function_">getVisibleTodos</span>(state.<span class="property">todos</span>, state.<span class="property">visibilityFilter</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><code>mapStateToProps</code>会订阅 Store，每当<code>state</code>更新的时候，就会自动执行，重新计算 UI 组件的参数，从而触发 UI 组件的重新渲染。</p>
-<p><code>mapStateToProps</code>的第一个参数总是<code>state</code>对象，还可以使用第二个参数，代表容器组件的<code>props</code>对象。</p>
-<p><code>connect</code>方法可以省略<code>mapStateToProps</code>参数，那样的话，UI 组件就不会订阅Store，就是说 Store 的更新不会引起 UI 组件的更新。</p>
+<li><p>Component：组件</p>
 </li>
-<li><h3 id="mapDispatchToProps"><a href="#mapDispatchToProps" class="headerlink" title="mapDispatchToProps"></a><code>mapDispatchToProps</code></h3><p><code>mapDispatchToProps</code>是<code>connect</code>函数的第二个参数，用来建立 UI 组件的参数到<code>store.dispatch</code>方法的映射</p>
-<p>如果<code>mapDispatchToProps</code>是一个函数，会得到<code>dispatch</code>和<code>ownProps</code></p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">mapDispatchToProps</span> = (<span class="params"></span></span><br><span class="line"><span class="params">  dispatch,</span></span><br><span class="line"><span class="params">  ownProps</span></span><br><span class="line"><span class="params"></span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    <span class="attr">onClick</span>: <span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="title function_">dispatch</span>(&#123;</span><br><span class="line">        <span class="attr">type</span>: <span class="string">&#x27;SET_VISIBILITY_FILTER&#x27;</span>,</span><br><span class="line">        <span class="attr">filter</span>: ownProps.<span class="property">filter</span></span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>如果<code>mapDispatchToProps</code>是一个对象，它的每个键名也是对应 UI 组件的同名参数，键值应该是一个函数，会被当作 Action creator ，返回的 Action 会由 Redux 自动发出(dispatch).</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> mapDispatchToProps = &#123;</span><br><span class="line">  <span class="attr">onClick</span>: <span class="function">(<span class="params">filter</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="attr">type</span>: <span class="string">&#x27;SET_VISIBILITY_FILTER&#x27;</span>,</span><br><span class="line">    <span class="attr">filter</span>: filter</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="计数器Demo："><a href="#计数器Demo：" class="headerlink" title="计数器Demo："></a>计数器Demo：</h2><p>两个组件，按钮ComA和文本ComB，点击按钮+1，用react-redux实现通信的过程</p>
+<li><p>areEqual：比较函数<br>比较函数的入参有两个，arg0 为 前一次渲染的 props, arg1 为本次渲染的 props。如果返回 true，则该节点本次渲染将被标记为无需重新计算，从而使其所有子节点、孙子节点都无需计算。<br>areEqual 如果不传，默认使用</p>
 </li>
 </ul>
-<p><img src="/../assets/image-20210310173423401.png" alt="image-20210310173423401"></p>
+<figure class="highlight lisp"><table><tr><td class="code"><pre><span class="line">(<span class="name">prevProps</span>, nextProps) =&gt; shallowEqual(<span class="name">prevProps</span>, nextProps)</span><br></pre></td></tr></table></figure>
+
+<p>做为比较函数。</p>
+<h5 id="如何定位优化点"><a href="#如何定位优化点" class="headerlink" title="如何定位优化点"></a>如何定位优化点</h5><p>使用前一章节提到 React DevTools 中的 Profiling 功能，record 发生卡顿的操作，从耗时长的组件逐个查看，找到那些跟此次操作无关的上层渲染节点，尝试使用 React.memo 包裹这些组件。</p>
+<h5 id="不要为了优化而优化"><a href="#不要为了优化而优化" class="headerlink" title="不要为了优化而优化"></a>不要为了优化而优化</h5><p>在没有性能问题前，不用去纠结是否要用 Profiling、React.memo、useMemo、useCallback 去优化性能，这些不一定能带来性能提升，反而肯定会带来首屏的性能下降。大多数情况下，React 现有算法以能满足性能需求。</p>
+<h5 id="对于一个组件，有三样东西会让她重绘"><a href="#对于一个组件，有三样东西会让她重绘" class="headerlink" title="对于一个组件，有三样东西会让她重绘"></a>对于一个组件，有三样东西会让她重绘</h5><ol>
+<li>State 变更</li>
+<li>依赖的 context 变更</li>
+<li>父组件重绘</li>
+</ol>
+<p>所以用 React.memo 包裹之后，并不是说性能就会有多大的提高。如果组件中依赖的 context 中，有一部分并不是此组件需要的数据，但会经常变更，也会导致组件经常重绘。这时候我们可以增加一层组件，把依赖 context 中的数据，通过增加的一层父组件取出来，然后通过 props 传给真正渲染的组件，把 React.memo 加在真正渲染的组件上，来达到屏蔽 context 变更引起的重绘问题。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; useMemo, useContext &#125; <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">SomeContext</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;./SomeContext&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">PickContextData</span>(<span class="params">props</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> ctx = <span class="title function_">useContext</span>(<span class="title class_">SomeContext</span>);</span><br><span class="line">  <span class="keyword">const</span> someDataFromContext = <span class="title function_">useMemo</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> ctx.<span class="property">data</span>;</span><br><span class="line">  &#125;, [ctx.<span class="property">data</span>]);</span><br><span class="line">  <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">RenderComponent</span> <span class="attr">data</span>=<span class="string">&#123;someDataFromContext&#125;</span> &#123;<span class="attr">...props</span>&#125; /&gt;</span></span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title class_">RenderComponent</span> = <span class="title class_">React</span>.<span class="title function_">memo</span>(<span class="function">(<span class="params">props</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// 略</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>更通用点，可以封装出 react-redux 的 connect 函数，传入 selector 来取所需的 Context 数据。</p>
 ]]></content>
       <categories>
-        <category>状态管理</category>
+        <category>React</category>
       </categories>
       <tags>
         <tag>JavaScript</tag>
+        <tag>Hooks</tag>
         <tag>React</tag>
-        <tag>Redux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>React组件通信</title>
+    <url>/2021/10/07/React%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1/</url>
+    <content><![CDATA[<h3 id="组件通信"><a href="#组件通信" class="headerlink" title="组件通信"></a>组件通信</h3><h5 id="爷孙组件通信"><a href="#爷孙组件通信" class="headerlink" title="爷孙组件通信"></a>爷孙组件通信</h5><p>爷孙组件通信主要有 3 种方式：</p>
+<ol>
+<li>将孙子组件的 props 封装在一个固定字段中</li>
+<li>通过 children 透传</li>
+<li>通过 context 传递</li>
+</ol>
+<p>假设有个三层组件，爷爷分别给儿子和孙子发红包</p>
+<p>先看青铜解决方案：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Grandpa</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> [someMoneyForMe] = <span class="title function_">useState</span>(<span class="number">100</span>);</span><br><span class="line">  <span class="keyword">const</span> [someMoneyForDaddy] = <span class="title function_">useState</span>(<span class="number">101</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">Daddy</span> <span class="attr">money</span>=<span class="string">&#123;someMoneyForDaddy&#125;</span> <span class="attr">moneyForSon</span>=<span class="string">&#123;someMoneyForMe&#125;</span> /&gt;</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Daddy</span>(<span class="params">props: &#123; money: number; moneyForSon: number &#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; money, moneyForSon &#125; = props;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;daddy&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">h2</span>&gt;</span>This is Daddy, received $&#123;money&#125;<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">Me</span> <span class="attr">money</span>=<span class="string">&#123;moneyForSon&#125;</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Me</span>(<span class="params">props: &#123; money: number &#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; money &#125; = props;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;son&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">h3</span>&gt;</span>This is Me, received $&#123;money&#125;<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Daddy 组件会透传爷爷给孙子的组件给 Me。这种方案的缺点很明显，以后爷爷要给 Daddy 和 Me 发糖果的时候，Daddy 还得加字段。</p>
+<p><strong>将孙子组件的 props 封装在一个固定字段中</strong></p>
+<p>按照 1 的方案，我们可以固定给 Daddy 添加一个 sonProps 的字段，然后将 Grandpa 需要传给孙子的状态全部通过 sonProps 传递</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Grandpa</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> [someMoneyForMe] = <span class="title function_">useState</span>(<span class="number">100</span>);</span><br><span class="line">  <span class="keyword">const</span> [someMoneyForDaddy] = <span class="title function_">useState</span>(<span class="number">101</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">Daddy</span> <span class="attr">money</span>=<span class="string">&#123;someMoneyForDaddy&#125;</span> <span class="attr">sonProps</span>=<span class="string">&#123;&#123;money:</span> <span class="attr">someMoneyForMe</span>&#125;&#125; /&gt;</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Daddy</span>(<span class="params">props: &#123; money: number; sonProps: Parameters&lt;<span class="keyword">typeof</span> Me&gt;[<span class="number">0</span>]; &#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; money, sonProps &#125; = props;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;daddy&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">h2</span>&gt;</span>This is Daddy, received $&#123;money&#125;<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">Me</span> &#123;<span class="attr">...sonProps</span>&#125;/&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Me</span>(<span class="params">props: &#123; money: number &#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; money &#125; = props;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;son&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">h3</span>&gt;</span>This is Me, received $&#123;money&#125;<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样以后要给 Me 加字段，就不用改 Daddy 了。<strong>但要测试 Daddy 时还得 mock Me 组件的数据，Daddy 和 Son 耦合。</strong></p>
+<p><strong>通过 children 透传</strong></p>
+<p>children 类似于 vue 中的 slot，可以完成一些嵌套组件通信的功能</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Grandpa</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> [someMoneyForMe] = <span class="title function_">useState</span>(<span class="number">100</span>);</span><br><span class="line">  <span class="keyword">const</span> [someMoneyForDaddy] = <span class="title function_">useState</span>(<span class="number">101</span>);</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">Daddy</span> <span class="attr">money</span>=<span class="string">&#123;someMoneyForDaddy&#125;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">Me</span> <span class="attr">money</span>=<span class="string">&#123;someMoneyForMe&#125;</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">Daddy</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Daddy</span>(<span class="params">props: &#123; money: number; children?: React.ChildNode &#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; money, children &#125; = props;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;daddy&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">h2</span>&gt;</span>This is Daddy, received $&#123;money&#125;<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      &#123;children&#125;</span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Me</span>(<span class="params">props: &#123; money: number &#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; money &#125; = props;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;son&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">h3</span>&gt;</span>This is Me, received $&#123;money&#125;<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>将 Daddy 的嵌套部分用 children 替代后，解耦了子组件和孙子组件的依赖关系，Daddy 组件更加独立。</p>
+<p>作为替代，也可以传递一个组件实例：</p>
+<p><code><Daddy money=&#123;someMoneyForDaddy&#125; me=&#123;<Me money=&#123;someMoneyForMe&#125; /> </code></p>
+<p><strong>三种方案的决策</strong></p>
+<ol>
+<li>第一种方案一般用于固定结构和跨组件有互相依赖的场景，多见于 UI 框架中的复合组件与原子组件的设计中</li>
+<li>第二种常用在嵌套层级不深的业务代码中，比如表单场景。<strong>优点是顶层 Grandpa 的业务收敛度很高，一眼能看清 UI 结构及状态绑定关系，相当于拍平了 React 组件树</strong></li>
+<li>第三种比较通用，适合复杂嵌套透传场景。缺点是范式代码较多，且会造成 react dev tools 层级过多；Context 无法在父组件看出依赖关系，必须到子组件文件中才能知道数据来源</li>
+</ol>
+]]></content>
+      <categories>
+        <category>React</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>Hooks</tag>
+        <tag>React</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Webpack</title>
+    <url>/2022/04/14/Webpack/</url>
+    <content><![CDATA[<h3 id="Webpack-是什么"><a href="#Webpack-是什么" class="headerlink" title="Webpack 是什么"></a>Webpack 是什么</h3><p>webpack 是一种<strong>前端资源构建工具</strong>，一个静态模块打包器(module bundler)。</p>
+<p>在webpack 看来, 前端的所有资源文件(js&#x2F;json&#x2F;css&#x2F;img&#x2F;less&#x2F;…)都会作为模块处理。<br>它将根据模块的依赖关系进行静态分析，打包生成对应的静态资源(bundle)。</p>
+<h3 id="Webpack-五个核心概念"><a href="#Webpack-五个核心概念" class="headerlink" title="Webpack 五个核心概念"></a>Webpack 五个核心概念</h3><h4 id="Entry"><a href="#Entry" class="headerlink" title="Entry"></a>Entry</h4><p>入口(Entry)：指示 webpack 以哪个文件为入口起点开始打包，分析构建内部依赖图。</p>
+<h4 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h4><p>输出(Output)：指示 webpack 打包后的资源 bundles 输出到哪里去，以及如何命名。</p>
+<h4 id="Loader"><a href="#Loader" class="headerlink" title="Loader"></a>Loader</h4><p>Loader：让 webpack 能够去处理那些非 JS 的文件，比如样式文件、图片文件(webpack 自身只理解<br>JS)</p>
+<h4 id="Plugins"><a href="#Plugins" class="headerlink" title="Plugins"></a>Plugins</h4><p>插件(Plugins)：可以用于执行范围更广的任务。插件的范围包括，从打包优化和压缩，<br>一直到重新定义环境中的变量等。</p>
+<span id="more"></span>
+
+<h4 id="Mode"><a href="#Mode" class="headerlink" title="Mode"></a>Mode</h4><p>模式(Mode)：指示 webpack 使用相应模式的配置。</p>
+<ol>
+<li><p>development:  </p>
+<p> 会将 DefinePlugin 中 <code>process.env.NODE_ENV</code> 的值设置为 development。</p>
+<p>启用 </p>
+<figure class="highlight plaintext"><figcaption><span>和 ```NamedModulesPlugin```。</span></figcaption><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">   特点： 能让代码本地调试运行的环境。</span><br><span class="line"></span><br><span class="line">2. production</span><br><span class="line"></span><br><span class="line">   会将 DefinePlugin 中 ```process.env.NODE_ENV``` 的值设置为 production。</span><br><span class="line"></span><br><span class="line">   启用 </span><br><span class="line"></span><br><span class="line">   ```FlagDependencyUsagePlugin,```</span><br><span class="line"></span><br><span class="line">   ``` FlagIncludedChunksPlugin,``` </span><br><span class="line"></span><br><span class="line">   ``` ModuleConcatenationPlugin, ``` </span><br><span class="line"></span><br><span class="line">   ```NoEmitOnErrorsPlugin, ```</span><br><span class="line"></span><br><span class="line">    ```OccurrenceOrderPlugin, ```</span><br><span class="line"></span><br><span class="line">   ```SideEffectsFlagPlugin 和 TerserPlugin```。</span><br><span class="line"></span><br><span class="line">   特点： 能让代码优化上线运行的环境。</span><br><span class="line"></span><br><span class="line">   </span><br><span class="line"></span><br><span class="line">### 编译打包应用</span><br><span class="line"></span><br><span class="line">创建 src 下的 js 等文件后，不需要配置 webpack.config.js 文件，在命令行就可以编译打包。</span><br><span class="line"></span><br><span class="line">指令：</span><br><span class="line"></span><br><span class="line">- 开发环境：</span><br><span class="line">```shell</span><br><span class="line">webpack ./src/index.js -o ./build/built.js --mode=development</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>  webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后输出到 .&#x2F;build&#x2F;built.js 整体打包环境，是开发环境</p>
+<ul>
+<li>生产环境：<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">webpack ./src/index.js -o ./build/built.js --mode=production</span><br></pre></td></tr></table></figure>
+webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后输出到 .&#x2F;build&#x2F;built.js 整体打包环境，是生产环境</li>
+</ul>
+<p>结论：</p>
+<ol>
+<li>webpack 本身能处理 js&#x2F;json 资源，不能处理 css&#x2F;img 等其他资源</li>
+<li>生产环境和开发环境将 ES6 模块化编译成浏览器能识别的模块化，但是不能处理 ES6 的基本语法转化为 ES5（需要借助 loader）</li>
+<li>生产环境比开发环境多一个压缩 js 代码</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// resolve用来拼接绝对路径的方法</span></span><br><span class="line"><span class="keyword">const</span> &#123; resolve &#125; = <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>);</span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="comment">// webpack配置</span></span><br><span class="line">  <span class="comment">// 入口起点</span></span><br><span class="line">  <span class="attr">entry</span>: <span class="string">&#x27;./src/index.js&#x27;</span>,</span><br><span class="line">  <span class="comment">// 输出</span></span><br><span class="line">  <span class="attr">output</span>: &#123;</span><br><span class="line">    <span class="comment">// 输出文件名</span></span><br><span class="line">    <span class="attr">filename</span>: <span class="string">&#x27;built.js&#x27;</span>,</span><br><span class="line">    <span class="comment">// 输出路径</span></span><br><span class="line">    <span class="comment">// __dirname nodejs的变量，代表当前文件的目录绝对路径</span></span><br><span class="line">    <span class="attr">path</span>: <span class="title function_">resolve</span>(__dirname, <span class="string">&#x27;build&#x27;</span>)</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// loader的配置</span></span><br><span class="line">  <span class="attr">module</span>: &#123;</span><br><span class="line">    <span class="attr">rules</span>: [</span><br><span class="line">      <span class="comment">// 详细loader配置</span></span><br><span class="line">      <span class="comment">// 不同文件必须配置不同loader处理</span></span><br><span class="line">      &#123; </span><br><span class="line">        <span class="comment">// 匹配哪些文件</span></span><br><span class="line">        <span class="attr">test</span>: <span class="regexp">/\.css$/</span>,</span><br><span class="line">        <span class="comment">// 使用哪些loader进行处理</span></span><br><span class="line">        <span class="attr">use</span>: [</span><br><span class="line">          <span class="comment">// use数组中loader执行顺序：从右到左，从下到上 依次执行</span></span><br><span class="line">          <span class="comment">// 创建style标签，将js中的样式资源插入进行，添加到head中生效</span></span><br><span class="line">          <span class="string">&#x27;style-loader&#x27;</span>,</span><br><span class="line">          <span class="comment">// 将css文件变成commonjs模块加载js中，里面内容是样式字符串</span></span><br><span class="line">          <span class="string">&#x27;css-loader&#x27;</span></span><br><span class="line">        ]</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">test</span>: <span class="regexp">/\.less$/</span>,</span><br><span class="line">        <span class="attr">use</span>: [</span><br><span class="line">          <span class="string">&#x27;style-loader&#x27;</span>,</span><br><span class="line">          <span class="string">&#x27;css-loader&#x27;</span>,</span><br><span class="line">          <span class="comment">// 将less文件编译成css文件</span></span><br><span class="line">          <span class="comment">// 需要下载 less-loader和less</span></span><br><span class="line">           <span class="string">&#x27;less-loader&#x27;</span></span><br><span class="line">        ]</span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// plugins的配置</span></span><br><span class="line">  <span class="attr">plugins</span>: [</span><br><span class="line">    <span class="comment">// 详细plugins的配置</span></span><br><span class="line">  ],</span><br><span class="line">  <span class="comment">// 模式</span></span><br><span class="line">  <span class="attr">mode</span>: <span class="string">&#x27;development&#x27;</span>, <span class="comment">// 开发模式</span></span><br><span class="line">  <span class="comment">// mode: &#x27;production&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>打包工具</category>
+      </categories>
+      <tags>
+        <tag>Webpack</tag>
+        <tag>打包工具</tag>
       </tags>
   </entry>
   <entry>
@@ -1802,49 +1862,82 @@ module: &#123;
       </tags>
   </entry>
   <entry>
-    <title>Webpack</title>
-    <url>/2022/04/14/Webpack/</url>
-    <content><![CDATA[<h3 id="Webpack-是什么"><a href="#Webpack-是什么" class="headerlink" title="Webpack 是什么"></a>Webpack 是什么</h3><p>webpack 是一种<strong>前端资源构建工具</strong>，一个静态模块打包器(module bundler)。</p>
-<p>在webpack 看来, 前端的所有资源文件(js&#x2F;json&#x2F;css&#x2F;img&#x2F;less&#x2F;…)都会作为模块处理。<br>它将根据模块的依赖关系进行静态分析，打包生成对应的静态资源(bundle)。</p>
-<h3 id="Webpack-五个核心概念"><a href="#Webpack-五个核心概念" class="headerlink" title="Webpack 五个核心概念"></a>Webpack 五个核心概念</h3><h4 id="Entry"><a href="#Entry" class="headerlink" title="Entry"></a>Entry</h4><p>入口(Entry)：指示 webpack 以哪个文件为入口起点开始打包，分析构建内部依赖图。</p>
-<h4 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h4><p>输出(Output)：指示 webpack 打包后的资源 bundles 输出到哪里去，以及如何命名。</p>
-<h4 id="Loader"><a href="#Loader" class="headerlink" title="Loader"></a>Loader</h4><p>Loader：让 webpack 能够去处理那些非 JS 的文件，比如样式文件、图片文件(webpack 自身只理解<br>JS)</p>
-<h4 id="Plugins"><a href="#Plugins" class="headerlink" title="Plugins"></a>Plugins</h4><p>插件(Plugins)：可以用于执行范围更广的任务。插件的范围包括，从打包优化和压缩，<br>一直到重新定义环境中的变量等。</p>
+    <title>Redux</title>
+    <url>/2021/10/11/Redux/</url>
+    <content><![CDATA[<ul>
+<li>Redux的设计思想</li>
+</ul>
+<p>（1）Web 应用是一个状态机，视图与状态是一一对应的。</p>
+<p>（2）所有的状态，保存在一个对象里面。</p>
+<h2 id="Action"><a href="#Action" class="headerlink" title="Action"></a>Action</h2><ol>
+<li><p>Action 就是 View 发出的通知，表示 State 应该要发生变化了。</p>
+</li>
+<li><p>Action 是一个对象，其中的<code>type</code>属性是必须的，表示 Action 的名称，Action 描述当前发生的事情。</p>
+</li>
+<li><p>改变 State 的唯一办法，就是使用 Action。</p>
+</li>
+</ol>
+<p>可以定义一个函数来生成 Action，这个函数就叫 Action Creator，示例如下</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">sendAction</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        <span class="attr">type</span>: <span class="string">&#x27;send_type&#x27;</span>,</span><br><span class="line">        <span class="attr">value</span>: <span class="string">&#x27;action hello&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <span id="more"></span>
 
-<h4 id="Mode"><a href="#Mode" class="headerlink" title="Mode"></a>Mode</h4><p>模式(Mode)：指示 webpack 使用相应模式的配置。</p>
-<ol>
-<li><p>development:  </p>
-<p> 会将 DefinePlugin 中 <code>process.env.NODE_ENV</code> 的值设置为 development。</p>
-<p>启用 </p>
-<figure class="highlight plaintext"><figcaption><span>和 ```NamedModulesPlugin```。</span></figcaption><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">   特点： 能让代码本地调试运行的环境。</span><br><span class="line"></span><br><span class="line">2. production</span><br><span class="line"></span><br><span class="line">   会将 DefinePlugin 中 ```process.env.NODE_ENV``` 的值设置为 production。</span><br><span class="line"></span><br><span class="line">   启用 </span><br><span class="line"></span><br><span class="line">   ```FlagDependencyUsagePlugin,```</span><br><span class="line"></span><br><span class="line">   ``` FlagIncludedChunksPlugin,``` </span><br><span class="line"></span><br><span class="line">   ``` ModuleConcatenationPlugin, ``` </span><br><span class="line"></span><br><span class="line">   ```NoEmitOnErrorsPlugin, ```</span><br><span class="line"></span><br><span class="line">    ```OccurrenceOrderPlugin, ```</span><br><span class="line"></span><br><span class="line">   ```SideEffectsFlagPlugin 和 TerserPlugin```。</span><br><span class="line"></span><br><span class="line">   特点： 能让代码优化上线运行的环境。</span><br><span class="line"></span><br><span class="line">   </span><br><span class="line"></span><br><span class="line">### 编译打包应用</span><br><span class="line"></span><br><span class="line">创建 src 下的 js 等文件后，不需要配置 webpack.config.js 文件，在命令行就可以编译打包。</span><br><span class="line"></span><br><span class="line">指令：</span><br><span class="line"></span><br><span class="line">- 开发环境：</span><br><span class="line">```shell</span><br><span class="line">webpack ./src/index.js -o ./build/built.js --mode=development</span><br></pre></td></tr></table></figure></li>
-</ol>
-<p>  webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后输出到 .&#x2F;build&#x2F;built.js 整体打包环境，是开发环境</p>
-<ul>
-<li>生产环境：<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">webpack ./src/index.js -o ./build/built.js --mode=production</span><br></pre></td></tr></table></figure>
-webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后输出到 .&#x2F;build&#x2F;built.js 整体打包环境，是生产环境</li>
-</ul>
-<p>结论：</p>
-<ol>
-<li>webpack 本身能处理 js&#x2F;json 资源，不能处理 css&#x2F;img 等其他资源</li>
-<li>生产环境和开发环境将 ES6 模块化编译成浏览器能识别的模块化，但是不能处理 ES6 的基本语法转化为 ES5（需要借助 loader）</li>
-<li>生产环境比开发环境多一个压缩 js 代码</li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// resolve用来拼接绝对路径的方法</span></span><br><span class="line"><span class="keyword">const</span> &#123; resolve &#125; = <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>);</span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="comment">// webpack配置</span></span><br><span class="line">  <span class="comment">// 入口起点</span></span><br><span class="line">  <span class="attr">entry</span>: <span class="string">&#x27;./src/index.js&#x27;</span>,</span><br><span class="line">  <span class="comment">// 输出</span></span><br><span class="line">  <span class="attr">output</span>: &#123;</span><br><span class="line">    <span class="comment">// 输出文件名</span></span><br><span class="line">    <span class="attr">filename</span>: <span class="string">&#x27;built.js&#x27;</span>,</span><br><span class="line">    <span class="comment">// 输出路径</span></span><br><span class="line">    <span class="comment">// __dirname nodejs的变量，代表当前文件的目录绝对路径</span></span><br><span class="line">    <span class="attr">path</span>: <span class="title function_">resolve</span>(__dirname, <span class="string">&#x27;build&#x27;</span>)</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// loader的配置</span></span><br><span class="line">  <span class="attr">module</span>: &#123;</span><br><span class="line">    <span class="attr">rules</span>: [</span><br><span class="line">      <span class="comment">// 详细loader配置</span></span><br><span class="line">      <span class="comment">// 不同文件必须配置不同loader处理</span></span><br><span class="line">      &#123; </span><br><span class="line">        <span class="comment">// 匹配哪些文件</span></span><br><span class="line">        <span class="attr">test</span>: <span class="regexp">/\.css$/</span>,</span><br><span class="line">        <span class="comment">// 使用哪些loader进行处理</span></span><br><span class="line">        <span class="attr">use</span>: [</span><br><span class="line">          <span class="comment">// use数组中loader执行顺序：从右到左，从下到上 依次执行</span></span><br><span class="line">          <span class="comment">// 创建style标签，将js中的样式资源插入进行，添加到head中生效</span></span><br><span class="line">          <span class="string">&#x27;style-loader&#x27;</span>,</span><br><span class="line">          <span class="comment">// 将css文件变成commonjs模块加载js中，里面内容是样式字符串</span></span><br><span class="line">          <span class="string">&#x27;css-loader&#x27;</span></span><br><span class="line">        ]</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">test</span>: <span class="regexp">/\.less$/</span>,</span><br><span class="line">        <span class="attr">use</span>: [</span><br><span class="line">          <span class="string">&#x27;style-loader&#x27;</span>,</span><br><span class="line">          <span class="string">&#x27;css-loader&#x27;</span>,</span><br><span class="line">          <span class="comment">// 将less文件编译成css文件</span></span><br><span class="line">          <span class="comment">// 需要下载 less-loader和less</span></span><br><span class="line">           <span class="string">&#x27;less-loader&#x27;</span></span><br><span class="line">        ]</span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// plugins的配置</span></span><br><span class="line">  <span class="attr">plugins</span>: [</span><br><span class="line">    <span class="comment">// 详细plugins的配置</span></span><br><span class="line">  ],</span><br><span class="line">  <span class="comment">// 模式</span></span><br><span class="line">  <span class="attr">mode</span>: <span class="string">&#x27;development&#x27;</span>, <span class="comment">// 开发模式</span></span><br><span class="line">  <span class="comment">// mode: &#x27;production&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
+<h2 id="Reducer"><a href="#Reducer" class="headerlink" title="Reducer"></a>Reducer</h2><ol>
+<li><p>Store 收到 Action 以后，必须给出一个新的 State，这样 View 才会发生变化。这种 State 的计算过程就叫做 Reducer。</p>
+</li>
+<li><p>Reducer 是一个函数，它接受 Action 和当前 State 作为参数，返回一个新的 State。</p>
+</li>
+</ol>
+<p>Demo:</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> initState = &#123;</span><br><span class="line">    <span class="attr">value</span>: <span class="string">&#x27;init&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> <span class="title function_">reducer</span> = (<span class="params">state = initState, action</span>) =&gt; &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;reducer:&#x27;</span>, state, action);</span><br><span class="line">    <span class="keyword">switch</span>(action.<span class="property">type</span>)&#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;send_type&#x27;</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="title class_">Object</span>.<span class="title function_">assign</span>(&#123;&#125;, state, action);</span><br><span class="line">        <span class="attr">default</span>:</span><br><span class="line">            <span class="keyword">return</span> state;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Store"><a href="#Store" class="headerlink" title="Store"></a>Store</h2><h3 id="StoreApi"><a href="#StoreApi" class="headerlink" title="StoreApi:"></a>StoreApi:</h3><ul>
+<li><p><code>store.subscribe()</code>: 添加一个变化监听器。每当 dispatch action 的时候就会执行，state 树中的一部分可能已经变化。你可以在回调函数里调用<code>getState()</code>来拿到当前 state。</p>
+</li>
+<li><p><code>store.dispatch()</code>是 View 发出 Action 的唯一方法，将使用当前 <code>getState()</code>的结果和传入的 <code>action</code> 以同步方式的调用 store 的 reduce 函数。它的返回值会被作为下一个 state。从现在开始，这就成为了 <code>getState()</code>的返回值，同时变化监听器(change listener)会被触发。</p>
+<blockquote>
+</blockquote>
+</li>
+<li><p>流程：</p>
+<p>组件 – <code>store.dispatch(action)</code> – 触发reducer的执行 – 根据type区分返回的state – 返回值给store – 更新state – <code>store.subscribe(listener)</code>中listener回调函数执行。</p>
+</li>
+</ul>
+<p><img src="/../assets/image-20210309183756689.png" alt="image-20210309183756689"></p>
+<h2 id="React-redux"><a href="#React-redux" class="headerlink" title="React-redux"></a>React-redux</h2><p><img src="/../assets/image-20210309200347890.png" alt="image-20210309200347890"></p>
+<h2 id="provider"><a href="#provider" class="headerlink" title="provider"></a>provider</h2><h2 id="connect"><a href="#connect" class="headerlink" title="connect"></a>connect</h2><p><code>connect</code>方法接受两个参数：<code>mapStateT.oProps</code>和<code>mapDispatchToProps</code>。它们定义了 UI 组件的业务逻辑。前者负责输入逻辑，即将<code>state</code>映射到 UI 组件的参数（<code>props</code>），后者负责输出逻辑，即将用户对 UI 组件的操作映射成 Action。</p>
+<ul>
+<li><h3 id="mapStateToProps"><a href="#mapStateToProps" class="headerlink" title="mapStateToProps"></a><code>mapStateToProps</code></h3><p><code>mapStateToProps</code>是一个函数。它的作用就是像它的名字那样，建立一个从（外部的）<code>state</code>对象到（UI 组件的）<code>props</code>对象的映射关系。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">mapStateToProps</span> = (<span class="params">state</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    <span class="attr">todos</span>: <span class="title function_">getVisibleTodos</span>(state.<span class="property">todos</span>, state.<span class="property">visibilityFilter</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>mapStateToProps</code>会订阅 Store，每当<code>state</code>更新的时候，就会自动执行，重新计算 UI 组件的参数，从而触发 UI 组件的重新渲染。</p>
+<p><code>mapStateToProps</code>的第一个参数总是<code>state</code>对象，还可以使用第二个参数，代表容器组件的<code>props</code>对象。</p>
+<p><code>connect</code>方法可以省略<code>mapStateToProps</code>参数，那样的话，UI 组件就不会订阅Store，就是说 Store 的更新不会引起 UI 组件的更新。</p>
+</li>
+<li><h3 id="mapDispatchToProps"><a href="#mapDispatchToProps" class="headerlink" title="mapDispatchToProps"></a><code>mapDispatchToProps</code></h3><p><code>mapDispatchToProps</code>是<code>connect</code>函数的第二个参数，用来建立 UI 组件的参数到<code>store.dispatch</code>方法的映射</p>
+<p>如果<code>mapDispatchToProps</code>是一个函数，会得到<code>dispatch</code>和<code>ownProps</code></p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">mapDispatchToProps</span> = (<span class="params"></span></span><br><span class="line"><span class="params">  dispatch,</span></span><br><span class="line"><span class="params">  ownProps</span></span><br><span class="line"><span class="params"></span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    <span class="attr">onClick</span>: <span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="title function_">dispatch</span>(&#123;</span><br><span class="line">        <span class="attr">type</span>: <span class="string">&#x27;SET_VISIBILITY_FILTER&#x27;</span>,</span><br><span class="line">        <span class="attr">filter</span>: ownProps.<span class="property">filter</span></span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果<code>mapDispatchToProps</code>是一个对象，它的每个键名也是对应 UI 组件的同名参数，键值应该是一个函数，会被当作 Action creator ，返回的 Action 会由 Redux 自动发出(dispatch).</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> mapDispatchToProps = &#123;</span><br><span class="line">  <span class="attr">onClick</span>: <span class="function">(<span class="params">filter</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="attr">type</span>: <span class="string">&#x27;SET_VISIBILITY_FILTER&#x27;</span>,</span><br><span class="line">    <span class="attr">filter</span>: filter</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="计数器Demo："><a href="#计数器Demo：" class="headerlink" title="计数器Demo："></a>计数器Demo：</h2><p>两个组件，按钮ComA和文本ComB，点击按钮+1，用react-redux实现通信的过程</p>
+</li>
+</ul>
+<p><img src="/../assets/image-20210310173423401.png" alt="image-20210310173423401"></p>
 ]]></content>
       <categories>
-        <category>打包工具</category>
+        <category>状态管理</category>
       </categories>
       <tags>
-        <tag>Webpack</tag>
-        <tag>打包工具</tag>
+        <tag>JavaScript</tag>
+        <tag>React</tag>
+        <tag>Redux</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>序 / INTRO</title>
-    <url>/2024/09/30/intro/</url>
-    <content><![CDATA[]]></content>
   </entry>
   <entry>
     <title>require() 源码解读</title>
@@ -1859,6 +1952,11 @@ webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后�
       </tags>
   </entry>
   <entry>
+    <title>序 / INTRO</title>
+    <url>/2024/09/30/intro/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
     <title>书单 / BookList</title>
     <url>/2024/09/26/%E4%B9%A6%E5%8D%95/</url>
     <content><![CDATA[<h4 id="专业向"><a href="#专业向" class="headerlink" title="专业向"></a>专业向</h4><h5 id="计算机（2）"><a href="#计算机（2）" class="headerlink" title="计算机（2）"></a>计算机（2）</h5><p><a href="https://markdown.com.cn/">你所不知道的JavaScript</a><br><a href="https://markdown.com.cn/">深入浅出NodeJS</a><br><a href="https://markdown.com.cn/">Webpack实战：入门、进阶与调优</a><br><a href="https://markdown.com.cn/">TypeScript图形渲染实战</a></p>
@@ -1871,6 +1969,46 @@ webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后�
       <categories>
         <category>生活</category>
       </categories>
+  </entry>
+  <entry>
+    <title>函数式编程</title>
+    <url>/2021/10/08/%E4%BB%80%E4%B9%88%E6%98%AF%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/</url>
+    <content><![CDATA[<h4 id="什么是函数式编程？"><a href="#什么是函数式编程？" class="headerlink" title="什么是函数式编程？"></a>什么是函数式编程？</h4><p>函数式编程具有五个鲜明的特点。</p>
+<p><strong>1. 函数是”第一等公民”</strong></p>
+<p>指的是函数与其他数据类型一样，处于平等地位，可以赋值给其他变量，也可以作为参数，传入另一个函数，或者作为别的函数的返回值。</p>
+<p>举例来说，下面代码中的print变量就是一个函数，可以作为另一个函数的参数。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">　　<span class="keyword">var</span> print = <span class="keyword">function</span>(<span class="params">i</span>)&#123; <span class="variable language_">console</span>.<span class="title function_">log</span>(i);&#125;;</span><br><span class="line"></span><br><span class="line">　　[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>].<span class="title function_">forEach</span>(print);</span><br></pre></td></tr></table></figure>
+
+<p><strong>2. 只用”表达式”，不用”语句”</strong></p>
+<p>“表达式”（expression）是一个单纯的运算过程，总是有返回值；”语句”（statement）是执行某种操作，没有返回值。函数式编程要求，只使用表达式，不使用语句。也就是说，每一步都是单纯的运算，而且都有返回值。</p>
+<p>原因是函数式编程的开发动机，一开始就是为了处理运算（computation），不考虑系统的读写（I&#x2F;O）。”语句”属于对系统的读写操作，所以就被排斥在外。</p>
+<p>当然，实际应用中，不做I&#x2F;O是不可能的。因此，编程过程中，函数式编程只要求把I&#x2F;O限制到最小，不要有不必要的读写行为，保持计算过程的单纯性。</p>
+<span id="more"></span>
+
+<p><strong>3. 没有”副作用”</strong></p>
+<p>所谓”副作用”（side effect），指的是函数内部与外部互动（最典型的情况，就是修改全局变量的值），产生运算以外的其他结果。</p>
+<p>函数式编程强调没有”副作用”，意味着函数要保持独立，所有功能就是返回一个新的值，没有其他行为，尤其是不得修改外部变量的值。</p>
+<p><strong>4. 不修改状态</strong></p>
+<p>上一点已经提到，函数式编程只是返回新的值，不修改系统变量。因此，不修改变量，也是它的一个重要特点。</p>
+<p>在其他类型的语言中，变量往往用来保存”状态”（state）。不修改变量，意味着状态不能保存在变量中。函数式编程使用参数保存状态，最好的例子就是递归。下面的代码是一个将字符串逆序排列的函数，它演示了不同的参数如何决定了运算所处的”状态”。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function reverse(string) &#123;</span><br><span class="line">　　if(string.length == 0) &#123;</span><br><span class="line">　　　　return string;</span><br><span class="line">　　&#125; else &#123;</span><br><span class="line">　　　　return reverse(string.substring(1, string.length)) + string.substring(0, 1);</span><br><span class="line">　　&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>由于使用了递归，函数式语言的运行速度比较慢，这是它长期不能在业界推广的主要原因。</p>
+<p><strong>5. 引用透明</strong></p>
+<p>引用透明（Referential transparency），指的是函数的运行不依赖于外部变量或”状态”，只依赖于输入的参数，任何时候只要参数相同，引用函数所得到的返回值总是相同的。</p>
+<p>有了前面的第三点和第四点，这点是很显然的。其他类型的语言，函数的返回值往往与系统状态有关，不同的状态之下，返回值是不一样的。这就叫”引用不透明”，很不利于观察和理解程序的行为。</p>
+<h4 id="函数式编程的意义"><a href="#函数式编程的意义" class="headerlink" title="函数式编程的意义"></a>函数式编程的意义</h4><p><strong>1. 代码简洁，开发快速</strong></p>
+<p>函数式编程大量使用函数，减少了代码的重复，因此程序比较短，开发速度较快。</p>
+<p><strong>2. 更方便的代码管理</strong></p>
+<p>函数式编程不依赖、也不会改变外界的状态，只要给定输入参数，返回的结果必定相同。因此，每一个函数都可以被看做独立单元，很有利于进行单元测试（unit testing）和除错（debugging），以及模块化组合。</p>
+]]></content>
+      <categories>
+        <category>Chore</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>Functional Programming</tag>
+      </tags>
   </entry>
   <entry>
     <title>如何利用css var做一个dark mode方案</title>
@@ -1983,46 +2121,6 @@ webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后�
       </categories>
       <tags>
         <tag>CSS</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>函数式编程</title>
-    <url>/2021/10/08/%E4%BB%80%E4%B9%88%E6%98%AF%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/</url>
-    <content><![CDATA[<h4 id="什么是函数式编程？"><a href="#什么是函数式编程？" class="headerlink" title="什么是函数式编程？"></a>什么是函数式编程？</h4><p>函数式编程具有五个鲜明的特点。</p>
-<p><strong>1. 函数是”第一等公民”</strong></p>
-<p>指的是函数与其他数据类型一样，处于平等地位，可以赋值给其他变量，也可以作为参数，传入另一个函数，或者作为别的函数的返回值。</p>
-<p>举例来说，下面代码中的print变量就是一个函数，可以作为另一个函数的参数。</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">　　<span class="keyword">var</span> print = <span class="keyword">function</span>(<span class="params">i</span>)&#123; <span class="variable language_">console</span>.<span class="title function_">log</span>(i);&#125;;</span><br><span class="line"></span><br><span class="line">　　[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>].<span class="title function_">forEach</span>(print);</span><br></pre></td></tr></table></figure>
-
-<p><strong>2. 只用”表达式”，不用”语句”</strong></p>
-<p>“表达式”（expression）是一个单纯的运算过程，总是有返回值；”语句”（statement）是执行某种操作，没有返回值。函数式编程要求，只使用表达式，不使用语句。也就是说，每一步都是单纯的运算，而且都有返回值。</p>
-<p>原因是函数式编程的开发动机，一开始就是为了处理运算（computation），不考虑系统的读写（I&#x2F;O）。”语句”属于对系统的读写操作，所以就被排斥在外。</p>
-<p>当然，实际应用中，不做I&#x2F;O是不可能的。因此，编程过程中，函数式编程只要求把I&#x2F;O限制到最小，不要有不必要的读写行为，保持计算过程的单纯性。</p>
-<span id="more"></span>
-
-<p><strong>3. 没有”副作用”</strong></p>
-<p>所谓”副作用”（side effect），指的是函数内部与外部互动（最典型的情况，就是修改全局变量的值），产生运算以外的其他结果。</p>
-<p>函数式编程强调没有”副作用”，意味着函数要保持独立，所有功能就是返回一个新的值，没有其他行为，尤其是不得修改外部变量的值。</p>
-<p><strong>4. 不修改状态</strong></p>
-<p>上一点已经提到，函数式编程只是返回新的值，不修改系统变量。因此，不修改变量，也是它的一个重要特点。</p>
-<p>在其他类型的语言中，变量往往用来保存”状态”（state）。不修改变量，意味着状态不能保存在变量中。函数式编程使用参数保存状态，最好的例子就是递归。下面的代码是一个将字符串逆序排列的函数，它演示了不同的参数如何决定了运算所处的”状态”。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function reverse(string) &#123;</span><br><span class="line">　　if(string.length == 0) &#123;</span><br><span class="line">　　　　return string;</span><br><span class="line">　　&#125; else &#123;</span><br><span class="line">　　　　return reverse(string.substring(1, string.length)) + string.substring(0, 1);</span><br><span class="line">　　&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>由于使用了递归，函数式语言的运行速度比较慢，这是它长期不能在业界推广的主要原因。</p>
-<p><strong>5. 引用透明</strong></p>
-<p>引用透明（Referential transparency），指的是函数的运行不依赖于外部变量或”状态”，只依赖于输入的参数，任何时候只要参数相同，引用函数所得到的返回值总是相同的。</p>
-<p>有了前面的第三点和第四点，这点是很显然的。其他类型的语言，函数的返回值往往与系统状态有关，不同的状态之下，返回值是不一样的。这就叫”引用不透明”，很不利于观察和理解程序的行为。</p>
-<h4 id="函数式编程的意义"><a href="#函数式编程的意义" class="headerlink" title="函数式编程的意义"></a>函数式编程的意义</h4><p><strong>1. 代码简洁，开发快速</strong></p>
-<p>函数式编程大量使用函数，减少了代码的重复，因此程序比较短，开发速度较快。</p>
-<p><strong>2. 更方便的代码管理</strong></p>
-<p>函数式编程不依赖、也不会改变外界的状态，只要给定输入参数，返回的结果必定相同。因此，每一个函数都可以被看做独立单元，很有利于进行单元测试（unit testing）和除错（debugging），以及模块化组合。</p>
-]]></content>
-      <categories>
-        <category>Chore</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-        <tag>Functional Programming</tag>
       </tags>
   </entry>
   <entry>
@@ -2165,104 +2263,6 @@ webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后�
       </categories>
       <tags>
         <tag>Chrome</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>React组件通信</title>
-    <url>/2021/10/07/React%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1/</url>
-    <content><![CDATA[<h3 id="组件通信"><a href="#组件通信" class="headerlink" title="组件通信"></a>组件通信</h3><h5 id="爷孙组件通信"><a href="#爷孙组件通信" class="headerlink" title="爷孙组件通信"></a>爷孙组件通信</h5><p>爷孙组件通信主要有 3 种方式：</p>
-<ol>
-<li>将孙子组件的 props 封装在一个固定字段中</li>
-<li>通过 children 透传</li>
-<li>通过 context 传递</li>
-</ol>
-<p>假设有个三层组件，爷爷分别给儿子和孙子发红包</p>
-<p>先看青铜解决方案：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Grandpa</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> [someMoneyForMe] = <span class="title function_">useState</span>(<span class="number">100</span>);</span><br><span class="line">  <span class="keyword">const</span> [someMoneyForDaddy] = <span class="title function_">useState</span>(<span class="number">101</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">Daddy</span> <span class="attr">money</span>=<span class="string">&#123;someMoneyForDaddy&#125;</span> <span class="attr">moneyForSon</span>=<span class="string">&#123;someMoneyForMe&#125;</span> /&gt;</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Daddy</span>(<span class="params">props: &#123; money: number; moneyForSon: number &#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; money, moneyForSon &#125; = props;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;daddy&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">h2</span>&gt;</span>This is Daddy, received $&#123;money&#125;<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">Me</span> <span class="attr">money</span>=<span class="string">&#123;moneyForSon&#125;</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Me</span>(<span class="params">props: &#123; money: number &#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; money &#125; = props;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;son&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">h3</span>&gt;</span>This is Me, received $&#123;money&#125;<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>Daddy 组件会透传爷爷给孙子的组件给 Me。这种方案的缺点很明显，以后爷爷要给 Daddy 和 Me 发糖果的时候，Daddy 还得加字段。</p>
-<p><strong>将孙子组件的 props 封装在一个固定字段中</strong></p>
-<p>按照 1 的方案，我们可以固定给 Daddy 添加一个 sonProps 的字段，然后将 Grandpa 需要传给孙子的状态全部通过 sonProps 传递</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Grandpa</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> [someMoneyForMe] = <span class="title function_">useState</span>(<span class="number">100</span>);</span><br><span class="line">  <span class="keyword">const</span> [someMoneyForDaddy] = <span class="title function_">useState</span>(<span class="number">101</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">Daddy</span> <span class="attr">money</span>=<span class="string">&#123;someMoneyForDaddy&#125;</span> <span class="attr">sonProps</span>=<span class="string">&#123;&#123;money:</span> <span class="attr">someMoneyForMe</span>&#125;&#125; /&gt;</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Daddy</span>(<span class="params">props: &#123; money: number; sonProps: Parameters&lt;<span class="keyword">typeof</span> Me&gt;[<span class="number">0</span>]; &#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; money, sonProps &#125; = props;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;daddy&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">h2</span>&gt;</span>This is Daddy, received $&#123;money&#125;<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">Me</span> &#123;<span class="attr">...sonProps</span>&#125;/&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Me</span>(<span class="params">props: &#123; money: number &#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; money &#125; = props;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;son&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">h3</span>&gt;</span>This is Me, received $&#123;money&#125;<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这样以后要给 Me 加字段，就不用改 Daddy 了。<strong>但要测试 Daddy 时还得 mock Me 组件的数据，Daddy 和 Son 耦合。</strong></p>
-<p><strong>通过 children 透传</strong></p>
-<p>children 类似于 vue 中的 slot，可以完成一些嵌套组件通信的功能</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Grandpa</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> [someMoneyForMe] = <span class="title function_">useState</span>(<span class="number">100</span>);</span><br><span class="line">  <span class="keyword">const</span> [someMoneyForDaddy] = <span class="title function_">useState</span>(<span class="number">101</span>);</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">Daddy</span> <span class="attr">money</span>=<span class="string">&#123;someMoneyForDaddy&#125;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">Me</span> <span class="attr">money</span>=<span class="string">&#123;someMoneyForMe&#125;</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">Daddy</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Daddy</span>(<span class="params">props: &#123; money: number; children?: React.ChildNode &#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; money, children &#125; = props;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;daddy&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">h2</span>&gt;</span>This is Daddy, received $&#123;money&#125;<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      &#123;children&#125;</span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Me</span>(<span class="params">props: &#123; money: number &#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; money &#125; = props;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;son&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">h3</span>&gt;</span>This is Me, received $&#123;money&#125;<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>将 Daddy 的嵌套部分用 children 替代后，解耦了子组件和孙子组件的依赖关系，Daddy 组件更加独立。</p>
-<p>作为替代，也可以传递一个组件实例：</p>
-<p><code><Daddy money=&#123;someMoneyForDaddy&#125; me=&#123;<Me money=&#123;someMoneyForMe&#125; /> </code></p>
-<p><strong>三种方案的决策</strong></p>
-<ol>
-<li>第一种方案一般用于固定结构和跨组件有互相依赖的场景，多见于 UI 框架中的复合组件与原子组件的设计中</li>
-<li>第二种常用在嵌套层级不深的业务代码中，比如表单场景。<strong>优点是顶层 Grandpa 的业务收敛度很高，一眼能看清 UI 结构及状态绑定关系，相当于拍平了 React 组件树</strong></li>
-<li>第三种比较通用，适合复杂嵌套透传场景。缺点是范式代码较多，且会造成 react dev tools 层级过多；Context 无法在父组件看出依赖关系，必须到子组件文件中才能知道数据来源</li>
-</ol>
-]]></content>
-      <categories>
-        <category>React</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-        <tag>Hooks</tag>
-        <tag>React</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>React组件性能优化</title>
-    <url>/2021/10/14/React%E7%BB%84%E4%BB%B6%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</url>
-    <content><![CDATA[<h3 id="React-性能优化思路"><a href="#React-性能优化思路" class="headerlink" title="React 性能优化思路"></a>React 性能优化思路</h3><p>我觉得React 性能优化的理念的主要方向就是这两个：</p>
-<ol>
-<li><strong>减少重新 render 的次数。因为在 React 里最重(花时间最长)的一块就是 reconciliation(简单的可以理解为 diff)，如果不 render，就不会 reconciliation。</strong></li>
-<li><strong>减少计算的量。主要是减少重复计算，对于函数式组件来说，每次 render 都会重新从头开始执行函数调用。</strong></li>
-</ol>
-<p>在使用类组件的时候，使用的 React 优化 API 主要是：<code>shouldComponentUpdate</code>和  <code>PureComponent</code>，这两个 API 所提供的解决思路都是为了<strong>减少重新 render 的次数</strong>，主要是减少父组件更新而子组件也更新的情况。</p>
-<p>但是在函数式组件里面没有声明周期也没有类，那如何来做性能优化呢？</p>
-<p><strong>先分个类，组件什么时候会重新执行？</strong></p>
-<ol>
-<li><strong>组件自己的状态改变</strong></li>
-<li><strong>父组件重新渲染，导致子组件重新渲染，但是父组件的 props 没有改变</strong></li>
-<li><strong>父组件重新渲染，导致子组件重新渲染，但是父组件传递的 props 改变</strong></li>
-</ol>
-<p>针对第二点，在FC中，可以通过memo减少rerender</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Component</span>(<span class="params">props</span>) &#123;</span><br><span class="line">   <span class="comment">/* 使用 props 渲染 */</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> <span class="title class_">MyComponent</span> = <span class="title class_">React</span>.<span class="title function_">memo</span>(<span class="title class_">Component</span>);</span><br></pre></td></tr></table></figure>
-
-<p>通过 <code>React.memo</code> 包裹的组件在 props 不变的情况下，这个被包裹的组件是不会重新渲染的(相当于PureComonent)</p>
-<p>默认情况下其只会对 props 的复杂对象做浅层对比(浅层对比就是只会对比前后两次 props 对象引用是否相同，不会对比对象里面的内容是否相同)，如果你想要控制对比过程，那么请将自定义的比较函数通过第二个参数传入来实现。</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">MyComponent</span>(<span class="params">props</span>) &#123;</span><br><span class="line">  <span class="comment">/* 使用 props 渲染 */</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">areEqual</span>(<span class="params">prevProps, nextProps</span>) &#123;</span><br><span class="line">  <span class="comment">/*</span></span><br><span class="line"><span class="comment">  如果把 nextProps 传入 render 方法的返回结果与</span></span><br><span class="line"><span class="comment">  将 prevProps 传入 render 方法的返回结果一致则返回 true，</span></span><br><span class="line"><span class="comment">  否则返回 false</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">React</span>.<span class="title function_">memo</span>(<span class="title class_">MyComponent</span>, areEqual);</span><br></pre></td></tr></table></figure>
-
-<h3 id="组件性能优化"><a href="#组件性能优化" class="headerlink" title="组件性能优化"></a>组件性能优化</h3><p>React 组件是一个树形结构，且每个节点都是懒计算的（类似于 Thunk 的概念）。当一个节点不需要重新计算（重绘）时，他的子树都不会计算（重绘）。<strong>所以我们做性能优化的目标，就是在尽量离根节点近的位置，拦截不必要的节点重算，从而减少重绘的计算量。</strong></p>
-<h5 id="React-memo"><a href="#React-memo" class="headerlink" title="React.memo"></a>React.memo</h5><p>阻止节点重绘主要通过 React.memo 方法生成特殊的组件节点。它接受两个传参：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="title class_">React</span>.<span class="title function_">memo</span>(<span class="title class_">Component</span>, areEqual);</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>Component：组件</p>
-</li>
-<li><p>areEqual：比较函数<br>比较函数的入参有两个，arg0 为 前一次渲染的 props, arg1 为本次渲染的 props。如果返回 true，则该节点本次渲染将被标记为无需重新计算，从而使其所有子节点、孙子节点都无需计算。<br>areEqual 如果不传，默认使用</p>
-</li>
-</ul>
-<figure class="highlight lisp"><table><tr><td class="code"><pre><span class="line">(<span class="name">prevProps</span>, nextProps) =&gt; shallowEqual(<span class="name">prevProps</span>, nextProps)</span><br></pre></td></tr></table></figure>
-
-<p>做为比较函数。</p>
-<h5 id="如何定位优化点"><a href="#如何定位优化点" class="headerlink" title="如何定位优化点"></a>如何定位优化点</h5><p>使用前一章节提到 React DevTools 中的 Profiling 功能，record 发生卡顿的操作，从耗时长的组件逐个查看，找到那些跟此次操作无关的上层渲染节点，尝试使用 React.memo 包裹这些组件。</p>
-<h5 id="不要为了优化而优化"><a href="#不要为了优化而优化" class="headerlink" title="不要为了优化而优化"></a>不要为了优化而优化</h5><p>在没有性能问题前，不用去纠结是否要用 Profiling、React.memo、useMemo、useCallback 去优化性能，这些不一定能带来性能提升，反而肯定会带来首屏的性能下降。大多数情况下，React 现有算法以能满足性能需求。</p>
-<h5 id="对于一个组件，有三样东西会让她重绘"><a href="#对于一个组件，有三样东西会让她重绘" class="headerlink" title="对于一个组件，有三样东西会让她重绘"></a>对于一个组件，有三样东西会让她重绘</h5><ol>
-<li>State 变更</li>
-<li>依赖的 context 变更</li>
-<li>父组件重绘</li>
-</ol>
-<p>所以用 React.memo 包裹之后，并不是说性能就会有多大的提高。如果组件中依赖的 context 中，有一部分并不是此组件需要的数据，但会经常变更，也会导致组件经常重绘。这时候我们可以增加一层组件，把依赖 context 中的数据，通过增加的一层父组件取出来，然后通过 props 传给真正渲染的组件，把 React.memo 加在真正渲染的组件上，来达到屏蔽 context 变更引起的重绘问题。</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; useMemo, useContext &#125; <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">SomeContext</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;./SomeContext&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">PickContextData</span>(<span class="params">props</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> ctx = <span class="title function_">useContext</span>(<span class="title class_">SomeContext</span>);</span><br><span class="line">  <span class="keyword">const</span> someDataFromContext = <span class="title function_">useMemo</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> ctx.<span class="property">data</span>;</span><br><span class="line">  &#125;, [ctx.<span class="property">data</span>]);</span><br><span class="line">  <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">RenderComponent</span> <span class="attr">data</span>=<span class="string">&#123;someDataFromContext&#125;</span> &#123;<span class="attr">...props</span>&#125; /&gt;</span></span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title class_">RenderComponent</span> = <span class="title class_">React</span>.<span class="title function_">memo</span>(<span class="function">(<span class="params">props</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// 略</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<p>更通用点，可以封装出 react-redux 的 connect 函数，传入 selector 来取所需的 Context 数据。</p>
-]]></content>
-      <categories>
-        <category>React</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-        <tag>Hooks</tag>
-        <tag>React</tag>
       </tags>
   </entry>
 </search>
