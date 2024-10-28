@@ -138,26 +138,26 @@
 </blockquote>
 <p>上面例子中，<code>useEffect()</code>的参数是一个函数，它就是所要完成的副效应（改变网页标题）。组件加载以后，React 就会执行这个函数。</p>
 <p><code>useEffect()</code>的作用就是指定一个副效应函数，组件每渲染一次，该函数就执行一次。<strong>组件首次在网页 DOM 加载后，副效应函数也会执行。</strong></p>
-<h5 id="useEffect指定依赖项"><a href="#useEffect指定依赖项" class="headerlink" title="useEffect指定依赖项"></a>useEffect指定依赖项</h5><p>有时候，我们不希望<code>useEffect()</code>每次渲染都执行，这时可以使用它的第二个参数，使用一个数组指定副效应函数的依赖项，只有依赖项发生变化，才会执行。</p>
+<h4 id="useEffect指定依赖项"><a href="#useEffect指定依赖项" class="headerlink" title="useEffect指定依赖项"></a>useEffect指定依赖项</h4><p>有时候，我们不希望<code>useEffect()</code>每次渲染都执行，这时可以使用它的第二个参数，使用一个数组指定副效应函数的依赖项，只有依赖项发生变化，才会执行。</p>
 <p>如果上例改为</p>
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Welcome</span>(<span class="params">props</span>) &#123;</span><br><span class="line">  <span class="title function_">useEffect</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">document</span>.<span class="property">title</span> = <span class="string">&#x27;加载完成&#x27;</span>;</span><br><span class="line">  &#125;, []);</span><br><span class="line">  <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>Hello, &#123;props.name&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>便只会在组件首次挂载时执行函数，相当于class component中的componentDidMount</p>
-<h5 id="useEffect-的用途"><a href="#useEffect-的用途" class="headerlink" title="useEffect() 的用途"></a>useEffect() 的用途</h5><p>只要是副效应，都可以使用<code>useEffect()</code>引入。它的常见用途有下面几种。</p>
+<h4 id="useEffect-的用途"><a href="#useEffect-的用途" class="headerlink" title="useEffect() 的用途"></a>useEffect() 的用途</h4><p>只要是副效应，都可以使用<code>useEffect()</code>引入。它的常见用途有下面几种。</p>
 <ul>
 <li>获取数据（data fetching）</li>
 <li>事件监听或订阅（setting up a subscription）</li>
 <li>改变 DOM（changing the DOM）</li>
 <li>输出日志（logging）</li>
 </ul>
-<h5 id="useEffect返回值"><a href="#useEffect返回值" class="headerlink" title="useEffect返回值"></a>useEffect返回值</h5><p>副效应是随着组件加载而发生的，那么组件卸载时，可能需要清理这些副效应。</p>
+<h4 id="useEffect返回值"><a href="#useEffect返回值" class="headerlink" title="useEffect返回值"></a>useEffect返回值</h4><p>副效应是随着组件加载而发生的，那么组件卸载时，可能需要清理这些副效应。</p>
 <p><code>useEffect()</code>允许返回一个函数，在组件卸载时，执行该函数，清理副效应。如果不需要清理副效应，<code>useEffect()</code>就不用返回任何值。</p>
 <blockquote>
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="title function_">useEffect</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> subscription = props.<span class="property">source</span>.<span class="title function_">subscribe</span>();</span><br><span class="line">  <span class="keyword">return</span> <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    subscription.<span class="title function_">unsubscribe</span>();</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;, [props.<span class="property">source</span>]);</span><br></pre></td></tr></table></figure>
 </blockquote>
 <p>上面例子中，<code>useEffect()</code>在组件加载时订阅了一个事件，并且返回一个清理函数，在组件卸载时取消订阅。</p>
 <p><strong>实际使用中，由于副效应函数默认是每次渲染都会执行，所以清理函数不仅会在组件卸载时执行一次，每次副效应函数重新执行之前，也会执行一次，用来清理上一次渲染的副效应。</strong></p>
-<h5 id="useEffect常见问题"><a href="#useEffect常见问题" class="headerlink" title="useEffect常见问题"></a>useEffect常见问题</h5><p><strong>使用useEffect应该在依赖的变量中指明定义的函数会用到哪些state或者props</strong></p>
+<h4 id="useEffect常见问题"><a href="#useEffect常见问题" class="headerlink" title="useEffect常见问题"></a>useEffect常见问题</h4><p><strong>使用useEffect应该在依赖的变量中指明定义的函数会用到哪些state或者props</strong></p>
 <p>effect 可能会使用一些频繁变化的值。可能会忽略依赖列表中 state，但这通常会引起 Bug：<span name = "233"> </span></p>
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Counter</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> [count, setCount] = <span class="title function_">useState</span>(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">  <span class="title function_">useEffect</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> id = <span class="built_in">setInterval</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(count);</span><br><span class="line">      <span class="title function_">setCount</span>(count + <span class="number">1</span>); <span class="comment">// 这个 effect 依赖于 `count` state    </span></span><br><span class="line">    &#125;, <span class="number">1000</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="function">() =&gt;</span> <span class="built_in">clearInterval</span>(id);</span><br><span class="line">  &#125;, []); <span class="comment">// 🔴 Bug: `count` 没有被指定为依赖</span></span><br><span class="line">  <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>&#123;count&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -165,10 +165,14 @@
 <p>指定 <code>[count]</code> 作为依赖列表就能修复这个 Bug，但会导致每次改变发生时定时器都被重置。事实上，每个 <code>setInterval</code> 在被清除前都会调用一次（等于说直接使用 <code>setTimeout</code>就行了）。要解决这个问题，可以使用类似setState函数式更新的操作，不依赖外部count变量，它允许我们指定 state 该如何改变而不用引用state或者props</p>
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Counter</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> [count, setCount] = <span class="title function_">useState</span>(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">  <span class="title function_">useEffect</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> id = <span class="built_in">setInterval</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="title function_">setCount</span>(<span class="function"><span class="params">c</span> =&gt;</span> c + <span class="number">1</span>); <span class="comment">// ✅ 在这不依赖于外部的 `count` 变量    &#125;, 1000);</span></span><br><span class="line">    <span class="keyword">return</span> <span class="function">() =&gt;</span> <span class="built_in">clearInterval</span>(id);</span><br><span class="line">  &#125;, []); <span class="comment">// ✅ 我们的 effect 不使用组件作用域中的任何变量</span></span><br><span class="line">  <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>&#123;count&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h5 id="useLayoutEffect-vs-useEffect"><a href="#useLayoutEffect-vs-useEffect" class="headerlink" title="useLayoutEffect vs. useEffect"></a>useLayoutEffect vs. useEffect</h5><p>useLayoutEffect 和 useEffect 的传参一致，但有以下区别</p>
+<h4 id="useLayoutEffect-vs-useEffect"><a href="#useLayoutEffect-vs-useEffect" class="headerlink" title="useLayoutEffect vs useEffect"></a>useLayoutEffect vs useEffect</h4><blockquote>
+<p>useLayoutEffect 和 useEffect 的传参一致，但有以下区别</p>
+</blockquote>
 <ol>
-<li>执行时机不同。useLayoutEffect 的入参函数会在 react 更新 DOM 树后同步调用（<strong>其实就是dom树更新，浏览器重绘前会执行useLayoutEffect里的函数，此时比如去拿 style 或者 dom 尺寸，都是游览器即将渲染的那一次的尺寸，而不是现在页面上展示的尺寸</strong>），useEffect 为异步调用（useEffect 则肯定是在游览器渲染完后才执行），所以应该尽可能使用标准的 <code>useEffect</code> 以避免阻塞视觉更新</li>
-<li>useLayoutEffect 在 development 模式下 SSR 会有警告⚠️</li>
+<li><p><strong>执行时机不同</strong><br>useLayoutEffect 的入参函数会在 react 更新 DOM 树后同步调用（<strong>其实就是dom树更新，浏览器重绘前会执行useLayoutEffect里的函数，此时比如去拿 style 或者 dom 尺寸，都是游览器即将渲染的那一次的尺寸，而不是现在页面上展示的尺寸</strong>），useEffect 为异步调用（useEffect 则肯定是在游览器渲染完后才执行），所以应该尽可能使用标准的 <code>useEffect</code> 以避免阻塞视觉更新</p>
+</li>
+<li><p><strong>useLayoutEffect 在 development 模式下 SSR 会有警告⚠️</strong></p>
+</li>
 </ol>
 <p>通常情况下 useLayoutEffect 会用在做动效和记录 layout 的一些特殊场景（比如防止渲染闪烁，在渲染前再给你个机会去改 DOM）。一般不需要使用 useLayoutEffect。</p>
 <p>React 组件是一个树形结构，且每个节点都是懒计算的（类似于 Thunk 的概念）。当一个节点不需要重新计算（重绘）时，他的子树都不会计算（重绘）。<strong>所以我们做性能优化的目标，就是在尽量离根节点近的位置，拦截不必要的节点重算，从而减少重绘的计算量。</strong></p>
@@ -195,14 +199,14 @@
 <blockquote>
 <p>不返回变更入口函数。useRef 虽然可以借助 TypeScript 达到语法检测上的 immutable，但实际还是 mutable 的。</p>
 </blockquote>
-<h3 id="useContext"><a href="#useContext" class="headerlink" title="useContext"></a>useContext</h3><h5 id="context简介："><a href="#context简介：" class="headerlink" title="context简介："></a>context简介：</h5><p><code>React.createContext</code> 新建context</p>
+<h3 id="useContext"><a href="#useContext" class="headerlink" title="useContext"></a>useContext</h3><h4 id="context简介："><a href="#context简介：" class="headerlink" title="context简介："></a>context简介：</h4><p><code>React.createContext</code> 新建context</p>
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title class_">MyContext</span> = <span class="title class_">React</span>.<span class="title function_">createContext</span>(defaultValue);</span><br></pre></td></tr></table></figure>
 
 <p>创建一个 Context 对象。当 React 渲染一个订阅了这个 Context 对象的组件，这个组件会从组件树中离自身最近的那个匹配的 <code>Provider</code> 中读取到当前的 context 值。</p>
 <p><strong>只有</strong>当组件所处的树中没有匹配到 Provider 时，其 <code>defaultValue</code> 参数才会生效。此默认值有助于在不使用 Provider 包装组件的情况下对组件进行测试。<strong>注意：将 <code>undefined</code> 传递给 Provider 的 value 时，消费组件的 <code>defaultValue</code> 不会生效。</strong></p>
 <p><code>Context.Provider</code></p>
 <p>每个 Context 对象都会返回一个 Provider React 组件，它允许消费组件订阅 context 的变化。</p>
-<h5 id="useContext使用"><a href="#useContext使用" class="headerlink" title="useContext使用"></a>useContext使用</h5><p>接收一个 context 对象（<code>React.createContext</code> 的返回值）并返回该 context 的当前值。当前的 context 值由上层组件中距离当前组件最近的 <code>&lt;MyContext.Provider&gt;</code> 的 <code>value</code> prop 决定。</p>
+<h4 id="useContext使用"><a href="#useContext使用" class="headerlink" title="useContext使用"></a>useContext使用</h4><p>接收一个 context 对象（<code>React.createContext</code> 的返回值）并返回该 context 的当前值。当前的 context 值由上层组件中距离当前组件最近的 <code>&lt;MyContext.Provider&gt;</code> 的 <code>value</code> prop 决定。</p>
 <p>当组件上层最近的 <code>&lt;MyContext.Provider&gt;</code> 更新时，该 Hook 会触发重渲染，并使用最新传递给 <code>MyContext</code> provider 的 context <code>value</code> 值。即使祖先使用 <a href="https://zh-hans.reactjs.org/docs/react-api.html#reactmemo"><code>React.memo</code></a> 或 <a href="https://zh-hans.reactjs.org/docs/react-component.html#shouldcomponentupdate"><code>shouldComponentUpdate</code></a>，也会在组件本身使用 <code>useContext</code> 时重新渲染。</p>
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">React</span>, &#123; useContext, useState &#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">ThemeContext</span>, themes &#125; <span class="keyword">from</span> <span class="string">&quot;./utils/index&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">function</span> <span class="title function_">App</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> [theme, setTheme] = <span class="title function_">useState</span>(themes.<span class="property">light</span>);</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        <span class="language-xml"><span class="tag">&lt;<span class="name">ThemeContext.Provider</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">            <span class="attr">value</span>=<span class="string">&#123;&#123;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">                <span class="attr">theme</span>,</span></span></span><br><span class="line"><span class="tag"><span class="language-xml">                <span class="attr">toggle:</span> () =&gt;</span></span></span><br><span class="line"><span class="language-xml">                    setTheme(</span></span><br><span class="line"><span class="language-xml">                        theme === themes.light ? themes.dark : themes.light</span></span><br><span class="line"><span class="language-xml">                    ),</span></span><br><span class="line"><span class="language-xml">            &#125;&#125;</span></span><br><span class="line"><span class="language-xml">        &gt;</span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">Toolbar</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;/<span class="name">ThemeContext.Provider</span>&gt;</span></span></span><br><span class="line">    );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Toolbar</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        <span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">ThemedButton</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">ThemedButton</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> context = <span class="title function_">useContext</span>(<span class="title class_">ThemeContext</span>);</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        <span class="language-xml"><span class="tag">&lt;<span class="name">button</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">            <span class="attr">style</span>=<span class="string">&#123;&#123;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">                <span class="attr">background:</span> <span class="attr">context.theme.background</span>,</span></span></span><br><span class="line"><span class="tag"><span class="language-xml">                <span class="attr">color:</span> <span class="attr">context.theme.foreground</span>,</span></span></span><br><span class="line"><span class="tag"><span class="language-xml">            &#125;&#125;</span></span></span><br><span class="line"><span class="tag"><span class="language-xml">            <span class="attr">onClick</span>=<span class="string">&#123;context.toggle&#125;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">        &gt;</span></span></span><br><span class="line"><span class="language-xml">            I am styled by theme context!</span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line">    );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -258,6 +262,47 @@
         <tag>Network</tag>
         <tag>Http</tag>
         <tag>Https</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JavaSrcipt原型</title>
+    <url>/2021/02/17/JavaScript%E5%8E%9F%E5%9E%8B/</url>
+    <content><![CDATA[<p>首先，要明确几个点：</p>
+<ol>
+<li><p>在JS里，万物皆对象。方法（Function）是对象，方法的原型(Function.prototype)是对象。因此，它们都会具有对象共有的特点。<br>即：对象具有属性__proto__，可称为隐式原型，一个对象的隐式原型指向构造该对象的构造函数的原型，这也保证了实例能够访问在构造函数原型中定义的属性和方法。</p>
+</li>
+<li><p>方法(Function)<br>方法这个特殊的对象，除了和其他对象一样有上述_proto_属性之外，还有自己特有的属性——原型属性（prototype），这个属性是一个指针，指向一个对象，这个对象的用途就是包含所有实例共享的属性和方法（我们把这个对象叫做原型对象）。原型对象也有一个属性，叫做constructor，这个属性包含了一个指针，指回原构造函数。</p>
+</li>
+</ol>
+<p>好啦，知道了这两个基本点，我们来看看上面这副图。</p>
+<ol>
+<li><p>构造函数Foo()<br>构造函数的原型属性Foo.prototype指向了原型对象，在原型对象里有共有的方法，所有构造函数声明的实例（这里是f1，f2）都可以共享这个方法。</p>
+</li>
+<li><p>原型对象Foo.prototype<br>Foo.prototype保存着实例共享的方法，有一个指针constructor指回构造函数。</p>
+</li>
+<li><p>实例<br>f1和f2是Foo这个对象的两个实例，这两个对象也有属性__proto__，指向构造函数的原型对象，这样子就可以像上面1所说的访问原型对象的所有方法啦。</p>
+<p><img src="/../assets/Snipaste_2021-08-08_20-48-18.png" alt="image-20210808204737157"></p>
+</li>
+</ol>
+<span id="more"></span>
+
+<p>另外：<br>构造函数Foo()除了是方法，也是对象啊，它也有__proto__属性，指向谁呢？<br>指向它的构造函数的原型对象呗。函数的构造函数不就是Function嘛，因此这里的__proto__指向了Function.prototype。<br>其实除了Foo()，Function(), Object()也是一样的道理。</p>
+<p>原型对象也是对象啊，它的__proto__属性，又指向谁呢？<br>同理，指向它的构造函数的原型对象呗。这里是Object.prototype.</p>
+<p>最后，Object.prototype的__proto__属性指向null（原型链的终点）</p>
+<p>总结：</p>
+<ol>
+<li>对象有属性__proto__,指向该对象的构造函数的原型对象。</li>
+<li>方法除了有属性__proto__,还有属性prototype，prototype指向该方法的原型对象。</li>
+<li>标准化获取对象的构造函数的原型：不要用obj.__proto__，用Object.getPrototypeof(obj)。</li>
+</ol>
+<h2 id="原型对象中的constructor"><a href="#原型对象中的constructor" class="headerlink" title="原型对象中的constructor"></a>原型对象中的constructor</h2><p>看一段代码:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function </span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>JavaScript原理</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
       </tags>
   </entry>
   <entry>
@@ -387,47 +432,6 @@
 <div><i>标记清除这个算法把“对象是否不再需要”简化定义为“对象是否可以获得”。这个算法假定设置一个叫做根（root）的对象（在Javascript里，根是全局对象）。垃圾回收器将定期从根开始，找所有从根开始引用的对象，然后找这些对象引用的对象……从根开始，垃圾回收器将找到所有可以获得的对象和收集所有不能获得的对象
 
 <h4 id="这里的‘根’指的应该是上下文对象"><a href="#这里的‘根’指的应该是上下文对象" class="headerlink" title="这里的‘根’指的应该是上下文对象"></a>这里的‘根’指的应该是上下文对象</h4><p>因为通过当前的执行上下文对象可以访问到当前环境中的变量，也可以通过作用域链去访问到其他上下文中的活动对象，从而可以判断得到所有可以获得的对象和所有不能获得的对象</p>
-]]></content>
-      <categories>
-        <category>JavaScript原理</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>JavaSrcipt原型</title>
-    <url>/2021/02/17/JavaScript%E5%8E%9F%E5%9E%8B/</url>
-    <content><![CDATA[<p>首先，要明确几个点：</p>
-<ol>
-<li><p>在JS里，万物皆对象。方法（Function）是对象，方法的原型(Function.prototype)是对象。因此，它们都会具有对象共有的特点。<br>即：对象具有属性__proto__，可称为隐式原型，一个对象的隐式原型指向构造该对象的构造函数的原型，这也保证了实例能够访问在构造函数原型中定义的属性和方法。</p>
-</li>
-<li><p>方法(Function)<br>方法这个特殊的对象，除了和其他对象一样有上述_proto_属性之外，还有自己特有的属性——原型属性（prototype），这个属性是一个指针，指向一个对象，这个对象的用途就是包含所有实例共享的属性和方法（我们把这个对象叫做原型对象）。原型对象也有一个属性，叫做constructor，这个属性包含了一个指针，指回原构造函数。</p>
-</li>
-</ol>
-<p>好啦，知道了这两个基本点，我们来看看上面这副图。</p>
-<ol>
-<li><p>构造函数Foo()<br>构造函数的原型属性Foo.prototype指向了原型对象，在原型对象里有共有的方法，所有构造函数声明的实例（这里是f1，f2）都可以共享这个方法。</p>
-</li>
-<li><p>原型对象Foo.prototype<br>Foo.prototype保存着实例共享的方法，有一个指针constructor指回构造函数。</p>
-</li>
-<li><p>实例<br>f1和f2是Foo这个对象的两个实例，这两个对象也有属性__proto__，指向构造函数的原型对象，这样子就可以像上面1所说的访问原型对象的所有方法啦。</p>
-<p><img src="/../assets/Snipaste_2021-08-08_20-48-18.png" alt="image-20210808204737157"></p>
-</li>
-</ol>
-<span id="more"></span>
-
-<p>另外：<br>构造函数Foo()除了是方法，也是对象啊，它也有__proto__属性，指向谁呢？<br>指向它的构造函数的原型对象呗。函数的构造函数不就是Function嘛，因此这里的__proto__指向了Function.prototype。<br>其实除了Foo()，Function(), Object()也是一样的道理。</p>
-<p>原型对象也是对象啊，它的__proto__属性，又指向谁呢？<br>同理，指向它的构造函数的原型对象呗。这里是Object.prototype.</p>
-<p>最后，Object.prototype的__proto__属性指向null（原型链的终点）</p>
-<p>总结：</p>
-<ol>
-<li>对象有属性__proto__,指向该对象的构造函数的原型对象。</li>
-<li>方法除了有属性__proto__,还有属性prototype，prototype指向该方法的原型对象。</li>
-<li>标准化获取对象的构造函数的原型：不要用obj.__proto__，用Object.getPrototypeof(obj)。</li>
-</ol>
-<h2 id="原型对象中的constructor"><a href="#原型对象中的constructor" class="headerlink" title="原型对象中的constructor"></a>原型对象中的constructor</h2><p>看一段代码:</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function </span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>JavaScript原理</category>
@@ -1371,6 +1375,104 @@ C组件: 读取A组件传入的数据显示 &#123;this.props.data&#125;
       </tags>
   </entry>
   <entry>
+    <title>React组件性能优化</title>
+    <url>/2021/10/14/React%E7%BB%84%E4%BB%B6%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</url>
+    <content><![CDATA[<h3 id="React-性能优化思路"><a href="#React-性能优化思路" class="headerlink" title="React 性能优化思路"></a>React 性能优化思路</h3><p>我觉得React 性能优化的理念的主要方向就是这两个：</p>
+<ol>
+<li><strong>减少重新 render 的次数。因为在 React 里最重(花时间最长)的一块就是 reconciliation(简单的可以理解为 diff)，如果不 render，就不会 reconciliation。</strong></li>
+<li><strong>减少计算的量。主要是减少重复计算，对于函数式组件来说，每次 render 都会重新从头开始执行函数调用。</strong></li>
+</ol>
+<p>在使用类组件的时候，使用的 React 优化 API 主要是：<code>shouldComponentUpdate</code>和  <code>PureComponent</code>，这两个 API 所提供的解决思路都是为了<strong>减少重新 render 的次数</strong>，主要是减少父组件更新而子组件也更新的情况。</p>
+<p>但是在函数式组件里面没有声明周期也没有类，那如何来做性能优化呢？</p>
+<p><strong>先分个类，组件什么时候会重新执行？</strong></p>
+<ol>
+<li><strong>组件自己的状态改变</strong></li>
+<li><strong>父组件重新渲染，导致子组件重新渲染，但是父组件的 props 没有改变</strong></li>
+<li><strong>父组件重新渲染，导致子组件重新渲染，但是父组件传递的 props 改变</strong></li>
+</ol>
+<p>针对第二点，在FC中，可以通过memo减少rerender</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Component</span>(<span class="params">props</span>) &#123;</span><br><span class="line">   <span class="comment">/* 使用 props 渲染 */</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> <span class="title class_">MyComponent</span> = <span class="title class_">React</span>.<span class="title function_">memo</span>(<span class="title class_">Component</span>);</span><br></pre></td></tr></table></figure>
+
+<p>通过 <code>React.memo</code> 包裹的组件在 props 不变的情况下，这个被包裹的组件是不会重新渲染的(相当于PureComonent)</p>
+<p>默认情况下其只会对 props 的复杂对象做浅层对比(浅层对比就是只会对比前后两次 props 对象引用是否相同，不会对比对象里面的内容是否相同)，如果你想要控制对比过程，那么请将自定义的比较函数通过第二个参数传入来实现。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">MyComponent</span>(<span class="params">props</span>) &#123;</span><br><span class="line">  <span class="comment">/* 使用 props 渲染 */</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">areEqual</span>(<span class="params">prevProps, nextProps</span>) &#123;</span><br><span class="line">  <span class="comment">/*</span></span><br><span class="line"><span class="comment">  如果把 nextProps 传入 render 方法的返回结果与</span></span><br><span class="line"><span class="comment">  将 prevProps 传入 render 方法的返回结果一致则返回 true，</span></span><br><span class="line"><span class="comment">  否则返回 false</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">React</span>.<span class="title function_">memo</span>(<span class="title class_">MyComponent</span>, areEqual);</span><br></pre></td></tr></table></figure>
+
+<h3 id="组件性能优化"><a href="#组件性能优化" class="headerlink" title="组件性能优化"></a>组件性能优化</h3><p>React 组件是一个树形结构，且每个节点都是懒计算的（类似于 Thunk 的概念）。当一个节点不需要重新计算（重绘）时，他的子树都不会计算（重绘）。<strong>所以我们做性能优化的目标，就是在尽量离根节点近的位置，拦截不必要的节点重算，从而减少重绘的计算量。</strong></p>
+<h5 id="React-memo"><a href="#React-memo" class="headerlink" title="React.memo"></a>React.memo</h5><p>阻止节点重绘主要通过 React.memo 方法生成特殊的组件节点。它接受两个传参：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="title class_">React</span>.<span class="title function_">memo</span>(<span class="title class_">Component</span>, areEqual);</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>Component：组件</p>
+</li>
+<li><p>areEqual：比较函数<br>比较函数的入参有两个，arg0 为 前一次渲染的 props, arg1 为本次渲染的 props。如果返回 true，则该节点本次渲染将被标记为无需重新计算，从而使其所有子节点、孙子节点都无需计算。<br>areEqual 如果不传，默认使用</p>
+</li>
+</ul>
+<figure class="highlight lisp"><table><tr><td class="code"><pre><span class="line">(<span class="name">prevProps</span>, nextProps) =&gt; shallowEqual(<span class="name">prevProps</span>, nextProps)</span><br></pre></td></tr></table></figure>
+
+<p>做为比较函数。</p>
+<h5 id="如何定位优化点"><a href="#如何定位优化点" class="headerlink" title="如何定位优化点"></a>如何定位优化点</h5><p>使用前一章节提到 React DevTools 中的 Profiling 功能，record 发生卡顿的操作，从耗时长的组件逐个查看，找到那些跟此次操作无关的上层渲染节点，尝试使用 React.memo 包裹这些组件。</p>
+<h5 id="不要为了优化而优化"><a href="#不要为了优化而优化" class="headerlink" title="不要为了优化而优化"></a>不要为了优化而优化</h5><p>在没有性能问题前，不用去纠结是否要用 Profiling、React.memo、useMemo、useCallback 去优化性能，这些不一定能带来性能提升，反而肯定会带来首屏的性能下降。大多数情况下，React 现有算法以能满足性能需求。</p>
+<h5 id="对于一个组件，有三样东西会让她重绘"><a href="#对于一个组件，有三样东西会让她重绘" class="headerlink" title="对于一个组件，有三样东西会让她重绘"></a>对于一个组件，有三样东西会让她重绘</h5><ol>
+<li>State 变更</li>
+<li>依赖的 context 变更</li>
+<li>父组件重绘</li>
+</ol>
+<p>所以用 React.memo 包裹之后，并不是说性能就会有多大的提高。如果组件中依赖的 context 中，有一部分并不是此组件需要的数据，但会经常变更，也会导致组件经常重绘。这时候我们可以增加一层组件，把依赖 context 中的数据，通过增加的一层父组件取出来，然后通过 props 传给真正渲染的组件，把 React.memo 加在真正渲染的组件上，来达到屏蔽 context 变更引起的重绘问题。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; useMemo, useContext &#125; <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">SomeContext</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;./SomeContext&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">PickContextData</span>(<span class="params">props</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> ctx = <span class="title function_">useContext</span>(<span class="title class_">SomeContext</span>);</span><br><span class="line">  <span class="keyword">const</span> someDataFromContext = <span class="title function_">useMemo</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> ctx.<span class="property">data</span>;</span><br><span class="line">  &#125;, [ctx.<span class="property">data</span>]);</span><br><span class="line">  <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">RenderComponent</span> <span class="attr">data</span>=<span class="string">&#123;someDataFromContext&#125;</span> &#123;<span class="attr">...props</span>&#125; /&gt;</span></span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title class_">RenderComponent</span> = <span class="title class_">React</span>.<span class="title function_">memo</span>(<span class="function">(<span class="params">props</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// 略</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>更通用点，可以封装出 react-redux 的 connect 函数，传入 selector 来取所需的 Context 数据。</p>
+]]></content>
+      <categories>
+        <category>React</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>Hooks</tag>
+        <tag>React</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>React组件通信</title>
+    <url>/2021/10/07/React%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1/</url>
+    <content><![CDATA[<h3 id="组件通信"><a href="#组件通信" class="headerlink" title="组件通信"></a>组件通信</h3><h5 id="爷孙组件通信"><a href="#爷孙组件通信" class="headerlink" title="爷孙组件通信"></a>爷孙组件通信</h5><p>爷孙组件通信主要有 3 种方式：</p>
+<ol>
+<li>将孙子组件的 props 封装在一个固定字段中</li>
+<li>通过 children 透传</li>
+<li>通过 context 传递</li>
+</ol>
+<p>假设有个三层组件，爷爷分别给儿子和孙子发红包</p>
+<p>先看青铜解决方案：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Grandpa</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> [someMoneyForMe] = <span class="title function_">useState</span>(<span class="number">100</span>);</span><br><span class="line">  <span class="keyword">const</span> [someMoneyForDaddy] = <span class="title function_">useState</span>(<span class="number">101</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">Daddy</span> <span class="attr">money</span>=<span class="string">&#123;someMoneyForDaddy&#125;</span> <span class="attr">moneyForSon</span>=<span class="string">&#123;someMoneyForMe&#125;</span> /&gt;</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Daddy</span>(<span class="params">props: &#123; money: number; moneyForSon: number &#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; money, moneyForSon &#125; = props;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;daddy&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">h2</span>&gt;</span>This is Daddy, received $&#123;money&#125;<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">Me</span> <span class="attr">money</span>=<span class="string">&#123;moneyForSon&#125;</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Me</span>(<span class="params">props: &#123; money: number &#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; money &#125; = props;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;son&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">h3</span>&gt;</span>This is Me, received $&#123;money&#125;<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Daddy 组件会透传爷爷给孙子的组件给 Me。这种方案的缺点很明显，以后爷爷要给 Daddy 和 Me 发糖果的时候，Daddy 还得加字段。</p>
+<p><strong>将孙子组件的 props 封装在一个固定字段中</strong></p>
+<p>按照 1 的方案，我们可以固定给 Daddy 添加一个 sonProps 的字段，然后将 Grandpa 需要传给孙子的状态全部通过 sonProps 传递</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Grandpa</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> [someMoneyForMe] = <span class="title function_">useState</span>(<span class="number">100</span>);</span><br><span class="line">  <span class="keyword">const</span> [someMoneyForDaddy] = <span class="title function_">useState</span>(<span class="number">101</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">Daddy</span> <span class="attr">money</span>=<span class="string">&#123;someMoneyForDaddy&#125;</span> <span class="attr">sonProps</span>=<span class="string">&#123;&#123;money:</span> <span class="attr">someMoneyForMe</span>&#125;&#125; /&gt;</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Daddy</span>(<span class="params">props: &#123; money: number; sonProps: Parameters&lt;<span class="keyword">typeof</span> Me&gt;[<span class="number">0</span>]; &#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; money, sonProps &#125; = props;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;daddy&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">h2</span>&gt;</span>This is Daddy, received $&#123;money&#125;<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">Me</span> &#123;<span class="attr">...sonProps</span>&#125;/&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Me</span>(<span class="params">props: &#123; money: number &#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; money &#125; = props;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;son&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">h3</span>&gt;</span>This is Me, received $&#123;money&#125;<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样以后要给 Me 加字段，就不用改 Daddy 了。<strong>但要测试 Daddy 时还得 mock Me 组件的数据，Daddy 和 Son 耦合。</strong></p>
+<p><strong>通过 children 透传</strong></p>
+<p>children 类似于 vue 中的 slot，可以完成一些嵌套组件通信的功能</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Grandpa</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> [someMoneyForMe] = <span class="title function_">useState</span>(<span class="number">100</span>);</span><br><span class="line">  <span class="keyword">const</span> [someMoneyForDaddy] = <span class="title function_">useState</span>(<span class="number">101</span>);</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">Daddy</span> <span class="attr">money</span>=<span class="string">&#123;someMoneyForDaddy&#125;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">Me</span> <span class="attr">money</span>=<span class="string">&#123;someMoneyForMe&#125;</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">Daddy</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Daddy</span>(<span class="params">props: &#123; money: number; children?: React.ChildNode &#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; money, children &#125; = props;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;daddy&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">h2</span>&gt;</span>This is Daddy, received $&#123;money&#125;<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      &#123;children&#125;</span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Me</span>(<span class="params">props: &#123; money: number &#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; money &#125; = props;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;son&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">h3</span>&gt;</span>This is Me, received $&#123;money&#125;<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>将 Daddy 的嵌套部分用 children 替代后，解耦了子组件和孙子组件的依赖关系，Daddy 组件更加独立。</p>
+<p>作为替代，也可以传递一个组件实例：</p>
+<p><code><Daddy money=&#123;someMoneyForDaddy&#125; me=&#123;<Me money=&#123;someMoneyForMe&#125; /> </code></p>
+<p><strong>三种方案的决策</strong></p>
+<ol>
+<li>第一种方案一般用于固定结构和跨组件有互相依赖的场景，多见于 UI 框架中的复合组件与原子组件的设计中</li>
+<li>第二种常用在嵌套层级不深的业务代码中，比如表单场景。<strong>优点是顶层 Grandpa 的业务收敛度很高，一眼能看清 UI 结构及状态绑定关系，相当于拍平了 React 组件树</strong></li>
+<li>第三种比较通用，适合复杂嵌套透传场景。缺点是范式代码较多，且会造成 react dev tools 层级过多；Context 无法在父组件看出依赖关系，必须到子组件文件中才能知道数据来源</li>
+</ol>
+]]></content>
+      <categories>
+        <category>React</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>Hooks</tag>
+        <tag>React</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Redux</title>
     <url>/2021/10/11/Redux/</url>
     <content><![CDATA[<ul>
@@ -1446,104 +1548,6 @@ C组件: 读取A组件传入的数据显示 &#123;this.props.data&#125;
         <tag>JavaScript</tag>
         <tag>React</tag>
         <tag>Redux</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>React组件通信</title>
-    <url>/2021/10/07/React%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1/</url>
-    <content><![CDATA[<h3 id="组件通信"><a href="#组件通信" class="headerlink" title="组件通信"></a>组件通信</h3><h5 id="爷孙组件通信"><a href="#爷孙组件通信" class="headerlink" title="爷孙组件通信"></a>爷孙组件通信</h5><p>爷孙组件通信主要有 3 种方式：</p>
-<ol>
-<li>将孙子组件的 props 封装在一个固定字段中</li>
-<li>通过 children 透传</li>
-<li>通过 context 传递</li>
-</ol>
-<p>假设有个三层组件，爷爷分别给儿子和孙子发红包</p>
-<p>先看青铜解决方案：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Grandpa</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> [someMoneyForMe] = <span class="title function_">useState</span>(<span class="number">100</span>);</span><br><span class="line">  <span class="keyword">const</span> [someMoneyForDaddy] = <span class="title function_">useState</span>(<span class="number">101</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">Daddy</span> <span class="attr">money</span>=<span class="string">&#123;someMoneyForDaddy&#125;</span> <span class="attr">moneyForSon</span>=<span class="string">&#123;someMoneyForMe&#125;</span> /&gt;</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Daddy</span>(<span class="params">props: &#123; money: number; moneyForSon: number &#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; money, moneyForSon &#125; = props;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;daddy&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">h2</span>&gt;</span>This is Daddy, received $&#123;money&#125;<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">Me</span> <span class="attr">money</span>=<span class="string">&#123;moneyForSon&#125;</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Me</span>(<span class="params">props: &#123; money: number &#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; money &#125; = props;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;son&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">h3</span>&gt;</span>This is Me, received $&#123;money&#125;<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>Daddy 组件会透传爷爷给孙子的组件给 Me。这种方案的缺点很明显，以后爷爷要给 Daddy 和 Me 发糖果的时候，Daddy 还得加字段。</p>
-<p><strong>将孙子组件的 props 封装在一个固定字段中</strong></p>
-<p>按照 1 的方案，我们可以固定给 Daddy 添加一个 sonProps 的字段，然后将 Grandpa 需要传给孙子的状态全部通过 sonProps 传递</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Grandpa</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> [someMoneyForMe] = <span class="title function_">useState</span>(<span class="number">100</span>);</span><br><span class="line">  <span class="keyword">const</span> [someMoneyForDaddy] = <span class="title function_">useState</span>(<span class="number">101</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">Daddy</span> <span class="attr">money</span>=<span class="string">&#123;someMoneyForDaddy&#125;</span> <span class="attr">sonProps</span>=<span class="string">&#123;&#123;money:</span> <span class="attr">someMoneyForMe</span>&#125;&#125; /&gt;</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Daddy</span>(<span class="params">props: &#123; money: number; sonProps: Parameters&lt;<span class="keyword">typeof</span> Me&gt;[<span class="number">0</span>]; &#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; money, sonProps &#125; = props;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;daddy&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">h2</span>&gt;</span>This is Daddy, received $&#123;money&#125;<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">Me</span> &#123;<span class="attr">...sonProps</span>&#125;/&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Me</span>(<span class="params">props: &#123; money: number &#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; money &#125; = props;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;son&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">h3</span>&gt;</span>This is Me, received $&#123;money&#125;<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这样以后要给 Me 加字段，就不用改 Daddy 了。<strong>但要测试 Daddy 时还得 mock Me 组件的数据，Daddy 和 Son 耦合。</strong></p>
-<p><strong>通过 children 透传</strong></p>
-<p>children 类似于 vue 中的 slot，可以完成一些嵌套组件通信的功能</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Grandpa</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> [someMoneyForMe] = <span class="title function_">useState</span>(<span class="number">100</span>);</span><br><span class="line">  <span class="keyword">const</span> [someMoneyForDaddy] = <span class="title function_">useState</span>(<span class="number">101</span>);</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">Daddy</span> <span class="attr">money</span>=<span class="string">&#123;someMoneyForDaddy&#125;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">Me</span> <span class="attr">money</span>=<span class="string">&#123;someMoneyForMe&#125;</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">Daddy</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Daddy</span>(<span class="params">props: &#123; money: number; children?: React.ChildNode &#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; money, children &#125; = props;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;daddy&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">h2</span>&gt;</span>This is Daddy, received $&#123;money&#125;<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      &#123;children&#125;</span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Me</span>(<span class="params">props: &#123; money: number &#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; money &#125; = props;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;son&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">h3</span>&gt;</span>This is Me, received $&#123;money&#125;<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>将 Daddy 的嵌套部分用 children 替代后，解耦了子组件和孙子组件的依赖关系，Daddy 组件更加独立。</p>
-<p>作为替代，也可以传递一个组件实例：</p>
-<p><code><Daddy money=&#123;someMoneyForDaddy&#125; me=&#123;<Me money=&#123;someMoneyForMe&#125; /> </code></p>
-<p><strong>三种方案的决策</strong></p>
-<ol>
-<li>第一种方案一般用于固定结构和跨组件有互相依赖的场景，多见于 UI 框架中的复合组件与原子组件的设计中</li>
-<li>第二种常用在嵌套层级不深的业务代码中，比如表单场景。<strong>优点是顶层 Grandpa 的业务收敛度很高，一眼能看清 UI 结构及状态绑定关系，相当于拍平了 React 组件树</strong></li>
-<li>第三种比较通用，适合复杂嵌套透传场景。缺点是范式代码较多，且会造成 react dev tools 层级过多；Context 无法在父组件看出依赖关系，必须到子组件文件中才能知道数据来源</li>
-</ol>
-]]></content>
-      <categories>
-        <category>React</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-        <tag>Hooks</tag>
-        <tag>React</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>React组件性能优化</title>
-    <url>/2021/10/14/React%E7%BB%84%E4%BB%B6%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</url>
-    <content><![CDATA[<h3 id="React-性能优化思路"><a href="#React-性能优化思路" class="headerlink" title="React 性能优化思路"></a>React 性能优化思路</h3><p>我觉得React 性能优化的理念的主要方向就是这两个：</p>
-<ol>
-<li><strong>减少重新 render 的次数。因为在 React 里最重(花时间最长)的一块就是 reconciliation(简单的可以理解为 diff)，如果不 render，就不会 reconciliation。</strong></li>
-<li><strong>减少计算的量。主要是减少重复计算，对于函数式组件来说，每次 render 都会重新从头开始执行函数调用。</strong></li>
-</ol>
-<p>在使用类组件的时候，使用的 React 优化 API 主要是：<code>shouldComponentUpdate</code>和  <code>PureComponent</code>，这两个 API 所提供的解决思路都是为了<strong>减少重新 render 的次数</strong>，主要是减少父组件更新而子组件也更新的情况。</p>
-<p>但是在函数式组件里面没有声明周期也没有类，那如何来做性能优化呢？</p>
-<p><strong>先分个类，组件什么时候会重新执行？</strong></p>
-<ol>
-<li><strong>组件自己的状态改变</strong></li>
-<li><strong>父组件重新渲染，导致子组件重新渲染，但是父组件的 props 没有改变</strong></li>
-<li><strong>父组件重新渲染，导致子组件重新渲染，但是父组件传递的 props 改变</strong></li>
-</ol>
-<p>针对第二点，在FC中，可以通过memo减少rerender</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Component</span>(<span class="params">props</span>) &#123;</span><br><span class="line">   <span class="comment">/* 使用 props 渲染 */</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> <span class="title class_">MyComponent</span> = <span class="title class_">React</span>.<span class="title function_">memo</span>(<span class="title class_">Component</span>);</span><br></pre></td></tr></table></figure>
-
-<p>通过 <code>React.memo</code> 包裹的组件在 props 不变的情况下，这个被包裹的组件是不会重新渲染的(相当于PureComonent)</p>
-<p>默认情况下其只会对 props 的复杂对象做浅层对比(浅层对比就是只会对比前后两次 props 对象引用是否相同，不会对比对象里面的内容是否相同)，如果你想要控制对比过程，那么请将自定义的比较函数通过第二个参数传入来实现。</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">MyComponent</span>(<span class="params">props</span>) &#123;</span><br><span class="line">  <span class="comment">/* 使用 props 渲染 */</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">areEqual</span>(<span class="params">prevProps, nextProps</span>) &#123;</span><br><span class="line">  <span class="comment">/*</span></span><br><span class="line"><span class="comment">  如果把 nextProps 传入 render 方法的返回结果与</span></span><br><span class="line"><span class="comment">  将 prevProps 传入 render 方法的返回结果一致则返回 true，</span></span><br><span class="line"><span class="comment">  否则返回 false</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">React</span>.<span class="title function_">memo</span>(<span class="title class_">MyComponent</span>, areEqual);</span><br></pre></td></tr></table></figure>
-
-<h3 id="组件性能优化"><a href="#组件性能优化" class="headerlink" title="组件性能优化"></a>组件性能优化</h3><p>React 组件是一个树形结构，且每个节点都是懒计算的（类似于 Thunk 的概念）。当一个节点不需要重新计算（重绘）时，他的子树都不会计算（重绘）。<strong>所以我们做性能优化的目标，就是在尽量离根节点近的位置，拦截不必要的节点重算，从而减少重绘的计算量。</strong></p>
-<h5 id="React-memo"><a href="#React-memo" class="headerlink" title="React.memo"></a>React.memo</h5><p>阻止节点重绘主要通过 React.memo 方法生成特殊的组件节点。它接受两个传参：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="title class_">React</span>.<span class="title function_">memo</span>(<span class="title class_">Component</span>, areEqual);</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>Component：组件</p>
-</li>
-<li><p>areEqual：比较函数<br>比较函数的入参有两个，arg0 为 前一次渲染的 props, arg1 为本次渲染的 props。如果返回 true，则该节点本次渲染将被标记为无需重新计算，从而使其所有子节点、孙子节点都无需计算。<br>areEqual 如果不传，默认使用</p>
-</li>
-</ul>
-<figure class="highlight lisp"><table><tr><td class="code"><pre><span class="line">(<span class="name">prevProps</span>, nextProps) =&gt; shallowEqual(<span class="name">prevProps</span>, nextProps)</span><br></pre></td></tr></table></figure>
-
-<p>做为比较函数。</p>
-<h5 id="如何定位优化点"><a href="#如何定位优化点" class="headerlink" title="如何定位优化点"></a>如何定位优化点</h5><p>使用前一章节提到 React DevTools 中的 Profiling 功能，record 发生卡顿的操作，从耗时长的组件逐个查看，找到那些跟此次操作无关的上层渲染节点，尝试使用 React.memo 包裹这些组件。</p>
-<h5 id="不要为了优化而优化"><a href="#不要为了优化而优化" class="headerlink" title="不要为了优化而优化"></a>不要为了优化而优化</h5><p>在没有性能问题前，不用去纠结是否要用 Profiling、React.memo、useMemo、useCallback 去优化性能，这些不一定能带来性能提升，反而肯定会带来首屏的性能下降。大多数情况下，React 现有算法以能满足性能需求。</p>
-<h5 id="对于一个组件，有三样东西会让她重绘"><a href="#对于一个组件，有三样东西会让她重绘" class="headerlink" title="对于一个组件，有三样东西会让她重绘"></a>对于一个组件，有三样东西会让她重绘</h5><ol>
-<li>State 变更</li>
-<li>依赖的 context 变更</li>
-<li>父组件重绘</li>
-</ol>
-<p>所以用 React.memo 包裹之后，并不是说性能就会有多大的提高。如果组件中依赖的 context 中，有一部分并不是此组件需要的数据，但会经常变更，也会导致组件经常重绘。这时候我们可以增加一层组件，把依赖 context 中的数据，通过增加的一层父组件取出来，然后通过 props 传给真正渲染的组件，把 React.memo 加在真正渲染的组件上，来达到屏蔽 context 变更引起的重绘问题。</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; useMemo, useContext &#125; <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">SomeContext</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;./SomeContext&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">PickContextData</span>(<span class="params">props</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> ctx = <span class="title function_">useContext</span>(<span class="title class_">SomeContext</span>);</span><br><span class="line">  <span class="keyword">const</span> someDataFromContext = <span class="title function_">useMemo</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> ctx.<span class="property">data</span>;</span><br><span class="line">  &#125;, [ctx.<span class="property">data</span>]);</span><br><span class="line">  <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">RenderComponent</span> <span class="attr">data</span>=<span class="string">&#123;someDataFromContext&#125;</span> &#123;<span class="attr">...props</span>&#125; /&gt;</span></span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title class_">RenderComponent</span> = <span class="title class_">React</span>.<span class="title function_">memo</span>(<span class="function">(<span class="params">props</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// 略</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<p>更通用点，可以封装出 react-redux 的 connect 函数，传入 selector 来取所需的 Context 数据。</p>
-]]></content>
-      <categories>
-        <category>React</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-        <tag>Hooks</tag>
-        <tag>React</tag>
       </tags>
   </entry>
   <entry>
@@ -1945,6 +1949,18 @@ webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后�
     <content><![CDATA[]]></content>
   </entry>
   <entry>
+    <title>require() 源码解读</title>
+    <url>/2021/08/21/require%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/</url>
+    <content><![CDATA[<span id="more"></span>
+]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>书单 / BookList</title>
     <url>/2024/09/26/%E4%B9%A6%E5%8D%95/</url>
     <content><![CDATA[<h4 id="专业向"><a href="#专业向" class="headerlink" title="专业向"></a>专业向</h4><h5 id="计算机（2）"><a href="#计算机（2）" class="headerlink" title="计算机（2）"></a>计算机（2）</h5><p><a href="https://markdown.com.cn/">你所不知道的JavaScript</a><br><a href="https://markdown.com.cn/">深入浅出NodeJS</a><br><a href="https://markdown.com.cn/">Webpack实战：入门、进阶与调优</a><br><a href="https://markdown.com.cn/">TypeScript图形渲染实战</a></p>
@@ -1957,18 +1973,6 @@ webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后�
       <categories>
         <category>生活</category>
       </categories>
-  </entry>
-  <entry>
-    <title>require() 源码解读</title>
-    <url>/2021/08/21/require%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/</url>
-    <content><![CDATA[<span id="more"></span>
-]]></content>
-      <categories>
-        <category>JavaScript</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-      </tags>
   </entry>
   <entry>
     <title>函数式编程</title>
