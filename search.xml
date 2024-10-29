@@ -119,6 +119,26 @@
       </tags>
   </entry>
   <entry>
+    <title>Http2/Http3</title>
+    <url>/2021/09/18/Http2Http3/</url>
+    <content><![CDATA[<h4 id="为什么Http-1-1无法并发的发送多个请求（同时发多个请求，再同时接收）"><a href="#为什么Http-1-1无法并发的发送多个请求（同时发多个请求，再同时接收）" class="headerlink" title="为什么Http 1.1无法并发的发送多个请求（同时发多个请求，再同时接收）"></a>为什么Http 1.1无法并发的发送多个请求（同时发多个请求，再同时接收）</h4><p>因为http1.1是基于文本的协议，比如客户端向服务器发送了两个请求 <code>GET /query?q=A</code> 和 <code>GET /query?q=B</code>，服务器返回了两个结果，客户端是没有办法根据响应结果来判断响应对应于哪一个请求的，而http2基于二进制分帧实现多路复用，数据流以消息的形式发送，而消息又由一个或多个帧组成，多个帧之间可以乱序发送，<strong>因为根据帧首部的流标识可以重新组装。</strong></p>
+<span id="more"></span>
+
+
+
+
+
+]]></content>
+      <categories>
+        <category>计算机网络协议</category>
+      </categories>
+      <tags>
+        <tag>Network</tag>
+        <tag>Http</tag>
+        <tag>Https</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Hooks</title>
     <url>/2021/10/12/Hooks/</url>
     <content><![CDATA[<h3 id="hooks的作用"><a href="#hooks的作用" class="headerlink" title="hooks的作用"></a>hooks的作用</h3><p><strong>钩子（hook）就是 React 函数组件的副效应解决方案，用来为函数组件引入副效应。</strong> 函数组件的主体只应该用来返回组件的 HTML 代码，所有的其他操作（副效应）都必须通过钩子引入。</p>
@@ -243,26 +263,6 @@
         <tag>JavaScript</tag>
         <tag>Hooks</tag>
         <tag>React</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Http2/Http3</title>
-    <url>/2021/09/18/Http2Http3/</url>
-    <content><![CDATA[<h4 id="为什么Http-1-1无法并发的发送多个请求（同时发多个请求，再同时接收）"><a href="#为什么Http-1-1无法并发的发送多个请求（同时发多个请求，再同时接收）" class="headerlink" title="为什么Http 1.1无法并发的发送多个请求（同时发多个请求，再同时接收）"></a>为什么Http 1.1无法并发的发送多个请求（同时发多个请求，再同时接收）</h4><p>因为http1.1是基于文本的协议，比如客户端向服务器发送了两个请求 <code>GET /query?q=A</code> 和 <code>GET /query?q=B</code>，服务器返回了两个结果，客户端是没有办法根据响应结果来判断响应对应于哪一个请求的，而http2基于二进制分帧实现多路复用，数据流以消息的形式发送，而消息又由一个或多个帧组成，多个帧之间可以乱序发送，<strong>因为根据帧首部的流标识可以重新组装。</strong></p>
-<span id="more"></span>
-
-
-
-
-
-]]></content>
-      <categories>
-        <category>计算机网络协议</category>
-      </categories>
-      <tags>
-        <tag>Network</tag>
-        <tag>Http</tag>
-        <tag>Https</tag>
       </tags>
   </entry>
   <entry>
@@ -1396,6 +1396,8 @@ C组件: 读取A组件传入的数据显示 &#123;this.props.data&#125;
 
 <p>通过 <code>React.memo</code> 包裹的组件在 props 不变的情况下，这个被包裹的组件是不会重新渲染的(相当于PureComonent)</p>
 <p>默认情况下其只会对 props 的复杂对象做浅层对比(浅层对比就是只会对比前后两次 props 对象引用是否相同，不会对比对象里面的内容是否相同)，如果你想要控制对比过程，那么请将自定义的比较函数通过第二个参数传入来实现。</p>
+<span id="more"></span>
+
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">MyComponent</span>(<span class="params">props</span>) &#123;</span><br><span class="line">  <span class="comment">/* 使用 props 渲染 */</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">areEqual</span>(<span class="params">prevProps, nextProps</span>) &#123;</span><br><span class="line">  <span class="comment">/*</span></span><br><span class="line"><span class="comment">  如果把 nextProps 传入 render 方法的返回结果与</span></span><br><span class="line"><span class="comment">  将 prevProps 传入 render 方法的返回结果一致则返回 true，</span></span><br><span class="line"><span class="comment">  否则返回 false</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">React</span>.<span class="title function_">memo</span>(<span class="title class_">MyComponent</span>, areEqual);</span><br></pre></td></tr></table></figure>
 
 <h3 id="组件性能优化"><a href="#组件性能优化" class="headerlink" title="组件性能优化"></a>组件性能优化</h3><p>React 组件是一个树形结构，且每个节点都是懒计算的（类似于 Thunk 的概念）。当一个节点不需要重新计算（重绘）时，他的子树都不会计算（重绘）。<strong>所以我们做性能优化的目标，就是在尽量离根节点近的位置，拦截不必要的节点重算，从而减少重绘的计算量。</strong></p>
@@ -1549,46 +1551,6 @@ C组件: 读取A组件传入的数据显示 &#123;this.props.data&#125;
         <tag>JavaScript</tag>
         <tag>React</tag>
         <tag>Redux</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Webpack</title>
-    <url>/2022/04/14/Webpack/</url>
-    <content><![CDATA[<h3 id="Webpack-是什么"><a href="#Webpack-是什么" class="headerlink" title="Webpack 是什么"></a>Webpack 是什么</h3><p>webpack 是一种<strong>前端资源构建工具</strong>，一个静态模块打包器(module bundler)。</p>
-<p>在webpack 看来, 前端的所有资源文件(js&#x2F;json&#x2F;css&#x2F;img&#x2F;less&#x2F;…)都会作为模块处理。<br>它将根据模块的依赖关系进行静态分析，打包生成对应的静态资源(bundle)。</p>
-<h3 id="Webpack-五个核心概念"><a href="#Webpack-五个核心概念" class="headerlink" title="Webpack 五个核心概念"></a>Webpack 五个核心概念</h3><h4 id="Entry"><a href="#Entry" class="headerlink" title="Entry"></a>Entry</h4><p>入口(Entry)：指示 webpack 以哪个文件为入口起点开始打包，分析构建内部依赖图。</p>
-<h4 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h4><p>输出(Output)：指示 webpack 打包后的资源 bundles 输出到哪里去，以及如何命名。</p>
-<h4 id="Loader"><a href="#Loader" class="headerlink" title="Loader"></a>Loader</h4><p>Loader：让 webpack 能够去处理那些非 JS 的文件，比如样式文件、图片文件(webpack 自身只理解<br>JS)</p>
-<h4 id="Plugins"><a href="#Plugins" class="headerlink" title="Plugins"></a>Plugins</h4><p>插件(Plugins)：可以用于执行范围更广的任务。插件的范围包括，从打包优化和压缩，<br>一直到重新定义环境中的变量等。</p>
-<span id="more"></span>
-
-<h4 id="Mode"><a href="#Mode" class="headerlink" title="Mode"></a>Mode</h4><p>模式(Mode)：指示 webpack 使用相应模式的配置。</p>
-<ol>
-<li><p>development:  </p>
-<p> 会将 DefinePlugin 中 <code>process.env.NODE_ENV</code> 的值设置为 development。</p>
-<p>启用 </p>
-<figure class="highlight plaintext"><figcaption><span>和 ```NamedModulesPlugin```。</span></figcaption><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">   特点： 能让代码本地调试运行的环境。</span><br><span class="line"></span><br><span class="line">2. production</span><br><span class="line"></span><br><span class="line">   会将 DefinePlugin 中 ```process.env.NODE_ENV``` 的值设置为 production。</span><br><span class="line"></span><br><span class="line">   启用 </span><br><span class="line"></span><br><span class="line">   ```FlagDependencyUsagePlugin,```</span><br><span class="line"></span><br><span class="line">   ``` FlagIncludedChunksPlugin,``` </span><br><span class="line"></span><br><span class="line">   ``` ModuleConcatenationPlugin, ``` </span><br><span class="line"></span><br><span class="line">   ```NoEmitOnErrorsPlugin, ```</span><br><span class="line"></span><br><span class="line">    ```OccurrenceOrderPlugin, ```</span><br><span class="line"></span><br><span class="line">   ```SideEffectsFlagPlugin 和 TerserPlugin```。</span><br><span class="line"></span><br><span class="line">   特点： 能让代码优化上线运行的环境。</span><br><span class="line"></span><br><span class="line">   </span><br><span class="line"></span><br><span class="line">### 编译打包应用</span><br><span class="line"></span><br><span class="line">创建 src 下的 js 等文件后，不需要配置 webpack.config.js 文件，在命令行就可以编译打包。</span><br><span class="line"></span><br><span class="line">指令：</span><br><span class="line"></span><br><span class="line">- 开发环境：</span><br><span class="line">```shell</span><br><span class="line">webpack ./src/index.js -o ./build/built.js --mode=development</span><br></pre></td></tr></table></figure></li>
-</ol>
-<p>  webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后输出到 .&#x2F;build&#x2F;built.js 整体打包环境，是开发环境</p>
-<ul>
-<li>生产环境：<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">webpack ./src/index.js -o ./build/built.js --mode=production</span><br></pre></td></tr></table></figure>
-webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后输出到 .&#x2F;build&#x2F;built.js 整体打包环境，是生产环境</li>
-</ul>
-<p>结论：</p>
-<ol>
-<li>webpack 本身能处理 js&#x2F;json 资源，不能处理 css&#x2F;img 等其他资源</li>
-<li>生产环境和开发环境将 ES6 模块化编译成浏览器能识别的模块化，但是不能处理 ES6 的基本语法转化为 ES5（需要借助 loader）</li>
-<li>生产环境比开发环境多一个压缩 js 代码</li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// resolve用来拼接绝对路径的方法</span></span><br><span class="line"><span class="keyword">const</span> &#123; resolve &#125; = <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>);</span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="comment">// webpack配置</span></span><br><span class="line">  <span class="comment">// 入口起点</span></span><br><span class="line">  <span class="attr">entry</span>: <span class="string">&#x27;./src/index.js&#x27;</span>,</span><br><span class="line">  <span class="comment">// 输出</span></span><br><span class="line">  <span class="attr">output</span>: &#123;</span><br><span class="line">    <span class="comment">// 输出文件名</span></span><br><span class="line">    <span class="attr">filename</span>: <span class="string">&#x27;built.js&#x27;</span>,</span><br><span class="line">    <span class="comment">// 输出路径</span></span><br><span class="line">    <span class="comment">// __dirname nodejs的变量，代表当前文件的目录绝对路径</span></span><br><span class="line">    <span class="attr">path</span>: <span class="title function_">resolve</span>(__dirname, <span class="string">&#x27;build&#x27;</span>)</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// loader的配置</span></span><br><span class="line">  <span class="attr">module</span>: &#123;</span><br><span class="line">    <span class="attr">rules</span>: [</span><br><span class="line">      <span class="comment">// 详细loader配置</span></span><br><span class="line">      <span class="comment">// 不同文件必须配置不同loader处理</span></span><br><span class="line">      &#123; </span><br><span class="line">        <span class="comment">// 匹配哪些文件</span></span><br><span class="line">        <span class="attr">test</span>: <span class="regexp">/\.css$/</span>,</span><br><span class="line">        <span class="comment">// 使用哪些loader进行处理</span></span><br><span class="line">        <span class="attr">use</span>: [</span><br><span class="line">          <span class="comment">// use数组中loader执行顺序：从右到左，从下到上 依次执行</span></span><br><span class="line">          <span class="comment">// 创建style标签，将js中的样式资源插入进行，添加到head中生效</span></span><br><span class="line">          <span class="string">&#x27;style-loader&#x27;</span>,</span><br><span class="line">          <span class="comment">// 将css文件变成commonjs模块加载js中，里面内容是样式字符串</span></span><br><span class="line">          <span class="string">&#x27;css-loader&#x27;</span></span><br><span class="line">        ]</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">test</span>: <span class="regexp">/\.less$/</span>,</span><br><span class="line">        <span class="attr">use</span>: [</span><br><span class="line">          <span class="string">&#x27;style-loader&#x27;</span>,</span><br><span class="line">          <span class="string">&#x27;css-loader&#x27;</span>,</span><br><span class="line">          <span class="comment">// 将less文件编译成css文件</span></span><br><span class="line">          <span class="comment">// 需要下载 less-loader和less</span></span><br><span class="line">           <span class="string">&#x27;less-loader&#x27;</span></span><br><span class="line">        ]</span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// plugins的配置</span></span><br><span class="line">  <span class="attr">plugins</span>: [</span><br><span class="line">    <span class="comment">// 详细plugins的配置</span></span><br><span class="line">  ],</span><br><span class="line">  <span class="comment">// 模式</span></span><br><span class="line">  <span class="attr">mode</span>: <span class="string">&#x27;development&#x27;</span>, <span class="comment">// 开发模式</span></span><br><span class="line">  <span class="comment">// mode: &#x27;production&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>打包工具</category>
-      </categories>
-      <tags>
-        <tag>Webpack</tag>
-        <tag>打包工具</tag>
       </tags>
   </entry>
   <entry>
@@ -1945,6 +1907,61 @@ module: &#123;
       </tags>
   </entry>
   <entry>
+    <title>Web3相关学习</title>
+    <url>/2024/10/29/Web3%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/</url>
+    <content><![CDATA[<p>先开个坑，准备下Web3相关的学习</p>
+<h2 id="学习路线"><a href="#学习路线" class="headerlink" title="学习路线"></a>学习路线</h2><p><a href="https://54web3.cc/blog/roadmap/learning-path-web3">https://54web3.cc/blog/roadmap/learning-path-web3</a></p>
+]]></content>
+      <categories>
+        <category>Chore</category>
+      </categories>
+      <tags>
+        <tag>Web3</tag>
+        <tag>区块链</tag>
+        <tag>智能合约</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Webpack</title>
+    <url>/2022/04/14/Webpack/</url>
+    <content><![CDATA[<h3 id="Webpack-是什么"><a href="#Webpack-是什么" class="headerlink" title="Webpack 是什么"></a>Webpack 是什么</h3><p>webpack 是一种<strong>前端资源构建工具</strong>，一个静态模块打包器(module bundler)。</p>
+<p>在webpack 看来, 前端的所有资源文件(js&#x2F;json&#x2F;css&#x2F;img&#x2F;less&#x2F;…)都会作为模块处理。<br>它将根据模块的依赖关系进行静态分析，打包生成对应的静态资源(bundle)。</p>
+<h3 id="Webpack-五个核心概念"><a href="#Webpack-五个核心概念" class="headerlink" title="Webpack 五个核心概念"></a>Webpack 五个核心概念</h3><h4 id="Entry"><a href="#Entry" class="headerlink" title="Entry"></a>Entry</h4><p>入口(Entry)：指示 webpack 以哪个文件为入口起点开始打包，分析构建内部依赖图。</p>
+<h4 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h4><p>输出(Output)：指示 webpack 打包后的资源 bundles 输出到哪里去，以及如何命名。</p>
+<h4 id="Loader"><a href="#Loader" class="headerlink" title="Loader"></a>Loader</h4><p>Loader：让 webpack 能够去处理那些非 JS 的文件，比如样式文件、图片文件(webpack 自身只理解<br>JS)</p>
+<h4 id="Plugins"><a href="#Plugins" class="headerlink" title="Plugins"></a>Plugins</h4><p>插件(Plugins)：可以用于执行范围更广的任务。插件的范围包括，从打包优化和压缩，<br>一直到重新定义环境中的变量等。</p>
+<span id="more"></span>
+
+<h4 id="Mode"><a href="#Mode" class="headerlink" title="Mode"></a>Mode</h4><p>模式(Mode)：指示 webpack 使用相应模式的配置。</p>
+<ol>
+<li><p>development:  </p>
+<p> 会将 DefinePlugin 中 <code>process.env.NODE_ENV</code> 的值设置为 development。</p>
+<p>启用 </p>
+<figure class="highlight plaintext"><figcaption><span>和 ```NamedModulesPlugin```。</span></figcaption><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">   特点： 能让代码本地调试运行的环境。</span><br><span class="line"></span><br><span class="line">2. production</span><br><span class="line"></span><br><span class="line">   会将 DefinePlugin 中 ```process.env.NODE_ENV``` 的值设置为 production。</span><br><span class="line"></span><br><span class="line">   启用 </span><br><span class="line"></span><br><span class="line">   ```FlagDependencyUsagePlugin,```</span><br><span class="line"></span><br><span class="line">   ``` FlagIncludedChunksPlugin,``` </span><br><span class="line"></span><br><span class="line">   ``` ModuleConcatenationPlugin, ``` </span><br><span class="line"></span><br><span class="line">   ```NoEmitOnErrorsPlugin, ```</span><br><span class="line"></span><br><span class="line">    ```OccurrenceOrderPlugin, ```</span><br><span class="line"></span><br><span class="line">   ```SideEffectsFlagPlugin 和 TerserPlugin```。</span><br><span class="line"></span><br><span class="line">   特点： 能让代码优化上线运行的环境。</span><br><span class="line"></span><br><span class="line">   </span><br><span class="line"></span><br><span class="line">### 编译打包应用</span><br><span class="line"></span><br><span class="line">创建 src 下的 js 等文件后，不需要配置 webpack.config.js 文件，在命令行就可以编译打包。</span><br><span class="line"></span><br><span class="line">指令：</span><br><span class="line"></span><br><span class="line">- 开发环境：</span><br><span class="line">```shell</span><br><span class="line">webpack ./src/index.js -o ./build/built.js --mode=development</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>  webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后输出到 .&#x2F;build&#x2F;built.js 整体打包环境，是开发环境</p>
+<ul>
+<li>生产环境：<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">webpack ./src/index.js -o ./build/built.js --mode=production</span><br></pre></td></tr></table></figure>
+webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后输出到 .&#x2F;build&#x2F;built.js 整体打包环境，是生产环境</li>
+</ul>
+<p>结论：</p>
+<ol>
+<li>webpack 本身能处理 js&#x2F;json 资源，不能处理 css&#x2F;img 等其他资源</li>
+<li>生产环境和开发环境将 ES6 模块化编译成浏览器能识别的模块化，但是不能处理 ES6 的基本语法转化为 ES5（需要借助 loader）</li>
+<li>生产环境比开发环境多一个压缩 js 代码</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// resolve用来拼接绝对路径的方法</span></span><br><span class="line"><span class="keyword">const</span> &#123; resolve &#125; = <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>);</span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="comment">// webpack配置</span></span><br><span class="line">  <span class="comment">// 入口起点</span></span><br><span class="line">  <span class="attr">entry</span>: <span class="string">&#x27;./src/index.js&#x27;</span>,</span><br><span class="line">  <span class="comment">// 输出</span></span><br><span class="line">  <span class="attr">output</span>: &#123;</span><br><span class="line">    <span class="comment">// 输出文件名</span></span><br><span class="line">    <span class="attr">filename</span>: <span class="string">&#x27;built.js&#x27;</span>,</span><br><span class="line">    <span class="comment">// 输出路径</span></span><br><span class="line">    <span class="comment">// __dirname nodejs的变量，代表当前文件的目录绝对路径</span></span><br><span class="line">    <span class="attr">path</span>: <span class="title function_">resolve</span>(__dirname, <span class="string">&#x27;build&#x27;</span>)</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// loader的配置</span></span><br><span class="line">  <span class="attr">module</span>: &#123;</span><br><span class="line">    <span class="attr">rules</span>: [</span><br><span class="line">      <span class="comment">// 详细loader配置</span></span><br><span class="line">      <span class="comment">// 不同文件必须配置不同loader处理</span></span><br><span class="line">      &#123; </span><br><span class="line">        <span class="comment">// 匹配哪些文件</span></span><br><span class="line">        <span class="attr">test</span>: <span class="regexp">/\.css$/</span>,</span><br><span class="line">        <span class="comment">// 使用哪些loader进行处理</span></span><br><span class="line">        <span class="attr">use</span>: [</span><br><span class="line">          <span class="comment">// use数组中loader执行顺序：从右到左，从下到上 依次执行</span></span><br><span class="line">          <span class="comment">// 创建style标签，将js中的样式资源插入进行，添加到head中生效</span></span><br><span class="line">          <span class="string">&#x27;style-loader&#x27;</span>,</span><br><span class="line">          <span class="comment">// 将css文件变成commonjs模块加载js中，里面内容是样式字符串</span></span><br><span class="line">          <span class="string">&#x27;css-loader&#x27;</span></span><br><span class="line">        ]</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">test</span>: <span class="regexp">/\.less$/</span>,</span><br><span class="line">        <span class="attr">use</span>: [</span><br><span class="line">          <span class="string">&#x27;style-loader&#x27;</span>,</span><br><span class="line">          <span class="string">&#x27;css-loader&#x27;</span>,</span><br><span class="line">          <span class="comment">// 将less文件编译成css文件</span></span><br><span class="line">          <span class="comment">// 需要下载 less-loader和less</span></span><br><span class="line">           <span class="string">&#x27;less-loader&#x27;</span></span><br><span class="line">        ]</span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// plugins的配置</span></span><br><span class="line">  <span class="attr">plugins</span>: [</span><br><span class="line">    <span class="comment">// 详细plugins的配置</span></span><br><span class="line">  ],</span><br><span class="line">  <span class="comment">// 模式</span></span><br><span class="line">  <span class="attr">mode</span>: <span class="string">&#x27;development&#x27;</span>, <span class="comment">// 开发模式</span></span><br><span class="line">  <span class="comment">// mode: &#x27;production&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>打包工具</category>
+      </categories>
+      <tags>
+        <tag>Webpack</tag>
+        <tag>打包工具</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>require() 源码解读</title>
     <url>/2021/08/21/require%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/</url>
     <content><![CDATA[<span id="more"></span>
@@ -1995,6 +2012,46 @@ module: &#123;
         <tag>JavaScript</tag>
         <tag>Functional Programming</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>成为老师</title>
+    <url>/2024/10/29/%E6%88%90%E4%B8%BA%E8%80%81%E5%B8%88/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>生活</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>站点更新日志 / ChangeLog</title>
+    <url>/2024/10/28/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97/</url>
+    <content><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>兜兜转转终于是有时间把这个站点建起来了;D，本文主要是记录下站点更新日志，会按月进行归档，还会简单写一下后续更新的一些想法和计划</p>
+<p>想法还有很多</p>
+<p>功能上非常想做的是个一言主题的页面，还有日间&#x2F;夜间模式切换，日程表、sitemap功能<br>内容上可以补充的还有个人简介<br>工程上能做的有域名简化（自定义域名），blog自动化部署（借助一些Github Webhooks），CDN加速（腾讯云）</p>
+<p>那么，拭目以待吧~</p>
+<hr>
+<!-- ### 后续更新计划
+**自定义域名（SSL证书、地址映射）**
+**日间/夜间模式切换**
+**添加一言主题页面**
+**添加个人简介**
+**blog自动化部署**
+**日程表、sitemap探索**
+
+------ -->
+
+<h3 id="2024-10更新"><a href="#2024-10更新" class="headerlink" title="2024-10更新"></a>2024-10更新</h3><p><strong>腾讯云托管站点</strong><br>主要是解决Github Page部署后国内内网无法访问的问题（搜了下是DNS污染的问题，不太好解决，暂时先迁到腾讯云上去托管站点了）</p>
+<p><strong>部分文章重新整理一版</strong><br>整理了一系列陈年老文章，主要是一些文章之前的格式在博客里不太兼容，还有部分内容在迁移的过程中有丢失，都加以补充了</p>
+<p><strong>文章置顶、排序、显隐功能</strong><br>引了个<code>hexo-generator-index-custom</code>插件来置顶、排序文章</p>
+<span id="more"></span>
+
+<hr>
+<h3 id="2024-9更新"><a href="#2024-9更新" class="headerlink" title="2024-9更新"></a>2024-9更新</h3><p><strong>Hexo+Next建站</strong><br>基于Hexo V7.3 + Next V8.2 搭建了个人博客站点</p>
+<p><strong>搜索功能</strong><br>加入了文章搜索功能。会很好用吧？(大概</p>
+<!-- ![](../assets/blog-search-example.png) -->
+
+<p><strong>标签、分类功能</strong><br>所有文章整理了一版，对所有文章分标签、分类展示</p>
+<p><strong>文章显示字数统计、浏览时间</strong><br>引入<code>hexo-word-counter</code>这个插件来实现的，还会统计代码字数，算是个锦上添花的功能吧^^</p>
+]]></content>
   </entry>
   <entry>
     <title>书单 / BookList</title>
@@ -2147,29 +2204,11 @@ module: &#123;
   <entry>
     <title>序 / Intro</title>
     <url>/2024/09/30/%E5%BA%8F%E8%A8%80/</url>
-    <content><![CDATA[]]></content>
-  </entry>
-  <entry>
-    <title>站点更新日志 / ChangeLog</title>
-    <url>/2024/10/28/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97/</url>
-    <content><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>兜兜转转终于是有时间把这个站点建起来了;D，本文主要是记录下站点更新日志，会按月进行归档；还会简单写一下后续更新的一些想法和计划</p>
-<p>想法还有很多</p>
-<p>功能上非常想做的是个一言主题的页面，还有日间&#x2F;夜间模式切换，日程表、sitemap功能<br>内容上可以补充的还有个人简介<br>工程上能做的有域名简化（自定义域名），blog自动化部署（借助一些Github Webhooks）</p>
-<p>那么，拭目以待吧~</p>
-<hr>
-<h3 id="后续更新计划"><a href="#后续更新计划" class="headerlink" title="后续更新计划"></a>后续更新计划</h3><p><strong>自定义域名（SSL证书、地址映射）</strong><br><strong>日间&#x2F;夜间模式切换</strong><br><strong>添加一言主题页面</strong><br><strong>添加个人简介</strong><br><strong>blog自动化部署</strong><br><strong>日程表、sitemap探索</strong></p>
-<hr>
-<h3 id="2024-10更新"><a href="#2024-10更新" class="headerlink" title="2024-10更新"></a>2024-10更新</h3><p><strong>腾讯云托管站点</strong><br>主要是解决Github Page部署后国内内网无法访问的问题（搜了下是DNS污染的问题，不太好解决，暂时先迁到腾讯云上去托管站点了）</p>
-<p><strong>部分文章重新整理一版</strong><br>整理了一系列陈年老文章，主要是一些文章之前的格式在博客里不太兼容，还有部分内容在迁移的过程中有丢失，都加以补充了</p>
-<p><strong>文章置顶、排序、显隐功能</strong><br>引了个hexo-generator-index-custom插件来置顶、排序文章</p>
-<hr>
-<h3 id="2024-9更新"><a href="#2024-9更新" class="headerlink" title="2024-9更新"></a>2024-9更新</h3><p><strong>Hexo+Next建站</strong><br>基于Hexo V7.3 + Next V8.2 搭建了个人博客站点</p>
-<p><strong>搜索功能</strong><br>加入了文章搜索功能。会很好用吧？(大概</p>
-<!-- ![](../assets/blog-search-example.png) -->
-
-<p><strong>标签、分类功能</strong><br>所有文章整理了一版，对所有文章分标签、分类展示</p>
-<p><strong>文章显示字数统计、浏览时间</strong><br>引入hexo-generator-searchdb这个插件来实现的，还会统计代码字数，算是个锦上添花的功能吧^^</p>
-<span id="more"></span>]]></content>
+    <content><![CDATA[<blockquote class="blockquote-center">
+    <p><b>循着无私与弃绝之念走在自我修行的道路上</b></p>
+    <!-- <p>[英]威廉·萨默塞特·毛姆 《刀锋》</p> -->
+</blockquote>
+]]></content>
   </entry>
   <entry>
     <title>浏览器架构和事件循环</title>
