@@ -119,105 +119,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Http2/Http3</title>
-    <url>/2021/09/18/Http2Http3/</url>
-    <content><![CDATA[<h4 id="为什么Http-1-1无法并发的发送多个请求（同时发多个请求，再同时接收）"><a href="#为什么Http-1-1无法并发的发送多个请求（同时发多个请求，再同时接收）" class="headerlink" title="为什么Http 1.1无法并发的发送多个请求（同时发多个请求，再同时接收）"></a>为什么Http 1.1无法并发的发送多个请求（同时发多个请求，再同时接收）</h4><p>因为http1.1是基于文本的协议，比如客户端向服务器发送了两个请求 <code>GET /query?q=A</code> 和 <code>GET /query?q=B</code>，服务器返回了两个结果，客户端是没有办法根据响应结果来判断响应对应于哪一个请求的，而http2基于二进制分帧实现多路复用，数据流以消息的形式发送，而消息又由一个或多个帧组成，多个帧之间可以乱序发送，<strong>因为根据帧首部的流标识可以重新组装。</strong></p>
-<span id="more"></span>
-
-
-
-
-
-]]></content>
-      <categories>
-        <category>计算机网络协议</category>
-      </categories>
-      <tags>
-        <tag>Network</tag>
-        <tag>Http</tag>
-        <tag>Https</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Https</title>
-    <url>/2021/09/13/Https/</url>
-    <content><![CDATA[<h3 id="为什么需要加密？"><a href="#为什么需要加密？" class="headerlink" title="为什么需要加密？"></a><strong>为什么需要加密？</strong></h3><p>因为http的内容是明文传输的，明文数据会经过中间代理服务器、路由器、wifi热点、通信服务运营商等多个物理节点，如果信息在传输过程中被劫持，传输的内容就完全暴露了。劫持者还可以篡改传输的信息且不被双方察觉，这就是“中间人攻击”。</p>
-<h3 id="用对称加密可行吗？"><a href="#用对称加密可行吗？" class="headerlink" title="用对称加密可行吗？"></a><strong>用对称加密可行吗？</strong></h3><p>对称加密最大的问题就是密钥的传输，而密钥的传输又需要加密（反复套娃），故而单纯的对称加密是无法解决问题的。</p>
-<span id="more"></span>
-
-
-<h3 id="用非对称加密可行吗？"><a href="#用非对称加密可行吗？" class="headerlink" title="用非对称加密可行吗？"></a>用非对称加密可行吗？</h3><p>鉴于非对称加密的机制，我们可能会有这种思路：服务器先把公钥以明文方式传输给浏览器，之后浏览器向服务器传数据前都先用这个公钥加密好再传，这条数据的安全似乎可以保障了！<strong>因为只有服务器有相应的私钥能解开公钥加密的数据</strong>。</p>
-<p>然而反过来<strong>由服务器到浏览器的这条路怎么保障安全？</strong>如果服务器用它的私钥加密数据传给浏览器，那么浏览器用公钥可以解密它，而这个公钥是一开始通过明文传输给浏览器的，若这个公钥被中间人劫持到了，那他也能用该公钥解密服务器传来的信息了。所以<strong>目前似乎只能保证由浏览器向服务器传输数据的安全性</strong></p>
-<h3 id="那用两组公钥私钥，是否就能保证双向传输都安全了？"><a href="#那用两组公钥私钥，是否就能保证双向传输都安全了？" class="headerlink" title="那用两组公钥私钥，是否就能保证双向传输都安全了？"></a>那用两组公钥私钥，是否就能保证双向传输都安全了？</h3><ol>
-<li>某网站服务器拥有公钥A与对应的私钥A’；浏览器拥有公钥B与对应的私钥B’。</li>
-<li>浏览器把公钥B明文传输给服务器。</li>
-<li>服务器把公钥A明文给传输浏览器。</li>
-<li>之后浏览器向服务器传输的内容都用公钥A加密，服务器收到后用私钥A’解密。由于只有服务器拥有私钥A’，所以能保证这条数据的安全。</li>
-<li>同理，服务器向浏览器传输的内容都用公钥B加密，浏览器收到后用私钥B’解密。同上也可以保证这条数据的安全。</li>
-</ol>
-<p>然而这又引出了一个新的问题，非对称加密非常耗时，如何解决？（见RSA算法）而且这种方法真的安全了吗？</p>
-<h3 id="非对称加密-对称加密"><a href="#非对称加密-对称加密" class="headerlink" title="非对称加密 + 对称加密"></a>非对称加密 + 对称加密</h3><ol>
-<li>某网站拥有用于非对称加密的公钥A、私钥A’。</li>
-<li>浏览器向网站服务器请求，服务器把公钥A明文给传输浏览器。</li>
-<li>浏览器随机生成一个用于对称加密的密钥X，用公钥A加密后传给服务器。</li>
-<li>服务器拿到后用私钥A’解密得到密钥X。</li>
-<li>这样双方就都拥有密钥X了，且别人无法知道它。之后双方所有数据都通过密钥X加密解密即可。</li>
-</ol>
-<p>这基本上就是https采用的方案了，但仍然还是有漏洞。</p>
-<h3 id="中间人攻击"><a href="#中间人攻击" class="headerlink" title="中间人攻击"></a>中间人攻击</h3><p>中间人攻击（MITMA，man in the middle attack）<br>中间人攻击是一种网络攻击类型 ，应用与LAN局域网中。这种攻击的方式是 hacker 置身于两个通信 paties 之间，窃取数据。</p>
-<p>中间人攻击允许黑客截获双方之间的数据，它可能是服务器和客户端或客户端到客户端或服务器到服务器。</p>
-<p><img src="/../assets/image-20210513212400962.png" alt="image-20210513212400962"></p>
-<p>如果在数据传输过程中，中间人劫持到了数据，此时他的确无法得到浏览器生成的密钥X，这个密钥本身被公钥A加密了，只有服务器才有私钥A’解开它，然而中间人却完全不需要拿到私钥A’就能干坏事了。请看：</p>
-<ol>
-<li>某网站有用于非对称加密的公钥A、私钥A’。</li>
-<li>浏览器向网站服务器请求，服务器把公钥A明文给传输浏览器。</li>
-<li><strong>中间人劫持到公钥A，保存下来，把数据包中的公钥A替换成自己伪造的公钥B（它当然也拥有公钥B对应的私钥B’）</strong>。</li>
-<li>浏览器生成一个用于对称加密的密钥X，用<strong>公钥B</strong>（浏览器无法得知公钥被替换了）加密后传给服务器。</li>
-<li><strong>中间人劫持后用私钥B’解密得到密钥X，再用公钥A加密后传给服务器</strong>。</li>
-<li>服务器拿到后用私钥A’解密得到密钥X。</li>
-</ol>
-<p>这样在双方都不会发现异常的情况下，中间人掉包了服务器传来的公钥，进而得到了密钥X。<strong>根本原因是浏览器无法确认收到的公钥是不是网站自己的，</strong>因为公钥本身是明文传输的，难道还得对公钥的传输进行加密？这似乎变成鸡生蛋、蛋生鸡的问题了。解法是什么？</p>
-<h3 id="如何证明浏览器收到的公钥一定是该网站的公钥？"><a href="#如何证明浏览器收到的公钥一定是该网站的公钥？" class="headerlink" title="如何证明浏览器收到的公钥一定是该网站的公钥？"></a><strong>如何证明浏览器收到的公钥一定是该网站的公钥？</strong></h3><p>网站是否有个‘身份证’来证明自己的公钥合法？这个‘身份证’又由谁来颁发？</p>
-<p><strong>CA机构</strong>，它是如今互联网世界正常运作的前提，而CA机构颁发的“身份证”就是<strong>数字证书</strong>。</p>
-<h4 id="数字证书"><a href="#数字证书" class="headerlink" title="数字证书"></a><strong>数字证书</strong></h4><p>网站在使用HTTPS前，需要向<strong>CA机构</strong>申领一份<strong>数字证书</strong>，数字证书里含有证书持有者信息、公钥信息等。服务器把证书传输给浏览器，浏览器从证书里获取公钥就行了，证书就如身份证，证明“该公钥对应该网站”。</p>
-<p>而这里又有一个显而易见的问题，“<strong>证书本身的传输过程中，如何防止被篡改”</strong>？即如何证明证书本身的真实性？身份证运用了一些防伪技术，而数字证书怎么防伪呢？</p>
-<h3 id="如何放防止数字证书被篡改？"><a href="#如何放防止数字证书被篡改？" class="headerlink" title="如何放防止数字证书被篡改？"></a><strong>如何放防止数字证书被篡改？</strong></h3><p>我们把证书原本的内容生成一份“签名”，比对证书内容和签名是否一致就能判别是否被篡改。这就是数字证书的“防伪技术”，这里的“签名”就叫<code>数字签名</code>：</p>
-<p>数字签名的制作过程：</p>
-<ol>
-<li>CA机构拥有非对称加密的私钥和公钥。</li>
-<li>CA机构对证书明文数据T进行hash。</li>
-<li>对hash后的值用私钥加密，得到数字签名S。</li>
-</ol>
-<p>明文和数字签名共同组成了数字证书，这样一份数字证书就可以颁发给网站了。<br>那浏览器拿到服务器传来的数字证书后，如何验证它是不是真的？（有没有被篡改、掉包）</p>
-<p>浏览器验证过程：</p>
-<ol>
-<li>拿到证书，得到明文T，签名S。</li>
-<li>用CA机构的公钥对S解密（由于是浏览器信任的机构，所以浏览器保有它的公钥。详情见下文），得到S’。</li>
-<li>用证书里指明的hash算法对明文T进行hash得到T’。</li>
-<li>显然通过以上步骤，T’应当等于S‘，除非明文或签名被篡改。所以此时比较S’是否等于T’，等于则表明证书可信。</li>
-</ol>
-<p><img src="/../assets/image-20210513214044731.png" alt="image-20210513214044731"></p>
-<h3 id="中间人有可能篡改该证书吗？"><a href="#中间人有可能篡改该证书吗？" class="headerlink" title="中间人有可能篡改该证书吗？"></a><strong>中间人有可能篡改该证书吗？</strong></h3><p>假设中间人篡改了证书的原文，由于他没有CA机构的私钥，所以无法得到此时加密后签名，无法相应地篡改签名。浏览器收到该证书后会发现原文和签名解密后的值不一致，则说明证书已被篡改，证书不可信</p>
-<h3 id="中间人有可能把证书掉包吗？"><a href="#中间人有可能把证书掉包吗？" class="headerlink" title="中间人有可能把证书掉包吗？"></a><strong>中间人有可能把证书掉包吗？</strong></h3><p>假设有另一个网站B也拿到了CA机构认证的证书，它想劫持网站A的信息。于是它成为中间人拦截到了A传给浏览器的证书，然后替换成自己的证书，传给浏览器，之后浏览器就会错误地拿到B的证书里的公钥了。</p>
-<p>其实这并不会发生，因为证书一定是无法被篡改的，所以网站B掉包的一定也是正规的证书，而证书黎里包含了网站的信息，包括域名，浏览器把证书里的域名与自己请求的域名比对一下就知道有没有被掉包了。</p>
-<h3 id="为什么制作数字签名时需要hash一次？"><a href="#为什么制作数字签名时需要hash一次？" class="headerlink" title="为什么制作数字签名时需要hash一次？"></a><strong>为什么制作数字签名时需要hash一次？</strong></h3><p>最显然的是性能问题，非对称加密效率较差，证书信息一般较长，比较耗时。而hash后得到的是固定长度的信息（比如用md5算法hash后可以得到固定的128位的值），这样加解密就快很多。</p>
-<h3 id="怎么证明CA机构的公钥是可信的？"><a href="#怎么证明CA机构的公钥是可信的？" class="headerlink" title="怎么证明CA机构的公钥是可信的？"></a><strong>怎么证明CA机构的公钥是可信的？</strong></h3><p>“浏览器保有它的公钥”，这是个什么保有法？怎么证明这个公钥是否可信？</p>
-<p>让我们回想一下数字证书到底是干啥的？没错，为了证明某公钥是可信的，即“该公钥是否对应该网站”，那CA机构的公钥是否也可以用数字证书来证明？没错，操作系统、浏览器本身会预装一些它们信任的根证书，如果其中会有CA机构的根证书，这样就可以拿到它对应的可信公钥了。</p>
-<p>实际上证书之间的认证也可以不止一层，可以A信任B，B信任C，以此类推，我们把它叫做<code>信任链</code>或<code>数字证书链</code>。也就是一连串的数字证书，由根证书为起点，透过层层信任，使终端实体证书的持有者可以获得转授的信任，以证明身份。</p>
-<p>另外，不知你们是否遇到过网站访问不了、提示需安装证书的情况？这里安装的就是根证书。说明浏览器不认给这个网站颁发证书的机构，那么你就得手动下载安装该机构的根证书（风险自己承担XD）。安装后，你就有了它的公钥，就可以用它验证服务器发来的证书是否可信了。</p>
-<h3 id="每次进行HTTPS请求时都必须在SSL-TLS层进行握手传输密钥吗？"><a href="#每次进行HTTPS请求时都必须在SSL-TLS层进行握手传输密钥吗？" class="headerlink" title="每次进行HTTPS请求时都必须在SSL&#x2F;TLS层进行握手传输密钥吗？"></a><strong>每次进行HTTPS请求时都</strong>必须<strong>在SSL&#x2F;TLS层进行握手传输密钥吗？</strong></h3><p>显然每次请求都经历一次密钥传输过程非常耗时，那怎么达到只传输一次呢？</p>
-<p>服务器会为每个浏览器（或客户端软件）维护一个session ID，在TLS握手阶段传给浏览器，浏览器生成好密钥传给服务器后，服务器会把该密钥存到相应的session ID下，之后浏览器每次请求都会携带session ID，服务器会根据session ID找到相应的密钥并进行解密加密操作，这样就不必要每次重新制作、传输密钥了！</p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a><strong>总结</strong></h3><p>可以看下这张图，梳理一下整个流程（SSL、TLS握手有一些区别，不同版本间也有区别，不过大致过程就是这样）：</p>
-]]></content>
-      <categories>
-        <category>计算机网络协议</category>
-      </categories>
-      <tags>
-        <tag>Network</tag>
-        <tag>Https</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Hooks</title>
     <url>/2021/10/12/Hooks/</url>
     <content><![CDATA[<h3 id="hooks的作用"><a href="#hooks的作用" class="headerlink" title="hooks的作用"></a>hooks的作用</h3><p><strong>钩子（hook）就是 React 函数组件的副效应解决方案，用来为函数组件引入副效应。</strong> 函数组件的主体只应该用来返回组件的 HTML 代码，所有的其他操作（副效应）都必须通过钩子引入。</p>
@@ -342,6 +243,105 @@
         <tag>JavaScript</tag>
         <tag>Hooks</tag>
         <tag>React</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Http2/Http3</title>
+    <url>/2021/09/18/Http2Http3/</url>
+    <content><![CDATA[<h4 id="为什么Http-1-1无法并发的发送多个请求（同时发多个请求，再同时接收）"><a href="#为什么Http-1-1无法并发的发送多个请求（同时发多个请求，再同时接收）" class="headerlink" title="为什么Http 1.1无法并发的发送多个请求（同时发多个请求，再同时接收）"></a>为什么Http 1.1无法并发的发送多个请求（同时发多个请求，再同时接收）</h4><p>因为http1.1是基于文本的协议，比如客户端向服务器发送了两个请求 <code>GET /query?q=A</code> 和 <code>GET /query?q=B</code>，服务器返回了两个结果，客户端是没有办法根据响应结果来判断响应对应于哪一个请求的，而http2基于二进制分帧实现多路复用，数据流以消息的形式发送，而消息又由一个或多个帧组成，多个帧之间可以乱序发送，<strong>因为根据帧首部的流标识可以重新组装。</strong></p>
+<span id="more"></span>
+
+
+
+
+
+]]></content>
+      <categories>
+        <category>计算机网络协议</category>
+      </categories>
+      <tags>
+        <tag>Network</tag>
+        <tag>Http</tag>
+        <tag>Https</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Https</title>
+    <url>/2021/09/13/Https/</url>
+    <content><![CDATA[<h3 id="为什么需要加密？"><a href="#为什么需要加密？" class="headerlink" title="为什么需要加密？"></a><strong>为什么需要加密？</strong></h3><p>因为http的内容是明文传输的，明文数据会经过中间代理服务器、路由器、wifi热点、通信服务运营商等多个物理节点，如果信息在传输过程中被劫持，传输的内容就完全暴露了。劫持者还可以篡改传输的信息且不被双方察觉，这就是“中间人攻击”。</p>
+<h3 id="用对称加密可行吗？"><a href="#用对称加密可行吗？" class="headerlink" title="用对称加密可行吗？"></a><strong>用对称加密可行吗？</strong></h3><p>对称加密最大的问题就是密钥的传输，而密钥的传输又需要加密（反复套娃），故而单纯的对称加密是无法解决问题的。</p>
+<span id="more"></span>
+
+
+<h3 id="用非对称加密可行吗？"><a href="#用非对称加密可行吗？" class="headerlink" title="用非对称加密可行吗？"></a>用非对称加密可行吗？</h3><p>鉴于非对称加密的机制，我们可能会有这种思路：服务器先把公钥以明文方式传输给浏览器，之后浏览器向服务器传数据前都先用这个公钥加密好再传，这条数据的安全似乎可以保障了！<strong>因为只有服务器有相应的私钥能解开公钥加密的数据</strong>。</p>
+<p>然而反过来<strong>由服务器到浏览器的这条路怎么保障安全？</strong>如果服务器用它的私钥加密数据传给浏览器，那么浏览器用公钥可以解密它，而这个公钥是一开始通过明文传输给浏览器的，若这个公钥被中间人劫持到了，那他也能用该公钥解密服务器传来的信息了。所以<strong>目前似乎只能保证由浏览器向服务器传输数据的安全性</strong></p>
+<h3 id="那用两组公钥私钥，是否就能保证双向传输都安全了？"><a href="#那用两组公钥私钥，是否就能保证双向传输都安全了？" class="headerlink" title="那用两组公钥私钥，是否就能保证双向传输都安全了？"></a>那用两组公钥私钥，是否就能保证双向传输都安全了？</h3><ol>
+<li>某网站服务器拥有公钥A与对应的私钥A’；浏览器拥有公钥B与对应的私钥B’。</li>
+<li>浏览器把公钥B明文传输给服务器。</li>
+<li>服务器把公钥A明文给传输浏览器。</li>
+<li>之后浏览器向服务器传输的内容都用公钥A加密，服务器收到后用私钥A’解密。由于只有服务器拥有私钥A’，所以能保证这条数据的安全。</li>
+<li>同理，服务器向浏览器传输的内容都用公钥B加密，浏览器收到后用私钥B’解密。同上也可以保证这条数据的安全。</li>
+</ol>
+<p>然而这又引出了一个新的问题，非对称加密非常耗时，如何解决？（见RSA算法）而且这种方法真的安全了吗？</p>
+<h3 id="非对称加密-对称加密"><a href="#非对称加密-对称加密" class="headerlink" title="非对称加密 + 对称加密"></a>非对称加密 + 对称加密</h3><ol>
+<li>某网站拥有用于非对称加密的公钥A、私钥A’。</li>
+<li>浏览器向网站服务器请求，服务器把公钥A明文给传输浏览器。</li>
+<li>浏览器随机生成一个用于对称加密的密钥X，用公钥A加密后传给服务器。</li>
+<li>服务器拿到后用私钥A’解密得到密钥X。</li>
+<li>这样双方就都拥有密钥X了，且别人无法知道它。之后双方所有数据都通过密钥X加密解密即可。</li>
+</ol>
+<p>这基本上就是https采用的方案了，但仍然还是有漏洞。</p>
+<h3 id="中间人攻击"><a href="#中间人攻击" class="headerlink" title="中间人攻击"></a>中间人攻击</h3><p>中间人攻击（MITMA，man in the middle attack）<br>中间人攻击是一种网络攻击类型 ，应用与LAN局域网中。这种攻击的方式是 hacker 置身于两个通信 paties 之间，窃取数据。</p>
+<p>中间人攻击允许黑客截获双方之间的数据，它可能是服务器和客户端或客户端到客户端或服务器到服务器。</p>
+<p><img src="/../assets/image-20210513212400962.png" alt="image-20210513212400962"></p>
+<p>如果在数据传输过程中，中间人劫持到了数据，此时他的确无法得到浏览器生成的密钥X，这个密钥本身被公钥A加密了，只有服务器才有私钥A’解开它，然而中间人却完全不需要拿到私钥A’就能干坏事了。请看：</p>
+<ol>
+<li>某网站有用于非对称加密的公钥A、私钥A’。</li>
+<li>浏览器向网站服务器请求，服务器把公钥A明文给传输浏览器。</li>
+<li><strong>中间人劫持到公钥A，保存下来，把数据包中的公钥A替换成自己伪造的公钥B（它当然也拥有公钥B对应的私钥B’）</strong>。</li>
+<li>浏览器生成一个用于对称加密的密钥X，用<strong>公钥B</strong>（浏览器无法得知公钥被替换了）加密后传给服务器。</li>
+<li><strong>中间人劫持后用私钥B’解密得到密钥X，再用公钥A加密后传给服务器</strong>。</li>
+<li>服务器拿到后用私钥A’解密得到密钥X。</li>
+</ol>
+<p>这样在双方都不会发现异常的情况下，中间人掉包了服务器传来的公钥，进而得到了密钥X。<strong>根本原因是浏览器无法确认收到的公钥是不是网站自己的，</strong>因为公钥本身是明文传输的，难道还得对公钥的传输进行加密？这似乎变成鸡生蛋、蛋生鸡的问题了。解法是什么？</p>
+<h3 id="如何证明浏览器收到的公钥一定是该网站的公钥？"><a href="#如何证明浏览器收到的公钥一定是该网站的公钥？" class="headerlink" title="如何证明浏览器收到的公钥一定是该网站的公钥？"></a><strong>如何证明浏览器收到的公钥一定是该网站的公钥？</strong></h3><p>网站是否有个‘身份证’来证明自己的公钥合法？这个‘身份证’又由谁来颁发？</p>
+<p><strong>CA机构</strong>，它是如今互联网世界正常运作的前提，而CA机构颁发的“身份证”就是<strong>数字证书</strong>。</p>
+<h4 id="数字证书"><a href="#数字证书" class="headerlink" title="数字证书"></a><strong>数字证书</strong></h4><p>网站在使用HTTPS前，需要向<strong>CA机构</strong>申领一份<strong>数字证书</strong>，数字证书里含有证书持有者信息、公钥信息等。服务器把证书传输给浏览器，浏览器从证书里获取公钥就行了，证书就如身份证，证明“该公钥对应该网站”。</p>
+<p>而这里又有一个显而易见的问题，“<strong>证书本身的传输过程中，如何防止被篡改”</strong>？即如何证明证书本身的真实性？身份证运用了一些防伪技术，而数字证书怎么防伪呢？</p>
+<h3 id="如何放防止数字证书被篡改？"><a href="#如何放防止数字证书被篡改？" class="headerlink" title="如何放防止数字证书被篡改？"></a><strong>如何放防止数字证书被篡改？</strong></h3><p>我们把证书原本的内容生成一份“签名”，比对证书内容和签名是否一致就能判别是否被篡改。这就是数字证书的“防伪技术”，这里的“签名”就叫<code>数字签名</code>：</p>
+<p>数字签名的制作过程：</p>
+<ol>
+<li>CA机构拥有非对称加密的私钥和公钥。</li>
+<li>CA机构对证书明文数据T进行hash。</li>
+<li>对hash后的值用私钥加密，得到数字签名S。</li>
+</ol>
+<p>明文和数字签名共同组成了数字证书，这样一份数字证书就可以颁发给网站了。<br>那浏览器拿到服务器传来的数字证书后，如何验证它是不是真的？（有没有被篡改、掉包）</p>
+<p>浏览器验证过程：</p>
+<ol>
+<li>拿到证书，得到明文T，签名S。</li>
+<li>用CA机构的公钥对S解密（由于是浏览器信任的机构，所以浏览器保有它的公钥。详情见下文），得到S’。</li>
+<li>用证书里指明的hash算法对明文T进行hash得到T’。</li>
+<li>显然通过以上步骤，T’应当等于S‘，除非明文或签名被篡改。所以此时比较S’是否等于T’，等于则表明证书可信。</li>
+</ol>
+<p><img src="/../assets/image-20210513214044731.png" alt="image-20210513214044731"></p>
+<h3 id="中间人有可能篡改该证书吗？"><a href="#中间人有可能篡改该证书吗？" class="headerlink" title="中间人有可能篡改该证书吗？"></a><strong>中间人有可能篡改该证书吗？</strong></h3><p>假设中间人篡改了证书的原文，由于他没有CA机构的私钥，所以无法得到此时加密后签名，无法相应地篡改签名。浏览器收到该证书后会发现原文和签名解密后的值不一致，则说明证书已被篡改，证书不可信</p>
+<h3 id="中间人有可能把证书掉包吗？"><a href="#中间人有可能把证书掉包吗？" class="headerlink" title="中间人有可能把证书掉包吗？"></a><strong>中间人有可能把证书掉包吗？</strong></h3><p>假设有另一个网站B也拿到了CA机构认证的证书，它想劫持网站A的信息。于是它成为中间人拦截到了A传给浏览器的证书，然后替换成自己的证书，传给浏览器，之后浏览器就会错误地拿到B的证书里的公钥了。</p>
+<p>其实这并不会发生，因为证书一定是无法被篡改的，所以网站B掉包的一定也是正规的证书，而证书黎里包含了网站的信息，包括域名，浏览器把证书里的域名与自己请求的域名比对一下就知道有没有被掉包了。</p>
+<h3 id="为什么制作数字签名时需要hash一次？"><a href="#为什么制作数字签名时需要hash一次？" class="headerlink" title="为什么制作数字签名时需要hash一次？"></a><strong>为什么制作数字签名时需要hash一次？</strong></h3><p>最显然的是性能问题，非对称加密效率较差，证书信息一般较长，比较耗时。而hash后得到的是固定长度的信息（比如用md5算法hash后可以得到固定的128位的值），这样加解密就快很多。</p>
+<h3 id="怎么证明CA机构的公钥是可信的？"><a href="#怎么证明CA机构的公钥是可信的？" class="headerlink" title="怎么证明CA机构的公钥是可信的？"></a><strong>怎么证明CA机构的公钥是可信的？</strong></h3><p>“浏览器保有它的公钥”，这是个什么保有法？怎么证明这个公钥是否可信？</p>
+<p>让我们回想一下数字证书到底是干啥的？没错，为了证明某公钥是可信的，即“该公钥是否对应该网站”，那CA机构的公钥是否也可以用数字证书来证明？没错，操作系统、浏览器本身会预装一些它们信任的根证书，如果其中会有CA机构的根证书，这样就可以拿到它对应的可信公钥了。</p>
+<p>实际上证书之间的认证也可以不止一层，可以A信任B，B信任C，以此类推，我们把它叫做<code>信任链</code>或<code>数字证书链</code>。也就是一连串的数字证书，由根证书为起点，透过层层信任，使终端实体证书的持有者可以获得转授的信任，以证明身份。</p>
+<p>另外，不知你们是否遇到过网站访问不了、提示需安装证书的情况？这里安装的就是根证书。说明浏览器不认给这个网站颁发证书的机构，那么你就得手动下载安装该机构的根证书（风险自己承担XD）。安装后，你就有了它的公钥，就可以用它验证服务器发来的证书是否可信了。</p>
+<h3 id="每次进行HTTPS请求时都必须在SSL-TLS层进行握手传输密钥吗？"><a href="#每次进行HTTPS请求时都必须在SSL-TLS层进行握手传输密钥吗？" class="headerlink" title="每次进行HTTPS请求时都必须在SSL&#x2F;TLS层进行握手传输密钥吗？"></a><strong>每次进行HTTPS请求时都</strong>必须<strong>在SSL&#x2F;TLS层进行握手传输密钥吗？</strong></h3><p>显然每次请求都经历一次密钥传输过程非常耗时，那怎么达到只传输一次呢？</p>
+<p>服务器会为每个浏览器（或客户端软件）维护一个session ID，在TLS握手阶段传给浏览器，浏览器生成好密钥传给服务器后，服务器会把该密钥存到相应的session ID下，之后浏览器每次请求都会携带session ID，服务器会根据session ID找到相应的密钥并进行解密加密操作，这样就不必要每次重新制作、传输密钥了！</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a><strong>总结</strong></h3><p>可以看下这张图，梳理一下整个流程（SSL、TLS握手有一些区别，不同版本间也有区别，不过大致过程就是这样）：</p>
+]]></content>
+      <categories>
+        <category>计算机网络协议</category>
+      </categories>
+      <tags>
+        <tag>Network</tag>
+        <tag>Https</tag>
       </tags>
   </entry>
   <entry>
@@ -1932,6 +1932,46 @@ module: &#123;
       </tags>
   </entry>
   <entry>
+    <title>Webpack</title>
+    <url>/2022/04/14/Webpack/</url>
+    <content><![CDATA[<h3 id="Webpack-是什么"><a href="#Webpack-是什么" class="headerlink" title="Webpack 是什么"></a>Webpack 是什么</h3><p>webpack 是一种<strong>前端资源构建工具</strong>，一个静态模块打包器(module bundler)。</p>
+<p>在webpack 看来, 前端的所有资源文件(js&#x2F;json&#x2F;css&#x2F;img&#x2F;less&#x2F;…)都会作为模块处理。<br>它将根据模块的依赖关系进行静态分析，打包生成对应的静态资源(bundle)。</p>
+<h3 id="Webpack-五个核心概念"><a href="#Webpack-五个核心概念" class="headerlink" title="Webpack 五个核心概念"></a>Webpack 五个核心概念</h3><h4 id="Entry"><a href="#Entry" class="headerlink" title="Entry"></a>Entry</h4><p>入口(Entry)：指示 webpack 以哪个文件为入口起点开始打包，分析构建内部依赖图。</p>
+<h4 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h4><p>输出(Output)：指示 webpack 打包后的资源 bundles 输出到哪里去，以及如何命名。</p>
+<h4 id="Loader"><a href="#Loader" class="headerlink" title="Loader"></a>Loader</h4><p>Loader：让 webpack 能够去处理那些非 JS 的文件，比如样式文件、图片文件(webpack 自身只理解<br>JS)</p>
+<h4 id="Plugins"><a href="#Plugins" class="headerlink" title="Plugins"></a>Plugins</h4><p>插件(Plugins)：可以用于执行范围更广的任务。插件的范围包括，从打包优化和压缩，<br>一直到重新定义环境中的变量等。</p>
+<span id="more"></span>
+
+<h4 id="Mode"><a href="#Mode" class="headerlink" title="Mode"></a>Mode</h4><p>模式(Mode)：指示 webpack 使用相应模式的配置。</p>
+<ol>
+<li><p>development:  </p>
+<p> 会将 DefinePlugin 中 <code>process.env.NODE_ENV</code> 的值设置为 development。</p>
+<p>启用 </p>
+<figure class="highlight plaintext"><figcaption><span>和 ```NamedModulesPlugin```。</span></figcaption><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">   特点： 能让代码本地调试运行的环境。</span><br><span class="line"></span><br><span class="line">2. production</span><br><span class="line"></span><br><span class="line">   会将 DefinePlugin 中 ```process.env.NODE_ENV``` 的值设置为 production。</span><br><span class="line"></span><br><span class="line">   启用 </span><br><span class="line"></span><br><span class="line">   ```FlagDependencyUsagePlugin,```</span><br><span class="line"></span><br><span class="line">   ```FlagIncludedChunksPlugin,``` </span><br><span class="line"></span><br><span class="line">   ```ModuleConcatenationPlugin,``` </span><br><span class="line"></span><br><span class="line">   ```NoEmitOnErrorsPlugin,```</span><br><span class="line"></span><br><span class="line">    ```OccurrenceOrderPlugin,```</span><br><span class="line"></span><br><span class="line">   ```SideEffectsFlagPlugin 和 TerserPlugin```。</span><br><span class="line"></span><br><span class="line">   特点： 能让代码优化上线运行的环境。</span><br><span class="line"></span><br><span class="line">   </span><br><span class="line"></span><br><span class="line">### 编译打包应用</span><br><span class="line"></span><br><span class="line">创建 src 下的 js 等文件后，不需要配置 webpack.config.js 文件，在命令行就可以编译打包。</span><br><span class="line"></span><br><span class="line">指令：</span><br><span class="line"></span><br><span class="line">- 开发环境：</span><br><span class="line">```shell</span><br><span class="line">webpack ./src/index.js -o ./build/built.js --mode=development</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>  webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后输出到 .&#x2F;build&#x2F;built.js 整体打包环境，是开发环境</p>
+<ul>
+<li>生产环境：<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">webpack ./src/index.js -o ./build/built.js --mode=production</span><br></pre></td></tr></table></figure>
+webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后输出到 .&#x2F;build&#x2F;built.js 整体打包环境，是生产环境</li>
+</ul>
+<p>结论：</p>
+<ol>
+<li>webpack 本身能处理 js&#x2F;json 资源，不能处理 css&#x2F;img 等其他资源</li>
+<li>生产环境和开发环境将 ES6 模块化编译成浏览器能识别的模块化，但是不能处理 ES6 的基本语法转化为 ES5（需要借助 loader）</li>
+<li>生产环境比开发环境多一个压缩 js 代码</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// resolve用来拼接绝对路径的方法</span></span><br><span class="line"><span class="keyword">const</span> &#123; resolve &#125; = <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>);</span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="comment">// webpack配置</span></span><br><span class="line">  <span class="comment">// 入口起点</span></span><br><span class="line">  <span class="attr">entry</span>: <span class="string">&#x27;./src/index.js&#x27;</span>,</span><br><span class="line">  <span class="comment">// 输出</span></span><br><span class="line">  <span class="attr">output</span>: &#123;</span><br><span class="line">    <span class="comment">// 输出文件名</span></span><br><span class="line">    <span class="attr">filename</span>: <span class="string">&#x27;built.js&#x27;</span>,</span><br><span class="line">    <span class="comment">// 输出路径</span></span><br><span class="line">    <span class="comment">// __dirname nodejs的变量，代表当前文件的目录绝对路径</span></span><br><span class="line">    <span class="attr">path</span>: <span class="title function_">resolve</span>(__dirname, <span class="string">&#x27;build&#x27;</span>)</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// loader的配置</span></span><br><span class="line">  <span class="attr">module</span>: &#123;</span><br><span class="line">    <span class="attr">rules</span>: [</span><br><span class="line">      <span class="comment">// 详细loader配置</span></span><br><span class="line">      <span class="comment">// 不同文件必须配置不同loader处理</span></span><br><span class="line">      &#123; </span><br><span class="line">        <span class="comment">// 匹配哪些文件</span></span><br><span class="line">        <span class="attr">test</span>: <span class="regexp">/\.css$/</span>,</span><br><span class="line">        <span class="comment">// 使用哪些loader进行处理</span></span><br><span class="line">        <span class="attr">use</span>: [</span><br><span class="line">          <span class="comment">// use数组中loader执行顺序：从右到左，从下到上 依次执行</span></span><br><span class="line">          <span class="comment">// 创建style标签，将js中的样式资源插入进行，添加到head中生效</span></span><br><span class="line">          <span class="string">&#x27;style-loader&#x27;</span>,</span><br><span class="line">          <span class="comment">// 将css文件变成commonjs模块加载js中，里面内容是样式字符串</span></span><br><span class="line">          <span class="string">&#x27;css-loader&#x27;</span></span><br><span class="line">        ]</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">test</span>: <span class="regexp">/\.less$/</span>,</span><br><span class="line">        <span class="attr">use</span>: [</span><br><span class="line">          <span class="string">&#x27;style-loader&#x27;</span>,</span><br><span class="line">          <span class="string">&#x27;css-loader&#x27;</span>,</span><br><span class="line">          <span class="comment">// 将less文件编译成css文件</span></span><br><span class="line">          <span class="comment">// 需要下载 less-loader和less</span></span><br><span class="line">           <span class="string">&#x27;less-loader&#x27;</span></span><br><span class="line">        ]</span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// plugins的配置</span></span><br><span class="line">  <span class="attr">plugins</span>: [</span><br><span class="line">    <span class="comment">// 详细plugins的配置</span></span><br><span class="line">  ],</span><br><span class="line">  <span class="comment">// 模式</span></span><br><span class="line">  <span class="attr">mode</span>: <span class="string">&#x27;development&#x27;</span>, <span class="comment">// 开发模式</span></span><br><span class="line">  <span class="comment">// mode: &#x27;production&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>打包工具</category>
+      </categories>
+      <tags>
+        <tag>Webpack</tag>
+        <tag>打包工具</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>require() 源码解读</title>
     <url>/2021/08/21/require%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/</url>
     <content><![CDATA[<span id="more"></span>
@@ -1942,6 +1982,41 @@ module: &#123;
       <tags>
         <tag>JavaScript</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>书单 / BookList</title>
+    <url>/2024/09/26/%E4%B9%A6%E5%8D%95/</url>
+    <content><![CDATA[<h4 id="专业向"><a href="#专业向" class="headerlink" title="专业向"></a>专业向</h4><h5 id="计算机（2）"><a href="#计算机（2）" class="headerlink" title="计算机（2）"></a>计算机（2）</h5><ul>
+<li><a href="https://markdown.com.cn/">你所不知道的JavaScript</a></li>
+<li><a href="https://markdown.com.cn/">深入浅出NodeJS</a></li>
+<li><a href="https://markdown.com.cn/">Webpack实战：入门、进阶与调优</a></li>
+<li><a href="https://markdown.com.cn/">TypeScript图形渲染实战</a></li>
+</ul>
+<h5 id="数学"><a href="#数学" class="headerlink" title="数学"></a>数学</h5><hr>
+<h4 id="非专业向"><a href="#非专业向" class="headerlink" title="非专业向"></a>非专业向</h4><h5 id="社科文学类（5）"><a href="#社科文学类（5）" class="headerlink" title="社科文学类（5）"></a>社科文学类（5）</h5><ul>
+<li><a href="https://markdown.com.cn/">山月记</a></li>
+<li><a href="https://markdown.com.cn/">宋词群星闪耀时</a></li>
+<li><a href="https://markdown.com.cn/">我在西南联大的日子</a></li>
+<li><a href="https://markdown.com.cn/">当呼吸化为空气</a></li>
+<li><a href="https://markdown.com.cn/">被讨厌的勇气</a></li>
+</ul>
+<h5 id="杂文散文（1）"><a href="#杂文散文（1）" class="headerlink" title="杂文散文（1）"></a>杂文散文（1）</h5><ul>
+<li><a href="https://markdown.com.cn/">生命是孤独的旅程</a></li>
+</ul>
+<h5 id="小说（4）"><a href="#小说（4）" class="headerlink" title="小说（4）"></a>小说（4）</h5><ul>
+<li><a href="https://markdown.com.cn/">羊毛战记</a></li>
+<li><a href="https://markdown.com.cn/">三国演义</a></li>
+<li><a href="https://markdown.com.cn/">冰与火之歌</a></li>
+<li><a href="https://markdown.com.cn/">野性的呼唤</a></li>
+<li><a href="https://markdown.com.cn/">龙族</a></li>
+</ul>
+<h5 id="传记（1）"><a href="#传记（1）" class="headerlink" title="传记（1）"></a>传记（1）</h5><ul>
+<li><a href="https://markdown.com.cn/">苏东坡全传</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>生活</category>
+      </categories>
   </entry>
   <entry>
     <title>函数式编程</title>
@@ -1981,69 +2056,6 @@ module: &#123;
       <tags>
         <tag>JavaScript</tag>
         <tag>Functional Programming</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>区块链基础知识</title>
-    <url>/2024/11/01/%E5%8C%BA%E5%9D%97%E9%93%BE%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</url>
-    <content><![CDATA[<h2 id="区块链的本质"><a href="#区块链的本质" class="headerlink" title="区块链的本质"></a>区块链的本质</h2><p>区块链是什么？一言以蔽之：<strong>特殊的分布式数据库</strong><br>区块链的主要做用还是储存信息，任何需要保存的信息，都可以写入区块链，也可以从里面读取。</p>
-<p>其次，任何人都可以架设服务器，加入区块链网络，成为一个节点。区块链的世界里面，没有中心节点，每个节点都是平等的，都保存着整个数据库。你可以向任何一个节点，写入&#x2F;读取数据，因为所有节点最后都会同步，保证区块链一致。</p>
-<h2 id="区块链的最大特点"><a href="#区块链的最大特点" class="headerlink" title="区块链的最大特点"></a>区块链的最大特点</h2><p>去中心化、保持一致性（算力证明增加叛徒成本）</p>
-<h3 id="拜占庭将军问题"><a href="#拜占庭将军问题" class="headerlink" title="拜占庭将军问题"></a>拜占庭将军问题</h3><blockquote>
-<p>如何解决在所有网络节点存在故障、恶意节点时，保证其余部分结点的准确性和一致性</p>
-</blockquote>
-<h4 id="拜占庭容错（将军-副官模型）"><a href="#拜占庭容错（将军-副官模型）" class="headerlink" title="拜占庭容错（将军-副官模型）"></a>拜占庭容错（将军-副官模型）</h4><ol>
-<li>忠诚的副官遵守同一个命令</li>
-<li>若将军忠诚，则忠诚的副官会执行他的命令<br>m: 恶意副官的个数；n: 总人数<br>当 n&gt;3m, 问题可解</li>
-</ol>
-]]></content>
-      <categories>
-        <category>Web3</category>
-      </categories>
-      <tags>
-        <tag>Web3</tag>
-        <tag>区块链</tag>
-        <tag>智能合约</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Webpack</title>
-    <url>/2022/04/14/Webpack/</url>
-    <content><![CDATA[<h3 id="Webpack-是什么"><a href="#Webpack-是什么" class="headerlink" title="Webpack 是什么"></a>Webpack 是什么</h3><p>webpack 是一种<strong>前端资源构建工具</strong>，一个静态模块打包器(module bundler)。</p>
-<p>在webpack 看来, 前端的所有资源文件(js&#x2F;json&#x2F;css&#x2F;img&#x2F;less&#x2F;…)都会作为模块处理。<br>它将根据模块的依赖关系进行静态分析，打包生成对应的静态资源(bundle)。</p>
-<h3 id="Webpack-五个核心概念"><a href="#Webpack-五个核心概念" class="headerlink" title="Webpack 五个核心概念"></a>Webpack 五个核心概念</h3><h4 id="Entry"><a href="#Entry" class="headerlink" title="Entry"></a>Entry</h4><p>入口(Entry)：指示 webpack 以哪个文件为入口起点开始打包，分析构建内部依赖图。</p>
-<h4 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h4><p>输出(Output)：指示 webpack 打包后的资源 bundles 输出到哪里去，以及如何命名。</p>
-<h4 id="Loader"><a href="#Loader" class="headerlink" title="Loader"></a>Loader</h4><p>Loader：让 webpack 能够去处理那些非 JS 的文件，比如样式文件、图片文件(webpack 自身只理解<br>JS)</p>
-<h4 id="Plugins"><a href="#Plugins" class="headerlink" title="Plugins"></a>Plugins</h4><p>插件(Plugins)：可以用于执行范围更广的任务。插件的范围包括，从打包优化和压缩，<br>一直到重新定义环境中的变量等。</p>
-<span id="more"></span>
-
-<h4 id="Mode"><a href="#Mode" class="headerlink" title="Mode"></a>Mode</h4><p>模式(Mode)：指示 webpack 使用相应模式的配置。</p>
-<ol>
-<li><p>development:  </p>
-<p> 会将 DefinePlugin 中 <code>process.env.NODE_ENV</code> 的值设置为 development。</p>
-<p>启用 </p>
-<figure class="highlight plaintext"><figcaption><span>和 ```NamedModulesPlugin```。</span></figcaption><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">   特点： 能让代码本地调试运行的环境。</span><br><span class="line"></span><br><span class="line">2. production</span><br><span class="line"></span><br><span class="line">   会将 DefinePlugin 中 ```process.env.NODE_ENV``` 的值设置为 production。</span><br><span class="line"></span><br><span class="line">   启用 </span><br><span class="line"></span><br><span class="line">   ```FlagDependencyUsagePlugin,```</span><br><span class="line"></span><br><span class="line">   ```FlagIncludedChunksPlugin,``` </span><br><span class="line"></span><br><span class="line">   ```ModuleConcatenationPlugin,``` </span><br><span class="line"></span><br><span class="line">   ```NoEmitOnErrorsPlugin,```</span><br><span class="line"></span><br><span class="line">    ```OccurrenceOrderPlugin,```</span><br><span class="line"></span><br><span class="line">   ```SideEffectsFlagPlugin 和 TerserPlugin```。</span><br><span class="line"></span><br><span class="line">   特点： 能让代码优化上线运行的环境。</span><br><span class="line"></span><br><span class="line">   </span><br><span class="line"></span><br><span class="line">### 编译打包应用</span><br><span class="line"></span><br><span class="line">创建 src 下的 js 等文件后，不需要配置 webpack.config.js 文件，在命令行就可以编译打包。</span><br><span class="line"></span><br><span class="line">指令：</span><br><span class="line"></span><br><span class="line">- 开发环境：</span><br><span class="line">```shell</span><br><span class="line">webpack ./src/index.js -o ./build/built.js --mode=development</span><br></pre></td></tr></table></figure></li>
-</ol>
-<p>  webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后输出到 .&#x2F;build&#x2F;built.js 整体打包环境，是开发环境</p>
-<ul>
-<li>生产环境：<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">webpack ./src/index.js -o ./build/built.js --mode=production</span><br></pre></td></tr></table></figure>
-webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后输出到 .&#x2F;build&#x2F;built.js 整体打包环境，是生产环境</li>
-</ul>
-<p>结论：</p>
-<ol>
-<li>webpack 本身能处理 js&#x2F;json 资源，不能处理 css&#x2F;img 等其他资源</li>
-<li>生产环境和开发环境将 ES6 模块化编译成浏览器能识别的模块化，但是不能处理 ES6 的基本语法转化为 ES5（需要借助 loader）</li>
-<li>生产环境比开发环境多一个压缩 js 代码</li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// resolve用来拼接绝对路径的方法</span></span><br><span class="line"><span class="keyword">const</span> &#123; resolve &#125; = <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>);</span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="comment">// webpack配置</span></span><br><span class="line">  <span class="comment">// 入口起点</span></span><br><span class="line">  <span class="attr">entry</span>: <span class="string">&#x27;./src/index.js&#x27;</span>,</span><br><span class="line">  <span class="comment">// 输出</span></span><br><span class="line">  <span class="attr">output</span>: &#123;</span><br><span class="line">    <span class="comment">// 输出文件名</span></span><br><span class="line">    <span class="attr">filename</span>: <span class="string">&#x27;built.js&#x27;</span>,</span><br><span class="line">    <span class="comment">// 输出路径</span></span><br><span class="line">    <span class="comment">// __dirname nodejs的变量，代表当前文件的目录绝对路径</span></span><br><span class="line">    <span class="attr">path</span>: <span class="title function_">resolve</span>(__dirname, <span class="string">&#x27;build&#x27;</span>)</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// loader的配置</span></span><br><span class="line">  <span class="attr">module</span>: &#123;</span><br><span class="line">    <span class="attr">rules</span>: [</span><br><span class="line">      <span class="comment">// 详细loader配置</span></span><br><span class="line">      <span class="comment">// 不同文件必须配置不同loader处理</span></span><br><span class="line">      &#123; </span><br><span class="line">        <span class="comment">// 匹配哪些文件</span></span><br><span class="line">        <span class="attr">test</span>: <span class="regexp">/\.css$/</span>,</span><br><span class="line">        <span class="comment">// 使用哪些loader进行处理</span></span><br><span class="line">        <span class="attr">use</span>: [</span><br><span class="line">          <span class="comment">// use数组中loader执行顺序：从右到左，从下到上 依次执行</span></span><br><span class="line">          <span class="comment">// 创建style标签，将js中的样式资源插入进行，添加到head中生效</span></span><br><span class="line">          <span class="string">&#x27;style-loader&#x27;</span>,</span><br><span class="line">          <span class="comment">// 将css文件变成commonjs模块加载js中，里面内容是样式字符串</span></span><br><span class="line">          <span class="string">&#x27;css-loader&#x27;</span></span><br><span class="line">        ]</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">test</span>: <span class="regexp">/\.less$/</span>,</span><br><span class="line">        <span class="attr">use</span>: [</span><br><span class="line">          <span class="string">&#x27;style-loader&#x27;</span>,</span><br><span class="line">          <span class="string">&#x27;css-loader&#x27;</span>,</span><br><span class="line">          <span class="comment">// 将less文件编译成css文件</span></span><br><span class="line">          <span class="comment">// 需要下载 less-loader和less</span></span><br><span class="line">           <span class="string">&#x27;less-loader&#x27;</span></span><br><span class="line">        ]</span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// plugins的配置</span></span><br><span class="line">  <span class="attr">plugins</span>: [</span><br><span class="line">    <span class="comment">// 详细plugins的配置</span></span><br><span class="line">  ],</span><br><span class="line">  <span class="comment">// 模式</span></span><br><span class="line">  <span class="attr">mode</span>: <span class="string">&#x27;development&#x27;</span>, <span class="comment">// 开发模式</span></span><br><span class="line">  <span class="comment">// mode: &#x27;production&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>打包工具</category>
-      </categories>
-      <tags>
-        <tag>Webpack</tag>
-        <tag>打包工具</tag>
       </tags>
   </entry>
   <entry>
@@ -2160,47 +2172,27 @@ webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后�
       </tags>
   </entry>
   <entry>
-    <title>书单 / BookList</title>
-    <url>/2024/09/26/%E4%B9%A6%E5%8D%95/</url>
-    <content><![CDATA[<h4 id="专业向"><a href="#专业向" class="headerlink" title="专业向"></a>专业向</h4><h5 id="计算机（2）"><a href="#计算机（2）" class="headerlink" title="计算机（2）"></a>计算机（2）</h5><ul>
-<li><a href="https://markdown.com.cn/">你所不知道的JavaScript</a></li>
-<li><a href="https://markdown.com.cn/">深入浅出NodeJS</a></li>
-<li><a href="https://markdown.com.cn/">Webpack实战：入门、进阶与调优</a></li>
-<li><a href="https://markdown.com.cn/">TypeScript图形渲染实战</a></li>
-</ul>
-<h5 id="数学"><a href="#数学" class="headerlink" title="数学"></a>数学</h5><hr>
-<h4 id="非专业向"><a href="#非专业向" class="headerlink" title="非专业向"></a>非专业向</h4><h5 id="社科文学类（5）"><a href="#社科文学类（5）" class="headerlink" title="社科文学类（5）"></a>社科文学类（5）</h5><ul>
-<li><a href="https://markdown.com.cn/">山月记</a></li>
-<li><a href="https://markdown.com.cn/">宋词群星闪耀时</a></li>
-<li><a href="https://markdown.com.cn/">我在西南联大的日子</a></li>
-<li><a href="https://markdown.com.cn/">当呼吸化为空气</a></li>
-<li><a href="https://markdown.com.cn/">被讨厌的勇气</a></li>
-</ul>
-<h5 id="杂文散文（1）"><a href="#杂文散文（1）" class="headerlink" title="杂文散文（1）"></a>杂文散文（1）</h5><ul>
-<li><a href="https://markdown.com.cn/">生命是孤独的旅程</a></li>
-</ul>
-<h5 id="小说（4）"><a href="#小说（4）" class="headerlink" title="小说（4）"></a>小说（4）</h5><ul>
-<li><a href="https://markdown.com.cn/">羊毛战记</a></li>
-<li><a href="https://markdown.com.cn/">三国演义</a></li>
-<li><a href="https://markdown.com.cn/">冰与火之歌</a></li>
-<li><a href="https://markdown.com.cn/">野性的呼唤</a></li>
-<li><a href="https://markdown.com.cn/">龙族</a></li>
-</ul>
-<h5 id="传记（1）"><a href="#传记（1）" class="headerlink" title="传记（1）"></a>传记（1）</h5><ul>
-<li><a href="https://markdown.com.cn/">苏东坡全传</a></li>
-</ul>
+    <title>区块链基础知识</title>
+    <url>/2024/11/01/%E5%8C%BA%E5%9D%97%E9%93%BE%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</url>
+    <content><![CDATA[<h2 id="区块链的本质"><a href="#区块链的本质" class="headerlink" title="区块链的本质"></a>区块链的本质</h2><p>区块链是什么？一言以蔽之：<strong>特殊的分布式数据库</strong><br>区块链的主要做用还是储存信息，任何需要保存的信息，都可以写入区块链，也可以从里面读取。</p>
+<p>其次，任何人都可以架设服务器，加入区块链网络，成为一个节点。区块链的世界里面，没有中心节点，每个节点都是平等的，都保存着整个数据库。你可以向任何一个节点，写入&#x2F;读取数据，因为所有节点最后都会同步，保证区块链一致。</p>
+<h2 id="区块链的最大特点"><a href="#区块链的最大特点" class="headerlink" title="区块链的最大特点"></a>区块链的最大特点</h2><p>去中心化、保持一致性（算力证明增加叛徒成本）</p>
+<h3 id="拜占庭将军问题"><a href="#拜占庭将军问题" class="headerlink" title="拜占庭将军问题"></a>拜占庭将军问题</h3><blockquote>
+<p>如何解决在所有网络节点存在故障、恶意节点时，保证其余部分结点的准确性和一致性</p>
+</blockquote>
+<h4 id="拜占庭容错（将军-副官模型）"><a href="#拜占庭容错（将军-副官模型）" class="headerlink" title="拜占庭容错（将军-副官模型）"></a>拜占庭容错（将军-副官模型）</h4><ol>
+<li>忠诚的副官遵守同一个命令</li>
+<li>若将军忠诚，则忠诚的副官会执行他的命令<br>m: 恶意副官的个数；n: 总人数<br>当 n&gt;3m, 问题可解</li>
+</ol>
 ]]></content>
       <categories>
-        <category>生活</category>
+        <category>Web3</category>
       </categories>
-  </entry>
-  <entry>
-    <title>成为老师</title>
-    <url>/2024/10/29/%E6%88%90%E4%B8%BA%E8%80%81%E5%B8%88/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>生活</category>
-      </categories>
+      <tags>
+        <tag>Web3</tag>
+        <tag>区块链</tag>
+        <tag>智能合约</tag>
+      </tags>
   </entry>
   <entry>
     <title>序 / Intro</title>
@@ -2210,6 +2202,14 @@ webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后�
     <!-- <p>[英]威廉·萨默塞特·毛姆 《刀锋》</p> -->
 </blockquote>
 ]]></content>
+  </entry>
+  <entry>
+    <title>成为老师</title>
+    <url>/2024/10/29/%E6%88%90%E4%B8%BA%E8%80%81%E5%B8%88/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>生活</category>
+      </categories>
   </entry>
   <entry>
     <title>站点更新日志 / ChangeLog</title>
