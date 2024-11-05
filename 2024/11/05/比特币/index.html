@@ -19,16 +19,17 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.21.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="比特币中的密码学比特币中的哈希特性 容易验证，不容易计算  Collision resistance (抗哈希碰撞) 没有高效的方法来人为的制造哈希碰撞   Collision resistance的定义：给定X，没有高效的方法找到Y，使得H(X) &#x3D; H(Y) Collision resistance的特性：无法用数学证明 MD5哈希函数：以前认为是Collision resistan">
+    <meta name="description" content="不要被学术界的思维限制了头脑，不要被程序员的思维限制了想象力。   比特币中的密码学比特币中的哈希特性 Collision resistance (抗哈希碰撞) 没有高效的方法来人为的制造哈希碰撞   Collision resistance的定义：给定X，没有高效的方法找到Y，使得H(X) &#x3D; H(Y) Collision resistance的特性：无法用数学证明 MD5哈">
 <meta property="og:type" content="article">
 <meta property="og:title" content="比特币">
 <meta property="og:url" content="http://example.com/2024/11/05/%E6%AF%94%E7%89%B9%E5%B8%81/index.html">
 <meta property="og:site_name" content="Huangyunze">
-<meta property="og:description" content="比特币中的密码学比特币中的哈希特性 容易验证，不容易计算  Collision resistance (抗哈希碰撞) 没有高效的方法来人为的制造哈希碰撞   Collision resistance的定义：给定X，没有高效的方法找到Y，使得H(X) &#x3D; H(Y) Collision resistance的特性：无法用数学证明 MD5哈希函数：以前认为是Collision resistan">
+<meta property="og:description" content="不要被学术界的思维限制了头脑，不要被程序员的思维限制了想象力。   比特币中的密码学比特币中的哈希特性 Collision resistance (抗哈希碰撞) 没有高效的方法来人为的制造哈希碰撞   Collision resistance的定义：给定X，没有高效的方法找到Y，使得H(X) &#x3D; H(Y) Collision resistance的特性：无法用数学证明 MD5哈">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/assets/merkle-tree.png">
+<meta property="og:image" content="http://example.com/assets/merkle-proof.png">
 <meta property="article:published_time" content="2024-11-05T02:17:17.738Z">
-<meta property="article:modified_time" content="2024-11-05T03:15:02.058Z">
+<meta property="article:modified_time" content="2024-11-05T06:54:00.357Z">
 <meta property="article:author" content="Huangyunze">
 <meta property="article:tag" content="Web3">
 <meta property="article:tag" content="比特币">
@@ -143,7 +144,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AF%94%E7%89%B9%E5%B8%81%E4%B8%AD%E7%9A%84%E5%AF%86%E7%A0%81%E5%AD%A6"><span class="nav-number">1.</span> <span class="nav-text">比特币中的密码学</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AF%94%E7%89%B9%E5%B8%81%E4%B8%AD%E7%9A%84%E5%93%88%E5%B8%8C%E7%89%B9%E6%80%A7"><span class="nav-number">1.1.</span> <span class="nav-text">比特币中的哈希特性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Collision-resistance-%E6%8A%97%E5%93%88%E5%B8%8C%E7%A2%B0%E6%92%9E"><span class="nav-number">1.1.1.</span> <span class="nav-text">Collision resistance (抗哈希碰撞)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Hiding"><span class="nav-number">1.1.2.</span> <span class="nav-text">Hiding</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Puzzle-friendly"><span class="nav-number">1.1.3.</span> <span class="nav-text">Puzzle friendly</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AF%94%E7%89%B9%E5%B8%81%E4%B8%AD%E7%9A%84%E8%B4%A6%E6%88%B7%E7%AE%A1%E7%90%86"><span class="nav-number">1.2.</span> <span class="nav-text">比特币中的账户管理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AF%94%E7%89%B9%E5%B8%81%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="nav-number">2.</span> <span class="nav-text">比特币的数据结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Block-chain%EF%BC%88%E5%8C%BA%E5%9D%97%E9%93%BE%EF%BC%89"><span class="nav-number">2.1.</span> <span class="nav-text">Block chain（区块链）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Merkle-tree"><span class="nav-number">2.2.</span> <span class="nav-text">Merkle tree</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AF%94%E7%89%B9%E5%B8%81%E4%B8%AD%E7%9A%84%E5%AF%86%E7%A0%81%E5%AD%A6"><span class="nav-number">1.</span> <span class="nav-text">比特币中的密码学</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AF%94%E7%89%B9%E5%B8%81%E4%B8%AD%E7%9A%84%E5%93%88%E5%B8%8C%E7%89%B9%E6%80%A7"><span class="nav-number">1.1.</span> <span class="nav-text">比特币中的哈希特性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Collision-resistance-%E6%8A%97%E5%93%88%E5%B8%8C%E7%A2%B0%E6%92%9E"><span class="nav-number">1.1.1.</span> <span class="nav-text">Collision resistance (抗哈希碰撞)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Hiding"><span class="nav-number">1.1.2.</span> <span class="nav-text">Hiding</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Puzzle-friendly"><span class="nav-number">1.1.3.</span> <span class="nav-text">Puzzle friendly</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AF%94%E7%89%B9%E5%B8%81%E4%B8%AD%E7%9A%84%E8%B4%A6%E6%88%B7%E7%AE%A1%E7%90%86"><span class="nav-number">1.2.</span> <span class="nav-text">比特币中的账户管理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AF%94%E7%89%B9%E5%B8%81%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="nav-number">2.</span> <span class="nav-text">比特币的数据结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Block-chain%EF%BC%88%E5%8C%BA%E5%9D%97%E9%93%BE%EF%BC%89"><span class="nav-number">2.1.</span> <span class="nav-text">Block chain（区块链）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Merkle-tree%EF%BC%88%E9%BB%98%E5%85%8B%E5%B0%94%E6%A0%91%EF%BC%89"><span class="nav-number">2.2.</span> <span class="nav-text">Merkle tree（默克尔树）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AF%94%E7%89%B9%E5%B8%81%E7%9A%84%E5%85%B1%E8%AF%86%E5%8D%8F%E8%AE%AE"><span class="nav-number">3.</span> <span class="nav-text">比特币的共识协议</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -234,7 +235,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2024-11-05 10:17:17 / 修改时间：11:15:02" itemprop="dateCreated datePublished" datetime="2024-11-05T10:17:17+08:00">2024-11-05</time>
+      <time title="创建时间：2024-11-05 10:17:17 / 修改时间：14:54:00" itemprop="dateCreated datePublished" datetime="2024-11-05T10:17:17+08:00">2024-11-05</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -260,14 +261,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>577</span>
+      <span>1.1k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>2 分钟</span>
+      <span>4 分钟</span>
     </span>
 </div>
 
@@ -277,9 +278,11 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><h2 id="比特币中的密码学"><a href="#比特币中的密码学" class="headerlink" title="比特币中的密码学"></a>比特币中的密码学</h2><h3 id="比特币中的哈希特性"><a href="#比特币中的哈希特性" class="headerlink" title="比特币中的哈希特性"></a>比特币中的哈希特性</h3><blockquote>
-<p>容易验证，不容易计算</p>
+    <div class="post-body" itemprop="articleBody"><blockquote class="blockquote-center">
+    <p><b>不要被学术界的思维限制了头脑，不要被程序员的思维限制了想象力。</b></p>
 </blockquote>
+
+<h2 id="比特币中的密码学"><a href="#比特币中的密码学" class="headerlink" title="比特币中的密码学"></a>比特币中的密码学</h2><h3 id="比特币中的哈希特性"><a href="#比特币中的哈希特性" class="headerlink" title="比特币中的哈希特性"></a>比特币中的哈希特性</h3><!-- > 容易验证，不容易计算 -->
 <h4 id="Collision-resistance-抗哈希碰撞"><a href="#Collision-resistance-抗哈希碰撞" class="headerlink" title="Collision resistance (抗哈希碰撞)"></a>Collision resistance (抗哈希碰撞)</h4><blockquote>
 <p>没有高效的方法来人为的制造哈希碰撞</p>
 </blockquote>
@@ -304,10 +307,14 @@
 <p>message取hash-&gt;hash取签名</p>
 <span id="more"></span>
 
-<h2 id="比特币的数据结构"><a href="#比特币的数据结构" class="headerlink" title="比特币的数据结构"></a>比特币的数据结构</h2><h3 id="Block-chain（区块链）"><a href="#Block-chain（区块链）" class="headerlink" title="Block chain（区块链）"></a>Block chain（区块链）</h3><p>Hash pointers：存地址、哈希值<br>区块链：使用哈希指针</p>
+<h2 id="比特币的数据结构"><a href="#比特币的数据结构" class="headerlink" title="比特币的数据结构"></a>比特币的数据结构</h2><h3 id="Block-chain（区块链）"><a href="#Block-chain（区块链）" class="headerlink" title="Block chain（区块链）"></a>Block chain（区块链）</h3><p>Hash pointers：</p>
+<ul>
+<li>当前区块的地址</li>
+<li>前一个哈希指针 + 当前区块计算出的哈希值<br>区块链：使用哈希指针</li>
+</ul>
 <p>Genesis block（创始区块）：<br>Most recent block（最近使用区块）：</p>
-<h3 id="Merkle-tree"><a href="#Merkle-tree" class="headerlink" title="Merkle tree"></a>Merkle tree</h3><p>比特币中各个区块用Hash Pointer连接在一起，各个区块包含的交易信息是组织成Merkle tree的形式</p>
-<p>Merkle tree结构：二叉树的形式，最底层是交易记录，中间层都是下一层哈希值计算出的结果<br><img src="/../assets/merkle-tree.png" alt="image-20241105"></p>
+<h3 id="Merkle-tree（默克尔树）"><a href="#Merkle-tree（默克尔树）" class="headerlink" title="Merkle tree（默克尔树）"></a>Merkle tree（默克尔树）</h3><p>比特币中各个区块用Hash Pointer连接在一起，各个区块包含的交易信息是组织成Merkle tree的形式</p>
+<p>Merkle tree结构：二叉树的形式，最底层是交易记录，中间层都是下一层哈希值计算出的结果，树中的root hash可以用来判断是否有一个节点发生变更，因为任何一个节点的变更都会导致root hash发生变化<br><img src="/../assets/merkle-tree.png" alt="image-20241105"></p>
 <p>每一个区块构成：<br><strong>Block header</strong></p>
 <!-- = 指向前一块的哈希指针 -->
 <ul>
@@ -317,6 +324,28 @@
 <ul>
 <li>交易列表、信息</li>
 </ul>
+<p>比特币节点分类</p>
+<ul>
+<li>全节点：保存区块的全部信息，Block header + Block body</li>
+<li>轻节点：手机上的比特币钱包，只保存Block header（也就是只保存了Merkle tree的Root hash）</li>
+</ul>
+<p>如何向轻节点证明某个交易已经被写入区块链？<br>用户A，用户B（轻节点），转账 A –&gt; B，A需要向B证明已经转账，如何证明：Merkle proof&#x2F;Proof of menbership：证明Merkle tree包含了某个交易，时间复杂度为 O(logn)<br>过程详见：<br><img src="/../assets/merkle-proof.png" alt="image-20241105"></p>
+<blockquote>
+<p>全节点把缺失信息发给轻节点，轻节点通过计算验证Root Hash相同，则代表交易已被写入到区块里</p>
+</blockquote>
+<p>全节点发送的哈希值可能被伪造吗，来保持上层的哈希值符合要求？<br>不行，因为哈希满足<strong>Collision resistance</strong>的特性，无法人为制造哈希碰撞</p>
+<p>Proof of non-menbership（证明交易记录不在树里）：</p>
+<ul>
+<li>全节点发送整颗merkle tree给轻节点，轻节点验证各个节点、各层有没有出现问题，如果都没问题，证明只有这些叶子节点，则只需要判断叶子节点有没有包含该交易记录。复杂度 O(n)</li>
+<li>假定叶子结点</li>
+</ul>
+<p>无环的数据结构都可以用hash pointer代替普通指针</p>
+<h2 id="比特币的共识协议"><a href="#比特币的共识协议" class="headerlink" title="比特币的共识协议"></a>比特币的共识协议</h2><p>比特币中区块的指针</p>
+<ul>
+<li>指向前一个区块</li>
+<li>指向币的来源：证明钱不是凭空捏造，是有记录的，防止Double spending</li>
+</ul>
+<p>转账：A -&gt; B A需要知道B的公钥，B也需要知道A的公钥，<br>签名验证的过程？不太理解</p>
 
     </div>
 
@@ -370,13 +399,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">32k</span>
+    <span title="站点总字数">33k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:57</span>
+    <span title="站点阅读时长">1:58</span>
   </span>
 </div>
 

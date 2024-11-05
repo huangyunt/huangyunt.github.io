@@ -119,126 +119,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Https</title>
-    <url>/2021/09/13/Https/</url>
-    <content><![CDATA[<h3 id="为什么需要加密？"><a href="#为什么需要加密？" class="headerlink" title="为什么需要加密？"></a><strong>为什么需要加密？</strong></h3><p>因为http的内容是明文传输的，明文数据会经过中间代理服务器、路由器、wifi热点、通信服务运营商等多个物理节点，如果信息在传输过程中被劫持，传输的内容就完全暴露了。劫持者还可以篡改传输的信息且不被双方察觉，这就是“中间人攻击”。</p>
-<h3 id="用对称加密可行吗？"><a href="#用对称加密可行吗？" class="headerlink" title="用对称加密可行吗？"></a><strong>用对称加密可行吗？</strong></h3><p>对称加密最大的问题就是密钥的传输，而密钥的传输又需要加密（反复套娃），故而单纯的对称加密是无法解决问题的。</p>
-<span id="more"></span>
-
-
-<h3 id="用非对称加密可行吗？"><a href="#用非对称加密可行吗？" class="headerlink" title="用非对称加密可行吗？"></a>用非对称加密可行吗？</h3><p>鉴于非对称加密的机制，我们可能会有这种思路：服务器先把公钥以明文方式传输给浏览器，之后浏览器向服务器传数据前都先用这个公钥加密好再传，这条数据的安全似乎可以保障了！<strong>因为只有服务器有相应的私钥能解开公钥加密的数据</strong>。</p>
-<p>然而反过来<strong>由服务器到浏览器的这条路怎么保障安全？</strong>如果服务器用它的私钥加密数据传给浏览器，那么浏览器用公钥可以解密它，而这个公钥是一开始通过明文传输给浏览器的，若这个公钥被中间人劫持到了，那他也能用该公钥解密服务器传来的信息了。所以<strong>目前似乎只能保证由浏览器向服务器传输数据的安全性</strong></p>
-<h3 id="那用两组公钥私钥，是否就能保证双向传输都安全了？"><a href="#那用两组公钥私钥，是否就能保证双向传输都安全了？" class="headerlink" title="那用两组公钥私钥，是否就能保证双向传输都安全了？"></a>那用两组公钥私钥，是否就能保证双向传输都安全了？</h3><ol>
-<li>某网站服务器拥有公钥A与对应的私钥A’；浏览器拥有公钥B与对应的私钥B’。</li>
-<li>浏览器把公钥B明文传输给服务器。</li>
-<li>服务器把公钥A明文给传输浏览器。</li>
-<li>之后浏览器向服务器传输的内容都用公钥A加密，服务器收到后用私钥A’解密。由于只有服务器拥有私钥A’，所以能保证这条数据的安全。</li>
-<li>同理，服务器向浏览器传输的内容都用公钥B加密，浏览器收到后用私钥B’解密。同上也可以保证这条数据的安全。</li>
-</ol>
-<p>然而这又引出了一个新的问题，非对称加密非常耗时，如何解决？（见RSA算法）而且这种方法真的安全了吗？</p>
-<h3 id="非对称加密-对称加密"><a href="#非对称加密-对称加密" class="headerlink" title="非对称加密 + 对称加密"></a>非对称加密 + 对称加密</h3><ol>
-<li>某网站拥有用于非对称加密的公钥A、私钥A’。</li>
-<li>浏览器向网站服务器请求，服务器把公钥A明文给传输浏览器。</li>
-<li>浏览器随机生成一个用于对称加密的密钥X，用公钥A加密后传给服务器。</li>
-<li>服务器拿到后用私钥A’解密得到密钥X。</li>
-<li>这样双方就都拥有密钥X了，且别人无法知道它。之后双方所有数据都通过密钥X加密解密即可。</li>
-</ol>
-<p>这基本上就是https采用的方案了，但仍然还是有漏洞。</p>
-<h3 id="中间人攻击"><a href="#中间人攻击" class="headerlink" title="中间人攻击"></a>中间人攻击</h3><p>中间人攻击（MITMA，man in the middle attack）<br>中间人攻击是一种网络攻击类型 ，应用与LAN局域网中。这种攻击的方式是 hacker 置身于两个通信 paties 之间，窃取数据。</p>
-<p>中间人攻击允许黑客截获双方之间的数据，它可能是服务器和客户端或客户端到客户端或服务器到服务器。</p>
-<p><img src="/../assets/image-20210513212400962.png" alt="image-20210513212400962"></p>
-<p>如果在数据传输过程中，中间人劫持到了数据，此时他的确无法得到浏览器生成的密钥X，这个密钥本身被公钥A加密了，只有服务器才有私钥A’解开它，然而中间人却完全不需要拿到私钥A’就能干坏事了。请看：</p>
-<ol>
-<li>某网站有用于非对称加密的公钥A、私钥A’。</li>
-<li>浏览器向网站服务器请求，服务器把公钥A明文给传输浏览器。</li>
-<li><strong>中间人劫持到公钥A，保存下来，把数据包中的公钥A替换成自己伪造的公钥B（它当然也拥有公钥B对应的私钥B’）</strong>。</li>
-<li>浏览器生成一个用于对称加密的密钥X，用<strong>公钥B</strong>（浏览器无法得知公钥被替换了）加密后传给服务器。</li>
-<li><strong>中间人劫持后用私钥B’解密得到密钥X，再用公钥A加密后传给服务器</strong>。</li>
-<li>服务器拿到后用私钥A’解密得到密钥X。</li>
-</ol>
-<p>这样在双方都不会发现异常的情况下，中间人掉包了服务器传来的公钥，进而得到了密钥X。<strong>根本原因是浏览器无法确认收到的公钥是不是网站自己的，</strong>因为公钥本身是明文传输的，难道还得对公钥的传输进行加密？这似乎变成鸡生蛋、蛋生鸡的问题了。解法是什么？</p>
-<h3 id="如何证明浏览器收到的公钥一定是该网站的公钥？"><a href="#如何证明浏览器收到的公钥一定是该网站的公钥？" class="headerlink" title="如何证明浏览器收到的公钥一定是该网站的公钥？"></a><strong>如何证明浏览器收到的公钥一定是该网站的公钥？</strong></h3><p>网站是否有个‘身份证’来证明自己的公钥合法？这个‘身份证’又由谁来颁发？</p>
-<p><strong>CA机构</strong>，它是如今互联网世界正常运作的前提，而CA机构颁发的“身份证”就是<strong>数字证书</strong>。</p>
-<h4 id="数字证书"><a href="#数字证书" class="headerlink" title="数字证书"></a><strong>数字证书</strong></h4><p>网站在使用HTTPS前，需要向<strong>CA机构</strong>申领一份<strong>数字证书</strong>，数字证书里含有证书持有者信息、公钥信息等。服务器把证书传输给浏览器，浏览器从证书里获取公钥就行了，证书就如身份证，证明“该公钥对应该网站”。</p>
-<p>而这里又有一个显而易见的问题，“<strong>证书本身的传输过程中，如何防止被篡改”</strong>？即如何证明证书本身的真实性？身份证运用了一些防伪技术，而数字证书怎么防伪呢？</p>
-<h3 id="如何放防止数字证书被篡改？"><a href="#如何放防止数字证书被篡改？" class="headerlink" title="如何放防止数字证书被篡改？"></a><strong>如何放防止数字证书被篡改？</strong></h3><p>我们把证书原本的内容生成一份“签名”，比对证书内容和签名是否一致就能判别是否被篡改。这就是数字证书的“防伪技术”，这里的“签名”就叫<code>数字签名</code>：</p>
-<p>数字签名的制作过程：</p>
-<ol>
-<li>CA机构拥有非对称加密的私钥和公钥。</li>
-<li>CA机构对证书明文数据T进行hash。</li>
-<li>对hash后的值用私钥加密，得到数字签名S。</li>
-</ol>
-<p>明文和数字签名共同组成了数字证书，这样一份数字证书就可以颁发给网站了。<br>那浏览器拿到服务器传来的数字证书后，如何验证它是不是真的？（有没有被篡改、掉包）</p>
-<p>浏览器验证过程：</p>
-<ol>
-<li>拿到证书，得到明文T，签名S。</li>
-<li>用CA机构的公钥对S解密（由于是浏览器信任的机构，所以浏览器保有它的公钥。详情见下文），得到S’。</li>
-<li>用证书里指明的hash算法对明文T进行hash得到T’。</li>
-<li>显然通过以上步骤，T’应当等于S‘，除非明文或签名被篡改。所以此时比较S’是否等于T’，等于则表明证书可信。</li>
-</ol>
-<p><img src="/../assets/image-20210513214044731.png" alt="image-20210513214044731"></p>
-<h3 id="中间人有可能篡改该证书吗？"><a href="#中间人有可能篡改该证书吗？" class="headerlink" title="中间人有可能篡改该证书吗？"></a><strong>中间人有可能篡改该证书吗？</strong></h3><p>假设中间人篡改了证书的原文，由于他没有CA机构的私钥，所以无法得到此时加密后签名，无法相应地篡改签名。浏览器收到该证书后会发现原文和签名解密后的值不一致，则说明证书已被篡改，证书不可信</p>
-<h3 id="中间人有可能把证书掉包吗？"><a href="#中间人有可能把证书掉包吗？" class="headerlink" title="中间人有可能把证书掉包吗？"></a><strong>中间人有可能把证书掉包吗？</strong></h3><p>假设有另一个网站B也拿到了CA机构认证的证书，它想劫持网站A的信息。于是它成为中间人拦截到了A传给浏览器的证书，然后替换成自己的证书，传给浏览器，之后浏览器就会错误地拿到B的证书里的公钥了。</p>
-<p>其实这并不会发生，因为证书一定是无法被篡改的，所以网站B掉包的一定也是正规的证书，而证书黎里包含了网站的信息，包括域名，浏览器把证书里的域名与自己请求的域名比对一下就知道有没有被掉包了。</p>
-<h3 id="为什么制作数字签名时需要hash一次？"><a href="#为什么制作数字签名时需要hash一次？" class="headerlink" title="为什么制作数字签名时需要hash一次？"></a><strong>为什么制作数字签名时需要hash一次？</strong></h3><p>最显然的是性能问题，非对称加密效率较差，证书信息一般较长，比较耗时。而hash后得到的是固定长度的信息（比如用md5算法hash后可以得到固定的128位的值），这样加解密就快很多。</p>
-<h3 id="怎么证明CA机构的公钥是可信的？"><a href="#怎么证明CA机构的公钥是可信的？" class="headerlink" title="怎么证明CA机构的公钥是可信的？"></a><strong>怎么证明CA机构的公钥是可信的？</strong></h3><p>“浏览器保有它的公钥”，这是个什么保有法？怎么证明这个公钥是否可信？</p>
-<p>让我们回想一下数字证书到底是干啥的？没错，为了证明某公钥是可信的，即“该公钥是否对应该网站”，那CA机构的公钥是否也可以用数字证书来证明？没错，操作系统、浏览器本身会预装一些它们信任的根证书，如果其中会有CA机构的根证书，这样就可以拿到它对应的可信公钥了。</p>
-<p>实际上证书之间的认证也可以不止一层，可以A信任B，B信任C，以此类推，我们把它叫做<code>信任链</code>或<code>数字证书链</code>。也就是一连串的数字证书，由根证书为起点，透过层层信任，使终端实体证书的持有者可以获得转授的信任，以证明身份。</p>
-<p>另外，不知你们是否遇到过网站访问不了、提示需安装证书的情况？这里安装的就是根证书。说明浏览器不认给这个网站颁发证书的机构，那么你就得手动下载安装该机构的根证书（风险自己承担XD）。安装后，你就有了它的公钥，就可以用它验证服务器发来的证书是否可信了。</p>
-<h3 id="每次进行HTTPS请求时都必须在SSL-TLS层进行握手传输密钥吗？"><a href="#每次进行HTTPS请求时都必须在SSL-TLS层进行握手传输密钥吗？" class="headerlink" title="每次进行HTTPS请求时都必须在SSL&#x2F;TLS层进行握手传输密钥吗？"></a><strong>每次进行HTTPS请求时都</strong>必须<strong>在SSL&#x2F;TLS层进行握手传输密钥吗？</strong></h3><p>显然每次请求都经历一次密钥传输过程非常耗时，那怎么达到只传输一次呢？</p>
-<p>服务器会为每个浏览器（或客户端软件）维护一个session ID，在TLS握手阶段传给浏览器，浏览器生成好密钥传给服务器后，服务器会把该密钥存到相应的session ID下，之后浏览器每次请求都会携带session ID，服务器会根据session ID找到相应的密钥并进行解密加密操作，这样就不必要每次重新制作、传输密钥了！</p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a><strong>总结</strong></h3><p>可以看下这张图，梳理一下整个流程（SSL、TLS握手有一些区别，不同版本间也有区别，不过大致过程就是这样）：</p>
-]]></content>
-      <categories>
-        <category>计算机网络协议</category>
-      </categories>
-      <tags>
-        <tag>Network</tag>
-        <tag>Https</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>JavaSrcipt原型</title>
-    <url>/2021/02/17/JavaScript%E5%8E%9F%E5%9E%8B/</url>
-    <content><![CDATA[<p>首先，要明确几个点：</p>
-<ol>
-<li><p>在JS里，万物皆对象。方法（Function）是对象，方法的原型(Function.prototype)是对象。因此，它们都会具有对象共有的特点。<br>即：对象具有属性__proto__，可称为隐式原型，一个对象的隐式原型指向构造该对象的构造函数的原型，这也保证了实例能够访问在构造函数原型中定义的属性和方法。</p>
-</li>
-<li><p>方法(Function)<br>方法这个特殊的对象，除了和其他对象一样有上述_proto_属性之外，还有自己特有的属性——原型属性（prototype），这个属性是一个指针，指向一个对象，这个对象的用途就是包含所有实例共享的属性和方法（我们把这个对象叫做原型对象）。原型对象也有一个属性，叫做constructor，这个属性包含了一个指针，指回原构造函数。</p>
-</li>
-</ol>
-<p>好啦，知道了这两个基本点，我们来看看上面这副图。</p>
-<ol>
-<li><p>构造函数Foo()<br>构造函数的原型属性Foo.prototype指向了原型对象，在原型对象里有共有的方法，所有构造函数声明的实例（这里是f1，f2）都可以共享这个方法。</p>
-</li>
-<li><p>原型对象Foo.prototype<br>Foo.prototype保存着实例共享的方法，有一个指针constructor指回构造函数。</p>
-</li>
-<li><p>实例<br>f1和f2是Foo这个对象的两个实例，这两个对象也有属性__proto__，指向构造函数的原型对象，这样子就可以像上面1所说的访问原型对象的所有方法啦。</p>
-<p><img src="/../assets/Snipaste_2021-08-08_20-48-18.png" alt="image-20210808204737157"></p>
-</li>
-</ol>
-<span id="more"></span>
-
-<p>另外：<br>构造函数Foo()除了是方法，也是对象啊，它也有__proto__属性，指向谁呢？<br>指向它的构造函数的原型对象呗。函数的构造函数不就是Function嘛，因此这里的__proto__指向了Function.prototype。<br>其实除了Foo()，Function(), Object()也是一样的道理。</p>
-<p>原型对象也是对象啊，它的__proto__属性，又指向谁呢？<br>同理，指向它的构造函数的原型对象呗。这里是Object.prototype.</p>
-<p>最后，Object.prototype的__proto__属性指向null（原型链的终点）</p>
-<p>总结：</p>
-<ol>
-<li>对象有属性__proto__,指向该对象的构造函数的原型对象。</li>
-<li>方法除了有属性__proto__,还有属性prototype，prototype指向该方法的原型对象。</li>
-<li>标准化获取对象的构造函数的原型：不要用obj.__proto__，用Object.getPrototypeof(obj)。</li>
-</ol>
-<h2 id="原型对象中的constructor"><a href="#原型对象中的constructor" class="headerlink" title="原型对象中的constructor"></a>原型对象中的constructor</h2><p>看一段代码:</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function </span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>JavaScript原理</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Hooks</title>
     <url>/2021/10/12/Hooks/</url>
     <content><![CDATA[<h3 id="hooks的作用"><a href="#hooks的作用" class="headerlink" title="hooks的作用"></a>hooks的作用</h3><p><strong>钩子（hook）就是 React 函数组件的副效应解决方案，用来为函数组件引入副效应。</strong> 函数组件的主体只应该用来返回组件的 HTML 代码，所有的其他操作（副效应）都必须通过钩子引入。</p>
@@ -381,8 +261,128 @@
       </categories>
       <tags>
         <tag>Network</tag>
-        <tag>Https</tag>
         <tag>Http</tag>
+        <tag>Https</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Https</title>
+    <url>/2021/09/13/Https/</url>
+    <content><![CDATA[<h3 id="为什么需要加密？"><a href="#为什么需要加密？" class="headerlink" title="为什么需要加密？"></a><strong>为什么需要加密？</strong></h3><p>因为http的内容是明文传输的，明文数据会经过中间代理服务器、路由器、wifi热点、通信服务运营商等多个物理节点，如果信息在传输过程中被劫持，传输的内容就完全暴露了。劫持者还可以篡改传输的信息且不被双方察觉，这就是“中间人攻击”。</p>
+<h3 id="用对称加密可行吗？"><a href="#用对称加密可行吗？" class="headerlink" title="用对称加密可行吗？"></a><strong>用对称加密可行吗？</strong></h3><p>对称加密最大的问题就是密钥的传输，而密钥的传输又需要加密（反复套娃），故而单纯的对称加密是无法解决问题的。</p>
+<span id="more"></span>
+
+
+<h3 id="用非对称加密可行吗？"><a href="#用非对称加密可行吗？" class="headerlink" title="用非对称加密可行吗？"></a>用非对称加密可行吗？</h3><p>鉴于非对称加密的机制，我们可能会有这种思路：服务器先把公钥以明文方式传输给浏览器，之后浏览器向服务器传数据前都先用这个公钥加密好再传，这条数据的安全似乎可以保障了！<strong>因为只有服务器有相应的私钥能解开公钥加密的数据</strong>。</p>
+<p>然而反过来<strong>由服务器到浏览器的这条路怎么保障安全？</strong>如果服务器用它的私钥加密数据传给浏览器，那么浏览器用公钥可以解密它，而这个公钥是一开始通过明文传输给浏览器的，若这个公钥被中间人劫持到了，那他也能用该公钥解密服务器传来的信息了。所以<strong>目前似乎只能保证由浏览器向服务器传输数据的安全性</strong></p>
+<h3 id="那用两组公钥私钥，是否就能保证双向传输都安全了？"><a href="#那用两组公钥私钥，是否就能保证双向传输都安全了？" class="headerlink" title="那用两组公钥私钥，是否就能保证双向传输都安全了？"></a>那用两组公钥私钥，是否就能保证双向传输都安全了？</h3><ol>
+<li>某网站服务器拥有公钥A与对应的私钥A’；浏览器拥有公钥B与对应的私钥B’。</li>
+<li>浏览器把公钥B明文传输给服务器。</li>
+<li>服务器把公钥A明文给传输浏览器。</li>
+<li>之后浏览器向服务器传输的内容都用公钥A加密，服务器收到后用私钥A’解密。由于只有服务器拥有私钥A’，所以能保证这条数据的安全。</li>
+<li>同理，服务器向浏览器传输的内容都用公钥B加密，浏览器收到后用私钥B’解密。同上也可以保证这条数据的安全。</li>
+</ol>
+<p>然而这又引出了一个新的问题，非对称加密非常耗时，如何解决？（见RSA算法）而且这种方法真的安全了吗？</p>
+<h3 id="非对称加密-对称加密"><a href="#非对称加密-对称加密" class="headerlink" title="非对称加密 + 对称加密"></a>非对称加密 + 对称加密</h3><ol>
+<li>某网站拥有用于非对称加密的公钥A、私钥A’。</li>
+<li>浏览器向网站服务器请求，服务器把公钥A明文给传输浏览器。</li>
+<li>浏览器随机生成一个用于对称加密的密钥X，用公钥A加密后传给服务器。</li>
+<li>服务器拿到后用私钥A’解密得到密钥X。</li>
+<li>这样双方就都拥有密钥X了，且别人无法知道它。之后双方所有数据都通过密钥X加密解密即可。</li>
+</ol>
+<p>这基本上就是https采用的方案了，但仍然还是有漏洞。</p>
+<h3 id="中间人攻击"><a href="#中间人攻击" class="headerlink" title="中间人攻击"></a>中间人攻击</h3><p>中间人攻击（MITMA，man in the middle attack）<br>中间人攻击是一种网络攻击类型 ，应用与LAN局域网中。这种攻击的方式是 hacker 置身于两个通信 paties 之间，窃取数据。</p>
+<p>中间人攻击允许黑客截获双方之间的数据，它可能是服务器和客户端或客户端到客户端或服务器到服务器。</p>
+<p><img src="/../assets/image-20210513212400962.png" alt="image-20210513212400962"></p>
+<p>如果在数据传输过程中，中间人劫持到了数据，此时他的确无法得到浏览器生成的密钥X，这个密钥本身被公钥A加密了，只有服务器才有私钥A’解开它，然而中间人却完全不需要拿到私钥A’就能干坏事了。请看：</p>
+<ol>
+<li>某网站有用于非对称加密的公钥A、私钥A’。</li>
+<li>浏览器向网站服务器请求，服务器把公钥A明文给传输浏览器。</li>
+<li><strong>中间人劫持到公钥A，保存下来，把数据包中的公钥A替换成自己伪造的公钥B（它当然也拥有公钥B对应的私钥B’）</strong>。</li>
+<li>浏览器生成一个用于对称加密的密钥X，用<strong>公钥B</strong>（浏览器无法得知公钥被替换了）加密后传给服务器。</li>
+<li><strong>中间人劫持后用私钥B’解密得到密钥X，再用公钥A加密后传给服务器</strong>。</li>
+<li>服务器拿到后用私钥A’解密得到密钥X。</li>
+</ol>
+<p>这样在双方都不会发现异常的情况下，中间人掉包了服务器传来的公钥，进而得到了密钥X。<strong>根本原因是浏览器无法确认收到的公钥是不是网站自己的，</strong>因为公钥本身是明文传输的，难道还得对公钥的传输进行加密？这似乎变成鸡生蛋、蛋生鸡的问题了。解法是什么？</p>
+<h3 id="如何证明浏览器收到的公钥一定是该网站的公钥？"><a href="#如何证明浏览器收到的公钥一定是该网站的公钥？" class="headerlink" title="如何证明浏览器收到的公钥一定是该网站的公钥？"></a><strong>如何证明浏览器收到的公钥一定是该网站的公钥？</strong></h3><p>网站是否有个‘身份证’来证明自己的公钥合法？这个‘身份证’又由谁来颁发？</p>
+<p><strong>CA机构</strong>，它是如今互联网世界正常运作的前提，而CA机构颁发的“身份证”就是<strong>数字证书</strong>。</p>
+<h4 id="数字证书"><a href="#数字证书" class="headerlink" title="数字证书"></a><strong>数字证书</strong></h4><p>网站在使用HTTPS前，需要向<strong>CA机构</strong>申领一份<strong>数字证书</strong>，数字证书里含有证书持有者信息、公钥信息等。服务器把证书传输给浏览器，浏览器从证书里获取公钥就行了，证书就如身份证，证明“该公钥对应该网站”。</p>
+<p>而这里又有一个显而易见的问题，“<strong>证书本身的传输过程中，如何防止被篡改”</strong>？即如何证明证书本身的真实性？身份证运用了一些防伪技术，而数字证书怎么防伪呢？</p>
+<h3 id="如何放防止数字证书被篡改？"><a href="#如何放防止数字证书被篡改？" class="headerlink" title="如何放防止数字证书被篡改？"></a><strong>如何放防止数字证书被篡改？</strong></h3><p>我们把证书原本的内容生成一份“签名”，比对证书内容和签名是否一致就能判别是否被篡改。这就是数字证书的“防伪技术”，这里的“签名”就叫<code>数字签名</code>：</p>
+<p>数字签名的制作过程：</p>
+<ol>
+<li>CA机构拥有非对称加密的私钥和公钥。</li>
+<li>CA机构对证书明文数据T进行hash。</li>
+<li>对hash后的值用私钥加密，得到数字签名S。</li>
+</ol>
+<p>明文和数字签名共同组成了数字证书，这样一份数字证书就可以颁发给网站了。<br>那浏览器拿到服务器传来的数字证书后，如何验证它是不是真的？（有没有被篡改、掉包）</p>
+<p>浏览器验证过程：</p>
+<ol>
+<li>拿到证书，得到明文T，签名S。</li>
+<li>用CA机构的公钥对S解密（由于是浏览器信任的机构，所以浏览器保有它的公钥。详情见下文），得到S’。</li>
+<li>用证书里指明的hash算法对明文T进行hash得到T’。</li>
+<li>显然通过以上步骤，T’应当等于S‘，除非明文或签名被篡改。所以此时比较S’是否等于T’，等于则表明证书可信。</li>
+</ol>
+<p><img src="/../assets/image-20210513214044731.png" alt="image-20210513214044731"></p>
+<h3 id="中间人有可能篡改该证书吗？"><a href="#中间人有可能篡改该证书吗？" class="headerlink" title="中间人有可能篡改该证书吗？"></a><strong>中间人有可能篡改该证书吗？</strong></h3><p>假设中间人篡改了证书的原文，由于他没有CA机构的私钥，所以无法得到此时加密后签名，无法相应地篡改签名。浏览器收到该证书后会发现原文和签名解密后的值不一致，则说明证书已被篡改，证书不可信</p>
+<h3 id="中间人有可能把证书掉包吗？"><a href="#中间人有可能把证书掉包吗？" class="headerlink" title="中间人有可能把证书掉包吗？"></a><strong>中间人有可能把证书掉包吗？</strong></h3><p>假设有另一个网站B也拿到了CA机构认证的证书，它想劫持网站A的信息。于是它成为中间人拦截到了A传给浏览器的证书，然后替换成自己的证书，传给浏览器，之后浏览器就会错误地拿到B的证书里的公钥了。</p>
+<p>其实这并不会发生，因为证书一定是无法被篡改的，所以网站B掉包的一定也是正规的证书，而证书黎里包含了网站的信息，包括域名，浏览器把证书里的域名与自己请求的域名比对一下就知道有没有被掉包了。</p>
+<h3 id="为什么制作数字签名时需要hash一次？"><a href="#为什么制作数字签名时需要hash一次？" class="headerlink" title="为什么制作数字签名时需要hash一次？"></a><strong>为什么制作数字签名时需要hash一次？</strong></h3><p>最显然的是性能问题，非对称加密效率较差，证书信息一般较长，比较耗时。而hash后得到的是固定长度的信息（比如用md5算法hash后可以得到固定的128位的值），这样加解密就快很多。</p>
+<h3 id="怎么证明CA机构的公钥是可信的？"><a href="#怎么证明CA机构的公钥是可信的？" class="headerlink" title="怎么证明CA机构的公钥是可信的？"></a><strong>怎么证明CA机构的公钥是可信的？</strong></h3><p>“浏览器保有它的公钥”，这是个什么保有法？怎么证明这个公钥是否可信？</p>
+<p>让我们回想一下数字证书到底是干啥的？没错，为了证明某公钥是可信的，即“该公钥是否对应该网站”，那CA机构的公钥是否也可以用数字证书来证明？没错，操作系统、浏览器本身会预装一些它们信任的根证书，如果其中会有CA机构的根证书，这样就可以拿到它对应的可信公钥了。</p>
+<p>实际上证书之间的认证也可以不止一层，可以A信任B，B信任C，以此类推，我们把它叫做<code>信任链</code>或<code>数字证书链</code>。也就是一连串的数字证书，由根证书为起点，透过层层信任，使终端实体证书的持有者可以获得转授的信任，以证明身份。</p>
+<p>另外，不知你们是否遇到过网站访问不了、提示需安装证书的情况？这里安装的就是根证书。说明浏览器不认给这个网站颁发证书的机构，那么你就得手动下载安装该机构的根证书（风险自己承担XD）。安装后，你就有了它的公钥，就可以用它验证服务器发来的证书是否可信了。</p>
+<h3 id="每次进行HTTPS请求时都必须在SSL-TLS层进行握手传输密钥吗？"><a href="#每次进行HTTPS请求时都必须在SSL-TLS层进行握手传输密钥吗？" class="headerlink" title="每次进行HTTPS请求时都必须在SSL&#x2F;TLS层进行握手传输密钥吗？"></a><strong>每次进行HTTPS请求时都</strong>必须<strong>在SSL&#x2F;TLS层进行握手传输密钥吗？</strong></h3><p>显然每次请求都经历一次密钥传输过程非常耗时，那怎么达到只传输一次呢？</p>
+<p>服务器会为每个浏览器（或客户端软件）维护一个session ID，在TLS握手阶段传给浏览器，浏览器生成好密钥传给服务器后，服务器会把该密钥存到相应的session ID下，之后浏览器每次请求都会携带session ID，服务器会根据session ID找到相应的密钥并进行解密加密操作，这样就不必要每次重新制作、传输密钥了！</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a><strong>总结</strong></h3><p>可以看下这张图，梳理一下整个流程（SSL、TLS握手有一些区别，不同版本间也有区别，不过大致过程就是这样）：</p>
+]]></content>
+      <categories>
+        <category>计算机网络协议</category>
+      </categories>
+      <tags>
+        <tag>Network</tag>
+        <tag>Https</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JavaSrcipt原型</title>
+    <url>/2021/02/17/JavaScript%E5%8E%9F%E5%9E%8B/</url>
+    <content><![CDATA[<p>首先，要明确几个点：</p>
+<ol>
+<li><p>在JS里，万物皆对象。方法（Function）是对象，方法的原型(Function.prototype)是对象。因此，它们都会具有对象共有的特点。<br>即：对象具有属性__proto__，可称为隐式原型，一个对象的隐式原型指向构造该对象的构造函数的原型，这也保证了实例能够访问在构造函数原型中定义的属性和方法。</p>
+</li>
+<li><p>方法(Function)<br>方法这个特殊的对象，除了和其他对象一样有上述_proto_属性之外，还有自己特有的属性——原型属性（prototype），这个属性是一个指针，指向一个对象，这个对象的用途就是包含所有实例共享的属性和方法（我们把这个对象叫做原型对象）。原型对象也有一个属性，叫做constructor，这个属性包含了一个指针，指回原构造函数。</p>
+</li>
+</ol>
+<p>好啦，知道了这两个基本点，我们来看看上面这副图。</p>
+<ol>
+<li><p>构造函数Foo()<br>构造函数的原型属性Foo.prototype指向了原型对象，在原型对象里有共有的方法，所有构造函数声明的实例（这里是f1，f2）都可以共享这个方法。</p>
+</li>
+<li><p>原型对象Foo.prototype<br>Foo.prototype保存着实例共享的方法，有一个指针constructor指回构造函数。</p>
+</li>
+<li><p>实例<br>f1和f2是Foo这个对象的两个实例，这两个对象也有属性__proto__，指向构造函数的原型对象，这样子就可以像上面1所说的访问原型对象的所有方法啦。</p>
+<p><img src="/../assets/Snipaste_2021-08-08_20-48-18.png" alt="image-20210808204737157"></p>
+</li>
+</ol>
+<span id="more"></span>
+
+<p>另外：<br>构造函数Foo()除了是方法，也是对象啊，它也有__proto__属性，指向谁呢？<br>指向它的构造函数的原型对象呗。函数的构造函数不就是Function嘛，因此这里的__proto__指向了Function.prototype。<br>其实除了Foo()，Function(), Object()也是一样的道理。</p>
+<p>原型对象也是对象啊，它的__proto__属性，又指向谁呢？<br>同理，指向它的构造函数的原型对象呗。这里是Object.prototype.</p>
+<p>最后，Object.prototype的__proto__属性指向null（原型链的终点）</p>
+<p>总结：</p>
+<ol>
+<li>对象有属性__proto__,指向该对象的构造函数的原型对象。</li>
+<li>方法除了有属性__proto__,还有属性prototype，prototype指向该方法的原型对象。</li>
+<li>标准化获取对象的构造函数的原型：不要用obj.__proto__，用Object.getPrototypeof(obj)。</li>
+</ol>
+<h2 id="原型对象中的constructor"><a href="#原型对象中的constructor" class="headerlink" title="原型对象中的constructor"></a>原型对象中的constructor</h2><p>看一段代码:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function </span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>JavaScript原理</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
       </tags>
   </entry>
   <entry>
@@ -469,6 +469,24 @@
 
 <p>后端部分</p>
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 后端</span></span><br><span class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">&#x27;http&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> url = <span class="built_in">require</span>(<span class="string">&#x27;url&#x27;</span>);</span><br><span class="line">http.<span class="title function_">createServer</span>(<span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// /api?callback=onResponse</span></span><br><span class="line">  <span class="comment">// 解析前端请求url中的callback名</span></span><br><span class="line">  <span class="keyword">if</span>(req.<span class="property">url</span>.<span class="title function_">includes</span>(<span class="string">&#x27;/api&#x27;</span>)) &#123;</span><br><span class="line">    <span class="keyword">let</span> myurl = url.<span class="title function_">parse</span>(req.<span class="property">url</span>);</span><br><span class="line">    <span class="keyword">let</span> params = <span class="keyword">new</span> <span class="title class_">URLSearchParams</span>(myurl.<span class="property">query</span>)</span><br><span class="line">    <span class="keyword">let</span> posts = [<span class="string">&#x27;js&#x27;</span>, <span class="string">&#x27;php&#x27;</span>];</span><br><span class="line">    <span class="keyword">let</span> mathodName = params.<span class="title function_">get</span>(<span class="string">&#x27;callback&#x27;</span>);</span><br><span class="line">    res.<span class="title function_">end</span>(<span class="string">`<span class="subst">$&#123;mathodName&#125;</span>(<span class="subst">$&#123;<span class="built_in">JSON</span>.stringify(posts)&#125;</span>)`</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line">.<span class="title function_">listen</span>(<span class="number">9090</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">9090</span>);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JavaSrcipt知识点</title>
+    <url>/2021/02/17/Javascript%E7%9F%A5%E8%AF%86%E7%82%B9/</url>
+    <content><![CDATA[<h4 id="1-script标签中async和defer的区别"><a href="#1-script标签中async和defer的区别" class="headerlink" title="1. script标签中async和defer的区别"></a>1. script标签中async和defer的区别</h4><p><img src="/../assets/Snipaste_2021-12-13_03-23-58.png" alt="image-20211025190555184"></p>
+<ul>
+<li>普通script标签：下载和执行都会阻塞Dom渲染</li>
+<li>defer：立即进行异步下载，等到HTML完全解析完后开始执行，有多个defer的标签时，会按照顺序下载执行</li>
+<li>async：立即进行异步下载，下载完后会立即执行同时阻塞Dom渲染，因为是下载完立即执行，不能保证多个加载时的先后顺序。</li>
+</ul>
+<span id="more"></span>
 ]]></content>
       <categories>
         <category>JavaScript</category>
@@ -598,24 +616,6 @@
       </tags>
   </entry>
   <entry>
-    <title>JavaSrcipt知识点</title>
-    <url>/2021/02/17/Javascript%E7%9F%A5%E8%AF%86%E7%82%B9/</url>
-    <content><![CDATA[<h4 id="1-script标签中async和defer的区别"><a href="#1-script标签中async和defer的区别" class="headerlink" title="1. script标签中async和defer的区别"></a>1. script标签中async和defer的区别</h4><p><img src="/../assets/Snipaste_2021-12-13_03-23-58.png" alt="image-20211025190555184"></p>
-<ul>
-<li>普通script标签：下载和执行都会阻塞Dom渲染</li>
-<li>defer：立即进行异步下载，等到HTML完全解析完后开始执行，有多个defer的标签时，会按照顺序下载执行</li>
-<li>async：立即进行异步下载，下载完后会立即执行同时阻塞Dom渲染，因为是下载完立即执行，不能保证多个加载时的先后顺序。</li>
-</ul>
-<span id="more"></span>
-]]></content>
-      <categories>
-        <category>JavaScript</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Jira项目</title>
     <url>/2022/03/02/Jira%E9%A1%B9%E7%9B%AE/</url>
     <content><![CDATA[<h4 id="代码自动格式化工具：prettier"><a href="#代码自动格式化工具：prettier" class="headerlink" title="代码自动格式化工具：prettier"></a>代码自动格式化工具：prettier</h4><p>配置过程：<a href="https://prettier.io/docs/en/precommit.html">https://prettier.io/docs/en/precommit.html</a></p>
@@ -704,6 +704,108 @@
       <tags>
         <tag>JavaScript</tag>
         <tag>React</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Node中的process.env</title>
+    <url>/2022/03/11/Node%E4%B8%AD%E7%9A%84process.env/</url>
+    <content><![CDATA[<h4 id="process-env"><a href="#process-env" class="headerlink" title="process.env"></a>process.env</h4><p><code>process</code> 是 <code>Node.js</code> 中的 一个全局变量，提供来有关当前 Node.js 进程的信息并对其进行控制。而<code>process</code> 中的 <code>env</code> 则是返回包含用户环境的对象。可以通过 <code>process.env</code> 拿到当前项目运行环境的信息。</p>
+<h4 id="设置环境变量"><a href="#设置环境变量" class="headerlink" title="设置环境变量"></a>设置环境变量</h4><h5 id="通过cli的方式进行设置"><a href="#通过cli的方式进行设置" class="headerlink" title="通过cli的方式进行设置"></a>通过cli的方式进行设置</h5><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// index.js中</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(process.<span class="property">env</span>.<span class="property">PROT</span>)</span><br></pre></td></tr></table></figure>
+
+<p><strong>Windows (cmd.exe)</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">set</span> PROT=10086 &amp;&amp; node index.js</span><br></pre></td></tr></table></figure>
+
+<p><strong>Linux, macOS (Bash)</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">PROT=10086 node index.js</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<h5 id="env文件"><a href="#env文件" class="headerlink" title=".env文件"></a><a name="env">.env文件</a></h5><ul>
+<li>创建</li>
+</ul>
+<p>直接在项目根目录中创建 <code>.env</code> 文件，然后键入环境变量及其值。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">NDOE_ENV=development</span><br><span class="line">PROT=10086</span><br><span class="line">APP_KEY=***********</span><br><span class="line">HOST_URL=**********</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p><strong>⚠️注意</strong>：不要把<code>.env</code>文入放入代码版本管理中，因为这些环境变量都是项目中的隐私数据。</p>
+<ul>
+<li>读取</li>
+</ul>
+<p><strong>在cra创建的项目中，自带了dotenv解析.env，所以创建.env文件后即可</strong>。</p>
+<p>创建 <code>.env</code> 文件后，可以自己编写代码来查找解析文件并将其写入到你的项目中，或者利用第三方的<code>npm</code>包，比如 <a href="https://link.juejin.cn/?target=https://github.com/motdotla/dotenv"><code>dotenv</code></a> 。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">yarn add dotenv</span><br><span class="line"></span><br><span class="line"><span class="comment">// .env</span></span><br><span class="line"><span class="variable constant_">PROT</span>=<span class="number">10086</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// index.js</span></span><br><span class="line"><span class="keyword">const</span> dotenv = <span class="built_in">require</span>(<span class="string">&#x27;dotenv&#x27;</span>);</span><br><span class="line">dotenv.<span class="title function_">config</span>(); </span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(process.<span class="property">env</span>.<span class="property">PROT</span>); <span class="comment">// 10086</span></span><br></pre></td></tr></table></figure>
+
+<p>现在当你执行命令脚本的时候就不用传入环境变量及其值了，在 <code>.env</code> 文件里也能更直观的看到和管理各环境变量的配置。</p>
+<h5 id="更好的组织"><a href="#更好的组织" class="headerlink" title="更好的组织"></a>更好的组织</h5><p>一旦环境变量变多，就需要对所有环境变量进行集中式的管理，因为在所有需要使用的地直接引用变量与集中管理相比，重构和维护会更加困难。</p>
+<p>所以<strong>创建一个负责收集环境变量的模块</strong>是一个更好的方式，这样可以轻松地一次查看环境变量并将它们映射为可读的名称。</p>
+<ul>
+<li>手动整理</li>
+</ul>
+<p>创建一个名为 <code>config.js</code> 的文件，然后写入变量，将其命名为具有良好可读性的属性进行并导出它们。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> dotenv = <span class="built_in">require</span>（<span class="string">&#x27;dotenv&#x27;</span>）; </span><br><span class="line"></span><br><span class="line">dotenv.<span class="property">config</span>（）; </span><br><span class="line"></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123; </span><br><span class="line">  hostUrl：process.<span class="property">env</span>.<span class="property">HOST_URL</span>，</span><br><span class="line">  secretKey：process.<span class="property">env</span>.<span class="property">API_KEY</span>，</span><br><span class="line">  port：process.<span class="property">env</span>.<span class="property">PORT</span> </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>然后就可以这样进行使用：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123;port&#125; = <span class="built_in">require</span>（<span class="string">&#x27;./ config&#x27;</span>）; </span><br><span class="line"><span class="variable language_">console</span>.<span class="property">log</span>（<span class="string">`端口为：$ &#123;port&#125;`</span>）; <span class="comment">// 10086</span></span><br></pre></td></tr></table></figure>
+
+<p>这样有什么好处呢？</p>
+<ol>
+<li><p>项目文件组织更为直观合理</p>
+</li>
+<li><p>清楚的知道环境变量的映射关系</p>
+</li>
+<li><p>变量重命名为更具可读性的属性</p>
+</li>
+<li><p>可以添加其他非环境变量的配置属性</p>
+</li>
+</ol>
+<p>但是如果要添加新的环境变量时，就必须将其添加到<code>config</code>模块中。</p>
+<ul>
+<li>自动整理</li>
+</ul>
+<p>前面提到的第三方 <code>NPM</code> 包 <code>dotenv</code> 就可以做到。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// config.js </span></span><br><span class="line"><span class="keyword">const</span> dotenv = <span class="built_in">require</span>(<span class="string">&#x27;dotenv&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> result = dotenv.<span class="title function_">config</span>();</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (result.<span class="property">error</span>) &#123;</span><br><span class="line">  <span class="keyword">throw</span> result.<span class="property">error</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> &#123; <span class="attr">parsed</span>: envs &#125; = result;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(envs);</span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = envs;</span><br></pre></td></tr></table></figure>
+
+<p>然后就可以其他模块中这样引用：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123; <span class="variable constant_">HOST_URL</span>, <span class="variable constant_">API_KEY</span>, <span class="variable constant_">PROT</span> &#125; = <span class="built_in">require</span>(<span class="string">&#x27;./config&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="CRA创建的项目使用环境变量"><a href="#CRA创建的项目使用环境变量" class="headerlink" title="CRA创建的项目使用环境变量"></a>CRA创建的项目使用环境变量</h4><p>必须以 <code>REACT_APP_</code> 开头创建自定义环境变量，环境变量在构建期间嵌入。</p>
+<h5 id="设置临时环境变量"><a href="#设置临时环境变量" class="headerlink" title="设置临时环境变量"></a>设置临时环境变量</h5><p><strong>Windows (cmd.exe)</strong></p>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="built_in">set</span> <span class="string">&quot;REACT_APP_SECRET_CODE=abcdef&quot;</span> &amp;&amp; npm <span class="built_in">start</span></span><br></pre></td></tr></table></figure>
+
+<p>（注意：变量赋值需要用引号包裹，以避免尾随空格。）</p>
+<p><strong>Windows (Powershell)</strong></p>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">(<span class="variable">$env:REACT_APP_SECRET_CODE</span> = <span class="string">&quot;abcdef&quot;</span>) <span class="operator">-and</span> (npm <span class="built_in">start</span>)</span><br></pre></td></tr></table></figure>
+
+<p><strong>Linux, macOS (Bash)</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">REACT_APP_SECRET_CODE=abcdef npm start</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="env-中添加环境变量"><a href="#env-中添加环境变量" class="headerlink" title=".env 中添加环境变量"></a><code>.env</code> 中添加环境变量</h5><p>见<a href="#env">上文</a>设置。</p>
+<h5 id="其他-env-文件"><a href="#其他-env-文件" class="headerlink" title="其他 .env 文件"></a>其他 <code>.env</code> 文件</h5><blockquote>
+<p>注意：此功能 <strong>适用于 <code>react-scripts@1.0.0</code> 及更高版本</strong>。</p>
+</blockquote>
+<ul>
+<li><code>.env</code>：默认。</li>
+<li><code>.env.local</code>：本地覆盖。<strong>除 test 之外的所有环境都加载此文件</strong>。</li>
+<li><code>.env.development</code>, <code>.env.test</code>, <code>.env.production</code>：设置特定环境。</li>
+<li><code>.env.development.local</code>, <code>.env.test.local</code>, <code>.env.production.local</code>：设置特定环境的本地覆盖。</li>
+</ul>
+<p>左侧的文件比右侧的文件具有更高的优先级：</p>
+<ul>
+<li><code>npm start</code>: <code>.env.development.local</code>, <code>.env.development</code>, <code>.env.local</code>, <code>.env</code></li>
+<li><code>npm run build</code>: <code>.env.production.local</code>, <code>.env.production</code>, <code>.env.local</code>, <code>.env</code></li>
+<li><code>npm test</code>: <code>.env.test.local</code>, <code>.env.test</code>, <code>.env</code> (注意没有 <code>.env.local</code> )</li>
+</ul>
+<h5 id="NODE-ENV-的特殊内置环境变量"><a href="#NODE-ENV-的特殊内置环境变量" class="headerlink" title="NODE_ENV 的特殊内置环境变量"></a><code>NODE_ENV</code> 的特殊内置环境变量</h5><p>有一个名为 <code>NODE_ENV</code> 的特殊内置环境变量。可以从 <code>process.env.NODE_ENV</code> 中读取。运行 <code>npm start</code> 时，它总是等于 <code>&#39;development&#39;</code> ，运行 <code>npm test</code> 它总是等于 <code>&#39;test&#39;</code> ，运行 <code>npm run build</code> 来生成一个生产 bundle(包) 时，它总是等于 <code>&#39;production&#39;</code> 。**<code>NODE_ENV</code>无法手动覆盖。** </p>
+]]></content>
+      <categories>
+        <category>NodeJS</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>Node</tag>
       </tags>
   </entry>
   <entry>
@@ -886,294 +988,6 @@
       </categories>
       <tags>
         <tag>JavaScript</tag>
-        <tag>React</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Node中的process.env</title>
-    <url>/2022/03/11/Node%E4%B8%AD%E7%9A%84process.env/</url>
-    <content><![CDATA[<h4 id="process-env"><a href="#process-env" class="headerlink" title="process.env"></a>process.env</h4><p><code>process</code> 是 <code>Node.js</code> 中的 一个全局变量，提供来有关当前 Node.js 进程的信息并对其进行控制。而<code>process</code> 中的 <code>env</code> 则是返回包含用户环境的对象。可以通过 <code>process.env</code> 拿到当前项目运行环境的信息。</p>
-<h4 id="设置环境变量"><a href="#设置环境变量" class="headerlink" title="设置环境变量"></a>设置环境变量</h4><h5 id="通过cli的方式进行设置"><a href="#通过cli的方式进行设置" class="headerlink" title="通过cli的方式进行设置"></a>通过cli的方式进行设置</h5><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// index.js中</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(process.<span class="property">env</span>.<span class="property">PROT</span>)</span><br></pre></td></tr></table></figure>
-
-<p><strong>Windows (cmd.exe)</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">set</span> PROT=10086 &amp;&amp; node index.js</span><br></pre></td></tr></table></figure>
-
-<p><strong>Linux, macOS (Bash)</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">PROT=10086 node index.js</span><br></pre></td></tr></table></figure>
-
-<span id="more"></span>
-
-<h5 id="env文件"><a href="#env文件" class="headerlink" title=".env文件"></a><a name="env">.env文件</a></h5><ul>
-<li>创建</li>
-</ul>
-<p>直接在项目根目录中创建 <code>.env</code> 文件，然后键入环境变量及其值。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">NDOE_ENV=development</span><br><span class="line">PROT=10086</span><br><span class="line">APP_KEY=***********</span><br><span class="line">HOST_URL=**********</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
-
-<p><strong>⚠️注意</strong>：不要把<code>.env</code>文入放入代码版本管理中，因为这些环境变量都是项目中的隐私数据。</p>
-<ul>
-<li>读取</li>
-</ul>
-<p><strong>在cra创建的项目中，自带了dotenv解析.env，所以创建.env文件后即可</strong>。</p>
-<p>创建 <code>.env</code> 文件后，可以自己编写代码来查找解析文件并将其写入到你的项目中，或者利用第三方的<code>npm</code>包，比如 <a href="https://link.juejin.cn/?target=https://github.com/motdotla/dotenv"><code>dotenv</code></a> 。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">yarn add dotenv</span><br><span class="line"></span><br><span class="line"><span class="comment">// .env</span></span><br><span class="line"><span class="variable constant_">PROT</span>=<span class="number">10086</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// index.js</span></span><br><span class="line"><span class="keyword">const</span> dotenv = <span class="built_in">require</span>(<span class="string">&#x27;dotenv&#x27;</span>);</span><br><span class="line">dotenv.<span class="title function_">config</span>(); </span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(process.<span class="property">env</span>.<span class="property">PROT</span>); <span class="comment">// 10086</span></span><br></pre></td></tr></table></figure>
-
-<p>现在当你执行命令脚本的时候就不用传入环境变量及其值了，在 <code>.env</code> 文件里也能更直观的看到和管理各环境变量的配置。</p>
-<h5 id="更好的组织"><a href="#更好的组织" class="headerlink" title="更好的组织"></a>更好的组织</h5><p>一旦环境变量变多，就需要对所有环境变量进行集中式的管理，因为在所有需要使用的地直接引用变量与集中管理相比，重构和维护会更加困难。</p>
-<p>所以<strong>创建一个负责收集环境变量的模块</strong>是一个更好的方式，这样可以轻松地一次查看环境变量并将它们映射为可读的名称。</p>
-<ul>
-<li>手动整理</li>
-</ul>
-<p>创建一个名为 <code>config.js</code> 的文件，然后写入变量，将其命名为具有良好可读性的属性进行并导出它们。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> dotenv = <span class="built_in">require</span>（<span class="string">&#x27;dotenv&#x27;</span>）; </span><br><span class="line"></span><br><span class="line">dotenv.<span class="property">config</span>（）; </span><br><span class="line"></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123; </span><br><span class="line">  hostUrl：process.<span class="property">env</span>.<span class="property">HOST_URL</span>，</span><br><span class="line">  secretKey：process.<span class="property">env</span>.<span class="property">API_KEY</span>，</span><br><span class="line">  port：process.<span class="property">env</span>.<span class="property">PORT</span> </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>然后就可以这样进行使用：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123;port&#125; = <span class="built_in">require</span>（<span class="string">&#x27;./ config&#x27;</span>）; </span><br><span class="line"><span class="variable language_">console</span>.<span class="property">log</span>（<span class="string">`端口为：$ &#123;port&#125;`</span>）; <span class="comment">// 10086</span></span><br></pre></td></tr></table></figure>
-
-<p>这样有什么好处呢？</p>
-<ol>
-<li><p>项目文件组织更为直观合理</p>
-</li>
-<li><p>清楚的知道环境变量的映射关系</p>
-</li>
-<li><p>变量重命名为更具可读性的属性</p>
-</li>
-<li><p>可以添加其他非环境变量的配置属性</p>
-</li>
-</ol>
-<p>但是如果要添加新的环境变量时，就必须将其添加到<code>config</code>模块中。</p>
-<ul>
-<li>自动整理</li>
-</ul>
-<p>前面提到的第三方 <code>NPM</code> 包 <code>dotenv</code> 就可以做到。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// config.js </span></span><br><span class="line"><span class="keyword">const</span> dotenv = <span class="built_in">require</span>(<span class="string">&#x27;dotenv&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> result = dotenv.<span class="title function_">config</span>();</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (result.<span class="property">error</span>) &#123;</span><br><span class="line">  <span class="keyword">throw</span> result.<span class="property">error</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> &#123; <span class="attr">parsed</span>: envs &#125; = result;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(envs);</span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = envs;</span><br></pre></td></tr></table></figure>
-
-<p>然后就可以其他模块中这样引用：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123; <span class="variable constant_">HOST_URL</span>, <span class="variable constant_">API_KEY</span>, <span class="variable constant_">PROT</span> &#125; = <span class="built_in">require</span>(<span class="string">&#x27;./config&#x27;</span>);</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="CRA创建的项目使用环境变量"><a href="#CRA创建的项目使用环境变量" class="headerlink" title="CRA创建的项目使用环境变量"></a>CRA创建的项目使用环境变量</h4><p>必须以 <code>REACT_APP_</code> 开头创建自定义环境变量，环境变量在构建期间嵌入。</p>
-<h5 id="设置临时环境变量"><a href="#设置临时环境变量" class="headerlink" title="设置临时环境变量"></a>设置临时环境变量</h5><p><strong>Windows (cmd.exe)</strong></p>
-<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="built_in">set</span> <span class="string">&quot;REACT_APP_SECRET_CODE=abcdef&quot;</span> &amp;&amp; npm <span class="built_in">start</span></span><br></pre></td></tr></table></figure>
-
-<p>（注意：变量赋值需要用引号包裹，以避免尾随空格。）</p>
-<p><strong>Windows (Powershell)</strong></p>
-<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">(<span class="variable">$env:REACT_APP_SECRET_CODE</span> = <span class="string">&quot;abcdef&quot;</span>) <span class="operator">-and</span> (npm <span class="built_in">start</span>)</span><br></pre></td></tr></table></figure>
-
-<p><strong>Linux, macOS (Bash)</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">REACT_APP_SECRET_CODE=abcdef npm start</span><br></pre></td></tr></table></figure>
-
-
-
-<h5 id="env-中添加环境变量"><a href="#env-中添加环境变量" class="headerlink" title=".env 中添加环境变量"></a><code>.env</code> 中添加环境变量</h5><p>见<a href="#env">上文</a>设置。</p>
-<h5 id="其他-env-文件"><a href="#其他-env-文件" class="headerlink" title="其他 .env 文件"></a>其他 <code>.env</code> 文件</h5><blockquote>
-<p>注意：此功能 <strong>适用于 <code>react-scripts@1.0.0</code> 及更高版本</strong>。</p>
-</blockquote>
-<ul>
-<li><code>.env</code>：默认。</li>
-<li><code>.env.local</code>：本地覆盖。<strong>除 test 之外的所有环境都加载此文件</strong>。</li>
-<li><code>.env.development</code>, <code>.env.test</code>, <code>.env.production</code>：设置特定环境。</li>
-<li><code>.env.development.local</code>, <code>.env.test.local</code>, <code>.env.production.local</code>：设置特定环境的本地覆盖。</li>
-</ul>
-<p>左侧的文件比右侧的文件具有更高的优先级：</p>
-<ul>
-<li><code>npm start</code>: <code>.env.development.local</code>, <code>.env.development</code>, <code>.env.local</code>, <code>.env</code></li>
-<li><code>npm run build</code>: <code>.env.production.local</code>, <code>.env.production</code>, <code>.env.local</code>, <code>.env</code></li>
-<li><code>npm test</code>: <code>.env.test.local</code>, <code>.env.test</code>, <code>.env</code> (注意没有 <code>.env.local</code> )</li>
-</ul>
-<h5 id="NODE-ENV-的特殊内置环境变量"><a href="#NODE-ENV-的特殊内置环境变量" class="headerlink" title="NODE_ENV 的特殊内置环境变量"></a><code>NODE_ENV</code> 的特殊内置环境变量</h5><p>有一个名为 <code>NODE_ENV</code> 的特殊内置环境变量。可以从 <code>process.env.NODE_ENV</code> 中读取。运行 <code>npm start</code> 时，它总是等于 <code>&#39;development&#39;</code> ，运行 <code>npm test</code> 它总是等于 <code>&#39;test&#39;</code> ，运行 <code>npm run build</code> 来生成一个生产 bundle(包) 时，它总是等于 <code>&#39;production&#39;</code> 。**<code>NODE_ENV</code>无法手动覆盖。** </p>
-]]></content>
-      <categories>
-        <category>NodeJS</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-        <tag>Node</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>React生态</title>
-    <url>/2021/09/30/React%E7%94%9F%E6%80%81/</url>
-    <content><![CDATA[<h3 id="React-DevTools"><a href="#React-DevTools" class="headerlink" title="React DevTools"></a>React DevTools</h3><h5 id="General-设置"><a href="#General-设置" class="headerlink" title="General 设置"></a>General 设置</h5><img src="../assets/image-20220222024702149.png" alt="image-20220222024702149" style="zoom:33%;" />
-
-<p>General 面板中最重要的功能就是 **”Highlight updates when components render”**。勾选上之后，可以查看 React 重绘时，页面哪些部分有更新。在遇到性能问题时，可以快速帮助决策在哪部分不需要重绘的组件部分添加 React.memo 阻止重绘。</p>
-<h5 id="Debugging-设置"><a href="#Debugging-设置" class="headerlink" title="Debugging 设置"></a>Debugging 设置</h5><img src="..\assets\image-20220222024832097.png" alt="image-20220222024832097" style="zoom:33%;" />
-
-<p><strong>“Append components stacks to console warnings and errors.”</strong></p>
-<p>可以帮助我们定位 React 报错信息来自哪个组件</p>
-<span id="more"></span>
-
-
-<h5 id="Components-设置"><a href="#Components-设置" class="headerlink" title="Components 设置"></a>Components 设置</h5><img src="..\assets\image-20220222024936104.png" alt="image-20220222024936104" style="zoom:33%;" />
-
-<p><strong>“Hide components where…”</strong></p>
-<p>此项在过滤组件树时有用。比如，大多数应用可能会在顶层有很多 Context.Provider，就可以过滤 Context 类型、不显示。当我们只关心业务逻辑层的组件时，可以过滤掉 DOM 组件，减少树的节点</p>
-<h5 id="Profiler-设置"><a href="#Profiler-设置" class="headerlink" title="Profiler 设置"></a>Profiler 设置</h5><img src="..\assets\image-20220222025024293.png" alt="image-20220222025024293" style="zoom:33%;" />
-
-<p><strong>“Record why each component rendered while profiling”</strong></p>
-<img src="..\assets\image-20220222025054509.png" alt="image-20220222025054509" style="zoom:33%;" />
-
-<p>勾选之后会在渲染火焰图的 hover 面板中看到 **”Why did this render”**。</p>
-<h5 id="现在有哪些-render-原因呢？"><a href="#现在有哪些-render-原因呢？" class="headerlink" title="现在有哪些 render 原因呢？"></a>现在有哪些 render 原因呢？</h5><ul>
-<li><p><strong>Props changed</strong></p>
-<p>​     顾名思义，传入组件的 props 变更</p>
-</li>
-<li><p><strong>The parent component rendered</strong></p>
-<p>​	父组件渲染导致的子组件渲染。一般要做性能优化都是找这类重绘原因的组件。但是要注意，如果组件中有用到 useContext，Provider 的 value 变更导致的重绘也是被标记为 The parent component rendered，需要注意</p>
-</li>
-<li><p><strong>Hooks changed</strong></p>
-<p>​	Hook 状态变更导致的重绘，一般就是指 useState 返回的更新函数被调用了</p>
-</li>
-<li><p><strong>State changed</strong></p>
-<p>​	这个只会在 class component 中有，大家忽略</p>
-</li>
-<li><p><strong>“Hide commits below xx (ms)”</strong></p>
-<p>​	设置一个更新耗时的阈值，低于该阈值的渲染不显示。用来快速过滤哪些渲染有性能问题</p>
-</li>
-</ul>
-<h5 id="React-组件检视器"><a href="#React-组件检视器" class="headerlink" title="React 组件检视器"></a>React 组件检视器</h5><p>用法和 DevTools 的元素面板类似，可以直接在页面上定位到元素对应的 React Component。并且可以实时查看当前组件内部的 hooks 状态，返回的组件树</p>
-<img src="..\assets\image-20220222025129591.png" alt="image-20220222025129591" style="zoom:33%;" />
-
-<p>右上角的四个图标</p>
-<img src="..\assets\image-20220222025154916.png" alt="image-20220222025154916" style="zoom:33%;" />
-
-<p>分别作用如下：</p>
-<ul>
-<li>模拟 ReactLazy 懒加载组件 Suspense 状态</li>
-<li>定位组件所渲染的 DOM 节点</li>
-<li>在 Console 中打印 Component 内部状态</li>
-<li>跳转到组件所在源文件（配合 sourcemap）</li>
-</ul>
-]]></content>
-      <categories>
-        <category>React</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-        <tag>React</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>React的设计和实现</title>
-    <url>/2021/09/29/React%E7%9A%84%E8%AE%BE%E8%AE%A1%E5%92%8C%E5%AE%9E%E7%8E%B0/</url>
-    <content><![CDATA[<h4 id="本篇笔记的目的：站在更高的角度看待React"><a href="#本篇笔记的目的：站在更高的角度看待React" class="headerlink" title="本篇笔记的目的：站在更高的角度看待React"></a>本篇笔记的目的：站在更高的角度看待React</h4><h4 id="React的设计思路"><a href="#React的设计思路" class="headerlink" title="React的设计思路"></a>React的设计思路</h4><ul>
-<li><p>解决UI编程的痛点</p>
-<ol>
-<li><p>状态更新，UI不会自动更新，需要手动调dom api进行更新</p>
-<ol start="2">
-<li>欠缺基本代码的封装和隔离，代码层面没有组件化</li>
-<li>UI之间数据依赖，需要手动维护，如果依赖链路过长，会有 callback hell的问题</li>
-</ol>
-</li>
-</ol>
-</li>
-<li><p>响应式编程</p>
-</li>
-</ul>
-<p><img src="/../assets/image-20220210203412954.png" alt="image-20220210203412954"></p>
-<ul>
-<li><p>期望能</p>
-<pre><code>1. 状态更新，UI自动更新
-2. 前端代码组件化，可复用，可封装
-3. 状态之间的依赖关系，只需要声明即可
-</code></pre>
-</li>
-<li><p>组件化</p>
-<pre><code>1. 组件是组件的组合/原子组件
-2. 组件内拥有状态，外部不可见
-3. 父组件可将状态传入组件内部
-</code></pre>
-</li>
-<li><p>状态归属问题</p>
-<pre><code>1. react是单向数据流，只能父组件将状态传递给子组件（但可以将改变父组件状态的方法传递给子组件实现父子组件通信）
-2. 如何解决不合理的状态上升问题？
-3. 组件状态改变后，如何更新dom
-</code></pre>
-</li>
-</ul>
-<span id="more"></span>
-
-
-<h4 id="React的实现"><a href="#React的实现" class="headerlink" title="React的实现"></a>React的实现</h4><ul>
-<li>DIff算法</li>
-</ul>
-<img src="../assets/image-20220210212319207.png" alt="image-20220210212319207" style="zoom:40%;" />
-
-
-
-<h3 id="React解决状态管理问题"><a href="#React解决状态管理问题" class="headerlink" title="React解决状态管理问题"></a>React解决状态管理问题</h3><p>先说结论：使用状态管理库</p>
-<ul>
-<li><p>状态管理库核心思想：将状态抽离到ui外部进行统一管理。</p>
-</li>
-<li><p>将状态抽离到ui外部的问题：降低了组件复用性，组件跟外部状态强耦合</p>
-</li>
-</ul>
-<p><strong>何时使用状态管理库？</strong></p>
-<p><strong>判断一个状态是不是只属于组件本身，如若是则不需要状态管理库</strong></p>
-]]></content>
-      <categories>
-        <category>React</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-        <tag>React</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>React组件性能优化</title>
-    <url>/2021/10/14/React%E7%BB%84%E4%BB%B6%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</url>
-    <content><![CDATA[<h3 id="React-性能优化思路"><a href="#React-性能优化思路" class="headerlink" title="React 性能优化思路"></a>React 性能优化思路</h3><p>我觉得React 性能优化的理念的主要方向就是这两个：</p>
-<ol>
-<li><strong>减少重新 render 的次数。因为在 React 里最重(花时间最长)的一块就是 reconciliation(简单的可以理解为 diff)，如果不 render，就不会 reconciliation。</strong></li>
-<li><strong>减少计算的量。主要是减少重复计算，对于函数式组件来说，每次 render 都会重新从头开始执行函数调用。</strong></li>
-</ol>
-<p>在使用类组件的时候，使用的 React 优化 API 主要是：<code>shouldComponentUpdate</code>和  <code>PureComponent</code>，这两个 API 所提供的解决思路都是为了<strong>减少重新 render 的次数</strong>，主要是减少父组件更新而子组件也更新的情况。</p>
-<p>但是在函数式组件里面没有声明周期也没有类，那如何来做性能优化呢？</p>
-<p><strong>先分个类，组件什么时候会重新执行？</strong></p>
-<ol>
-<li><strong>组件自己的状态改变</strong></li>
-<li><strong>父组件重新渲染，导致子组件重新渲染，但是父组件的 props 没有改变</strong></li>
-<li><strong>父组件重新渲染，导致子组件重新渲染，但是父组件传递的 props 改变</strong></li>
-</ol>
-<p>针对第二点，在FC中，可以通过memo减少rerender</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Component</span>(<span class="params">props</span>) &#123;</span><br><span class="line">   <span class="comment">/* 使用 props 渲染 */</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> <span class="title class_">MyComponent</span> = <span class="title class_">React</span>.<span class="title function_">memo</span>(<span class="title class_">Component</span>);</span><br></pre></td></tr></table></figure>
-
-<p>通过 <code>React.memo</code> 包裹的组件在 props 不变的情况下，这个被包裹的组件是不会重新渲染的(相当于PureComonent)</p>
-<p>默认情况下其只会对 props 的复杂对象做浅层对比(浅层对比就是只会对比前后两次 props 对象引用是否相同，不会对比对象里面的内容是否相同)，如果你想要控制对比过程，那么请将自定义的比较函数通过第二个参数传入来实现。</p>
-<span id="more"></span>
-
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">MyComponent</span>(<span class="params">props</span>) &#123;</span><br><span class="line">  <span class="comment">/* 使用 props 渲染 */</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">areEqual</span>(<span class="params">prevProps, nextProps</span>) &#123;</span><br><span class="line">  <span class="comment">/*</span></span><br><span class="line"><span class="comment">  如果把 nextProps 传入 render 方法的返回结果与</span></span><br><span class="line"><span class="comment">  将 prevProps 传入 render 方法的返回结果一致则返回 true，</span></span><br><span class="line"><span class="comment">  否则返回 false</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">React</span>.<span class="title function_">memo</span>(<span class="title class_">MyComponent</span>, areEqual);</span><br></pre></td></tr></table></figure>
-
-<h3 id="组件性能优化"><a href="#组件性能优化" class="headerlink" title="组件性能优化"></a>组件性能优化</h3><p>React 组件是一个树形结构，且每个节点都是懒计算的（类似于 Thunk 的概念）。当一个节点不需要重新计算（重绘）时，他的子树都不会计算（重绘）。<strong>所以我们做性能优化的目标，就是在尽量离根节点近的位置，拦截不必要的节点重算，从而减少重绘的计算量。</strong></p>
-<h5 id="React-memo"><a href="#React-memo" class="headerlink" title="React.memo"></a>React.memo</h5><p>阻止节点重绘主要通过 React.memo 方法生成特殊的组件节点。它接受两个传参：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="title class_">React</span>.<span class="title function_">memo</span>(<span class="title class_">Component</span>, areEqual);</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>Component：组件</p>
-</li>
-<li><p>areEqual：比较函数<br>比较函数的入参有两个，arg0 为 前一次渲染的 props, arg1 为本次渲染的 props。如果返回 true，则该节点本次渲染将被标记为无需重新计算，从而使其所有子节点、孙子节点都无需计算。<br>areEqual 如果不传，默认使用</p>
-</li>
-</ul>
-<figure class="highlight lisp"><table><tr><td class="code"><pre><span class="line">(<span class="name">prevProps</span>, nextProps) =&gt; shallowEqual(<span class="name">prevProps</span>, nextProps)</span><br></pre></td></tr></table></figure>
-
-<p>做为比较函数。</p>
-<h5 id="如何定位优化点"><a href="#如何定位优化点" class="headerlink" title="如何定位优化点"></a>如何定位优化点</h5><p>使用前一章节提到 React DevTools 中的 Profiling 功能，record 发生卡顿的操作，从耗时长的组件逐个查看，找到那些跟此次操作无关的上层渲染节点，尝试使用 React.memo 包裹这些组件。</p>
-<h5 id="不要为了优化而优化"><a href="#不要为了优化而优化" class="headerlink" title="不要为了优化而优化"></a>不要为了优化而优化</h5><p>在没有性能问题前，不用去纠结是否要用 Profiling、React.memo、useMemo、useCallback 去优化性能，这些不一定能带来性能提升，反而肯定会带来首屏的性能下降。大多数情况下，React 现有算法以能满足性能需求。</p>
-<h5 id="对于一个组件，有三样东西会让她重绘"><a href="#对于一个组件，有三样东西会让她重绘" class="headerlink" title="对于一个组件，有三样东西会让她重绘"></a>对于一个组件，有三样东西会让她重绘</h5><ol>
-<li>State 变更</li>
-<li>依赖的 context 变更</li>
-<li>父组件重绘</li>
-</ol>
-<p>所以用 React.memo 包裹之后，并不是说性能就会有多大的提高。如果组件中依赖的 context 中，有一部分并不是此组件需要的数据，但会经常变更，也会导致组件经常重绘。这时候我们可以增加一层组件，把依赖 context 中的数据，通过增加的一层父组件取出来，然后通过 props 传给真正渲染的组件，把 React.memo 加在真正渲染的组件上，来达到屏蔽 context 变更引起的重绘问题。</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; useMemo, useContext &#125; <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">SomeContext</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;./SomeContext&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">PickContextData</span>(<span class="params">props</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> ctx = <span class="title function_">useContext</span>(<span class="title class_">SomeContext</span>);</span><br><span class="line">  <span class="keyword">const</span> someDataFromContext = <span class="title function_">useMemo</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> ctx.<span class="property">data</span>;</span><br><span class="line">  &#125;, [ctx.<span class="property">data</span>]);</span><br><span class="line">  <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">RenderComponent</span> <span class="attr">data</span>=<span class="string">&#123;someDataFromContext&#125;</span> &#123;<span class="attr">...props</span>&#125; /&gt;</span></span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title class_">RenderComponent</span> = <span class="title class_">React</span>.<span class="title function_">memo</span>(<span class="function">(<span class="params">props</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// 略</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<p>更通用点，可以封装出 react-redux 的 connect 函数，传入 selector 来取所需的 Context 数据。</p>
-]]></content>
-      <categories>
-        <category>React</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-        <tag>Hooks</tag>
         <tag>React</tag>
       </tags>
   </entry>
@@ -1434,6 +1248,192 @@ C组件: 读取A组件传入的数据显示 &#123;this.props.data&#125;
       </tags>
   </entry>
   <entry>
+    <title>React生态</title>
+    <url>/2021/09/30/React%E7%94%9F%E6%80%81/</url>
+    <content><![CDATA[<h3 id="React-DevTools"><a href="#React-DevTools" class="headerlink" title="React DevTools"></a>React DevTools</h3><h5 id="General-设置"><a href="#General-设置" class="headerlink" title="General 设置"></a>General 设置</h5><img src="../assets/image-20220222024702149.png" alt="image-20220222024702149" style="zoom:33%;" />
+
+<p>General 面板中最重要的功能就是 **”Highlight updates when components render”**。勾选上之后，可以查看 React 重绘时，页面哪些部分有更新。在遇到性能问题时，可以快速帮助决策在哪部分不需要重绘的组件部分添加 React.memo 阻止重绘。</p>
+<h5 id="Debugging-设置"><a href="#Debugging-设置" class="headerlink" title="Debugging 设置"></a>Debugging 设置</h5><img src="..\assets\image-20220222024832097.png" alt="image-20220222024832097" style="zoom:33%;" />
+
+<p><strong>“Append components stacks to console warnings and errors.”</strong></p>
+<p>可以帮助我们定位 React 报错信息来自哪个组件</p>
+<span id="more"></span>
+
+
+<h5 id="Components-设置"><a href="#Components-设置" class="headerlink" title="Components 设置"></a>Components 设置</h5><img src="..\assets\image-20220222024936104.png" alt="image-20220222024936104" style="zoom:33%;" />
+
+<p><strong>“Hide components where…”</strong></p>
+<p>此项在过滤组件树时有用。比如，大多数应用可能会在顶层有很多 Context.Provider，就可以过滤 Context 类型、不显示。当我们只关心业务逻辑层的组件时，可以过滤掉 DOM 组件，减少树的节点</p>
+<h5 id="Profiler-设置"><a href="#Profiler-设置" class="headerlink" title="Profiler 设置"></a>Profiler 设置</h5><img src="..\assets\image-20220222025024293.png" alt="image-20220222025024293" style="zoom:33%;" />
+
+<p><strong>“Record why each component rendered while profiling”</strong></p>
+<img src="..\assets\image-20220222025054509.png" alt="image-20220222025054509" style="zoom:33%;" />
+
+<p>勾选之后会在渲染火焰图的 hover 面板中看到 **”Why did this render”**。</p>
+<h5 id="现在有哪些-render-原因呢？"><a href="#现在有哪些-render-原因呢？" class="headerlink" title="现在有哪些 render 原因呢？"></a>现在有哪些 render 原因呢？</h5><ul>
+<li><p><strong>Props changed</strong></p>
+<p>​     顾名思义，传入组件的 props 变更</p>
+</li>
+<li><p><strong>The parent component rendered</strong></p>
+<p>​	父组件渲染导致的子组件渲染。一般要做性能优化都是找这类重绘原因的组件。但是要注意，如果组件中有用到 useContext，Provider 的 value 变更导致的重绘也是被标记为 The parent component rendered，需要注意</p>
+</li>
+<li><p><strong>Hooks changed</strong></p>
+<p>​	Hook 状态变更导致的重绘，一般就是指 useState 返回的更新函数被调用了</p>
+</li>
+<li><p><strong>State changed</strong></p>
+<p>​	这个只会在 class component 中有，大家忽略</p>
+</li>
+<li><p><strong>“Hide commits below xx (ms)”</strong></p>
+<p>​	设置一个更新耗时的阈值，低于该阈值的渲染不显示。用来快速过滤哪些渲染有性能问题</p>
+</li>
+</ul>
+<h5 id="React-组件检视器"><a href="#React-组件检视器" class="headerlink" title="React 组件检视器"></a>React 组件检视器</h5><p>用法和 DevTools 的元素面板类似，可以直接在页面上定位到元素对应的 React Component。并且可以实时查看当前组件内部的 hooks 状态，返回的组件树</p>
+<img src="..\assets\image-20220222025129591.png" alt="image-20220222025129591" style="zoom:33%;" />
+
+<p>右上角的四个图标</p>
+<img src="..\assets\image-20220222025154916.png" alt="image-20220222025154916" style="zoom:33%;" />
+
+<p>分别作用如下：</p>
+<ul>
+<li>模拟 ReactLazy 懒加载组件 Suspense 状态</li>
+<li>定位组件所渲染的 DOM 节点</li>
+<li>在 Console 中打印 Component 内部状态</li>
+<li>跳转到组件所在源文件（配合 sourcemap）</li>
+</ul>
+]]></content>
+      <categories>
+        <category>React</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>React</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>React的设计和实现</title>
+    <url>/2021/09/29/React%E7%9A%84%E8%AE%BE%E8%AE%A1%E5%92%8C%E5%AE%9E%E7%8E%B0/</url>
+    <content><![CDATA[<h4 id="本篇笔记的目的：站在更高的角度看待React"><a href="#本篇笔记的目的：站在更高的角度看待React" class="headerlink" title="本篇笔记的目的：站在更高的角度看待React"></a>本篇笔记的目的：站在更高的角度看待React</h4><h4 id="React的设计思路"><a href="#React的设计思路" class="headerlink" title="React的设计思路"></a>React的设计思路</h4><ul>
+<li><p>解决UI编程的痛点</p>
+<ol>
+<li><p>状态更新，UI不会自动更新，需要手动调dom api进行更新</p>
+<ol start="2">
+<li>欠缺基本代码的封装和隔离，代码层面没有组件化</li>
+<li>UI之间数据依赖，需要手动维护，如果依赖链路过长，会有 callback hell的问题</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><p>响应式编程</p>
+</li>
+</ul>
+<p><img src="/../assets/image-20220210203412954.png" alt="image-20220210203412954"></p>
+<ul>
+<li><p>期望能</p>
+<pre><code>1. 状态更新，UI自动更新
+2. 前端代码组件化，可复用，可封装
+3. 状态之间的依赖关系，只需要声明即可
+</code></pre>
+</li>
+<li><p>组件化</p>
+<pre><code>1. 组件是组件的组合/原子组件
+2. 组件内拥有状态，外部不可见
+3. 父组件可将状态传入组件内部
+</code></pre>
+</li>
+<li><p>状态归属问题</p>
+<pre><code>1. react是单向数据流，只能父组件将状态传递给子组件（但可以将改变父组件状态的方法传递给子组件实现父子组件通信）
+2. 如何解决不合理的状态上升问题？
+3. 组件状态改变后，如何更新dom
+</code></pre>
+</li>
+</ul>
+<span id="more"></span>
+
+
+<h4 id="React的实现"><a href="#React的实现" class="headerlink" title="React的实现"></a>React的实现</h4><ul>
+<li>DIff算法</li>
+</ul>
+<img src="../assets/image-20220210212319207.png" alt="image-20220210212319207" style="zoom:40%;" />
+
+
+
+<h3 id="React解决状态管理问题"><a href="#React解决状态管理问题" class="headerlink" title="React解决状态管理问题"></a>React解决状态管理问题</h3><p>先说结论：使用状态管理库</p>
+<ul>
+<li><p>状态管理库核心思想：将状态抽离到ui外部进行统一管理。</p>
+</li>
+<li><p>将状态抽离到ui外部的问题：降低了组件复用性，组件跟外部状态强耦合</p>
+</li>
+</ul>
+<p><strong>何时使用状态管理库？</strong></p>
+<p><strong>判断一个状态是不是只属于组件本身，如若是则不需要状态管理库</strong></p>
+]]></content>
+      <categories>
+        <category>React</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>React</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>React组件性能优化</title>
+    <url>/2021/10/14/React%E7%BB%84%E4%BB%B6%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</url>
+    <content><![CDATA[<h3 id="React-性能优化思路"><a href="#React-性能优化思路" class="headerlink" title="React 性能优化思路"></a>React 性能优化思路</h3><p>我觉得React 性能优化的理念的主要方向就是这两个：</p>
+<ol>
+<li><strong>减少重新 render 的次数。因为在 React 里最重(花时间最长)的一块就是 reconciliation(简单的可以理解为 diff)，如果不 render，就不会 reconciliation。</strong></li>
+<li><strong>减少计算的量。主要是减少重复计算，对于函数式组件来说，每次 render 都会重新从头开始执行函数调用。</strong></li>
+</ol>
+<p>在使用类组件的时候，使用的 React 优化 API 主要是：<code>shouldComponentUpdate</code>和  <code>PureComponent</code>，这两个 API 所提供的解决思路都是为了<strong>减少重新 render 的次数</strong>，主要是减少父组件更新而子组件也更新的情况。</p>
+<p>但是在函数式组件里面没有声明周期也没有类，那如何来做性能优化呢？</p>
+<p><strong>先分个类，组件什么时候会重新执行？</strong></p>
+<ol>
+<li><strong>组件自己的状态改变</strong></li>
+<li><strong>父组件重新渲染，导致子组件重新渲染，但是父组件的 props 没有改变</strong></li>
+<li><strong>父组件重新渲染，导致子组件重新渲染，但是父组件传递的 props 改变</strong></li>
+</ol>
+<p>针对第二点，在FC中，可以通过memo减少rerender</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Component</span>(<span class="params">props</span>) &#123;</span><br><span class="line">   <span class="comment">/* 使用 props 渲染 */</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> <span class="title class_">MyComponent</span> = <span class="title class_">React</span>.<span class="title function_">memo</span>(<span class="title class_">Component</span>);</span><br></pre></td></tr></table></figure>
+
+<p>通过 <code>React.memo</code> 包裹的组件在 props 不变的情况下，这个被包裹的组件是不会重新渲染的(相当于PureComonent)</p>
+<p>默认情况下其只会对 props 的复杂对象做浅层对比(浅层对比就是只会对比前后两次 props 对象引用是否相同，不会对比对象里面的内容是否相同)，如果你想要控制对比过程，那么请将自定义的比较函数通过第二个参数传入来实现。</p>
+<span id="more"></span>
+
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">MyComponent</span>(<span class="params">props</span>) &#123;</span><br><span class="line">  <span class="comment">/* 使用 props 渲染 */</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">areEqual</span>(<span class="params">prevProps, nextProps</span>) &#123;</span><br><span class="line">  <span class="comment">/*</span></span><br><span class="line"><span class="comment">  如果把 nextProps 传入 render 方法的返回结果与</span></span><br><span class="line"><span class="comment">  将 prevProps 传入 render 方法的返回结果一致则返回 true，</span></span><br><span class="line"><span class="comment">  否则返回 false</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">React</span>.<span class="title function_">memo</span>(<span class="title class_">MyComponent</span>, areEqual);</span><br></pre></td></tr></table></figure>
+
+<h3 id="组件性能优化"><a href="#组件性能优化" class="headerlink" title="组件性能优化"></a>组件性能优化</h3><p>React 组件是一个树形结构，且每个节点都是懒计算的（类似于 Thunk 的概念）。当一个节点不需要重新计算（重绘）时，他的子树都不会计算（重绘）。<strong>所以我们做性能优化的目标，就是在尽量离根节点近的位置，拦截不必要的节点重算，从而减少重绘的计算量。</strong></p>
+<h5 id="React-memo"><a href="#React-memo" class="headerlink" title="React.memo"></a>React.memo</h5><p>阻止节点重绘主要通过 React.memo 方法生成特殊的组件节点。它接受两个传参：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="title class_">React</span>.<span class="title function_">memo</span>(<span class="title class_">Component</span>, areEqual);</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>Component：组件</p>
+</li>
+<li><p>areEqual：比较函数<br>比较函数的入参有两个，arg0 为 前一次渲染的 props, arg1 为本次渲染的 props。如果返回 true，则该节点本次渲染将被标记为无需重新计算，从而使其所有子节点、孙子节点都无需计算。<br>areEqual 如果不传，默认使用</p>
+</li>
+</ul>
+<figure class="highlight lisp"><table><tr><td class="code"><pre><span class="line">(<span class="name">prevProps</span>, nextProps) =&gt; shallowEqual(<span class="name">prevProps</span>, nextProps)</span><br></pre></td></tr></table></figure>
+
+<p>做为比较函数。</p>
+<h5 id="如何定位优化点"><a href="#如何定位优化点" class="headerlink" title="如何定位优化点"></a>如何定位优化点</h5><p>使用前一章节提到 React DevTools 中的 Profiling 功能，record 发生卡顿的操作，从耗时长的组件逐个查看，找到那些跟此次操作无关的上层渲染节点，尝试使用 React.memo 包裹这些组件。</p>
+<h5 id="不要为了优化而优化"><a href="#不要为了优化而优化" class="headerlink" title="不要为了优化而优化"></a>不要为了优化而优化</h5><p>在没有性能问题前，不用去纠结是否要用 Profiling、React.memo、useMemo、useCallback 去优化性能，这些不一定能带来性能提升，反而肯定会带来首屏的性能下降。大多数情况下，React 现有算法以能满足性能需求。</p>
+<h5 id="对于一个组件，有三样东西会让她重绘"><a href="#对于一个组件，有三样东西会让她重绘" class="headerlink" title="对于一个组件，有三样东西会让她重绘"></a>对于一个组件，有三样东西会让她重绘</h5><ol>
+<li>State 变更</li>
+<li>依赖的 context 变更</li>
+<li>父组件重绘</li>
+</ol>
+<p>所以用 React.memo 包裹之后，并不是说性能就会有多大的提高。如果组件中依赖的 context 中，有一部分并不是此组件需要的数据，但会经常变更，也会导致组件经常重绘。这时候我们可以增加一层组件，把依赖 context 中的数据，通过增加的一层父组件取出来，然后通过 props 传给真正渲染的组件，把 React.memo 加在真正渲染的组件上，来达到屏蔽 context 变更引起的重绘问题。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; useMemo, useContext &#125; <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">SomeContext</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;./SomeContext&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">PickContextData</span>(<span class="params">props</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> ctx = <span class="title function_">useContext</span>(<span class="title class_">SomeContext</span>);</span><br><span class="line">  <span class="keyword">const</span> someDataFromContext = <span class="title function_">useMemo</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> ctx.<span class="property">data</span>;</span><br><span class="line">  &#125;, [ctx.<span class="property">data</span>]);</span><br><span class="line">  <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">RenderComponent</span> <span class="attr">data</span>=<span class="string">&#123;someDataFromContext&#125;</span> &#123;<span class="attr">...props</span>&#125; /&gt;</span></span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title class_">RenderComponent</span> = <span class="title class_">React</span>.<span class="title function_">memo</span>(<span class="function">(<span class="params">props</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// 略</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>更通用点，可以封装出 react-redux 的 connect 函数，传入 selector 来取所需的 Context 数据。</p>
+]]></content>
+      <categories>
+        <category>React</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>Hooks</tag>
+        <tag>React</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>React组件通信</title>
     <url>/2021/10/07/React%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1/</url>
     <content><![CDATA[<h3 id="组件通信"><a href="#组件通信" class="headerlink" title="组件通信"></a>组件通信</h3><h5 id="爷孙组件通信"><a href="#爷孙组件通信" class="headerlink" title="爷孙组件通信"></a>爷孙组件通信</h5><p>爷孙组件通信主要有 3 种方式：</p>
@@ -1551,31 +1551,6 @@ C组件: 读取A组件传入的数据显示 &#123;this.props.data&#125;
         <tag>JavaScript</tag>
         <tag>React</tag>
         <tag>Redux</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Web3相关学习</title>
-    <url>/2024/10/29/Web3%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/</url>
-    <content><![CDATA[<p>先开个坑，准备下Web3相关的学习</p>
-<h2 id="学习路线"><a href="#学习路线" class="headerlink" title="学习路线"></a>学习路线</h2><ul>
-<li><strong>Web3开发学习路线</strong>: <a href="https://54web3.cc/blog/roadmap/learning-path-web3">https://54web3.cc/blog/roadmap/learning-path-web3</a></li>
-<li><strong>Web3 入门计划</strong>: <a href="https://cubic-leaf-731.notion.site/web3-202208-09-1623ccd15c2148a1ae00ed8794d153b1">https://cubic-leaf-731.notion.site/web3-202208-09-1623ccd15c2148a1ae00ed8794d153b1</a></li>
-</ul>
-<h3 id="WEEK-1-区块链的基础知识"><a href="#WEEK-1-区块链的基础知识" class="headerlink" title="WEEK 1: 区块链的基础知识"></a><strong>WEEK 1: 区块链的基础知识</strong></h3><ul>
-<li>密码学基础</li>
-<li>区块链基础</li>
-<li>相关金融知识</li>
-<li>学习比特币底层技术</li>
-<li>学习以太坊原理</li>
-</ul>
-]]></content>
-      <categories>
-        <category>Chore</category>
-      </categories>
-      <tags>
-        <tag>Web3</tag>
-        <tag>区块链</tag>
-        <tag>智能合约</tag>
       </tags>
   </entry>
   <entry>
@@ -1932,6 +1907,31 @@ module: &#123;
       </tags>
   </entry>
   <entry>
+    <title>Web3相关学习</title>
+    <url>/2024/10/29/Web3%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/</url>
+    <content><![CDATA[<p>先开个坑，准备下Web3相关的学习</p>
+<h2 id="学习路线"><a href="#学习路线" class="headerlink" title="学习路线"></a>学习路线</h2><ul>
+<li><strong>Web3开发学习路线</strong>: <a href="https://54web3.cc/blog/roadmap/learning-path-web3">https://54web3.cc/blog/roadmap/learning-path-web3</a></li>
+<li><strong>Web3 入门计划</strong>: <a href="https://cubic-leaf-731.notion.site/web3-202208-09-1623ccd15c2148a1ae00ed8794d153b1">https://cubic-leaf-731.notion.site/web3-202208-09-1623ccd15c2148a1ae00ed8794d153b1</a></li>
+</ul>
+<h3 id="WEEK-1-区块链的基础知识"><a href="#WEEK-1-区块链的基础知识" class="headerlink" title="WEEK 1: 区块链的基础知识"></a><strong>WEEK 1: 区块链的基础知识</strong></h3><ul>
+<li>密码学基础</li>
+<li>区块链基础</li>
+<li>相关金融知识</li>
+<li>学习比特币底层技术</li>
+<li>学习以太坊原理</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Chore</category>
+      </categories>
+      <tags>
+        <tag>Web3</tag>
+        <tag>区块链</tag>
+        <tag>智能合约</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Webpack</title>
     <url>/2022/04/14/Webpack/</url>
     <content><![CDATA[<h3 id="Webpack-是什么"><a href="#Webpack-是什么" class="headerlink" title="Webpack 是什么"></a>Webpack 是什么</h3><p>webpack 是一种<strong>前端资源构建工具</strong>，一个静态模块打包器(module bundler)。</p>
@@ -2227,43 +2227,13 @@ webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后�
       </categories>
   </entry>
   <entry>
-    <title>站点更新日志 / ChangeLog</title>
-    <url>/2024/10/28/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97/</url>
-    <content><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>兜兜转转终于是有时间把这个站点建起来了;D，本文主要是记录下站点更新日志，会按月进行归档，还会简单写一下后续更新的一些想法和计划</p>
-<p>想法还有很多</p>
-<p>功能上非常想做的是个一言主题的页面，还有日间&#x2F;夜间模式切换，日程表、sitemap功能<br>内容上可以补充的还有个人简介<br>工程上能做的有域名简化（自定义域名），blog自动化部署（借助一些Github Webhooks），CDN加速（腾讯云）</p>
-<p>那么，拭目以待吧~</p>
-<hr>
-<!-- ### 后续更新计划
-**自定义域名（SSL证书、地址映射）**
-**日间/夜间模式切换**
-**添加一言主题页面**
-**添加个人简介**
-**blog自动化部署**
-**日程表、sitemap探索**
-
------- -->
-
-<h3 id="2024-10更新"><a href="#2024-10更新" class="headerlink" title="2024-10更新"></a>2024-10更新</h3><p><strong>腾讯云托管站点</strong><br>主要是解决Github Page部署后国内内网无法访问的问题（搜了下是DNS污染的问题，不太好解决，暂时先迁到腾讯云上去托管站点了）</p>
-<p><strong>部分文章重新整理一版</strong><br>整理了一系列陈年老文章，主要是一些文章之前的格式在博客里不太兼容，还有部分内容在迁移的过程中有丢失，都加以补充了</p>
-<p><strong>文章置顶、排序、显隐功能</strong><br>引了个<code>hexo-generator-index-custom</code>插件来置顶、排序文章</p>
-<span id="more"></span>
-
-<hr>
-<h3 id="2024-9更新"><a href="#2024-9更新" class="headerlink" title="2024-9更新"></a>2024-9更新</h3><p><strong>Hexo+Next建站</strong><br>基于Hexo V7.3 + Next V8.2 搭建了个人博客站点</p>
-<p><strong>搜索功能</strong><br>加入了文章搜索功能。会很好用吧？(大概</p>
-<!-- ![](../assets/blog-search-example.png) -->
-
-<p><strong>标签、分类功能</strong><br>所有文章整理了一版，对所有文章分标签、分类展示</p>
-<p><strong>文章显示字数统计、浏览时间</strong><br>引入<code>hexo-word-counter</code>这个插件来实现的，还会统计代码字数，算是个锦上添花的功能吧^^</p>
-]]></content>
-  </entry>
-  <entry>
     <title>比特币</title>
     <url>/2024/11/05/%E6%AF%94%E7%89%B9%E5%B8%81/</url>
-    <content><![CDATA[<h2 id="比特币中的密码学"><a href="#比特币中的密码学" class="headerlink" title="比特币中的密码学"></a>比特币中的密码学</h2><h3 id="比特币中的哈希特性"><a href="#比特币中的哈希特性" class="headerlink" title="比特币中的哈希特性"></a>比特币中的哈希特性</h3><blockquote>
-<p>容易验证，不容易计算</p>
+    <content><![CDATA[<blockquote class="blockquote-center">
+    <p><b>不要被学术界的思维限制了头脑，不要被程序员的思维限制了想象力。</b></p>
 </blockquote>
+
+<h2 id="比特币中的密码学"><a href="#比特币中的密码学" class="headerlink" title="比特币中的密码学"></a>比特币中的密码学</h2><h3 id="比特币中的哈希特性"><a href="#比特币中的哈希特性" class="headerlink" title="比特币中的哈希特性"></a>比特币中的哈希特性</h3><!-- > 容易验证，不容易计算 -->
 <h4 id="Collision-resistance-抗哈希碰撞"><a href="#Collision-resistance-抗哈希碰撞" class="headerlink" title="Collision resistance (抗哈希碰撞)"></a>Collision resistance (抗哈希碰撞)</h4><blockquote>
 <p>没有高效的方法来人为的制造哈希碰撞</p>
 </blockquote>
@@ -2288,10 +2258,14 @@ webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后�
 <p>message取hash-&gt;hash取签名</p>
 <span id="more"></span>
 
-<h2 id="比特币的数据结构"><a href="#比特币的数据结构" class="headerlink" title="比特币的数据结构"></a>比特币的数据结构</h2><h3 id="Block-chain（区块链）"><a href="#Block-chain（区块链）" class="headerlink" title="Block chain（区块链）"></a>Block chain（区块链）</h3><p>Hash pointers：存地址、哈希值<br>区块链：使用哈希指针</p>
+<h2 id="比特币的数据结构"><a href="#比特币的数据结构" class="headerlink" title="比特币的数据结构"></a>比特币的数据结构</h2><h3 id="Block-chain（区块链）"><a href="#Block-chain（区块链）" class="headerlink" title="Block chain（区块链）"></a>Block chain（区块链）</h3><p>Hash pointers：</p>
+<ul>
+<li>当前区块的地址</li>
+<li>前一个哈希指针 + 当前区块计算出的哈希值<br>区块链：使用哈希指针</li>
+</ul>
 <p>Genesis block（创始区块）：<br>Most recent block（最近使用区块）：</p>
-<h3 id="Merkle-tree"><a href="#Merkle-tree" class="headerlink" title="Merkle tree"></a>Merkle tree</h3><p>比特币中各个区块用Hash Pointer连接在一起，各个区块包含的交易信息是组织成Merkle tree的形式</p>
-<p>Merkle tree结构：二叉树的形式，最底层是交易记录，中间层都是下一层哈希值计算出的结果<br><img src="/../assets/merkle-tree.png" alt="image-20241105"></p>
+<h3 id="Merkle-tree（默克尔树）"><a href="#Merkle-tree（默克尔树）" class="headerlink" title="Merkle tree（默克尔树）"></a>Merkle tree（默克尔树）</h3><p>比特币中各个区块用Hash Pointer连接在一起，各个区块包含的交易信息是组织成Merkle tree的形式</p>
+<p>Merkle tree结构：二叉树的形式，最底层是交易记录，中间层都是下一层哈希值计算出的结果，树中的root hash可以用来判断是否有一个节点发生变更，因为任何一个节点的变更都会导致root hash发生变化<br><img src="/../assets/merkle-tree.png" alt="image-20241105"></p>
 <p>每一个区块构成：<br><strong>Block header</strong></p>
 <!-- = 指向前一块的哈希指针 -->
 <ul>
@@ -2301,6 +2275,28 @@ webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后�
 <ul>
 <li>交易列表、信息</li>
 </ul>
+<p>比特币节点分类</p>
+<ul>
+<li>全节点：保存区块的全部信息，Block header + Block body</li>
+<li>轻节点：手机上的比特币钱包，只保存Block header（也就是只保存了Merkle tree的Root hash）</li>
+</ul>
+<p>如何向轻节点证明某个交易已经被写入区块链？<br>用户A，用户B（轻节点），转账 A –&gt; B，A需要向B证明已经转账，如何证明：Merkle proof&#x2F;Proof of menbership：证明Merkle tree包含了某个交易，时间复杂度为 O(logn)<br>过程详见：<br><img src="/../assets/merkle-proof.png" alt="image-20241105"></p>
+<blockquote>
+<p>全节点把缺失信息发给轻节点，轻节点通过计算验证Root Hash相同，则代表交易已被写入到区块里</p>
+</blockquote>
+<p>全节点发送的哈希值可能被伪造吗，来保持上层的哈希值符合要求？<br>不行，因为哈希满足<strong>Collision resistance</strong>的特性，无法人为制造哈希碰撞</p>
+<p>Proof of non-menbership（证明交易记录不在树里）：</p>
+<ul>
+<li>全节点发送整颗merkle tree给轻节点，轻节点验证各个节点、各层有没有出现问题，如果都没问题，证明只有这些叶子节点，则只需要判断叶子节点有没有包含该交易记录。复杂度 O(n)</li>
+<li>假定叶子结点</li>
+</ul>
+<p>无环的数据结构都可以用hash pointer代替普通指针</p>
+<h2 id="比特币的共识协议"><a href="#比特币的共识协议" class="headerlink" title="比特币的共识协议"></a>比特币的共识协议</h2><p>比特币中区块的指针</p>
+<ul>
+<li>指向前一个区块</li>
+<li>指向币的来源：证明钱不是凭空捏造，是有记录的，防止Double spending</li>
+</ul>
+<p>转账：A -&gt; B A需要知道B的公钥，B也需要知道A的公钥，<br>签名验证的过程？不太理解</p>
 ]]></content>
       <categories>
         <category>Web3</category>
@@ -2442,5 +2438,37 @@ webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后�
       <tags>
         <tag>Chrome</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>站点更新日志 / ChangeLog</title>
+    <url>/2024/10/28/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97/</url>
+    <content><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>兜兜转转终于是有时间把这个站点建起来了;D，本文主要是记录下站点更新日志，会按月进行归档，还会简单写一下后续更新的一些想法和计划</p>
+<p>想法还有很多</p>
+<p>功能上非常想做的是个一言主题的页面，还有日间&#x2F;夜间模式切换，日程表、sitemap功能<br>内容上可以补充的还有个人简介<br>工程上能做的有域名简化（自定义域名），blog自动化部署（借助一些Github Webhooks），CDN加速（腾讯云）</p>
+<p>那么，拭目以待吧~</p>
+<hr>
+<!-- ### 后续更新计划
+**自定义域名（SSL证书、地址映射）**
+**日间/夜间模式切换**
+**添加一言主题页面**
+**添加个人简介**
+**blog自动化部署**
+**日程表、sitemap探索**
+
+------ -->
+
+<h3 id="2024-10更新"><a href="#2024-10更新" class="headerlink" title="2024-10更新"></a>2024-10更新</h3><p><strong>腾讯云托管站点</strong><br>主要是解决Github Page部署后国内内网无法访问的问题（搜了下是DNS污染的问题，不太好解决，暂时先迁到腾讯云上去托管站点了）</p>
+<p><strong>部分文章重新整理一版</strong><br>整理了一系列陈年老文章，主要是一些文章之前的格式在博客里不太兼容，还有部分内容在迁移的过程中有丢失，都加以补充了</p>
+<p><strong>文章置顶、排序、显隐功能</strong><br>引了个<code>hexo-generator-index-custom</code>插件来置顶、排序文章</p>
+<span id="more"></span>
+
+<hr>
+<h3 id="2024-9更新"><a href="#2024-9更新" class="headerlink" title="2024-9更新"></a>2024-9更新</h3><p><strong>Hexo+Next建站</strong><br>基于Hexo V7.3 + Next V8.2 搭建了个人博客站点</p>
+<p><strong>搜索功能</strong><br>加入了文章搜索功能。会很好用吧？(大概</p>
+<!-- ![](../assets/blog-search-example.png) -->
+
+<p><strong>标签、分类功能</strong><br>所有文章整理了一版，对所有文章分标签、分类展示</p>
+<p><strong>文章显示字数统计、浏览时间</strong><br>引入<code>hexo-word-counter</code>这个插件来实现的，还会统计代码字数，算是个锦上添花的功能吧^^</p>
+]]></content>
   </entry>
 </search>
