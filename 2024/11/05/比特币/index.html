@@ -28,8 +28,9 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/assets/merkle-tree.png">
 <meta property="og:image" content="http://example.com/assets/merkle-proof.png">
+<meta property="og:image" content="http://example.com/assets/bitcon-trading-process.png">
 <meta property="article:published_time" content="2024-11-05T02:17:17.738Z">
-<meta property="article:modified_time" content="2024-11-05T06:54:00.357Z">
+<meta property="article:modified_time" content="2024-11-12T08:40:37.019Z">
 <meta property="article:author" content="Huangyunze">
 <meta property="article:tag" content="Web3">
 <meta property="article:tag" content="比特币">
@@ -93,7 +94,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-文章"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>文章</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">15</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">35</span></a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">21</span></a></li><li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-文章"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>文章</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">15</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">37</span></a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">23</span></a></li><li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -144,7 +145,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AF%94%E7%89%B9%E5%B8%81%E4%B8%AD%E7%9A%84%E5%AF%86%E7%A0%81%E5%AD%A6"><span class="nav-number">1.</span> <span class="nav-text">比特币中的密码学</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AF%94%E7%89%B9%E5%B8%81%E4%B8%AD%E7%9A%84%E5%93%88%E5%B8%8C%E7%89%B9%E6%80%A7"><span class="nav-number">1.1.</span> <span class="nav-text">比特币中的哈希特性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Collision-resistance-%E6%8A%97%E5%93%88%E5%B8%8C%E7%A2%B0%E6%92%9E"><span class="nav-number">1.1.1.</span> <span class="nav-text">Collision resistance (抗哈希碰撞)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Hiding"><span class="nav-number">1.1.2.</span> <span class="nav-text">Hiding</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Puzzle-friendly"><span class="nav-number">1.1.3.</span> <span class="nav-text">Puzzle friendly</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AF%94%E7%89%B9%E5%B8%81%E4%B8%AD%E7%9A%84%E8%B4%A6%E6%88%B7%E7%AE%A1%E7%90%86"><span class="nav-number">1.2.</span> <span class="nav-text">比特币中的账户管理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AF%94%E7%89%B9%E5%B8%81%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="nav-number">2.</span> <span class="nav-text">比特币的数据结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Block-chain%EF%BC%88%E5%8C%BA%E5%9D%97%E9%93%BE%EF%BC%89"><span class="nav-number">2.1.</span> <span class="nav-text">Block chain（区块链）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Merkle-tree%EF%BC%88%E9%BB%98%E5%85%8B%E5%B0%94%E6%A0%91%EF%BC%89"><span class="nav-number">2.2.</span> <span class="nav-text">Merkle tree（默克尔树）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AF%94%E7%89%B9%E5%B8%81%E7%9A%84%E5%85%B1%E8%AF%86%E5%8D%8F%E8%AE%AE"><span class="nav-number">3.</span> <span class="nav-text">比特币的共识协议</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AF%94%E7%89%B9%E5%B8%81%E4%B8%AD%E7%9A%84%E5%AF%86%E7%A0%81%E5%AD%A6"><span class="nav-number">1.</span> <span class="nav-text">比特币中的密码学</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AF%94%E7%89%B9%E5%B8%81%E4%B8%AD%E7%9A%84%E5%93%88%E5%B8%8C%E7%89%B9%E6%80%A7"><span class="nav-number">1.1.</span> <span class="nav-text">比特币中的哈希特性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Collision-resistance-%E6%8A%97%E5%93%88%E5%B8%8C%E7%A2%B0%E6%92%9E"><span class="nav-number">1.1.1.</span> <span class="nav-text">Collision resistance (抗哈希碰撞)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Hiding"><span class="nav-number">1.1.2.</span> <span class="nav-text">Hiding</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Puzzle-friendly"><span class="nav-number">1.1.3.</span> <span class="nav-text">Puzzle friendly</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AF%94%E7%89%B9%E5%B8%81%E4%B8%AD%E7%9A%84%E8%B4%A6%E6%88%B7%E7%AE%A1%E7%90%86"><span class="nav-number">1.2.</span> <span class="nav-text">比特币中的账户管理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AF%94%E7%89%B9%E5%B8%81%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="nav-number">2.</span> <span class="nav-text">比特币的数据结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Block-chain%EF%BC%88%E5%8C%BA%E5%9D%97%E9%93%BE%EF%BC%89"><span class="nav-number">2.1.</span> <span class="nav-text">Block chain（区块链）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Hash-pointers%EF%BC%88%E5%93%88%E5%B8%8C%E6%8C%87%E9%92%88%EF%BC%89"><span class="nav-number">2.1.1.</span> <span class="nav-text">Hash pointers（哈希指针）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Genesis-block%EF%BC%88%E5%88%9B%E5%A7%8B%E5%8C%BA%E5%9D%97%EF%BC%89"><span class="nav-number">2.1.2.</span> <span class="nav-text">Genesis block（创始区块）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Most-recent-block%EF%BC%88%E6%9C%80%E8%BF%91%E4%BD%BF%E7%94%A8%E5%8C%BA%E5%9D%97%EF%BC%89"><span class="nav-number">2.1.3.</span> <span class="nav-text">Most recent block（最近使用区块）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Block%EF%BC%88%E5%8C%BA%E5%9D%97%EF%BC%89"><span class="nav-number">2.1.4.</span> <span class="nav-text">Block（区块）</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Block-header"><span class="nav-number">2.1.4.1.</span> <span class="nav-text">Block header</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Block-body"><span class="nav-number">2.1.4.2.</span> <span class="nav-text">Block body</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Merkle-tree%EF%BC%88%E9%BB%98%E5%85%8B%E5%B0%94%E6%A0%91%EF%BC%89"><span class="nav-number">2.2.</span> <span class="nav-text">Merkle tree（默克尔树）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AF%94%E7%89%B9%E5%B8%81%E7%9A%84%E5%85%B1%E8%AF%86%E5%8D%8F%E8%AE%AE"><span class="nav-number">3.</span> <span class="nav-text">比特币的共识协议</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -159,7 +160,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">35</span>
+          <span class="site-state-item-count">37</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -170,7 +171,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-count">23</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -233,9 +234,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2024-11-05 10:17:17 / 修改时间：14:54:00" itemprop="dateCreated datePublished" datetime="2024-11-05T10:17:17+08:00">2024-11-05</time>
+      <time title="创建时间：2024-11-05 10:17:17" itemprop="dateCreated datePublished" datetime="2024-11-05T10:17:17+08:00">2024-11-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-11-12 16:40:37" itemprop="dateModified" datetime="2024-11-12T16:40:37+08:00">2024-11-12</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -261,14 +268,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>1.1k</span>
+      <span>1.4k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>4 分钟</span>
+      <span>5 分钟</span>
     </span>
 </div>
 
@@ -307,27 +314,31 @@
 <p>message取hash-&gt;hash取签名</p>
 <span id="more"></span>
 
-<h2 id="比特币的数据结构"><a href="#比特币的数据结构" class="headerlink" title="比特币的数据结构"></a>比特币的数据结构</h2><h3 id="Block-chain（区块链）"><a href="#Block-chain（区块链）" class="headerlink" title="Block chain（区块链）"></a>Block chain（区块链）</h3><p>Hash pointers：</p>
+<h2 id="比特币的数据结构"><a href="#比特币的数据结构" class="headerlink" title="比特币的数据结构"></a>比特币的数据结构</h2><h3 id="Block-chain（区块链）"><a href="#Block-chain（区块链）" class="headerlink" title="Block chain（区块链）"></a>Block chain（区块链）</h3><blockquote>
+<p>本质上是一个链表，通过Hash pointers相连</p>
+</blockquote>
+<h4 id="Hash-pointers（哈希指针）"><a href="#Hash-pointers（哈希指针）" class="headerlink" title="Hash pointers（哈希指针）"></a>Hash pointers（哈希指针）</h4><p>当前区块的地址<br>前一个哈希指针 + 当前区块计算出的哈希值 </p>
+<h4 id="Genesis-block（创始区块）"><a href="#Genesis-block（创始区块）" class="headerlink" title="Genesis block（创始区块）"></a>Genesis block（创始区块）</h4><p>区块链中的第一个区块</p>
+<h4 id="Most-recent-block（最近使用区块）"><a href="#Most-recent-block（最近使用区块）" class="headerlink" title="Most recent block（最近使用区块）"></a>Most recent block（最近使用区块）</h4><p>区块链末尾的区块，指的是最近被添加到区块链的区块</p>
+<h4 id="Block（区块）"><a href="#Block（区块）" class="headerlink" title="Block（区块）"></a>Block（区块）</h4><p>每一个区块构成：</p>
+<h5 id="Block-header"><a href="#Block-header" class="headerlink" title="Block header"></a>Block header</h5><blockquote>
+<p>只有Block header会用Hash pointer串联</p>
+</blockquote>
 <ul>
-<li>当前区块的地址</li>
-<li>前一个哈希指针 + 当前区块计算出的哈希值<br>区块链：使用哈希指针</li>
+<li>Version（用的是比特币哪个版本的协议）</li>
+<li>Hash of previous block header（前一个区块头的hash）</li>
+<li>Merkle root hash（merkle tree的根哈希，能保证Block body里的Transaction list没有被篡改）</li>
+<li>Target（挖矿的难度目标阈值, H(block header) &lt;&#x3D; target, block header这里存的是目标阈值的编码nbits）</li>
+<li>Nonce（随机数）</li>
 </ul>
-<p>Genesis block（创始区块）：<br>Most recent block（最近使用区块）：</p>
-<h3 id="Merkle-tree（默克尔树）"><a href="#Merkle-tree（默克尔树）" class="headerlink" title="Merkle tree（默克尔树）"></a>Merkle tree（默克尔树）</h3><p>比特币中各个区块用Hash Pointer连接在一起，各个区块包含的交易信息是组织成Merkle tree的形式</p>
-<p>Merkle tree结构：二叉树的形式，最底层是交易记录，中间层都是下一层哈希值计算出的结果，树中的root hash可以用来判断是否有一个节点发生变更，因为任何一个节点的变更都会导致root hash发生变化<br><img src="/../assets/merkle-tree.png" alt="image-20241105"></p>
-<p>每一个区块构成：<br><strong>Block header</strong></p>
-<!-- = 指向前一块的哈希指针 -->
-<ul>
-<li>Merkle tree的Root hash</li>
+<h5 id="Block-body"><a href="#Block-body" class="headerlink" title="Block body"></a>Block body</h5><ul>
+<li>Transaction list（交易列表）</li>
 </ul>
-<p><strong>Block body</strong></p>
-<ul>
-<li>交易列表、信息</li>
-</ul>
+<h3 id="Merkle-tree（默克尔树）"><a href="#Merkle-tree（默克尔树）" class="headerlink" title="Merkle tree（默克尔树）"></a>Merkle tree（默克尔树）</h3><p>比特币中各个区块用Hash Pointer连接在一起，各个区块包含的交易信息是组织成Merkle tree的形式<br>Merkle tree结构：二叉树的形式，最底层是交易记录，中间层都是下一层哈希值计算出的结果，树中的root hash可以用来判断是否有一个节点发生变更，因为任何一个节点的变更都会导致root hash发生变化<br><img src="/../assets/merkle-tree.png" alt="image-20241105"></p>
 <p>比特币节点分类</p>
 <ul>
-<li>全节点：保存区块的全部信息，Block header + Block body</li>
-<li>轻节点：手机上的比特币钱包，只保存Block header（也就是只保存了Merkle tree的Root hash）</li>
+<li>Full node（全节点）：保存区块的全部信息，Block header + Block body，用于验证每一个交易，又叫 Fully validating node</li>
+<li>Light node（轻节点）：手机上的比特币钱包，只保存Block header（也就是只保存了Merkle tree的Root hash），无法独立验证交易的可靠性，系统中大部分节点是轻节点</li>
 </ul>
 <p>如何向轻节点证明某个交易已经被写入区块链？<br>用户A，用户B（轻节点），转账 A –&gt; B，A需要向B证明已经转账，如何证明：Merkle proof&#x2F;Proof of menbership：证明Merkle tree包含了某个交易，时间复杂度为 O(logn)<br>过程详见：<br><img src="/../assets/merkle-proof.png" alt="image-20241105"></p>
 <blockquote>
@@ -340,12 +351,20 @@
 <li>假定叶子结点</li>
 </ul>
 <p>无环的数据结构都可以用hash pointer代替普通指针</p>
-<h2 id="比特币的共识协议"><a href="#比特币的共识协议" class="headerlink" title="比特币的共识协议"></a>比特币的共识协议</h2><p>比特币中区块的指针</p>
+<h2 id="比特币的共识协议"><a href="#比特币的共识协议" class="headerlink" title="比特币的共识协议"></a>比特币的共识协议</h2><p>比特币的交易过程<br><img src="/../assets/bitcon-trading-process.png" alt="image-20241105"></p>
+<p>比特币中区块的指针</p>
 <ul>
 <li>指向前一个区块</li>
 <li>指向币的来源：证明钱不是凭空捏造，是有记录的，防止Double spending</li>
 </ul>
-<p>转账：A -&gt; B A需要知道B的公钥，B也需要知道A的公钥，<br>签名验证的过程？不太理解</p>
+<p>转账：A -&gt; B A需要知道B的公钥，B也需要知道A的公钥，<br>签名验证的过程？不太理解<br>交易记录通过A的私钥加密后 – 接收方通过A的公钥解密</p>
+<p>如何写入区块链？</p>
+<p>账本内容需要取得分布式的共识（distributed consensus）：一致性<br>Cap Theorem: 只能同时满足其中两个特性<br>Consistency（一致性）<br>Availability（可用性）<br>Partition tolerance（分区容错性：</p>
+<p>Paxos协议：</p>
+<p>Consensus in Bitcoin（解决的问题：存在恶意节点，假设大多数节点好的，少部分恶意节点，如何设计一个共识协议）</p>
+<ul>
+<li>直接投票是否可行？女巫攻击–恶意节点生成超过半数以上的账号，获取投票权</li>
+</ul>
 
     </div>
 
@@ -369,6 +388,9 @@
                 </a>
             </div>
             <div class="post-nav-item">
+                <a href="/2024/11/12/IPad%E9%85%8D%E7%BD%AE%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" rel="next" title="IPad配置开发环境">
+                  IPad配置开发环境 <i class="fa fa-angle-right"></i>
+                </a>
             </div>
           </div>
     </footer>
@@ -399,13 +421,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">33k</span>
+    <span title="站点总字数">36k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:58</span>
+    <span title="站点阅读时长">2:10</span>
   </span>
 </div>
 

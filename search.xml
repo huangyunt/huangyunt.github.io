@@ -1,6 +1,199 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>HTTP</title>
+    <url>/2021/09/20/HTTP/</url>
+    <content><![CDATA[<h2 id="HTTP-有哪些常见状态码"><a href="#HTTP-有哪些常见状态码" class="headerlink" title="HTTP 有哪些常见状态码"></a>HTTP 有哪些常见状态码</h2><h3 id="2xx（成功状态码）"><a href="#2xx（成功状态码）" class="headerlink" title="2xx（成功状态码）"></a>2xx（成功状态码）</h3><h4 id="200-OK"><a href="#200-OK" class="headerlink" title="200 OK"></a>200 OK</h4><blockquote>
+<p>请求成功，服务器已成功处理了客户端的请求，并返回了请求的内容。</p>
+</blockquote>
+<h3 id="3xx（重定向状态码）"><a href="#3xx（重定向状态码）" class="headerlink" title="3xx（重定向状态码）"></a>3xx（重定向状态码）</h3><h4 id="301-Moved-Permanently"><a href="#301-Moved-Permanently" class="headerlink" title="301 Moved Permanently"></a>301 Moved Permanently</h4><blockquote>
+<p>被请求的资源已永久移动到新位置，服务器返回这个状态码时，会在响应头的 Location 字段给出资源的新 URL。搜索引擎会更新其索引中的链接。</p>
+</blockquote>
+<p>应用场景：如果一个网站更改了页面的 URL 结构，希望将旧的 URL 永久重定向到新的 URL</p>
+<h4 id="302-Found"><a href="#302-Found" class="headerlink" title="302 Found"></a>302 Found</h4><blockquote>
+<p>表示请求的资源临时移动到了新位置。与 301 不同的是，搜索引擎不会更新索引中的链接</p>
+</blockquote>
+<h4 id="304-Not-Modified"><a href="#304-Not-Modified" class="headerlink" title="304 Not Modified"></a>304 Not Modified</h4><blockquote>
+<p>说明无需再次传输请求的内容，也就是说可以使用缓存的内容</p>
+</blockquote>
+<span id="more"></span>
+
+<h3 id="4xx（客户端错误状态码）"><a href="#4xx（客户端错误状态码）" class="headerlink" title="4xx（客户端错误状态码）"></a>4xx（客户端错误状态码）</h3><h4 id="400-Bad-Request"><a href="#400-Bad-Request" class="headerlink" title="400 Bad Request"></a>400 Bad Request</h4><blockquote>
+<p>客户端请求的语法错误，服务器无法理解。</p>
+</blockquote>
+<p>应用场景：例如，客户端发送的请求格式不符合 HTTP 协议规范，或者请求参数有误，像在 URL 中传递了错误格式的参数</p>
+<h4 id="401-Unauthorized"><a href="#401-Unauthorized" class="headerlink" title="401 Unauthorized"></a>401 Unauthorized</h4><blockquote>
+<p>请求要求用户的身份认证。对于需要登录才能访问的资源，如果用户未提供有效的认证信息，就会返回这个状态码。</p>
+</blockquote>
+<h4 id="403-Forbidden"><a href="#403-Forbidden" class="headerlink" title="403 Forbidden"></a>403 Forbidden</h4><blockquote>
+<p>服务器理解请求客户端的请求，但是拒绝执行此请求。这通常是因为服务器端的权限设置，导致用户虽然经过身份认证，但仍然没有足够的权限访问该资源。</p>
+</blockquote>
+<h4 id="404-Not-Found"><a href="#404-Not-Found" class="headerlink" title="404 Not Found"></a>404 Not Found</h4><blockquote>
+<p>服务器找不到请求的资源。这是在网络浏览中最常见的状态码之一。</p>
+</blockquote>
+<h3 id="5xx（服务器错误状态码）"><a href="#5xx（服务器错误状态码）" class="headerlink" title="5xx（服务器错误状态码）"></a>5xx（服务器错误状态码）</h3><h4 id="500-Internal-Server-Error"><a href="#500-Internal-Server-Error" class="headerlink" title="500 Internal Server Error"></a>500 Internal Server Error</h4><blockquote>
+<p>服务器内部错误，无法完成请求。这是一个比较笼统的服务器端错误状态码。</p>
+</blockquote>
+<p>应用场景：当服务器端的代码出现异常（如程序崩溃、数据库连接错误等），导致无法正常处理请求时，就会返回 500 Internal Server Error。</p>
+<h4 id="502-Bad-Gateway"><a href="#502-Bad-Gateway" class="headerlink" title="502 Bad Gateway"></a>502 Bad Gateway</h4><blockquote>
+<p>作为网关或者代理服务器，从上游服务器接收到无效的响应。</p>
+</blockquote>
+<p>应用场景：在一个复杂的网络架构中，当代理服务器或网关无法从后端服务器获取正确的响应时，例如后端服务器出现故障或者响应格式错误，就会返回 502 Bad Gateway 状态码。</p>
+<h4 id="503-Service-Unavailable"><a href="#503-Service-Unavailable" class="headerlink" title="503 Service Unavailable"></a>503 Service Unavailable</h4><blockquote>
+<p>服务器目前无法使用（由于超载或停机维护）。通常，这只是暂时状态。</p>
+</blockquote>
+<p>应用场景：在网站流量过高导致服务器过载，或者服务器正在进行维护操作时，会返回 503 Service Unavailable 状态码。</p>
+<h4 id="504-Geteway-Timeout"><a href="#504-Geteway-Timeout" class="headerlink" title="504 Geteway Timeout"></a>504 Geteway Timeout</h4><blockquote>
+<p>一般表现为应用层服务 (upstream) 超时，如查库操作耗时十分钟，超过了 Nginx 配置的超时时间</p>
+</blockquote>
+<hr>
+<h2 id="HTTP-状态码-502-和-504-有什么区别"><a href="#HTTP-状态码-502-和-504-有什么区别" class="headerlink" title="HTTP 状态码 502 和 504 有什么区别"></a>HTTP 状态码 502 和 504 有什么区别</h2><p>这两种异常状态码都与网关 Gateway 有关，首先明确两个概念</p>
+<ul>
+<li>Proxy (Gateway)，反向代理层或者网关层。在公司级应用中一般使用 Nginx 扮演这个角色</li>
+<li>Application (upstream serrver)，应用层服务，作为 Proxy 层的上游服务。在公司中一般为各种语言编写的服务器应用，如 Go&#x2F;Java&#x2F;Python&#x2F;PHP&#x2F;Node 等</li>
+</ul>
+<p>此时关于 502 与 504 的区别就很显而易见</p>
+<ul>
+<li><code>502 Bad Gateway</code>。一般表现为你自己写的应用层服务(Java&#x2F;Go&#x2F;PHP)挂了，网关层无法接收到响应</li>
+<li><code>504 Gateway Timeout</code>。一般表现为应用层服务 (upstream) 超时，如查库操作耗时十分钟，超过了 Nginx 配置的超时时间</li>
+</ul>
+<hr>
+<h2 id="HTTP1-1、HTTP2、HTTP3"><a href="#HTTP1-1、HTTP2、HTTP3" class="headerlink" title="HTTP1.1、HTTP2、HTTP3"></a>HTTP1.1、HTTP2、HTTP3</h2><p><a href="https://juejin.cn/post/6844903667569541133#%E5%B8%A7-Frame">https://juejin.cn/post/6844903667569541133#帧-Frame</a></p>
+<ul>
+<li>题目：<a href="https://q.shanyue.tech/fe/http/86">http2 与 http1.1 有什么改进</a></li>
+<li>题目：<a href="https://q.shanyue.tech/fe/http/275">http2 中的首部压缩的实现原理是什么</a></li>
+<li>题目：<a href="https://q.shanyue.tech/fe/http/670">http2 中 Stream 与 Frame 是什么关系</a></li>
+</ul>
+<h3 id="HTTP1-1"><a href="#HTTP1-1" class="headerlink" title="HTTP1.1"></a>HTTP1.1</h3><h4 id="HTTP1-1存在的问题"><a href="#HTTP1-1存在的问题" class="headerlink" title="HTTP1.1存在的问题"></a>HTTP1.1存在的问题</h4><ul>
+<li>收到上一个http请求的响应之后才能发送下一个http请求</li>
+<li>tcp链接数限制：对同一个域名，只能建立6-8个tcp链接</li>
+<li>建立每个tcp链接都需要经过dns解析，三次握手，tls握手，慢启动（开始时只发送较少数据）这些过程</li>
+<li>队头阻塞：前一个请求挂了，后面请求无法发送</li>
+<li>首部没有压缩，重复内容发送多次（cookie）</li>
+</ul>
+<h4 id="为什么HTTP1-1无法并发的发送多个请求？（同时发多个，同时收多个）"><a href="#为什么HTTP1-1无法并发的发送多个请求？（同时发多个，同时收多个）" class="headerlink" title="为什么HTTP1.1无法并发的发送多个请求？（同时发多个，同时收多个）"></a>为什么HTTP1.1无法并发的发送多个请求？（同时发多个，同时收多个）</h4><p>因为http1.1是基于文本的协议，比如客户端向服务器发送了两个请求 <code>GET /query?q=A</code> 和 <code>GET /query?q=B</code>，服务器返回了两个结果，客户端是没有办法根据响应结果来判断响应对应于哪一个请求的，而http2基于二进制分帧实现多路复用，数据流以消息的形式发送，而消息又由一个或多个帧组成，多个帧之间可以乱序发送，<strong>因为根据帧首部的流标识可以重新组装。</strong></p>
+<h4 id="HTTP-1-1-中的-keep-alive-有什么作用"><a href="#HTTP-1-1-中的-keep-alive-有什么作用" class="headerlink" title="HTTP 1.1 中的 keep-alive 有什么作用"></a>HTTP 1.1 中的 keep-alive 有什么作用</h4><blockquote>
+<p>在 <code>http 1.1</code> 中，在响应头中设置 <code>keep-alive</code> 可以在一个 TCP 连接上发送多个 http 请求</p>
+</blockquote>
+<ol>
+<li>避免了重开 TCP 连接的开销</li>
+<li>避免了刷新时重新建立 SSL 连接的开销</li>
+<li>避免了QPS过大时，服务器的连接数过大</li>
+</ol>
+<p>在服务器端使用响应头开启 <code>keep-alive</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Connection: Keep-Alive</span><br><span class="line">Keep-Alive: <span class="built_in">timeout</span>=5, max=1000</span><br></pre></td></tr></table></figure>
+
+<h3 id="HTTP2"><a href="#HTTP2" class="headerlink" title="HTTP2"></a>HTTP2</h3><p>关于 <code>http2</code> 可以阅读谷歌 <code>web.dev</code> 的文档 <a href="https://web.dev/performance-http2/">Introduction to HTTP&#x2F;2</a></p>
+<p>关于 HTTP2 有以下改进</p>
+<h4 id="二进制分帧"><a href="#二进制分帧" class="headerlink" title="二进制分帧"></a>二进制分帧</h4><ul>
+<li>帧和流：把请求和响应分成一个个二进制帧（首部帧，数据帧），一个完整的请求和响应是一个流每一个帧都有一个stream id，标识每一个帧属于哪个流</li>
+<li>复用同一个tcp链接，并发的发送一个个二进制帧，在接收方再进行重组</li>
+<li>同一域名只需要一个tcp链接</li>
+</ul>
+<h4 id="多路复用-Stream-Frame"><a href="#多路复用-Stream-Frame" class="headerlink" title="多路复用 (Stream&#x2F;Frame)"></a>多路复用 (Stream&#x2F;Frame)</h4><ul>
+<li>并发的发送一个个二进制帧</li>
+</ul>
+<h4 id="头部压缩-HPack"><a href="#头部压缩-HPack" class="headerlink" title="头部压缩: (HPack)"></a>头部压缩: (HPack)</h4><ul>
+<li>头部压缩算法压缩首部内容</li>
+<li>客户端浏览器都保存一张HPACK表，</li>
+</ul>
+<h4 id="服务端推送-Server-Push"><a href="#服务端推送-Server-Push" class="headerlink" title="服务端推送: (Server Push)"></a>服务端推送: (Server Push)</h4><ul>
+<li>不同于http1.1解析完html才请求资源，服务端提前返回这些资源文件</li>
+</ul>
+<h4 id="HTTP2中可以弃用哪些针对HTTP1-1的优化点"><a href="#HTTP2中可以弃用哪些针对HTTP1-1的优化点" class="headerlink" title="HTTP2中可以弃用哪些针对HTTP1.1的优化点"></a>HTTP2中可以弃用哪些针对HTTP1.1的优化点</h4><p>合并文件、内联资源、雪碧图、域名分片对于 HTTP&#x2F;2 来说是不必要的，使用 h2 尽可能将资源细粒化，文件分解地尽可能散，不用担心请求数多</p>
+<h3 id="HTTP3"><a href="#HTTP3" class="headerlink" title="HTTP3"></a>HTTP3</h3><p>HTTP3解决的问题：</p>
+<ul>
+<li>HTTP2虽然实现了多路复用，但仍基于TCP，一个TCP包丢失，整个链接上的所有流都被阻塞，直到该包被重新传输</li>
+<li>tcp和tls握手时延问题</li>
+</ul>
+<hr>
+<h2 id="简单请求和非简单请求"><a href="#简单请求和非简单请求" class="headerlink" title="简单请求和非简单请求"></a>简单请求和非简单请求</h2><h3 id="什么情况下会发送-OPTIONS-请求"><a href="#什么情况下会发送-OPTIONS-请求" class="headerlink" title="什么情况下会发送 OPTIONS 请求"></a>什么情况下会发送 OPTIONS 请求</h3><blockquote>
+<p>在 Issue 或者我的网站中交流与讨论: 16 什么情况下会发送 OPTIONS 请求</p>
+</blockquote>
+<p><strong>当一个请求跨域且不是简单请求时就会发送 <code>OPTIONS</code> 请求</strong></p>
+<p>满足以下条件就是一个简单请求:</p>
+<ol>
+<li><code>Method</code>: 请求的方法是 <code>GET</code>、<code>POST</code> 及 <code>HEAD</code></li>
+<li><code>Header</code>: 请求头是 <code>Content-Type</code>、<code>Accept-Language</code>、<code>Content-Language</code> 等</li>
+<li><code>Content-Type</code>: 请求类型是 <code>application/x-www-form-urlencoded</code>、<code>multipart/form-data</code> 或 <code>text/plain</code></li>
+</ol>
+<p>而在项目中常见的 <code>Content-Type: application/json</code> 及 <code>Authorization: &lt;token&gt;</code> 为典型的<strong>非简单请求</strong>，在发送请求时往往会带上 <code>Options</code></p>
+<blockquote>
+<p>更详细内容请参考 CORS - MDN</p>
+</blockquote>
+<hr>
+]]></content>
+      <categories>
+        <category>计算机网络协议</category>
+      </categories>
+      <tags>
+        <tag>Network</tag>
+        <tag>Http</tag>
+        <tag>Https</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>HTTP缓存</title>
+    <url>/2021/09/18/HTTP%E7%BC%93%E5%AD%98/</url>
+    <content><![CDATA[<h2 id="HTTP缓存机制"><a href="#HTTP缓存机制" class="headerlink" title="HTTP缓存机制"></a>HTTP缓存机制</h2><h3 id="HTTP缓存过程"><a href="#HTTP缓存过程" class="headerlink" title="HTTP缓存过程"></a>HTTP缓存过程</h3><blockquote>
+<p>第一次发送请求 - 服务器响应，响应标头带上Cache-Control、Expires、ETag、Last-Modified<br>第二次发送请求 - 先根据Cache-Control、Expires判断强缓存是否失效，如果失效，If-None-Match中的上一次ETag和If-Modified-Since中的上一次Last-Modified来判断是否变更，如果没有变更，返回304让浏览器使用本地缓存</p>
+</blockquote>
+<p><img src="/../assets/HTTP%E7%BC%93%E5%AD%98%E8%BF%87%E7%A8%8B.png" alt="image-20210808204737157"></p>
+<h3 id="强缓存"><a href="#强缓存" class="headerlink" title="强缓存"></a>强缓存</h3><h4 id="Cache-Control"><a href="#Cache-Control" class="headerlink" title="Cache-Control"></a>Cache-Control</h4><blockquote>
+<p>Cache-Control 是 HTTP&#x2F;1.1 中新增的属性，在请求头和响应头中都可以使用，常用的属性值如有：</p>
+</blockquote>
+<ul>
+<li>max-age：单位是秒，缓存时间计算的方式是距离发起的时间的秒数，超过间隔的秒数缓存失效</li>
+<li>no-cache：不使用强缓存，需要与服务器验证缓存是否新鲜</li>
+<li>no-store：禁止使用缓存（包括协商缓存），每次都向服务器请求最新的资源</li>
+<li>private：专用于个人的缓存，中间代理、CDN 等不能缓存此响应</li>
+<li>public：响应可以被中间代理、CDN 等缓存</li>
+<li>must-revalidate：在缓存过期前可以使用，过期后必须向服务器验证</li>
+</ul>
+<h4 id="Expires"><a href="#Expires" class="headerlink" title="Expires"></a>Expires</h4><blockquote>
+<p>Expires 的值是一个 HTTP 日期，在浏览器发起请求时，会根据系统时间和 Expires 的值进行比较，如果系统时间超过了 Expires 的值，缓存失效。</p>
+</blockquote>
+<p>由于和系统时间进行比较，所以当系统时间和服务器时间不一致的时候，会有缓存有效期不准的问题。Expires 的优先级在三个 Header 属性中是最低的。</p>
+<h3 id="协商缓存"><a href="#协商缓存" class="headerlink" title="协商缓存"></a>协商缓存</h3><blockquote>
+<p>当浏览器的强缓存失效的时候或者请求头中设置了不走强缓存，并且在请求头中设置了If-Modified-Since 或者 If-None-Match 的时候，会将这两个属性值到服务端去验证是否命中协商缓存，如果命中了协商缓存，会返回 304 状态，加载浏览器缓存，并且响应头会设置 Last-Modified 或者 ETag 属性。</p>
+</blockquote>
+<h4 id="ETag-If-None-Match"><a href="#ETag-If-None-Match" class="headerlink" title="ETag&#x2F;If-None-Match"></a>ETag&#x2F;If-None-Match</h4><blockquote>
+<p>ETag&#x2F;If-None-Match 的值是一串 hash 码，代表的是一个资源的标识符，当服务端的文件变化的时候，它的 hash码会随之改变</p>
+</blockquote>
+<h4 id="Last-Modified-If-Modified-Since"><a href="#Last-Modified-If-Modified-Since" class="headerlink" title="Last-Modified&#x2F;If-Modified-Since"></a>Last-Modified&#x2F;If-Modified-Since</h4><blockquote>
+<p>Last-Modified&#x2F;If-Modified-Since 的值代表的是文件的最后修改时间</p>
+</blockquote>
+<h4 id="如何实现ETag？"><a href="#如何实现ETag？" class="headerlink" title="如何实现ETag？"></a>如何实现ETag？</h4><p>Nginx中ETag是如何实现的： 上次修改时间 + content-length</p>
+<h3 id="缓存策略"><a href="#缓存策略" class="headerlink" title="缓存策略"></a>缓存策略</h3><blockquote>
+<p>题目：<a href="https://q.shanyue.tech/fe/http/193">简述你们前端项目中资源的缓存配置策略</a><br>  题目：<a href="https://q.shanyue.tech/fe/http/600">现代前端应用应如何配置 HTTP 缓存机制</a><br>  关于 http 缓存配置的最佳实践为以下两条：</p>
+</blockquote>
+<ul>
+<li>文件路径中带有 hash 值：一年的强缓存。因为该文件的内容发生变化时，会生成一个带有新的 hash 值的 URL。前端将会发起一个新的 URL 的请求。配置响应头 <code>Cache-Control: public,max-age=31536000,immutable</code></li>
+<li>文件路径中不带有 hash 值：协商缓存。大部分为 public 下文件。配置响应头 <code>Cache-Control: no-cache</code> 与 <code>etag/last-modified </code></li>
+</ul>
+<p>但是当处理永久缓存时，切记不可打包为一个大的 bundle.js，此时一行业务代码的改变，将导致整个项目的永久缓存失效，此时需要按代码更新频率分为多个 chunk 进行打包，可细粒度控制缓存。</p>
+<p><img src="/../assets/HTTP%E7%BC%93%E5%AD%98%E7%AD%96%E7%95%A5.png" alt="HTTP缓存策略"></p>
+<ol>
+<li><strong>webpack-runtime</strong>: 应用中的 webpack 的版本比较稳定，分离出来，保证长久的永久缓存</li>
+<li><strong>react&#x2F;react-dom</strong>: react 的版本更新频次也较低</li>
+<li><strong>vendor</strong>: 常用的第三方模块打包在一起，如 lodash，classnames 基本上每个页面都会引用到，但是它们的更新频率会更高一些。另外对低频次使用的第三方模块不要打进来</li>
+<li><strong>pageA</strong>: A 页面，当 A 页面的组件发生变更后，它的缓存将会失效</li>
+<li><strong>pageB</strong>: B 页面</li>
+<li><strong>echarts</strong>: 不常用且过大的第三方模块单独打包</li>
+<li><strong>mathjax</strong>: 不常用且过大的第三方模块单独打包</li>
+<li><strong>jspdf</strong>: 不常用且过大的第三方模块单独打包</li>
+</ol>
+<hr>
+]]></content>
+      <categories>
+        <category>计算机网络协议</category>
+      </categories>
+      <tags>
+        <tag>Network</tag>
+        <tag>Http</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>CSS</title>
     <url>/2021/02/07/CSS/</url>
     <content><![CDATA[<h3 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h3><p>最近看了两本书《CSS揭秘》和《CSS权威指南》恶补一下CSS（自己真是菜到天际），记录一些有意思的问题</p>
@@ -246,26 +439,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Http2/Http3</title>
-    <url>/2021/09/18/Http2Http3/</url>
-    <content><![CDATA[<h4 id="为什么Http-1-1无法并发的发送多个请求（同时发多个请求，再同时接收）"><a href="#为什么Http-1-1无法并发的发送多个请求（同时发多个请求，再同时接收）" class="headerlink" title="为什么Http 1.1无法并发的发送多个请求（同时发多个请求，再同时接收）"></a>为什么Http 1.1无法并发的发送多个请求（同时发多个请求，再同时接收）</h4><p>因为http1.1是基于文本的协议，比如客户端向服务器发送了两个请求 <code>GET /query?q=A</code> 和 <code>GET /query?q=B</code>，服务器返回了两个结果，客户端是没有办法根据响应结果来判断响应对应于哪一个请求的，而http2基于二进制分帧实现多路复用，数据流以消息的形式发送，而消息又由一个或多个帧组成，多个帧之间可以乱序发送，<strong>因为根据帧首部的流标识可以重新组装。</strong></p>
-<span id="more"></span>
-
-
-
-
-
-]]></content>
-      <categories>
-        <category>计算机网络协议</category>
-      </categories>
-      <tags>
-        <tag>Network</tag>
-        <tag>Http</tag>
-        <tag>Https</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Https</title>
     <url>/2021/09/13/Https/</url>
     <content><![CDATA[<h3 id="为什么需要加密？"><a href="#为什么需要加密？" class="headerlink" title="为什么需要加密？"></a><strong>为什么需要加密？</strong></h3><p>因为http的内容是明文传输的，明文数据会经过中间代理服务器、路由器、wifi热点、通信服务运营商等多个物理节点，如果信息在传输过程中被劫持，传输的内容就完全暴露了。劫持者还可以篡改传输的信息且不被双方察觉，这就是“中间人攻击”。</p>
@@ -306,7 +479,7 @@
 <p>这样在双方都不会发现异常的情况下，中间人掉包了服务器传来的公钥，进而得到了密钥X。<strong>根本原因是浏览器无法确认收到的公钥是不是网站自己的，</strong>因为公钥本身是明文传输的，难道还得对公钥的传输进行加密？这似乎变成鸡生蛋、蛋生鸡的问题了。解法是什么？</p>
 <h3 id="如何证明浏览器收到的公钥一定是该网站的公钥？"><a href="#如何证明浏览器收到的公钥一定是该网站的公钥？" class="headerlink" title="如何证明浏览器收到的公钥一定是该网站的公钥？"></a><strong>如何证明浏览器收到的公钥一定是该网站的公钥？</strong></h3><p>网站是否有个‘身份证’来证明自己的公钥合法？这个‘身份证’又由谁来颁发？</p>
 <p><strong>CA机构</strong>，它是如今互联网世界正常运作的前提，而CA机构颁发的“身份证”就是<strong>数字证书</strong>。</p>
-<h4 id="数字证书"><a href="#数字证书" class="headerlink" title="数字证书"></a><strong>数字证书</strong></h4><p>网站在使用HTTPS前，需要向<strong>CA机构</strong>申领一份<strong>数字证书</strong>，数字证书里含有证书持有者信息、公钥信息等。服务器把证书传输给浏览器，浏览器从证书里获取公钥就行了，证书就如身份证，证明“该公钥对应该网站”。</p>
+<h4 id="数字证书"><a href="#数字证书" class="headerlink" title="数字证书"></a><strong>数字证书</strong></h4><p>网站在使用HTTPS前，需要向<strong>CA机构</strong>申领一份<strong>数字证书</strong>，数字证书里含有证书持有者信息、域名、公钥信息等。服务器把证书传输给浏览器，浏览器从证书里获取公钥就行了，证书就如身份证，证明“该公钥对应该网站”。</p>
 <p>而这里又有一个显而易见的问题，“<strong>证书本身的传输过程中，如何防止被篡改”</strong>？即如何证明证书本身的真实性？身份证运用了一些防伪技术，而数字证书怎么防伪呢？</p>
 <h3 id="如何放防止数字证书被篡改？"><a href="#如何放防止数字证书被篡改？" class="headerlink" title="如何放防止数字证书被篡改？"></a><strong>如何放防止数字证书被篡改？</strong></h3><p>我们把证书原本的内容生成一份“签名”，比对证书内容和签名是否一致就能判别是否被篡改。这就是数字证书的“防伪技术”，这里的“签名”就叫<code>数字签名</code>：</p>
 <p>数字签名的制作过程：</p>
@@ -345,6 +518,18 @@
       </tags>
   </entry>
   <entry>
+    <title>IPad配置开发环境</title>
+    <url>/2024/11/12/IPad%E9%85%8D%E7%BD%AE%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>Chore</category>
+      </categories>
+      <tags>
+        <tag>编程环境</tag>
+        <tag>IPad</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>JavaSrcipt原型</title>
     <url>/2021/02/17/JavaScript%E5%8E%9F%E5%9E%8B/</url>
     <content><![CDATA[<p>首先，要明确几个点：</p>
@@ -380,6 +565,42 @@
 ]]></content>
       <categories>
         <category>JavaScript原理</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JavaScript手写题</title>
+    <url>/2021/03/02/Javascript%E6%89%8B%E5%86%99%E9%A2%98/</url>
+    <content><![CDATA[<h4 id="实现一个new"><a href="#实现一个new" class="headerlink" title="实现一个new"></a>实现一个new</h4><p><strong>new的具体步骤</strong></p>
+<ol>
+<li>内存中创建一个新对象</li>
+<li>新建对象的 _ <em>proto</em> _指向构造函数的prototype</li>
+<li>调用构造函数，函数的this指向新创建的对象</li>
+<li>执行构造函数内部的代码（给新对象添加属性）</li>
+<li><strong>如果构造函数返回非空对象，则返回该对象，否则，返回新创建的对象</strong></li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Person</span>(<span class="params">age, name</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">age</span> = age;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">name</span> = name;</span><br><span class="line">&#125;</span><br><span class="line"><span class="title class_">Person</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">sayHello</span> = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">name</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">myNew</span>(<span class="params">fn, ...args</span>) &#123;</span><br><span class="line">    <span class="comment">// 修改obj.__proto__ = fn.prototype，如果直接obj = &#123;&#125;会出现没有对象标识的问题（对象标识为Object），还会使得方法没有被创建</span></span><br><span class="line">    <span class="keyword">const</span> obj = <span class="title class_">Object</span>.<span class="title function_">create</span>(fn.<span class="property"><span class="keyword">prototype</span></span>)  <span class="comment">//fn.prototype代表 用当前对象的原型去创建</span></span><br><span class="line">    <span class="comment">//现在obj就代表Dog了,但是参数和this指向没有修改</span></span><br><span class="line">    <span class="keyword">const</span> rel = fn.<span class="title function_">apply</span>(obj,args)</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">       正常规定,如何fn返回的是null或undefined(也就是不返回内容),我们返回的是obj,否则返回rel</span></span><br><span class="line"><span class="comment">       因为比如下面这个构造函数</span></span><br><span class="line"><span class="comment">       function Person(name, age) &#123;</span></span><br><span class="line"><span class="comment">            this.name = name;</span></span><br><span class="line"><span class="comment">            this.age = age;</span></span><br><span class="line"><span class="comment">            return &#123;</span></span><br><span class="line"><span class="comment">                a: 1,</span></span><br><span class="line"><span class="comment">                b: 2,</span></span><br><span class="line"><span class="comment">            &#125;</span></span><br><span class="line"><span class="comment">        &#125;</span></span><br><span class="line"><span class="comment">        const p = new Person(&#x27;h&#x27;, &#x27;y&#x27;);</span></span><br><span class="line"><span class="comment">        这里new会优先为构造函数的返回值</span></span><br><span class="line"><span class="comment">        所以p的值为&#123;a: 1,b: 2&#125;</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="keyword">return</span> rel <span class="keyword">instanceof</span> <span class="title class_">Object</span> ? rel : obj</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> p1 = <span class="title function_">myNew</span>(<span class="title class_">Person</span>, <span class="number">19</span>, <span class="string">&#x27;hyz&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<h4 id="实现一个Object-create"><a href="#实现一个Object-create" class="headerlink" title="实现一个Object.create"></a>实现一个Object.create</h4><p>Object.create(proto)创建一个空对象，proto为空对象的”<em><strong>proto</strong></em>“</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">create</span>(<span class="params">obj</span>) &#123;</span><br><span class="line">  <span class="comment">// Object.create(null) 返回一个__proto__指向空的干净对象</span></span><br><span class="line">  <span class="keyword">if</span> (obj === <span class="literal">null</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="title class_">Object</span>.<span class="title function_">setPrototypeOf</span>(&#123;&#125;, <span class="literal">null</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 非对象非null，抛出异常</span></span><br><span class="line">  <span class="keyword">if</span> (!(obj <span class="keyword">instanceof</span> <span class="title class_">Object</span>)) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">TypeError</span>();</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="title class_">Object</span>.<span class="title function_">setPrototypeOf</span>(&#123;&#125;, obj);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="虾皮笔试题"><a href="#虾皮笔试题" class="headerlink" title="虾皮笔试题"></a>虾皮笔试题</h4><p>十分有水平的一道题，综合了new原理，原型链+instanceof原理</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Person</span>(<span class="params"></span>) &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> person1 = <span class="keyword">new</span> <span class="title class_">Person</span>();</span><br><span class="line"><span class="title class_">Person</span>.<span class="property"><span class="keyword">prototype</span></span> = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;ee&#x27;</span>,</span><br><span class="line">    <span class="attr">sayName</span>: <span class="function">() =&gt;</span> &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;    </span><br><span class="line"><span class="comment">// Person 的 prototype 已经改变，而 person1.__proto__ 指向一开始的 Person.prototype</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;person1 instanceof Person: &#x27;</span>, person1 <span class="keyword">instanceof</span> <span class="title class_">Person</span>) <span class="comment">// 为啥是false</span></span><br><span class="line"><span class="comment">// 所有的对象都继承自 Object，除了 null 或者你把最顶层的 prototype 也给改了</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;person1 instanceof Object: &#x27;</span>, person1 <span class="keyword">instanceof</span> <span class="title class_">Object</span>) <span class="comment">// 为啥是true</span></span><br><span class="line"><span class="comment">// person1 本身没有 constructor, 会沿着原型链找，</span></span><br><span class="line"><span class="comment">// person1.constructor === person1.__proto__.constructor</span></span><br><span class="line"><span class="comment">// 而上面也说了 person1.__proto__ 并没有因为 Person.prototype 改变而改变</span></span><br><span class="line"><span class="comment">// 这里需要注意的是：</span></span><br><span class="line"><span class="comment">// Person 本身就是 constructor</span></span><br><span class="line"><span class="comment">// 初始情况下</span></span><br><span class="line"><span class="comment">// Person.prototype =&gt; Person.prototype</span></span><br><span class="line"><span class="comment">// Person.prototype.constructor =&gt; Person</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;person1.constructor == Person: &#x27;</span>, person1.<span class="property">constructor</span> == <span class="title class_">Person</span>) <span class="comment">// 为啥是true</span></span><br><span class="line"><span class="comment">// 上面是 true, 下面就好说了</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;person1.constructor == Object: &#x27;</span>, person1.<span class="property">constructor</span> == <span class="title class_">Object</span>) <span class="comment">// 为啥是false</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="实现消息订阅"><a href="#实现消息订阅" class="headerlink" title="实现消息订阅"></a>实现消息订阅</h4><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">EventCenter</span> &#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> &#123;<span class="type">Map&lt;string, Array&lt;Function&gt;</span>&#125; <span class="variable">handlers</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="title function_">constructor</span>(<span class="params">handlers=<span class="keyword">new</span> <span class="built_in">Map</span>()</span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">handlers</span> = handlers;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> &#123;<span class="type">Function</span>&#125; <span class="variable">handler</span></span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> &#123;<span class="type">string</span>&#125; <span class="variable">type</span></span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="title function_">addEventListener</span>(<span class="params">type, newHandler</span>) &#123;</span><br><span class="line">        <span class="keyword">let</span> hanlder = <span class="variable language_">this</span>.<span class="property">handlers</span>.<span class="title function_">has</span>(type);</span><br><span class="line">        <span class="keyword">if</span> (hanlder) &#123;</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">handlers</span>.<span class="title function_">set</span>(type, [...<span class="variable language_">this</span>.<span class="property">handlers</span>.<span class="title function_">get</span>(type), newHandler]) </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">handlers</span>.<span class="title function_">set</span>(type, [newHandler]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> &#123;<span class="type">string</span>&#125; <span class="variable">type</span></span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> &#123;<span class="type">Array</span>&#125; <span class="variable">params</span></span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="title function_">dispatchEvent</span>(<span class="params">type, params=[]</span>) &#123;</span><br><span class="line">        <span class="keyword">const</span> handler = <span class="variable language_">this</span>.<span class="property">handlers</span>.<span class="title function_">get</span>(type);</span><br><span class="line">        handler &amp;&amp; handler.<span class="title function_">forEach</span>(<span class="function">(<span class="params">callback</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="title function_">callback</span>(...params);</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> &#123;<span class="type">string</span>&#125; type </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> &#123;<span class="type">Function</span>&#125; delHandler </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@returns</span> </span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="title function_">removeEventListener</span>(<span class="params">type, delHandler</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (!<span class="variable language_">this</span>.<span class="property">handlers</span>.<span class="title function_">has</span>(type)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Errow</span>(<span class="string">&quot;Unable to delete&quot;</span>)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (delHanlder) &#123;</span><br><span class="line">            <span class="keyword">const</span> oldHandlers = <span class="variable language_">this</span>.<span class="property">handlers</span>.<span class="title function_">get</span>(type);</span><br><span class="line">            <span class="keyword">const</span> ind = oldHandlers.<span class="title function_">indexOf</span>(delHandler);</span><br><span class="line">            <span class="keyword">if</span> (ind === -<span class="number">1</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Errow</span>(<span class="string">&quot;Unable to delete&quot;</span>)</span><br><span class="line">            &#125;</span><br><span class="line">            oldHandlers.<span class="title function_">splice</span>(ind, <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">handlers</span>.<span class="title function_">delete</span>(type);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="实现一个JSONP"><a href="#实现一个JSONP" class="headerlink" title="实现一个JSONP"></a>实现一个JSONP</h4><p>前端部分</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">jsonp</span>(<span class="params">url, options</span>) &#123;</span><br><span class="line">    <span class="comment">// 超时处理</span></span><br><span class="line">    <span class="keyword">const</span> &#123; timeout &#125; = options;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="comment">// 防止函数名冲突</span></span><br><span class="line">        <span class="keyword">let</span> funcName = <span class="string">`jsonp<span class="subst">$&#123;<span class="built_in">Date</span>.now()&#125;</span>`</span>;</span><br><span class="line">        <span class="keyword">let</span> time = <span class="literal">null</span>, scriptNode;</span><br><span class="line">        <span class="comment">// 定义callback</span></span><br><span class="line">        <span class="variable language_">window</span>[funcName] = <span class="keyword">function</span> (<span class="params">data</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (timeout) <span class="built_in">clearTimeout</span>(time);</span><br><span class="line">            <span class="title function_">resolve</span>(data);</span><br><span class="line">            <span class="comment">// 很重要的性能优化点</span></span><br><span class="line">            <span class="comment">// 清除本次请求产生的回调函数和script标签</span></span><br><span class="line">            <span class="keyword">delete</span> <span class="variable language_">window</span>[funcName];</span><br><span class="line">            <span class="variable language_">document</span>.<span class="property">body</span>.<span class="title function_">removeChild</span>(scriptNode);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 创建script标签</span></span><br><span class="line">        scriptNode = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&#x27;script&#x27;</span>);</span><br><span class="line">        <span class="comment">// 给script标签添加src属性</span></span><br><span class="line">        scriptNode.<span class="property">src</span> = <span class="string">`<span class="subst">$&#123;url&#125;</span>?callback=<span class="subst">$&#123;funcName&#125;</span>`</span>;</span><br><span class="line">        <span class="comment">// 发出请求</span></span><br><span class="line">        <span class="variable language_">document</span>.<span class="property">body</span>.<span class="title function_">appendChild</span>(scriptNode);</span><br><span class="line">        time = <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">            <span class="title function_">reject</span>(<span class="string">&#x27;network err, timeout&#x27;</span>)</span><br><span class="line">        &#125;, timeout)</span><br><span class="line">        <span class="comment">// 失败</span></span><br><span class="line">        scriptNode.<span class="property">onerror</span> = <span class="keyword">function</span> (<span class="params">err</span>) &#123;</span><br><span class="line">            <span class="title function_">reject</span>(err);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">jsonp</span>(<span class="string">&#x27;http://localhost:9090/api&#x27;</span>, &#123;</span><br><span class="line">    <span class="attr">callBack</span>: <span class="string">&#x27;res1&#x27;</span>,</span><br><span class="line">    <span class="comment">// 超时处理</span></span><br><span class="line">    <span class="attr">timeout</span>: <span class="number">3000</span></span><br><span class="line">&#125;)</span><br><span class="line">    <span class="comment">// 请求成功</span></span><br><span class="line">    .<span class="title function_">then</span>(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;jsonp-&gt;&#x27;</span>, res);</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="comment">// 请求失败</span></span><br><span class="line">    .<span class="title function_">catch</span>(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;network err!&quot;</span>)</span><br><span class="line">    &#125;)</span><br></pre></td></tr></table></figure>
+
+<p>后端部分</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 后端</span></span><br><span class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">&#x27;http&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> url = <span class="built_in">require</span>(<span class="string">&#x27;url&#x27;</span>);</span><br><span class="line">http.<span class="title function_">createServer</span>(<span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// /api?callback=onResponse</span></span><br><span class="line">  <span class="comment">// 解析前端请求url中的callback名</span></span><br><span class="line">  <span class="keyword">if</span>(req.<span class="property">url</span>.<span class="title function_">includes</span>(<span class="string">&#x27;/api&#x27;</span>)) &#123;</span><br><span class="line">    <span class="keyword">let</span> myurl = url.<span class="title function_">parse</span>(req.<span class="property">url</span>);</span><br><span class="line">    <span class="keyword">let</span> params = <span class="keyword">new</span> <span class="title class_">URLSearchParams</span>(myurl.<span class="property">query</span>)</span><br><span class="line">    <span class="keyword">let</span> posts = [<span class="string">&#x27;js&#x27;</span>, <span class="string">&#x27;php&#x27;</span>];</span><br><span class="line">    <span class="keyword">let</span> mathodName = params.<span class="title function_">get</span>(<span class="string">&#x27;callback&#x27;</span>);</span><br><span class="line">    res.<span class="title function_">end</span>(<span class="string">`<span class="subst">$&#123;mathodName&#125;</span>(<span class="subst">$&#123;<span class="built_in">JSON</span>.stringify(posts)&#125;</span>)`</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line">.<span class="title function_">listen</span>(<span class="number">9090</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">9090</span>);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>JavaScript</category>
       </categories>
       <tags>
         <tag>JavaScript</tag>
@@ -442,36 +663,59 @@
       </tags>
   </entry>
   <entry>
-    <title>JavaScript手写题</title>
-    <url>/2021/03/02/Javascript%E6%89%8B%E5%86%99%E9%A2%98/</url>
-    <content><![CDATA[<h4 id="实现一个new"><a href="#实现一个new" class="headerlink" title="实现一个new"></a>实现一个new</h4><p><strong>new的具体步骤</strong></p>
-<ol>
-<li>内存中创建一个新对象</li>
-<li>新建对象的 _ <em>proto</em> _指向构造函数的prototype</li>
-<li>调用构造函数，函数的this指向新创建的对象</li>
-<li>执行构造函数内部的代码（给新对象添加属性）</li>
-<li><strong>如果构造函数返回非空对象，则返回该对象，否则，返回新创建的对象</strong></li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Person</span>(<span class="params">age, name</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">age</span> = age;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">name</span> = name;</span><br><span class="line">&#125;</span><br><span class="line"><span class="title class_">Person</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">sayHello</span> = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">name</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">myNew</span>(<span class="params">fn, ...args</span>) &#123;</span><br><span class="line">    <span class="comment">// 修改obj.__proto__ = fn.prototype，如果直接obj = &#123;&#125;会出现没有对象标识的问题（对象标识为Object），还会使得方法没有被创建</span></span><br><span class="line">    <span class="keyword">const</span> obj = <span class="title class_">Object</span>.<span class="title function_">create</span>(fn.<span class="property"><span class="keyword">prototype</span></span>)  <span class="comment">//fn.prototype代表 用当前对象的原型去创建</span></span><br><span class="line">    <span class="comment">//现在obj就代表Dog了,但是参数和this指向没有修改</span></span><br><span class="line">    <span class="keyword">const</span> rel = fn.<span class="title function_">apply</span>(obj,args)</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">       正常规定,如何fn返回的是null或undefined(也就是不返回内容),我们返回的是obj,否则返回rel</span></span><br><span class="line"><span class="comment">       因为比如下面这个构造函数</span></span><br><span class="line"><span class="comment">       function Person(name, age) &#123;</span></span><br><span class="line"><span class="comment">            this.name = name;</span></span><br><span class="line"><span class="comment">            this.age = age;</span></span><br><span class="line"><span class="comment">            return &#123;</span></span><br><span class="line"><span class="comment">                a: 1,</span></span><br><span class="line"><span class="comment">                b: 2,</span></span><br><span class="line"><span class="comment">            &#125;</span></span><br><span class="line"><span class="comment">        &#125;</span></span><br><span class="line"><span class="comment">        const p = new Person(&#x27;h&#x27;, &#x27;y&#x27;);</span></span><br><span class="line"><span class="comment">        这里new会优先为构造函数的返回值</span></span><br><span class="line"><span class="comment">        所以p的值为&#123;a: 1,b: 2&#125;</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="keyword">return</span> rel <span class="keyword">instanceof</span> <span class="title class_">Object</span> ? rel : obj</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> p1 = <span class="title function_">myNew</span>(<span class="title class_">Person</span>, <span class="number">19</span>, <span class="string">&#x27;hyz&#x27;</span>);</span><br></pre></td></tr></table></figure>
-
+    <title>Jira项目</title>
+    <url>/2022/03/02/Jira%E9%A1%B9%E7%9B%AE/</url>
+    <content><![CDATA[<h4 id="代码自动格式化工具：prettier"><a href="#代码自动格式化工具：prettier" class="headerlink" title="代码自动格式化工具：prettier"></a>代码自动格式化工具：prettier</h4><p>配置过程：<a href="https://prettier.io/docs/en/precommit.html">https://prettier.io/docs/en/precommit.html</a></p>
+<p><code>yarn add --dev --exact prettier</code></p>
+<p>新建<code>.prettierrc.json，.prettierignore</code>文件</p>
+<p>设置git commit预提交钩子</p>
+<p><code>npx mrm@2 lint-staged </code></p>
+<h4 id="规范git-commit工具：commitlint"><a href="#规范git-commit工具：commitlint" class="headerlink" title="规范git commit工具：commitlint"></a>规范git commit工具：commitlint</h4><p>配置过程：<a href="https://github.com/conventional-changelog/commitlint">https://github.com/conventional-changelog/commitlint</a></p>
+<p><code>yarn add --save-dev @commitlint/config-conventional @commitlint/cli</code></p>
+<p>新建 commitlint.config.js文件，引入规则module.exports &#x3D; {extends: [‘@commitlint&#x2F;config-conventional’]}</p>
 <span id="more"></span>
 
-<h4 id="实现一个Object-create"><a href="#实现一个Object-create" class="headerlink" title="实现一个Object.create"></a>实现一个Object.create</h4><p>Object.create(proto)创建一个空对象，proto为空对象的”<em><strong>proto</strong></em>“</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">create</span>(<span class="params">obj</span>) &#123;</span><br><span class="line">  <span class="comment">// Object.create(null) 返回一个__proto__指向空的干净对象</span></span><br><span class="line">  <span class="keyword">if</span> (obj === <span class="literal">null</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="title class_">Object</span>.<span class="title function_">setPrototypeOf</span>(&#123;&#125;, <span class="literal">null</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 非对象非null，抛出异常</span></span><br><span class="line">  <span class="keyword">if</span> (!(obj <span class="keyword">instanceof</span> <span class="title class_">Object</span>)) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">TypeError</span>();</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="title class_">Object</span>.<span class="title function_">setPrototypeOf</span>(&#123;&#125;, obj);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="常见MOCK方案"><a href="#常见MOCK方案" class="headerlink" title="常见MOCK方案"></a>常见MOCK方案</h4><h5 id="1-代码侵入（直接在代码中写死Mock数据，或请求本地的JSON文件"><a href="#1-代码侵入（直接在代码中写死Mock数据，或请求本地的JSON文件" class="headerlink" title="1. 代码侵入（直接在代码中写死Mock数据，或请求本地的JSON文件"></a>1. 代码侵入（直接在代码中写死Mock数据，或请求本地的JSON文件</h5><p>​	优点：无</p>
+<p>​	缺点：与真实server环境的切换比较麻烦（需要修改请求地址），一切需要侵入代码切换环境的行为都是不好的</p>
+<h5 id="2-请求拦截"><a href="#2-请求拦截" class="headerlink" title="2. 请求拦截"></a>2. 请求拦截</h5><p>​	代表：<a href="http://mockjs.com/">Mock.js</a></p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="title class_">Mock</span>.<span class="title function_">mock</span>(<span class="regexp">/\\\\/</span>api\\\\/visitor\\\\/list/, <span class="string">&#x27;get&#x27;</span>, &#123;</span><br><span class="line">  <span class="attr">code</span>: <span class="number">2000</span>,</span><br><span class="line">  <span class="attr">msg</span>: <span class="string">&#x27;ok&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;data|10&#x27;</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="string">&#x27;id|+1&#x27;</span>: <span class="number">6</span>,</span><br><span class="line">      <span class="string">&#x27;name&#x27;</span>: <span class="string">&#x27;@csentence(5)&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;tag&#x27;</span>: <span class="string">&#x27;@integer(6, 9)-@integer(10, 14)岁 @cword(&quot;零有&quot;, 1)基础&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;lesson_image&#x27;</span>: <span class="string">&quot;&lt;https://images.pexels.com/3737094/pexels-photo-3737094.jpeg&gt;&quot;</span>,</span><br><span class="line">      <span class="string">&#x27;lesson_package&#x27;</span>: <span class="string">&#x27;L1基础指令课&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;done&#x27;</span>: <span class="string">&#x27;@integer(10000, 99999)&#x27;</span>,</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
-<h4 id="虾皮笔试题"><a href="#虾皮笔试题" class="headerlink" title="虾皮笔试题"></a>虾皮笔试题</h4><p>十分有水平的一道题，综合了new原理，原型链+instanceof原理</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Person</span>(<span class="params"></span>) &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> person1 = <span class="keyword">new</span> <span class="title class_">Person</span>();</span><br><span class="line"><span class="title class_">Person</span>.<span class="property"><span class="keyword">prototype</span></span> = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;ee&#x27;</span>,</span><br><span class="line">    <span class="attr">sayName</span>: <span class="function">() =&gt;</span> &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;    </span><br><span class="line"><span class="comment">// Person 的 prototype 已经改变，而 person1.__proto__ 指向一开始的 Person.prototype</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;person1 instanceof Person: &#x27;</span>, person1 <span class="keyword">instanceof</span> <span class="title class_">Person</span>) <span class="comment">// 为啥是false</span></span><br><span class="line"><span class="comment">// 所有的对象都继承自 Object，除了 null 或者你把最顶层的 prototype 也给改了</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;person1 instanceof Object: &#x27;</span>, person1 <span class="keyword">instanceof</span> <span class="title class_">Object</span>) <span class="comment">// 为啥是true</span></span><br><span class="line"><span class="comment">// person1 本身没有 constructor, 会沿着原型链找，</span></span><br><span class="line"><span class="comment">// person1.constructor === person1.__proto__.constructor</span></span><br><span class="line"><span class="comment">// 而上面也说了 person1.__proto__ 并没有因为 Person.prototype 改变而改变</span></span><br><span class="line"><span class="comment">// 这里需要注意的是：</span></span><br><span class="line"><span class="comment">// Person 本身就是 constructor</span></span><br><span class="line"><span class="comment">// 初始情况下</span></span><br><span class="line"><span class="comment">// Person.prototype =&gt; Person.prototype</span></span><br><span class="line"><span class="comment">// Person.prototype.constructor =&gt; Person</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;person1.constructor == Person: &#x27;</span>, person1.<span class="property">constructor</span> == <span class="title class_">Person</span>) <span class="comment">// 为啥是true</span></span><br><span class="line"><span class="comment">// 上面是 true, 下面就好说了</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;person1.constructor == Object: &#x27;</span>, person1.<span class="property">constructor</span> == <span class="title class_">Object</span>) <span class="comment">// 为啥是false</span></span><br></pre></td></tr></table></figure>
+<p>优点：</p>
+<ol>
+<li>与前端代码分离</li>
+<li>可生成随机数据</li>
+</ol>
+<p>缺点：</p>
+<ol>
+<li>数据都是动态生成的假数据，无法真实模拟增删改查的情况</li>
+<li>只支持ajax，不支持fetch（本质上是重写了ajax方法，两者的差别见：<a href="https://zhuanlan.zhihu.com/p/24594294">AJAX 之 XHR, Fetch 的对比</a>）</li>
+</ol>
+<h5 id="3-接口管理工具"><a href="#3-接口管理工具" class="headerlink" title="3. 接口管理工具"></a>3. 接口管理工具</h5><p>代表：rap，swagger，moco，yapi</p>
+<p>优点：</p>
+<p>​	1.配置功能强大，接口管理与Mock一体，后端修改接口Mock也跟着更改，可靠</p>
+<p>缺点：</p>
+<p>​	1.配置复杂，依赖后端</p>
+<p>​	2.一般会作为大团队的基础建设而存在</p>
+<h5 id="4-本地node服务器"><a href="#4-本地node服务器" class="headerlink" title="4. 本地node服务器"></a>4. 本地node服务器</h5><p>代表：<a href="https://github.com/typicode/json-server">json-server</a></p>
+<p>优点：</p>
+<p>​	1.配置简单，json-server甚至可以0代码30s启动一个REST API Server</p>
+<p>​	2.自定义程度高</p>
+<p>​	3.增删改查真是模拟</p>
+<h5 id="REST-API"><a href="#REST-API" class="headerlink" title="REST API"></a>REST API</h5><p>一句话总结：URI 代表 资源&#x2F;对象，METHOD 代表行为</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">GET /tickets // 列表</span><br><span class="line">GET /tickets/12 // 详情</span><br><span class="line">POST /tickets  // 增加</span><br><span class="line">PUT /tickets/12 // 替换</span><br><span class="line">PATCH /tickets/12 // 修改</span><br><span class="line">DELETE /tickets/12 // 删除</span><br></pre></td></tr></table></figure>
 
-<h4 id="实现消息订阅"><a href="#实现消息订阅" class="headerlink" title="实现消息订阅"></a>实现消息订阅</h4><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">EventCenter</span> &#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> &#123;<span class="type">Map&lt;string, Array&lt;Function&gt;</span>&#125; <span class="variable">handlers</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="title function_">constructor</span>(<span class="params">handlers=<span class="keyword">new</span> <span class="built_in">Map</span>()</span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">handlers</span> = handlers;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> &#123;<span class="type">Function</span>&#125; <span class="variable">handler</span></span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> &#123;<span class="type">string</span>&#125; <span class="variable">type</span></span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="title function_">addEventListener</span>(<span class="params">type, newHandler</span>) &#123;</span><br><span class="line">        <span class="keyword">let</span> hanlder = <span class="variable language_">this</span>.<span class="property">handlers</span>.<span class="title function_">has</span>(type);</span><br><span class="line">        <span class="keyword">if</span> (hanlder) &#123;</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">handlers</span>.<span class="title function_">set</span>(type, [...<span class="variable language_">this</span>.<span class="property">handlers</span>.<span class="title function_">get</span>(type), newHandler]) </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">handlers</span>.<span class="title function_">set</span>(type, [newHandler]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> &#123;<span class="type">string</span>&#125; <span class="variable">type</span></span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> &#123;<span class="type">Array</span>&#125; <span class="variable">params</span></span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="title function_">dispatchEvent</span>(<span class="params">type, params=[]</span>) &#123;</span><br><span class="line">        <span class="keyword">const</span> handler = <span class="variable language_">this</span>.<span class="property">handlers</span>.<span class="title function_">get</span>(type);</span><br><span class="line">        handler &amp;&amp; handler.<span class="title function_">forEach</span>(<span class="function">(<span class="params">callback</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="title function_">callback</span>(...params);</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> &#123;<span class="type">string</span>&#125; type </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> &#123;<span class="type">Function</span>&#125; delHandler </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@returns</span> </span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="title function_">removeEventListener</span>(<span class="params">type, delHandler</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (!<span class="variable language_">this</span>.<span class="property">handlers</span>.<span class="title function_">has</span>(type)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Errow</span>(<span class="string">&quot;Unable to delete&quot;</span>)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (delHanlder) &#123;</span><br><span class="line">            <span class="keyword">const</span> oldHandlers = <span class="variable language_">this</span>.<span class="property">handlers</span>.<span class="title function_">get</span>(type);</span><br><span class="line">            <span class="keyword">const</span> ind = oldHandlers.<span class="title function_">indexOf</span>(delHandler);</span><br><span class="line">            <span class="keyword">if</span> (ind === -<span class="number">1</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Errow</span>(<span class="string">&quot;Unable to delete&quot;</span>)</span><br><span class="line">            &#125;</span><br><span class="line">            oldHandlers.<span class="title function_">splice</span>(ind, <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">handlers</span>.<span class="title function_">delete</span>(type);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h4 id="实现一个JSONP"><a href="#实现一个JSONP" class="headerlink" title="实现一个JSONP"></a>实现一个JSONP</h4><p>前端部分</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">jsonp</span>(<span class="params">url, options</span>) &#123;</span><br><span class="line">    <span class="comment">// 超时处理</span></span><br><span class="line">    <span class="keyword">const</span> &#123; timeout &#125; = options;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="comment">// 防止函数名冲突</span></span><br><span class="line">        <span class="keyword">let</span> funcName = <span class="string">`jsonp<span class="subst">$&#123;<span class="built_in">Date</span>.now()&#125;</span>`</span>;</span><br><span class="line">        <span class="keyword">let</span> time = <span class="literal">null</span>, scriptNode;</span><br><span class="line">        <span class="comment">// 定义callback</span></span><br><span class="line">        <span class="variable language_">window</span>[funcName] = <span class="keyword">function</span> (<span class="params">data</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (timeout) <span class="built_in">clearTimeout</span>(time);</span><br><span class="line">            <span class="title function_">resolve</span>(data);</span><br><span class="line">            <span class="comment">// 很重要的性能优化点</span></span><br><span class="line">            <span class="comment">// 清除本次请求产生的回调函数和script标签</span></span><br><span class="line">            <span class="keyword">delete</span> <span class="variable language_">window</span>[funcName];</span><br><span class="line">            <span class="variable language_">document</span>.<span class="property">body</span>.<span class="title function_">removeChild</span>(scriptNode);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 创建script标签</span></span><br><span class="line">        scriptNode = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&#x27;script&#x27;</span>);</span><br><span class="line">        <span class="comment">// 给script标签添加src属性</span></span><br><span class="line">        scriptNode.<span class="property">src</span> = <span class="string">`<span class="subst">$&#123;url&#125;</span>?callback=<span class="subst">$&#123;funcName&#125;</span>`</span>;</span><br><span class="line">        <span class="comment">// 发出请求</span></span><br><span class="line">        <span class="variable language_">document</span>.<span class="property">body</span>.<span class="title function_">appendChild</span>(scriptNode);</span><br><span class="line">        time = <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">            <span class="title function_">reject</span>(<span class="string">&#x27;network err, timeout&#x27;</span>)</span><br><span class="line">        &#125;, timeout)</span><br><span class="line">        <span class="comment">// 失败</span></span><br><span class="line">        scriptNode.<span class="property">onerror</span> = <span class="keyword">function</span> (<span class="params">err</span>) &#123;</span><br><span class="line">            <span class="title function_">reject</span>(err);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">jsonp</span>(<span class="string">&#x27;http://localhost:9090/api&#x27;</span>, &#123;</span><br><span class="line">    <span class="attr">callBack</span>: <span class="string">&#x27;res1&#x27;</span>,</span><br><span class="line">    <span class="comment">// 超时处理</span></span><br><span class="line">    <span class="attr">timeout</span>: <span class="number">3000</span></span><br><span class="line">&#125;)</span><br><span class="line">    <span class="comment">// 请求成功</span></span><br><span class="line">    .<span class="title function_">then</span>(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;jsonp-&gt;&#x27;</span>, res);</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="comment">// 请求失败</span></span><br><span class="line">    .<span class="title function_">catch</span>(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;network err!&quot;</span>)</span><br><span class="line">    &#125;)</span><br></pre></td></tr></table></figure>
 
-<p>后端部分</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 后端</span></span><br><span class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">&#x27;http&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> url = <span class="built_in">require</span>(<span class="string">&#x27;url&#x27;</span>);</span><br><span class="line">http.<span class="title function_">createServer</span>(<span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// /api?callback=onResponse</span></span><br><span class="line">  <span class="comment">// 解析前端请求url中的callback名</span></span><br><span class="line">  <span class="keyword">if</span>(req.<span class="property">url</span>.<span class="title function_">includes</span>(<span class="string">&#x27;/api&#x27;</span>)) &#123;</span><br><span class="line">    <span class="keyword">let</span> myurl = url.<span class="title function_">parse</span>(req.<span class="property">url</span>);</span><br><span class="line">    <span class="keyword">let</span> params = <span class="keyword">new</span> <span class="title class_">URLSearchParams</span>(myurl.<span class="property">query</span>)</span><br><span class="line">    <span class="keyword">let</span> posts = [<span class="string">&#x27;js&#x27;</span>, <span class="string">&#x27;php&#x27;</span>];</span><br><span class="line">    <span class="keyword">let</span> mathodName = params.<span class="title function_">get</span>(<span class="string">&#x27;callback&#x27;</span>);</span><br><span class="line">    res.<span class="title function_">end</span>(<span class="string">`<span class="subst">$&#123;mathodName&#125;</span>(<span class="subst">$&#123;<span class="built_in">JSON</span>.stringify(posts)&#125;</span>)`</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line">.<span class="title function_">listen</span>(<span class="number">9090</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">9090</span>);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h4 id="d-ts类型文件"><a href="#d-ts类型文件" class="headerlink" title="d.ts类型文件"></a>d.ts类型文件</h4><p>改造js文件为ts文件后，引入的qs库报错</p>
+<p><img src="/../assets/image-20211110193223804.png" alt="image-20211110193223804"></p>
+<p><code>yarn add @types/qs --save-dev   </code> 安装对应的ts补丁文件</p>
+<p><strong>d.ts文件的作用：说明书文件</strong></p>
+<p>JS 文件 + .d.ts 文件   &#x3D;&#x3D;&#x3D; ts 文件</p>
+<p>.d.ts 文件可以让 JS 文件继续维持自己JS文件的身份，而拥有TS的类型保护</p>
+<p>一般写业务代码不会用到，但是点击类型跳转一般会跳转到 .d.ts文件</p>
 ]]></content>
       <categories>
-        <category>JavaScript</category>
+        <category>Chore</category>
       </categories>
       <tags>
         <tag>JavaScript</tag>
@@ -616,65 +860,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Jira项目</title>
-    <url>/2022/03/02/Jira%E9%A1%B9%E7%9B%AE/</url>
-    <content><![CDATA[<h4 id="代码自动格式化工具：prettier"><a href="#代码自动格式化工具：prettier" class="headerlink" title="代码自动格式化工具：prettier"></a>代码自动格式化工具：prettier</h4><p>配置过程：<a href="https://prettier.io/docs/en/precommit.html">https://prettier.io/docs/en/precommit.html</a></p>
-<p><code>yarn add --dev --exact prettier</code></p>
-<p>新建<code>.prettierrc.json，.prettierignore</code>文件</p>
-<p>设置git commit预提交钩子</p>
-<p><code>npx mrm@2 lint-staged </code></p>
-<h4 id="规范git-commit工具：commitlint"><a href="#规范git-commit工具：commitlint" class="headerlink" title="规范git commit工具：commitlint"></a>规范git commit工具：commitlint</h4><p>配置过程：<a href="https://github.com/conventional-changelog/commitlint">https://github.com/conventional-changelog/commitlint</a></p>
-<p><code>yarn add --save-dev @commitlint/config-conventional @commitlint/cli</code></p>
-<p>新建 commitlint.config.js文件，引入规则module.exports &#x3D; {extends: [‘@commitlint&#x2F;config-conventional’]}</p>
-<span id="more"></span>
-
-<h4 id="常见MOCK方案"><a href="#常见MOCK方案" class="headerlink" title="常见MOCK方案"></a>常见MOCK方案</h4><h5 id="1-代码侵入（直接在代码中写死Mock数据，或请求本地的JSON文件"><a href="#1-代码侵入（直接在代码中写死Mock数据，或请求本地的JSON文件" class="headerlink" title="1. 代码侵入（直接在代码中写死Mock数据，或请求本地的JSON文件"></a>1. 代码侵入（直接在代码中写死Mock数据，或请求本地的JSON文件</h5><p>​	优点：无</p>
-<p>​	缺点：与真实server环境的切换比较麻烦（需要修改请求地址），一切需要侵入代码切换环境的行为都是不好的</p>
-<h5 id="2-请求拦截"><a href="#2-请求拦截" class="headerlink" title="2. 请求拦截"></a>2. 请求拦截</h5><p>​	代表：<a href="http://mockjs.com/">Mock.js</a></p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="title class_">Mock</span>.<span class="title function_">mock</span>(<span class="regexp">/\\\\/</span>api\\\\/visitor\\\\/list/, <span class="string">&#x27;get&#x27;</span>, &#123;</span><br><span class="line">  <span class="attr">code</span>: <span class="number">2000</span>,</span><br><span class="line">  <span class="attr">msg</span>: <span class="string">&#x27;ok&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;data|10&#x27;</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="string">&#x27;id|+1&#x27;</span>: <span class="number">6</span>,</span><br><span class="line">      <span class="string">&#x27;name&#x27;</span>: <span class="string">&#x27;@csentence(5)&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;tag&#x27;</span>: <span class="string">&#x27;@integer(6, 9)-@integer(10, 14)岁 @cword(&quot;零有&quot;, 1)基础&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;lesson_image&#x27;</span>: <span class="string">&quot;&lt;https://images.pexels.com/3737094/pexels-photo-3737094.jpeg&gt;&quot;</span>,</span><br><span class="line">      <span class="string">&#x27;lesson_package&#x27;</span>: <span class="string">&#x27;L1基础指令课&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;done&#x27;</span>: <span class="string">&#x27;@integer(10000, 99999)&#x27;</span>,</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>优点：</p>
-<ol>
-<li>与前端代码分离</li>
-<li>可生成随机数据</li>
-</ol>
-<p>缺点：</p>
-<ol>
-<li>数据都是动态生成的假数据，无法真实模拟增删改查的情况</li>
-<li>只支持ajax，不支持fetch（本质上是重写了ajax方法，两者的差别见：<a href="https://zhuanlan.zhihu.com/p/24594294">AJAX 之 XHR, Fetch 的对比</a>）</li>
-</ol>
-<h5 id="3-接口管理工具"><a href="#3-接口管理工具" class="headerlink" title="3. 接口管理工具"></a>3. 接口管理工具</h5><p>代表：rap，swagger，moco，yapi</p>
-<p>优点：</p>
-<p>​	1.配置功能强大，接口管理与Mock一体，后端修改接口Mock也跟着更改，可靠</p>
-<p>缺点：</p>
-<p>​	1.配置复杂，依赖后端</p>
-<p>​	2.一般会作为大团队的基础建设而存在</p>
-<h5 id="4-本地node服务器"><a href="#4-本地node服务器" class="headerlink" title="4. 本地node服务器"></a>4. 本地node服务器</h5><p>代表：<a href="https://github.com/typicode/json-server">json-server</a></p>
-<p>优点：</p>
-<p>​	1.配置简单，json-server甚至可以0代码30s启动一个REST API Server</p>
-<p>​	2.自定义程度高</p>
-<p>​	3.增删改查真是模拟</p>
-<h5 id="REST-API"><a href="#REST-API" class="headerlink" title="REST API"></a>REST API</h5><p>一句话总结：URI 代表 资源&#x2F;对象，METHOD 代表行为</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">GET /tickets // 列表</span><br><span class="line">GET /tickets/12 // 详情</span><br><span class="line">POST /tickets  // 增加</span><br><span class="line">PUT /tickets/12 // 替换</span><br><span class="line">PATCH /tickets/12 // 修改</span><br><span class="line">DELETE /tickets/12 // 删除</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="d-ts类型文件"><a href="#d-ts类型文件" class="headerlink" title="d.ts类型文件"></a>d.ts类型文件</h4><p>改造js文件为ts文件后，引入的qs库报错</p>
-<p><img src="/../assets/image-20211110193223804.png" alt="image-20211110193223804"></p>
-<p><code>yarn add @types/qs --save-dev   </code> 安装对应的ts补丁文件</p>
-<p><strong>d.ts文件的作用：说明书文件</strong></p>
-<p>JS 文件 + .d.ts 文件   &#x3D;&#x3D;&#x3D; ts 文件</p>
-<p>.d.ts 文件可以让 JS 文件继续维持自己JS文件的身份，而拥有TS的类型保护</p>
-<p>一般写业务代码不会用到，但是点击类型跳转一般会跳转到 .d.ts文件</p>
-]]></content>
-      <categories>
-        <category>Chore</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Mini-React</title>
     <url>/2022/03/04/Mini-React/</url>
     <content><![CDATA[<h4 id="项目拆解："><a href="#项目拆解：" class="headerlink" title="项目拆解："></a>项目拆解：</h4><ol>
@@ -810,7 +995,7 @@
   </entry>
   <entry>
     <title>Promise</title>
-    <url>/2021/09/11/Promise/</url>
+    <url>/2021/09/03/Promise/</url>
     <content><![CDATA[<h3 id="引言："><a href="#引言：" class="headerlink" title="引言："></a>引言：</h3><p>感觉promise的思想非常有意思，为了代码的可读性和可维护性提供了一种新的异步编程方法，接触了一段时间的工程代码也让我体会到代码可维护，可拓展的必要性。</p>
 <h3 id="为什么要用Promise？"><a href="#为什么要用Promise？" class="headerlink" title="为什么要用Promise？"></a>为什么要用Promise？</h3><p>对于异步操作，例如文件读取</p>
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>)</span><br><span class="line"></span><br><span class="line">fs.<span class="title function_">readFile</span>(<span class="string">&#x27;./a.txt&#x27;</span>, <span class="string">&#x27;utf-8&#x27;</span>, <span class="keyword">function</span>(<span class="params">err, data</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (err) &#123;</span><br><span class="line">        <span class="keyword">throw</span> err;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(data);</span><br><span class="line">&#125;)</span><br><span class="line">fs.<span class="title function_">readFile</span>(<span class="string">&#x27;./b.txt&#x27;</span>, <span class="string">&#x27;utf-8&#x27;</span>, <span class="keyword">function</span>(<span class="params">err, data</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (err) &#123;</span><br><span class="line">        <span class="keyword">throw</span> err;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(data);</span><br><span class="line">&#125;)</span><br><span class="line">fs.<span class="title function_">readFile</span>(<span class="string">&#x27;./c.txt&#x27;</span>, <span class="string">&#x27;utf-8&#x27;</span>, <span class="keyword">function</span>(<span class="params">err, data</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (err) &#123;</span><br><span class="line">        <span class="keyword">throw</span> err;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(data);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
@@ -907,7 +1092,7 @@
   </entry>
   <entry>
     <title>React Router</title>
-    <url>/2021/09/11/React-Router/</url>
+    <url>/2021/09/01/React-Router/</url>
     <content><![CDATA[<h3 id="SPA的理解"><a href="#SPA的理解" class="headerlink" title="SPA的理解"></a>SPA的理解</h3><ol>
 <li><p>单页Web应用（single page web application，SPA）。</p>
 </li>
@@ -1913,6 +2098,7 @@ module: &#123;
 <h2 id="学习路线"><a href="#学习路线" class="headerlink" title="学习路线"></a>学习路线</h2><ul>
 <li><strong>Web3开发学习路线</strong>: <a href="https://54web3.cc/blog/roadmap/learning-path-web3">https://54web3.cc/blog/roadmap/learning-path-web3</a></li>
 <li><strong>Web3 入门计划</strong>: <a href="https://cubic-leaf-731.notion.site/web3-202208-09-1623ccd15c2148a1ae00ed8794d153b1">https://cubic-leaf-731.notion.site/web3-202208-09-1623ccd15c2148a1ae00ed8794d153b1</a></li>
+<li><strong>Web3从入门到精通开发学习路线</strong>：<a href="https://juejin.cn/post/7307185531330838543">https://juejin.cn/post/7307185531330838543</a></li>
 </ul>
 <h3 id="WEEK-1-区块链的基础知识"><a href="#WEEK-1-区块链的基础知识" class="headerlink" title="WEEK 1: 区块链的基础知识"></a><strong>WEEK 1: 区块链的基础知识</strong></h3><ul>
 <li>密码学基础</li>
@@ -1921,7 +2107,7 @@ module: &#123;
 <li>学习比特币底层技术</li>
 <li>学习以太坊原理</li>
 </ul>
-]]></content>
+<!-- ![image-20241105](../assets/Week1：区块链基础知识.png) -->]]></content>
       <categories>
         <category>Chore</category>
       </categories>
@@ -1984,41 +2170,6 @@ webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后�
       </tags>
   </entry>
   <entry>
-    <title>书单 / BookList</title>
-    <url>/2024/09/26/%E4%B9%A6%E5%8D%95/</url>
-    <content><![CDATA[<h4 id="专业向"><a href="#专业向" class="headerlink" title="专业向"></a>专业向</h4><h5 id="计算机（2）"><a href="#计算机（2）" class="headerlink" title="计算机（2）"></a>计算机（2）</h5><ul>
-<li><a href="https://markdown.com.cn/">你所不知道的JavaScript</a></li>
-<li><a href="https://markdown.com.cn/">深入浅出NodeJS</a></li>
-<li><a href="https://markdown.com.cn/">Webpack实战：入门、进阶与调优</a></li>
-<li><a href="https://markdown.com.cn/">TypeScript图形渲染实战</a></li>
-</ul>
-<h5 id="数学"><a href="#数学" class="headerlink" title="数学"></a>数学</h5><hr>
-<h4 id="非专业向"><a href="#非专业向" class="headerlink" title="非专业向"></a>非专业向</h4><h5 id="社科文学类（5）"><a href="#社科文学类（5）" class="headerlink" title="社科文学类（5）"></a>社科文学类（5）</h5><ul>
-<li><a href="https://markdown.com.cn/">山月记</a></li>
-<li><a href="https://markdown.com.cn/">宋词群星闪耀时</a></li>
-<li><a href="https://markdown.com.cn/">我在西南联大的日子</a></li>
-<li><a href="https://markdown.com.cn/">当呼吸化为空气</a></li>
-<li><a href="https://markdown.com.cn/">被讨厌的勇气</a></li>
-</ul>
-<h5 id="杂文散文（1）"><a href="#杂文散文（1）" class="headerlink" title="杂文散文（1）"></a>杂文散文（1）</h5><ul>
-<li><a href="https://markdown.com.cn/">生命是孤独的旅程</a></li>
-</ul>
-<h5 id="小说（4）"><a href="#小说（4）" class="headerlink" title="小说（4）"></a>小说（4）</h5><ul>
-<li><a href="https://markdown.com.cn/">羊毛战记</a></li>
-<li><a href="https://markdown.com.cn/">三国演义</a></li>
-<li><a href="https://markdown.com.cn/">冰与火之歌</a></li>
-<li><a href="https://markdown.com.cn/">野性的呼唤</a></li>
-<li><a href="https://markdown.com.cn/">龙族</a></li>
-</ul>
-<h5 id="传记（1）"><a href="#传记（1）" class="headerlink" title="传记（1）"></a>传记（1）</h5><ul>
-<li><a href="https://markdown.com.cn/">苏东坡全传</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>生活</category>
-      </categories>
-  </entry>
-  <entry>
     <title>函数式编程</title>
     <url>/2021/10/08/%E4%BB%80%E4%B9%88%E6%98%AF%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/</url>
     <content><![CDATA[<h4 id="什么是函数式编程？"><a href="#什么是函数式编程？" class="headerlink" title="什么是函数式编程？"></a>什么是函数式编程？</h4><p>函数式编程具有五个鲜明的特点。</p>
@@ -2072,6 +2223,42 @@ webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后�
         <tag>比特币</tag>
         <tag>加密货币</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>书单 / BookList</title>
+    <url>/2024/09/26/%E4%B9%A6%E5%8D%95/</url>
+    <content><![CDATA[<h4 id="专业向"><a href="#专业向" class="headerlink" title="专业向"></a>专业向</h4><h5 id="计算机（4）"><a href="#计算机（4）" class="headerlink" title="计算机（4）"></a>计算机（4）</h5><ul>
+<li><a href="https://markdown.com.cn/">你所不知道的JavaScript</a></li>
+<li><a href="https://markdown.com.cn/">深入浅出NodeJS</a></li>
+<li><a href="https://markdown.com.cn/">Webpack实战：入门、进阶与调优</a></li>
+<li><a href="https://markdown.com.cn/">TypeScript图形渲染实战</a></li>
+</ul>
+<h5 id="数学"><a href="#数学" class="headerlink" title="数学"></a>数学</h5><hr>
+<h4 id="非专业向"><a href="#非专业向" class="headerlink" title="非专业向"></a>非专业向</h4><h5 id="社科文学类（5）"><a href="#社科文学类（5）" class="headerlink" title="社科文学类（5）"></a>社科文学类（5）</h5><ul>
+<li><a href="https://markdown.com.cn/">山月记</a></li>
+<li><a href="https://markdown.com.cn/">宋词群星闪耀时</a></li>
+<li><a href="https://markdown.com.cn/">我在西南联大的日子</a></li>
+<li><a href="https://markdown.com.cn/">当呼吸化为空气</a></li>
+<li><a href="https://markdown.com.cn/">被讨厌的勇气</a></li>
+<li><a href="https://markdown.com.cn/">台湾四百年</a></li>
+</ul>
+<h5 id="杂文散文（1）"><a href="#杂文散文（1）" class="headerlink" title="杂文散文（1）"></a>杂文散文（1）</h5><ul>
+<li><a href="https://markdown.com.cn/">生命是孤独的旅程</a></li>
+</ul>
+<h5 id="小说（5）"><a href="#小说（5）" class="headerlink" title="小说（5）"></a>小说（5）</h5><ul>
+<li><a href="https://markdown.com.cn/">羊毛战记</a></li>
+<li><a href="https://markdown.com.cn/">三国演义</a></li>
+<li><a href="https://markdown.com.cn/">冰与火之歌</a></li>
+<li><a href="https://markdown.com.cn/">野性的呼唤</a></li>
+<li><a href="https://markdown.com.cn/">龙族</a></li>
+</ul>
+<h5 id="传记（1）"><a href="#传记（1）" class="headerlink" title="传记（1）"></a>传记（1）</h5><ul>
+<li><a href="https://markdown.com.cn/">苏东坡全传</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>生活</category>
+      </categories>
   </entry>
   <entry>
     <title>区块链基础知识</title>
@@ -2219,14 +2406,6 @@ webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后�
 ]]></content>
   </entry>
   <entry>
-    <title>成为老师</title>
-    <url>/2024/10/29/%E6%88%90%E4%B8%BA%E8%80%81%E5%B8%88/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>生活</category>
-      </categories>
-  </entry>
-  <entry>
     <title>比特币</title>
     <url>/2024/11/05/%E6%AF%94%E7%89%B9%E5%B8%81/</url>
     <content><![CDATA[<blockquote class="blockquote-center">
@@ -2258,27 +2437,31 @@ webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后�
 <p>message取hash-&gt;hash取签名</p>
 <span id="more"></span>
 
-<h2 id="比特币的数据结构"><a href="#比特币的数据结构" class="headerlink" title="比特币的数据结构"></a>比特币的数据结构</h2><h3 id="Block-chain（区块链）"><a href="#Block-chain（区块链）" class="headerlink" title="Block chain（区块链）"></a>Block chain（区块链）</h3><p>Hash pointers：</p>
+<h2 id="比特币的数据结构"><a href="#比特币的数据结构" class="headerlink" title="比特币的数据结构"></a>比特币的数据结构</h2><h3 id="Block-chain（区块链）"><a href="#Block-chain（区块链）" class="headerlink" title="Block chain（区块链）"></a>Block chain（区块链）</h3><blockquote>
+<p>本质上是一个链表，通过Hash pointers相连</p>
+</blockquote>
+<h4 id="Hash-pointers（哈希指针）"><a href="#Hash-pointers（哈希指针）" class="headerlink" title="Hash pointers（哈希指针）"></a>Hash pointers（哈希指针）</h4><p>当前区块的地址<br>前一个哈希指针 + 当前区块计算出的哈希值 </p>
+<h4 id="Genesis-block（创始区块）"><a href="#Genesis-block（创始区块）" class="headerlink" title="Genesis block（创始区块）"></a>Genesis block（创始区块）</h4><p>区块链中的第一个区块</p>
+<h4 id="Most-recent-block（最近使用区块）"><a href="#Most-recent-block（最近使用区块）" class="headerlink" title="Most recent block（最近使用区块）"></a>Most recent block（最近使用区块）</h4><p>区块链末尾的区块，指的是最近被添加到区块链的区块</p>
+<h4 id="Block（区块）"><a href="#Block（区块）" class="headerlink" title="Block（区块）"></a>Block（区块）</h4><p>每一个区块构成：</p>
+<h5 id="Block-header"><a href="#Block-header" class="headerlink" title="Block header"></a>Block header</h5><blockquote>
+<p>只有Block header会用Hash pointer串联</p>
+</blockquote>
 <ul>
-<li>当前区块的地址</li>
-<li>前一个哈希指针 + 当前区块计算出的哈希值<br>区块链：使用哈希指针</li>
+<li>Version（用的是比特币哪个版本的协议）</li>
+<li>Hash of previous block header（前一个区块头的hash）</li>
+<li>Merkle root hash（merkle tree的根哈希，能保证Block body里的Transaction list没有被篡改）</li>
+<li>Target（挖矿的难度目标阈值, H(block header) &lt;&#x3D; target, block header这里存的是目标阈值的编码nbits）</li>
+<li>Nonce（随机数）</li>
 </ul>
-<p>Genesis block（创始区块）：<br>Most recent block（最近使用区块）：</p>
-<h3 id="Merkle-tree（默克尔树）"><a href="#Merkle-tree（默克尔树）" class="headerlink" title="Merkle tree（默克尔树）"></a>Merkle tree（默克尔树）</h3><p>比特币中各个区块用Hash Pointer连接在一起，各个区块包含的交易信息是组织成Merkle tree的形式</p>
-<p>Merkle tree结构：二叉树的形式，最底层是交易记录，中间层都是下一层哈希值计算出的结果，树中的root hash可以用来判断是否有一个节点发生变更，因为任何一个节点的变更都会导致root hash发生变化<br><img src="/../assets/merkle-tree.png" alt="image-20241105"></p>
-<p>每一个区块构成：<br><strong>Block header</strong></p>
-<!-- = 指向前一块的哈希指针 -->
-<ul>
-<li>Merkle tree的Root hash</li>
+<h5 id="Block-body"><a href="#Block-body" class="headerlink" title="Block body"></a>Block body</h5><ul>
+<li>Transaction list（交易列表）</li>
 </ul>
-<p><strong>Block body</strong></p>
-<ul>
-<li>交易列表、信息</li>
-</ul>
+<h3 id="Merkle-tree（默克尔树）"><a href="#Merkle-tree（默克尔树）" class="headerlink" title="Merkle tree（默克尔树）"></a>Merkle tree（默克尔树）</h3><p>比特币中各个区块用Hash Pointer连接在一起，各个区块包含的交易信息是组织成Merkle tree的形式<br>Merkle tree结构：二叉树的形式，最底层是交易记录，中间层都是下一层哈希值计算出的结果，树中的root hash可以用来判断是否有一个节点发生变更，因为任何一个节点的变更都会导致root hash发生变化<br><img src="/../assets/merkle-tree.png" alt="image-20241105"></p>
 <p>比特币节点分类</p>
 <ul>
-<li>全节点：保存区块的全部信息，Block header + Block body</li>
-<li>轻节点：手机上的比特币钱包，只保存Block header（也就是只保存了Merkle tree的Root hash）</li>
+<li>Full node（全节点）：保存区块的全部信息，Block header + Block body，用于验证每一个交易，又叫 Fully validating node</li>
+<li>Light node（轻节点）：手机上的比特币钱包，只保存Block header（也就是只保存了Merkle tree的Root hash），无法独立验证交易的可靠性，系统中大部分节点是轻节点</li>
 </ul>
 <p>如何向轻节点证明某个交易已经被写入区块链？<br>用户A，用户B（轻节点），转账 A –&gt; B，A需要向B证明已经转账，如何证明：Merkle proof&#x2F;Proof of menbership：证明Merkle tree包含了某个交易，时间复杂度为 O(logn)<br>过程详见：<br><img src="/../assets/merkle-proof.png" alt="image-20241105"></p>
 <blockquote>
@@ -2291,12 +2474,20 @@ webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后�
 <li>假定叶子结点</li>
 </ul>
 <p>无环的数据结构都可以用hash pointer代替普通指针</p>
-<h2 id="比特币的共识协议"><a href="#比特币的共识协议" class="headerlink" title="比特币的共识协议"></a>比特币的共识协议</h2><p>比特币中区块的指针</p>
+<h2 id="比特币的共识协议"><a href="#比特币的共识协议" class="headerlink" title="比特币的共识协议"></a>比特币的共识协议</h2><p>比特币的交易过程<br><img src="/../assets/bitcon-trading-process.png" alt="image-20241105"></p>
+<p>比特币中区块的指针</p>
 <ul>
 <li>指向前一个区块</li>
 <li>指向币的来源：证明钱不是凭空捏造，是有记录的，防止Double spending</li>
 </ul>
-<p>转账：A -&gt; B A需要知道B的公钥，B也需要知道A的公钥，<br>签名验证的过程？不太理解</p>
+<p>转账：A -&gt; B A需要知道B的公钥，B也需要知道A的公钥，<br>签名验证的过程？不太理解<br>交易记录通过A的私钥加密后 – 接收方通过A的公钥解密</p>
+<p>如何写入区块链？</p>
+<p>账本内容需要取得分布式的共识（distributed consensus）：一致性<br>Cap Theorem: 只能同时满足其中两个特性<br>Consistency（一致性）<br>Availability（可用性）<br>Partition tolerance（分区容错性：</p>
+<p>Paxos协议：</p>
+<p>Consensus in Bitcoin（解决的问题：存在恶意节点，假设大多数节点好的，少部分恶意节点，如何设计一个共识协议）</p>
+<ul>
+<li>直接投票是否可行？女巫攻击–恶意节点生成超过半数以上的账号，获取投票权</li>
+</ul>
 ]]></content>
       <categories>
         <category>Web3</category>
@@ -2438,6 +2629,14 @@ webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后�
       <tags>
         <tag>Chrome</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>成为老师</title>
+    <url>/2024/10/29/%E6%88%90%E4%B8%BA%E8%80%81%E5%B8%88/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>生活</category>
+      </categories>
   </entry>
   <entry>
     <title>站点更新日志 / ChangeLog</title>
