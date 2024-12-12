@@ -85,7 +85,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-文章"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>文章</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">15</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">37</span></a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">23</span></a></li><li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-文章"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>文章</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">15</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">39</span></a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">24</span></a></li><li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -150,7 +150,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">37</span>
+          <span class="site-state-item-count">39</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -161,7 +161,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">23</span>
+        <span class="site-state-item-count">24</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -231,7 +231,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-09-24 10:37:19" itemprop="dateModified" datetime="2024-09-24T10:37:19+08:00">2024-09-24</time>
+      <time title="修改时间：2024-12-02 08:43:08" itemprop="dateModified" datetime="2024-12-02T08:43:08+08:00">2024-12-02</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -268,11 +268,11 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>React用于编写SPA（单页应用）</p>
-<h2 id="Ref"><a href="#Ref" class="headerlink" title="Ref"></a>Ref</h2><h4 id="回调形式Ref调用次数"><a href="#回调形式Ref调用次数" class="headerlink" title="回调形式Ref调用次数"></a>回调形式Ref调用次数</h4><p>如果 <code>ref</code> 回调函数是以内联函数的方式定义</p>
+<h2 id="Ref"><a href="#Ref" class="headerlink" title="Ref"></a>Ref</h2><h3 id="回调形式Ref调用次数"><a href="#回调形式Ref调用次数" class="headerlink" title="回调形式Ref调用次数"></a>回调形式Ref调用次数</h3><p>如果 <code>ref</code> 回调函数是以内联函数的方式定义</p>
 <p>例如：</p>
 <p><code>&lt;input ref=&#123;(c)=&gt;&#123;this.input1 = c;console.log(&#39;@&#39;,c);&#125;&#125; type=&quot;text&quot;/&gt;</code></p>
 <p>在更新过程中它会被执行两次，第一次传入参数 <code>null</code>，然后第二次会传入参数 DOM 元素。这是因为在每次渲染时会创建一个新的函数实例，所以 React 清空旧的 ref 并且设置新的。通过将 ref 的回调函数定义成 class 的绑定函数的方式可以避免上述问题，但是大多数情况下它是无关紧要的。</p>
-<h4 id="createRef创建ref容器"><a href="#createRef创建ref容器" class="headerlink" title="createRef创建ref容器"></a>createRef创建ref容器</h4><p>React.createRef调用后可以返回一个容器，该容器可以存储被ref所标识的节点,该容器是“专人专用”的</p>
+<h3 id="createRef创建ref容器"><a href="#createRef创建ref容器" class="headerlink" title="createRef创建ref容器"></a>createRef创建ref容器</h3><p>React.createRef调用后可以返回一个容器，该容器可以存储被ref所标识的节点,该容器是“专人专用”的</p>
 <p><code>myRef = React.createRef()</code></p>
 <p><code>&lt;input ref = &#123;this.myRef&#125;/&gt;</code></p>
           <!--noindex-->
@@ -344,7 +344,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-12-01 19:26:04" itemprop="dateModified" datetime="2024-12-01T19:26:04+08:00">2024-12-01</time>
+      <time title="修改时间：2024-12-01 19:42:36" itemprop="dateModified" datetime="2024-12-01T19:42:36+08:00">2024-12-01</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -362,7 +362,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>1.9k</span>
+      <span>2k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -609,7 +609,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-29 13:47:14" itemprop="dateModified" datetime="2024-11-29T13:47:14+08:00">2024-11-29</time>
+      <time title="修改时间：2024-12-02 08:41:38" itemprop="dateModified" datetime="2024-12-02T08:41:38+08:00">2024-12-02</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1387,7 +1387,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">2:10</span>
+    <span title="站点阅读时长">2:11</span>
   </span>
 </div>
 
