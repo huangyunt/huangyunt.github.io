@@ -317,85 +317,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Https</title>
-    <url>/2021/09/13/Https/</url>
-    <content><![CDATA[<h3 id="为什么需要加密？"><a href="#为什么需要加密？" class="headerlink" title="为什么需要加密？"></a><strong>为什么需要加密？</strong></h3><p>因为http的内容是明文传输的，明文数据会经过中间代理服务器、路由器、wifi热点、通信服务运营商等多个物理节点，如果信息在传输过程中被劫持，传输的内容就完全暴露了。劫持者还可以篡改传输的信息且不被双方察觉，这就是“中间人攻击”。</p>
-<h3 id="用对称加密可行吗？"><a href="#用对称加密可行吗？" class="headerlink" title="用对称加密可行吗？"></a><strong>用对称加密可行吗？</strong></h3><p>对称加密最大的问题就是密钥的传输，而密钥的传输又需要加密（反复套娃），故而单纯的对称加密是无法解决问题的。</p>
-<span id="more"></span>
-
-
-<h3 id="用非对称加密可行吗？"><a href="#用非对称加密可行吗？" class="headerlink" title="用非对称加密可行吗？"></a>用非对称加密可行吗？</h3><p>鉴于非对称加密的机制，我们可能会有这种思路：服务器先把公钥以明文方式传输给浏览器，之后浏览器向服务器传数据前都先用这个公钥加密好再传，这条数据的安全似乎可以保障了！<strong>因为只有服务器有相应的私钥能解开公钥加密的数据</strong>。</p>
-<p>然而反过来<strong>由服务器到浏览器的这条路怎么保障安全？</strong>如果服务器用它的私钥加密数据传给浏览器，那么浏览器用公钥可以解密它，而这个公钥是一开始通过明文传输给浏览器的，若这个公钥被中间人劫持到了，那他也能用该公钥解密服务器传来的信息了。所以<strong>目前似乎只能保证由浏览器向服务器传输数据的安全性</strong></p>
-<h3 id="那用两组公钥私钥，是否就能保证双向传输都安全了？"><a href="#那用两组公钥私钥，是否就能保证双向传输都安全了？" class="headerlink" title="那用两组公钥私钥，是否就能保证双向传输都安全了？"></a>那用两组公钥私钥，是否就能保证双向传输都安全了？</h3><ol>
-<li>某网站服务器拥有公钥A与对应的私钥A’；浏览器拥有公钥B与对应的私钥B’。</li>
-<li>浏览器把公钥B明文传输给服务器。</li>
-<li>服务器把公钥A明文给传输浏览器。</li>
-<li>之后浏览器向服务器传输的内容都用公钥A加密，服务器收到后用私钥A’解密。由于只有服务器拥有私钥A’，所以能保证这条数据的安全。</li>
-<li>同理，服务器向浏览器传输的内容都用公钥B加密，浏览器收到后用私钥B’解密。同上也可以保证这条数据的安全。</li>
-</ol>
-<p>然而这又引出了一个新的问题，非对称加密非常耗时，如何解决？（见RSA算法）而且这种方法真的安全了吗？</p>
-<h3 id="非对称加密-对称加密"><a href="#非对称加密-对称加密" class="headerlink" title="非对称加密 + 对称加密"></a>非对称加密 + 对称加密</h3><ol>
-<li>某网站拥有用于非对称加密的公钥A、私钥A’。</li>
-<li>浏览器向网站服务器请求，服务器把公钥A明文给传输浏览器。</li>
-<li>浏览器随机生成一个用于对称加密的密钥X，用公钥A加密后传给服务器。</li>
-<li>服务器拿到后用私钥A’解密得到密钥X。</li>
-<li>这样双方就都拥有密钥X了，且别人无法知道它。之后双方所有数据都通过密钥X加密解密即可。</li>
-</ol>
-<p>这基本上就是https采用的方案了，但仍然还是有漏洞。</p>
-<h3 id="中间人攻击"><a href="#中间人攻击" class="headerlink" title="中间人攻击"></a>中间人攻击</h3><p>中间人攻击（MITMA，man in the middle attack）<br>中间人攻击是一种网络攻击类型 ，应用与LAN局域网中。这种攻击的方式是 hacker 置身于两个通信 paties 之间，窃取数据。</p>
-<p>中间人攻击允许黑客截获双方之间的数据，它可能是服务器和客户端或客户端到客户端或服务器到服务器。</p>
-<p><img src="/../assets/image-20210513212400962.png" alt="image-20210513212400962"></p>
-<p>如果在数据传输过程中，中间人劫持到了数据，此时他的确无法得到浏览器生成的密钥X，这个密钥本身被公钥A加密了，只有服务器才有私钥A’解开它，然而中间人却完全不需要拿到私钥A’就能干坏事了。请看：</p>
-<ol>
-<li>某网站有用于非对称加密的公钥A、私钥A’。</li>
-<li>浏览器向网站服务器请求，服务器把公钥A明文给传输浏览器。</li>
-<li><strong>中间人劫持到公钥A，保存下来，把数据包中的公钥A替换成自己伪造的公钥B（它当然也拥有公钥B对应的私钥B’）</strong>。</li>
-<li>浏览器生成一个用于对称加密的密钥X，用<strong>公钥B</strong>（浏览器无法得知公钥被替换了）加密后传给服务器。</li>
-<li><strong>中间人劫持后用私钥B’解密得到密钥X，再用公钥A加密后传给服务器</strong>。</li>
-<li>服务器拿到后用私钥A’解密得到密钥X。</li>
-</ol>
-<p>这样在双方都不会发现异常的情况下，中间人掉包了服务器传来的公钥，进而得到了密钥X。<strong>根本原因是浏览器无法确认收到的公钥是不是网站自己的，</strong>因为公钥本身是明文传输的，难道还得对公钥的传输进行加密？这似乎变成鸡生蛋、蛋生鸡的问题了。解法是什么？</p>
-<h3 id="如何证明浏览器收到的公钥一定是该网站的公钥？"><a href="#如何证明浏览器收到的公钥一定是该网站的公钥？" class="headerlink" title="如何证明浏览器收到的公钥一定是该网站的公钥？"></a><strong>如何证明浏览器收到的公钥一定是该网站的公钥？</strong></h3><p>网站是否有个‘身份证’来证明自己的公钥合法？这个‘身份证’又由谁来颁发？</p>
-<p><strong>CA机构</strong>，它是如今互联网世界正常运作的前提，而CA机构颁发的“身份证”就是<strong>数字证书</strong>。</p>
-<h4 id="数字证书"><a href="#数字证书" class="headerlink" title="数字证书"></a><strong>数字证书</strong></h4><p>网站在使用HTTPS前，需要向<strong>CA机构</strong>申领一份<strong>数字证书</strong>，数字证书里含有证书持有者信息、域名、公钥信息等。服务器把证书传输给浏览器，浏览器从证书里获取公钥就行了，证书就如身份证，证明“该公钥对应该网站”。</p>
-<p>而这里又有一个显而易见的问题，“<strong>证书本身的传输过程中，如何防止被篡改”</strong>？即如何证明证书本身的真实性？身份证运用了一些防伪技术，而数字证书怎么防伪呢？</p>
-<h3 id="如何放防止数字证书被篡改？"><a href="#如何放防止数字证书被篡改？" class="headerlink" title="如何放防止数字证书被篡改？"></a><strong>如何放防止数字证书被篡改？</strong></h3><p>我们把证书原本的内容生成一份“签名”，比对证书内容和签名是否一致就能判别是否被篡改。这就是数字证书的“防伪技术”，这里的“签名”就叫<code>数字签名</code>：</p>
-<p>数字签名的制作过程：</p>
-<ol>
-<li>CA机构拥有非对称加密的私钥和公钥。</li>
-<li>CA机构对证书明文数据T进行hash。</li>
-<li>对hash后的值用私钥加密，得到数字签名S。</li>
-</ol>
-<p>明文和数字签名共同组成了数字证书，这样一份数字证书就可以颁发给网站了。<br>那浏览器拿到服务器传来的数字证书后，如何验证它是不是真的？（有没有被篡改、掉包）</p>
-<p>浏览器验证过程：</p>
-<ol>
-<li>拿到证书，得到明文T，签名S。</li>
-<li>用CA机构的公钥对S解密（由于是浏览器信任的机构，所以浏览器保有它的公钥。详情见下文），得到S’。</li>
-<li>用证书里指明的hash算法对明文T进行hash得到T’。</li>
-<li>显然通过以上步骤，T’应当等于S‘，除非明文或签名被篡改。所以此时比较S’是否等于T’，等于则表明证书可信。</li>
-</ol>
-<p><img src="/../assets/image-20210513214044731.png" alt="image-20210513214044731"></p>
-<h3 id="中间人有可能篡改该证书吗？"><a href="#中间人有可能篡改该证书吗？" class="headerlink" title="中间人有可能篡改该证书吗？"></a><strong>中间人有可能篡改该证书吗？</strong></h3><p>假设中间人篡改了证书的原文，由于他没有CA机构的私钥，所以无法得到此时加密后签名，无法相应地篡改签名。浏览器收到该证书后会发现原文和签名解密后的值不一致，则说明证书已被篡改，证书不可信</p>
-<h3 id="中间人有可能把证书掉包吗？"><a href="#中间人有可能把证书掉包吗？" class="headerlink" title="中间人有可能把证书掉包吗？"></a><strong>中间人有可能把证书掉包吗？</strong></h3><p>假设有另一个网站B也拿到了CA机构认证的证书，它想劫持网站A的信息。于是它成为中间人拦截到了A传给浏览器的证书，然后替换成自己的证书，传给浏览器，之后浏览器就会错误地拿到B的证书里的公钥了。</p>
-<p>其实这并不会发生，因为证书一定是无法被篡改的，所以网站B掉包的一定也是正规的证书，而证书黎里包含了网站的信息，包括域名，浏览器把证书里的域名与自己请求的域名比对一下就知道有没有被掉包了。</p>
-<h3 id="为什么制作数字签名时需要hash一次？"><a href="#为什么制作数字签名时需要hash一次？" class="headerlink" title="为什么制作数字签名时需要hash一次？"></a><strong>为什么制作数字签名时需要hash一次？</strong></h3><p>最显然的是性能问题，非对称加密效率较差，证书信息一般较长，比较耗时。而hash后得到的是固定长度的信息（比如用md5算法hash后可以得到固定的128位的值），这样加解密就快很多。</p>
-<h3 id="怎么证明CA机构的公钥是可信的？"><a href="#怎么证明CA机构的公钥是可信的？" class="headerlink" title="怎么证明CA机构的公钥是可信的？"></a><strong>怎么证明CA机构的公钥是可信的？</strong></h3><p>“浏览器保有它的公钥”，这是个什么保有法？怎么证明这个公钥是否可信？</p>
-<p>让我们回想一下数字证书到底是干啥的？没错，为了证明某公钥是可信的，即“该公钥是否对应该网站”，那CA机构的公钥是否也可以用数字证书来证明？没错，操作系统、浏览器本身会预装一些它们信任的根证书，如果其中会有CA机构的根证书，这样就可以拿到它对应的可信公钥了。</p>
-<p>实际上证书之间的认证也可以不止一层，可以A信任B，B信任C，以此类推，我们把它叫做<code>信任链</code>或<code>数字证书链</code>。也就是一连串的数字证书，由根证书为起点，透过层层信任，使终端实体证书的持有者可以获得转授的信任，以证明身份。</p>
-<p>另外，不知你们是否遇到过网站访问不了、提示需安装证书的情况？这里安装的就是根证书。说明浏览器不认给这个网站颁发证书的机构，那么你就得手动下载安装该机构的根证书（风险自己承担XD）。安装后，你就有了它的公钥，就可以用它验证服务器发来的证书是否可信了。</p>
-<h3 id="每次进行HTTPS请求时都必须在SSL-TLS层进行握手传输密钥吗？"><a href="#每次进行HTTPS请求时都必须在SSL-TLS层进行握手传输密钥吗？" class="headerlink" title="每次进行HTTPS请求时都必须在SSL&#x2F;TLS层进行握手传输密钥吗？"></a><strong>每次进行HTTPS请求时都</strong>必须<strong>在SSL&#x2F;TLS层进行握手传输密钥吗？</strong></h3><p>显然每次请求都经历一次密钥传输过程非常耗时，那怎么达到只传输一次呢？</p>
-<p>服务器会为每个浏览器（或客户端软件）维护一个session ID，在TLS握手阶段传给浏览器，浏览器生成好密钥传给服务器后，服务器会把该密钥存到相应的session ID下，之后浏览器每次请求都会携带session ID，服务器会根据session ID找到相应的密钥并进行解密加密操作，这样就不必要每次重新制作、传输密钥了！</p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a><strong>总结</strong></h3><p>TLS建立连接的整个过程（SSL、TLS握手有一些区别，不同版本间也有区别，不过大致过程就是这样）：</p>
-]]></content>
-      <categories>
-        <category>计算机网络协议</category>
-      </categories>
-      <tags>
-        <tag>Network</tag>
-        <tag>Https</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Hooks</title>
     <url>/2021/10/12/Hooks/</url>
     <content><![CDATA[<h3 id="hooks的作用"><a href="#hooks的作用" class="headerlink" title="hooks的作用"></a>hooks的作用</h3><p><strong>钩子（hook）就是 React 函数组件的副效应解决方案，用来为函数组件引入副效应。</strong> 函数组件的主体只应该用来返回组件的 HTML 代码，所有的其他操作（副效应）都必须通过钩子引入。</p>
@@ -523,6 +444,85 @@
       </tags>
   </entry>
   <entry>
+    <title>Https</title>
+    <url>/2021/09/13/Https/</url>
+    <content><![CDATA[<h3 id="为什么需要加密？"><a href="#为什么需要加密？" class="headerlink" title="为什么需要加密？"></a><strong>为什么需要加密？</strong></h3><p>因为http的内容是明文传输的，明文数据会经过中间代理服务器、路由器、wifi热点、通信服务运营商等多个物理节点，如果信息在传输过程中被劫持，传输的内容就完全暴露了。劫持者还可以篡改传输的信息且不被双方察觉，这就是“中间人攻击”。</p>
+<h3 id="用对称加密可行吗？"><a href="#用对称加密可行吗？" class="headerlink" title="用对称加密可行吗？"></a><strong>用对称加密可行吗？</strong></h3><p>对称加密最大的问题就是密钥的传输，而密钥的传输又需要加密（反复套娃），故而单纯的对称加密是无法解决问题的。</p>
+<span id="more"></span>
+
+
+<h3 id="用非对称加密可行吗？"><a href="#用非对称加密可行吗？" class="headerlink" title="用非对称加密可行吗？"></a>用非对称加密可行吗？</h3><p>鉴于非对称加密的机制，我们可能会有这种思路：服务器先把公钥以明文方式传输给浏览器，之后浏览器向服务器传数据前都先用这个公钥加密好再传，这条数据的安全似乎可以保障了！<strong>因为只有服务器有相应的私钥能解开公钥加密的数据</strong>。</p>
+<p>然而反过来<strong>由服务器到浏览器的这条路怎么保障安全？</strong>如果服务器用它的私钥加密数据传给浏览器，那么浏览器用公钥可以解密它，而这个公钥是一开始通过明文传输给浏览器的，若这个公钥被中间人劫持到了，那他也能用该公钥解密服务器传来的信息了。所以<strong>目前似乎只能保证由浏览器向服务器传输数据的安全性</strong></p>
+<h3 id="那用两组公钥私钥，是否就能保证双向传输都安全了？"><a href="#那用两组公钥私钥，是否就能保证双向传输都安全了？" class="headerlink" title="那用两组公钥私钥，是否就能保证双向传输都安全了？"></a>那用两组公钥私钥，是否就能保证双向传输都安全了？</h3><ol>
+<li>某网站服务器拥有公钥A与对应的私钥A’；浏览器拥有公钥B与对应的私钥B’。</li>
+<li>浏览器把公钥B明文传输给服务器。</li>
+<li>服务器把公钥A明文给传输浏览器。</li>
+<li>之后浏览器向服务器传输的内容都用公钥A加密，服务器收到后用私钥A’解密。由于只有服务器拥有私钥A’，所以能保证这条数据的安全。</li>
+<li>同理，服务器向浏览器传输的内容都用公钥B加密，浏览器收到后用私钥B’解密。同上也可以保证这条数据的安全。</li>
+</ol>
+<p>然而这又引出了一个新的问题，非对称加密非常耗时，如何解决？（见RSA算法）而且这种方法真的安全了吗？</p>
+<h3 id="非对称加密-对称加密"><a href="#非对称加密-对称加密" class="headerlink" title="非对称加密 + 对称加密"></a>非对称加密 + 对称加密</h3><ol>
+<li>某网站拥有用于非对称加密的公钥A、私钥A’。</li>
+<li>浏览器向网站服务器请求，服务器把公钥A明文给传输浏览器。</li>
+<li>浏览器随机生成一个用于对称加密的密钥X，用公钥A加密后传给服务器。</li>
+<li>服务器拿到后用私钥A’解密得到密钥X。</li>
+<li>这样双方就都拥有密钥X了，且别人无法知道它。之后双方所有数据都通过密钥X加密解密即可。</li>
+</ol>
+<p>这基本上就是https采用的方案了，但仍然还是有漏洞。</p>
+<h3 id="中间人攻击"><a href="#中间人攻击" class="headerlink" title="中间人攻击"></a>中间人攻击</h3><p>中间人攻击（MITMA，man in the middle attack）<br>中间人攻击是一种网络攻击类型 ，应用与LAN局域网中。这种攻击的方式是 hacker 置身于两个通信 paties 之间，窃取数据。</p>
+<p>中间人攻击允许黑客截获双方之间的数据，它可能是服务器和客户端或客户端到客户端或服务器到服务器。</p>
+<p><img src="/../assets/image-20210513212400962.png" alt="image-20210513212400962"></p>
+<p>如果在数据传输过程中，中间人劫持到了数据，此时他的确无法得到浏览器生成的密钥X，这个密钥本身被公钥A加密了，只有服务器才有私钥A’解开它，然而中间人却完全不需要拿到私钥A’就能干坏事了。请看：</p>
+<ol>
+<li>某网站有用于非对称加密的公钥A、私钥A’。</li>
+<li>浏览器向网站服务器请求，服务器把公钥A明文给传输浏览器。</li>
+<li><strong>中间人劫持到公钥A，保存下来，把数据包中的公钥A替换成自己伪造的公钥B（它当然也拥有公钥B对应的私钥B’）</strong>。</li>
+<li>浏览器生成一个用于对称加密的密钥X，用<strong>公钥B</strong>（浏览器无法得知公钥被替换了）加密后传给服务器。</li>
+<li><strong>中间人劫持后用私钥B’解密得到密钥X，再用公钥A加密后传给服务器</strong>。</li>
+<li>服务器拿到后用私钥A’解密得到密钥X。</li>
+</ol>
+<p>这样在双方都不会发现异常的情况下，中间人掉包了服务器传来的公钥，进而得到了密钥X。<strong>根本原因是浏览器无法确认收到的公钥是不是网站自己的，</strong>因为公钥本身是明文传输的，难道还得对公钥的传输进行加密？这似乎变成鸡生蛋、蛋生鸡的问题了。解法是什么？</p>
+<h3 id="如何证明浏览器收到的公钥一定是该网站的公钥？"><a href="#如何证明浏览器收到的公钥一定是该网站的公钥？" class="headerlink" title="如何证明浏览器收到的公钥一定是该网站的公钥？"></a><strong>如何证明浏览器收到的公钥一定是该网站的公钥？</strong></h3><p>网站是否有个‘身份证’来证明自己的公钥合法？这个‘身份证’又由谁来颁发？</p>
+<p><strong>CA机构</strong>，它是如今互联网世界正常运作的前提，而CA机构颁发的“身份证”就是<strong>数字证书</strong>。</p>
+<h4 id="数字证书"><a href="#数字证书" class="headerlink" title="数字证书"></a><strong>数字证书</strong></h4><p>网站在使用HTTPS前，需要向<strong>CA机构</strong>申领一份<strong>数字证书</strong>，数字证书里含有证书持有者信息、域名、公钥信息等。服务器把证书传输给浏览器，浏览器从证书里获取公钥就行了，证书就如身份证，证明“该公钥对应该网站”。</p>
+<p>而这里又有一个显而易见的问题，“<strong>证书本身的传输过程中，如何防止被篡改”</strong>？即如何证明证书本身的真实性？身份证运用了一些防伪技术，而数字证书怎么防伪呢？</p>
+<h3 id="如何放防止数字证书被篡改？"><a href="#如何放防止数字证书被篡改？" class="headerlink" title="如何放防止数字证书被篡改？"></a><strong>如何放防止数字证书被篡改？</strong></h3><p>我们把证书原本的内容生成一份“签名”，比对证书内容和签名是否一致就能判别是否被篡改。这就是数字证书的“防伪技术”，这里的“签名”就叫<code>数字签名</code>：</p>
+<p>数字签名的制作过程：</p>
+<ol>
+<li>CA机构拥有非对称加密的私钥和公钥。</li>
+<li>CA机构对证书明文数据T进行hash。</li>
+<li>对hash后的值用私钥加密，得到数字签名S。</li>
+</ol>
+<p>明文和数字签名共同组成了数字证书，这样一份数字证书就可以颁发给网站了。<br>那浏览器拿到服务器传来的数字证书后，如何验证它是不是真的？（有没有被篡改、掉包）</p>
+<p>浏览器验证过程：</p>
+<ol>
+<li>拿到证书，得到明文T，签名S。</li>
+<li>用CA机构的公钥对S解密（由于是浏览器信任的机构，所以浏览器保有它的公钥。详情见下文），得到S’。</li>
+<li>用证书里指明的hash算法对明文T进行hash得到T’。</li>
+<li>显然通过以上步骤，T’应当等于S‘，除非明文或签名被篡改。所以此时比较S’是否等于T’，等于则表明证书可信。</li>
+</ol>
+<p><img src="/../assets/image-20210513214044731.png" alt="image-20210513214044731"></p>
+<h3 id="中间人有可能篡改该证书吗？"><a href="#中间人有可能篡改该证书吗？" class="headerlink" title="中间人有可能篡改该证书吗？"></a><strong>中间人有可能篡改该证书吗？</strong></h3><p>假设中间人篡改了证书的原文，由于他没有CA机构的私钥，所以无法得到此时加密后签名，无法相应地篡改签名。浏览器收到该证书后会发现原文和签名解密后的值不一致，则说明证书已被篡改，证书不可信</p>
+<h3 id="中间人有可能把证书掉包吗？"><a href="#中间人有可能把证书掉包吗？" class="headerlink" title="中间人有可能把证书掉包吗？"></a><strong>中间人有可能把证书掉包吗？</strong></h3><p>假设有另一个网站B也拿到了CA机构认证的证书，它想劫持网站A的信息。于是它成为中间人拦截到了A传给浏览器的证书，然后替换成自己的证书，传给浏览器，之后浏览器就会错误地拿到B的证书里的公钥了。</p>
+<p>其实这并不会发生，因为证书一定是无法被篡改的，所以网站B掉包的一定也是正规的证书，而证书黎里包含了网站的信息，包括域名，浏览器把证书里的域名与自己请求的域名比对一下就知道有没有被掉包了。</p>
+<h3 id="为什么制作数字签名时需要hash一次？"><a href="#为什么制作数字签名时需要hash一次？" class="headerlink" title="为什么制作数字签名时需要hash一次？"></a><strong>为什么制作数字签名时需要hash一次？</strong></h3><p>最显然的是性能问题，非对称加密效率较差，证书信息一般较长，比较耗时。而hash后得到的是固定长度的信息（比如用md5算法hash后可以得到固定的128位的值），这样加解密就快很多。</p>
+<h3 id="怎么证明CA机构的公钥是可信的？"><a href="#怎么证明CA机构的公钥是可信的？" class="headerlink" title="怎么证明CA机构的公钥是可信的？"></a><strong>怎么证明CA机构的公钥是可信的？</strong></h3><p>“浏览器保有它的公钥”，这是个什么保有法？怎么证明这个公钥是否可信？</p>
+<p>让我们回想一下数字证书到底是干啥的？没错，为了证明某公钥是可信的，即“该公钥是否对应该网站”，那CA机构的公钥是否也可以用数字证书来证明？没错，操作系统、浏览器本身会预装一些它们信任的根证书，如果其中会有CA机构的根证书，这样就可以拿到它对应的可信公钥了。</p>
+<p>实际上证书之间的认证也可以不止一层，可以A信任B，B信任C，以此类推，我们把它叫做<code>信任链</code>或<code>数字证书链</code>。也就是一连串的数字证书，由根证书为起点，透过层层信任，使终端实体证书的持有者可以获得转授的信任，以证明身份。</p>
+<p>另外，不知你们是否遇到过网站访问不了、提示需安装证书的情况？这里安装的就是根证书。说明浏览器不认给这个网站颁发证书的机构，那么你就得手动下载安装该机构的根证书（风险自己承担XD）。安装后，你就有了它的公钥，就可以用它验证服务器发来的证书是否可信了。</p>
+<h3 id="每次进行HTTPS请求时都必须在SSL-TLS层进行握手传输密钥吗？"><a href="#每次进行HTTPS请求时都必须在SSL-TLS层进行握手传输密钥吗？" class="headerlink" title="每次进行HTTPS请求时都必须在SSL&#x2F;TLS层进行握手传输密钥吗？"></a><strong>每次进行HTTPS请求时都</strong>必须<strong>在SSL&#x2F;TLS层进行握手传输密钥吗？</strong></h3><p>显然每次请求都经历一次密钥传输过程非常耗时，那怎么达到只传输一次呢？</p>
+<p>服务器会为每个浏览器（或客户端软件）维护一个session ID，在TLS握手阶段传给浏览器，浏览器生成好密钥传给服务器后，服务器会把该密钥存到相应的session ID下，之后浏览器每次请求都会携带session ID，服务器会根据session ID找到相应的密钥并进行解密加密操作，这样就不必要每次重新制作、传输密钥了！</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a><strong>总结</strong></h3><p>TLS建立连接的整个过程（SSL、TLS握手有一些区别，不同版本间也有区别，不过大致过程就是这样）：</p>
+]]></content>
+      <categories>
+        <category>计算机网络协议</category>
+      </categories>
+      <tags>
+        <tag>Network</tag>
+        <tag>Https</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>IPad配置开发环境</title>
     <url>/2024/11/12/IPad%E9%85%8D%E7%BD%AE%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</url>
     <content><![CDATA[]]></content>
@@ -532,6 +532,24 @@
       <tags>
         <tag>编程环境</tag>
         <tag>IPad</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JavaScript API</title>
+    <url>/2024/12/30/JS%20API/</url>
+    <content><![CDATA[<h2 id="InterSectionObserver"><a href="#InterSectionObserver" class="headerlink" title="InterSectionObserver"></a>InterSectionObserver</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 创建 IntersectionObserver 实例</span></span><br><span class="line"><span class="keyword">const</span> observer = <span class="keyword">new</span> <span class="title class_">IntersectionObserver</span>(<span class="function">(<span class="params">entries</span>) =&gt;</span> &#123;</span><br><span class="line">  entries.<span class="title function_">forEach</span>(<span class="function">(<span class="params">entry</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (entry.<span class="property">isIntersecting</span>) &#123;</span><br><span class="line">      <span class="comment">// 目标元素进入视口时的操作</span></span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`<span class="subst">$&#123;entry.target.id&#125;</span> 进入视口`</span>);</span><br><span class="line">      <span class="comment">// 例如在这里可以加载图片或触发其他动画效果</span></span><br><span class="line">      entry.<span class="property">target</span>.<span class="property">src</span> = <span class="string">&#x27;your_image.jpg&#x27;</span>;</span><br><span class="line">      <span class="comment">// 停止观察该元素（可选）</span></span><br><span class="line">      observer.<span class="title function_">unobserve</span>(entry.<span class="property">target</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 选择要观察的目标元素</span></span><br><span class="line"><span class="keyword">const</span> targetElement = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;your_element_id&#x27;</span>);</span><br><span class="line"><span class="comment">// 开始观察目标元素</span></span><br><span class="line">observer.<span class="title function_">observe</span>(targetElement);</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="MutationObserver"><a href="#MutationObserver" class="headerlink" title="MutationObserver"></a>MutationObserver</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 创建 MutationObserver 实例</span></span><br><span class="line"><span class="keyword">const</span> observer = <span class="keyword">new</span> <span class="title class_">MutationObserver</span>(<span class="function">(<span class="params">mutationsList</span>) =&gt;</span> &#123;</span><br><span class="line">  mutationsList.<span class="title function_">forEach</span>(<span class="function">(<span class="params">mutation</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (mutation.<span class="property">type</span> === <span class="string">&#x27;childList&#x27;</span>) &#123;</span><br><span class="line">      <span class="comment">// 子节点列表发生变化时的操作</span></span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;子节点列表发生变化&#x27;</span>);</span><br><span class="line">      <span class="comment">// 可以在这里对新增或删除的子节点进行进一步处理</span></span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (mutation.<span class="property">type</span> === <span class="string">&#x27;attributes&#x27;</span>) &#123;</span><br><span class="line">      <span class="comment">// 属性发生变化时的操作</span></span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`属性 <span class="subst">$&#123;mutation.attributeName&#125;</span> 发生变化`</span>);</span><br><span class="line">      <span class="comment">// 根据属性变化进行相应的样式更新或逻辑处理</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 选择要观察的目标节点</span></span><br><span class="line"><span class="keyword">const</span> targetNode = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;your_target_node_id&#x27;</span>);</span><br><span class="line"><span class="comment">// 配置观察选项</span></span><br><span class="line"><span class="keyword">const</span> config = &#123; <span class="attr">attributes</span>: <span class="literal">true</span>, <span class="attr">childList</span>: <span class="literal">true</span>, <span class="attr">subtree</span>: <span class="literal">true</span> &#125;;</span><br><span class="line"><span class="comment">// 开始观察目标节点</span></span><br><span class="line">observer.<span class="title function_">observe</span>(targetNode, config);</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="PerformanceObserver"><a href="#PerformanceObserver" class="headerlink" title="PerformanceObserver"></a>PerformanceObserver</h2><h2 id="requestAnimationFrame"><a href="#requestAnimationFrame" class="headerlink" title="requestAnimationFrame"></a>requestAnimationFrame</h2><h2 id="requestIdleCallback"><a href="#requestIdleCallback" class="headerlink" title="requestIdleCallback"></a>requestIdleCallback</h2>]]></content>
+      <categories>
+        <category>chore</category>
+      </categories>
+      <tags>
+        <tag>API</tag>
+        <tag>工程化</tag>
       </tags>
   </entry>
   <entry>
@@ -806,6 +824,38 @@
       </tags>
   </entry>
   <entry>
+    <title>Mini-React</title>
+    <url>/2022/03/04/Mini-React/</url>
+    <content><![CDATA[<h4 id="项目拆解："><a href="#项目拆解：" class="headerlink" title="项目拆解："></a>项目拆解：</h4><ol>
+<li><p>Jsx 和虚拟 DOM</p>
+</li>
+<li><p>组件和生命周期</p>
+</li>
+<li><p>Diff</p>
+</li>
+<li><p>异步的setState</p>
+</li>
+<li><p>hook支持</p>
+</li>
+</ol>
+<h4 id="具体思路"><a href="#具体思路" class="headerlink" title="具体思路"></a>具体思路</h4><h5 id="将jsx经过babel转成React-createElement的形式"><a href="#将jsx经过babel转成React-createElement的形式" class="headerlink" title="将jsx经过babel转成React.createElement的形式"></a>将jsx经过babel转成React.createElement的形式</h5><p>例如</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Hem</span> <span class="keyword">extends</span> <span class="title class_ inherited__">React.Component</span> &#123;</span><br><span class="line">    <span class="title function_">render</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> (</span><br><span class="line">            <span class="language-xml"><span class="tag">&lt;<span class="name">A</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">                <span class="tag">&lt;<span class="name">B</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">                    <span class="tag">&lt;<span class="name">C</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">                        <span class="tag">&lt;<span class="name">div</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">                        <span class="tag">&lt;<span class="name">span</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">                    <span class="tag">&lt;/<span class="name">C</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">                    <span class="tag">&lt;<span class="name">D</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">                <span class="tag">&lt;/<span class="name">B</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">                <span class="tag">&lt;<span class="name">E</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">                <span class="tag">&lt;<span class="name">F</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;/<span class="name">A</span>&gt;</span></span></span><br><span class="line">        );</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>经过babel转义后</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="title function_">_createClass</span>(<span class="title class_">Hem</span>, [</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">key</span>: <span class="string">&quot;render&quot;</span>,</span><br><span class="line">        <span class="attr">value</span>: <span class="keyword">function</span> <span class="title function_">render</span>(<span class="params"></span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="title class_">React</span>.<span class="title function_">createElement</span>(</span><br><span class="line">                A,</span><br><span class="line">                <span class="literal">null</span>,</span><br><span class="line">                <span class="comment">// A组件的亲儿子组件B</span></span><br><span class="line">                <span class="title class_">React</span>.<span class="title function_">createElement</span>(</span><br><span class="line">                    B,</span><br><span class="line">                    <span class="literal">null</span>,</span><br><span class="line">                    <span class="title class_">React</span>.<span class="title function_">createElement</span>(</span><br><span class="line">                        C,</span><br><span class="line">                        <span class="literal">null</span>,</span><br><span class="line">                        <span class="comment">// C组件的亲儿子 div</span></span><br><span class="line">                        <span class="title class_">React</span>.<span class="title function_">createElement</span>(<span class="string">&quot;div&quot;</span>, <span class="literal">null</span>),</span><br><span class="line">                        <span class="comment">// C组件的亲儿子 span</span></span><br><span class="line">                        <span class="title class_">React</span>.<span class="title function_">createElement</span>(<span class="string">&quot;span&quot;</span>, <span class="literal">null</span>)</span><br><span class="line">                    ),</span><br><span class="line">                    <span class="title class_">React</span>.<span class="title function_">createElement</span>(D, <span class="literal">null</span>)</span><br><span class="line">                ),</span><br><span class="line">                <span class="comment">// A组件的亲儿子组件E</span></span><br><span class="line">                <span class="title class_">React</span>.<span class="title function_">createElement</span>(E, <span class="literal">null</span>),</span><br><span class="line">                <span class="comment">// A组件的亲儿子组件F</span></span><br><span class="line">                <span class="title class_">React</span>.<span class="title function_">createElement</span>(F, <span class="literal">null</span>)</span><br><span class="line">            );</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">]);</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<h5 id="createElement生成虚拟dom"><a href="#createElement生成虚拟dom" class="headerlink" title="createElement生成虚拟dom"></a>createElement生成虚拟dom</h5>]]></content>
+      <categories>
+        <category>React</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>React</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Jira项目</title>
     <url>/2022/03/02/Jira%E9%A1%B9%E7%9B%AE/</url>
     <content><![CDATA[<h4 id="代码自动格式化工具：prettier"><a href="#代码自动格式化工具：prettier" class="headerlink" title="代码自动格式化工具：prettier"></a>代码自动格式化工具：prettier</h4><p>配置过程：<a href="https://prettier.io/docs/en/precommit.html">https://prettier.io/docs/en/precommit.html</a></p>
@@ -964,38 +1014,6 @@
       <tags>
         <tag>JavaScript</tag>
         <tag>Node</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Mini-React</title>
-    <url>/2022/03/04/Mini-React/</url>
-    <content><![CDATA[<h4 id="项目拆解："><a href="#项目拆解：" class="headerlink" title="项目拆解："></a>项目拆解：</h4><ol>
-<li><p>Jsx 和虚拟 DOM</p>
-</li>
-<li><p>组件和生命周期</p>
-</li>
-<li><p>Diff</p>
-</li>
-<li><p>异步的setState</p>
-</li>
-<li><p>hook支持</p>
-</li>
-</ol>
-<h4 id="具体思路"><a href="#具体思路" class="headerlink" title="具体思路"></a>具体思路</h4><h5 id="将jsx经过babel转成React-createElement的形式"><a href="#将jsx经过babel转成React-createElement的形式" class="headerlink" title="将jsx经过babel转成React.createElement的形式"></a>将jsx经过babel转成React.createElement的形式</h5><p>例如</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Hem</span> <span class="keyword">extends</span> <span class="title class_ inherited__">React.Component</span> &#123;</span><br><span class="line">    <span class="title function_">render</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> (</span><br><span class="line">            <span class="language-xml"><span class="tag">&lt;<span class="name">A</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">                <span class="tag">&lt;<span class="name">B</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">                    <span class="tag">&lt;<span class="name">C</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">                        <span class="tag">&lt;<span class="name">div</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">                        <span class="tag">&lt;<span class="name">span</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">                    <span class="tag">&lt;/<span class="name">C</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">                    <span class="tag">&lt;<span class="name">D</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">                <span class="tag">&lt;/<span class="name">B</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">                <span class="tag">&lt;<span class="name">E</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">                <span class="tag">&lt;<span class="name">F</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;/<span class="name">A</span>&gt;</span></span></span><br><span class="line">        );</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>经过babel转义后</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="title function_">_createClass</span>(<span class="title class_">Hem</span>, [</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">key</span>: <span class="string">&quot;render&quot;</span>,</span><br><span class="line">        <span class="attr">value</span>: <span class="keyword">function</span> <span class="title function_">render</span>(<span class="params"></span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="title class_">React</span>.<span class="title function_">createElement</span>(</span><br><span class="line">                A,</span><br><span class="line">                <span class="literal">null</span>,</span><br><span class="line">                <span class="comment">// A组件的亲儿子组件B</span></span><br><span class="line">                <span class="title class_">React</span>.<span class="title function_">createElement</span>(</span><br><span class="line">                    B,</span><br><span class="line">                    <span class="literal">null</span>,</span><br><span class="line">                    <span class="title class_">React</span>.<span class="title function_">createElement</span>(</span><br><span class="line">                        C,</span><br><span class="line">                        <span class="literal">null</span>,</span><br><span class="line">                        <span class="comment">// C组件的亲儿子 div</span></span><br><span class="line">                        <span class="title class_">React</span>.<span class="title function_">createElement</span>(<span class="string">&quot;div&quot;</span>, <span class="literal">null</span>),</span><br><span class="line">                        <span class="comment">// C组件的亲儿子 span</span></span><br><span class="line">                        <span class="title class_">React</span>.<span class="title function_">createElement</span>(<span class="string">&quot;span&quot;</span>, <span class="literal">null</span>)</span><br><span class="line">                    ),</span><br><span class="line">                    <span class="title class_">React</span>.<span class="title function_">createElement</span>(D, <span class="literal">null</span>)</span><br><span class="line">                ),</span><br><span class="line">                <span class="comment">// A组件的亲儿子组件E</span></span><br><span class="line">                <span class="title class_">React</span>.<span class="title function_">createElement</span>(E, <span class="literal">null</span>),</span><br><span class="line">                <span class="comment">// A组件的亲儿子组件F</span></span><br><span class="line">                <span class="title class_">React</span>.<span class="title function_">createElement</span>(F, <span class="literal">null</span>)</span><br><span class="line">            );</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">]);</span><br></pre></td></tr></table></figure>
-
-<span id="more"></span>
-
-<h5 id="createElement生成虚拟dom"><a href="#createElement生成虚拟dom" class="headerlink" title="createElement生成虚拟dom"></a>createElement生成虚拟dom</h5>]]></content>
-      <categories>
-        <category>React</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-        <tag>React</tag>
       </tags>
   </entry>
   <entry>
@@ -1451,68 +1469,6 @@ C组件: 读取A组件传入的数据显示 &#123;this.props.data&#125;
       </tags>
   </entry>
   <entry>
-    <title>React生态</title>
-    <url>/2021/09/30/React%E7%94%9F%E6%80%81/</url>
-    <content><![CDATA[<h3 id="React-DevTools"><a href="#React-DevTools" class="headerlink" title="React DevTools"></a>React DevTools</h3><h5 id="General-设置"><a href="#General-设置" class="headerlink" title="General 设置"></a>General 设置</h5><img src="../assets/image-20220222024702149.png" alt="image-20220222024702149" style="zoom:33%;" />
-
-<p>General 面板中最重要的功能就是 **”Highlight updates when components render”**。勾选上之后，可以查看 React 重绘时，页面哪些部分有更新。在遇到性能问题时，可以快速帮助决策在哪部分不需要重绘的组件部分添加 React.memo 阻止重绘。</p>
-<h5 id="Debugging-设置"><a href="#Debugging-设置" class="headerlink" title="Debugging 设置"></a>Debugging 设置</h5><img src="..\assets\image-20220222024832097.png" alt="image-20220222024832097" style="zoom:33%;" />
-
-<p><strong>“Append components stacks to console warnings and errors.”</strong></p>
-<p>可以帮助我们定位 React 报错信息来自哪个组件</p>
-<span id="more"></span>
-
-
-<h5 id="Components-设置"><a href="#Components-设置" class="headerlink" title="Components 设置"></a>Components 设置</h5><img src="..\assets\image-20220222024936104.png" alt="image-20220222024936104" style="zoom:33%;" />
-
-<p><strong>“Hide components where…”</strong></p>
-<p>此项在过滤组件树时有用。比如，大多数应用可能会在顶层有很多 Context.Provider，就可以过滤 Context 类型、不显示。当我们只关心业务逻辑层的组件时，可以过滤掉 DOM 组件，减少树的节点</p>
-<h5 id="Profiler-设置"><a href="#Profiler-设置" class="headerlink" title="Profiler 设置"></a>Profiler 设置</h5><img src="..\assets\image-20220222025024293.png" alt="image-20220222025024293" style="zoom:33%;" />
-
-<p><strong>“Record why each component rendered while profiling”</strong></p>
-<img src="..\assets\image-20220222025054509.png" alt="image-20220222025054509" style="zoom:33%;" />
-
-<p>勾选之后会在渲染火焰图的 hover 面板中看到 **”Why did this render”**。</p>
-<h5 id="现在有哪些-render-原因呢？"><a href="#现在有哪些-render-原因呢？" class="headerlink" title="现在有哪些 render 原因呢？"></a>现在有哪些 render 原因呢？</h5><ul>
-<li><p><strong>Props changed</strong></p>
-<p>​     顾名思义，传入组件的 props 变更</p>
-</li>
-<li><p><strong>The parent component rendered</strong></p>
-<p>​	父组件渲染导致的子组件渲染。一般要做性能优化都是找这类重绘原因的组件。但是要注意，如果组件中有用到 useContext，Provider 的 value 变更导致的重绘也是被标记为 The parent component rendered，需要注意</p>
-</li>
-<li><p><strong>Hooks changed</strong></p>
-<p>​	Hook 状态变更导致的重绘，一般就是指 useState 返回的更新函数被调用了</p>
-</li>
-<li><p><strong>State changed</strong></p>
-<p>​	这个只会在 class component 中有，大家忽略</p>
-</li>
-<li><p><strong>“Hide commits below xx (ms)”</strong></p>
-<p>​	设置一个更新耗时的阈值，低于该阈值的渲染不显示。用来快速过滤哪些渲染有性能问题</p>
-</li>
-</ul>
-<h5 id="React-组件检视器"><a href="#React-组件检视器" class="headerlink" title="React 组件检视器"></a>React 组件检视器</h5><p>用法和 DevTools 的元素面板类似，可以直接在页面上定位到元素对应的 React Component。并且可以实时查看当前组件内部的 hooks 状态，返回的组件树</p>
-<img src="..\assets\image-20220222025129591.png" alt="image-20220222025129591" style="zoom:33%;" />
-
-<p>右上角的四个图标</p>
-<img src="..\assets\image-20220222025154916.png" alt="image-20220222025154916" style="zoom:33%;" />
-
-<p>分别作用如下：</p>
-<ul>
-<li>模拟 ReactLazy 懒加载组件 Suspense 状态</li>
-<li>定位组件所渲染的 DOM 节点</li>
-<li>在 Console 中打印 Component 内部状态</li>
-<li>跳转到组件所在源文件（配合 sourcemap）</li>
-</ul>
-]]></content>
-      <categories>
-        <category>React</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-        <tag>React</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>React的设计和实现</title>
     <url>/2021/09/29/React%E7%9A%84%E8%AE%BE%E8%AE%A1%E5%92%8C%E5%AE%9E%E7%8E%B0/</url>
     <content><![CDATA[<h4 id="本篇笔记的目的：站在更高的角度看待React"><a href="#本篇笔记的目的：站在更高的角度看待React" class="headerlink" title="本篇笔记的目的：站在更高的角度看待React"></a>本篇笔记的目的：站在更高的角度看待React</h4><h4 id="React的设计思路"><a href="#React的设计思路" class="headerlink" title="React的设计思路"></a>React的设计思路</h4><ul>
@@ -1750,72 +1706,6 @@ C组件: 读取A组件传入的数据显示 &#123;this.props.data&#125;
         <tag>JavaScript</tag>
         <tag>React</tag>
         <tag>Redux</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Webpack</title>
-    <url>/2022/04/14/Webpack/</url>
-    <content><![CDATA[<h3 id="Webpack-是什么"><a href="#Webpack-是什么" class="headerlink" title="Webpack 是什么"></a>Webpack 是什么</h3><p>webpack 是一种<strong>前端资源构建工具</strong>，一个静态模块打包器(module bundler)。</p>
-<p>在webpack 看来, 前端的所有资源文件(js&#x2F;json&#x2F;css&#x2F;img&#x2F;less&#x2F;…)都会作为模块处理。<br>它将根据模块的依赖关系进行静态分析，打包生成对应的静态资源(bundle)。</p>
-<h3 id="Webpack-五个核心概念"><a href="#Webpack-五个核心概念" class="headerlink" title="Webpack 五个核心概念"></a>Webpack 五个核心概念</h3><h4 id="Entry"><a href="#Entry" class="headerlink" title="Entry"></a>Entry</h4><p>入口(Entry)：指示 webpack 以哪个文件为入口起点开始打包，分析构建内部依赖图。</p>
-<h4 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h4><p>输出(Output)：指示 webpack 打包后的资源 bundles 输出到哪里去，以及如何命名。</p>
-<h4 id="Loader"><a href="#Loader" class="headerlink" title="Loader"></a>Loader</h4><p>Loader：让 webpack 能够去处理那些非 JS 的文件，比如样式文件、图片文件(webpack 自身只理解<br>JS)</p>
-<h4 id="Plugins"><a href="#Plugins" class="headerlink" title="Plugins"></a>Plugins</h4><p>插件(Plugins)：可以用于执行范围更广的任务。插件的范围包括，从打包优化和压缩，<br>一直到重新定义环境中的变量等。</p>
-<span id="more"></span>
-
-<h4 id="Mode"><a href="#Mode" class="headerlink" title="Mode"></a>Mode</h4><p>模式(Mode)：指示 webpack 使用相应模式的配置。</p>
-<ol>
-<li><p>development:  </p>
-<p> 会将 DefinePlugin 中 <code>process.env.NODE_ENV</code> 的值设置为 development。</p>
-<p>启用 </p>
-<figure class="highlight plaintext"><figcaption><span>和 ```NamedModulesPlugin```。</span></figcaption><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">   特点： 能让代码本地调试运行的环境。</span><br><span class="line"></span><br><span class="line">2. production</span><br><span class="line"></span><br><span class="line">   会将 DefinePlugin 中 ```process.env.NODE_ENV``` 的值设置为 production。</span><br><span class="line"></span><br><span class="line">   启用 </span><br><span class="line"></span><br><span class="line">   ```FlagDependencyUsagePlugin,```</span><br><span class="line"></span><br><span class="line">   ```FlagIncludedChunksPlugin,``` </span><br><span class="line"></span><br><span class="line">   ```ModuleConcatenationPlugin,``` </span><br><span class="line"></span><br><span class="line">   ```NoEmitOnErrorsPlugin,```</span><br><span class="line"></span><br><span class="line">    ```OccurrenceOrderPlugin,```</span><br><span class="line"></span><br><span class="line">   ```SideEffectsFlagPlugin 和 TerserPlugin```。</span><br><span class="line"></span><br><span class="line">   特点： 能让代码优化上线运行的环境。</span><br><span class="line"></span><br><span class="line">   </span><br><span class="line"></span><br><span class="line">### 编译打包应用</span><br><span class="line"></span><br><span class="line">创建 src 下的 js 等文件后，不需要配置 webpack.config.js 文件，在命令行就可以编译打包。</span><br><span class="line"></span><br><span class="line">指令：</span><br><span class="line"></span><br><span class="line">- 开发环境：</span><br><span class="line">```shell</span><br><span class="line">webpack ./src/index.js -o ./build/built.js --mode=development</span><br></pre></td></tr></table></figure></li>
-</ol>
-<p>  webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后输出到 .&#x2F;build&#x2F;built.js 整体打包环境，是开发环境</p>
-<ul>
-<li>生产环境：<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">webpack ./src/index.js -o ./build/built.js --mode=production</span><br></pre></td></tr></table></figure>
-webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后输出到 .&#x2F;build&#x2F;built.js 整体打包环境，是生产环境</li>
-</ul>
-<p>结论：</p>
-<ol>
-<li>webpack 本身能处理 js&#x2F;json 资源，不能处理 css&#x2F;img 等其他资源</li>
-<li>生产环境和开发环境将 ES6 模块化编译成浏览器能识别的模块化，但是不能处理 ES6 的基本语法转化为 ES5（需要借助 loader）</li>
-<li>生产环境比开发环境多一个压缩 js 代码</li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// resolve用来拼接绝对路径的方法</span></span><br><span class="line"><span class="keyword">const</span> &#123; resolve &#125; = <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>);</span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="comment">// webpack配置</span></span><br><span class="line">  <span class="comment">// 入口起点</span></span><br><span class="line">  <span class="attr">entry</span>: <span class="string">&#x27;./src/index.js&#x27;</span>,</span><br><span class="line">  <span class="comment">// 输出</span></span><br><span class="line">  <span class="attr">output</span>: &#123;</span><br><span class="line">    <span class="comment">// 输出文件名</span></span><br><span class="line">    <span class="attr">filename</span>: <span class="string">&#x27;built.js&#x27;</span>,</span><br><span class="line">    <span class="comment">// 输出路径</span></span><br><span class="line">    <span class="comment">// __dirname nodejs的变量，代表当前文件的目录绝对路径</span></span><br><span class="line">    <span class="attr">path</span>: <span class="title function_">resolve</span>(__dirname, <span class="string">&#x27;build&#x27;</span>)</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// loader的配置</span></span><br><span class="line">  <span class="attr">module</span>: &#123;</span><br><span class="line">    <span class="attr">rules</span>: [</span><br><span class="line">      <span class="comment">// 详细loader配置</span></span><br><span class="line">      <span class="comment">// 不同文件必须配置不同loader处理</span></span><br><span class="line">      &#123; </span><br><span class="line">        <span class="comment">// 匹配哪些文件</span></span><br><span class="line">        <span class="attr">test</span>: <span class="regexp">/\.css$/</span>,</span><br><span class="line">        <span class="comment">// 使用哪些loader进行处理</span></span><br><span class="line">        <span class="attr">use</span>: [</span><br><span class="line">          <span class="comment">// use数组中loader执行顺序：从右到左，从下到上 依次执行</span></span><br><span class="line">          <span class="comment">// 创建style标签，将js中的样式资源插入进行，添加到head中生效</span></span><br><span class="line">          <span class="string">&#x27;style-loader&#x27;</span>,</span><br><span class="line">          <span class="comment">// 将css文件变成commonjs模块加载js中，里面内容是样式字符串</span></span><br><span class="line">          <span class="string">&#x27;css-loader&#x27;</span></span><br><span class="line">        ]</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">test</span>: <span class="regexp">/\.less$/</span>,</span><br><span class="line">        <span class="attr">use</span>: [</span><br><span class="line">          <span class="string">&#x27;style-loader&#x27;</span>,</span><br><span class="line">          <span class="string">&#x27;css-loader&#x27;</span>,</span><br><span class="line">          <span class="comment">// 将less文件编译成css文件</span></span><br><span class="line">          <span class="comment">// 需要下载 less-loader和less</span></span><br><span class="line">           <span class="string">&#x27;less-loader&#x27;</span></span><br><span class="line">        ]</span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// plugins的配置</span></span><br><span class="line">  <span class="attr">plugins</span>: [</span><br><span class="line">    <span class="comment">// 详细plugins的配置</span></span><br><span class="line">  ],</span><br><span class="line">  <span class="comment">// 模式</span></span><br><span class="line">  <span class="attr">mode</span>: <span class="string">&#x27;development&#x27;</span>, <span class="comment">// 开发模式</span></span><br><span class="line">  <span class="comment">// mode: &#x27;production&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>打包工具</category>
-      </categories>
-      <tags>
-        <tag>Webpack</tag>
-        <tag>打包工具</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Web3相关学习</title>
-    <url>/2024/10/29/Web3%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/</url>
-    <content><![CDATA[<p>先开个坑，准备下Web3相关的学习</p>
-<h2 id="学习路线"><a href="#学习路线" class="headerlink" title="学习路线"></a>学习路线</h2><ul>
-<li><strong>Web3开发学习路线</strong>: <a href="https://54web3.cc/blog/roadmap/learning-path-web3">https://54web3.cc/blog/roadmap/learning-path-web3</a></li>
-<li><strong>Web3 入门计划</strong>: <a href="https://cubic-leaf-731.notion.site/web3-202208-09-1623ccd15c2148a1ae00ed8794d153b1">https://cubic-leaf-731.notion.site/web3-202208-09-1623ccd15c2148a1ae00ed8794d153b1</a></li>
-<li><strong>Web3从入门到精通开发学习路线</strong>：<a href="https://juejin.cn/post/7307185531330838543">https://juejin.cn/post/7307185531330838543</a></li>
-</ul>
-<h3 id="WEEK-1-区块链的基础知识"><a href="#WEEK-1-区块链的基础知识" class="headerlink" title="WEEK 1: 区块链的基础知识"></a><strong>WEEK 1: 区块链的基础知识</strong></h3><ul>
-<li>密码学基础</li>
-<li>区块链基础</li>
-<li>相关金融知识</li>
-<li>学习比特币底层技术</li>
-<li>学习以太坊原理</li>
-</ul>
-<!-- ![image-20241105](../assets/Week1：区块链基础知识.png) -->]]></content>
-      <categories>
-        <category>Chore</category>
-      </categories>
-      <tags>
-        <tag>Web3</tag>
-        <tag>区块链</tag>
-        <tag>智能合约</tag>
       </tags>
   </entry>
   <entry>
@@ -2172,6 +2062,134 @@ module: &#123;
       </tags>
   </entry>
   <entry>
+    <title>React生态</title>
+    <url>/2021/09/30/React%E7%94%9F%E6%80%81/</url>
+    <content><![CDATA[<h3 id="React-DevTools"><a href="#React-DevTools" class="headerlink" title="React DevTools"></a>React DevTools</h3><h5 id="General-设置"><a href="#General-设置" class="headerlink" title="General 设置"></a>General 设置</h5><img src="../assets/image-20220222024702149.png" alt="image-20220222024702149" style="zoom:33%;" />
+
+<p>General 面板中最重要的功能就是 **”Highlight updates when components render”**。勾选上之后，可以查看 React 重绘时，页面哪些部分有更新。在遇到性能问题时，可以快速帮助决策在哪部分不需要重绘的组件部分添加 React.memo 阻止重绘。</p>
+<h5 id="Debugging-设置"><a href="#Debugging-设置" class="headerlink" title="Debugging 设置"></a>Debugging 设置</h5><img src="..\assets\image-20220222024832097.png" alt="image-20220222024832097" style="zoom:33%;" />
+
+<p><strong>“Append components stacks to console warnings and errors.”</strong></p>
+<p>可以帮助我们定位 React 报错信息来自哪个组件</p>
+<span id="more"></span>
+
+
+<h5 id="Components-设置"><a href="#Components-设置" class="headerlink" title="Components 设置"></a>Components 设置</h5><img src="..\assets\image-20220222024936104.png" alt="image-20220222024936104" style="zoom:33%;" />
+
+<p><strong>“Hide components where…”</strong></p>
+<p>此项在过滤组件树时有用。比如，大多数应用可能会在顶层有很多 Context.Provider，就可以过滤 Context 类型、不显示。当我们只关心业务逻辑层的组件时，可以过滤掉 DOM 组件，减少树的节点</p>
+<h5 id="Profiler-设置"><a href="#Profiler-设置" class="headerlink" title="Profiler 设置"></a>Profiler 设置</h5><img src="..\assets\image-20220222025024293.png" alt="image-20220222025024293" style="zoom:33%;" />
+
+<p><strong>“Record why each component rendered while profiling”</strong></p>
+<img src="..\assets\image-20220222025054509.png" alt="image-20220222025054509" style="zoom:33%;" />
+
+<p>勾选之后会在渲染火焰图的 hover 面板中看到 **”Why did this render”**。</p>
+<h5 id="现在有哪些-render-原因呢？"><a href="#现在有哪些-render-原因呢？" class="headerlink" title="现在有哪些 render 原因呢？"></a>现在有哪些 render 原因呢？</h5><ul>
+<li><p><strong>Props changed</strong></p>
+<p>​     顾名思义，传入组件的 props 变更</p>
+</li>
+<li><p><strong>The parent component rendered</strong></p>
+<p>​	父组件渲染导致的子组件渲染。一般要做性能优化都是找这类重绘原因的组件。但是要注意，如果组件中有用到 useContext，Provider 的 value 变更导致的重绘也是被标记为 The parent component rendered，需要注意</p>
+</li>
+<li><p><strong>Hooks changed</strong></p>
+<p>​	Hook 状态变更导致的重绘，一般就是指 useState 返回的更新函数被调用了</p>
+</li>
+<li><p><strong>State changed</strong></p>
+<p>​	这个只会在 class component 中有，大家忽略</p>
+</li>
+<li><p><strong>“Hide commits below xx (ms)”</strong></p>
+<p>​	设置一个更新耗时的阈值，低于该阈值的渲染不显示。用来快速过滤哪些渲染有性能问题</p>
+</li>
+</ul>
+<h5 id="React-组件检视器"><a href="#React-组件检视器" class="headerlink" title="React 组件检视器"></a>React 组件检视器</h5><p>用法和 DevTools 的元素面板类似，可以直接在页面上定位到元素对应的 React Component。并且可以实时查看当前组件内部的 hooks 状态，返回的组件树</p>
+<img src="..\assets\image-20220222025129591.png" alt="image-20220222025129591" style="zoom:33%;" />
+
+<p>右上角的四个图标</p>
+<img src="..\assets\image-20220222025154916.png" alt="image-20220222025154916" style="zoom:33%;" />
+
+<p>分别作用如下：</p>
+<ul>
+<li>模拟 ReactLazy 懒加载组件 Suspense 状态</li>
+<li>定位组件所渲染的 DOM 节点</li>
+<li>在 Console 中打印 Component 内部状态</li>
+<li>跳转到组件所在源文件（配合 sourcemap）</li>
+</ul>
+]]></content>
+      <categories>
+        <category>React</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>React</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Web3相关学习</title>
+    <url>/2024/10/29/Web3%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/</url>
+    <content><![CDATA[<p>先开个坑，准备下Web3相关的学习</p>
+<h2 id="学习路线"><a href="#学习路线" class="headerlink" title="学习路线"></a>学习路线</h2><ul>
+<li><strong>Web3开发学习路线</strong>: <a href="https://54web3.cc/blog/roadmap/learning-path-web3">https://54web3.cc/blog/roadmap/learning-path-web3</a></li>
+<li><strong>Web3 入门计划</strong>: <a href="https://cubic-leaf-731.notion.site/web3-202208-09-1623ccd15c2148a1ae00ed8794d153b1">https://cubic-leaf-731.notion.site/web3-202208-09-1623ccd15c2148a1ae00ed8794d153b1</a></li>
+<li><strong>Web3从入门到精通开发学习路线</strong>：<a href="https://juejin.cn/post/7307185531330838543">https://juejin.cn/post/7307185531330838543</a></li>
+</ul>
+<h3 id="WEEK-1-区块链的基础知识"><a href="#WEEK-1-区块链的基础知识" class="headerlink" title="WEEK 1: 区块链的基础知识"></a><strong>WEEK 1: 区块链的基础知识</strong></h3><ul>
+<li>密码学基础</li>
+<li>区块链基础</li>
+<li>相关金融知识</li>
+<li>学习比特币底层技术</li>
+<li>学习以太坊原理</li>
+</ul>
+<!-- ![image-20241105](../assets/Week1：区块链基础知识.png) -->]]></content>
+      <categories>
+        <category>Chore</category>
+      </categories>
+      <tags>
+        <tag>Web3</tag>
+        <tag>区块链</tag>
+        <tag>智能合约</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Webpack</title>
+    <url>/2022/04/14/Webpack/</url>
+    <content><![CDATA[<h3 id="Webpack-是什么"><a href="#Webpack-是什么" class="headerlink" title="Webpack 是什么"></a>Webpack 是什么</h3><p>webpack 是一种<strong>前端资源构建工具</strong>，一个静态模块打包器(module bundler)。</p>
+<p>在webpack 看来, 前端的所有资源文件(js&#x2F;json&#x2F;css&#x2F;img&#x2F;less&#x2F;…)都会作为模块处理。<br>它将根据模块的依赖关系进行静态分析，打包生成对应的静态资源(bundle)。</p>
+<h3 id="Webpack-五个核心概念"><a href="#Webpack-五个核心概念" class="headerlink" title="Webpack 五个核心概念"></a>Webpack 五个核心概念</h3><h4 id="Entry"><a href="#Entry" class="headerlink" title="Entry"></a>Entry</h4><p>入口(Entry)：指示 webpack 以哪个文件为入口起点开始打包，分析构建内部依赖图。</p>
+<h4 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h4><p>输出(Output)：指示 webpack 打包后的资源 bundles 输出到哪里去，以及如何命名。</p>
+<h4 id="Loader"><a href="#Loader" class="headerlink" title="Loader"></a>Loader</h4><p>Loader：让 webpack 能够去处理那些非 JS 的文件，比如样式文件、图片文件(webpack 自身只理解<br>JS)</p>
+<h4 id="Plugins"><a href="#Plugins" class="headerlink" title="Plugins"></a>Plugins</h4><p>插件(Plugins)：可以用于执行范围更广的任务。插件的范围包括，从打包优化和压缩，<br>一直到重新定义环境中的变量等。</p>
+<span id="more"></span>
+
+<h4 id="Mode"><a href="#Mode" class="headerlink" title="Mode"></a>Mode</h4><p>模式(Mode)：指示 webpack 使用相应模式的配置。</p>
+<ol>
+<li><p>development:  </p>
+<p> 会将 DefinePlugin 中 <code>process.env.NODE_ENV</code> 的值设置为 development。</p>
+<p>启用 </p>
+<figure class="highlight plaintext"><figcaption><span>和 ```NamedModulesPlugin```。</span></figcaption><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">   特点： 能让代码本地调试运行的环境。</span><br><span class="line"></span><br><span class="line">2. production</span><br><span class="line"></span><br><span class="line">   会将 DefinePlugin 中 ```process.env.NODE_ENV``` 的值设置为 production。</span><br><span class="line"></span><br><span class="line">   启用 </span><br><span class="line"></span><br><span class="line">   ```FlagDependencyUsagePlugin,```</span><br><span class="line"></span><br><span class="line">   ```FlagIncludedChunksPlugin,``` </span><br><span class="line"></span><br><span class="line">   ```ModuleConcatenationPlugin,``` </span><br><span class="line"></span><br><span class="line">   ```NoEmitOnErrorsPlugin,```</span><br><span class="line"></span><br><span class="line">    ```OccurrenceOrderPlugin,```</span><br><span class="line"></span><br><span class="line">   ```SideEffectsFlagPlugin 和 TerserPlugin```。</span><br><span class="line"></span><br><span class="line">   特点： 能让代码优化上线运行的环境。</span><br><span class="line"></span><br><span class="line">   </span><br><span class="line"></span><br><span class="line">### 编译打包应用</span><br><span class="line"></span><br><span class="line">创建 src 下的 js 等文件后，不需要配置 webpack.config.js 文件，在命令行就可以编译打包。</span><br><span class="line"></span><br><span class="line">指令：</span><br><span class="line"></span><br><span class="line">- 开发环境：</span><br><span class="line">```shell</span><br><span class="line">webpack ./src/index.js -o ./build/built.js --mode=development</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>  webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后输出到 .&#x2F;build&#x2F;built.js 整体打包环境，是开发环境</p>
+<ul>
+<li>生产环境：<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">webpack ./src/index.js -o ./build/built.js --mode=production</span><br></pre></td></tr></table></figure>
+webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后输出到 .&#x2F;build&#x2F;built.js 整体打包环境，是生产环境</li>
+</ul>
+<p>结论：</p>
+<ol>
+<li>webpack 本身能处理 js&#x2F;json 资源，不能处理 css&#x2F;img 等其他资源</li>
+<li>生产环境和开发环境将 ES6 模块化编译成浏览器能识别的模块化，但是不能处理 ES6 的基本语法转化为 ES5（需要借助 loader）</li>
+<li>生产环境比开发环境多一个压缩 js 代码</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// resolve用来拼接绝对路径的方法</span></span><br><span class="line"><span class="keyword">const</span> &#123; resolve &#125; = <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>);</span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="comment">// webpack配置</span></span><br><span class="line">  <span class="comment">// 入口起点</span></span><br><span class="line">  <span class="attr">entry</span>: <span class="string">&#x27;./src/index.js&#x27;</span>,</span><br><span class="line">  <span class="comment">// 输出</span></span><br><span class="line">  <span class="attr">output</span>: &#123;</span><br><span class="line">    <span class="comment">// 输出文件名</span></span><br><span class="line">    <span class="attr">filename</span>: <span class="string">&#x27;built.js&#x27;</span>,</span><br><span class="line">    <span class="comment">// 输出路径</span></span><br><span class="line">    <span class="comment">// __dirname nodejs的变量，代表当前文件的目录绝对路径</span></span><br><span class="line">    <span class="attr">path</span>: <span class="title function_">resolve</span>(__dirname, <span class="string">&#x27;build&#x27;</span>)</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// loader的配置</span></span><br><span class="line">  <span class="attr">module</span>: &#123;</span><br><span class="line">    <span class="attr">rules</span>: [</span><br><span class="line">      <span class="comment">// 详细loader配置</span></span><br><span class="line">      <span class="comment">// 不同文件必须配置不同loader处理</span></span><br><span class="line">      &#123; </span><br><span class="line">        <span class="comment">// 匹配哪些文件</span></span><br><span class="line">        <span class="attr">test</span>: <span class="regexp">/\.css$/</span>,</span><br><span class="line">        <span class="comment">// 使用哪些loader进行处理</span></span><br><span class="line">        <span class="attr">use</span>: [</span><br><span class="line">          <span class="comment">// use数组中loader执行顺序：从右到左，从下到上 依次执行</span></span><br><span class="line">          <span class="comment">// 创建style标签，将js中的样式资源插入进行，添加到head中生效</span></span><br><span class="line">          <span class="string">&#x27;style-loader&#x27;</span>,</span><br><span class="line">          <span class="comment">// 将css文件变成commonjs模块加载js中，里面内容是样式字符串</span></span><br><span class="line">          <span class="string">&#x27;css-loader&#x27;</span></span><br><span class="line">        ]</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">test</span>: <span class="regexp">/\.less$/</span>,</span><br><span class="line">        <span class="attr">use</span>: [</span><br><span class="line">          <span class="string">&#x27;style-loader&#x27;</span>,</span><br><span class="line">          <span class="string">&#x27;css-loader&#x27;</span>,</span><br><span class="line">          <span class="comment">// 将less文件编译成css文件</span></span><br><span class="line">          <span class="comment">// 需要下载 less-loader和less</span></span><br><span class="line">           <span class="string">&#x27;less-loader&#x27;</span></span><br><span class="line">        ]</span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// plugins的配置</span></span><br><span class="line">  <span class="attr">plugins</span>: [</span><br><span class="line">    <span class="comment">// 详细plugins的配置</span></span><br><span class="line">  ],</span><br><span class="line">  <span class="comment">// 模式</span></span><br><span class="line">  <span class="attr">mode</span>: <span class="string">&#x27;development&#x27;</span>, <span class="comment">// 开发模式</span></span><br><span class="line">  <span class="comment">// mode: &#x27;production&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>打包工具</category>
+      </categories>
+      <tags>
+        <tag>Webpack</tag>
+        <tag>打包工具</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>require() 源码解读</title>
     <url>/2021/08/21/require%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/</url>
     <content><![CDATA[<span id="more"></span>
@@ -2260,21 +2278,6 @@ module: &#123;
       </tags>
   </entry>
   <entry>
-    <title>加密货币的本质</title>
-    <url>/2024/11/04/%E5%8A%A0%E5%AF%86%E8%B4%A7%E5%B8%81%E7%9A%84%E6%9C%AC%E8%B4%A8/</url>
-    <content><![CDATA[<h2 id="钱的本质"><a href="#钱的本质" class="headerlink" title="钱的本质"></a>钱的本质</h2><p>共识、可信性</p>
-<h3 id="比特币的可信性"><a href="#比特币的可信性" class="headerlink" title="比特币的可信性"></a>比特币的可信性</h3><p>比特币要解决的核心问题，就是创造一种可信的数字凭证。由于这种凭证可信，所以能够当做货币。<br>比特币的技术基础是加密学，因为只有加密学才能保证它的可信性。一旦加密被破解，它就没法当作货币了。这也是这一类数字凭证被称为”加密货币”的原因。<br>技术人员对比特币感兴趣，还有一个重要原因。任何需要可靠的数字凭证的场合，也许都可以用到这种技术。</p>
-]]></content>
-      <categories>
-        <category>Web3</category>
-      </categories>
-      <tags>
-        <tag>Web3</tag>
-        <tag>比特币</tag>
-        <tag>加密货币</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Web Development Trend</title>
     <url>/2024/12/05/%E5%89%8D%E7%AB%AF%E5%8F%91%E5%B1%95%E8%B6%8B%E5%8A%BF/</url>
     <content><![CDATA[<h2 id="前端供需关系"><a href="#前端供需关系" class="headerlink" title="前端供需关系"></a>前端供需关系</h2><h2 id="新的样式解决方案和组件库现状-发展"><a href="#新的样式解决方案和组件库现状-发展" class="headerlink" title="新的样式解决方案和组件库现状&amp;发展"></a>新的样式解决方案和组件库现状&amp;发展</h2><blockquote>
@@ -2290,6 +2293,57 @@ module: &#123;
       </categories>
       <tags>
         <tag>前端</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>前端工程化</title>
+    <url>/2024/12/30/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%8C%96/</url>
+    <content><![CDATA[<h1 id="工程化相关"><a href="#工程化相关" class="headerlink" title="工程化相关"></a>工程化相关</h1><h2 id="Npm发包"><a href="#Npm发包" class="headerlink" title="Npm发包"></a>Npm发包</h2><h3 id="files"><a href="#files" class="headerlink" title="files"></a>files</h3><p>指定哪些文件会被打包发布（后面详细描述）。</p>
+<h3 id="main、browser、exports、module"><a href="#main、browser、exports、module" class="headerlink" title="main、browser、exports、module"></a>main、browser、exports、module</h3><p>这四个字段都是用来定义包的入口，<code>npm</code> 只规定了 <code>main</code> 和 <code>browser</code> 这两个字段，<code>exports</code> 是 <code>nodejs</code> 的规范，<code>module</code> 一般被构建工具所支持。</p>
+<h3 id="main"><a href="#main" class="headerlink" title="main"></a>main</h3><p><code>main</code> 规定了包的主要入口点，默认值为 <code>index.js</code>。</p>
+<p>如果你的包名为 <code>foo</code> 可以通过 <code>require(&quot;foo&quot;)</code> 引入对应模块导出的内容，所以这应该是个 CommonJS 模块，除非你设置了 <code>&quot;type&quot;: &quot;module&quot;</code>。</p>
+<p>作者：ArmanTang链接：<a href="https://juejin.cn/post/7093873173128544270%E6%9D%A5%E6%BA%90%EF%BC%9A%E7%A8%80%E5%9C%9F%E6%8E%98%E9%87%91%E8%91%97%E4%BD%9C%E6%9D%83%E5%BD%92%E4%BD%9C%E8%80%85%E6%89%80%E6%9C%89%E3%80%82%E5%95%86%E4%B8%9A%E8%BD%AC%E8%BD%BD%E8%AF%B7%E8%81%94%E7%B3%BB%E4%BD%9C%E8%80%85%E8%8E%B7%E5%BE%97%E6%8E%88%E6%9D%83%EF%BC%8C%E9%9D%9E%E5%95%86%E4%B8%9A%E8%BD%AC%E8%BD%BD%E8%AF%B7%E6%B3%A8%E6%98%8E%E5%87%BA%E5%A4%84%E3%80%82">https://juejin.cn/post/7093873173128544270来源：稀土掘金著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</a></p>
+<h2 id="CommonJs和Esmodule的区别"><a href="#CommonJs和Esmodule的区别" class="headerlink" title="CommonJs和Esmodule的区别"></a>CommonJs和Esmodule的区别</h2><p>CJS：运行时加载</p>
+<p>Esmodule：编译时加载</p>
+<span id="more"></span>
+
+<h2 id="peerDependencies"><a href="#peerDependencies" class="headerlink" title="peerDependencies"></a>peerDependencies</h2><ul>
+<li>项目安装的某个依赖存在peerDependencies，项目又没有声明这个依赖，那项目会自动安装吗，会autoinstall</li>
+</ul>
+<h2 id="Pnpm"><a href="#Pnpm" class="headerlink" title="Pnpm"></a>Pnpm</h2><ul>
+<li>省空间</li>
+<li>解决幽灵依赖</li>
+</ul>
+<p>如何确定一个项目的包管理工具？</p>
+<ul>
+<li>lock文件、package.json下packageManager字段来判断</li>
+</ul>
+<p>如何确定包管理工具的版本号？</p>
+<ul>
+<li>engines字段</li>
+</ul>
+]]></content>
+      <categories>
+        <category>chore</category>
+      </categories>
+      <tags>
+        <tag>工程化</tag>
+        <tag>前端</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>加密货币的本质</title>
+    <url>/2024/11/04/%E5%8A%A0%E5%AF%86%E8%B4%A7%E5%B8%81%E7%9A%84%E6%9C%AC%E8%B4%A8/</url>
+    <content><![CDATA[<h2 id="钱的本质"><a href="#钱的本质" class="headerlink" title="钱的本质"></a>钱的本质</h2><p>共识、可信性</p>
+<h3 id="比特币的可信性"><a href="#比特币的可信性" class="headerlink" title="比特币的可信性"></a>比特币的可信性</h3><p>比特币要解决的核心问题，就是创造一种可信的数字凭证。由于这种凭证可信，所以能够当做货币。<br>比特币的技术基础是加密学，因为只有加密学才能保证它的可信性。一旦加密被破解，它就没法当作货币了。这也是这一类数字凭证被称为”加密货币”的原因。<br>技术人员对比特币感兴趣，还有一个重要原因。任何需要可靠的数字凭证的场合，也许都可以用到这种技术。</p>
+]]></content>
+      <categories>
+        <category>Web3</category>
+      </categories>
+      <tags>
+        <tag>Web3</tag>
+        <tag>比特币</tag>
+        <tag>加密货币</tag>
       </tags>
   </entry>
   <entry>
@@ -2314,23 +2368,6 @@ module: &#123;
         <tag>区块链</tag>
         <tag>智能合约</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>序 / Intro</title>
-    <url>/2024/09/30/%E5%BA%8F%E8%A8%80/</url>
-    <content><![CDATA[<blockquote class="blockquote-center">
-    <p><b>循着无私与弃绝之念走在自我修行的道路上</b></p>
-    <!-- <p>[英]威廉·萨默塞特·毛姆 《刀锋》</p> -->
-</blockquote>
-]]></content>
-  </entry>
-  <entry>
-    <title>成为老师</title>
-    <url>/2024/10/29/%E6%88%90%E4%B8%BA%E8%80%81%E5%B8%88/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>生活</category>
-      </categories>
   </entry>
   <entry>
     <title>如何利用css var做一个dark mode方案</title>
@@ -2446,35 +2483,20 @@ module: &#123;
       </tags>
   </entry>
   <entry>
-    <title>站点更新日志 / ChangeLog</title>
-    <url>/2024/10/28/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97/</url>
-    <content><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>兜兜转转终于是有时间把这个站点建起来了;D，本文主要是记录下站点更新日志，会按月进行归档，还会简单写一下后续更新的一些想法和计划</p>
-<p>想法还有很多</p>
-<p>功能上非常想做的是个一言主题的页面，还有日间&#x2F;夜间模式切换，日程表、sitemap功能<br>内容上可以补充的还有个人简介<br>工程上能做的有域名简化（自定义域名），blog自动化部署（借助一些Github Webhooks），CDN加速（腾讯云）</p>
-<p>那么，拭目以待吧~</p>
-<hr>
-<!-- ### 后续更新计划
-**自定义域名（SSL证书、地址映射）**
-**日间/夜间模式切换**
-**添加一言主题页面**
-**添加个人简介**
-**blog自动化部署**
-**日程表、sitemap探索**
-
------- -->
-
-<h3 id="2024-10更新"><a href="#2024-10更新" class="headerlink" title="2024-10更新"></a>2024-10更新</h3><p><strong>腾讯云托管站点</strong><br>主要是解决Github Page部署后国内内网无法访问的问题（搜了下是DNS污染的问题，不太好解决，暂时先迁到腾讯云上去托管站点了）</p>
-<p><strong>部分文章重新整理一版</strong><br>整理了一系列陈年老文章，主要是一些文章之前的格式在博客里不太兼容，还有部分内容在迁移的过程中有丢失，都加以补充了</p>
-<p><strong>文章置顶、排序、显隐功能</strong><br>引了个<code>hexo-generator-index-custom</code>插件来置顶、排序文章</p>
-<span id="more"></span>
-
-<hr>
-<h3 id="2024-9更新"><a href="#2024-9更新" class="headerlink" title="2024-9更新"></a>2024-9更新</h3><p><strong>Hexo+Next建站</strong><br>基于Hexo V7.3 + Next V8.2 搭建了个人博客站点</p>
-<p><strong>搜索功能</strong><br>加入了文章搜索功能。会很好用吧？(大概</p>
-<!-- ![](../assets/blog-search-example.png) -->
-
-<p><strong>标签、分类功能</strong><br>所有文章整理了一版，对所有文章分标签、分类展示</p>
-<p><strong>文章显示字数统计、浏览时间</strong><br>引入<code>hexo-word-counter</code>这个插件来实现的，还会统计代码字数，算是个锦上添花的功能吧^^</p>
+    <title>成为老师</title>
+    <url>/2024/10/29/%E6%88%90%E4%B8%BA%E8%80%81%E5%B8%88/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>生活</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>序 / Intro</title>
+    <url>/2024/09/30/%E5%BA%8F%E8%A8%80/</url>
+    <content><![CDATA[<blockquote class="blockquote-center">
+    <p><b>循着无私与弃绝之念走在自我修行的道路上</b></p>
+    <!-- <p>[英]威廉·萨默塞特·毛姆 《刀锋》</p> -->
+</blockquote>
 ]]></content>
   </entry>
   <entry>
@@ -2699,5 +2721,46 @@ module: &#123;
       <tags>
         <tag>Chrome</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>站点更新日志 / ChangeLog</title>
+    <url>/2024/10/28/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97/</url>
+    <content><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>兜兜转转终于是有时间把这个站点建起来了;D，本文主要是记录下站点更新日志，会按月进行归档，还会简单写一下后续更新的一些想法和计划</p>
+<p>想法还有很多</p>
+<p>功能上非常想做的是个一言主题的页面，还有日间&#x2F;夜间模式切换，日程表、sitemap功能<br>内容上可以补充的还有个人简介<br>工程上能做的有域名简化（自定义域名），blog自动化部署（借助一些Github Webhooks），CDN加速（腾讯云），页面SEO相关优化</p>
+<p>那么，拭目以待吧~</p>
+<hr>
+<!-- ### 后续更新计划
+**自定义域名（SSL证书、地址映射）**
+**日间/夜间模式切换**
+**添加一言主题页面**
+**添加个人简介**
+**blog自动化部署**
+**日程表、sitemap探索**
+
+------ -->
+
+<h3 id="2024-11、2024-12更新"><a href="#2024-11、2024-12更新" class="headerlink" title="2024-11、2024-12更新"></a>2024-11、2024-12更新</h3><p>主要是之前前端相关知识的文章整理、比特币相关学习</p>
+<ul>
+<li><strong><a href="http://localhost:4000/2024/11/05/%E6%AF%94%E7%89%B9%E5%B8%81/">比特币</a></strong></li>
+<li><strong><a href="http://localhost:4000/2021/10/01/React%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/">React最佳实践</a></strong></li>
+<li><strong><a href="http://localhost:4000/2024/11/05/%E6%AF%94%E7%89%B9%E5%B8%81/">Redux</a></strong></li>
+<li><strong><a href="http://localhost:4000/2021/09/20/HTTP/">HTTP</a></strong></li>
+<li><strong><a href="http://localhost:4000/2021/09/18/HTTP%E7%BC%93%E5%AD%98/">HTTP缓存</a></strong></li>
+</ul>
+<hr>
+<h3 id="2024-10更新"><a href="#2024-10更新" class="headerlink" title="2024-10更新"></a>2024-10更新</h3><p><strong>腾讯云托管站点</strong><br>主要是解决Github Page部署后国内内网无法访问的问题（搜了下是DNS污染的问题，不太好解决，暂时先迁到腾讯云上去托管站点了）</p>
+<p><strong>部分文章重新整理一版</strong><br>整理了一系列陈年老文章，主要是一些文章之前的格式在博客里不太兼容，还有部分内容在迁移的过程中有丢失，都加以补充了</p>
+<p><strong>文章置顶、排序、显隐功能</strong><br>引了个<code>hexo-generator-index-custom</code>插件来置顶、排序文章</p>
+<span id="more"></span>
+
+<hr>
+<h3 id="2024-9更新"><a href="#2024-9更新" class="headerlink" title="2024-9更新"></a>2024-9更新</h3><p><strong>Hexo+Next建站</strong><br>基于Hexo V7.3 + Next V8.2 搭建了个人博客站点</p>
+<p><strong>搜索功能</strong><br>加入了文章搜索功能。会很好用吧？(大概</p>
+<!-- ![](../assets/blog-search-example.png) -->
+
+<p><strong>标签、分类功能</strong><br>所有文章整理了一版，对所有文章分标签、分类展示</p>
+<p><strong>文章显示字数统计、浏览时间</strong><br>引入<code>hexo-word-counter</code>这个插件来实现的，还会统计代码字数，算是个锦上添花的功能吧^^</p>
+]]></content>
   </entry>
 </search>
