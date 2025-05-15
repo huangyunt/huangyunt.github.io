@@ -83,6 +83,143 @@
       </tags>
   </entry>
   <entry>
+    <title>HTTP</title>
+    <url>/2021/09/20/HTTP/</url>
+    <content><![CDATA[<h2 id="HTTP-有哪些常见状态码"><a href="#HTTP-有哪些常见状态码" class="headerlink" title="HTTP 有哪些常见状态码"></a>HTTP 有哪些常见状态码</h2><h3 id="2xx（成功状态码）"><a href="#2xx（成功状态码）" class="headerlink" title="2xx（成功状态码）"></a>2xx（成功状态码）</h3><h4 id="200-OK"><a href="#200-OK" class="headerlink" title="200 OK"></a>200 OK</h4><blockquote>
+<p>请求成功，服务器已成功处理了客户端的请求，并返回了请求的内容。</p>
+</blockquote>
+<h3 id="3xx（重定向状态码）"><a href="#3xx（重定向状态码）" class="headerlink" title="3xx（重定向状态码）"></a>3xx（重定向状态码）</h3><h4 id="301-Moved-Permanently"><a href="#301-Moved-Permanently" class="headerlink" title="301 Moved Permanently"></a>301 Moved Permanently</h4><blockquote>
+<p>被请求的资源已永久移动到新位置，服务器返回这个状态码时，会在响应头的 Location 字段给出资源的新 URL。搜索引擎会更新其索引中的链接。</p>
+</blockquote>
+<p>应用场景：如果一个网站更改了页面的 URL 结构，希望将旧的 URL 永久重定向到新的 URL</p>
+<h4 id="302-Found"><a href="#302-Found" class="headerlink" title="302 Found"></a>302 Found</h4><blockquote>
+<p>表示请求的资源临时移动到了新位置。与 301 不同的是，搜索引擎不会更新索引中的链接</p>
+</blockquote>
+<h4 id="304-Not-Modified"><a href="#304-Not-Modified" class="headerlink" title="304 Not Modified"></a>304 Not Modified</h4><blockquote>
+<p>说明无需再次传输请求的内容，也就是说可以使用缓存的内容</p>
+</blockquote>
+<span id="more"></span>
+
+<h3 id="4xx（客户端错误状态码）"><a href="#4xx（客户端错误状态码）" class="headerlink" title="4xx（客户端错误状态码）"></a>4xx（客户端错误状态码）</h3><h4 id="400-Bad-Request"><a href="#400-Bad-Request" class="headerlink" title="400 Bad Request"></a>400 Bad Request</h4><blockquote>
+<p>客户端请求的语法错误，服务器无法理解。</p>
+</blockquote>
+<p>应用场景：例如，客户端发送的请求格式不符合 HTTP 协议规范，或者请求参数有误，像在 URL 中传递了错误格式的参数</p>
+<h4 id="401-Unauthorized"><a href="#401-Unauthorized" class="headerlink" title="401 Unauthorized"></a>401 Unauthorized</h4><blockquote>
+<p>请求要求用户的身份认证。对于需要登录才能访问的资源，如果用户未提供有效的认证信息，就会返回这个状态码。</p>
+</blockquote>
+<h4 id="403-Forbidden"><a href="#403-Forbidden" class="headerlink" title="403 Forbidden"></a>403 Forbidden</h4><blockquote>
+<p>服务器理解请求客户端的请求，但是拒绝执行此请求。这通常是因为服务器端的权限设置，导致用户虽然经过身份认证，但仍然没有足够的权限访问该资源。</p>
+</blockquote>
+<h4 id="404-Not-Found"><a href="#404-Not-Found" class="headerlink" title="404 Not Found"></a>404 Not Found</h4><blockquote>
+<p>服务器找不到请求的资源。这是在网络浏览中最常见的状态码之一。</p>
+</blockquote>
+<h3 id="5xx（服务器错误状态码）"><a href="#5xx（服务器错误状态码）" class="headerlink" title="5xx（服务器错误状态码）"></a>5xx（服务器错误状态码）</h3><h4 id="500-Internal-Server-Error"><a href="#500-Internal-Server-Error" class="headerlink" title="500 Internal Server Error"></a>500 Internal Server Error</h4><blockquote>
+<p>服务器内部错误，无法完成请求。这是一个比较笼统的服务器端错误状态码。</p>
+</blockquote>
+<p>应用场景：当服务器端的代码出现异常（如程序崩溃、数据库连接错误等），导致无法正常处理请求时，就会返回 500 Internal Server Error。</p>
+<h4 id="502-Bad-Gateway"><a href="#502-Bad-Gateway" class="headerlink" title="502 Bad Gateway"></a>502 Bad Gateway</h4><blockquote>
+<p>作为网关或者代理服务器，从上游服务器接收到无效的响应。</p>
+</blockquote>
+<p>应用场景：在一个复杂的网络架构中，当代理服务器或网关无法从后端服务器获取正确的响应时，例如后端服务器出现故障或者响应格式错误，就会返回 502 Bad Gateway 状态码。</p>
+<h4 id="503-Service-Unavailable"><a href="#503-Service-Unavailable" class="headerlink" title="503 Service Unavailable"></a>503 Service Unavailable</h4><blockquote>
+<p>服务器目前无法使用（由于超载或停机维护）。通常，这只是暂时状态。</p>
+</blockquote>
+<p>应用场景：在网站流量过高导致服务器过载，或者服务器正在进行维护操作时，会返回 503 Service Unavailable 状态码。</p>
+<h4 id="504-Geteway-Timeout"><a href="#504-Geteway-Timeout" class="headerlink" title="504 Geteway Timeout"></a>504 Geteway Timeout</h4><blockquote>
+<p>一般表现为应用层服务 (upstream) 超时，如查库操作耗时十分钟，超过了 Nginx 配置的超时时间</p>
+</blockquote>
+<hr>
+<h2 id="HTTP-状态码-502-和-504-有什么区别"><a href="#HTTP-状态码-502-和-504-有什么区别" class="headerlink" title="HTTP 状态码 502 和 504 有什么区别"></a>HTTP 状态码 502 和 504 有什么区别</h2><p>这两种异常状态码都与网关 Gateway 有关，首先明确两个概念</p>
+<ul>
+<li>Proxy (Gateway)，反向代理层或者网关层。在公司级应用中一般使用 Nginx 扮演这个角色</li>
+<li>Application (upstream serrver)，应用层服务，作为 Proxy 层的上游服务。在公司中一般为各种语言编写的服务器应用，如 Go&#x2F;Java&#x2F;Python&#x2F;PHP&#x2F;Node 等</li>
+</ul>
+<p>此时关于 502 与 504 的区别就很显而易见</p>
+<ul>
+<li><code>502 Bad Gateway</code>。一般表现为你自己写的应用层服务(Java&#x2F;Go&#x2F;PHP)挂了，网关层无法接收到响应</li>
+<li><code>504 Gateway Timeout</code>。一般表现为应用层服务 (upstream) 超时，如查库操作耗时十分钟，超过了 Nginx 配置的超时时间</li>
+</ul>
+<hr>
+<h2 id="HTTP1-1、HTTP2、HTTP3"><a href="#HTTP1-1、HTTP2、HTTP3" class="headerlink" title="HTTP1.1、HTTP2、HTTP3"></a>HTTP1.1、HTTP2、HTTP3</h2><p><a href="https://juejin.cn/post/6844903667569541133#%E5%B8%A7-Frame">https://juejin.cn/post/6844903667569541133#帧-Frame</a></p>
+<ul>
+<li>题目：<a href="https://q.shanyue.tech/fe/http/86">http2 与 http1.1 有什么改进</a></li>
+<li>题目：<a href="https://q.shanyue.tech/fe/http/275">http2 中的首部压缩的实现原理是什么</a></li>
+<li>题目：<a href="https://q.shanyue.tech/fe/http/670">http2 中 Stream 与 Frame 是什么关系</a></li>
+</ul>
+<h3 id="HTTP1-1"><a href="#HTTP1-1" class="headerlink" title="HTTP1.1"></a>HTTP1.1</h3><h4 id="HTTP1-1存在的问题"><a href="#HTTP1-1存在的问题" class="headerlink" title="HTTP1.1存在的问题"></a>HTTP1.1存在的问题</h4><ul>
+<li>收到上一个http请求的响应之后才能发送下一个http请求</li>
+<li>tcp链接数限制：对同一个域名，只能建立6-8个tcp链接</li>
+<li>建立每个tcp链接都需要经过dns解析，三次握手，tls握手，慢启动（开始时只发送较少数据）这些过程</li>
+<li>队头阻塞：前一个请求挂了，后面请求无法发送</li>
+<li>首部没有压缩，重复内容发送多次（cookie）</li>
+</ul>
+<h4 id="为什么HTTP1-1无法并发的发送多个请求？（同时发多个，同时收多个）"><a href="#为什么HTTP1-1无法并发的发送多个请求？（同时发多个，同时收多个）" class="headerlink" title="为什么HTTP1.1无法并发的发送多个请求？（同时发多个，同时收多个）"></a>为什么HTTP1.1无法并发的发送多个请求？（同时发多个，同时收多个）</h4><p>因为http1.1是基于文本的协议，比如客户端向服务器发送了两个请求 <code>GET /query?q=A</code> 和 <code>GET /query?q=B</code>，服务器返回了两个结果，客户端是没有办法根据响应结果来判断响应对应于哪一个请求的，而http2基于二进制分帧实现多路复用，数据流以消息的形式发送，而消息又由一个或多个帧组成，多个帧之间可以乱序发送，<strong>因为根据帧首部的流标识可以重新组装。</strong></p>
+<h4 id="HTTP-1-1-中的-keep-alive-有什么作用"><a href="#HTTP-1-1-中的-keep-alive-有什么作用" class="headerlink" title="HTTP 1.1 中的 keep-alive 有什么作用"></a>HTTP 1.1 中的 keep-alive 有什么作用</h4><blockquote>
+<p>在 <code>http 1.1</code> 中，在响应头中设置 <code>keep-alive</code> 可以在一个 TCP 连接上发送多个 http 请求</p>
+</blockquote>
+<ol>
+<li>避免了重开 TCP 连接的开销</li>
+<li>避免了刷新时重新建立 SSL 连接的开销</li>
+<li>避免了QPS过大时，服务器的连接数过大</li>
+</ol>
+<p>在服务器端使用响应头开启 <code>keep-alive</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Connection: Keep-Alive</span><br><span class="line">Keep-Alive: <span class="built_in">timeout</span>=5, max=1000</span><br></pre></td></tr></table></figure>
+
+<h3 id="HTTP2"><a href="#HTTP2" class="headerlink" title="HTTP2"></a>HTTP2</h3><p>关于 <code>http2</code> 可以阅读谷歌 <code>web.dev</code> 的文档 <a href="https://web.dev/performance-http2/">Introduction to HTTP&#x2F;2</a></p>
+<p>关于 HTTP2 有以下改进</p>
+<h4 id="二进制分帧"><a href="#二进制分帧" class="headerlink" title="二进制分帧"></a>二进制分帧</h4><ul>
+<li>帧和流：把请求和响应分成一个个二进制帧（首部帧，数据帧），一个完整的请求和响应是一个流每一个帧都有一个stream id，标识每一个帧属于哪个流</li>
+<li>复用同一个tcp链接，并发的发送一个个二进制帧，在接收方再进行重组</li>
+<li>同一域名只需要一个tcp链接</li>
+</ul>
+<h4 id="多路复用-Stream-Frame"><a href="#多路复用-Stream-Frame" class="headerlink" title="多路复用 (Stream&#x2F;Frame)"></a>多路复用 (Stream&#x2F;Frame)</h4><ul>
+<li>并发的发送一个个二进制帧</li>
+</ul>
+<h4 id="头部压缩-HPack"><a href="#头部压缩-HPack" class="headerlink" title="头部压缩: (HPack)"></a>头部压缩: (HPack)</h4><ul>
+<li>头部压缩算法压缩首部内容</li>
+<li>客户端浏览器都保存一张HPACK表，</li>
+</ul>
+<h4 id="服务端推送-Server-Push"><a href="#服务端推送-Server-Push" class="headerlink" title="服务端推送: (Server Push)"></a>服务端推送: (Server Push)</h4><ul>
+<li>不同于http1.1解析完html才请求资源，服务端提前返回这些资源文件</li>
+</ul>
+<h4 id="HTTP2中可以弃用哪些针对HTTP1-1的优化点"><a href="#HTTP2中可以弃用哪些针对HTTP1-1的优化点" class="headerlink" title="HTTP2中可以弃用哪些针对HTTP1.1的优化点"></a>HTTP2中可以弃用哪些针对HTTP1.1的优化点</h4><p>合并文件、内联资源、雪碧图、域名分片对于 HTTP&#x2F;2 来说是不必要的，使用 h2 尽可能将资源细粒化，文件分解地尽可能散，不用担心请求数多</p>
+<h3 id="HTTP3"><a href="#HTTP3" class="headerlink" title="HTTP3"></a>HTTP3</h3><p>HTTP3解决的问题：</p>
+<ul>
+<li>HTTP2虽然实现了多路复用，但仍基于TCP，一个TCP包丢失，整个链接上的所有流都被阻塞，直到该包被重新传输</li>
+<li>tcp和tls握手时延问题</li>
+</ul>
+<h3 id="HTTP-Proxy原理"><a href="#HTTP-Proxy原理" class="headerlink" title="HTTP Proxy原理"></a>HTTP Proxy原理</h3><blockquote>
+<p>webpack-dev-server 中proxy原理，以及如何解决跨域<br>本质上是因为服务端不存在跨域的问题，跨域是浏览器的限制</p>
+</blockquote>
+<p><strong>Proxy的原理</strong>：<br>代理服务器会自动提取请求数据包中的HTTP请求数据发送给服务端，并服务端的HTTP响应数据转发给发送请求的客户端，HTTP代理服务器使用的端口通常是8080。</p>
+<ul>
+<li>对于Web客户端来说，代理扮演的服务器角色，接收请求（Request），返回响应（Response）。</li>
+<li>对于Web服务器来说，代理扮演的客户端角色，发送请求（Request），接收响应（Response）。</li>
+</ul>
+<hr>
+<h2 id="简单请求和非简单请求"><a href="#简单请求和非简单请求" class="headerlink" title="简单请求和非简单请求"></a>简单请求和非简单请求</h2><h3 id="什么情况下会发送-OPTIONS-请求"><a href="#什么情况下会发送-OPTIONS-请求" class="headerlink" title="什么情况下会发送 OPTIONS 请求"></a>什么情况下会发送 OPTIONS 请求</h3><p><strong>当一个请求跨域且不是简单请求时就会发送 <code>OPTIONS</code> 请求</strong></p>
+<p>满足以下条件就是一个简单请求:</p>
+<ol>
+<li><code>Method</code>: 请求的方法是 <code>GET</code>、<code>POST</code> 及 <code>HEAD</code></li>
+<li><code>Header</code>: 请求头是 <code>Content-Type</code>、<code>Accept-Language</code>、<code>Content-Language</code> 等</li>
+<li><code>Content-Type</code>: 请求类型是 <code>application/x-www-form-urlencoded</code>、<code>multipart/form-data</code> 或 <code>text/plain</code></li>
+</ol>
+<p>而在项目中常见的 <code>Content-Type: application/json</code> 及 <code>Authorization: &lt;token&gt;</code> 为典型的<strong>非简单请求</strong>，在发送请求时往往会带上 <code>Options</code></p>
+<blockquote>
+<p>更详细内容请参考 CORS - MDN</p>
+</blockquote>
+<hr>
+]]></content>
+      <categories>
+        <category>计算机网络协议</category>
+      </categories>
+      <tags>
+        <tag>Network</tag>
+        <tag>Http</tag>
+        <tag>Https</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>HTTP缓存</title>
     <url>/2021/09/18/HTTP%E7%BC%93%E5%AD%98/</url>
     <content><![CDATA[<h2 id="HTTP缓存机制"><a href="#HTTP缓存机制" class="headerlink" title="HTTP缓存机制"></a>HTTP缓存机制</h2><h3 id="HTTP缓存过程"><a href="#HTTP缓存过程" class="headerlink" title="HTTP缓存过程"></a>HTTP缓存过程</h3><blockquote>
@@ -304,143 +441,6 @@
         <tag>JavaScript</tag>
         <tag>Hooks</tag>
         <tag>React</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>HTTP</title>
-    <url>/2021/09/20/HTTP/</url>
-    <content><![CDATA[<h2 id="HTTP-有哪些常见状态码"><a href="#HTTP-有哪些常见状态码" class="headerlink" title="HTTP 有哪些常见状态码"></a>HTTP 有哪些常见状态码</h2><h3 id="2xx（成功状态码）"><a href="#2xx（成功状态码）" class="headerlink" title="2xx（成功状态码）"></a>2xx（成功状态码）</h3><h4 id="200-OK"><a href="#200-OK" class="headerlink" title="200 OK"></a>200 OK</h4><blockquote>
-<p>请求成功，服务器已成功处理了客户端的请求，并返回了请求的内容。</p>
-</blockquote>
-<h3 id="3xx（重定向状态码）"><a href="#3xx（重定向状态码）" class="headerlink" title="3xx（重定向状态码）"></a>3xx（重定向状态码）</h3><h4 id="301-Moved-Permanently"><a href="#301-Moved-Permanently" class="headerlink" title="301 Moved Permanently"></a>301 Moved Permanently</h4><blockquote>
-<p>被请求的资源已永久移动到新位置，服务器返回这个状态码时，会在响应头的 Location 字段给出资源的新 URL。搜索引擎会更新其索引中的链接。</p>
-</blockquote>
-<p>应用场景：如果一个网站更改了页面的 URL 结构，希望将旧的 URL 永久重定向到新的 URL</p>
-<h4 id="302-Found"><a href="#302-Found" class="headerlink" title="302 Found"></a>302 Found</h4><blockquote>
-<p>表示请求的资源临时移动到了新位置。与 301 不同的是，搜索引擎不会更新索引中的链接</p>
-</blockquote>
-<h4 id="304-Not-Modified"><a href="#304-Not-Modified" class="headerlink" title="304 Not Modified"></a>304 Not Modified</h4><blockquote>
-<p>说明无需再次传输请求的内容，也就是说可以使用缓存的内容</p>
-</blockquote>
-<span id="more"></span>
-
-<h3 id="4xx（客户端错误状态码）"><a href="#4xx（客户端错误状态码）" class="headerlink" title="4xx（客户端错误状态码）"></a>4xx（客户端错误状态码）</h3><h4 id="400-Bad-Request"><a href="#400-Bad-Request" class="headerlink" title="400 Bad Request"></a>400 Bad Request</h4><blockquote>
-<p>客户端请求的语法错误，服务器无法理解。</p>
-</blockquote>
-<p>应用场景：例如，客户端发送的请求格式不符合 HTTP 协议规范，或者请求参数有误，像在 URL 中传递了错误格式的参数</p>
-<h4 id="401-Unauthorized"><a href="#401-Unauthorized" class="headerlink" title="401 Unauthorized"></a>401 Unauthorized</h4><blockquote>
-<p>请求要求用户的身份认证。对于需要登录才能访问的资源，如果用户未提供有效的认证信息，就会返回这个状态码。</p>
-</blockquote>
-<h4 id="403-Forbidden"><a href="#403-Forbidden" class="headerlink" title="403 Forbidden"></a>403 Forbidden</h4><blockquote>
-<p>服务器理解请求客户端的请求，但是拒绝执行此请求。这通常是因为服务器端的权限设置，导致用户虽然经过身份认证，但仍然没有足够的权限访问该资源。</p>
-</blockquote>
-<h4 id="404-Not-Found"><a href="#404-Not-Found" class="headerlink" title="404 Not Found"></a>404 Not Found</h4><blockquote>
-<p>服务器找不到请求的资源。这是在网络浏览中最常见的状态码之一。</p>
-</blockquote>
-<h3 id="5xx（服务器错误状态码）"><a href="#5xx（服务器错误状态码）" class="headerlink" title="5xx（服务器错误状态码）"></a>5xx（服务器错误状态码）</h3><h4 id="500-Internal-Server-Error"><a href="#500-Internal-Server-Error" class="headerlink" title="500 Internal Server Error"></a>500 Internal Server Error</h4><blockquote>
-<p>服务器内部错误，无法完成请求。这是一个比较笼统的服务器端错误状态码。</p>
-</blockquote>
-<p>应用场景：当服务器端的代码出现异常（如程序崩溃、数据库连接错误等），导致无法正常处理请求时，就会返回 500 Internal Server Error。</p>
-<h4 id="502-Bad-Gateway"><a href="#502-Bad-Gateway" class="headerlink" title="502 Bad Gateway"></a>502 Bad Gateway</h4><blockquote>
-<p>作为网关或者代理服务器，从上游服务器接收到无效的响应。</p>
-</blockquote>
-<p>应用场景：在一个复杂的网络架构中，当代理服务器或网关无法从后端服务器获取正确的响应时，例如后端服务器出现故障或者响应格式错误，就会返回 502 Bad Gateway 状态码。</p>
-<h4 id="503-Service-Unavailable"><a href="#503-Service-Unavailable" class="headerlink" title="503 Service Unavailable"></a>503 Service Unavailable</h4><blockquote>
-<p>服务器目前无法使用（由于超载或停机维护）。通常，这只是暂时状态。</p>
-</blockquote>
-<p>应用场景：在网站流量过高导致服务器过载，或者服务器正在进行维护操作时，会返回 503 Service Unavailable 状态码。</p>
-<h4 id="504-Geteway-Timeout"><a href="#504-Geteway-Timeout" class="headerlink" title="504 Geteway Timeout"></a>504 Geteway Timeout</h4><blockquote>
-<p>一般表现为应用层服务 (upstream) 超时，如查库操作耗时十分钟，超过了 Nginx 配置的超时时间</p>
-</blockquote>
-<hr>
-<h2 id="HTTP-状态码-502-和-504-有什么区别"><a href="#HTTP-状态码-502-和-504-有什么区别" class="headerlink" title="HTTP 状态码 502 和 504 有什么区别"></a>HTTP 状态码 502 和 504 有什么区别</h2><p>这两种异常状态码都与网关 Gateway 有关，首先明确两个概念</p>
-<ul>
-<li>Proxy (Gateway)，反向代理层或者网关层。在公司级应用中一般使用 Nginx 扮演这个角色</li>
-<li>Application (upstream serrver)，应用层服务，作为 Proxy 层的上游服务。在公司中一般为各种语言编写的服务器应用，如 Go&#x2F;Java&#x2F;Python&#x2F;PHP&#x2F;Node 等</li>
-</ul>
-<p>此时关于 502 与 504 的区别就很显而易见</p>
-<ul>
-<li><code>502 Bad Gateway</code>。一般表现为你自己写的应用层服务(Java&#x2F;Go&#x2F;PHP)挂了，网关层无法接收到响应</li>
-<li><code>504 Gateway Timeout</code>。一般表现为应用层服务 (upstream) 超时，如查库操作耗时十分钟，超过了 Nginx 配置的超时时间</li>
-</ul>
-<hr>
-<h2 id="HTTP1-1、HTTP2、HTTP3"><a href="#HTTP1-1、HTTP2、HTTP3" class="headerlink" title="HTTP1.1、HTTP2、HTTP3"></a>HTTP1.1、HTTP2、HTTP3</h2><p><a href="https://juejin.cn/post/6844903667569541133#%E5%B8%A7-Frame">https://juejin.cn/post/6844903667569541133#帧-Frame</a></p>
-<ul>
-<li>题目：<a href="https://q.shanyue.tech/fe/http/86">http2 与 http1.1 有什么改进</a></li>
-<li>题目：<a href="https://q.shanyue.tech/fe/http/275">http2 中的首部压缩的实现原理是什么</a></li>
-<li>题目：<a href="https://q.shanyue.tech/fe/http/670">http2 中 Stream 与 Frame 是什么关系</a></li>
-</ul>
-<h3 id="HTTP1-1"><a href="#HTTP1-1" class="headerlink" title="HTTP1.1"></a>HTTP1.1</h3><h4 id="HTTP1-1存在的问题"><a href="#HTTP1-1存在的问题" class="headerlink" title="HTTP1.1存在的问题"></a>HTTP1.1存在的问题</h4><ul>
-<li>收到上一个http请求的响应之后才能发送下一个http请求</li>
-<li>tcp链接数限制：对同一个域名，只能建立6-8个tcp链接</li>
-<li>建立每个tcp链接都需要经过dns解析，三次握手，tls握手，慢启动（开始时只发送较少数据）这些过程</li>
-<li>队头阻塞：前一个请求挂了，后面请求无法发送</li>
-<li>首部没有压缩，重复内容发送多次（cookie）</li>
-</ul>
-<h4 id="为什么HTTP1-1无法并发的发送多个请求？（同时发多个，同时收多个）"><a href="#为什么HTTP1-1无法并发的发送多个请求？（同时发多个，同时收多个）" class="headerlink" title="为什么HTTP1.1无法并发的发送多个请求？（同时发多个，同时收多个）"></a>为什么HTTP1.1无法并发的发送多个请求？（同时发多个，同时收多个）</h4><p>因为http1.1是基于文本的协议，比如客户端向服务器发送了两个请求 <code>GET /query?q=A</code> 和 <code>GET /query?q=B</code>，服务器返回了两个结果，客户端是没有办法根据响应结果来判断响应对应于哪一个请求的，而http2基于二进制分帧实现多路复用，数据流以消息的形式发送，而消息又由一个或多个帧组成，多个帧之间可以乱序发送，<strong>因为根据帧首部的流标识可以重新组装。</strong></p>
-<h4 id="HTTP-1-1-中的-keep-alive-有什么作用"><a href="#HTTP-1-1-中的-keep-alive-有什么作用" class="headerlink" title="HTTP 1.1 中的 keep-alive 有什么作用"></a>HTTP 1.1 中的 keep-alive 有什么作用</h4><blockquote>
-<p>在 <code>http 1.1</code> 中，在响应头中设置 <code>keep-alive</code> 可以在一个 TCP 连接上发送多个 http 请求</p>
-</blockquote>
-<ol>
-<li>避免了重开 TCP 连接的开销</li>
-<li>避免了刷新时重新建立 SSL 连接的开销</li>
-<li>避免了QPS过大时，服务器的连接数过大</li>
-</ol>
-<p>在服务器端使用响应头开启 <code>keep-alive</code></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Connection: Keep-Alive</span><br><span class="line">Keep-Alive: <span class="built_in">timeout</span>=5, max=1000</span><br></pre></td></tr></table></figure>
-
-<h3 id="HTTP2"><a href="#HTTP2" class="headerlink" title="HTTP2"></a>HTTP2</h3><p>关于 <code>http2</code> 可以阅读谷歌 <code>web.dev</code> 的文档 <a href="https://web.dev/performance-http2/">Introduction to HTTP&#x2F;2</a></p>
-<p>关于 HTTP2 有以下改进</p>
-<h4 id="二进制分帧"><a href="#二进制分帧" class="headerlink" title="二进制分帧"></a>二进制分帧</h4><ul>
-<li>帧和流：把请求和响应分成一个个二进制帧（首部帧，数据帧），一个完整的请求和响应是一个流每一个帧都有一个stream id，标识每一个帧属于哪个流</li>
-<li>复用同一个tcp链接，并发的发送一个个二进制帧，在接收方再进行重组</li>
-<li>同一域名只需要一个tcp链接</li>
-</ul>
-<h4 id="多路复用-Stream-Frame"><a href="#多路复用-Stream-Frame" class="headerlink" title="多路复用 (Stream&#x2F;Frame)"></a>多路复用 (Stream&#x2F;Frame)</h4><ul>
-<li>并发的发送一个个二进制帧</li>
-</ul>
-<h4 id="头部压缩-HPack"><a href="#头部压缩-HPack" class="headerlink" title="头部压缩: (HPack)"></a>头部压缩: (HPack)</h4><ul>
-<li>头部压缩算法压缩首部内容</li>
-<li>客户端浏览器都保存一张HPACK表，</li>
-</ul>
-<h4 id="服务端推送-Server-Push"><a href="#服务端推送-Server-Push" class="headerlink" title="服务端推送: (Server Push)"></a>服务端推送: (Server Push)</h4><ul>
-<li>不同于http1.1解析完html才请求资源，服务端提前返回这些资源文件</li>
-</ul>
-<h4 id="HTTP2中可以弃用哪些针对HTTP1-1的优化点"><a href="#HTTP2中可以弃用哪些针对HTTP1-1的优化点" class="headerlink" title="HTTP2中可以弃用哪些针对HTTP1.1的优化点"></a>HTTP2中可以弃用哪些针对HTTP1.1的优化点</h4><p>合并文件、内联资源、雪碧图、域名分片对于 HTTP&#x2F;2 来说是不必要的，使用 h2 尽可能将资源细粒化，文件分解地尽可能散，不用担心请求数多</p>
-<h3 id="HTTP3"><a href="#HTTP3" class="headerlink" title="HTTP3"></a>HTTP3</h3><p>HTTP3解决的问题：</p>
-<ul>
-<li>HTTP2虽然实现了多路复用，但仍基于TCP，一个TCP包丢失，整个链接上的所有流都被阻塞，直到该包被重新传输</li>
-<li>tcp和tls握手时延问题</li>
-</ul>
-<h3 id="HTTP-Proxy原理"><a href="#HTTP-Proxy原理" class="headerlink" title="HTTP Proxy原理"></a>HTTP Proxy原理</h3><blockquote>
-<p>webpack-dev-server 中proxy原理，以及如何解决跨域<br>本质上是因为服务端不存在跨域的问题，跨域是浏览器的限制</p>
-</blockquote>
-<p><strong>Proxy的原理</strong>：<br>代理服务器会自动提取请求数据包中的HTTP请求数据发送给服务端，并服务端的HTTP响应数据转发给发送请求的客户端，HTTP代理服务器使用的端口通常是8080。</p>
-<ul>
-<li>对于Web客户端来说，代理扮演的服务器角色，接收请求（Request），返回响应（Response）。</li>
-<li>对于Web服务器来说，代理扮演的客户端角色，发送请求（Request），接收响应（Response）。</li>
-</ul>
-<hr>
-<h2 id="简单请求和非简单请求"><a href="#简单请求和非简单请求" class="headerlink" title="简单请求和非简单请求"></a>简单请求和非简单请求</h2><h3 id="什么情况下会发送-OPTIONS-请求"><a href="#什么情况下会发送-OPTIONS-请求" class="headerlink" title="什么情况下会发送 OPTIONS 请求"></a>什么情况下会发送 OPTIONS 请求</h3><p><strong>当一个请求跨域且不是简单请求时就会发送 <code>OPTIONS</code> 请求</strong></p>
-<p>满足以下条件就是一个简单请求:</p>
-<ol>
-<li><code>Method</code>: 请求的方法是 <code>GET</code>、<code>POST</code> 及 <code>HEAD</code></li>
-<li><code>Header</code>: 请求头是 <code>Content-Type</code>、<code>Accept-Language</code>、<code>Content-Language</code> 等</li>
-<li><code>Content-Type</code>: 请求类型是 <code>application/x-www-form-urlencoded</code>、<code>multipart/form-data</code> 或 <code>text/plain</code></li>
-</ol>
-<p>而在项目中常见的 <code>Content-Type: application/json</code> 及 <code>Authorization: &lt;token&gt;</code> 为典型的<strong>非简单请求</strong>，在发送请求时往往会带上 <code>Options</code></p>
-<blockquote>
-<p>更详细内容请参考 CORS - MDN</p>
-</blockquote>
-<hr>
-]]></content>
-      <categories>
-        <category>计算机网络协议</category>
-      </categories>
-      <tags>
-        <tag>Network</tag>
-        <tag>Http</tag>
-        <tag>Https</tag>
       </tags>
   </entry>
   <entry>
@@ -686,6 +686,83 @@
       </tags>
   </entry>
   <entry>
+    <title>JavaSrcipt知识点</title>
+    <url>/2021/02/17/Javascript%E7%9F%A5%E8%AF%86%E7%82%B9/</url>
+    <content><![CDATA[<h4 id="1-script标签中async和defer的区别"><a href="#1-script标签中async和defer的区别" class="headerlink" title="1. script标签中async和defer的区别"></a>1. script标签中async和defer的区别</h4><p><img src="/../assets/Snipaste_2021-12-13_03-23-58.png" alt="image-20211025190555184"></p>
+<ul>
+<li>普通script标签：下载和执行都会阻塞Dom渲染</li>
+<li>defer：立即进行异步下载，等到HTML完全解析完后开始执行，有多个defer的标签时，会按照顺序下载执行</li>
+<li>async：立即进行异步下载，下载完后会立即执行同时阻塞Dom渲染，因为是下载完立即执行，不能保证多个加载时的先后顺序。</li>
+</ul>
+<span id="more"></span>
+]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Jira项目</title>
+    <url>/2022/03/02/Jira%E9%A1%B9%E7%9B%AE/</url>
+    <content><![CDATA[<h4 id="代码自动格式化工具：prettier"><a href="#代码自动格式化工具：prettier" class="headerlink" title="代码自动格式化工具：prettier"></a>代码自动格式化工具：prettier</h4><p>配置过程：<a href="https://prettier.io/docs/en/precommit.html">https://prettier.io/docs/en/precommit.html</a></p>
+<p><code>yarn add --dev --exact prettier</code></p>
+<p>新建<code>.prettierrc.json，.prettierignore</code>文件</p>
+<p>设置git commit预提交钩子</p>
+<p><code>npx mrm@2 lint-staged </code></p>
+<h4 id="规范git-commit工具：commitlint"><a href="#规范git-commit工具：commitlint" class="headerlink" title="规范git commit工具：commitlint"></a>规范git commit工具：commitlint</h4><p>配置过程：<a href="https://github.com/conventional-changelog/commitlint">https://github.com/conventional-changelog/commitlint</a></p>
+<p><code>yarn add --save-dev @commitlint/config-conventional @commitlint/cli</code></p>
+<p>新建 commitlint.config.js文件，引入规则module.exports &#x3D; {extends: [‘@commitlint&#x2F;config-conventional’]}</p>
+<span id="more"></span>
+
+<h4 id="常见MOCK方案"><a href="#常见MOCK方案" class="headerlink" title="常见MOCK方案"></a>常见MOCK方案</h4><h5 id="1-代码侵入（直接在代码中写死Mock数据，或请求本地的JSON文件"><a href="#1-代码侵入（直接在代码中写死Mock数据，或请求本地的JSON文件" class="headerlink" title="1. 代码侵入（直接在代码中写死Mock数据，或请求本地的JSON文件"></a>1. 代码侵入（直接在代码中写死Mock数据，或请求本地的JSON文件</h5><p>​	优点：无</p>
+<p>​	缺点：与真实server环境的切换比较麻烦（需要修改请求地址），一切需要侵入代码切换环境的行为都是不好的</p>
+<h5 id="2-请求拦截"><a href="#2-请求拦截" class="headerlink" title="2. 请求拦截"></a>2. 请求拦截</h5><p>​	代表：<a href="http://mockjs.com/">Mock.js</a></p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="title class_">Mock</span>.<span class="title function_">mock</span>(<span class="regexp">/\\\\/</span>api\\\\/visitor\\\\/list/, <span class="string">&#x27;get&#x27;</span>, &#123;</span><br><span class="line">  <span class="attr">code</span>: <span class="number">2000</span>,</span><br><span class="line">  <span class="attr">msg</span>: <span class="string">&#x27;ok&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;data|10&#x27;</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="string">&#x27;id|+1&#x27;</span>: <span class="number">6</span>,</span><br><span class="line">      <span class="string">&#x27;name&#x27;</span>: <span class="string">&#x27;@csentence(5)&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;tag&#x27;</span>: <span class="string">&#x27;@integer(6, 9)-@integer(10, 14)岁 @cword(&quot;零有&quot;, 1)基础&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;lesson_image&#x27;</span>: <span class="string">&quot;&lt;https://images.pexels.com/3737094/pexels-photo-3737094.jpeg&gt;&quot;</span>,</span><br><span class="line">      <span class="string">&#x27;lesson_package&#x27;</span>: <span class="string">&#x27;L1基础指令课&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;done&#x27;</span>: <span class="string">&#x27;@integer(10000, 99999)&#x27;</span>,</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>优点：</p>
+<ol>
+<li>与前端代码分离</li>
+<li>可生成随机数据</li>
+</ol>
+<p>缺点：</p>
+<ol>
+<li>数据都是动态生成的假数据，无法真实模拟增删改查的情况</li>
+<li>只支持ajax，不支持fetch（本质上是重写了ajax方法，两者的差别见：<a href="https://zhuanlan.zhihu.com/p/24594294">AJAX 之 XHR, Fetch 的对比</a>）</li>
+</ol>
+<h5 id="3-接口管理工具"><a href="#3-接口管理工具" class="headerlink" title="3. 接口管理工具"></a>3. 接口管理工具</h5><p>代表：rap，swagger，moco，yapi</p>
+<p>优点：</p>
+<p>​	1.配置功能强大，接口管理与Mock一体，后端修改接口Mock也跟着更改，可靠</p>
+<p>缺点：</p>
+<p>​	1.配置复杂，依赖后端</p>
+<p>​	2.一般会作为大团队的基础建设而存在</p>
+<h5 id="4-本地node服务器"><a href="#4-本地node服务器" class="headerlink" title="4. 本地node服务器"></a>4. 本地node服务器</h5><p>代表：<a href="https://github.com/typicode/json-server">json-server</a></p>
+<p>优点：</p>
+<p>​	1.配置简单，json-server甚至可以0代码30s启动一个REST API Server</p>
+<p>​	2.自定义程度高</p>
+<p>​	3.增删改查真是模拟</p>
+<h5 id="REST-API"><a href="#REST-API" class="headerlink" title="REST API"></a>REST API</h5><p>一句话总结：URI 代表 资源&#x2F;对象，METHOD 代表行为</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">GET /tickets // 列表</span><br><span class="line">GET /tickets/12 // 详情</span><br><span class="line">POST /tickets  // 增加</span><br><span class="line">PUT /tickets/12 // 替换</span><br><span class="line">PATCH /tickets/12 // 修改</span><br><span class="line">DELETE /tickets/12 // 删除</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="d-ts类型文件"><a href="#d-ts类型文件" class="headerlink" title="d.ts类型文件"></a>d.ts类型文件</h4><p>改造js文件为ts文件后，引入的qs库报错</p>
+<p><img src="/../assets/image-20211110193223804.png" alt="image-20211110193223804"></p>
+<p><code>yarn add @types/qs --save-dev   </code> 安装对应的ts补丁文件</p>
+<p><strong>d.ts文件的作用：说明书文件</strong></p>
+<p>JS 文件 + .d.ts 文件   &#x3D;&#x3D;&#x3D; ts 文件</p>
+<p>.d.ts 文件可以让 JS 文件继续维持自己JS文件的身份，而拥有TS的类型保护</p>
+<p>一般写业务代码不会用到，但是点击类型跳转一般会跳转到 .d.ts文件</p>
+]]></content>
+      <categories>
+        <category>Chore</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>JavaScript执行上下文</title>
     <url>/2021/02/17/Javascript%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87/</url>
     <content><![CDATA[<h4 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h4><h4 id="在看js垃圾回收时遇到相关问题，感觉自己对上下文对象理解的还是不够透彻（实在是太菜了）这就回来恶补。"><a href="#在看js垃圾回收时遇到相关问题，感觉自己对上下文对象理解的还是不够透彻（实在是太菜了）这就回来恶补。" class="headerlink" title="在看js垃圾回收时遇到相关问题，感觉自己对上下文对象理解的还是不够透彻（实在是太菜了）这就回来恶补。"></a>在看js垃圾回收时遇到相关问题，感觉自己对上下文对象理解的还是不够透彻（实在是太菜了）这就回来恶补。</h4><h4 id="执行上下文（Execution-Context）"><a href="#执行上下文（Execution-Context）" class="headerlink" title="执行上下文（Execution Context）"></a>执行上下文（Execution Context）</h4><ul>
@@ -800,83 +877,6 @@
 <h5 id="需要注意的是，在-ES6-中箭头函数中，this-是在函数声明的时候确定的-箭头函数不绑定this，会捕获上下文的this"><a href="#需要注意的是，在-ES6-中箭头函数中，this-是在函数声明的时候确定的-箭头函数不绑定this，会捕获上下文的this" class="headerlink" title="需要注意的是，在 ES6 中箭头函数中，this 是在函数声明的时候确定的(箭头函数不绑定this，会捕获上下文的this)"></a>需要注意的是，在 ES6 中箭头函数中，this 是在函数声明的时候确定的(箭头函数不绑定this，会捕获上下文的this)</h5>]]></content>
       <categories>
         <category>JavaScript原理</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Jira项目</title>
-    <url>/2022/03/02/Jira%E9%A1%B9%E7%9B%AE/</url>
-    <content><![CDATA[<h4 id="代码自动格式化工具：prettier"><a href="#代码自动格式化工具：prettier" class="headerlink" title="代码自动格式化工具：prettier"></a>代码自动格式化工具：prettier</h4><p>配置过程：<a href="https://prettier.io/docs/en/precommit.html">https://prettier.io/docs/en/precommit.html</a></p>
-<p><code>yarn add --dev --exact prettier</code></p>
-<p>新建<code>.prettierrc.json，.prettierignore</code>文件</p>
-<p>设置git commit预提交钩子</p>
-<p><code>npx mrm@2 lint-staged </code></p>
-<h4 id="规范git-commit工具：commitlint"><a href="#规范git-commit工具：commitlint" class="headerlink" title="规范git commit工具：commitlint"></a>规范git commit工具：commitlint</h4><p>配置过程：<a href="https://github.com/conventional-changelog/commitlint">https://github.com/conventional-changelog/commitlint</a></p>
-<p><code>yarn add --save-dev @commitlint/config-conventional @commitlint/cli</code></p>
-<p>新建 commitlint.config.js文件，引入规则module.exports &#x3D; {extends: [‘@commitlint&#x2F;config-conventional’]}</p>
-<span id="more"></span>
-
-<h4 id="常见MOCK方案"><a href="#常见MOCK方案" class="headerlink" title="常见MOCK方案"></a>常见MOCK方案</h4><h5 id="1-代码侵入（直接在代码中写死Mock数据，或请求本地的JSON文件"><a href="#1-代码侵入（直接在代码中写死Mock数据，或请求本地的JSON文件" class="headerlink" title="1. 代码侵入（直接在代码中写死Mock数据，或请求本地的JSON文件"></a>1. 代码侵入（直接在代码中写死Mock数据，或请求本地的JSON文件</h5><p>​	优点：无</p>
-<p>​	缺点：与真实server环境的切换比较麻烦（需要修改请求地址），一切需要侵入代码切换环境的行为都是不好的</p>
-<h5 id="2-请求拦截"><a href="#2-请求拦截" class="headerlink" title="2. 请求拦截"></a>2. 请求拦截</h5><p>​	代表：<a href="http://mockjs.com/">Mock.js</a></p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="title class_">Mock</span>.<span class="title function_">mock</span>(<span class="regexp">/\\\\/</span>api\\\\/visitor\\\\/list/, <span class="string">&#x27;get&#x27;</span>, &#123;</span><br><span class="line">  <span class="attr">code</span>: <span class="number">2000</span>,</span><br><span class="line">  <span class="attr">msg</span>: <span class="string">&#x27;ok&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;data|10&#x27;</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="string">&#x27;id|+1&#x27;</span>: <span class="number">6</span>,</span><br><span class="line">      <span class="string">&#x27;name&#x27;</span>: <span class="string">&#x27;@csentence(5)&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;tag&#x27;</span>: <span class="string">&#x27;@integer(6, 9)-@integer(10, 14)岁 @cword(&quot;零有&quot;, 1)基础&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;lesson_image&#x27;</span>: <span class="string">&quot;&lt;https://images.pexels.com/3737094/pexels-photo-3737094.jpeg&gt;&quot;</span>,</span><br><span class="line">      <span class="string">&#x27;lesson_package&#x27;</span>: <span class="string">&#x27;L1基础指令课&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;done&#x27;</span>: <span class="string">&#x27;@integer(10000, 99999)&#x27;</span>,</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>优点：</p>
-<ol>
-<li>与前端代码分离</li>
-<li>可生成随机数据</li>
-</ol>
-<p>缺点：</p>
-<ol>
-<li>数据都是动态生成的假数据，无法真实模拟增删改查的情况</li>
-<li>只支持ajax，不支持fetch（本质上是重写了ajax方法，两者的差别见：<a href="https://zhuanlan.zhihu.com/p/24594294">AJAX 之 XHR, Fetch 的对比</a>）</li>
-</ol>
-<h5 id="3-接口管理工具"><a href="#3-接口管理工具" class="headerlink" title="3. 接口管理工具"></a>3. 接口管理工具</h5><p>代表：rap，swagger，moco，yapi</p>
-<p>优点：</p>
-<p>​	1.配置功能强大，接口管理与Mock一体，后端修改接口Mock也跟着更改，可靠</p>
-<p>缺点：</p>
-<p>​	1.配置复杂，依赖后端</p>
-<p>​	2.一般会作为大团队的基础建设而存在</p>
-<h5 id="4-本地node服务器"><a href="#4-本地node服务器" class="headerlink" title="4. 本地node服务器"></a>4. 本地node服务器</h5><p>代表：<a href="https://github.com/typicode/json-server">json-server</a></p>
-<p>优点：</p>
-<p>​	1.配置简单，json-server甚至可以0代码30s启动一个REST API Server</p>
-<p>​	2.自定义程度高</p>
-<p>​	3.增删改查真是模拟</p>
-<h5 id="REST-API"><a href="#REST-API" class="headerlink" title="REST API"></a>REST API</h5><p>一句话总结：URI 代表 资源&#x2F;对象，METHOD 代表行为</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">GET /tickets // 列表</span><br><span class="line">GET /tickets/12 // 详情</span><br><span class="line">POST /tickets  // 增加</span><br><span class="line">PUT /tickets/12 // 替换</span><br><span class="line">PATCH /tickets/12 // 修改</span><br><span class="line">DELETE /tickets/12 // 删除</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="d-ts类型文件"><a href="#d-ts类型文件" class="headerlink" title="d.ts类型文件"></a>d.ts类型文件</h4><p>改造js文件为ts文件后，引入的qs库报错</p>
-<p><img src="/../assets/image-20211110193223804.png" alt="image-20211110193223804"></p>
-<p><code>yarn add @types/qs --save-dev   </code> 安装对应的ts补丁文件</p>
-<p><strong>d.ts文件的作用：说明书文件</strong></p>
-<p>JS 文件 + .d.ts 文件   &#x3D;&#x3D;&#x3D; ts 文件</p>
-<p>.d.ts 文件可以让 JS 文件继续维持自己JS文件的身份，而拥有TS的类型保护</p>
-<p>一般写业务代码不会用到，但是点击类型跳转一般会跳转到 .d.ts文件</p>
-]]></content>
-      <categories>
-        <category>Chore</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>JavaSrcipt知识点</title>
-    <url>/2021/02/17/Javascript%E7%9F%A5%E8%AF%86%E7%82%B9/</url>
-    <content><![CDATA[<h4 id="1-script标签中async和defer的区别"><a href="#1-script标签中async和defer的区别" class="headerlink" title="1. script标签中async和defer的区别"></a>1. script标签中async和defer的区别</h4><p><img src="/../assets/Snipaste_2021-12-13_03-23-58.png" alt="image-20211025190555184"></p>
-<ul>
-<li>普通script标签：下载和执行都会阻塞Dom渲染</li>
-<li>defer：立即进行异步下载，等到HTML完全解析完后开始执行，有多个defer的标签时，会按照顺序下载执行</li>
-<li>async：立即进行异步下载，下载完后会立即执行同时阻塞Dom渲染，因为是下载完立即执行，不能保证多个加载时的先后顺序。</li>
-</ul>
-<span id="more"></span>
-]]></content>
-      <categories>
-        <category>JavaScript</category>
       </categories>
       <tags>
         <tag>JavaScript</tag>
@@ -1327,6 +1327,72 @@
       </tags>
   </entry>
   <entry>
+    <title>React的设计和实现</title>
+    <url>/2021/09/29/React%E7%9A%84%E8%AE%BE%E8%AE%A1%E5%92%8C%E5%AE%9E%E7%8E%B0/</url>
+    <content><![CDATA[<h4 id="本篇笔记的目的：站在更高的角度看待React"><a href="#本篇笔记的目的：站在更高的角度看待React" class="headerlink" title="本篇笔记的目的：站在更高的角度看待React"></a>本篇笔记的目的：站在更高的角度看待React</h4><h4 id="React的设计思路"><a href="#React的设计思路" class="headerlink" title="React的设计思路"></a>React的设计思路</h4><ul>
+<li><p>解决UI编程的痛点</p>
+<ol>
+<li><p>状态更新，UI不会自动更新，需要手动调dom api进行更新</p>
+<ol start="2">
+<li>欠缺基本代码的封装和隔离，代码层面没有组件化</li>
+<li>UI之间数据依赖，需要手动维护，如果依赖链路过长，会有 callback hell的问题</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><p>响应式编程</p>
+</li>
+</ul>
+<p><img src="/../assets/image-20220210203412954.png" alt="image-20220210203412954"></p>
+<ul>
+<li><p>期望能</p>
+<pre><code>1. 状态更新，UI自动更新
+2. 前端代码组件化，可复用，可封装
+3. 状态之间的依赖关系，只需要声明即可
+</code></pre>
+</li>
+<li><p>组件化</p>
+<pre><code>1. 组件是组件的组合/原子组件
+2. 组件内拥有状态，外部不可见
+3. 父组件可将状态传入组件内部
+</code></pre>
+</li>
+<li><p>状态归属问题</p>
+<pre><code>1. react是单向数据流，只能父组件将状态传递给子组件（但可以将改变父组件状态的方法传递给子组件实现父子组件通信）
+2. 如何解决不合理的状态上升问题？
+3. 组件状态改变后，如何更新dom
+</code></pre>
+</li>
+</ul>
+<span id="more"></span>
+
+
+<h4 id="React的实现"><a href="#React的实现" class="headerlink" title="React的实现"></a>React的实现</h4><ul>
+<li>DIff算法</li>
+</ul>
+<img src="../assets/image-20220210212319207.png" alt="image-20220210212319207" style="zoom:40%;" />
+
+
+
+<h3 id="React解决状态管理问题"><a href="#React解决状态管理问题" class="headerlink" title="React解决状态管理问题"></a>React解决状态管理问题</h3><p>先说结论：使用状态管理库</p>
+<ul>
+<li><p>状态管理库核心思想：将状态抽离到ui外部进行统一管理。</p>
+</li>
+<li><p>将状态抽离到ui外部的问题：降低了组件复用性，组件跟外部状态强耦合</p>
+</li>
+</ul>
+<p><strong>何时使用状态管理库？</strong></p>
+<p><strong>判断一个状态是不是只属于组件本身，如若是则不需要状态管理库</strong></p>
+]]></content>
+      <categories>
+        <category>React</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>React</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>React组件性能优化</title>
     <url>/2021/10/14/React%E7%BB%84%E4%BB%B6%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</url>
     <content><![CDATA[<h3 id="React-性能优化思路"><a href="#React-性能优化思路" class="headerlink" title="React 性能优化思路"></a>React 性能优化思路</h3><p>我觉得React 性能优化的理念的主要方向就是这两个：</p>
@@ -1424,6 +1490,120 @@
         <tag>JavaScript</tag>
         <tag>Hooks</tag>
         <tag>React</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Redux</title>
+    <url>/2021/10/11/Redux/</url>
+    <content><![CDATA[<h2 id="Redux"><a href="#Redux" class="headerlink" title="Redux"></a>Redux</h2><h3 id="设计思想"><a href="#设计思想" class="headerlink" title="设计思想"></a>设计思想</h3><ul>
+<li>（1）Web 应用是一个状态机，视图与状态是一一对应的。</li>
+<li>（2）所有的状态，保存在一个对象里面。</li>
+</ul>
+<h3 id="Action"><a href="#Action" class="headerlink" title="Action"></a>Action</h3><ol>
+<li><p>Action 就是 View 发出的通知，表示 State 应该要发生变化了。</p>
+</li>
+<li><p>Action 是一个对象，其中的<code>type</code>属性是必须的，表示 Action 的名称，Action 描述当前发生的事情。</p>
+</li>
+<li><p>改变 State 的唯一办法，就是使用 Action。</p>
+</li>
+</ol>
+<p>可以定义一个函数来生成 Action，这个函数就叫 Action Creator，示例如下</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="variable constant_">ADD_TODO</span> = <span class="string">&#x27;添加 TODO&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">addTodo</span>(<span class="params">text</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    <span class="attr">type</span>: <span class="variable constant_">ADD_TODO</span>,</span><br><span class="line">    text</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> action = <span class="title function_">addTodo</span>(<span class="string">&#x27;Learn Redux&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+
+<h3 id="Reducer"><a href="#Reducer" class="headerlink" title="Reducer"></a>Reducer</h3><ol>
+<li><p>Store 收到 Action 以后，必须给出一个新的 State，这样 View 才会发生变化。这种 State 的计算过程就叫做 Reducer。</p>
+</li>
+<li><p>Reducer 是一个函数，它接受 Action 和当前 State 作为参数，返回一个新的 State。</p>
+</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> initState = &#123;</span><br><span class="line">    <span class="attr">value</span>: <span class="string">&#x27;init&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> <span class="title function_">reducer</span> = (<span class="params">state = initState, action</span>) =&gt; &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;reducer:&#x27;</span>, state, action);</span><br><span class="line">    <span class="keyword">switch</span>(action.<span class="property">type</span>)&#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;send_type&#x27;</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="title class_">Object</span>.<span class="title function_">assign</span>(&#123;&#125;, state, action);</span><br><span class="line">        <span class="attr">default</span>:</span><br><span class="line">            <span class="keyword">return</span> state;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Store"><a href="#Store" class="headerlink" title="Store"></a>Store</h3><h4 id="store-subscribe"><a href="#store-subscribe" class="headerlink" title="store.subscribe()"></a>store.subscribe()</h4><p>添加一个变化监听器。每当 <code>dispatch action</code> 的时候就会执行，<code>state</code> 树中的一部分可能已经变化。可以在回调函数里调用<code>getState()</code>来拿到当前 <code>state</code>，并且让<code>View</code>重新渲染<br>  <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">listerner</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">let</span> newState = store.<span class="title function_">getState</span>();</span><br><span class="line">  component.<span class="title function_">setState</span>(newState);   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="store-dispatch"><a href="#store-dispatch" class="headerlink" title="store.dispatch()"></a>store.dispatch()</h4><p><code>store.dispatch()</code>是 <code>View</code> 发出 <code>Action</code> 的唯一方法，将使用当前 <code>getState()</code>的结果和传入的 <code>action</code> 以同步方式的调用 <code>store</code> 的 <code>reducer</code> 函数。它的返回值会被作为下一个 <code>state</code>。从现在开始，这就成为了 <code>getState()</code>的返回值，同时变化监听器(change listener)会被触发。</p>
+<blockquote>
+</blockquote>
+<ul>
+<li><p>流程：</p>
+<p>组件 – <code>store.dispatch(action)</code> – 触发reducer的执行 – 根据type区分返回的state – 返回值给store – 更新state – <code>store.subscribe(listener)</code>中listener回调函数执行。</p>
+</li>
+</ul>
+<p><img src="/../assets/image-20210309183756689.png" alt="image-20210309183756689"></p>
+<h2 id="中间件和异步操作"><a href="#中间件和异步操作" class="headerlink" title="中间件和异步操作"></a>中间件和异步操作</h2><h3 id="中间件的概念"><a href="#中间件的概念" class="headerlink" title="中间件的概念"></a>中间件的概念</h3><p>本质上就是对原方法进行了重定义，以<code>redux-logger</code>为例</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> next = store.<span class="property">dispatch</span>;</span><br><span class="line">store.<span class="property">dispatch</span> = <span class="keyword">function</span> <span class="title function_">dispatchAndLog</span>(<span class="params">action</span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;dispatching&#x27;</span>, action);</span><br><span class="line">  <span class="title function_">next</span>(action);</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;next state&#x27;</span>, store.<span class="title function_">getState</span>());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="中间件的用法"><a href="#中间件的用法" class="headerlink" title="中间件的用法"></a>中间件的用法</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; applyMiddleware, createStore &#125; <span class="keyword">from</span> <span class="string">&#x27;redux&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> createLogger <span class="keyword">from</span> <span class="string">&#x27;redux-logger&#x27;</span>;</span><br><span class="line"><span class="keyword">const</span> logger = <span class="title function_">createLogger</span>();</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> store = <span class="title function_">createStore</span>(</span><br><span class="line">  reducer,</span><br><span class="line">  <span class="comment">// 中间件的次序有要求</span></span><br><span class="line">  <span class="title function_">applyMiddleware</span>(thunk, promise, logger)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<h3 id="异步操作的思路"><a href="#异步操作的思路" class="headerlink" title="异步操作的思路"></a>异步操作的思路</h3><blockquote>
+<p>同步操作只需要一种<code>Action</code>，而异步操作需要发出三种<code>Action</code></p>
+</blockquote>
+<ul>
+<li>操作发起时的 <code>Action</code></li>
+<li>操作成功时的 <code>Action</code></li>
+<li>操作失败时的 <code>Action</code></li>
+</ul>
+<blockquote>
+<p>异步操作的 <code>State</code> 也要进行改造，整个过程如下</p>
+</blockquote>
+<ul>
+<li>操作开始时，送出一个 <code>Action</code>，触发 <code>State</code> 更新为”正在操作”状态，<code>View</code> 重新渲染</li>
+<li>操作结束后，再送出一个 <code>Action</code>，触发 <code>State</code> 更新为”操作结束”状态，<code>View</code> 再一次重新渲染</li>
+</ul>
+<h3 id="Redux-thunk中间件"><a href="#Redux-thunk中间件" class="headerlink" title="Redux-thunk中间件"></a>Redux-thunk中间件</h3><h2 id="React-redux"><a href="#React-redux" class="headerlink" title="React-redux"></a>React-redux</h2><h3 id="UI组件和容器组件"><a href="#UI组件和容器组件" class="headerlink" title="UI组件和容器组件"></a>UI组件和容器组件</h3><h3 id="provider"><a href="#provider" class="headerlink" title="provider"></a>provider</h3><p><img src="/../assets/image-20210309200347890.png" alt="image-20210309200347890"></p>
+<h3 id="connect"><a href="#connect" class="headerlink" title="connect"></a>connect</h3><p><code>connect</code>方法接受两个参数：<code>mapStateT.oProps</code>和<code>mapDispatchToProps</code>。它们定义了 UI 组件的业务逻辑。前者负责输入逻辑，即将<code>state</code>映射到 UI 组件的参数（<code>props</code>），后者负责输出逻辑，即将用户对 UI 组件的操作映射成 Action。</p>
+<ul>
+<li><h4 id="mapStateToProps"><a href="#mapStateToProps" class="headerlink" title="mapStateToProps"></a><code>mapStateToProps</code></h4><p><code>mapStateToProps</code>是一个函数。它的作用就是像它的名字那样，建立一个从（外部的）<code>state</code>对象到（UI 组件的）<code>props</code>对象的映射关系。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">mapStateToProps</span> = (<span class="params">state</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    <span class="attr">todos</span>: <span class="title function_">getVisibleTodos</span>(state.<span class="property">todos</span>, state.<span class="property">visibilityFilter</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>mapStateToProps</code>会订阅 Store，每当<code>state</code>更新的时候，就会自动执行，重新计算 UI 组件的参数，从而触发 UI 组件的重新渲染。</p>
+<p><code>mapStateToProps</code>的第一个参数总是<code>state</code>对象，还可以使用第二个参数，代表容器组件的<code>props</code>对象。</p>
+<p><code>connect</code>方法可以省略<code>mapStateToProps</code>参数，那样的话，UI 组件就不会订阅Store，就是说 Store 的更新不会引起 UI 组件的更新。</p>
+</li>
+<li><h4 id="mapDispatchToProps"><a href="#mapDispatchToProps" class="headerlink" title="mapDispatchToProps"></a><code>mapDispatchToProps</code></h4><p><code>mapDispatchToProps</code>是<code>connect</code>函数的第二个参数，用来建立 UI 组件的参数到<code>store.dispatch</code>方法的映射</p>
+<p>如果<code>mapDispatchToProps</code>是一个函数，会得到<code>dispatch</code>和<code>ownProps</code></p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">mapDispatchToProps</span> = (<span class="params"></span></span><br><span class="line"><span class="params">  dispatch,</span></span><br><span class="line"><span class="params">  ownProps</span></span><br><span class="line"><span class="params"></span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    <span class="attr">onClick</span>: <span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="title function_">dispatch</span>(&#123;</span><br><span class="line">        <span class="attr">type</span>: <span class="string">&#x27;SET_VISIBILITY_FILTER&#x27;</span>,</span><br><span class="line">        <span class="attr">filter</span>: ownProps.<span class="property">filter</span></span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果<code>mapDispatchToProps</code>是一个对象，它的每个键名也是对应 UI 组件的同名参数，键值应该是一个函数，会被当作 Action creator ，返回的 Action 会由 Redux 自动发出(dispatch).</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> mapDispatchToProps = &#123;</span><br><span class="line">  <span class="attr">onClick</span>: <span class="function">(<span class="params">filter</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="attr">type</span>: <span class="string">&#x27;SET_VISIBILITY_FILTER&#x27;</span>,</span><br><span class="line">    <span class="attr">filter</span>: filter</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="计数器Demo："><a href="#计数器Demo：" class="headerlink" title="计数器Demo："></a>计数器Demo：</h3><p>  两个组件，按钮ComA和文本ComB，点击按钮+1，用react-redux实现通信的过程</p>
+<p><img src="/../assets/image-20210310173423401.png" alt="image-20210310173423401"></p>
+]]></content>
+      <categories>
+        <category>状态管理</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>React</tag>
+        <tag>Redux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Web3相关学习</title>
+    <url>/2024/10/29/Web3%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/</url>
+    <content><![CDATA[<p>先开个坑，准备下Web3相关的学习</p>
+<h2 id="学习路线"><a href="#学习路线" class="headerlink" title="学习路线"></a>学习路线</h2><ul>
+<li><strong>Web3开发学习路线</strong>: <a href="https://54web3.cc/blog/roadmap/learning-path-web3">https://54web3.cc/blog/roadmap/learning-path-web3</a></li>
+<li><strong>Web3 入门计划</strong>: <a href="https://cubic-leaf-731.notion.site/web3-202208-09-1623ccd15c2148a1ae00ed8794d153b1">https://cubic-leaf-731.notion.site/web3-202208-09-1623ccd15c2148a1ae00ed8794d153b1</a></li>
+<li><strong>Web3从入门到精通开发学习路线</strong>：<a href="https://juejin.cn/post/7307185531330838543">https://juejin.cn/post/7307185531330838543</a></li>
+</ul>
+<h3 id="WEEK-1-区块链的基础知识"><a href="#WEEK-1-区块链的基础知识" class="headerlink" title="WEEK 1: 区块链的基础知识"></a><strong>WEEK 1: 区块链的基础知识</strong></h3><ul>
+<li>密码学基础</li>
+<li>区块链基础</li>
+<li>相关金融知识</li>
+<li>学习比特币底层技术</li>
+<li>学习以太坊原理</li>
+</ul>
+<!-- ![image-20241105](../assets/Week1：区块链基础知识.png) -->]]></content>
+      <categories>
+        <category>Chore</category>
+      </categories>
+      <tags>
+        <tag>Web3</tag>
+        <tag>区块链</tag>
+        <tag>智能合约</tag>
       </tags>
   </entry>
   <entry>
@@ -1780,98 +1960,6 @@ module: &#123;
       </tags>
   </entry>
   <entry>
-    <title>React的设计和实现</title>
-    <url>/2021/09/29/React%E7%9A%84%E8%AE%BE%E8%AE%A1%E5%92%8C%E5%AE%9E%E7%8E%B0/</url>
-    <content><![CDATA[<h4 id="本篇笔记的目的：站在更高的角度看待React"><a href="#本篇笔记的目的：站在更高的角度看待React" class="headerlink" title="本篇笔记的目的：站在更高的角度看待React"></a>本篇笔记的目的：站在更高的角度看待React</h4><h4 id="React的设计思路"><a href="#React的设计思路" class="headerlink" title="React的设计思路"></a>React的设计思路</h4><ul>
-<li><p>解决UI编程的痛点</p>
-<ol>
-<li><p>状态更新，UI不会自动更新，需要手动调dom api进行更新</p>
-<ol start="2">
-<li>欠缺基本代码的封装和隔离，代码层面没有组件化</li>
-<li>UI之间数据依赖，需要手动维护，如果依赖链路过长，会有 callback hell的问题</li>
-</ol>
-</li>
-</ol>
-</li>
-<li><p>响应式编程</p>
-</li>
-</ul>
-<p><img src="/../assets/image-20220210203412954.png" alt="image-20220210203412954"></p>
-<ul>
-<li><p>期望能</p>
-<pre><code>1. 状态更新，UI自动更新
-2. 前端代码组件化，可复用，可封装
-3. 状态之间的依赖关系，只需要声明即可
-</code></pre>
-</li>
-<li><p>组件化</p>
-<pre><code>1. 组件是组件的组合/原子组件
-2. 组件内拥有状态，外部不可见
-3. 父组件可将状态传入组件内部
-</code></pre>
-</li>
-<li><p>状态归属问题</p>
-<pre><code>1. react是单向数据流，只能父组件将状态传递给子组件（但可以将改变父组件状态的方法传递给子组件实现父子组件通信）
-2. 如何解决不合理的状态上升问题？
-3. 组件状态改变后，如何更新dom
-</code></pre>
-</li>
-</ul>
-<span id="more"></span>
-
-
-<h4 id="React的实现"><a href="#React的实现" class="headerlink" title="React的实现"></a>React的实现</h4><ul>
-<li>DIff算法</li>
-</ul>
-<img src="../assets/image-20220210212319207.png" alt="image-20220210212319207" style="zoom:40%;" />
-
-
-
-<h3 id="React解决状态管理问题"><a href="#React解决状态管理问题" class="headerlink" title="React解决状态管理问题"></a>React解决状态管理问题</h3><p>先说结论：使用状态管理库</p>
-<ul>
-<li><p>状态管理库核心思想：将状态抽离到ui外部进行统一管理。</p>
-</li>
-<li><p>将状态抽离到ui外部的问题：降低了组件复用性，组件跟外部状态强耦合</p>
-</li>
-</ul>
-<p><strong>何时使用状态管理库？</strong></p>
-<p><strong>判断一个状态是不是只属于组件本身，如若是则不需要状态管理库</strong></p>
-]]></content>
-      <categories>
-        <category>React</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-        <tag>React</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Web3相关学习</title>
-    <url>/2024/10/29/Web3%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/</url>
-    <content><![CDATA[<p>先开个坑，准备下Web3相关的学习</p>
-<h2 id="学习路线"><a href="#学习路线" class="headerlink" title="学习路线"></a>学习路线</h2><ul>
-<li><strong>Web3开发学习路线</strong>: <a href="https://54web3.cc/blog/roadmap/learning-path-web3">https://54web3.cc/blog/roadmap/learning-path-web3</a></li>
-<li><strong>Web3 入门计划</strong>: <a href="https://cubic-leaf-731.notion.site/web3-202208-09-1623ccd15c2148a1ae00ed8794d153b1">https://cubic-leaf-731.notion.site/web3-202208-09-1623ccd15c2148a1ae00ed8794d153b1</a></li>
-<li><strong>Web3从入门到精通开发学习路线</strong>：<a href="https://juejin.cn/post/7307185531330838543">https://juejin.cn/post/7307185531330838543</a></li>
-</ul>
-<h3 id="WEEK-1-区块链的基础知识"><a href="#WEEK-1-区块链的基础知识" class="headerlink" title="WEEK 1: 区块链的基础知识"></a><strong>WEEK 1: 区块链的基础知识</strong></h3><ul>
-<li>密码学基础</li>
-<li>区块链基础</li>
-<li>相关金融知识</li>
-<li>学习比特币底层技术</li>
-<li>学习以太坊原理</li>
-</ul>
-<!-- ![image-20241105](../assets/Week1：区块链基础知识.png) -->]]></content>
-      <categories>
-        <category>Chore</category>
-      </categories>
-      <tags>
-        <tag>Web3</tag>
-        <tag>区块链</tag>
-        <tag>智能合约</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Webpack</title>
     <url>/2022/04/14/Webpack/</url>
     <content><![CDATA[<h3 id="Webpack-是什么"><a href="#Webpack-是什么" class="headerlink" title="Webpack 是什么"></a>Webpack 是什么</h3><p>webpack 是一种<strong>前端资源构建工具</strong>，一个静态模块打包器(module bundler)。</p>
@@ -1912,94 +2000,6 @@ webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后�
       </tags>
   </entry>
   <entry>
-    <title>Redux</title>
-    <url>/2021/10/11/Redux/</url>
-    <content><![CDATA[<h2 id="Redux"><a href="#Redux" class="headerlink" title="Redux"></a>Redux</h2><h3 id="设计思想"><a href="#设计思想" class="headerlink" title="设计思想"></a>设计思想</h3><ul>
-<li>（1）Web 应用是一个状态机，视图与状态是一一对应的。</li>
-<li>（2）所有的状态，保存在一个对象里面。</li>
-</ul>
-<h3 id="Action"><a href="#Action" class="headerlink" title="Action"></a>Action</h3><ol>
-<li><p>Action 就是 View 发出的通知，表示 State 应该要发生变化了。</p>
-</li>
-<li><p>Action 是一个对象，其中的<code>type</code>属性是必须的，表示 Action 的名称，Action 描述当前发生的事情。</p>
-</li>
-<li><p>改变 State 的唯一办法，就是使用 Action。</p>
-</li>
-</ol>
-<p>可以定义一个函数来生成 Action，这个函数就叫 Action Creator，示例如下</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="variable constant_">ADD_TODO</span> = <span class="string">&#x27;添加 TODO&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">addTodo</span>(<span class="params">text</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    <span class="attr">type</span>: <span class="variable constant_">ADD_TODO</span>,</span><br><span class="line">    text</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> action = <span class="title function_">addTodo</span>(<span class="string">&#x27;Learn Redux&#x27;</span>);</span><br></pre></td></tr></table></figure>
-
-<span id="more"></span>
-
-
-<h3 id="Reducer"><a href="#Reducer" class="headerlink" title="Reducer"></a>Reducer</h3><ol>
-<li><p>Store 收到 Action 以后，必须给出一个新的 State，这样 View 才会发生变化。这种 State 的计算过程就叫做 Reducer。</p>
-</li>
-<li><p>Reducer 是一个函数，它接受 Action 和当前 State 作为参数，返回一个新的 State。</p>
-</li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> initState = &#123;</span><br><span class="line">    <span class="attr">value</span>: <span class="string">&#x27;init&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> <span class="title function_">reducer</span> = (<span class="params">state = initState, action</span>) =&gt; &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;reducer:&#x27;</span>, state, action);</span><br><span class="line">    <span class="keyword">switch</span>(action.<span class="property">type</span>)&#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;send_type&#x27;</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="title class_">Object</span>.<span class="title function_">assign</span>(&#123;&#125;, state, action);</span><br><span class="line">        <span class="attr">default</span>:</span><br><span class="line">            <span class="keyword">return</span> state;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="Store"><a href="#Store" class="headerlink" title="Store"></a>Store</h3><h4 id="store-subscribe"><a href="#store-subscribe" class="headerlink" title="store.subscribe()"></a>store.subscribe()</h4><p>添加一个变化监听器。每当 <code>dispatch action</code> 的时候就会执行，<code>state</code> 树中的一部分可能已经变化。可以在回调函数里调用<code>getState()</code>来拿到当前 <code>state</code>，并且让<code>View</code>重新渲染<br>  <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">listerner</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">let</span> newState = store.<span class="title function_">getState</span>();</span><br><span class="line">  component.<span class="title function_">setState</span>(newState);   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h4 id="store-dispatch"><a href="#store-dispatch" class="headerlink" title="store.dispatch()"></a>store.dispatch()</h4><p><code>store.dispatch()</code>是 <code>View</code> 发出 <code>Action</code> 的唯一方法，将使用当前 <code>getState()</code>的结果和传入的 <code>action</code> 以同步方式的调用 <code>store</code> 的 <code>reducer</code> 函数。它的返回值会被作为下一个 <code>state</code>。从现在开始，这就成为了 <code>getState()</code>的返回值，同时变化监听器(change listener)会被触发。</p>
-<blockquote>
-</blockquote>
-<ul>
-<li><p>流程：</p>
-<p>组件 – <code>store.dispatch(action)</code> – 触发reducer的执行 – 根据type区分返回的state – 返回值给store – 更新state – <code>store.subscribe(listener)</code>中listener回调函数执行。</p>
-</li>
-</ul>
-<p><img src="/../assets/image-20210309183756689.png" alt="image-20210309183756689"></p>
-<h2 id="中间件和异步操作"><a href="#中间件和异步操作" class="headerlink" title="中间件和异步操作"></a>中间件和异步操作</h2><h3 id="中间件的概念"><a href="#中间件的概念" class="headerlink" title="中间件的概念"></a>中间件的概念</h3><p>本质上就是对原方法进行了重定义，以<code>redux-logger</code>为例</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> next = store.<span class="property">dispatch</span>;</span><br><span class="line">store.<span class="property">dispatch</span> = <span class="keyword">function</span> <span class="title function_">dispatchAndLog</span>(<span class="params">action</span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;dispatching&#x27;</span>, action);</span><br><span class="line">  <span class="title function_">next</span>(action);</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;next state&#x27;</span>, store.<span class="title function_">getState</span>());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="中间件的用法"><a href="#中间件的用法" class="headerlink" title="中间件的用法"></a>中间件的用法</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; applyMiddleware, createStore &#125; <span class="keyword">from</span> <span class="string">&#x27;redux&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> createLogger <span class="keyword">from</span> <span class="string">&#x27;redux-logger&#x27;</span>;</span><br><span class="line"><span class="keyword">const</span> logger = <span class="title function_">createLogger</span>();</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> store = <span class="title function_">createStore</span>(</span><br><span class="line">  reducer,</span><br><span class="line">  <span class="comment">// 中间件的次序有要求</span></span><br><span class="line">  <span class="title function_">applyMiddleware</span>(thunk, promise, logger)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-<h3 id="异步操作的思路"><a href="#异步操作的思路" class="headerlink" title="异步操作的思路"></a>异步操作的思路</h3><blockquote>
-<p>同步操作只需要一种<code>Action</code>，而异步操作需要发出三种<code>Action</code></p>
-</blockquote>
-<ul>
-<li>操作发起时的 <code>Action</code></li>
-<li>操作成功时的 <code>Action</code></li>
-<li>操作失败时的 <code>Action</code></li>
-</ul>
-<blockquote>
-<p>异步操作的 <code>State</code> 也要进行改造，整个过程如下</p>
-</blockquote>
-<ul>
-<li>操作开始时，送出一个 <code>Action</code>，触发 <code>State</code> 更新为”正在操作”状态，<code>View</code> 重新渲染</li>
-<li>操作结束后，再送出一个 <code>Action</code>，触发 <code>State</code> 更新为”操作结束”状态，<code>View</code> 再一次重新渲染</li>
-</ul>
-<h3 id="Redux-thunk中间件"><a href="#Redux-thunk中间件" class="headerlink" title="Redux-thunk中间件"></a>Redux-thunk中间件</h3><h2 id="React-redux"><a href="#React-redux" class="headerlink" title="React-redux"></a>React-redux</h2><h3 id="UI组件和容器组件"><a href="#UI组件和容器组件" class="headerlink" title="UI组件和容器组件"></a>UI组件和容器组件</h3><h3 id="provider"><a href="#provider" class="headerlink" title="provider"></a>provider</h3><p><img src="/../assets/image-20210309200347890.png" alt="image-20210309200347890"></p>
-<h3 id="connect"><a href="#connect" class="headerlink" title="connect"></a>connect</h3><p><code>connect</code>方法接受两个参数：<code>mapStateT.oProps</code>和<code>mapDispatchToProps</code>。它们定义了 UI 组件的业务逻辑。前者负责输入逻辑，即将<code>state</code>映射到 UI 组件的参数（<code>props</code>），后者负责输出逻辑，即将用户对 UI 组件的操作映射成 Action。</p>
-<ul>
-<li><h4 id="mapStateToProps"><a href="#mapStateToProps" class="headerlink" title="mapStateToProps"></a><code>mapStateToProps</code></h4><p><code>mapStateToProps</code>是一个函数。它的作用就是像它的名字那样，建立一个从（外部的）<code>state</code>对象到（UI 组件的）<code>props</code>对象的映射关系。</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">mapStateToProps</span> = (<span class="params">state</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    <span class="attr">todos</span>: <span class="title function_">getVisibleTodos</span>(state.<span class="property">todos</span>, state.<span class="property">visibilityFilter</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><code>mapStateToProps</code>会订阅 Store，每当<code>state</code>更新的时候，就会自动执行，重新计算 UI 组件的参数，从而触发 UI 组件的重新渲染。</p>
-<p><code>mapStateToProps</code>的第一个参数总是<code>state</code>对象，还可以使用第二个参数，代表容器组件的<code>props</code>对象。</p>
-<p><code>connect</code>方法可以省略<code>mapStateToProps</code>参数，那样的话，UI 组件就不会订阅Store，就是说 Store 的更新不会引起 UI 组件的更新。</p>
-</li>
-<li><h4 id="mapDispatchToProps"><a href="#mapDispatchToProps" class="headerlink" title="mapDispatchToProps"></a><code>mapDispatchToProps</code></h4><p><code>mapDispatchToProps</code>是<code>connect</code>函数的第二个参数，用来建立 UI 组件的参数到<code>store.dispatch</code>方法的映射</p>
-<p>如果<code>mapDispatchToProps</code>是一个函数，会得到<code>dispatch</code>和<code>ownProps</code></p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">mapDispatchToProps</span> = (<span class="params"></span></span><br><span class="line"><span class="params">  dispatch,</span></span><br><span class="line"><span class="params">  ownProps</span></span><br><span class="line"><span class="params"></span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    <span class="attr">onClick</span>: <span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="title function_">dispatch</span>(&#123;</span><br><span class="line">        <span class="attr">type</span>: <span class="string">&#x27;SET_VISIBILITY_FILTER&#x27;</span>,</span><br><span class="line">        <span class="attr">filter</span>: ownProps.<span class="property">filter</span></span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>如果<code>mapDispatchToProps</code>是一个对象，它的每个键名也是对应 UI 组件的同名参数，键值应该是一个函数，会被当作 Action creator ，返回的 Action 会由 Redux 自动发出(dispatch).</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> mapDispatchToProps = &#123;</span><br><span class="line">  <span class="attr">onClick</span>: <span class="function">(<span class="params">filter</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="attr">type</span>: <span class="string">&#x27;SET_VISIBILITY_FILTER&#x27;</span>,</span><br><span class="line">    <span class="attr">filter</span>: filter</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h3 id="计数器Demo："><a href="#计数器Demo：" class="headerlink" title="计数器Demo："></a>计数器Demo：</h3><p>  两个组件，按钮ComA和文本ComB，点击按钮+1，用react-redux实现通信的过程</p>
-<p><img src="/../assets/image-20210310173423401.png" alt="image-20210310173423401"></p>
-]]></content>
-      <categories>
-        <category>状态管理</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-        <tag>React</tag>
-        <tag>Redux</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>require() 源码解读</title>
     <url>/2021/08/21/require%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/</url>
     <content><![CDATA[<span id="more"></span>
@@ -2010,6 +2010,42 @@ webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后�
       <tags>
         <tag>JavaScript</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>书单 / BookList</title>
+    <url>/2024/09/26/%E4%B9%A6%E5%8D%95/</url>
+    <content><![CDATA[<h4 id="专业向"><a href="#专业向" class="headerlink" title="专业向"></a>专业向</h4><h5 id="计算机（4）"><a href="#计算机（4）" class="headerlink" title="计算机（4）"></a>计算机（4）</h5><ul>
+<li><a href="https://markdown.com.cn/">你所不知道的JavaScript</a></li>
+<li><a href="https://markdown.com.cn/">深入浅出NodeJS</a></li>
+<li><a href="https://markdown.com.cn/">Webpack实战：入门、进阶与调优</a></li>
+<li><a href="https://markdown.com.cn/">TypeScript图形渲染实战</a></li>
+</ul>
+<h5 id="数学"><a href="#数学" class="headerlink" title="数学"></a>数学</h5><hr>
+<h4 id="非专业向"><a href="#非专业向" class="headerlink" title="非专业向"></a>非专业向</h4><h5 id="社科文学类（5）"><a href="#社科文学类（5）" class="headerlink" title="社科文学类（5）"></a>社科文学类（5）</h5><ul>
+<li><a href="https://markdown.com.cn/">山月记</a></li>
+<li><a href="https://markdown.com.cn/">宋词群星闪耀时</a></li>
+<li><a href="https://markdown.com.cn/">我在西南联大的日子</a></li>
+<li><a href="https://markdown.com.cn/">当呼吸化为空气</a></li>
+<li><a href="https://markdown.com.cn/">被讨厌的勇气</a></li>
+<li><a href="https://markdown.com.cn/">台湾四百年</a></li>
+</ul>
+<h5 id="杂文散文（1）"><a href="#杂文散文（1）" class="headerlink" title="杂文散文（1）"></a>杂文散文（1）</h5><ul>
+<li><a href="https://markdown.com.cn/">生命是孤独的旅程</a></li>
+</ul>
+<h5 id="小说（5）"><a href="#小说（5）" class="headerlink" title="小说（5）"></a>小说（5）</h5><ul>
+<li><a href="https://markdown.com.cn/">羊毛战记</a></li>
+<li><a href="https://markdown.com.cn/">三国演义</a></li>
+<li><a href="https://markdown.com.cn/">冰与火之歌</a></li>
+<li><a href="https://markdown.com.cn/">野性的呼唤</a></li>
+<li><a href="https://markdown.com.cn/">龙族</a></li>
+</ul>
+<h5 id="传记（1）"><a href="#传记（1）" class="headerlink" title="传记（1）"></a>传记（1）</h5><ul>
+<li><a href="https://markdown.com.cn/">苏东坡全传</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>生活</category>
+      </categories>
   </entry>
   <entry>
     <title>函数式编程</title>
@@ -2052,40 +2088,22 @@ webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后�
       </tags>
   </entry>
   <entry>
-    <title>书单 / BookList</title>
-    <url>/2024/09/26/%E4%B9%A6%E5%8D%95/</url>
-    <content><![CDATA[<h4 id="专业向"><a href="#专业向" class="headerlink" title="专业向"></a>专业向</h4><h5 id="计算机（4）"><a href="#计算机（4）" class="headerlink" title="计算机（4）"></a>计算机（4）</h5><ul>
-<li><a href="https://markdown.com.cn/">你所不知道的JavaScript</a></li>
-<li><a href="https://markdown.com.cn/">深入浅出NodeJS</a></li>
-<li><a href="https://markdown.com.cn/">Webpack实战：入门、进阶与调优</a></li>
-<li><a href="https://markdown.com.cn/">TypeScript图形渲染实战</a></li>
-</ul>
-<h5 id="数学"><a href="#数学" class="headerlink" title="数学"></a>数学</h5><hr>
-<h4 id="非专业向"><a href="#非专业向" class="headerlink" title="非专业向"></a>非专业向</h4><h5 id="社科文学类（5）"><a href="#社科文学类（5）" class="headerlink" title="社科文学类（5）"></a>社科文学类（5）</h5><ul>
-<li><a href="https://markdown.com.cn/">山月记</a></li>
-<li><a href="https://markdown.com.cn/">宋词群星闪耀时</a></li>
-<li><a href="https://markdown.com.cn/">我在西南联大的日子</a></li>
-<li><a href="https://markdown.com.cn/">当呼吸化为空气</a></li>
-<li><a href="https://markdown.com.cn/">被讨厌的勇气</a></li>
-<li><a href="https://markdown.com.cn/">台湾四百年</a></li>
-</ul>
-<h5 id="杂文散文（1）"><a href="#杂文散文（1）" class="headerlink" title="杂文散文（1）"></a>杂文散文（1）</h5><ul>
-<li><a href="https://markdown.com.cn/">生命是孤独的旅程</a></li>
-</ul>
-<h5 id="小说（5）"><a href="#小说（5）" class="headerlink" title="小说（5）"></a>小说（5）</h5><ul>
-<li><a href="https://markdown.com.cn/">羊毛战记</a></li>
-<li><a href="https://markdown.com.cn/">三国演义</a></li>
-<li><a href="https://markdown.com.cn/">冰与火之歌</a></li>
-<li><a href="https://markdown.com.cn/">野性的呼唤</a></li>
-<li><a href="https://markdown.com.cn/">龙族</a></li>
-</ul>
-<h5 id="传记（1）"><a href="#传记（1）" class="headerlink" title="传记（1）"></a>传记（1）</h5><ul>
-<li><a href="https://markdown.com.cn/">苏东坡全传</a></li>
-</ul>
+    <title>Web Development Trend</title>
+    <url>/2024/12/05/%E5%89%8D%E7%AB%AF%E5%8F%91%E5%B1%95%E8%B6%8B%E5%8A%BF/</url>
+    <content><![CDATA[<h2 id="前端供需关系"><a href="#前端供需关系" class="headerlink" title="前端供需关系"></a>前端供需关系</h2><h2 id="新的样式解决方案和组件库现状-发展"><a href="#新的样式解决方案和组件库现状-发展" class="headerlink" title="新的样式解决方案和组件库现状&amp;发展"></a>新的样式解决方案和组件库现状&amp;发展</h2><blockquote>
+<p>样式如何结合组件库去使用</p>
+</blockquote>
+<h3 id="CSS-in-JS-style-component"><a href="#CSS-in-JS-style-component" class="headerlink" title="CSS in JS: style component"></a>CSS in JS: style component</h3><p>能够实现CSS模块化，专注于</p>
+<p>语义差，不利于SSO<br>运行时编译</p>
+<h3 id="Tailwind-CSS"><a href="#Tailwind-CSS" class="headerlink" title="Tailwind CSS"></a>Tailwind CSS</h3><p>语义好，利于AI学习，AI</p>
+<h3 id="Shadcn"><a href="#Shadcn" class="headerlink" title="Shadcn"></a>Shadcn</h3><h3 id="HeadlessUI"><a href="#HeadlessUI" class="headerlink" title="HeadlessUI"></a>HeadlessUI</h3><h3 id="Radix"><a href="#Radix" class="headerlink" title="Radix"></a>Radix</h3><p>主题样式</p>
 ]]></content>
       <categories>
-        <category>生活</category>
+        <category>chore</category>
       </categories>
+      <tags>
+        <tag>前端</tag>
+      </tags>
   </entry>
   <entry>
     <title>前端安全相关</title>
@@ -2176,39 +2194,6 @@ webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后�
       </tags>
   </entry>
   <entry>
-    <title>Web Development Trend</title>
-    <url>/2024/12/05/%E5%89%8D%E7%AB%AF%E5%8F%91%E5%B1%95%E8%B6%8B%E5%8A%BF/</url>
-    <content><![CDATA[<h2 id="前端供需关系"><a href="#前端供需关系" class="headerlink" title="前端供需关系"></a>前端供需关系</h2><h2 id="新的样式解决方案和组件库现状-发展"><a href="#新的样式解决方案和组件库现状-发展" class="headerlink" title="新的样式解决方案和组件库现状&amp;发展"></a>新的样式解决方案和组件库现状&amp;发展</h2><blockquote>
-<p>样式如何结合组件库去使用</p>
-</blockquote>
-<h3 id="CSS-in-JS-style-component"><a href="#CSS-in-JS-style-component" class="headerlink" title="CSS in JS: style component"></a>CSS in JS: style component</h3><p>能够实现CSS模块化，专注于</p>
-<p>语义差，不利于SSO<br>运行时编译</p>
-<h3 id="Tailwind-CSS"><a href="#Tailwind-CSS" class="headerlink" title="Tailwind CSS"></a>Tailwind CSS</h3><p>语义好，利于AI学习，AI</p>
-<h3 id="Shadcn"><a href="#Shadcn" class="headerlink" title="Shadcn"></a>Shadcn</h3><h3 id="HeadlessUI"><a href="#HeadlessUI" class="headerlink" title="HeadlessUI"></a>HeadlessUI</h3><h3 id="Radix"><a href="#Radix" class="headerlink" title="Radix"></a>Radix</h3><p>主题样式</p>
-]]></content>
-      <categories>
-        <category>chore</category>
-      </categories>
-      <tags>
-        <tag>前端</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>加密货币的本质</title>
-    <url>/2024/11/04/%E5%8A%A0%E5%AF%86%E8%B4%A7%E5%B8%81%E7%9A%84%E6%9C%AC%E8%B4%A8/</url>
-    <content><![CDATA[<h2 id="钱的本质"><a href="#钱的本质" class="headerlink" title="钱的本质"></a>钱的本质</h2><p>共识、可信性</p>
-<h3 id="比特币的可信性"><a href="#比特币的可信性" class="headerlink" title="比特币的可信性"></a>比特币的可信性</h3><p>比特币要解决的核心问题，就是创造一种可信的数字凭证。由于这种凭证可信，所以能够当做货币。<br>比特币的技术基础是加密学，因为只有加密学才能保证它的可信性。一旦加密被破解，它就没法当作货币了。这也是这一类数字凭证被称为”加密货币”的原因。<br>技术人员对比特币感兴趣，还有一个重要原因。任何需要可靠的数字凭证的场合，也许都可以用到这种技术。</p>
-]]></content>
-      <categories>
-        <category>Web3</category>
-      </categories>
-      <tags>
-        <tag>Web3</tag>
-        <tag>比特币</tag>
-        <tag>加密货币</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>前端面试</title>
     <url>/2025/01/05/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95/</url>
     <content><![CDATA[<h2 id="React"><a href="#React" class="headerlink" title="React"></a>React</h2><h3 id="useEffect-中如何使用-async-await"><a href="#useEffect-中如何使用-async-await" class="headerlink" title="useEffect 中如何使用 async&#x2F;await"></a>useEffect 中如何使用 async&#x2F;await</h3><ol>
@@ -2243,6 +2228,21 @@ webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后�
       </categories>
       <tags>
         <tag>前端</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>加密货币的本质</title>
+    <url>/2024/11/04/%E5%8A%A0%E5%AF%86%E8%B4%A7%E5%B8%81%E7%9A%84%E6%9C%AC%E8%B4%A8/</url>
+    <content><![CDATA[<h2 id="钱的本质"><a href="#钱的本质" class="headerlink" title="钱的本质"></a>钱的本质</h2><p>共识、可信性</p>
+<h3 id="比特币的可信性"><a href="#比特币的可信性" class="headerlink" title="比特币的可信性"></a>比特币的可信性</h3><p>比特币要解决的核心问题，就是创造一种可信的数字凭证。由于这种凭证可信，所以能够当做货币。<br>比特币的技术基础是加密学，因为只有加密学才能保证它的可信性。一旦加密被破解，它就没法当作货币了。这也是这一类数字凭证被称为”加密货币”的原因。<br>技术人员对比特币感兴趣，还有一个重要原因。任何需要可靠的数字凭证的场合，也许都可以用到这种技术。</p>
+]]></content>
+      <categories>
+        <category>Web3</category>
+      </categories>
+      <tags>
+        <tag>Web3</tag>
+        <tag>比特币</tag>
+        <tag>加密货币</tag>
       </tags>
   </entry>
   <entry>
@@ -2444,21 +2444,21 @@ webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后�
       </tags>
   </entry>
   <entry>
-    <title>成为老师</title>
-    <url>/2024/10/29/%E6%88%90%E4%B8%BA%E8%80%81%E5%B8%88/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>生活</category>
-      </categories>
-  </entry>
-  <entry>
     <title>站点更新日志 / ChangeLog</title>
     <url>/2024/10/28/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97/</url>
-    <content><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>兜兜转转终于是有时间把这个站点建起来了;D，本文主要是记录下站点更新日志，会按月进行归档，还会简单写一下后续更新的一些想法和计划</p>
-<p>想法还有很多</p>
-<p>功能上非常想做的是个一言主题的页面，还有日间&#x2F;夜间模式切换，日程表、sitemap功能<br>内容上可以补充的还有个人简介<br>工程上能做的有域名简化（自定义域名），blog自动化部署（借助一些Github Webhooks），CDN加速（腾讯云），页面SEO相关优化</p>
-<p>那么，拭目以待吧~</p>
-<hr>
+    <content><![CDATA[<!-- ### 前言
+兜兜转转终于是有时间把这个站点建起来了;D，本文主要是记录下站点更新日志，会按月进行归档，还会简单写一下后续更新的一些想法和计划
+
+想法还有很多
+
+功能上非常想做的是个一言主题的页面，还有日间/夜间模式切换，日程表、sitemap功能
+内容上可以补充的还有个人简介
+工程上能做的有域名简化（自定义域名），blog自动化部署（借助一些Github Webhooks），CDN加速（腾讯云），页面SEO相关优化
+
+那么，拭目以待吧~
+
+------ -->
+
 <!-- ### 后续更新计划
 **自定义域名（SSL证书、地址映射）**
 **日间/夜间模式切换**
@@ -2491,6 +2491,14 @@ webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后�
 <p><strong>标签、分类功能</strong><br>所有文章整理了一版，对所有文章分标签、分类展示</p>
 <p><strong>文章显示字数统计、浏览时间</strong><br>引入<code>hexo-word-counter</code>这个插件来实现的，还会统计代码字数，算是个锦上添花的功能吧^^</p>
 ]]></content>
+  </entry>
+  <entry>
+    <title>成为老师</title>
+    <url>/2024/10/29/%E6%88%90%E4%B8%BA%E8%80%81%E5%B8%88/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>生活</category>
+      </categories>
   </entry>
   <entry>
     <title>比特币</title>
