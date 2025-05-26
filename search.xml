@@ -523,36 +523,6 @@
       </tags>
   </entry>
   <entry>
-    <title>IPad配置开发环境</title>
-    <url>/2024/11/12/IPad%E9%85%8D%E7%BD%AE%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>Chore</category>
-      </categories>
-      <tags>
-        <tag>编程环境</tag>
-        <tag>IPad</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>JavaScript API</title>
-    <url>/2024/12/30/JS%20API/</url>
-    <content><![CDATA[<h2 id="InterSectionObserver"><a href="#InterSectionObserver" class="headerlink" title="InterSectionObserver"></a>InterSectionObserver</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 创建 IntersectionObserver 实例</span></span><br><span class="line"><span class="keyword">const</span> observer = <span class="keyword">new</span> <span class="title class_">IntersectionObserver</span>(<span class="function">(<span class="params">entries</span>) =&gt;</span> &#123;</span><br><span class="line">  entries.<span class="title function_">forEach</span>(<span class="function">(<span class="params">entry</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (entry.<span class="property">isIntersecting</span>) &#123;</span><br><span class="line">      <span class="comment">// 目标元素进入视口时的操作</span></span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`<span class="subst">$&#123;entry.target.id&#125;</span> 进入视口`</span>);</span><br><span class="line">      <span class="comment">// 例如在这里可以加载图片或触发其他动画效果</span></span><br><span class="line">      entry.<span class="property">target</span>.<span class="property">src</span> = <span class="string">&#x27;your_image.jpg&#x27;</span>;</span><br><span class="line">      <span class="comment">// 停止观察该元素（可选）</span></span><br><span class="line">      observer.<span class="title function_">unobserve</span>(entry.<span class="property">target</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 选择要观察的目标元素</span></span><br><span class="line"><span class="keyword">const</span> targetElement = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;your_element_id&#x27;</span>);</span><br><span class="line"><span class="comment">// 开始观察目标元素</span></span><br><span class="line">observer.<span class="title function_">observe</span>(targetElement);</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="MutationObserver"><a href="#MutationObserver" class="headerlink" title="MutationObserver"></a>MutationObserver</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 创建 MutationObserver 实例</span></span><br><span class="line"><span class="keyword">const</span> observer = <span class="keyword">new</span> <span class="title class_">MutationObserver</span>(<span class="function">(<span class="params">mutationsList</span>) =&gt;</span> &#123;</span><br><span class="line">  mutationsList.<span class="title function_">forEach</span>(<span class="function">(<span class="params">mutation</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (mutation.<span class="property">type</span> === <span class="string">&#x27;childList&#x27;</span>) &#123;</span><br><span class="line">      <span class="comment">// 子节点列表发生变化时的操作</span></span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;子节点列表发生变化&#x27;</span>);</span><br><span class="line">      <span class="comment">// 可以在这里对新增或删除的子节点进行进一步处理</span></span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (mutation.<span class="property">type</span> === <span class="string">&#x27;attributes&#x27;</span>) &#123;</span><br><span class="line">      <span class="comment">// 属性发生变化时的操作</span></span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`属性 <span class="subst">$&#123;mutation.attributeName&#125;</span> 发生变化`</span>);</span><br><span class="line">      <span class="comment">// 根据属性变化进行相应的样式更新或逻辑处理</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 选择要观察的目标节点</span></span><br><span class="line"><span class="keyword">const</span> targetNode = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;your_target_node_id&#x27;</span>);</span><br><span class="line"><span class="comment">// 配置观察选项</span></span><br><span class="line"><span class="keyword">const</span> config = &#123; <span class="attr">attributes</span>: <span class="literal">true</span>, <span class="attr">childList</span>: <span class="literal">true</span>, <span class="attr">subtree</span>: <span class="literal">true</span> &#125;;</span><br><span class="line"><span class="comment">// 开始观察目标节点</span></span><br><span class="line">observer.<span class="title function_">observe</span>(targetNode, config);</span><br></pre></td></tr></table></figure>
-
-<h2 id="PerformanceObserver"><a href="#PerformanceObserver" class="headerlink" title="PerformanceObserver"></a>PerformanceObserver</h2><h2 id="requestAnimationFrame"><a href="#requestAnimationFrame" class="headerlink" title="requestAnimationFrame"></a>requestAnimationFrame</h2><h3 id="requestAnimationFrame的概念"><a href="#requestAnimationFrame的概念" class="headerlink" title="requestAnimationFrame的概念"></a>requestAnimationFrame的概念</h3><p>通俗点讲就是该API能以浏览器的显示频率来作为其动画动作的频率，比如浏览器每10ms刷新一次，动画回调也每10ms调用一次，这样就不会存在过度绘制的问题，动画不会掉帧，自然流畅。</p>
-<h3 id="requestAnimationFrame的作用"><a href="#requestAnimationFrame的作用" class="headerlink" title="requestAnimationFrame的作用"></a>requestAnimationFrame的作用</h3><h3 id="requestAnimationFrame的优势"><a href="#requestAnimationFrame的优势" class="headerlink" title="requestAnimationFrame的优势"></a>requestAnimationFrame的优势</h3><h3 id="requestAnimationFrame的优势应用场景"><a href="#requestAnimationFrame的优势应用场景" class="headerlink" title="requestAnimationFrame的优势应用场景"></a>requestAnimationFrame的优势应用场景</h3><h2 id="requestIdleCallback"><a href="#requestIdleCallback" class="headerlink" title="requestIdleCallback"></a>requestIdleCallback</h2>]]></content>
-      <categories>
-        <category>chore</category>
-      </categories>
-      <tags>
-        <tag>API</tag>
-        <tag>工程化</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>JavaSrcipt原型</title>
     <url>/2021/02/17/JavaScript%E5%8E%9F%E5%9E%8B/</url>
     <content><![CDATA[<p>首先，要明确几个点：</p>
@@ -591,6 +561,36 @@
       </categories>
       <tags>
         <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JavaScript API</title>
+    <url>/2024/12/30/JS%20API/</url>
+    <content><![CDATA[<h2 id="InterSectionObserver"><a href="#InterSectionObserver" class="headerlink" title="InterSectionObserver"></a>InterSectionObserver</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 创建 IntersectionObserver 实例</span></span><br><span class="line"><span class="keyword">const</span> observer = <span class="keyword">new</span> <span class="title class_">IntersectionObserver</span>(<span class="function">(<span class="params">entries</span>) =&gt;</span> &#123;</span><br><span class="line">  entries.<span class="title function_">forEach</span>(<span class="function">(<span class="params">entry</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (entry.<span class="property">isIntersecting</span>) &#123;</span><br><span class="line">      <span class="comment">// 目标元素进入视口时的操作</span></span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`<span class="subst">$&#123;entry.target.id&#125;</span> 进入视口`</span>);</span><br><span class="line">      <span class="comment">// 例如在这里可以加载图片或触发其他动画效果</span></span><br><span class="line">      entry.<span class="property">target</span>.<span class="property">src</span> = <span class="string">&#x27;your_image.jpg&#x27;</span>;</span><br><span class="line">      <span class="comment">// 停止观察该元素（可选）</span></span><br><span class="line">      observer.<span class="title function_">unobserve</span>(entry.<span class="property">target</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 选择要观察的目标元素</span></span><br><span class="line"><span class="keyword">const</span> targetElement = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;your_element_id&#x27;</span>);</span><br><span class="line"><span class="comment">// 开始观察目标元素</span></span><br><span class="line">observer.<span class="title function_">observe</span>(targetElement);</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="MutationObserver"><a href="#MutationObserver" class="headerlink" title="MutationObserver"></a>MutationObserver</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 创建 MutationObserver 实例</span></span><br><span class="line"><span class="keyword">const</span> observer = <span class="keyword">new</span> <span class="title class_">MutationObserver</span>(<span class="function">(<span class="params">mutationsList</span>) =&gt;</span> &#123;</span><br><span class="line">  mutationsList.<span class="title function_">forEach</span>(<span class="function">(<span class="params">mutation</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (mutation.<span class="property">type</span> === <span class="string">&#x27;childList&#x27;</span>) &#123;</span><br><span class="line">      <span class="comment">// 子节点列表发生变化时的操作</span></span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;子节点列表发生变化&#x27;</span>);</span><br><span class="line">      <span class="comment">// 可以在这里对新增或删除的子节点进行进一步处理</span></span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (mutation.<span class="property">type</span> === <span class="string">&#x27;attributes&#x27;</span>) &#123;</span><br><span class="line">      <span class="comment">// 属性发生变化时的操作</span></span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`属性 <span class="subst">$&#123;mutation.attributeName&#125;</span> 发生变化`</span>);</span><br><span class="line">      <span class="comment">// 根据属性变化进行相应的样式更新或逻辑处理</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 选择要观察的目标节点</span></span><br><span class="line"><span class="keyword">const</span> targetNode = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;your_target_node_id&#x27;</span>);</span><br><span class="line"><span class="comment">// 配置观察选项</span></span><br><span class="line"><span class="keyword">const</span> config = &#123; <span class="attr">attributes</span>: <span class="literal">true</span>, <span class="attr">childList</span>: <span class="literal">true</span>, <span class="attr">subtree</span>: <span class="literal">true</span> &#125;;</span><br><span class="line"><span class="comment">// 开始观察目标节点</span></span><br><span class="line">observer.<span class="title function_">observe</span>(targetNode, config);</span><br></pre></td></tr></table></figure>
+
+<h2 id="PerformanceObserver"><a href="#PerformanceObserver" class="headerlink" title="PerformanceObserver"></a>PerformanceObserver</h2><h2 id="requestAnimationFrame"><a href="#requestAnimationFrame" class="headerlink" title="requestAnimationFrame"></a>requestAnimationFrame</h2><h3 id="requestAnimationFrame的概念"><a href="#requestAnimationFrame的概念" class="headerlink" title="requestAnimationFrame的概念"></a>requestAnimationFrame的概念</h3><p>通俗点讲就是该API能以浏览器的显示频率来作为其动画动作的频率，比如浏览器每10ms刷新一次，动画回调也每10ms调用一次，这样就不会存在过度绘制的问题，动画不会掉帧，自然流畅。</p>
+<h3 id="requestAnimationFrame的作用"><a href="#requestAnimationFrame的作用" class="headerlink" title="requestAnimationFrame的作用"></a>requestAnimationFrame的作用</h3><h3 id="requestAnimationFrame的优势"><a href="#requestAnimationFrame的优势" class="headerlink" title="requestAnimationFrame的优势"></a>requestAnimationFrame的优势</h3><h3 id="requestAnimationFrame的优势应用场景"><a href="#requestAnimationFrame的优势应用场景" class="headerlink" title="requestAnimationFrame的优势应用场景"></a>requestAnimationFrame的优势应用场景</h3><h2 id="requestIdleCallback"><a href="#requestIdleCallback" class="headerlink" title="requestIdleCallback"></a>requestIdleCallback</h2>]]></content>
+      <categories>
+        <category>chore</category>
+      </categories>
+      <tags>
+        <tag>API</tag>
+        <tag>工程化</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>IPad配置开发环境</title>
+    <url>/2024/11/12/IPad%E9%85%8D%E7%BD%AE%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>Chore</category>
+      </categories>
+      <tags>
+        <tag>编程环境</tag>
+        <tag>IPad</tag>
       </tags>
   </entry>
   <entry>
@@ -680,83 +680,6 @@
 ]]></content>
       <categories>
         <category>JavaScript</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>JavaSrcipt知识点</title>
-    <url>/2021/02/17/Javascript%E7%9F%A5%E8%AF%86%E7%82%B9/</url>
-    <content><![CDATA[<h4 id="1-script标签中async和defer的区别"><a href="#1-script标签中async和defer的区别" class="headerlink" title="1. script标签中async和defer的区别"></a>1. script标签中async和defer的区别</h4><p><img src="/../assets/Snipaste_2021-12-13_03-23-58.png" alt="image-20211025190555184"></p>
-<ul>
-<li>普通script标签：下载和执行都会阻塞Dom渲染</li>
-<li>defer：立即进行异步下载，等到HTML完全解析完后开始执行，有多个defer的标签时，会按照顺序下载执行</li>
-<li>async：立即进行异步下载，下载完后会立即执行同时阻塞Dom渲染，因为是下载完立即执行，不能保证多个加载时的先后顺序。</li>
-</ul>
-<span id="more"></span>
-]]></content>
-      <categories>
-        <category>JavaScript</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Jira项目</title>
-    <url>/2022/03/02/Jira%E9%A1%B9%E7%9B%AE/</url>
-    <content><![CDATA[<h4 id="代码自动格式化工具：prettier"><a href="#代码自动格式化工具：prettier" class="headerlink" title="代码自动格式化工具：prettier"></a>代码自动格式化工具：prettier</h4><p>配置过程：<a href="https://prettier.io/docs/en/precommit.html">https://prettier.io/docs/en/precommit.html</a></p>
-<p><code>yarn add --dev --exact prettier</code></p>
-<p>新建<code>.prettierrc.json，.prettierignore</code>文件</p>
-<p>设置git commit预提交钩子</p>
-<p><code>npx mrm@2 lint-staged </code></p>
-<h4 id="规范git-commit工具：commitlint"><a href="#规范git-commit工具：commitlint" class="headerlink" title="规范git commit工具：commitlint"></a>规范git commit工具：commitlint</h4><p>配置过程：<a href="https://github.com/conventional-changelog/commitlint">https://github.com/conventional-changelog/commitlint</a></p>
-<p><code>yarn add --save-dev @commitlint/config-conventional @commitlint/cli</code></p>
-<p>新建 commitlint.config.js文件，引入规则module.exports &#x3D; {extends: [‘@commitlint&#x2F;config-conventional’]}</p>
-<span id="more"></span>
-
-<h4 id="常见MOCK方案"><a href="#常见MOCK方案" class="headerlink" title="常见MOCK方案"></a>常见MOCK方案</h4><h5 id="1-代码侵入（直接在代码中写死Mock数据，或请求本地的JSON文件"><a href="#1-代码侵入（直接在代码中写死Mock数据，或请求本地的JSON文件" class="headerlink" title="1. 代码侵入（直接在代码中写死Mock数据，或请求本地的JSON文件"></a>1. 代码侵入（直接在代码中写死Mock数据，或请求本地的JSON文件</h5><p>​	优点：无</p>
-<p>​	缺点：与真实server环境的切换比较麻烦（需要修改请求地址），一切需要侵入代码切换环境的行为都是不好的</p>
-<h5 id="2-请求拦截"><a href="#2-请求拦截" class="headerlink" title="2. 请求拦截"></a>2. 请求拦截</h5><p>​	代表：<a href="http://mockjs.com/">Mock.js</a></p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="title class_">Mock</span>.<span class="title function_">mock</span>(<span class="regexp">/\\\\/</span>api\\\\/visitor\\\\/list/, <span class="string">&#x27;get&#x27;</span>, &#123;</span><br><span class="line">  <span class="attr">code</span>: <span class="number">2000</span>,</span><br><span class="line">  <span class="attr">msg</span>: <span class="string">&#x27;ok&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;data|10&#x27;</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="string">&#x27;id|+1&#x27;</span>: <span class="number">6</span>,</span><br><span class="line">      <span class="string">&#x27;name&#x27;</span>: <span class="string">&#x27;@csentence(5)&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;tag&#x27;</span>: <span class="string">&#x27;@integer(6, 9)-@integer(10, 14)岁 @cword(&quot;零有&quot;, 1)基础&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;lesson_image&#x27;</span>: <span class="string">&quot;&lt;https://images.pexels.com/3737094/pexels-photo-3737094.jpeg&gt;&quot;</span>,</span><br><span class="line">      <span class="string">&#x27;lesson_package&#x27;</span>: <span class="string">&#x27;L1基础指令课&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;done&#x27;</span>: <span class="string">&#x27;@integer(10000, 99999)&#x27;</span>,</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>优点：</p>
-<ol>
-<li>与前端代码分离</li>
-<li>可生成随机数据</li>
-</ol>
-<p>缺点：</p>
-<ol>
-<li>数据都是动态生成的假数据，无法真实模拟增删改查的情况</li>
-<li>只支持ajax，不支持fetch（本质上是重写了ajax方法，两者的差别见：<a href="https://zhuanlan.zhihu.com/p/24594294">AJAX 之 XHR, Fetch 的对比</a>）</li>
-</ol>
-<h5 id="3-接口管理工具"><a href="#3-接口管理工具" class="headerlink" title="3. 接口管理工具"></a>3. 接口管理工具</h5><p>代表：rap，swagger，moco，yapi</p>
-<p>优点：</p>
-<p>​	1.配置功能强大，接口管理与Mock一体，后端修改接口Mock也跟着更改，可靠</p>
-<p>缺点：</p>
-<p>​	1.配置复杂，依赖后端</p>
-<p>​	2.一般会作为大团队的基础建设而存在</p>
-<h5 id="4-本地node服务器"><a href="#4-本地node服务器" class="headerlink" title="4. 本地node服务器"></a>4. 本地node服务器</h5><p>代表：<a href="https://github.com/typicode/json-server">json-server</a></p>
-<p>优点：</p>
-<p>​	1.配置简单，json-server甚至可以0代码30s启动一个REST API Server</p>
-<p>​	2.自定义程度高</p>
-<p>​	3.增删改查真是模拟</p>
-<h5 id="REST-API"><a href="#REST-API" class="headerlink" title="REST API"></a>REST API</h5><p>一句话总结：URI 代表 资源&#x2F;对象，METHOD 代表行为</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">GET /tickets // 列表</span><br><span class="line">GET /tickets/12 // 详情</span><br><span class="line">POST /tickets  // 增加</span><br><span class="line">PUT /tickets/12 // 替换</span><br><span class="line">PATCH /tickets/12 // 修改</span><br><span class="line">DELETE /tickets/12 // 删除</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="d-ts类型文件"><a href="#d-ts类型文件" class="headerlink" title="d.ts类型文件"></a>d.ts类型文件</h4><p>改造js文件为ts文件后，引入的qs库报错</p>
-<p><img src="/../assets/image-20211110193223804.png" alt="image-20211110193223804"></p>
-<p><code>yarn add @types/qs --save-dev   </code> 安装对应的ts补丁文件</p>
-<p><strong>d.ts文件的作用：说明书文件</strong></p>
-<p>JS 文件 + .d.ts 文件   &#x3D;&#x3D;&#x3D; ts 文件</p>
-<p>.d.ts 文件可以让 JS 文件继续维持自己JS文件的身份，而拥有TS的类型保护</p>
-<p>一般写业务代码不会用到，但是点击类型跳转一般会跳转到 .d.ts文件</p>
-]]></content>
-      <categories>
-        <category>Chore</category>
       </categories>
       <tags>
         <tag>JavaScript</tag>
@@ -883,6 +806,65 @@
       </tags>
   </entry>
   <entry>
+    <title>Jira项目</title>
+    <url>/2022/03/02/Jira%E9%A1%B9%E7%9B%AE/</url>
+    <content><![CDATA[<h4 id="代码自动格式化工具：prettier"><a href="#代码自动格式化工具：prettier" class="headerlink" title="代码自动格式化工具：prettier"></a>代码自动格式化工具：prettier</h4><p>配置过程：<a href="https://prettier.io/docs/en/precommit.html">https://prettier.io/docs/en/precommit.html</a></p>
+<p><code>yarn add --dev --exact prettier</code></p>
+<p>新建<code>.prettierrc.json，.prettierignore</code>文件</p>
+<p>设置git commit预提交钩子</p>
+<p><code>npx mrm@2 lint-staged </code></p>
+<h4 id="规范git-commit工具：commitlint"><a href="#规范git-commit工具：commitlint" class="headerlink" title="规范git commit工具：commitlint"></a>规范git commit工具：commitlint</h4><p>配置过程：<a href="https://github.com/conventional-changelog/commitlint">https://github.com/conventional-changelog/commitlint</a></p>
+<p><code>yarn add --save-dev @commitlint/config-conventional @commitlint/cli</code></p>
+<p>新建 commitlint.config.js文件，引入规则module.exports &#x3D; {extends: [‘@commitlint&#x2F;config-conventional’]}</p>
+<span id="more"></span>
+
+<h4 id="常见MOCK方案"><a href="#常见MOCK方案" class="headerlink" title="常见MOCK方案"></a>常见MOCK方案</h4><h5 id="1-代码侵入（直接在代码中写死Mock数据，或请求本地的JSON文件"><a href="#1-代码侵入（直接在代码中写死Mock数据，或请求本地的JSON文件" class="headerlink" title="1. 代码侵入（直接在代码中写死Mock数据，或请求本地的JSON文件"></a>1. 代码侵入（直接在代码中写死Mock数据，或请求本地的JSON文件</h5><p>​	优点：无</p>
+<p>​	缺点：与真实server环境的切换比较麻烦（需要修改请求地址），一切需要侵入代码切换环境的行为都是不好的</p>
+<h5 id="2-请求拦截"><a href="#2-请求拦截" class="headerlink" title="2. 请求拦截"></a>2. 请求拦截</h5><p>​	代表：<a href="http://mockjs.com/">Mock.js</a></p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="title class_">Mock</span>.<span class="title function_">mock</span>(<span class="regexp">/\\\\/</span>api\\\\/visitor\\\\/list/, <span class="string">&#x27;get&#x27;</span>, &#123;</span><br><span class="line">  <span class="attr">code</span>: <span class="number">2000</span>,</span><br><span class="line">  <span class="attr">msg</span>: <span class="string">&#x27;ok&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;data|10&#x27;</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="string">&#x27;id|+1&#x27;</span>: <span class="number">6</span>,</span><br><span class="line">      <span class="string">&#x27;name&#x27;</span>: <span class="string">&#x27;@csentence(5)&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;tag&#x27;</span>: <span class="string">&#x27;@integer(6, 9)-@integer(10, 14)岁 @cword(&quot;零有&quot;, 1)基础&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;lesson_image&#x27;</span>: <span class="string">&quot;&lt;https://images.pexels.com/3737094/pexels-photo-3737094.jpeg&gt;&quot;</span>,</span><br><span class="line">      <span class="string">&#x27;lesson_package&#x27;</span>: <span class="string">&#x27;L1基础指令课&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;done&#x27;</span>: <span class="string">&#x27;@integer(10000, 99999)&#x27;</span>,</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>优点：</p>
+<ol>
+<li>与前端代码分离</li>
+<li>可生成随机数据</li>
+</ol>
+<p>缺点：</p>
+<ol>
+<li>数据都是动态生成的假数据，无法真实模拟增删改查的情况</li>
+<li>只支持ajax，不支持fetch（本质上是重写了ajax方法，两者的差别见：<a href="https://zhuanlan.zhihu.com/p/24594294">AJAX 之 XHR, Fetch 的对比</a>）</li>
+</ol>
+<h5 id="3-接口管理工具"><a href="#3-接口管理工具" class="headerlink" title="3. 接口管理工具"></a>3. 接口管理工具</h5><p>代表：rap，swagger，moco，yapi</p>
+<p>优点：</p>
+<p>​	1.配置功能强大，接口管理与Mock一体，后端修改接口Mock也跟着更改，可靠</p>
+<p>缺点：</p>
+<p>​	1.配置复杂，依赖后端</p>
+<p>​	2.一般会作为大团队的基础建设而存在</p>
+<h5 id="4-本地node服务器"><a href="#4-本地node服务器" class="headerlink" title="4. 本地node服务器"></a>4. 本地node服务器</h5><p>代表：<a href="https://github.com/typicode/json-server">json-server</a></p>
+<p>优点：</p>
+<p>​	1.配置简单，json-server甚至可以0代码30s启动一个REST API Server</p>
+<p>​	2.自定义程度高</p>
+<p>​	3.增删改查真是模拟</p>
+<h5 id="REST-API"><a href="#REST-API" class="headerlink" title="REST API"></a>REST API</h5><p>一句话总结：URI 代表 资源&#x2F;对象，METHOD 代表行为</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">GET /tickets // 列表</span><br><span class="line">GET /tickets/12 // 详情</span><br><span class="line">POST /tickets  // 增加</span><br><span class="line">PUT /tickets/12 // 替换</span><br><span class="line">PATCH /tickets/12 // 修改</span><br><span class="line">DELETE /tickets/12 // 删除</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="d-ts类型文件"><a href="#d-ts类型文件" class="headerlink" title="d.ts类型文件"></a>d.ts类型文件</h4><p>改造js文件为ts文件后，引入的qs库报错</p>
+<p><img src="/../assets/image-20211110193223804.png" alt="image-20211110193223804"></p>
+<p><code>yarn add @types/qs --save-dev   </code> 安装对应的ts补丁文件</p>
+<p><strong>d.ts文件的作用：说明书文件</strong></p>
+<p>JS 文件 + .d.ts 文件   &#x3D;&#x3D;&#x3D; ts 文件</p>
+<p>.d.ts 文件可以让 JS 文件继续维持自己JS文件的身份，而拥有TS的类型保护</p>
+<p>一般写业务代码不会用到，但是点击类型跳转一般会跳转到 .d.ts文件</p>
+]]></content>
+      <categories>
+        <category>Chore</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Mini-React</title>
     <url>/2022/03/04/Mini-React/</url>
     <content><![CDATA[<h4 id="项目拆解："><a href="#项目拆解：" class="headerlink" title="项目拆解："></a>项目拆解：</h4><ol>
@@ -912,6 +894,24 @@
       <tags>
         <tag>JavaScript</tag>
         <tag>React</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JavaSrcipt知识点</title>
+    <url>/2021/02/17/Javascript%E7%9F%A5%E8%AF%86%E7%82%B9/</url>
+    <content><![CDATA[<h4 id="1-script标签中async和defer的区别"><a href="#1-script标签中async和defer的区别" class="headerlink" title="1. script标签中async和defer的区别"></a>1. script标签中async和defer的区别</h4><p><img src="/../assets/Snipaste_2021-12-13_03-23-58.png" alt="image-20211025190555184"></p>
+<ul>
+<li>普通script标签：下载和执行都会阻塞Dom渲染</li>
+<li>defer：立即进行异步下载，等到HTML完全解析完后开始执行，有多个defer的标签时，会按照顺序下载执行</li>
+<li>async：立即进行异步下载，下载完后会立即执行同时阻塞Dom渲染，因为是下载完立即执行，不能保证多个加载时的先后顺序。</li>
+</ul>
+<span id="more"></span>
+]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
       </tags>
   </entry>
   <entry>
@@ -1265,68 +1265,6 @@
       </tags>
   </entry>
   <entry>
-    <title>React生态</title>
-    <url>/2021/09/30/React%E7%94%9F%E6%80%81/</url>
-    <content><![CDATA[<h3 id="React-DevTools"><a href="#React-DevTools" class="headerlink" title="React DevTools"></a>React DevTools</h3><h5 id="General-设置"><a href="#General-设置" class="headerlink" title="General 设置"></a>General 设置</h5><img src="../assets/image-20220222024702149.png" alt="image-20220222024702149" style="zoom:33%;" />
-
-<p>General 面板中最重要的功能就是 **”Highlight updates when components render”**。勾选上之后，可以查看 React 重绘时，页面哪些部分有更新。在遇到性能问题时，可以快速帮助决策在哪部分不需要重绘的组件部分添加 React.memo 阻止重绘。</p>
-<h5 id="Debugging-设置"><a href="#Debugging-设置" class="headerlink" title="Debugging 设置"></a>Debugging 设置</h5><img src="..\assets\image-20220222024832097.png" alt="image-20220222024832097" style="zoom:33%;" />
-
-<p><strong>“Append components stacks to console warnings and errors.”</strong></p>
-<p>可以帮助我们定位 React 报错信息来自哪个组件</p>
-<span id="more"></span>
-
-
-<h5 id="Components-设置"><a href="#Components-设置" class="headerlink" title="Components 设置"></a>Components 设置</h5><img src="..\assets\image-20220222024936104.png" alt="image-20220222024936104" style="zoom:33%;" />
-
-<p><strong>“Hide components where…”</strong></p>
-<p>此项在过滤组件树时有用。比如，大多数应用可能会在顶层有很多 Context.Provider，就可以过滤 Context 类型、不显示。当我们只关心业务逻辑层的组件时，可以过滤掉 DOM 组件，减少树的节点</p>
-<h5 id="Profiler-设置"><a href="#Profiler-设置" class="headerlink" title="Profiler 设置"></a>Profiler 设置</h5><img src="..\assets\image-20220222025024293.png" alt="image-20220222025024293" style="zoom:33%;" />
-
-<p><strong>“Record why each component rendered while profiling”</strong></p>
-<img src="..\assets\image-20220222025054509.png" alt="image-20220222025054509" style="zoom:33%;" />
-
-<p>勾选之后会在渲染火焰图的 hover 面板中看到 **”Why did this render”**。</p>
-<h5 id="现在有哪些-render-原因呢？"><a href="#现在有哪些-render-原因呢？" class="headerlink" title="现在有哪些 render 原因呢？"></a>现在有哪些 render 原因呢？</h5><ul>
-<li><p><strong>Props changed</strong></p>
-<p>​     顾名思义，传入组件的 props 变更</p>
-</li>
-<li><p><strong>The parent component rendered</strong></p>
-<p>​	父组件渲染导致的子组件渲染。一般要做性能优化都是找这类重绘原因的组件。但是要注意，如果组件中有用到 useContext，Provider 的 value 变更导致的重绘也是被标记为 The parent component rendered，需要注意</p>
-</li>
-<li><p><strong>Hooks changed</strong></p>
-<p>​	Hook 状态变更导致的重绘，一般就是指 useState 返回的更新函数被调用了</p>
-</li>
-<li><p><strong>State changed</strong></p>
-<p>​	这个只会在 class component 中有，大家忽略</p>
-</li>
-<li><p><strong>“Hide commits below xx (ms)”</strong></p>
-<p>​	设置一个更新耗时的阈值，低于该阈值的渲染不显示。用来快速过滤哪些渲染有性能问题</p>
-</li>
-</ul>
-<h5 id="React-组件检视器"><a href="#React-组件检视器" class="headerlink" title="React 组件检视器"></a>React 组件检视器</h5><p>用法和 DevTools 的元素面板类似，可以直接在页面上定位到元素对应的 React Component。并且可以实时查看当前组件内部的 hooks 状态，返回的组件树</p>
-<img src="..\assets\image-20220222025129591.png" alt="image-20220222025129591" style="zoom:33%;" />
-
-<p>右上角的四个图标</p>
-<img src="..\assets\image-20220222025154916.png" alt="image-20220222025154916" style="zoom:33%;" />
-
-<p>分别作用如下：</p>
-<ul>
-<li>模拟 ReactLazy 懒加载组件 Suspense 状态</li>
-<li>定位组件所渲染的 DOM 节点</li>
-<li>在 Console 中打印 Component 内部状态</li>
-<li>跳转到组件所在源文件（配合 sourcemap）</li>
-</ul>
-]]></content>
-      <categories>
-        <category>React</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-        <tag>React</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>React的设计和实现</title>
     <url>/2021/09/29/React%E7%9A%84%E8%AE%BE%E8%AE%A1%E5%92%8C%E5%AE%9E%E7%8E%B0/</url>
     <content><![CDATA[<h4 id="本篇笔记的目的：站在更高的角度看待React"><a href="#本篇笔记的目的：站在更高的角度看待React" class="headerlink" title="本篇笔记的目的：站在更高的角度看待React"></a>本篇笔记的目的：站在更高的角度看待React</h4><h4 id="React的设计思路"><a href="#React的设计思路" class="headerlink" title="React的设计思路"></a>React的设计思路</h4><ul>
@@ -1393,6 +1331,110 @@
       </tags>
   </entry>
   <entry>
+    <title>React生态</title>
+    <url>/2021/09/30/React%E7%94%9F%E6%80%81/</url>
+    <content><![CDATA[<h3 id="React-DevTools"><a href="#React-DevTools" class="headerlink" title="React DevTools"></a>React DevTools</h3><h5 id="General-设置"><a href="#General-设置" class="headerlink" title="General 设置"></a>General 设置</h5><img src="../assets/image-20220222024702149.png" alt="image-20220222024702149" style="zoom:33%;" />
+
+<p>General 面板中最重要的功能就是 **”Highlight updates when components render”**。勾选上之后，可以查看 React 重绘时，页面哪些部分有更新。在遇到性能问题时，可以快速帮助决策在哪部分不需要重绘的组件部分添加 React.memo 阻止重绘。</p>
+<h5 id="Debugging-设置"><a href="#Debugging-设置" class="headerlink" title="Debugging 设置"></a>Debugging 设置</h5><img src="..\assets\image-20220222024832097.png" alt="image-20220222024832097" style="zoom:33%;" />
+
+<p><strong>“Append components stacks to console warnings and errors.”</strong></p>
+<p>可以帮助我们定位 React 报错信息来自哪个组件</p>
+<span id="more"></span>
+
+
+<h5 id="Components-设置"><a href="#Components-设置" class="headerlink" title="Components 设置"></a>Components 设置</h5><img src="..\assets\image-20220222024936104.png" alt="image-20220222024936104" style="zoom:33%;" />
+
+<p><strong>“Hide components where…”</strong></p>
+<p>此项在过滤组件树时有用。比如，大多数应用可能会在顶层有很多 Context.Provider，就可以过滤 Context 类型、不显示。当我们只关心业务逻辑层的组件时，可以过滤掉 DOM 组件，减少树的节点</p>
+<h5 id="Profiler-设置"><a href="#Profiler-设置" class="headerlink" title="Profiler 设置"></a>Profiler 设置</h5><img src="..\assets\image-20220222025024293.png" alt="image-20220222025024293" style="zoom:33%;" />
+
+<p><strong>“Record why each component rendered while profiling”</strong></p>
+<img src="..\assets\image-20220222025054509.png" alt="image-20220222025054509" style="zoom:33%;" />
+
+<p>勾选之后会在渲染火焰图的 hover 面板中看到 **”Why did this render”**。</p>
+<h5 id="现在有哪些-render-原因呢？"><a href="#现在有哪些-render-原因呢？" class="headerlink" title="现在有哪些 render 原因呢？"></a>现在有哪些 render 原因呢？</h5><ul>
+<li><p><strong>Props changed</strong></p>
+<p>​     顾名思义，传入组件的 props 变更</p>
+</li>
+<li><p><strong>The parent component rendered</strong></p>
+<p>​	父组件渲染导致的子组件渲染。一般要做性能优化都是找这类重绘原因的组件。但是要注意，如果组件中有用到 useContext，Provider 的 value 变更导致的重绘也是被标记为 The parent component rendered，需要注意</p>
+</li>
+<li><p><strong>Hooks changed</strong></p>
+<p>​	Hook 状态变更导致的重绘，一般就是指 useState 返回的更新函数被调用了</p>
+</li>
+<li><p><strong>State changed</strong></p>
+<p>​	这个只会在 class component 中有，大家忽略</p>
+</li>
+<li><p><strong>“Hide commits below xx (ms)”</strong></p>
+<p>​	设置一个更新耗时的阈值，低于该阈值的渲染不显示。用来快速过滤哪些渲染有性能问题</p>
+</li>
+</ul>
+<h5 id="React-组件检视器"><a href="#React-组件检视器" class="headerlink" title="React 组件检视器"></a>React 组件检视器</h5><p>用法和 DevTools 的元素面板类似，可以直接在页面上定位到元素对应的 React Component。并且可以实时查看当前组件内部的 hooks 状态，返回的组件树</p>
+<img src="..\assets\image-20220222025129591.png" alt="image-20220222025129591" style="zoom:33%;" />
+
+<p>右上角的四个图标</p>
+<img src="..\assets\image-20220222025154916.png" alt="image-20220222025154916" style="zoom:33%;" />
+
+<p>分别作用如下：</p>
+<ul>
+<li>模拟 ReactLazy 懒加载组件 Suspense 状态</li>
+<li>定位组件所渲染的 DOM 节点</li>
+<li>在 Console 中打印 Component 内部状态</li>
+<li>跳转到组件所在源文件（配合 sourcemap）</li>
+</ul>
+]]></content>
+      <categories>
+        <category>React</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>React</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>React组件通信</title>
+    <url>/2021/10/07/React%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1/</url>
+    <content><![CDATA[<h3 id="组件通信"><a href="#组件通信" class="headerlink" title="组件通信"></a>组件通信</h3><h5 id="爷孙组件通信"><a href="#爷孙组件通信" class="headerlink" title="爷孙组件通信"></a>爷孙组件通信</h5><p>爷孙组件通信主要有 3 种方式：</p>
+<ol>
+<li>将孙子组件的 props 封装在一个固定字段中</li>
+<li>通过 children 透传</li>
+<li>通过 context 传递</li>
+</ol>
+<p>假设有个三层组件，爷爷分别给儿子和孙子发红包</p>
+<p>先看青铜解决方案：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Grandpa</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> [someMoneyForMe] = <span class="title function_">useState</span>(<span class="number">100</span>);</span><br><span class="line">  <span class="keyword">const</span> [someMoneyForDaddy] = <span class="title function_">useState</span>(<span class="number">101</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">Daddy</span> <span class="attr">money</span>=<span class="string">&#123;someMoneyForDaddy&#125;</span> <span class="attr">moneyForSon</span>=<span class="string">&#123;someMoneyForMe&#125;</span> /&gt;</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Daddy</span>(<span class="params">props: &#123; money: number; moneyForSon: number &#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; money, moneyForSon &#125; = props;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;daddy&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">h2</span>&gt;</span>This is Daddy, received $&#123;money&#125;<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">Me</span> <span class="attr">money</span>=<span class="string">&#123;moneyForSon&#125;</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Me</span>(<span class="params">props: &#123; money: number &#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; money &#125; = props;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;son&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">h3</span>&gt;</span>This is Me, received $&#123;money&#125;<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Daddy 组件会透传爷爷给孙子的组件给 Me。这种方案的缺点很明显，以后爷爷要给 Daddy 和 Me 发糖果的时候，Daddy 还得加字段。</p>
+<p><strong>将孙子组件的 props 封装在一个固定字段中</strong></p>
+<p>按照 1 的方案，我们可以固定给 Daddy 添加一个 sonProps 的字段，然后将 Grandpa 需要传给孙子的状态全部通过 sonProps 传递</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Grandpa</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> [someMoneyForMe] = <span class="title function_">useState</span>(<span class="number">100</span>);</span><br><span class="line">  <span class="keyword">const</span> [someMoneyForDaddy] = <span class="title function_">useState</span>(<span class="number">101</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">Daddy</span> <span class="attr">money</span>=<span class="string">&#123;someMoneyForDaddy&#125;</span> <span class="attr">sonProps</span>=<span class="string">&#123;&#123;money:</span> <span class="attr">someMoneyForMe</span>&#125;&#125; /&gt;</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Daddy</span>(<span class="params">props: &#123; money: number; sonProps: Parameters&lt;<span class="keyword">typeof</span> Me&gt;[<span class="number">0</span>]; &#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; money, sonProps &#125; = props;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;daddy&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">h2</span>&gt;</span>This is Daddy, received $&#123;money&#125;<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">Me</span> &#123;<span class="attr">...sonProps</span>&#125;/&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Me</span>(<span class="params">props: &#123; money: number &#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; money &#125; = props;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;son&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">h3</span>&gt;</span>This is Me, received $&#123;money&#125;<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样以后要给 Me 加字段，就不用改 Daddy 了。<strong>但要测试 Daddy 时还得 mock Me 组件的数据，Daddy 和 Son 耦合。</strong></p>
+<p><strong>通过 children 透传</strong></p>
+<p>children 类似于 vue 中的 slot，可以完成一些嵌套组件通信的功能</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Grandpa</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> [someMoneyForMe] = <span class="title function_">useState</span>(<span class="number">100</span>);</span><br><span class="line">  <span class="keyword">const</span> [someMoneyForDaddy] = <span class="title function_">useState</span>(<span class="number">101</span>);</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">Daddy</span> <span class="attr">money</span>=<span class="string">&#123;someMoneyForDaddy&#125;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">Me</span> <span class="attr">money</span>=<span class="string">&#123;someMoneyForMe&#125;</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">Daddy</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Daddy</span>(<span class="params">props: &#123; money: number; children?: React.ChildNode &#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; money, children &#125; = props;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;daddy&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">h2</span>&gt;</span>This is Daddy, received $&#123;money&#125;<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      &#123;children&#125;</span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Me</span>(<span class="params">props: &#123; money: number &#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; money &#125; = props;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;son&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">h3</span>&gt;</span>This is Me, received $&#123;money&#125;<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>将 Daddy 的嵌套部分用 children 替代后，解耦了子组件和孙子组件的依赖关系，Daddy 组件更加独立。</p>
+<p>作为替代，也可以传递一个组件实例：</p>
+<p><code><Daddy money=&#123;someMoneyForDaddy&#125; me=&#123;<Me money=&#123;someMoneyForMe&#125; /> </code></p>
+<p><strong>三种方案的决策</strong></p>
+<ol>
+<li>第一种方案一般用于固定结构和跨组件有互相依赖的场景，多见于 UI 框架中的复合组件与原子组件的设计中</li>
+<li>第二种常用在嵌套层级不深的业务代码中，比如表单场景。<strong>优点是顶层 Grandpa 的业务收敛度很高，一眼能看清 UI 结构及状态绑定关系，相当于拍平了 React 组件树</strong></li>
+<li>第三种比较通用，适合复杂嵌套透传场景。缺点是范式代码较多，且会造成 react dev tools 层级过多；Context 无法在父组件看出依赖关系，必须到子组件文件中才能知道数据来源</li>
+</ol>
+]]></content>
+      <categories>
+        <category>React</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>Hooks</tag>
+        <tag>React</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>React组件性能优化</title>
     <url>/2021/10/14/React%E7%BB%84%E4%BB%B6%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</url>
     <content><![CDATA[<h3 id="React-性能优化思路"><a href="#React-性能优化思路" class="headerlink" title="React 性能优化思路"></a>React 性能优化思路</h3><p>我觉得React 性能优化的理念的主要方向就是这两个：</p>
@@ -1440,48 +1482,6 @@
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; useMemo, useContext &#125; <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">SomeContext</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;./SomeContext&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">PickContextData</span>(<span class="params">props</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> ctx = <span class="title function_">useContext</span>(<span class="title class_">SomeContext</span>);</span><br><span class="line">  <span class="keyword">const</span> someDataFromContext = <span class="title function_">useMemo</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> ctx.<span class="property">data</span>;</span><br><span class="line">  &#125;, [ctx.<span class="property">data</span>]);</span><br><span class="line">  <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">RenderComponent</span> <span class="attr">data</span>=<span class="string">&#123;someDataFromContext&#125;</span> &#123;<span class="attr">...props</span>&#125; /&gt;</span></span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title class_">RenderComponent</span> = <span class="title class_">React</span>.<span class="title function_">memo</span>(<span class="function">(<span class="params">props</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// 略</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 
 <p>更通用点，可以封装出 react-redux 的 connect 函数，传入 selector 来取所需的 Context 数据。</p>
-]]></content>
-      <categories>
-        <category>React</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-        <tag>Hooks</tag>
-        <tag>React</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>React组件通信</title>
-    <url>/2021/10/07/React%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1/</url>
-    <content><![CDATA[<h3 id="组件通信"><a href="#组件通信" class="headerlink" title="组件通信"></a>组件通信</h3><h5 id="爷孙组件通信"><a href="#爷孙组件通信" class="headerlink" title="爷孙组件通信"></a>爷孙组件通信</h5><p>爷孙组件通信主要有 3 种方式：</p>
-<ol>
-<li>将孙子组件的 props 封装在一个固定字段中</li>
-<li>通过 children 透传</li>
-<li>通过 context 传递</li>
-</ol>
-<p>假设有个三层组件，爷爷分别给儿子和孙子发红包</p>
-<p>先看青铜解决方案：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Grandpa</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> [someMoneyForMe] = <span class="title function_">useState</span>(<span class="number">100</span>);</span><br><span class="line">  <span class="keyword">const</span> [someMoneyForDaddy] = <span class="title function_">useState</span>(<span class="number">101</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">Daddy</span> <span class="attr">money</span>=<span class="string">&#123;someMoneyForDaddy&#125;</span> <span class="attr">moneyForSon</span>=<span class="string">&#123;someMoneyForMe&#125;</span> /&gt;</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Daddy</span>(<span class="params">props: &#123; money: number; moneyForSon: number &#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; money, moneyForSon &#125; = props;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;daddy&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">h2</span>&gt;</span>This is Daddy, received $&#123;money&#125;<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">Me</span> <span class="attr">money</span>=<span class="string">&#123;moneyForSon&#125;</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Me</span>(<span class="params">props: &#123; money: number &#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; money &#125; = props;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;son&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">h3</span>&gt;</span>This is Me, received $&#123;money&#125;<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>Daddy 组件会透传爷爷给孙子的组件给 Me。这种方案的缺点很明显，以后爷爷要给 Daddy 和 Me 发糖果的时候，Daddy 还得加字段。</p>
-<p><strong>将孙子组件的 props 封装在一个固定字段中</strong></p>
-<p>按照 1 的方案，我们可以固定给 Daddy 添加一个 sonProps 的字段，然后将 Grandpa 需要传给孙子的状态全部通过 sonProps 传递</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Grandpa</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> [someMoneyForMe] = <span class="title function_">useState</span>(<span class="number">100</span>);</span><br><span class="line">  <span class="keyword">const</span> [someMoneyForDaddy] = <span class="title function_">useState</span>(<span class="number">101</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">Daddy</span> <span class="attr">money</span>=<span class="string">&#123;someMoneyForDaddy&#125;</span> <span class="attr">sonProps</span>=<span class="string">&#123;&#123;money:</span> <span class="attr">someMoneyForMe</span>&#125;&#125; /&gt;</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Daddy</span>(<span class="params">props: &#123; money: number; sonProps: Parameters&lt;<span class="keyword">typeof</span> Me&gt;[<span class="number">0</span>]; &#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; money, sonProps &#125; = props;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;daddy&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">h2</span>&gt;</span>This is Daddy, received $&#123;money&#125;<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">Me</span> &#123;<span class="attr">...sonProps</span>&#125;/&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Me</span>(<span class="params">props: &#123; money: number &#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; money &#125; = props;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;son&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">h3</span>&gt;</span>This is Me, received $&#123;money&#125;<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这样以后要给 Me 加字段，就不用改 Daddy 了。<strong>但要测试 Daddy 时还得 mock Me 组件的数据，Daddy 和 Son 耦合。</strong></p>
-<p><strong>通过 children 透传</strong></p>
-<p>children 类似于 vue 中的 slot，可以完成一些嵌套组件通信的功能</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Grandpa</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> [someMoneyForMe] = <span class="title function_">useState</span>(<span class="number">100</span>);</span><br><span class="line">  <span class="keyword">const</span> [someMoneyForDaddy] = <span class="title function_">useState</span>(<span class="number">101</span>);</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">Daddy</span> <span class="attr">money</span>=<span class="string">&#123;someMoneyForDaddy&#125;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">Me</span> <span class="attr">money</span>=<span class="string">&#123;someMoneyForMe&#125;</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">Daddy</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Daddy</span>(<span class="params">props: &#123; money: number; children?: React.ChildNode &#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; money, children &#125; = props;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;daddy&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">h2</span>&gt;</span>This is Daddy, received $&#123;money&#125;<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      &#123;children&#125;</span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Me</span>(<span class="params">props: &#123; money: number &#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; money &#125; = props;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;son&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">h3</span>&gt;</span>This is Me, received $&#123;money&#125;<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>将 Daddy 的嵌套部分用 children 替代后，解耦了子组件和孙子组件的依赖关系，Daddy 组件更加独立。</p>
-<p>作为替代，也可以传递一个组件实例：</p>
-<p><code><Daddy money=&#123;someMoneyForDaddy&#125; me=&#123;<Me money=&#123;someMoneyForMe&#125; /> </code></p>
-<p><strong>三种方案的决策</strong></p>
-<ol>
-<li>第一种方案一般用于固定结构和跨组件有互相依赖的场景，多见于 UI 框架中的复合组件与原子组件的设计中</li>
-<li>第二种常用在嵌套层级不深的业务代码中，比如表单场景。<strong>优点是顶层 Grandpa 的业务收敛度很高，一眼能看清 UI 结构及状态绑定关系，相当于拍平了 React 组件树</strong></li>
-<li>第三种比较通用，适合复杂嵌套透传场景。缺点是范式代码较多，且会造成 react dev tools 层级过多；Context 无法在父组件看出依赖关系，必须到子组件文件中才能知道数据来源</li>
-</ol>
 ]]></content>
       <categories>
         <category>React</category>
@@ -1578,32 +1578,6 @@
         <tag>JavaScript</tag>
         <tag>React</tag>
         <tag>Redux</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Web3相关学习</title>
-    <url>/2024/10/29/Web3%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/</url>
-    <content><![CDATA[<p>先开个坑，准备下Web3相关的学习</p>
-<h2 id="学习路线"><a href="#学习路线" class="headerlink" title="学习路线"></a>学习路线</h2><ul>
-<li><strong>Web3开发学习路线</strong>: <a href="https://54web3.cc/blog/roadmap/learning-path-web3">https://54web3.cc/blog/roadmap/learning-path-web3</a></li>
-<li><strong>Web3 入门计划</strong>: <a href="https://cubic-leaf-731.notion.site/web3-202208-09-1623ccd15c2148a1ae00ed8794d153b1">https://cubic-leaf-731.notion.site/web3-202208-09-1623ccd15c2148a1ae00ed8794d153b1</a></li>
-<li><strong>Web3从入门到精通开发学习路线</strong>：<a href="https://juejin.cn/post/7307185531330838543">https://juejin.cn/post/7307185531330838543</a></li>
-</ul>
-<h3 id="WEEK-1-区块链的基础知识"><a href="#WEEK-1-区块链的基础知识" class="headerlink" title="WEEK 1: 区块链的基础知识"></a><strong>WEEK 1: 区块链的基础知识</strong></h3><ul>
-<li>密码学基础</li>
-<li>区块链基础</li>
-<li>相关金融知识</li>
-<li>学习比特币底层技术</li>
-<li>学习以太坊原理</li>
-</ul>
-<!-- ![image-20241105](../assets/Week1：区块链基础知识.png) -->]]></content>
-      <categories>
-        <category>Chore</category>
-      </categories>
-      <tags>
-        <tag>Web3</tag>
-        <tag>区块链</tag>
-        <tag>智能合约</tag>
       </tags>
   </entry>
   <entry>
@@ -1960,6 +1934,32 @@ module: &#123;
       </tags>
   </entry>
   <entry>
+    <title>Web3相关学习</title>
+    <url>/2024/10/29/Web3%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/</url>
+    <content><![CDATA[<p>先开个坑，准备下Web3相关的学习</p>
+<h2 id="学习路线"><a href="#学习路线" class="headerlink" title="学习路线"></a>学习路线</h2><ul>
+<li><strong>Web3开发学习路线</strong>: <a href="https://54web3.cc/blog/roadmap/learning-path-web3">https://54web3.cc/blog/roadmap/learning-path-web3</a></li>
+<li><strong>Web3 入门计划</strong>: <a href="https://cubic-leaf-731.notion.site/web3-202208-09-1623ccd15c2148a1ae00ed8794d153b1">https://cubic-leaf-731.notion.site/web3-202208-09-1623ccd15c2148a1ae00ed8794d153b1</a></li>
+<li><strong>Web3从入门到精通开发学习路线</strong>：<a href="https://juejin.cn/post/7307185531330838543">https://juejin.cn/post/7307185531330838543</a></li>
+</ul>
+<h3 id="WEEK-1-区块链的基础知识"><a href="#WEEK-1-区块链的基础知识" class="headerlink" title="WEEK 1: 区块链的基础知识"></a><strong>WEEK 1: 区块链的基础知识</strong></h3><ul>
+<li>密码学基础</li>
+<li>区块链基础</li>
+<li>相关金融知识</li>
+<li>学习比特币底层技术</li>
+<li>学习以太坊原理</li>
+</ul>
+<!-- ![image-20241105](../assets/Week1：区块链基础知识.png) -->]]></content>
+      <categories>
+        <category>Chore</category>
+      </categories>
+      <tags>
+        <tag>Web3</tag>
+        <tag>区块链</tag>
+        <tag>智能合约</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Webpack</title>
     <url>/2022/04/14/Webpack/</url>
     <content><![CDATA[<h3 id="Webpack-是什么"><a href="#Webpack-是什么" class="headerlink" title="Webpack 是什么"></a>Webpack 是什么</h3><p>webpack 是一种<strong>前端资源构建工具</strong>，一个静态模块打包器(module bundler)。</p>
@@ -2161,13 +2161,49 @@ webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后�
   <entry>
     <title>前端工程化</title>
     <url>/2024/12/30/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%8C%96/</url>
-    <content><![CDATA[<h1 id="工程化相关"><a href="#工程化相关" class="headerlink" title="工程化相关"></a>工程化相关</h1><h2 id="包管理器"><a href="#包管理器" class="headerlink" title="包管理器"></a>包管理器</h2><h3 id="Npm-Yarn"><a href="#Npm-Yarn" class="headerlink" title="Npm&#x2F;Yarn"></a>Npm&#x2F;Yarn</h3><h4 id="Npm发包"><a href="#Npm发包" class="headerlink" title="Npm发包"></a>Npm发包</h4><h5 id="files"><a href="#files" class="headerlink" title="files"></a>files</h5><p>指定哪些文件会被打包发布（后面详细描述）。</p>
+    <content><![CDATA[<h2 id="打包器资源处理"><a href="#打包器资源处理" class="headerlink" title="打包器资源处理"></a>打包器资源处理</h2><h3 id="CommonJS-ESM-UMD等模块化方案"><a href="#CommonJS-ESM-UMD等模块化方案" class="headerlink" title="CommonJS&#x2F;ESM&#x2F;UMD等模块化方案"></a>CommonJS&#x2F;ESM&#x2F;UMD等模块化方案</h3><h4 id="CommonJS"><a href="#CommonJS" class="headerlink" title="CommonJS"></a>CommonJS</h4><ul>
+<li><p>使用<code>require</code>，<code>export</code>进行导入导出</p>
+</li>
+<li><p><code>CommonJS</code>是<code>Node</code>的模块化方案，只能在<code>Node</code>端运行，不能在浏览器端，除非使用一些构建工具进行编译（<code>Webpack</code>、<code>Rollup</code>）</p>
+</li>
+<li><p>特定的第三方库只支持<code>CommonJS</code>，比如下载量很高的<a href="https://www.npmjs.com/package/ms">ms</a></p>
+</li>
+<li><p><code>CommonJS</code>属于动态加载，可以直接<code>require</code>一个变量：<code>require(`./$&#123;a&#125;`);</code></p>
+  <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// sum.js</span></span><br><span class="line"><span class="built_in">exports</span>.<span class="property">sum</span> = <span class="function">(<span class="params">x, y</span>) =&gt;</span> x + y;</span><br><span class="line"><span class="comment">// index.js</span></span><br><span class="line"><span class="keyword">const</span> &#123; sum &#125; = <span class="built_in">require</span>(<span class="string">&quot;./sum.js&quot;</span>);</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="ESModule"><a href="#ESModule" class="headerlink" title="ESModule"></a>ESModule</h4><ul>
+<li><code>Esmodule</code> 是tc39对于<code>ESMAScript</code>的模块化规范，正因是语言层规范，<strong>因此在 Node 及 浏览器中均支持。</strong>  <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// sum.js</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="title function_">sum</span> = (<span class="params">x, y</span>) =&gt; x + y;</span><br><span class="line"><span class="comment">// index.js</span></span><br><span class="line"><span class="keyword">import</span> &#123; sum &#125; <span class="keyword">from</span> <span class="string">&quot;./sum&quot;</span>;</span><br></pre></td></tr></table></figure></li>
+<li>使用<code>import</code>，<code>export</code>进行模块的导入导出</li>
+<li><code>Esmodule</code>为静态导入，正因如此，可在编译期进行<code>Tree Shaking</code>，减少 js 体积。</li>
+<li>如果需要动态导入，tc39 为动态加载模块定义了 API: <code>import(module)</code>。</li>
+</ul>
+<p><code>cjs</code>模块输出的是一个值的拷贝，<code>esm</code>输出的是值的引用<br><code>cjs</code>模块是运行时加载，<code>esm</code>是编译时加载</p>
+<h4 id="UMD"><a href="#UMD" class="headerlink" title="UMD"></a>UMD</h4><p>一种兼容<code>cjs</code>与<code>amd</code>的模块，既可以在<code>node/webpack</code>环境中被<code>require</code>引用，也可以在浏览器中直接用 CDN 被<code>script.src</code>引入。</p>
+<h4 id="常见问题Q-A"><a href="#常见问题Q-A" class="headerlink" title="常见问题Q&amp;A"></a>常见问题Q&amp;A</h4><h5 id="1、第三方npm包基于commonjs开发，使用到webpack的前端项目中，能否通过ESM语法import引入"><a href="#1、第三方npm包基于commonjs开发，使用到webpack的前端项目中，能否通过ESM语法import引入" class="headerlink" title="1、第三方npm包基于commonjs开发，使用到webpack的前端项目中，能否通过ESM语法import引入"></a>1、第三方npm包基于commonjs开发，使用到webpack的前端项目中，能否通过ESM语法import引入</h5><p>可以通过<code>import</code>引入<code>CommonJS</code>模块，<code>Webpack</code>会自动处理兼容性：</p>
+<ul>
+<li>直接导入：大多数情况可直接使用<code>import ms from &#39;ms&#39;</code>。</li>
+<li><code>Tree Shaking</code>限制：<code>CommonJS</code> 模块的优化效果弱于 <code>ESM</code>，建议优先选择<code>ESM</code>版本的第三方库。</li>
+</ul>
+<h5 id="2、如何判断引入的第三方包是否支持-Tree-Shaking"><a href="#2、如何判断引入的第三方包是否支持-Tree-Shaking" class="headerlink" title="2、如何判断引入的第三方包是否支持 Tree Shaking"></a>2、如何判断引入的第三方包是否支持 Tree Shaking</h5><ul>
+<li>只有<code>ESM</code>支持<code>Tree Shaking</code></li>
+<li>要根据第三依赖的产物来判断（是否打成<code>ESM</code>的格式），而不是根据第三方依赖的源码判断</li>
+</ul>
+<h5 id="3、如果开发一个npm包，产物要支持ESM、CJS、UMD，需要怎么做呢"><a href="#3、如果开发一个npm包，产物要支持ESM、CJS、UMD，需要怎么做呢" class="headerlink" title="3、如果开发一个npm包，产物要支持ESM、CJS、UMD，需要怎么做呢"></a>3、如果开发一个npm包，产物要支持ESM、CJS、UMD，需要怎么做呢</h5><ul>
+<li><strong>代码优先</strong>：使用 ESM 语法开发，通过构建工具转换为其他格式。</li>
+<li><strong>构建灵活</strong>：配置 Rollup&#x2F;Webpack 输出多种格式，并正确设置 package.json 字段。</li>
+</ul>
+<h5 id="4、成熟的第三方npm包是怎么去做构建的（以Lodash为例）"><a href="#4、成熟的第三方npm包是怎么去做构建的（以Lodash为例）" class="headerlink" title="4、成熟的第三方npm包是怎么去做构建的（以Lodash为例）"></a>4、成熟的第三方npm包是怎么去做构建的（以Lodash为例）</h5><p><code>Lodash</code> 的源码采用「无模块化」设计，核心是通过构建工具将函数集合打包为多种格式：</p>
+<p>源码组织：所有工具函数（如 map、filter）定义在全局对象上。<br>构建工具：使用定制的构建系统，将源码转换为：<br><code>CJS</code> 格式：<code>lodash/index.js</code><br><code>ESM</code> 格式：<code>lodash-es/index.js</code><br><code>UMD</code> 格式：<code>dist/lodash.js</code>（可通过 CDN 引入）</p>
+<h5 id="5、Node环境和前端（Webpack）环境打包过程有什么区别"><a href="#5、Node环境和前端（Webpack）环境打包过程有什么区别" class="headerlink" title="5、Node环境和前端（Webpack）环境打包过程有什么区别"></a>5、Node环境和前端（Webpack）环境打包过程有什么区别</h5><h3 id="CommonJS和Esmodule的区别"><a href="#CommonJS和Esmodule的区别" class="headerlink" title="CommonJS和Esmodule的区别"></a>CommonJS和Esmodule的区别</h3><p>CJS：运行时加载<br>Esmodule：编译时加载</p>
+<span id="more"></span>
+
+<h2 id="包管理器"><a href="#包管理器" class="headerlink" title="包管理器"></a>包管理器</h2><h3 id="Npm-Yarn"><a href="#Npm-Yarn" class="headerlink" title="Npm&#x2F;Yarn"></a>Npm&#x2F;Yarn</h3><h4 id="Npm发包"><a href="#Npm发包" class="headerlink" title="Npm发包"></a>Npm发包</h4><h5 id="files"><a href="#files" class="headerlink" title="files"></a>files</h5><p>指定哪些文件会被打包发布（后面详细描述）。</p>
 <h5 id="main、browser、exports、module"><a href="#main、browser、exports、module" class="headerlink" title="main、browser、exports、module"></a>main、browser、exports、module</h5><p>这四个字段都是用来定义包的入口，<code>npm</code> 只规定了 <code>main</code> 和 <code>browser</code> 这两个字段，<code>exports</code> 是 <code>nodejs</code> 的规范，<code>module</code> 一般被构建工具所支持。</p>
 <h5 id="main"><a href="#main" class="headerlink" title="main"></a>main</h5><p><code>main</code> 规定了包的主要入口点，默认值为 <code>index.js</code>。</p>
 <p>如果你的包名为 <code>foo</code> 可以通过 <code>require(&quot;foo&quot;)</code> 引入对应模块导出的内容，所以这应该是个 CommonJS 模块，除非你设置了 <code>&quot;type&quot;: &quot;module&quot;</code>。</p>
 <h3 id="Pnpm"><a href="#Pnpm" class="headerlink" title="Pnpm"></a>Pnpm</h3><ul>
 <li>省空间</li>
-<li>解决幽灵依赖</li>
+<li>解决幽灵依赖的问题</li>
 </ul>
 <p>如何确定一个项目的包管理工具？</p>
 <ul>
@@ -2177,10 +2213,6 @@ webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后�
 <ul>
 <li>engines字段</li>
 </ul>
-<h2 id="打包工具"><a href="#打包工具" class="headerlink" title="打包工具"></a>打包工具</h2><h3 id="CommonJs和Esmodule的区别"><a href="#CommonJs和Esmodule的区别" class="headerlink" title="CommonJs和Esmodule的区别"></a>CommonJs和Esmodule的区别</h3><p>CJS：运行时加载</p>
-<p>Esmodule：编译时加载</p>
-<span id="more"></span>
-
 <h2 id="CI-CD"><a href="#CI-CD" class="headerlink" title="CI&#x2F;CD"></a>CI&#x2F;CD</h2><h3 id="npm-scripts"><a href="#npm-scripts" class="headerlink" title="npm scripts"></a>npm scripts</h3><h3 id="package-json"><a href="#package-json" class="headerlink" title="package.json"></a>package.json</h3><h4 id="peerDependencies"><a href="#peerDependencies" class="headerlink" title="peerDependencies"></a>peerDependencies</h4><ul>
 <li>项目安装的某个依赖存在peerDependencies，项目又没有声明这个依赖，那项目会自动安装吗，会autoinstall</li>
 </ul>
@@ -2231,21 +2263,6 @@ webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后�
       </tags>
   </entry>
   <entry>
-    <title>加密货币的本质</title>
-    <url>/2024/11/04/%E5%8A%A0%E5%AF%86%E8%B4%A7%E5%B8%81%E7%9A%84%E6%9C%AC%E8%B4%A8/</url>
-    <content><![CDATA[<h2 id="钱的本质"><a href="#钱的本质" class="headerlink" title="钱的本质"></a>钱的本质</h2><p>共识、可信性</p>
-<h3 id="比特币的可信性"><a href="#比特币的可信性" class="headerlink" title="比特币的可信性"></a>比特币的可信性</h3><p>比特币要解决的核心问题，就是创造一种可信的数字凭证。由于这种凭证可信，所以能够当做货币。<br>比特币的技术基础是加密学，因为只有加密学才能保证它的可信性。一旦加密被破解，它就没法当作货币了。这也是这一类数字凭证被称为”加密货币”的原因。<br>技术人员对比特币感兴趣，还有一个重要原因。任何需要可靠的数字凭证的场合，也许都可以用到这种技术。</p>
-]]></content>
-      <categories>
-        <category>Web3</category>
-      </categories>
-      <tags>
-        <tag>Web3</tag>
-        <tag>比特币</tag>
-        <tag>加密货币</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>区块链基础知识</title>
     <url>/2024/11/01/%E5%8C%BA%E5%9D%97%E9%93%BE%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</url>
     <content><![CDATA[<h2 id="区块链的本质"><a href="#区块链的本质" class="headerlink" title="区块链的本质"></a>区块链的本质</h2><p>区块链是什么？一言以蔽之：<strong>特殊的分布式数据库</strong><br>区块链的主要作用还是储存信息，任何需要保存的信息，都可以写入区块链，也可以从里面读取。</p>
@@ -2292,6 +2309,37 @@ webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后�
       </categories>
       <tags>
         <tag>前端安全</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>序 / Intro</title>
+    <url>/2024/09/30/%E5%BA%8F%E8%A8%80/</url>
+    <content><![CDATA[<blockquote class="blockquote-center">
+    <p><b>循着无私与弃绝之念走在自我修行的道路上</b></p>
+    <!-- <p>[英]威廉·萨默塞特·毛姆 《刀锋》</p> -->
+</blockquote>
+
+<!-- 为什么要写博客？
+> http://nathanmarz.com/blog/you-should-blog-even-if-you-have-no-readers.html
+- 1、锻炼表达能力；
+- 2、积累知识点；
+- 3、帮助自己快速找回曾经熟悉的内容；
+- 4、逼迫自己思考一些问题，将知识从点变成线或者网；
+- 5、增强自己在圈子内的影响力。 -->]]></content>
+  </entry>
+  <entry>
+    <title>加密货币的本质</title>
+    <url>/2024/11/04/%E5%8A%A0%E5%AF%86%E8%B4%A7%E5%B8%81%E7%9A%84%E6%9C%AC%E8%B4%A8/</url>
+    <content><![CDATA[<h2 id="钱的本质"><a href="#钱的本质" class="headerlink" title="钱的本质"></a>钱的本质</h2><p>共识、可信性</p>
+<h3 id="比特币的可信性"><a href="#比特币的可信性" class="headerlink" title="比特币的可信性"></a>比特币的可信性</h3><p>比特币要解决的核心问题，就是创造一种可信的数字凭证。由于这种凭证可信，所以能够当做货币。<br>比特币的技术基础是加密学，因为只有加密学才能保证它的可信性。一旦加密被破解，它就没法当作货币了。这也是这一类数字凭证被称为”加密货币”的原因。<br>技术人员对比特币感兴趣，还有一个重要原因。任何需要可靠的数字凭证的场合，也许都可以用到这种技术。</p>
+]]></content>
+      <categories>
+        <category>Web3</category>
+      </categories>
+      <tags>
+        <tag>Web3</tag>
+        <tag>比特币</tag>
+        <tag>加密货币</tag>
       </tags>
   </entry>
   <entry>
@@ -2408,22 +2456,6 @@ webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后�
       </tags>
   </entry>
   <entry>
-    <title>序 / Intro</title>
-    <url>/2024/09/30/%E5%BA%8F%E8%A8%80/</url>
-    <content><![CDATA[<blockquote class="blockquote-center">
-    <p><b>循着无私与弃绝之念走在自我修行的道路上</b></p>
-    <!-- <p>[英]威廉·萨默塞特·毛姆 《刀锋》</p> -->
-</blockquote>
-
-<!-- 为什么要写博客？
-> http://nathanmarz.com/blog/you-should-blog-even-if-you-have-no-readers.html
-- 1、锻炼表达能力；
-- 2、积累知识点；
-- 3、帮助自己快速找回曾经熟悉的内容；
-- 4、逼迫自己思考一些问题，将知识从点变成线或者网；
-- 5、增强自己在圈子内的影响力。 -->]]></content>
-  </entry>
-  <entry>
     <title>微信小程序</title>
     <url>/2025/03/12/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/</url>
     <content><![CDATA[<blockquote class="blockquote-center">
@@ -2442,6 +2474,14 @@ webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后�
         <tag>比特币</tag>
         <tag>加密货币</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>成为老师</title>
+    <url>/2024/10/29/%E6%88%90%E4%B8%BA%E8%80%81%E5%B8%88/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>生活</category>
+      </categories>
   </entry>
   <entry>
     <title>站点更新日志 / ChangeLog</title>
@@ -2491,107 +2531,6 @@ webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后�
 <p><strong>标签、分类功能</strong><br>所有文章整理了一版，对所有文章分标签、分类展示</p>
 <p><strong>文章显示字数统计、浏览时间</strong><br>引入<code>hexo-word-counter</code>这个插件来实现的，还会统计代码字数，算是个锦上添花的功能吧^^</p>
 ]]></content>
-  </entry>
-  <entry>
-    <title>成为老师</title>
-    <url>/2024/10/29/%E6%88%90%E4%B8%BA%E8%80%81%E5%B8%88/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>生活</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>比特币</title>
-    <url>/2024/11/05/%E6%AF%94%E7%89%B9%E5%B8%81/</url>
-    <content><![CDATA[<blockquote class="blockquote-center">
-    <p><b>不要被学术界的思维限制了头脑，不要被程序员的思维限制了想象力。</b></p>
-</blockquote>
-
-<h2 id="比特币中的密码学"><a href="#比特币中的密码学" class="headerlink" title="比特币中的密码学"></a>比特币中的密码学</h2><h3 id="比特币中的哈希特性"><a href="#比特币中的哈希特性" class="headerlink" title="比特币中的哈希特性"></a>比特币中的哈希特性</h3><!-- > 容易验证，不容易计算 -->
-<h4 id="Collision-resistance-抗哈希碰撞"><a href="#Collision-resistance-抗哈希碰撞" class="headerlink" title="Collision resistance (抗哈希碰撞)"></a>Collision resistance (抗哈希碰撞)</h4><blockquote>
-<p>没有高效的方法来人为的制造哈希碰撞</p>
-</blockquote>
-<ul>
-<li><strong>Collision resistance的定义</strong>：给定X，没有高效的方法找到Y，使得H(X) &#x3D; H(Y)</li>
-<li><strong>Collision resistance的特性</strong>：无法用数学证明</li>
-<li><strong>MD5哈希函数</strong>：以前认为是Collision resistance，后来被鉴定为不安全的哈希函数，可通过人为的方式制造哈希碰撞</li>
-<li><strong>比特币中使用的哈希函数</strong>：SHA-256（Secure Hash Algorithm）</li>
-</ul>
-<h4 id="Hiding"><a href="#Hiding" class="headerlink" title="Hiding"></a>Hiding</h4><blockquote>
-<p>哈希的过程单向不可逆</p>
-</blockquote>
-<ul>
-<li><strong>Hiding的定义</strong>：输入值的空间够大，且分布均匀，取值可能性相同<br>实际场景如何实现Hiding（保证分布均匀）：输入值 + 随机数（输入X || nonce随机数）后经过Hash</li>
-</ul>
-<h4 id="Puzzle-friendly"><a href="#Puzzle-friendly" class="headerlink" title="Puzzle friendly"></a>Puzzle friendly</h4><blockquote>
-<p>事先无法知道什么样的输入能得到一个什么样的哈希值，只能一个个尝试</p>
-</blockquote>
-<p>比如挖矿，H(nonce + block header) &lt;&#x3D; target，没有捷径，只能去尝试多个nonce来找到解 &#x3D;&gt; proof of work</p>
-<h3 id="比特币中的账户管理"><a href="#比特币中的账户管理" class="headerlink" title="比特币中的账户管理"></a>比特币中的账户管理</h3><p>非对称加密（asymmetric encryption algorithm）：加密解密不用同一个密钥，加密用公钥，解密用私钥<br>去中心化，每个用户本地自己生成一组公钥和私钥，公钥相当于银行账号，私钥相当于账号密码<br>比特币交易过程中，为了能知道交易是由谁发起，需要用私钥将交易签名，公钥验证</p>
-<p>两个人生成的公钥私钥相同怎么办（256位的值，产生两组相同公钥私钥的概率微乎其微）</p>
-<p>message取hash-&gt;hash取签名</p>
-<span id="more"></span>
-
-<h2 id="比特币的数据结构"><a href="#比特币的数据结构" class="headerlink" title="比特币的数据结构"></a>比特币的数据结构</h2><h3 id="Block-chain（区块链）"><a href="#Block-chain（区块链）" class="headerlink" title="Block chain（区块链）"></a>Block chain（区块链）</h3><blockquote>
-<p>本质上是一个链表，通过Hash pointers相连</p>
-</blockquote>
-<h4 id="Hash-pointers（哈希指针）"><a href="#Hash-pointers（哈希指针）" class="headerlink" title="Hash pointers（哈希指针）"></a>Hash pointers（哈希指针）</h4><p>当前区块的地址<br>前一个哈希指针 + 当前区块计算出的哈希值 </p>
-<h4 id="Genesis-block（创始区块）"><a href="#Genesis-block（创始区块）" class="headerlink" title="Genesis block（创始区块）"></a>Genesis block（创始区块）</h4><p>区块链中的第一个区块</p>
-<h4 id="Most-recent-block（最近使用区块）"><a href="#Most-recent-block（最近使用区块）" class="headerlink" title="Most recent block（最近使用区块）"></a>Most recent block（最近使用区块）</h4><p>区块链末尾的区块，指的是最近被添加到区块链的区块</p>
-<h4 id="Block（区块）"><a href="#Block（区块）" class="headerlink" title="Block（区块）"></a>Block（区块）</h4><p>每一个区块构成：</p>
-<h5 id="Block-header"><a href="#Block-header" class="headerlink" title="Block header"></a>Block header</h5><blockquote>
-<p>只有Block header会用Hash pointer串联</p>
-</blockquote>
-<ul>
-<li>Version（用的是比特币哪个版本的协议）</li>
-<li>Hash of previous block header（前一个区块头的hash）</li>
-<li>Merkle root hash（merkle tree的根哈希，能保证Block body里的Transaction list没有被篡改）</li>
-<li>Target（挖矿的难度目标阈值, H(block header) &lt;&#x3D; target, block header这里存的是目标阈值的编码nbits）</li>
-<li>Nonce（随机数）</li>
-</ul>
-<h5 id="Block-body"><a href="#Block-body" class="headerlink" title="Block body"></a>Block body</h5><ul>
-<li>Transaction list（交易列表）</li>
-</ul>
-<h3 id="Merkle-tree（默克尔树）"><a href="#Merkle-tree（默克尔树）" class="headerlink" title="Merkle tree（默克尔树）"></a>Merkle tree（默克尔树）</h3><p>比特币中各个区块用Hash Pointer连接在一起，各个区块包含的交易信息是组织成Merkle tree的形式<br>Merkle tree结构：二叉树的形式，最底层是交易记录，中间层都是下一层哈希值计算出的结果，树中的root hash可以用来判断是否有一个节点发生变更，因为任何一个节点的变更都会导致root hash发生变化<br><img src="/../assets/merkle-tree.png" alt="image-20241105"></p>
-<p>比特币节点分类</p>
-<ul>
-<li>Full node（全节点）：保存区块的全部信息，Block header + Block body，用于验证每一个交易，又叫 Fully validating node</li>
-<li>Light node（轻节点）：手机上的比特币钱包，只保存Block header（也就是只保存了Merkle tree的Root hash），无法独立验证交易的可靠性，系统中大部分节点是轻节点</li>
-</ul>
-<p>如何向轻节点证明某个交易已经被写入区块链？<br>用户A，用户B（轻节点），转账 A –&gt; B，A需要向B证明已经转账，如何证明：Merkle proof&#x2F;Proof of menbership：证明Merkle tree包含了某个交易，时间复杂度为 O(logn)<br>过程详见：<br><img src="/../assets/merkle-proof.png" alt="image-20241105"></p>
-<blockquote>
-<p>全节点把缺失信息发给轻节点，轻节点通过计算验证Root Hash相同，则代表交易已被写入到区块里</p>
-</blockquote>
-<p>全节点发送的哈希值可能被伪造吗，来保持上层的哈希值符合要求？<br>不行，因为哈希满足<strong>Collision resistance</strong>的特性，无法人为制造哈希碰撞</p>
-<p>Proof of non-menbership（证明交易记录不在树里）：</p>
-<ul>
-<li>全节点发送整颗merkle tree给轻节点，轻节点验证各个节点、各层有没有出现问题，如果都没问题，证明只有这些叶子节点，则只需要判断叶子节点有没有包含该交易记录。复杂度 O(n)</li>
-<li>假定叶子结点</li>
-</ul>
-<p>无环的数据结构都可以用hash pointer代替普通指针</p>
-<h2 id="比特币的共识协议"><a href="#比特币的共识协议" class="headerlink" title="比特币的共识协议"></a>比特币的共识协议</h2><p>比特币的交易过程<br><img src="/../assets/bitcon-trading-process.png" alt="image-20241105"></p>
-<p>比特币中区块的指针</p>
-<ul>
-<li>指向前一个区块</li>
-<li>指向币的来源：证明钱不是凭空捏造，是有记录的，防止Double spending</li>
-</ul>
-<p>转账：A -&gt; B A需要知道B的公钥，B也需要知道A的公钥，<br>签名验证的过程？不太理解<br>交易记录通过A的私钥加密后 – 接收方通过A的公钥解密</p>
-<p>如何写入区块链？</p>
-<p>账本内容需要取得分布式的共识（distributed consensus）：一致性<br>Cap Theorem: 只能同时满足其中两个特性<br>Consistency（一致性）<br>Availability（可用性）<br>Partition tolerance（分区容错性：</p>
-<p>Paxos协议：</p>
-<p>Consensus in Bitcoin（解决的问题：存在恶意节点，假设大多数节点好的，少部分恶意节点，如何设计一个共识协议）</p>
-<ul>
-<li>直接投票是否可行？女巫攻击–恶意节点生成超过半数以上的账号，获取投票权</li>
-</ul>
-]]></content>
-      <categories>
-        <category>加密货币</category>
-      </categories>
-      <tags>
-        <tag>Web3</tag>
-        <tag>比特币</tag>
-        <tag>加密货币</tag>
-      </tags>
   </entry>
   <entry>
     <title>浏览器架构和事件循环</title>
@@ -2721,6 +2660,99 @@ webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后�
       </categories>
       <tags>
         <tag>Chrome</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>比特币</title>
+    <url>/2024/11/05/%E6%AF%94%E7%89%B9%E5%B8%81/</url>
+    <content><![CDATA[<blockquote class="blockquote-center">
+    <p><b>不要被学术界的思维限制了头脑，不要被程序员的思维限制了想象力。</b></p>
+</blockquote>
+
+<h2 id="比特币中的密码学"><a href="#比特币中的密码学" class="headerlink" title="比特币中的密码学"></a>比特币中的密码学</h2><h3 id="比特币中的哈希特性"><a href="#比特币中的哈希特性" class="headerlink" title="比特币中的哈希特性"></a>比特币中的哈希特性</h3><!-- > 容易验证，不容易计算 -->
+<h4 id="Collision-resistance-抗哈希碰撞"><a href="#Collision-resistance-抗哈希碰撞" class="headerlink" title="Collision resistance (抗哈希碰撞)"></a>Collision resistance (抗哈希碰撞)</h4><blockquote>
+<p>没有高效的方法来人为的制造哈希碰撞</p>
+</blockquote>
+<ul>
+<li><strong>Collision resistance的定义</strong>：给定X，没有高效的方法找到Y，使得H(X) &#x3D; H(Y)</li>
+<li><strong>Collision resistance的特性</strong>：无法用数学证明</li>
+<li><strong>MD5哈希函数</strong>：以前认为是Collision resistance，后来被鉴定为不安全的哈希函数，可通过人为的方式制造哈希碰撞</li>
+<li><strong>比特币中使用的哈希函数</strong>：SHA-256（Secure Hash Algorithm）</li>
+</ul>
+<h4 id="Hiding"><a href="#Hiding" class="headerlink" title="Hiding"></a>Hiding</h4><blockquote>
+<p>哈希的过程单向不可逆</p>
+</blockquote>
+<ul>
+<li><strong>Hiding的定义</strong>：输入值的空间够大，且分布均匀，取值可能性相同<br>实际场景如何实现Hiding（保证分布均匀）：输入值 + 随机数（输入X || nonce随机数）后经过Hash</li>
+</ul>
+<h4 id="Puzzle-friendly"><a href="#Puzzle-friendly" class="headerlink" title="Puzzle friendly"></a>Puzzle friendly</h4><blockquote>
+<p>事先无法知道什么样的输入能得到一个什么样的哈希值，只能一个个尝试</p>
+</blockquote>
+<p>比如挖矿，H(nonce + block header) &lt;&#x3D; target，没有捷径，只能去尝试多个nonce来找到解 &#x3D;&gt; proof of work</p>
+<h3 id="比特币中的账户管理"><a href="#比特币中的账户管理" class="headerlink" title="比特币中的账户管理"></a>比特币中的账户管理</h3><p>非对称加密（asymmetric encryption algorithm）：加密解密不用同一个密钥，加密用公钥，解密用私钥<br>去中心化，每个用户本地自己生成一组公钥和私钥，公钥相当于银行账号，私钥相当于账号密码<br>比特币交易过程中，为了能知道交易是由谁发起，需要用私钥将交易签名，公钥验证</p>
+<p>两个人生成的公钥私钥相同怎么办（256位的值，产生两组相同公钥私钥的概率微乎其微）</p>
+<p>message取hash-&gt;hash取签名</p>
+<span id="more"></span>
+
+<h2 id="比特币的数据结构"><a href="#比特币的数据结构" class="headerlink" title="比特币的数据结构"></a>比特币的数据结构</h2><h3 id="Block-chain（区块链）"><a href="#Block-chain（区块链）" class="headerlink" title="Block chain（区块链）"></a>Block chain（区块链）</h3><blockquote>
+<p>本质上是一个链表，通过Hash pointers相连</p>
+</blockquote>
+<h4 id="Hash-pointers（哈希指针）"><a href="#Hash-pointers（哈希指针）" class="headerlink" title="Hash pointers（哈希指针）"></a>Hash pointers（哈希指针）</h4><p>当前区块的地址<br>前一个哈希指针 + 当前区块计算出的哈希值 </p>
+<h4 id="Genesis-block（创始区块）"><a href="#Genesis-block（创始区块）" class="headerlink" title="Genesis block（创始区块）"></a>Genesis block（创始区块）</h4><p>区块链中的第一个区块</p>
+<h4 id="Most-recent-block（最近使用区块）"><a href="#Most-recent-block（最近使用区块）" class="headerlink" title="Most recent block（最近使用区块）"></a>Most recent block（最近使用区块）</h4><p>区块链末尾的区块，指的是最近被添加到区块链的区块</p>
+<h4 id="Block（区块）"><a href="#Block（区块）" class="headerlink" title="Block（区块）"></a>Block（区块）</h4><p>每一个区块构成：</p>
+<h5 id="Block-header"><a href="#Block-header" class="headerlink" title="Block header"></a>Block header</h5><blockquote>
+<p>只有Block header会用Hash pointer串联</p>
+</blockquote>
+<ul>
+<li>Version（用的是比特币哪个版本的协议）</li>
+<li>Hash of previous block header（前一个区块头的hash）</li>
+<li>Merkle root hash（merkle tree的根哈希，能保证Block body里的Transaction list没有被篡改）</li>
+<li>Target（挖矿的难度目标阈值, H(block header) &lt;&#x3D; target, block header这里存的是目标阈值的编码nbits）</li>
+<li>Nonce（随机数）</li>
+</ul>
+<h5 id="Block-body"><a href="#Block-body" class="headerlink" title="Block body"></a>Block body</h5><ul>
+<li>Transaction list（交易列表）</li>
+</ul>
+<h3 id="Merkle-tree（默克尔树）"><a href="#Merkle-tree（默克尔树）" class="headerlink" title="Merkle tree（默克尔树）"></a>Merkle tree（默克尔树）</h3><p>比特币中各个区块用Hash Pointer连接在一起，各个区块包含的交易信息是组织成Merkle tree的形式<br>Merkle tree结构：二叉树的形式，最底层是交易记录，中间层都是下一层哈希值计算出的结果，树中的root hash可以用来判断是否有一个节点发生变更，因为任何一个节点的变更都会导致root hash发生变化<br><img src="/../assets/merkle-tree.png" alt="image-20241105"></p>
+<p>比特币节点分类</p>
+<ul>
+<li>Full node（全节点）：保存区块的全部信息，Block header + Block body，用于验证每一个交易，又叫 Fully validating node</li>
+<li>Light node（轻节点）：手机上的比特币钱包，只保存Block header（也就是只保存了Merkle tree的Root hash），无法独立验证交易的可靠性，系统中大部分节点是轻节点</li>
+</ul>
+<p>如何向轻节点证明某个交易已经被写入区块链？<br>用户A，用户B（轻节点），转账 A –&gt; B，A需要向B证明已经转账，如何证明：Merkle proof&#x2F;Proof of menbership：证明Merkle tree包含了某个交易，时间复杂度为 O(logn)<br>过程详见：<br><img src="/../assets/merkle-proof.png" alt="image-20241105"></p>
+<blockquote>
+<p>全节点把缺失信息发给轻节点，轻节点通过计算验证Root Hash相同，则代表交易已被写入到区块里</p>
+</blockquote>
+<p>全节点发送的哈希值可能被伪造吗，来保持上层的哈希值符合要求？<br>不行，因为哈希满足<strong>Collision resistance</strong>的特性，无法人为制造哈希碰撞</p>
+<p>Proof of non-menbership（证明交易记录不在树里）：</p>
+<ul>
+<li>全节点发送整颗merkle tree给轻节点，轻节点验证各个节点、各层有没有出现问题，如果都没问题，证明只有这些叶子节点，则只需要判断叶子节点有没有包含该交易记录。复杂度 O(n)</li>
+<li>假定叶子结点</li>
+</ul>
+<p>无环的数据结构都可以用hash pointer代替普通指针</p>
+<h2 id="比特币的共识协议"><a href="#比特币的共识协议" class="headerlink" title="比特币的共识协议"></a>比特币的共识协议</h2><p>比特币的交易过程<br><img src="/../assets/bitcon-trading-process.png" alt="image-20241105"></p>
+<p>比特币中区块的指针</p>
+<ul>
+<li>指向前一个区块</li>
+<li>指向币的来源：证明钱不是凭空捏造，是有记录的，防止Double spending</li>
+</ul>
+<p>转账：A -&gt; B A需要知道B的公钥，B也需要知道A的公钥，<br>签名验证的过程？不太理解<br>交易记录通过A的私钥加密后 – 接收方通过A的公钥解密</p>
+<p>如何写入区块链？</p>
+<p>账本内容需要取得分布式的共识（distributed consensus）：一致性<br>Cap Theorem: 只能同时满足其中两个特性<br>Consistency（一致性）<br>Availability（可用性）<br>Partition tolerance（分区容错性：</p>
+<p>Paxos协议：</p>
+<p>Consensus in Bitcoin（解决的问题：存在恶意节点，假设大多数节点好的，少部分恶意节点，如何设计一个共识协议）</p>
+<ul>
+<li>直接投票是否可行？女巫攻击–恶意节点生成超过半数以上的账号，获取投票权</li>
+</ul>
+]]></content>
+      <categories>
+        <category>加密货币</category>
+      </categories>
+      <tags>
+        <tag>Web3</tag>
+        <tag>比特币</tag>
+        <tag>加密货币</tag>
       </tags>
   </entry>
 </search>

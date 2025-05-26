@@ -464,7 +464,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-01-01 22:16:41" itemprop="dateModified" datetime="2025-01-01T22:16:41+08:00">2025-01-01</time>
+      <time title="修改时间：2025-05-26 14:37:21" itemprop="dateModified" datetime="2025-05-26T14:37:21+08:00">2025-05-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -482,14 +482,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>259</span>
+      <span>921</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
+      <span>3 分钟</span>
     </span>
 </div>
 
@@ -500,24 +500,40 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="工程化相关"><a href="#工程化相关" class="headerlink" title="工程化相关"></a>工程化相关</h1><h2 id="包管理器"><a href="#包管理器" class="headerlink" title="包管理器"></a>包管理器</h2><h3 id="Npm-Yarn"><a href="#Npm-Yarn" class="headerlink" title="Npm&#x2F;Yarn"></a>Npm&#x2F;Yarn</h3><h4 id="Npm发包"><a href="#Npm发包" class="headerlink" title="Npm发包"></a>Npm发包</h4><h5 id="files"><a href="#files" class="headerlink" title="files"></a>files</h5><p>指定哪些文件会被打包发布（后面详细描述）。</p>
-<h5 id="main、browser、exports、module"><a href="#main、browser、exports、module" class="headerlink" title="main、browser、exports、module"></a>main、browser、exports、module</h5><p>这四个字段都是用来定义包的入口，<code>npm</code> 只规定了 <code>main</code> 和 <code>browser</code> 这两个字段，<code>exports</code> 是 <code>nodejs</code> 的规范，<code>module</code> 一般被构建工具所支持。</p>
-<h5 id="main"><a href="#main" class="headerlink" title="main"></a>main</h5><p><code>main</code> 规定了包的主要入口点，默认值为 <code>index.js</code>。</p>
-<p>如果你的包名为 <code>foo</code> 可以通过 <code>require(&quot;foo&quot;)</code> 引入对应模块导出的内容，所以这应该是个 CommonJS 模块，除非你设置了 <code>&quot;type&quot;: &quot;module&quot;</code>。</p>
-<h3 id="Pnpm"><a href="#Pnpm" class="headerlink" title="Pnpm"></a>Pnpm</h3><ul>
-<li>省空间</li>
-<li>解决幽灵依赖</li>
+          <h2 id="打包器资源处理"><a href="#打包器资源处理" class="headerlink" title="打包器资源处理"></a>打包器资源处理</h2><h3 id="CommonJS-ESM-UMD等模块化方案"><a href="#CommonJS-ESM-UMD等模块化方案" class="headerlink" title="CommonJS&#x2F;ESM&#x2F;UMD等模块化方案"></a>CommonJS&#x2F;ESM&#x2F;UMD等模块化方案</h3><h4 id="CommonJS"><a href="#CommonJS" class="headerlink" title="CommonJS"></a>CommonJS</h4><ul>
+<li><p>使用<code>require</code>，<code>export</code>进行导入导出</p>
+</li>
+<li><p><code>CommonJS</code>是<code>Node</code>的模块化方案，只能在<code>Node</code>端运行，不能在浏览器端，除非使用一些构建工具进行编译（<code>Webpack</code>、<code>Rollup</code>）</p>
+</li>
+<li><p>特定的第三方库只支持<code>CommonJS</code>，比如下载量很高的<a target="_blank" rel="noopener" href="https://www.npmjs.com/package/ms">ms</a></p>
+</li>
+<li><p><code>CommonJS</code>属于动态加载，可以直接<code>require</code>一个变量：<code>require(`./$&#123;a&#125;`);</code></p>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// sum.js</span></span><br><span class="line"><span class="built_in">exports</span>.<span class="property">sum</span> = <span class="function">(<span class="params">x, y</span>) =&gt;</span> x + y;</span><br><span class="line"><span class="comment">// index.js</span></span><br><span class="line"><span class="keyword">const</span> &#123; sum &#125; = <span class="built_in">require</span>(<span class="string">&quot;./sum.js&quot;</span>);</span><br></pre></td></tr></table></figure></li>
 </ul>
-<p>如何确定一个项目的包管理工具？</p>
+<h4 id="ESModule"><a href="#ESModule" class="headerlink" title="ESModule"></a>ESModule</h4><ul>
+<li><code>Esmodule</code> 是tc39对于<code>ESMAScript</code>的模块化规范，正因是语言层规范，<strong>因此在 Node 及 浏览器中均支持。</strong>  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// sum.js</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="title function_">sum</span> = (<span class="params">x, y</span>) =&gt; x + y;</span><br><span class="line"><span class="comment">// index.js</span></span><br><span class="line"><span class="keyword">import</span> &#123; sum &#125; <span class="keyword">from</span> <span class="string">&quot;./sum&quot;</span>;</span><br></pre></td></tr></table></figure></li>
+<li>使用<code>import</code>，<code>export</code>进行模块的导入导出</li>
+<li><code>Esmodule</code>为静态导入，正因如此，可在编译期进行<code>Tree Shaking</code>，减少 js 体积。</li>
+<li>如果需要动态导入，tc39 为动态加载模块定义了 API: <code>import(module)</code>。</li>
+</ul>
+<p><code>cjs</code>模块输出的是一个值的拷贝，<code>esm</code>输出的是值的引用<br><code>cjs</code>模块是运行时加载，<code>esm</code>是编译时加载</p>
+<h4 id="UMD"><a href="#UMD" class="headerlink" title="UMD"></a>UMD</h4><p>一种兼容<code>cjs</code>与<code>amd</code>的模块，既可以在<code>node/webpack</code>环境中被<code>require</code>引用，也可以在浏览器中直接用 CDN 被<code>script.src</code>引入。</p>
+<h4 id="常见问题Q-A"><a href="#常见问题Q-A" class="headerlink" title="常见问题Q&amp;A"></a>常见问题Q&amp;A</h4><h5 id="1、第三方npm包基于commonjs开发，使用到webpack的前端项目中，能否通过ESM语法import引入"><a href="#1、第三方npm包基于commonjs开发，使用到webpack的前端项目中，能否通过ESM语法import引入" class="headerlink" title="1、第三方npm包基于commonjs开发，使用到webpack的前端项目中，能否通过ESM语法import引入"></a>1、第三方npm包基于commonjs开发，使用到webpack的前端项目中，能否通过ESM语法import引入</h5><p>可以通过<code>import</code>引入<code>CommonJS</code>模块，<code>Webpack</code>会自动处理兼容性：</p>
 <ul>
-<li>lock文件、package.json下packageManager字段来判断</li>
+<li>直接导入：大多数情况可直接使用<code>import ms from &#39;ms&#39;</code>。</li>
+<li><code>Tree Shaking</code>限制：<code>CommonJS</code> 模块的优化效果弱于 <code>ESM</code>，建议优先选择<code>ESM</code>版本的第三方库。</li>
 </ul>
-<p>如何确定包管理工具的版本号？</p>
-<ul>
-<li>engines字段</li>
+<h5 id="2、如何判断引入的第三方包是否支持-Tree-Shaking"><a href="#2、如何判断引入的第三方包是否支持-Tree-Shaking" class="headerlink" title="2、如何判断引入的第三方包是否支持 Tree Shaking"></a>2、如何判断引入的第三方包是否支持 Tree Shaking</h5><ul>
+<li>只有<code>ESM</code>支持<code>Tree Shaking</code></li>
+<li>要根据第三依赖的产物来判断（是否打成<code>ESM</code>的格式），而不是根据第三方依赖的源码判断</li>
 </ul>
-<h2 id="打包工具"><a href="#打包工具" class="headerlink" title="打包工具"></a>打包工具</h2><h3 id="CommonJs和Esmodule的区别"><a href="#CommonJs和Esmodule的区别" class="headerlink" title="CommonJs和Esmodule的区别"></a>CommonJs和Esmodule的区别</h3><p>CJS：运行时加载</p>
-<p>Esmodule：编译时加载</p>
+<h5 id="3、如果开发一个npm包，产物要支持ESM、CJS、UMD，需要怎么做呢"><a href="#3、如果开发一个npm包，产物要支持ESM、CJS、UMD，需要怎么做呢" class="headerlink" title="3、如果开发一个npm包，产物要支持ESM、CJS、UMD，需要怎么做呢"></a>3、如果开发一个npm包，产物要支持ESM、CJS、UMD，需要怎么做呢</h5><ul>
+<li><strong>代码优先</strong>：使用 ESM 语法开发，通过构建工具转换为其他格式。</li>
+<li><strong>构建灵活</strong>：配置 Rollup&#x2F;Webpack 输出多种格式，并正确设置 package.json 字段。</li>
+</ul>
+<h5 id="4、成熟的第三方npm包是怎么去做构建的（以Lodash为例）"><a href="#4、成熟的第三方npm包是怎么去做构建的（以Lodash为例）" class="headerlink" title="4、成熟的第三方npm包是怎么去做构建的（以Lodash为例）"></a>4、成熟的第三方npm包是怎么去做构建的（以Lodash为例）</h5><p><code>Lodash</code> 的源码采用「无模块化」设计，核心是通过构建工具将函数集合打包为多种格式：</p>
+<p>源码组织：所有工具函数（如 map、filter）定义在全局对象上。<br>构建工具：使用定制的构建系统，将源码转换为：<br><code>CJS</code> 格式：<code>lodash/index.js</code><br><code>ESM</code> 格式：<code>lodash-es/index.js</code><br><code>UMD</code> 格式：<code>dist/lodash.js</code>（可通过 CDN 引入）</p>
+<h5 id="5、Node环境和前端（Webpack）环境打包过程有什么区别"><a href="#5、Node环境和前端（Webpack）环境打包过程有什么区别" class="headerlink" title="5、Node环境和前端（Webpack）环境打包过程有什么区别"></a>5、Node环境和前端（Webpack）环境打包过程有什么区别</h5><h3 id="CommonJS和Esmodule的区别"><a href="#CommonJS和Esmodule的区别" class="headerlink" title="CommonJS和Esmodule的区别"></a>CommonJS和Esmodule的区别</h3><p>CJS：运行时加载<br>Esmodule：编译时加载</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2024/12/30/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%8C%96/#more" rel="contents">
@@ -1358,13 +1374,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">37k</span>
+    <span title="站点总字数">38k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">2:16</span>
+    <span title="站点阅读时长">2:19</span>
   </span>
 </div>
 
