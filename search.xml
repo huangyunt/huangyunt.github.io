@@ -281,42 +281,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Hexo + Next + GitHub Page搭建个人博客</title>
-    <url>/2024/09/21/Hexo%20+%20Next%20+%20GitHub%20Page%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
-    <content><![CDATA[<h3 id="Hexo介绍"><a href="#Hexo介绍" class="headerlink" title="Hexo介绍"></a>Hexo介绍</h3><p>Hexo是一款基于Node.js的开源静态博客框架，用于快速、简单且高效地搭建静态博客网站。本质上是一个静态网站生成器，新增文章只需要编辑md文件，通过运行命令再生成像html的静态文件。</p>
-<h3 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">全局安装hexo脚手架</span></span><br><span class="line">npm install -g hexo-cli</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建一blog项目</span></span><br><span class="line">hexo init blog</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">进入项目</span></span><br><span class="line">cd blog</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">安装依赖包</span></span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
-
-<h3 id="其他操作"><a href="#其他操作" class="headerlink" title="其他操作"></a>其他操作</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">右键 Git Bush，用户项目自动化部署</span></span><br><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
-
-<h3 id="项目预览"><a href="#项目预览" class="headerlink" title="项目预览"></a>项目预览</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">清理旧的静态文件</span></span><br><span class="line">hexo clean</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">生成静态文件</span></span><br><span class="line">hexo g</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">运行预览项目</span></span><br><span class="line">hexo s</span><br></pre></td></tr></table></figure>
-
-<span id="more"></span>
-
-
-<h3 id="Hexo配置文件详解（-config-yml）"><a href="#Hexo配置文件详解（-config-yml）" class="headerlink" title="Hexo配置文件详解（_config.yml）"></a>Hexo配置文件详解（_config.yml）</h3><h3 id="Hexo插件"><a href="#Hexo插件" class="headerlink" title="Hexo插件"></a>Hexo插件</h3><h4 id="文章排序、显隐插件"><a href="#文章排序、显隐插件" class="headerlink" title="文章排序、显隐插件"></a>文章排序、显隐插件</h4><p>插件：<strong>hexo-generator-index-custom</strong><br>详细见：<a href="https://github.com/im0o/hexo-generator-index-custom">https://github.com/im0o/hexo-generator-index-custom</a></p>
-<h4 id="搜索插件"><a href="#搜索插件" class="headerlink" title="搜索插件"></a>搜索插件</h4><h3 id="Next主题样式"><a href="#Next主题样式" class="headerlink" title="Next主题样式"></a>Next主题样式</h3><blockquote>
-<p>官方文档：<a href="https://theme-next.js.org/docs/getting-started/configuration.html">https://theme-next.js.org/docs/getting-started/configuration.html</a></p>
-</blockquote>
-<h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git clone https://github.com/next-theme/theme-next-docs</span><br><span class="line">cd theme-next-docs</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
-<h4 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h4><ol>
-<li>Hexo版本&gt;&#x3D;5.0</li>
-<li>在Hexo项目根目录下创建Next配置文件，命名为_config.next.yml</li>
-<li>首次创建Next配置文件时，可以直接复制theme-next-docs目录下的next默认配置文化<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Installed through npm</span></span><br><span class="line">cp node_modules/hexo-theme-next/_config.yml _config.next.yml</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Installed through Git</span></span><br><span class="line">cp themes/next/_config.yml _config.next.yml</span><br></pre></td></tr></table></figure></li>
-</ol>
-<h4 id="站点中的icon替换"><a href="#站点中的icon替换" class="headerlink" title="站点中的icon替换"></a>站点中的icon替换</h4><blockquote>
-<p>Next默认引了fontawsome样式，大部分直接替换即可 <a href="https://fontawesome.dashgame.com/">https://fontawesome.dashgame.com/</a></p>
-</blockquote>
-<h3 id="站点托管"><a href="#站点托管" class="headerlink" title="站点托管"></a>站点托管</h3><h4 id="腾讯云静态资源托管"><a href="#腾讯云静态资源托管" class="headerlink" title="腾讯云静态资源托管"></a>腾讯云静态资源托管</h4>]]></content>
-      <categories>
-        <category>Chore</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-        <tag>Hexo</tag>
-        <tag>Github</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Hooks</title>
     <url>/2021/10/12/Hooks/</url>
     <content><![CDATA[<h3 id="hooks的作用"><a href="#hooks的作用" class="headerlink" title="hooks的作用"></a>hooks的作用</h3><p><strong>钩子（hook）就是 React 函数组件的副效应解决方案，用来为函数组件引入副效应。</strong> 函数组件的主体只应该用来返回组件的 HTML 代码，所有的其他操作（副效应）都必须通过钩子引入。</p>
@@ -444,6 +408,42 @@
       </tags>
   </entry>
   <entry>
+    <title>Hexo + Next + GitHub Page搭建个人博客</title>
+    <url>/2024/09/21/Hexo%20+%20Next%20+%20GitHub%20Page%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
+    <content><![CDATA[<h3 id="Hexo介绍"><a href="#Hexo介绍" class="headerlink" title="Hexo介绍"></a>Hexo介绍</h3><p>Hexo是一款基于Node.js的开源静态博客框架，用于快速、简单且高效地搭建静态博客网站。本质上是一个静态网站生成器，新增文章只需要编辑md文件，通过运行命令再生成像html的静态文件。</p>
+<h3 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">全局安装hexo脚手架</span></span><br><span class="line">npm install -g hexo-cli</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建一blog项目</span></span><br><span class="line">hexo init blog</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">进入项目</span></span><br><span class="line">cd blog</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">安装依赖包</span></span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
+
+<h3 id="其他操作"><a href="#其他操作" class="headerlink" title="其他操作"></a>其他操作</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">右键 Git Bush，用户项目自动化部署</span></span><br><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+
+<h3 id="项目预览"><a href="#项目预览" class="headerlink" title="项目预览"></a>项目预览</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">清理旧的静态文件</span></span><br><span class="line">hexo clean</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">生成静态文件</span></span><br><span class="line">hexo g</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">运行预览项目</span></span><br><span class="line">hexo s</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+
+<h3 id="Hexo配置文件详解（-config-yml）"><a href="#Hexo配置文件详解（-config-yml）" class="headerlink" title="Hexo配置文件详解（_config.yml）"></a>Hexo配置文件详解（_config.yml）</h3><h3 id="Hexo插件"><a href="#Hexo插件" class="headerlink" title="Hexo插件"></a>Hexo插件</h3><h4 id="文章排序、显隐插件"><a href="#文章排序、显隐插件" class="headerlink" title="文章排序、显隐插件"></a>文章排序、显隐插件</h4><p>插件：<strong>hexo-generator-index-custom</strong><br>详细见：<a href="https://github.com/im0o/hexo-generator-index-custom">https://github.com/im0o/hexo-generator-index-custom</a></p>
+<h4 id="搜索插件"><a href="#搜索插件" class="headerlink" title="搜索插件"></a>搜索插件</h4><h3 id="Next主题样式"><a href="#Next主题样式" class="headerlink" title="Next主题样式"></a>Next主题样式</h3><blockquote>
+<p>官方文档：<a href="https://theme-next.js.org/docs/getting-started/configuration.html">https://theme-next.js.org/docs/getting-started/configuration.html</a></p>
+</blockquote>
+<h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git clone https://github.com/next-theme/theme-next-docs</span><br><span class="line">cd theme-next-docs</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
+<h4 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h4><ol>
+<li>Hexo版本&gt;&#x3D;5.0</li>
+<li>在Hexo项目根目录下创建Next配置文件，命名为_config.next.yml</li>
+<li>首次创建Next配置文件时，可以直接复制theme-next-docs目录下的next默认配置文化<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Installed through npm</span></span><br><span class="line">cp node_modules/hexo-theme-next/_config.yml _config.next.yml</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Installed through Git</span></span><br><span class="line">cp themes/next/_config.yml _config.next.yml</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h4 id="站点中的icon替换"><a href="#站点中的icon替换" class="headerlink" title="站点中的icon替换"></a>站点中的icon替换</h4><blockquote>
+<p>Next默认引了fontawsome样式，大部分直接替换即可 <a href="https://fontawesome.dashgame.com/">https://fontawesome.dashgame.com/</a></p>
+</blockquote>
+<h3 id="站点托管"><a href="#站点托管" class="headerlink" title="站点托管"></a>站点托管</h3><h4 id="腾讯云静态资源托管"><a href="#腾讯云静态资源托管" class="headerlink" title="腾讯云静态资源托管"></a>腾讯云静态资源托管</h4>]]></content>
+      <categories>
+        <category>Chore</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>Hexo</tag>
+        <tag>Github</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Https</title>
     <url>/2021/09/13/Https/</url>
     <content><![CDATA[<h3 id="为什么需要加密？"><a href="#为什么需要加密？" class="headerlink" title="为什么需要加密？"></a><strong>为什么需要加密？</strong></h3><p>因为http的内容是明文传输的，明文数据会经过中间代理服务器、路由器、wifi热点、通信服务运营商等多个物理节点，如果信息在传输过程中被劫持，传输的内容就完全暴露了。劫持者还可以篡改传输的信息且不被双方察觉，这就是“中间人攻击”。</p>
@@ -523,6 +523,36 @@
       </tags>
   </entry>
   <entry>
+    <title>IPad配置开发环境</title>
+    <url>/2024/11/12/IPad%E9%85%8D%E7%BD%AE%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>Chore</category>
+      </categories>
+      <tags>
+        <tag>编程环境</tag>
+        <tag>IPad</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JavaScript API</title>
+    <url>/2024/12/30/JS%20API/</url>
+    <content><![CDATA[<h2 id="InterSectionObserver"><a href="#InterSectionObserver" class="headerlink" title="InterSectionObserver"></a>InterSectionObserver</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 创建 IntersectionObserver 实例</span></span><br><span class="line"><span class="keyword">const</span> observer = <span class="keyword">new</span> <span class="title class_">IntersectionObserver</span>(<span class="function">(<span class="params">entries</span>) =&gt;</span> &#123;</span><br><span class="line">  entries.<span class="title function_">forEach</span>(<span class="function">(<span class="params">entry</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (entry.<span class="property">isIntersecting</span>) &#123;</span><br><span class="line">      <span class="comment">// 目标元素进入视口时的操作</span></span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`<span class="subst">$&#123;entry.target.id&#125;</span> 进入视口`</span>);</span><br><span class="line">      <span class="comment">// 例如在这里可以加载图片或触发其他动画效果</span></span><br><span class="line">      entry.<span class="property">target</span>.<span class="property">src</span> = <span class="string">&#x27;your_image.jpg&#x27;</span>;</span><br><span class="line">      <span class="comment">// 停止观察该元素（可选）</span></span><br><span class="line">      observer.<span class="title function_">unobserve</span>(entry.<span class="property">target</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 选择要观察的目标元素</span></span><br><span class="line"><span class="keyword">const</span> targetElement = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;your_element_id&#x27;</span>);</span><br><span class="line"><span class="comment">// 开始观察目标元素</span></span><br><span class="line">observer.<span class="title function_">observe</span>(targetElement);</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="MutationObserver"><a href="#MutationObserver" class="headerlink" title="MutationObserver"></a>MutationObserver</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 创建 MutationObserver 实例</span></span><br><span class="line"><span class="keyword">const</span> observer = <span class="keyword">new</span> <span class="title class_">MutationObserver</span>(<span class="function">(<span class="params">mutationsList</span>) =&gt;</span> &#123;</span><br><span class="line">  mutationsList.<span class="title function_">forEach</span>(<span class="function">(<span class="params">mutation</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (mutation.<span class="property">type</span> === <span class="string">&#x27;childList&#x27;</span>) &#123;</span><br><span class="line">      <span class="comment">// 子节点列表发生变化时的操作</span></span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;子节点列表发生变化&#x27;</span>);</span><br><span class="line">      <span class="comment">// 可以在这里对新增或删除的子节点进行进一步处理</span></span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (mutation.<span class="property">type</span> === <span class="string">&#x27;attributes&#x27;</span>) &#123;</span><br><span class="line">      <span class="comment">// 属性发生变化时的操作</span></span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`属性 <span class="subst">$&#123;mutation.attributeName&#125;</span> 发生变化`</span>);</span><br><span class="line">      <span class="comment">// 根据属性变化进行相应的样式更新或逻辑处理</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 选择要观察的目标节点</span></span><br><span class="line"><span class="keyword">const</span> targetNode = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;your_target_node_id&#x27;</span>);</span><br><span class="line"><span class="comment">// 配置观察选项</span></span><br><span class="line"><span class="keyword">const</span> config = &#123; <span class="attr">attributes</span>: <span class="literal">true</span>, <span class="attr">childList</span>: <span class="literal">true</span>, <span class="attr">subtree</span>: <span class="literal">true</span> &#125;;</span><br><span class="line"><span class="comment">// 开始观察目标节点</span></span><br><span class="line">observer.<span class="title function_">observe</span>(targetNode, config);</span><br></pre></td></tr></table></figure>
+
+<h2 id="PerformanceObserver"><a href="#PerformanceObserver" class="headerlink" title="PerformanceObserver"></a>PerformanceObserver</h2><h2 id="requestAnimationFrame"><a href="#requestAnimationFrame" class="headerlink" title="requestAnimationFrame"></a>requestAnimationFrame</h2><h3 id="requestAnimationFrame的概念"><a href="#requestAnimationFrame的概念" class="headerlink" title="requestAnimationFrame的概念"></a>requestAnimationFrame的概念</h3><p>通俗点讲就是该API能以浏览器的显示频率来作为其动画动作的频率，比如浏览器每10ms刷新一次，动画回调也每10ms调用一次，这样就不会存在过度绘制的问题，动画不会掉帧，自然流畅。</p>
+<h3 id="requestAnimationFrame的作用"><a href="#requestAnimationFrame的作用" class="headerlink" title="requestAnimationFrame的作用"></a>requestAnimationFrame的作用</h3><h3 id="requestAnimationFrame的优势"><a href="#requestAnimationFrame的优势" class="headerlink" title="requestAnimationFrame的优势"></a>requestAnimationFrame的优势</h3><h3 id="requestAnimationFrame的优势应用场景"><a href="#requestAnimationFrame的优势应用场景" class="headerlink" title="requestAnimationFrame的优势应用场景"></a>requestAnimationFrame的优势应用场景</h3><h2 id="requestIdleCallback"><a href="#requestIdleCallback" class="headerlink" title="requestIdleCallback"></a>requestIdleCallback</h2>]]></content>
+      <categories>
+        <category>chore</category>
+      </categories>
+      <tags>
+        <tag>API</tag>
+        <tag>工程化</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>JavaSrcipt原型</title>
     <url>/2021/02/17/JavaScript%E5%8E%9F%E5%9E%8B/</url>
     <content><![CDATA[<p>首先，要明确几个点：</p>
@@ -561,36 +591,6 @@
       </categories>
       <tags>
         <tag>JavaScript</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>JavaScript API</title>
-    <url>/2024/12/30/JS%20API/</url>
-    <content><![CDATA[<h2 id="InterSectionObserver"><a href="#InterSectionObserver" class="headerlink" title="InterSectionObserver"></a>InterSectionObserver</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 创建 IntersectionObserver 实例</span></span><br><span class="line"><span class="keyword">const</span> observer = <span class="keyword">new</span> <span class="title class_">IntersectionObserver</span>(<span class="function">(<span class="params">entries</span>) =&gt;</span> &#123;</span><br><span class="line">  entries.<span class="title function_">forEach</span>(<span class="function">(<span class="params">entry</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (entry.<span class="property">isIntersecting</span>) &#123;</span><br><span class="line">      <span class="comment">// 目标元素进入视口时的操作</span></span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`<span class="subst">$&#123;entry.target.id&#125;</span> 进入视口`</span>);</span><br><span class="line">      <span class="comment">// 例如在这里可以加载图片或触发其他动画效果</span></span><br><span class="line">      entry.<span class="property">target</span>.<span class="property">src</span> = <span class="string">&#x27;your_image.jpg&#x27;</span>;</span><br><span class="line">      <span class="comment">// 停止观察该元素（可选）</span></span><br><span class="line">      observer.<span class="title function_">unobserve</span>(entry.<span class="property">target</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 选择要观察的目标元素</span></span><br><span class="line"><span class="keyword">const</span> targetElement = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;your_element_id&#x27;</span>);</span><br><span class="line"><span class="comment">// 开始观察目标元素</span></span><br><span class="line">observer.<span class="title function_">observe</span>(targetElement);</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="MutationObserver"><a href="#MutationObserver" class="headerlink" title="MutationObserver"></a>MutationObserver</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 创建 MutationObserver 实例</span></span><br><span class="line"><span class="keyword">const</span> observer = <span class="keyword">new</span> <span class="title class_">MutationObserver</span>(<span class="function">(<span class="params">mutationsList</span>) =&gt;</span> &#123;</span><br><span class="line">  mutationsList.<span class="title function_">forEach</span>(<span class="function">(<span class="params">mutation</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (mutation.<span class="property">type</span> === <span class="string">&#x27;childList&#x27;</span>) &#123;</span><br><span class="line">      <span class="comment">// 子节点列表发生变化时的操作</span></span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;子节点列表发生变化&#x27;</span>);</span><br><span class="line">      <span class="comment">// 可以在这里对新增或删除的子节点进行进一步处理</span></span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (mutation.<span class="property">type</span> === <span class="string">&#x27;attributes&#x27;</span>) &#123;</span><br><span class="line">      <span class="comment">// 属性发生变化时的操作</span></span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`属性 <span class="subst">$&#123;mutation.attributeName&#125;</span> 发生变化`</span>);</span><br><span class="line">      <span class="comment">// 根据属性变化进行相应的样式更新或逻辑处理</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 选择要观察的目标节点</span></span><br><span class="line"><span class="keyword">const</span> targetNode = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;your_target_node_id&#x27;</span>);</span><br><span class="line"><span class="comment">// 配置观察选项</span></span><br><span class="line"><span class="keyword">const</span> config = &#123; <span class="attr">attributes</span>: <span class="literal">true</span>, <span class="attr">childList</span>: <span class="literal">true</span>, <span class="attr">subtree</span>: <span class="literal">true</span> &#125;;</span><br><span class="line"><span class="comment">// 开始观察目标节点</span></span><br><span class="line">observer.<span class="title function_">observe</span>(targetNode, config);</span><br></pre></td></tr></table></figure>
-
-<h2 id="PerformanceObserver"><a href="#PerformanceObserver" class="headerlink" title="PerformanceObserver"></a>PerformanceObserver</h2><h2 id="requestAnimationFrame"><a href="#requestAnimationFrame" class="headerlink" title="requestAnimationFrame"></a>requestAnimationFrame</h2><h3 id="requestAnimationFrame的概念"><a href="#requestAnimationFrame的概念" class="headerlink" title="requestAnimationFrame的概念"></a>requestAnimationFrame的概念</h3><p>通俗点讲就是该API能以浏览器的显示频率来作为其动画动作的频率，比如浏览器每10ms刷新一次，动画回调也每10ms调用一次，这样就不会存在过度绘制的问题，动画不会掉帧，自然流畅。</p>
-<h3 id="requestAnimationFrame的作用"><a href="#requestAnimationFrame的作用" class="headerlink" title="requestAnimationFrame的作用"></a>requestAnimationFrame的作用</h3><h3 id="requestAnimationFrame的优势"><a href="#requestAnimationFrame的优势" class="headerlink" title="requestAnimationFrame的优势"></a>requestAnimationFrame的优势</h3><h3 id="requestAnimationFrame的优势应用场景"><a href="#requestAnimationFrame的优势应用场景" class="headerlink" title="requestAnimationFrame的优势应用场景"></a>requestAnimationFrame的优势应用场景</h3><h2 id="requestIdleCallback"><a href="#requestIdleCallback" class="headerlink" title="requestIdleCallback"></a>requestIdleCallback</h2>]]></content>
-      <categories>
-        <category>chore</category>
-      </categories>
-      <tags>
-        <tag>API</tag>
-        <tag>工程化</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>IPad配置开发环境</title>
-    <url>/2024/11/12/IPad%E9%85%8D%E7%BD%AE%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>Chore</category>
-      </categories>
-      <tags>
-        <tag>编程环境</tag>
-        <tag>IPad</tag>
       </tags>
   </entry>
   <entry>
@@ -806,6 +806,24 @@
       </tags>
   </entry>
   <entry>
+    <title>JavaSrcipt知识点</title>
+    <url>/2021/02/17/Javascript%E7%9F%A5%E8%AF%86%E7%82%B9/</url>
+    <content><![CDATA[<h4 id="1-script标签中async和defer的区别"><a href="#1-script标签中async和defer的区别" class="headerlink" title="1. script标签中async和defer的区别"></a>1. script标签中async和defer的区别</h4><p><img src="/../assets/Snipaste_2021-12-13_03-23-58.png" alt="image-20211025190555184"></p>
+<ul>
+<li>普通script标签：下载和执行都会阻塞Dom渲染</li>
+<li>defer：立即进行异步下载，等到HTML完全解析完后开始执行，有多个defer的标签时，会按照顺序下载执行</li>
+<li>async：立即进行异步下载，下载完后会立即执行同时阻塞Dom渲染，因为是下载完立即执行，不能保证多个加载时的先后顺序。</li>
+</ul>
+<span id="more"></span>
+]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Jira项目</title>
     <url>/2022/03/02/Jira%E9%A1%B9%E7%9B%AE/</url>
     <content><![CDATA[<h4 id="代码自动格式化工具：prettier"><a href="#代码自动格式化工具：prettier" class="headerlink" title="代码自动格式化工具：prettier"></a>代码自动格式化工具：prettier</h4><p>配置过程：<a href="https://prettier.io/docs/en/precommit.html">https://prettier.io/docs/en/precommit.html</a></p>
@@ -894,24 +912,6 @@
       <tags>
         <tag>JavaScript</tag>
         <tag>React</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>JavaSrcipt知识点</title>
-    <url>/2021/02/17/Javascript%E7%9F%A5%E8%AF%86%E7%82%B9/</url>
-    <content><![CDATA[<h4 id="1-script标签中async和defer的区别"><a href="#1-script标签中async和defer的区别" class="headerlink" title="1. script标签中async和defer的区别"></a>1. script标签中async和defer的区别</h4><p><img src="/../assets/Snipaste_2021-12-13_03-23-58.png" alt="image-20211025190555184"></p>
-<ul>
-<li>普通script标签：下载和执行都会阻塞Dom渲染</li>
-<li>defer：立即进行异步下载，等到HTML完全解析完后开始执行，有多个defer的标签时，会按照顺序下载执行</li>
-<li>async：立即进行异步下载，下载完后会立即执行同时阻塞Dom渲染，因为是下载完立即执行，不能保证多个加载时的先后顺序。</li>
-</ul>
-<span id="more"></span>
-]]></content>
-      <categories>
-        <category>JavaScript</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
       </tags>
   </entry>
   <entry>
@@ -1265,6 +1265,68 @@
       </tags>
   </entry>
   <entry>
+    <title>React生态</title>
+    <url>/2021/09/30/React%E7%94%9F%E6%80%81/</url>
+    <content><![CDATA[<h3 id="React-DevTools"><a href="#React-DevTools" class="headerlink" title="React DevTools"></a>React DevTools</h3><h5 id="General-设置"><a href="#General-设置" class="headerlink" title="General 设置"></a>General 设置</h5><img src="../assets/image-20220222024702149.png" alt="image-20220222024702149" style="zoom:33%;" />
+
+<p>General 面板中最重要的功能就是 **”Highlight updates when components render”**。勾选上之后，可以查看 React 重绘时，页面哪些部分有更新。在遇到性能问题时，可以快速帮助决策在哪部分不需要重绘的组件部分添加 React.memo 阻止重绘。</p>
+<h5 id="Debugging-设置"><a href="#Debugging-设置" class="headerlink" title="Debugging 设置"></a>Debugging 设置</h5><img src="..\assets\image-20220222024832097.png" alt="image-20220222024832097" style="zoom:33%;" />
+
+<p><strong>“Append components stacks to console warnings and errors.”</strong></p>
+<p>可以帮助我们定位 React 报错信息来自哪个组件</p>
+<span id="more"></span>
+
+
+<h5 id="Components-设置"><a href="#Components-设置" class="headerlink" title="Components 设置"></a>Components 设置</h5><img src="..\assets\image-20220222024936104.png" alt="image-20220222024936104" style="zoom:33%;" />
+
+<p><strong>“Hide components where…”</strong></p>
+<p>此项在过滤组件树时有用。比如，大多数应用可能会在顶层有很多 Context.Provider，就可以过滤 Context 类型、不显示。当我们只关心业务逻辑层的组件时，可以过滤掉 DOM 组件，减少树的节点</p>
+<h5 id="Profiler-设置"><a href="#Profiler-设置" class="headerlink" title="Profiler 设置"></a>Profiler 设置</h5><img src="..\assets\image-20220222025024293.png" alt="image-20220222025024293" style="zoom:33%;" />
+
+<p><strong>“Record why each component rendered while profiling”</strong></p>
+<img src="..\assets\image-20220222025054509.png" alt="image-20220222025054509" style="zoom:33%;" />
+
+<p>勾选之后会在渲染火焰图的 hover 面板中看到 **”Why did this render”**。</p>
+<h5 id="现在有哪些-render-原因呢？"><a href="#现在有哪些-render-原因呢？" class="headerlink" title="现在有哪些 render 原因呢？"></a>现在有哪些 render 原因呢？</h5><ul>
+<li><p><strong>Props changed</strong></p>
+<p>​     顾名思义，传入组件的 props 变更</p>
+</li>
+<li><p><strong>The parent component rendered</strong></p>
+<p>​	父组件渲染导致的子组件渲染。一般要做性能优化都是找这类重绘原因的组件。但是要注意，如果组件中有用到 useContext，Provider 的 value 变更导致的重绘也是被标记为 The parent component rendered，需要注意</p>
+</li>
+<li><p><strong>Hooks changed</strong></p>
+<p>​	Hook 状态变更导致的重绘，一般就是指 useState 返回的更新函数被调用了</p>
+</li>
+<li><p><strong>State changed</strong></p>
+<p>​	这个只会在 class component 中有，大家忽略</p>
+</li>
+<li><p><strong>“Hide commits below xx (ms)”</strong></p>
+<p>​	设置一个更新耗时的阈值，低于该阈值的渲染不显示。用来快速过滤哪些渲染有性能问题</p>
+</li>
+</ul>
+<h5 id="React-组件检视器"><a href="#React-组件检视器" class="headerlink" title="React 组件检视器"></a>React 组件检视器</h5><p>用法和 DevTools 的元素面板类似，可以直接在页面上定位到元素对应的 React Component。并且可以实时查看当前组件内部的 hooks 状态，返回的组件树</p>
+<img src="..\assets\image-20220222025129591.png" alt="image-20220222025129591" style="zoom:33%;" />
+
+<p>右上角的四个图标</p>
+<img src="..\assets\image-20220222025154916.png" alt="image-20220222025154916" style="zoom:33%;" />
+
+<p>分别作用如下：</p>
+<ul>
+<li>模拟 ReactLazy 懒加载组件 Suspense 状态</li>
+<li>定位组件所渲染的 DOM 节点</li>
+<li>在 Console 中打印 Component 内部状态</li>
+<li>跳转到组件所在源文件（配合 sourcemap）</li>
+</ul>
+]]></content>
+      <categories>
+        <category>React</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>React</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>React的设计和实现</title>
     <url>/2021/09/29/React%E7%9A%84%E8%AE%BE%E8%AE%A1%E5%92%8C%E5%AE%9E%E7%8E%B0/</url>
     <content><![CDATA[<h4 id="本篇笔记的目的：站在更高的角度看待React"><a href="#本篇笔记的目的：站在更高的角度看待React" class="headerlink" title="本篇笔记的目的：站在更高的角度看待React"></a>本篇笔记的目的：站在更高的角度看待React</h4><h4 id="React的设计思路"><a href="#React的设计思路" class="headerlink" title="React的设计思路"></a>React的设计思路</h4><ul>
@@ -1331,110 +1393,6 @@
       </tags>
   </entry>
   <entry>
-    <title>React生态</title>
-    <url>/2021/09/30/React%E7%94%9F%E6%80%81/</url>
-    <content><![CDATA[<h3 id="React-DevTools"><a href="#React-DevTools" class="headerlink" title="React DevTools"></a>React DevTools</h3><h5 id="General-设置"><a href="#General-设置" class="headerlink" title="General 设置"></a>General 设置</h5><img src="../assets/image-20220222024702149.png" alt="image-20220222024702149" style="zoom:33%;" />
-
-<p>General 面板中最重要的功能就是 **”Highlight updates when components render”**。勾选上之后，可以查看 React 重绘时，页面哪些部分有更新。在遇到性能问题时，可以快速帮助决策在哪部分不需要重绘的组件部分添加 React.memo 阻止重绘。</p>
-<h5 id="Debugging-设置"><a href="#Debugging-设置" class="headerlink" title="Debugging 设置"></a>Debugging 设置</h5><img src="..\assets\image-20220222024832097.png" alt="image-20220222024832097" style="zoom:33%;" />
-
-<p><strong>“Append components stacks to console warnings and errors.”</strong></p>
-<p>可以帮助我们定位 React 报错信息来自哪个组件</p>
-<span id="more"></span>
-
-
-<h5 id="Components-设置"><a href="#Components-设置" class="headerlink" title="Components 设置"></a>Components 设置</h5><img src="..\assets\image-20220222024936104.png" alt="image-20220222024936104" style="zoom:33%;" />
-
-<p><strong>“Hide components where…”</strong></p>
-<p>此项在过滤组件树时有用。比如，大多数应用可能会在顶层有很多 Context.Provider，就可以过滤 Context 类型、不显示。当我们只关心业务逻辑层的组件时，可以过滤掉 DOM 组件，减少树的节点</p>
-<h5 id="Profiler-设置"><a href="#Profiler-设置" class="headerlink" title="Profiler 设置"></a>Profiler 设置</h5><img src="..\assets\image-20220222025024293.png" alt="image-20220222025024293" style="zoom:33%;" />
-
-<p><strong>“Record why each component rendered while profiling”</strong></p>
-<img src="..\assets\image-20220222025054509.png" alt="image-20220222025054509" style="zoom:33%;" />
-
-<p>勾选之后会在渲染火焰图的 hover 面板中看到 **”Why did this render”**。</p>
-<h5 id="现在有哪些-render-原因呢？"><a href="#现在有哪些-render-原因呢？" class="headerlink" title="现在有哪些 render 原因呢？"></a>现在有哪些 render 原因呢？</h5><ul>
-<li><p><strong>Props changed</strong></p>
-<p>​     顾名思义，传入组件的 props 变更</p>
-</li>
-<li><p><strong>The parent component rendered</strong></p>
-<p>​	父组件渲染导致的子组件渲染。一般要做性能优化都是找这类重绘原因的组件。但是要注意，如果组件中有用到 useContext，Provider 的 value 变更导致的重绘也是被标记为 The parent component rendered，需要注意</p>
-</li>
-<li><p><strong>Hooks changed</strong></p>
-<p>​	Hook 状态变更导致的重绘，一般就是指 useState 返回的更新函数被调用了</p>
-</li>
-<li><p><strong>State changed</strong></p>
-<p>​	这个只会在 class component 中有，大家忽略</p>
-</li>
-<li><p><strong>“Hide commits below xx (ms)”</strong></p>
-<p>​	设置一个更新耗时的阈值，低于该阈值的渲染不显示。用来快速过滤哪些渲染有性能问题</p>
-</li>
-</ul>
-<h5 id="React-组件检视器"><a href="#React-组件检视器" class="headerlink" title="React 组件检视器"></a>React 组件检视器</h5><p>用法和 DevTools 的元素面板类似，可以直接在页面上定位到元素对应的 React Component。并且可以实时查看当前组件内部的 hooks 状态，返回的组件树</p>
-<img src="..\assets\image-20220222025129591.png" alt="image-20220222025129591" style="zoom:33%;" />
-
-<p>右上角的四个图标</p>
-<img src="..\assets\image-20220222025154916.png" alt="image-20220222025154916" style="zoom:33%;" />
-
-<p>分别作用如下：</p>
-<ul>
-<li>模拟 ReactLazy 懒加载组件 Suspense 状态</li>
-<li>定位组件所渲染的 DOM 节点</li>
-<li>在 Console 中打印 Component 内部状态</li>
-<li>跳转到组件所在源文件（配合 sourcemap）</li>
-</ul>
-]]></content>
-      <categories>
-        <category>React</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-        <tag>React</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>React组件通信</title>
-    <url>/2021/10/07/React%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1/</url>
-    <content><![CDATA[<h3 id="组件通信"><a href="#组件通信" class="headerlink" title="组件通信"></a>组件通信</h3><h5 id="爷孙组件通信"><a href="#爷孙组件通信" class="headerlink" title="爷孙组件通信"></a>爷孙组件通信</h5><p>爷孙组件通信主要有 3 种方式：</p>
-<ol>
-<li>将孙子组件的 props 封装在一个固定字段中</li>
-<li>通过 children 透传</li>
-<li>通过 context 传递</li>
-</ol>
-<p>假设有个三层组件，爷爷分别给儿子和孙子发红包</p>
-<p>先看青铜解决方案：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Grandpa</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> [someMoneyForMe] = <span class="title function_">useState</span>(<span class="number">100</span>);</span><br><span class="line">  <span class="keyword">const</span> [someMoneyForDaddy] = <span class="title function_">useState</span>(<span class="number">101</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">Daddy</span> <span class="attr">money</span>=<span class="string">&#123;someMoneyForDaddy&#125;</span> <span class="attr">moneyForSon</span>=<span class="string">&#123;someMoneyForMe&#125;</span> /&gt;</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Daddy</span>(<span class="params">props: &#123; money: number; moneyForSon: number &#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; money, moneyForSon &#125; = props;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;daddy&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">h2</span>&gt;</span>This is Daddy, received $&#123;money&#125;<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">Me</span> <span class="attr">money</span>=<span class="string">&#123;moneyForSon&#125;</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Me</span>(<span class="params">props: &#123; money: number &#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; money &#125; = props;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;son&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">h3</span>&gt;</span>This is Me, received $&#123;money&#125;<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>Daddy 组件会透传爷爷给孙子的组件给 Me。这种方案的缺点很明显，以后爷爷要给 Daddy 和 Me 发糖果的时候，Daddy 还得加字段。</p>
-<p><strong>将孙子组件的 props 封装在一个固定字段中</strong></p>
-<p>按照 1 的方案，我们可以固定给 Daddy 添加一个 sonProps 的字段，然后将 Grandpa 需要传给孙子的状态全部通过 sonProps 传递</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Grandpa</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> [someMoneyForMe] = <span class="title function_">useState</span>(<span class="number">100</span>);</span><br><span class="line">  <span class="keyword">const</span> [someMoneyForDaddy] = <span class="title function_">useState</span>(<span class="number">101</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">Daddy</span> <span class="attr">money</span>=<span class="string">&#123;someMoneyForDaddy&#125;</span> <span class="attr">sonProps</span>=<span class="string">&#123;&#123;money:</span> <span class="attr">someMoneyForMe</span>&#125;&#125; /&gt;</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Daddy</span>(<span class="params">props: &#123; money: number; sonProps: Parameters&lt;<span class="keyword">typeof</span> Me&gt;[<span class="number">0</span>]; &#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; money, sonProps &#125; = props;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;daddy&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">h2</span>&gt;</span>This is Daddy, received $&#123;money&#125;<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">Me</span> &#123;<span class="attr">...sonProps</span>&#125;/&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Me</span>(<span class="params">props: &#123; money: number &#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; money &#125; = props;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;son&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">h3</span>&gt;</span>This is Me, received $&#123;money&#125;<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这样以后要给 Me 加字段，就不用改 Daddy 了。<strong>但要测试 Daddy 时还得 mock Me 组件的数据，Daddy 和 Son 耦合。</strong></p>
-<p><strong>通过 children 透传</strong></p>
-<p>children 类似于 vue 中的 slot，可以完成一些嵌套组件通信的功能</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Grandpa</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> [someMoneyForMe] = <span class="title function_">useState</span>(<span class="number">100</span>);</span><br><span class="line">  <span class="keyword">const</span> [someMoneyForDaddy] = <span class="title function_">useState</span>(<span class="number">101</span>);</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">Daddy</span> <span class="attr">money</span>=<span class="string">&#123;someMoneyForDaddy&#125;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">Me</span> <span class="attr">money</span>=<span class="string">&#123;someMoneyForMe&#125;</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">Daddy</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Daddy</span>(<span class="params">props: &#123; money: number; children?: React.ChildNode &#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; money, children &#125; = props;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;daddy&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">h2</span>&gt;</span>This is Daddy, received $&#123;money&#125;<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      &#123;children&#125;</span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Me</span>(<span class="params">props: &#123; money: number &#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; money &#125; = props;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;son&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">h3</span>&gt;</span>This is Me, received $&#123;money&#125;<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>将 Daddy 的嵌套部分用 children 替代后，解耦了子组件和孙子组件的依赖关系，Daddy 组件更加独立。</p>
-<p>作为替代，也可以传递一个组件实例：</p>
-<p><code><Daddy money=&#123;someMoneyForDaddy&#125; me=&#123;<Me money=&#123;someMoneyForMe&#125; /> </code></p>
-<p><strong>三种方案的决策</strong></p>
-<ol>
-<li>第一种方案一般用于固定结构和跨组件有互相依赖的场景，多见于 UI 框架中的复合组件与原子组件的设计中</li>
-<li>第二种常用在嵌套层级不深的业务代码中，比如表单场景。<strong>优点是顶层 Grandpa 的业务收敛度很高，一眼能看清 UI 结构及状态绑定关系，相当于拍平了 React 组件树</strong></li>
-<li>第三种比较通用，适合复杂嵌套透传场景。缺点是范式代码较多，且会造成 react dev tools 层级过多；Context 无法在父组件看出依赖关系，必须到子组件文件中才能知道数据来源</li>
-</ol>
-]]></content>
-      <categories>
-        <category>React</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-        <tag>Hooks</tag>
-        <tag>React</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>React组件性能优化</title>
     <url>/2021/10/14/React%E7%BB%84%E4%BB%B6%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</url>
     <content><![CDATA[<h3 id="React-性能优化思路"><a href="#React-性能优化思路" class="headerlink" title="React 性能优化思路"></a>React 性能优化思路</h3><p>我觉得React 性能优化的理念的主要方向就是这两个：</p>
@@ -1490,6 +1448,74 @@
         <tag>JavaScript</tag>
         <tag>Hooks</tag>
         <tag>React</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>React组件通信</title>
+    <url>/2021/10/07/React%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1/</url>
+    <content><![CDATA[<h3 id="组件通信"><a href="#组件通信" class="headerlink" title="组件通信"></a>组件通信</h3><h5 id="爷孙组件通信"><a href="#爷孙组件通信" class="headerlink" title="爷孙组件通信"></a>爷孙组件通信</h5><p>爷孙组件通信主要有 3 种方式：</p>
+<ol>
+<li>将孙子组件的 props 封装在一个固定字段中</li>
+<li>通过 children 透传</li>
+<li>通过 context 传递</li>
+</ol>
+<p>假设有个三层组件，爷爷分别给儿子和孙子发红包</p>
+<p>先看青铜解决方案：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Grandpa</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> [someMoneyForMe] = <span class="title function_">useState</span>(<span class="number">100</span>);</span><br><span class="line">  <span class="keyword">const</span> [someMoneyForDaddy] = <span class="title function_">useState</span>(<span class="number">101</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">Daddy</span> <span class="attr">money</span>=<span class="string">&#123;someMoneyForDaddy&#125;</span> <span class="attr">moneyForSon</span>=<span class="string">&#123;someMoneyForMe&#125;</span> /&gt;</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Daddy</span>(<span class="params">props: &#123; money: number; moneyForSon: number &#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; money, moneyForSon &#125; = props;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;daddy&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">h2</span>&gt;</span>This is Daddy, received $&#123;money&#125;<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">Me</span> <span class="attr">money</span>=<span class="string">&#123;moneyForSon&#125;</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Me</span>(<span class="params">props: &#123; money: number &#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; money &#125; = props;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;son&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">h3</span>&gt;</span>This is Me, received $&#123;money&#125;<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Daddy 组件会透传爷爷给孙子的组件给 Me。这种方案的缺点很明显，以后爷爷要给 Daddy 和 Me 发糖果的时候，Daddy 还得加字段。</p>
+<p><strong>将孙子组件的 props 封装在一个固定字段中</strong></p>
+<p>按照 1 的方案，我们可以固定给 Daddy 添加一个 sonProps 的字段，然后将 Grandpa 需要传给孙子的状态全部通过 sonProps 传递</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Grandpa</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> [someMoneyForMe] = <span class="title function_">useState</span>(<span class="number">100</span>);</span><br><span class="line">  <span class="keyword">const</span> [someMoneyForDaddy] = <span class="title function_">useState</span>(<span class="number">101</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">Daddy</span> <span class="attr">money</span>=<span class="string">&#123;someMoneyForDaddy&#125;</span> <span class="attr">sonProps</span>=<span class="string">&#123;&#123;money:</span> <span class="attr">someMoneyForMe</span>&#125;&#125; /&gt;</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Daddy</span>(<span class="params">props: &#123; money: number; sonProps: Parameters&lt;<span class="keyword">typeof</span> Me&gt;[<span class="number">0</span>]; &#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; money, sonProps &#125; = props;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;daddy&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">h2</span>&gt;</span>This is Daddy, received $&#123;money&#125;<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">Me</span> &#123;<span class="attr">...sonProps</span>&#125;/&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Me</span>(<span class="params">props: &#123; money: number &#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; money &#125; = props;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;son&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">h3</span>&gt;</span>This is Me, received $&#123;money&#125;<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样以后要给 Me 加字段，就不用改 Daddy 了。<strong>但要测试 Daddy 时还得 mock Me 组件的数据，Daddy 和 Son 耦合。</strong></p>
+<p><strong>通过 children 透传</strong></p>
+<p>children 类似于 vue 中的 slot，可以完成一些嵌套组件通信的功能</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Grandpa</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> [someMoneyForMe] = <span class="title function_">useState</span>(<span class="number">100</span>);</span><br><span class="line">  <span class="keyword">const</span> [someMoneyForDaddy] = <span class="title function_">useState</span>(<span class="number">101</span>);</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">Daddy</span> <span class="attr">money</span>=<span class="string">&#123;someMoneyForDaddy&#125;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">Me</span> <span class="attr">money</span>=<span class="string">&#123;someMoneyForMe&#125;</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">Daddy</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Daddy</span>(<span class="params">props: &#123; money: number; children?: React.ChildNode &#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; money, children &#125; = props;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;daddy&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">h2</span>&gt;</span>This is Daddy, received $&#123;money&#125;<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      &#123;children&#125;</span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Me</span>(<span class="params">props: &#123; money: number &#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; money &#125; = props;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;son&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">h3</span>&gt;</span>This is Me, received $&#123;money&#125;<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>将 Daddy 的嵌套部分用 children 替代后，解耦了子组件和孙子组件的依赖关系，Daddy 组件更加独立。</p>
+<p>作为替代，也可以传递一个组件实例：</p>
+<p><code><Daddy money=&#123;someMoneyForDaddy&#125; me=&#123;<Me money=&#123;someMoneyForMe&#125; /> </code></p>
+<p><strong>三种方案的决策</strong></p>
+<ol>
+<li>第一种方案一般用于固定结构和跨组件有互相依赖的场景，多见于 UI 框架中的复合组件与原子组件的设计中</li>
+<li>第二种常用在嵌套层级不深的业务代码中，比如表单场景。<strong>优点是顶层 Grandpa 的业务收敛度很高，一眼能看清 UI 结构及状态绑定关系，相当于拍平了 React 组件树</strong></li>
+<li>第三种比较通用，适合复杂嵌套透传场景。缺点是范式代码较多，且会造成 react dev tools 层级过多；Context 无法在父组件看出依赖关系，必须到子组件文件中才能知道数据来源</li>
+</ol>
+]]></content>
+      <categories>
+        <category>React</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>Hooks</tag>
+        <tag>React</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Web3相关学习</title>
+    <url>/2024/10/29/Web3%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/</url>
+    <content><![CDATA[<p>先开个坑，准备下Web3相关的学习</p>
+<h2 id="学习路线"><a href="#学习路线" class="headerlink" title="学习路线"></a>学习路线</h2><ul>
+<li><strong>Web3开发学习路线</strong>: <a href="https://54web3.cc/blog/roadmap/learning-path-web3">https://54web3.cc/blog/roadmap/learning-path-web3</a></li>
+<li><strong>Web3 入门计划</strong>: <a href="https://cubic-leaf-731.notion.site/web3-202208-09-1623ccd15c2148a1ae00ed8794d153b1">https://cubic-leaf-731.notion.site/web3-202208-09-1623ccd15c2148a1ae00ed8794d153b1</a></li>
+<li><strong>Web3从入门到精通开发学习路线</strong>：<a href="https://juejin.cn/post/7307185531330838543">https://juejin.cn/post/7307185531330838543</a></li>
+</ul>
+<h3 id="WEEK-1-区块链的基础知识"><a href="#WEEK-1-区块链的基础知识" class="headerlink" title="WEEK 1: 区块链的基础知识"></a><strong>WEEK 1: 区块链的基础知识</strong></h3><ul>
+<li>密码学基础</li>
+<li>区块链基础</li>
+<li>相关金融知识</li>
+<li>学习比特币底层技术</li>
+<li>学习以太坊原理</li>
+</ul>
+<!-- ![image-20241105](../assets/Week1：区块链基础知识.png) -->]]></content>
+      <categories>
+        <category>Chore</category>
+      </categories>
+      <tags>
+        <tag>Web3</tag>
+        <tag>区块链</tag>
+        <tag>智能合约</tag>
       </tags>
   </entry>
   <entry>
@@ -1934,29 +1960,15 @@ module: &#123;
       </tags>
   </entry>
   <entry>
-    <title>Web3相关学习</title>
-    <url>/2024/10/29/Web3%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/</url>
-    <content><![CDATA[<p>先开个坑，准备下Web3相关的学习</p>
-<h2 id="学习路线"><a href="#学习路线" class="headerlink" title="学习路线"></a>学习路线</h2><ul>
-<li><strong>Web3开发学习路线</strong>: <a href="https://54web3.cc/blog/roadmap/learning-path-web3">https://54web3.cc/blog/roadmap/learning-path-web3</a></li>
-<li><strong>Web3 入门计划</strong>: <a href="https://cubic-leaf-731.notion.site/web3-202208-09-1623ccd15c2148a1ae00ed8794d153b1">https://cubic-leaf-731.notion.site/web3-202208-09-1623ccd15c2148a1ae00ed8794d153b1</a></li>
-<li><strong>Web3从入门到精通开发学习路线</strong>：<a href="https://juejin.cn/post/7307185531330838543">https://juejin.cn/post/7307185531330838543</a></li>
-</ul>
-<h3 id="WEEK-1-区块链的基础知识"><a href="#WEEK-1-区块链的基础知识" class="headerlink" title="WEEK 1: 区块链的基础知识"></a><strong>WEEK 1: 区块链的基础知识</strong></h3><ul>
-<li>密码学基础</li>
-<li>区块链基础</li>
-<li>相关金融知识</li>
-<li>学习比特币底层技术</li>
-<li>学习以太坊原理</li>
-</ul>
-<!-- ![image-20241105](../assets/Week1：区块链基础知识.png) -->]]></content>
+    <title>require() 源码解读</title>
+    <url>/2021/08/21/require%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/</url>
+    <content><![CDATA[<span id="more"></span>
+]]></content>
       <categories>
-        <category>Chore</category>
+        <category>JavaScript</category>
       </categories>
       <tags>
-        <tag>Web3</tag>
-        <tag>区块链</tag>
-        <tag>智能合约</tag>
+        <tag>JavaScript</tag>
       </tags>
   </entry>
   <entry>
@@ -1997,18 +2009,6 @@ webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后�
       <tags>
         <tag>Webpack</tag>
         <tag>打包工具</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>require() 源码解读</title>
-    <url>/2021/08/21/require%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/</url>
-    <content><![CDATA[<span id="more"></span>
-]]></content>
-      <categories>
-        <category>JavaScript</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
       </tags>
   </entry>
   <entry>
@@ -2159,9 +2159,9 @@ webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后�
       </tags>
   </entry>
   <entry>
-    <title>前端工程化</title>
-    <url>/2024/12/30/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%8C%96/</url>
-    <content><![CDATA[<h2 id="打包器资源处理"><a href="#打包器资源处理" class="headerlink" title="打包器资源处理"></a>打包器资源处理</h2><h3 id="CommonJS-ESM-UMD等模块化方案"><a href="#CommonJS-ESM-UMD等模块化方案" class="headerlink" title="CommonJS&#x2F;ESM&#x2F;UMD等模块化方案"></a>CommonJS&#x2F;ESM&#x2F;UMD等模块化方案</h3><h4 id="CommonJS"><a href="#CommonJS" class="headerlink" title="CommonJS"></a>CommonJS</h4><ul>
+    <title>前端模块化</title>
+    <url>/2024/12/30/%E5%89%8D%E7%AB%AF%E6%A8%A1%E5%9D%97%E5%8C%96/</url>
+    <content><![CDATA[<h2 id="CommonJS-ESModule-UMD等模块化方案"><a href="#CommonJS-ESModule-UMD等模块化方案" class="headerlink" title="CommonJS&#x2F;ESModule&#x2F;UMD等模块化方案"></a>CommonJS&#x2F;ESModule&#x2F;UMD等模块化方案</h2><h3 id="CommonJS"><a href="#CommonJS" class="headerlink" title="CommonJS"></a>CommonJS</h3><ul>
 <li><p>使用<code>require</code>，<code>export</code>进行导入导出</p>
 </li>
 <li><p><code>CommonJS</code>是<code>Node</code>的模块化方案，只能在<code>Node</code>端运行，不能在浏览器端，除非使用一些构建工具进行编译（<code>Webpack</code>、<code>Rollup</code>）</p>
@@ -2171,54 +2171,112 @@ webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后�
 <li><p><code>CommonJS</code>属于动态加载，可以直接<code>require</code>一个变量：<code>require(`./$&#123;a&#125;`);</code></p>
   <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// sum.js</span></span><br><span class="line"><span class="built_in">exports</span>.<span class="property">sum</span> = <span class="function">(<span class="params">x, y</span>) =&gt;</span> x + y;</span><br><span class="line"><span class="comment">// index.js</span></span><br><span class="line"><span class="keyword">const</span> &#123; sum &#125; = <span class="built_in">require</span>(<span class="string">&quot;./sum.js&quot;</span>);</span><br></pre></td></tr></table></figure></li>
 </ul>
-<h4 id="ESModule"><a href="#ESModule" class="headerlink" title="ESModule"></a>ESModule</h4><ul>
+<hr>
+<span id="more"></span>
+
+<h3 id="ESModule"><a href="#ESModule" class="headerlink" title="ESModule"></a>ESModule</h3><ul>
 <li><code>Esmodule</code> 是tc39对于<code>ESMAScript</code>的模块化规范，正因是语言层规范，<strong>因此在 Node 及 浏览器中均支持。</strong>  <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// sum.js</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="title function_">sum</span> = (<span class="params">x, y</span>) =&gt; x + y;</span><br><span class="line"><span class="comment">// index.js</span></span><br><span class="line"><span class="keyword">import</span> &#123; sum &#125; <span class="keyword">from</span> <span class="string">&quot;./sum&quot;</span>;</span><br></pre></td></tr></table></figure></li>
 <li>使用<code>import</code>，<code>export</code>进行模块的导入导出</li>
 <li><code>Esmodule</code>为静态导入，正因如此，可在编译期进行<code>Tree Shaking</code>，减少 js 体积。</li>
 <li>如果需要动态导入，tc39 为动态加载模块定义了 API: <code>import(module)</code>。</li>
+<li><code>cjs</code>模块输出的是一个值的拷贝，<code>esm</code>输出的是值的引用</li>
+<li>Node环境下的<code>cjs</code>模块是<strong>运行时加载</strong>，Webpack环境下的<code>esm</code>模块化是<strong>编译时加载</strong><br><strong>本质上是多了个文件IO</strong></li>
 </ul>
-<p><code>cjs</code>模块输出的是一个值的拷贝，<code>esm</code>输出的是值的引用<br><code>cjs</code>模块是运行时加载，<code>esm</code>是编译时加载</p>
-<h4 id="UMD"><a href="#UMD" class="headerlink" title="UMD"></a>UMD</h4><p>一种兼容<code>cjs</code>与<code>amd</code>的模块，既可以在<code>node/webpack</code>环境中被<code>require</code>引用，也可以在浏览器中直接用 CDN 被<code>script.src</code>引入。</p>
-<h4 id="常见问题Q-A"><a href="#常见问题Q-A" class="headerlink" title="常见问题Q&amp;A"></a>常见问题Q&amp;A</h4><h5 id="1、第三方npm包基于commonjs开发，使用到webpack的前端项目中，能否通过ESM语法import引入"><a href="#1、第三方npm包基于commonjs开发，使用到webpack的前端项目中，能否通过ESM语法import引入" class="headerlink" title="1、第三方npm包基于commonjs开发，使用到webpack的前端项目中，能否通过ESM语法import引入"></a>1、第三方npm包基于commonjs开发，使用到webpack的前端项目中，能否通过ESM语法import引入</h5><p>可以通过<code>import</code>引入<code>CommonJS</code>模块，<code>Webpack</code>会自动处理兼容性：</p>
+<hr>
+<h3 id="UMD"><a href="#UMD" class="headerlink" title="UMD"></a>UMD</h3><p>一种<strong>兼容<code>cjs</code>与<code>amd</code>的模块化方案</strong>，既可以在<code>node/webpack</code>环境中被<code>require</code>引用，也可以在浏览器中直接用 CDN 被<code>script.src</code>引入。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">(<span class="keyword">function</span> (<span class="params">root, factory</span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> define === <span class="string">&quot;function&quot;</span> &amp;&amp; define.<span class="property">amd</span>) &#123;</span><br><span class="line">    <span class="comment">// AMD</span></span><br><span class="line">    <span class="title function_">define</span>([<span class="string">&quot;jquery&quot;</span>], factory);</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="built_in">exports</span> === <span class="string">&quot;object&quot;</span>) &#123;</span><br><span class="line">    <span class="comment">// CommonJS</span></span><br><span class="line">    <span class="variable language_">module</span>.<span class="property">exports</span> = <span class="title function_">factory</span>(<span class="built_in">require</span>(<span class="string">&quot;jquery&quot;</span>));</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// 全局变量</span></span><br><span class="line">    root.<span class="property">returnExports</span> = <span class="title function_">factory</span>(root.<span class="property">jQuery</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)(<span class="variable language_">this</span>, <span class="keyword">function</span> (<span class="params">$</span>) &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><table>
+<thead>
+<tr>
+<th align="center">特性</th>
+<th>ESM（ES6 模块）</th>
+<th>UMD（通用模块定义）</th>
+<th>CJS（CommonJS）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><strong>语法</strong></td>
+<td>import&#x2F;export</td>
+<td>自执行函数，兼容多种环境</td>
+<td>require&#x2F;exports&#x2F;module.exports</td>
+</tr>
+<tr>
+<td align="center"><strong>兼容性</strong></td>
+<td>现代浏览器、Node.js（需配置）</td>
+<td>所有环境（浏览器、Node.js）</td>
+<td>Node.js（默认）</td>
+</tr>
+<tr>
+<td align="center"><strong>加载时机</strong></td>
+<td>编译时静态分析（静态结构）</td>
+<td>运行时动态加载</td>
+<td>运行时动态加载</td>
+</tr>
+<tr>
+<td align="center"><strong>依赖解析</strong></td>
+<td>编译阶段确定依赖关系</td>
+<td>运行时判断环境并选择加载方式</td>
+<td>运行时执行 require 语句</td>
+</tr>
+<tr>
+<td align="center"><strong>Tree Shaking</strong></td>
+<td>支持	✅（静态结构可分析）</td>
+<td>❌（动态加载）</td>
+<td>❌（动态加载）</td>
+</tr>
+<tr>
+<td align="center"><strong>典型应用场景</strong></td>
+<td>现代前端项目（Webpack&#x2F;Vite）</td>
+<td>通用库（需兼容所有环境）</td>
+<td>Node.js 后端项目</td>
+</tr>
+<tr>
+<td align="center"><strong>作用域</strong></td>
+<td>每个模块有独立作用域</td>
+<td>封装在 IIFE 中，避免全局污染</td>
+<td>每个文件是独立模块</td>
+</tr>
+<tr>
+<td align="center"><strong>导出机制</strong></td>
+<td>实时绑定（引用共享）</td>
+<td>对象拷贝</td>
+<td>对象拷贝</td>
+</tr>
+</tbody></table>
+<h3 id="常见问题Q-A"><a href="#常见问题Q-A" class="headerlink" title="常见问题Q&amp;A"></a>常见问题Q&amp;A</h3><h4 id="1、第三方npm包基于commonjs开发，使用到webpack的前端项目中，能否通过esmodule语法import引入"><a href="#1、第三方npm包基于commonjs开发，使用到webpack的前端项目中，能否通过esmodule语法import引入" class="headerlink" title="1、第三方npm包基于commonjs开发，使用到webpack的前端项目中，能否通过esmodule语法import引入"></a>1、第三方npm包基于commonjs开发，使用到webpack的前端项目中，能否通过esmodule语法import引入</h4><p>可以通过<code>import</code>引入<code>CommonJS</code>模块，<code>Webpack</code>会自动处理兼容性，比如引入下载量很高的<a href="https://www.npmjs.com/package/ms">ms</a></p>
 <ul>
-<li>直接导入：大多数情况可直接使用<code>import ms from &#39;ms&#39;</code>。</li>
-<li><code>Tree Shaking</code>限制：<code>CommonJS</code> 模块的优化效果弱于 <code>ESM</code>，建议优先选择<code>ESM</code>版本的第三方库。</li>
+<li>直接导入：在Webpack环境下可直接使用<code>import ms from &#39;ms&#39;</code>导入，Webpack会自动处理</li>
+<li>要注意的是<code>Tree Shaking</code>限制： <code>Webpack</code>只会对<code>Esmodule</code>模块进行<code>TreeShaking</code>。</li>
 </ul>
-<h5 id="2、如何判断引入的第三方包是否支持-Tree-Shaking"><a href="#2、如何判断引入的第三方包是否支持-Tree-Shaking" class="headerlink" title="2、如何判断引入的第三方包是否支持 Tree Shaking"></a>2、如何判断引入的第三方包是否支持 Tree Shaking</h5><ul>
+<h4 id="2、如何判断引入的第三方包是否支持-Tree-Shaking"><a href="#2、如何判断引入的第三方包是否支持-Tree-Shaking" class="headerlink" title="2、如何判断引入的第三方包是否支持 Tree Shaking"></a>2、如何判断引入的第三方包是否支持 Tree Shaking</h4><ul>
 <li>只有<code>ESM</code>支持<code>Tree Shaking</code></li>
-<li>要根据第三依赖的产物来判断（是否打成<code>ESM</code>的格式），而不是根据第三方依赖的源码判断</li>
+<li>要根据第三方依赖的产物来判断（是否打成<code>ESM</code>的格式），而不是根据第三方依赖的源码判断</li>
 </ul>
-<h5 id="3、如果开发一个npm包，产物要支持ESM、CJS、UMD，需要怎么做呢"><a href="#3、如果开发一个npm包，产物要支持ESM、CJS、UMD，需要怎么做呢" class="headerlink" title="3、如果开发一个npm包，产物要支持ESM、CJS、UMD，需要怎么做呢"></a>3、如果开发一个npm包，产物要支持ESM、CJS、UMD，需要怎么做呢</h5><ul>
-<li><strong>代码优先</strong>：使用 ESM 语法开发，通过构建工具转换为其他格式。</li>
-<li><strong>构建灵活</strong>：配置 Rollup&#x2F;Webpack 输出多种格式，并正确设置 package.json 字段。</li>
+<h4 id="3、CJS的运行时加载和ESM的编译时加载有什么区别"><a href="#3、CJS的运行时加载和ESM的编译时加载有什么区别" class="headerlink" title="3、CJS的运行时加载和ESM的编译时加载有什么区别"></a>3、CJS的运行时加载和ESM的编译时加载有什么区别</h4><ul>
+<li><p><strong>前端Webpack环境编译时加载模块的执行过程</strong><br><code>源代码（含import语句） → 打包工具（如Webpack） → 分析import依赖 → 生成合并后的代码 → 浏览器直接执行</code><br>关键步骤：</p>
+<ol>
+<li>静态分析：Webpack 在打包时扫描所有 import 语句，构建依赖图。</li>
+<li>代码合并：将所有依赖的模块打包到一个或多个文件中（如 bundle.js）。</li>
+<li>运行时执行：浏览器直接执行打包后的代码，无需再加载其他文件（依赖已包含在主文件中）。</li>
+</ol>
+</li>
+<li><p><strong>Node环境运行时加载模块的执行过程</strong><br><code>代码执行 → 遇到require()语句 → 查找模块文件 → 读取文件内容 → 执行模块代码 → 返回导出值</code><br>关键步骤：</p>
+<ol>
+<li>执行到 require()：代码运行到该语句时，触发模块加载逻辑。</li>
+<li>路径解析：根据 require() 的参数（如 .&#x2F;math.js），查找对应的文件。</li>
+<li>文件读取与执行：读取模块文件内容，创建新的模块上下文并执行代码。</li>
+<li>缓存结果：将模块的 exports 对象存入缓存，下次引用时直接返回缓存。</li>
+</ol>
+</li>
 </ul>
-<h5 id="4、成熟的第三方npm包是怎么去做构建的（以Lodash为例）"><a href="#4、成熟的第三方npm包是怎么去做构建的（以Lodash为例）" class="headerlink" title="4、成熟的第三方npm包是怎么去做构建的（以Lodash为例）"></a>4、成熟的第三方npm包是怎么去做构建的（以Lodash为例）</h5><p><code>Lodash</code> 的源码采用「无模块化」设计，核心是通过构建工具将函数集合打包为多种格式：</p>
-<p>源码组织：所有工具函数（如 map、filter）定义在全局对象上。<br>构建工具：使用定制的构建系统，将源码转换为：<br><code>CJS</code> 格式：<code>lodash/index.js</code><br><code>ESM</code> 格式：<code>lodash-es/index.js</code><br><code>UMD</code> 格式：<code>dist/lodash.js</code>（可通过 CDN 引入）</p>
-<h5 id="5、Node环境和前端（Webpack）环境打包过程有什么区别"><a href="#5、Node环境和前端（Webpack）环境打包过程有什么区别" class="headerlink" title="5、Node环境和前端（Webpack）环境打包过程有什么区别"></a>5、Node环境和前端（Webpack）环境打包过程有什么区别</h5><h3 id="CommonJS和Esmodule的区别"><a href="#CommonJS和Esmodule的区别" class="headerlink" title="CommonJS和Esmodule的区别"></a>CommonJS和Esmodule的区别</h3><p>CJS：运行时加载<br>Esmodule：编译时加载</p>
-<span id="more"></span>
-
-<h2 id="包管理器"><a href="#包管理器" class="headerlink" title="包管理器"></a>包管理器</h2><h3 id="Npm-Yarn"><a href="#Npm-Yarn" class="headerlink" title="Npm&#x2F;Yarn"></a>Npm&#x2F;Yarn</h3><h4 id="Npm发包"><a href="#Npm发包" class="headerlink" title="Npm发包"></a>Npm发包</h4><h5 id="files"><a href="#files" class="headerlink" title="files"></a>files</h5><p>指定哪些文件会被打包发布（后面详细描述）。</p>
-<h5 id="main、browser、exports、module"><a href="#main、browser、exports、module" class="headerlink" title="main、browser、exports、module"></a>main、browser、exports、module</h5><p>这四个字段都是用来定义包的入口，<code>npm</code> 只规定了 <code>main</code> 和 <code>browser</code> 这两个字段，<code>exports</code> 是 <code>nodejs</code> 的规范，<code>module</code> 一般被构建工具所支持。</p>
-<h5 id="main"><a href="#main" class="headerlink" title="main"></a>main</h5><p><code>main</code> 规定了包的主要入口点，默认值为 <code>index.js</code>。</p>
-<p>如果你的包名为 <code>foo</code> 可以通过 <code>require(&quot;foo&quot;)</code> 引入对应模块导出的内容，所以这应该是个 CommonJS 模块，除非你设置了 <code>&quot;type&quot;: &quot;module&quot;</code>。</p>
-<h3 id="Pnpm"><a href="#Pnpm" class="headerlink" title="Pnpm"></a>Pnpm</h3><ul>
-<li>省空间</li>
-<li>解决幽灵依赖的问题</li>
-</ul>
-<p>如何确定一个项目的包管理工具？</p>
+<h4 id="4、成熟的第三方npm包是怎么去做构建的（以Lodash为例）"><a href="#4、成熟的第三方npm包是怎么去做构建的（以Lodash为例）" class="headerlink" title="4、成熟的第三方npm包是怎么去做构建的（以Lodash为例）"></a>4、成熟的第三方npm包是怎么去做构建的（以Lodash为例）</h4><figure class="highlight plaintext"><figcaption><span>的源码采用定义全局对象，「无模块化」设计，核心是通过构建工具将函数集合打包为多种格式：</span></figcaption><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">源码组织：所有工具函数（如 map、filter）定义在全局对象上。</span><br><span class="line">构建工具：使用定制的构建系统，将源码转换为：</span><br><span class="line">```CJS``` 格式：```lodash/index.js```</span><br><span class="line">```ESM``` 格式：```lodash-es/index.js```</span><br><span class="line">```UMD``` 格式：```dist/lodash.js```（可通过 CDN 引入）</span><br><span class="line"></span><br><span class="line">#### 5、如何把开发的NPM包打成不同的格式（ESM，CJS，UMD）</span><br><span class="line">详见：[打包示例](https://github.com/huangyunt/Learning-Demo/tree/master/esm%2Ccjs%2Cumd%E6%89%93%E5%8C%85%E7%A4%BA%E4%BE%8B)</span><br><span class="line">- js代码</span><br><span class="line">  ``` javaScript</span><br><span class="line">  export function capitalize(str) &#123;</span><br><span class="line">    if (!str) return &#x27;&#x27;;</span><br><span class="line">    return str.charAt(0).toUpperCase() + str.slice(1);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  export function truncate(str, maxLength = 10, suffix = &#x27;...&#x27;) &#123;</span><br><span class="line">    if (str.length &lt;= maxLength) return str;</span><br><span class="line">    return str.slice(0, maxLength) + suffix;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  export default &#123;</span><br><span class="line">    capitalize,</span><br><span class="line">    truncate</span><br><span class="line">  &#125;;</span><br></pre></td></tr></table></figure>
 <ul>
-<li>lock文件、package.json下packageManager字段来判断</li>
+<li>webpack配置文件<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> &#123; <span class="title class_">CleanWebpackPlugin</span> &#125; = <span class="built_in">require</span>(<span class="string">&#x27;clean-webpack-plugin&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> <span class="title class_">TerserPlugin</span> = <span class="built_in">require</span>(<span class="string">&#x27;terser-webpack-plugin&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 公共配置</span></span><br><span class="line"><span class="keyword">const</span> commonConfig = &#123;</span><br><span class="line">    <span class="attr">mode</span>: <span class="string">&#x27;production&#x27;</span>,</span><br><span class="line">    <span class="attr">entry</span>: <span class="string">&#x27;./src/index.js&#x27;</span>,</span><br><span class="line">    <span class="attr">module</span>: &#123;</span><br><span class="line">        <span class="attr">rules</span>: [</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="attr">test</span>: <span class="regexp">/\.js$/</span>,</span><br><span class="line">                <span class="attr">exclude</span>: <span class="regexp">/node_modules/</span>,</span><br><span class="line">                <span class="comment">// use: &#123;</span></span><br><span class="line">                <span class="comment">//   loader: &#x27;babel-loader&#x27;,</span></span><br><span class="line">                <span class="comment">//   options: &#123;</span></span><br><span class="line">                <span class="comment">//     presets: [&#x27;@babel/preset-env&#x27;]</span></span><br><span class="line">                <span class="comment">//   &#125;</span></span><br><span class="line">                <span class="comment">// &#125;</span></span><br><span class="line">            &#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">plugins</span>: [</span><br><span class="line">        <span class="comment">// new CleanWebpackPlugin() // 清理dist目录</span></span><br><span class="line">    ],</span><br><span class="line">    <span class="attr">resolve</span>: &#123;</span><br><span class="line">        <span class="attr">extensions</span>: [<span class="string">&#x27;.js&#x27;</span>]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ESM 配置</span></span><br><span class="line"><span class="keyword">const</span> esmConfig = &#123;</span><br><span class="line">    ...commonConfig,</span><br><span class="line">    <span class="attr">output</span>: &#123;</span><br><span class="line">        <span class="attr">path</span>: path.<span class="title function_">resolve</span>(__dirname, <span class="string">&#x27;dist&#x27;</span>),</span><br><span class="line">        <span class="attr">filename</span>: <span class="string">&#x27;string-utils.esm.js&#x27;</span>,</span><br><span class="line">        <span class="attr">library</span>: &#123;</span><br><span class="line">            <span class="attr">type</span>: <span class="string">&#x27;module&#x27;</span> <span class="comment">// 输出ESM格式</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">experiments</span>: &#123;</span><br><span class="line">        <span class="attr">outputModule</span>: <span class="literal">true</span> <span class="comment">// 启用ESM输出</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">optimization</span>: &#123;</span><br><span class="line">        <span class="attr">minimize</span>: <span class="literal">false</span> <span class="comment">// 开发环境不压缩</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// CJS 配置</span></span><br><span class="line"><span class="keyword">const</span> cjsConfig = &#123;</span><br><span class="line">    ...commonConfig,</span><br><span class="line">    <span class="attr">output</span>: &#123;</span><br><span class="line">        <span class="attr">path</span>: path.<span class="title function_">resolve</span>(__dirname, <span class="string">&#x27;dist&#x27;</span>),</span><br><span class="line">        <span class="attr">filename</span>: <span class="string">&#x27;string-utils.cjs.js&#x27;</span>,</span><br><span class="line">        <span class="attr">library</span>: &#123;</span><br><span class="line">            <span class="attr">type</span>: <span class="string">&#x27;commonjs2&#x27;</span> <span class="comment">// 输出CJS格式</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">target</span>: <span class="string">&#x27;node&#x27;</span>, <span class="comment">// 针对Node.js环境</span></span><br><span class="line">    <span class="attr">optimization</span>: &#123;</span><br><span class="line">        <span class="attr">minimize</span>: <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// UMD 配置（开发环境）</span></span><br><span class="line"><span class="keyword">const</span> umdDevConfig = &#123;</span><br><span class="line">    ...commonConfig,</span><br><span class="line">    <span class="attr">output</span>: &#123;</span><br><span class="line">        <span class="attr">path</span>: path.<span class="title function_">resolve</span>(__dirname, <span class="string">&#x27;dist&#x27;</span>),</span><br><span class="line">        <span class="attr">filename</span>: <span class="string">&#x27;string-utils.umd.js&#x27;</span>,</span><br><span class="line">        <span class="attr">library</span>: &#123;</span><br><span class="line">            <span class="attr">name</span>: <span class="string">&#x27;StringUtils&#x27;</span>, <span class="comment">// 全局变量名</span></span><br><span class="line">            <span class="attr">type</span>: <span class="string">&#x27;umd&#x27;</span> <span class="comment">// 输出UMD格式</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">globalObject</span>: <span class="string">&#x27;this&#x27;</span> <span class="comment">// 兼容浏览器和Node.js</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">optimization</span>: &#123;</span><br><span class="line">        <span class="attr">minimize</span>: <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = [esmConfig, cjsConfig, umdDevConfig, umdProdConfig];</span><br></pre></td></tr></table></figure></li>
 </ul>
-<p>如何确定包管理工具的版本号？</p>
-<ul>
-<li>engines字段</li>
-</ul>
-<h2 id="CI-CD"><a href="#CI-CD" class="headerlink" title="CI&#x2F;CD"></a>CI&#x2F;CD</h2><h3 id="npm-scripts"><a href="#npm-scripts" class="headerlink" title="npm scripts"></a>npm scripts</h3><h3 id="package-json"><a href="#package-json" class="headerlink" title="package.json"></a>package.json</h3><h4 id="peerDependencies"><a href="#peerDependencies" class="headerlink" title="peerDependencies"></a>peerDependencies</h4><ul>
-<li>项目安装的某个依赖存在peerDependencies，项目又没有声明这个依赖，那项目会自动安装吗，会autoinstall</li>
-</ul>
-<h3 id="github-action"><a href="#github-action" class="headerlink" title="github action"></a>github action</h3><h3 id="deploy"><a href="#deploy" class="headerlink" title="deploy"></a>deploy</h3>]]></content>
+]]></content>
       <categories>
-        <category>chore</category>
+        <category>前端工程化</category>
       </categories>
       <tags>
         <tag>工程化</tag>
@@ -2259,6 +2317,52 @@ webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后�
         <category>chore</category>
       </categories>
       <tags>
+        <tag>前端</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>加密货币的本质</title>
+    <url>/2024/11/04/%E5%8A%A0%E5%AF%86%E8%B4%A7%E5%B8%81%E7%9A%84%E6%9C%AC%E8%B4%A8/</url>
+    <content><![CDATA[<h2 id="钱的本质"><a href="#钱的本质" class="headerlink" title="钱的本质"></a>钱的本质</h2><p>共识、可信性</p>
+<h3 id="比特币的可信性"><a href="#比特币的可信性" class="headerlink" title="比特币的可信性"></a>比特币的可信性</h3><p>比特币要解决的核心问题，就是创造一种可信的数字凭证。由于这种凭证可信，所以能够当做货币。<br>比特币的技术基础是加密学，因为只有加密学才能保证它的可信性。一旦加密被破解，它就没法当作货币了。这也是这一类数字凭证被称为”加密货币”的原因。<br>技术人员对比特币感兴趣，还有一个重要原因。任何需要可靠的数字凭证的场合，也许都可以用到这种技术。</p>
+]]></content>
+      <categories>
+        <category>Web3</category>
+      </categories>
+      <tags>
+        <tag>Web3</tag>
+        <tag>比特币</tag>
+        <tag>加密货币</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>包管理器</title>
+    <url>/2025/05/27/%E5%8C%85%E7%AE%A1%E7%90%86%E5%99%A8/</url>
+    <content><![CDATA[<h2 id="包管理器"><a href="#包管理器" class="headerlink" title="包管理器"></a>包管理器</h2><h3 id="Npm-Yarn"><a href="#Npm-Yarn" class="headerlink" title="Npm&#x2F;Yarn"></a>Npm&#x2F;Yarn</h3><h4 id="Npm发包"><a href="#Npm发包" class="headerlink" title="Npm发包"></a>Npm发包</h4><h5 id="files"><a href="#files" class="headerlink" title="files"></a>files</h5><p>指定哪些文件会被打包发布（后面详细描述）。</p>
+<h5 id="main、browser、exports、module"><a href="#main、browser、exports、module" class="headerlink" title="main、browser、exports、module"></a>main、browser、exports、module</h5><p>这四个字段都是用来定义包的入口，<code>npm</code> 只规定了 <code>main</code> 和 <code>browser</code> 这两个字段，<code>exports</code> 是 <code>nodejs</code> 的规范，<code>module</code> 一般被构建工具所支持。</p>
+<h5 id="main"><a href="#main" class="headerlink" title="main"></a>main</h5><p><code>main</code> 规定了包的主要入口点，默认值为 <code>index.js</code>。</p>
+<p>如果你的包名为 <code>foo</code> 可以通过 <code>require(&quot;foo&quot;)</code> 引入对应模块导出的内容，所以这应该是个 CommonJS 模块，除非你设置了 <code>&quot;type&quot;: &quot;module&quot;</code>。</p>
+<h3 id="Pnpm"><a href="#Pnpm" class="headerlink" title="Pnpm"></a>Pnpm</h3><ul>
+<li>省空间</li>
+<li>解决幽灵依赖的问题</li>
+</ul>
+<p>如何确定一个项目的包管理工具？</p>
+<ul>
+<li>lock文件、package.json下packageManager字段来判断</li>
+</ul>
+<p>如何确定包管理工具的版本号？</p>
+<ul>
+<li>engines字段</li>
+</ul>
+<h2 id="CI-CD"><a href="#CI-CD" class="headerlink" title="CI&#x2F;CD"></a>CI&#x2F;CD</h2><h3 id="npm-scripts"><a href="#npm-scripts" class="headerlink" title="npm scripts"></a>npm scripts</h3><h3 id="package-json"><a href="#package-json" class="headerlink" title="package.json"></a>package.json</h3><h4 id="peerDependencies"><a href="#peerDependencies" class="headerlink" title="peerDependencies"></a>peerDependencies</h4><ul>
+<li>项目安装的某个依赖存在peerDependencies，项目又没有声明这个依赖，那项目会自动安装吗，会autoinstall</li>
+</ul>
+<h3 id="github-action"><a href="#github-action" class="headerlink" title="github action"></a>github action</h3><h3 id="deploy"><a href="#deploy" class="headerlink" title="deploy"></a>deploy</h3>]]></content>
+      <categories>
+        <category>前端工程化</category>
+      </categories>
+      <tags>
+        <tag>工程化</tag>
         <tag>前端</tag>
       </tags>
   </entry>
@@ -2309,37 +2413,6 @@ webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后�
       </categories>
       <tags>
         <tag>前端安全</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>序 / Intro</title>
-    <url>/2024/09/30/%E5%BA%8F%E8%A8%80/</url>
-    <content><![CDATA[<blockquote class="blockquote-center">
-    <p><b>循着无私与弃绝之念走在自我修行的道路上</b></p>
-    <!-- <p>[英]威廉·萨默塞特·毛姆 《刀锋》</p> -->
-</blockquote>
-
-<!-- 为什么要写博客？
-> http://nathanmarz.com/blog/you-should-blog-even-if-you-have-no-readers.html
-- 1、锻炼表达能力；
-- 2、积累知识点；
-- 3、帮助自己快速找回曾经熟悉的内容；
-- 4、逼迫自己思考一些问题，将知识从点变成线或者网；
-- 5、增强自己在圈子内的影响力。 -->]]></content>
-  </entry>
-  <entry>
-    <title>加密货币的本质</title>
-    <url>/2024/11/04/%E5%8A%A0%E5%AF%86%E8%B4%A7%E5%B8%81%E7%9A%84%E6%9C%AC%E8%B4%A8/</url>
-    <content><![CDATA[<h2 id="钱的本质"><a href="#钱的本质" class="headerlink" title="钱的本质"></a>钱的本质</h2><p>共识、可信性</p>
-<h3 id="比特币的可信性"><a href="#比特币的可信性" class="headerlink" title="比特币的可信性"></a>比特币的可信性</h3><p>比特币要解决的核心问题，就是创造一种可信的数字凭证。由于这种凭证可信，所以能够当做货币。<br>比特币的技术基础是加密学，因为只有加密学才能保证它的可信性。一旦加密被破解，它就没法当作货币了。这也是这一类数字凭证被称为”加密货币”的原因。<br>技术人员对比特币感兴趣，还有一个重要原因。任何需要可靠的数字凭证的场合，也许都可以用到这种技术。</p>
-]]></content>
-      <categories>
-        <category>Web3</category>
-      </categories>
-      <tags>
-        <tag>Web3</tag>
-        <tag>比特币</tag>
-        <tag>加密货币</tag>
       </tags>
   </entry>
   <entry>
@@ -2454,6 +2527,22 @@ webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后�
       <tags>
         <tag>CSS</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>序 / Intro</title>
+    <url>/2024/09/30/%E5%BA%8F%E8%A8%80/</url>
+    <content><![CDATA[<blockquote class="blockquote-center">
+    <p><b>循着无私与弃绝之念走在自我修行的道路上</b></p>
+    <!-- <p>[英]威廉·萨默塞特·毛姆 《刀锋》</p> -->
+</blockquote>
+
+<!-- 为什么要写博客？
+> http://nathanmarz.com/blog/you-should-blog-even-if-you-have-no-readers.html
+- 1、锻炼表达能力；
+- 2、积累知识点；
+- 3、帮助自己快速找回曾经熟悉的内容；
+- 4、逼迫自己思考一些问题，将知识从点变成线或者网；
+- 5、增强自己在圈子内的影响力。 -->]]></content>
   </entry>
   <entry>
     <title>微信小程序</title>
