@@ -281,6 +281,42 @@
       </tags>
   </entry>
   <entry>
+    <title>Hexo + Next + GitHub Page搭建个人博客</title>
+    <url>/2024/09/21/Hexo%20+%20Next%20+%20GitHub%20Page%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
+    <content><![CDATA[<h3 id="Hexo介绍"><a href="#Hexo介绍" class="headerlink" title="Hexo介绍"></a>Hexo介绍</h3><p>Hexo是一款基于Node.js的开源静态博客框架，用于快速、简单且高效地搭建静态博客网站。本质上是一个静态网站生成器，新增文章只需要编辑md文件，通过运行命令再生成像html的静态文件。</p>
+<h3 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">全局安装hexo脚手架</span></span><br><span class="line">npm install -g hexo-cli</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建一blog项目</span></span><br><span class="line">hexo init blog</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">进入项目</span></span><br><span class="line">cd blog</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">安装依赖包</span></span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
+
+<h3 id="其他操作"><a href="#其他操作" class="headerlink" title="其他操作"></a>其他操作</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">右键 Git Bush，用户项目自动化部署</span></span><br><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+
+<h3 id="项目预览"><a href="#项目预览" class="headerlink" title="项目预览"></a>项目预览</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">清理旧的静态文件</span></span><br><span class="line">hexo clean</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">生成静态文件</span></span><br><span class="line">hexo g</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">运行预览项目</span></span><br><span class="line">hexo s</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+
+<h3 id="Hexo配置文件详解（-config-yml）"><a href="#Hexo配置文件详解（-config-yml）" class="headerlink" title="Hexo配置文件详解（_config.yml）"></a>Hexo配置文件详解（_config.yml）</h3><h3 id="Hexo插件"><a href="#Hexo插件" class="headerlink" title="Hexo插件"></a>Hexo插件</h3><h4 id="文章排序、显隐插件"><a href="#文章排序、显隐插件" class="headerlink" title="文章排序、显隐插件"></a>文章排序、显隐插件</h4><p>插件：<strong>hexo-generator-index-custom</strong><br>详细见：<a href="https://github.com/im0o/hexo-generator-index-custom">https://github.com/im0o/hexo-generator-index-custom</a></p>
+<h4 id="搜索插件"><a href="#搜索插件" class="headerlink" title="搜索插件"></a>搜索插件</h4><h3 id="Next主题样式"><a href="#Next主题样式" class="headerlink" title="Next主题样式"></a>Next主题样式</h3><blockquote>
+<p>官方文档：<a href="https://theme-next.js.org/docs/getting-started/configuration.html">https://theme-next.js.org/docs/getting-started/configuration.html</a></p>
+</blockquote>
+<h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git clone https://github.com/next-theme/theme-next-docs</span><br><span class="line">cd theme-next-docs</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
+<h4 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h4><ol>
+<li>Hexo版本&gt;&#x3D;5.0</li>
+<li>在Hexo项目根目录下创建Next配置文件，命名为_config.next.yml</li>
+<li>首次创建Next配置文件时，可以直接复制theme-next-docs目录下的next默认配置文化<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Installed through npm</span></span><br><span class="line">cp node_modules/hexo-theme-next/_config.yml _config.next.yml</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Installed through Git</span></span><br><span class="line">cp themes/next/_config.yml _config.next.yml</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h4 id="站点中的icon替换"><a href="#站点中的icon替换" class="headerlink" title="站点中的icon替换"></a>站点中的icon替换</h4><blockquote>
+<p>Next默认引了fontawsome样式，大部分直接替换即可 <a href="https://fontawesome.dashgame.com/">https://fontawesome.dashgame.com/</a></p>
+</blockquote>
+<h3 id="站点托管"><a href="#站点托管" class="headerlink" title="站点托管"></a>站点托管</h3><h4 id="腾讯云静态资源托管"><a href="#腾讯云静态资源托管" class="headerlink" title="腾讯云静态资源托管"></a>腾讯云静态资源托管</h4>]]></content>
+      <categories>
+        <category>Chore</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>Hexo</tag>
+        <tag>Github</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Hooks</title>
     <url>/2021/10/12/Hooks/</url>
     <content><![CDATA[<h3 id="hooks的作用"><a href="#hooks的作用" class="headerlink" title="hooks的作用"></a>hooks的作用</h3><p><strong>钩子（hook）就是 React 函数组件的副效应解决方案，用来为函数组件引入副效应。</strong> 函数组件的主体只应该用来返回组件的 HTML 代码，所有的其他操作（副效应）都必须通过钩子引入。</p>
@@ -408,42 +444,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Hexo + Next + GitHub Page搭建个人博客</title>
-    <url>/2024/09/21/Hexo%20+%20Next%20+%20GitHub%20Page%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
-    <content><![CDATA[<h3 id="Hexo介绍"><a href="#Hexo介绍" class="headerlink" title="Hexo介绍"></a>Hexo介绍</h3><p>Hexo是一款基于Node.js的开源静态博客框架，用于快速、简单且高效地搭建静态博客网站。本质上是一个静态网站生成器，新增文章只需要编辑md文件，通过运行命令再生成像html的静态文件。</p>
-<h3 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">全局安装hexo脚手架</span></span><br><span class="line">npm install -g hexo-cli</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建一blog项目</span></span><br><span class="line">hexo init blog</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">进入项目</span></span><br><span class="line">cd blog</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">安装依赖包</span></span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
-
-<h3 id="其他操作"><a href="#其他操作" class="headerlink" title="其他操作"></a>其他操作</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">右键 Git Bush，用户项目自动化部署</span></span><br><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
-
-<h3 id="项目预览"><a href="#项目预览" class="headerlink" title="项目预览"></a>项目预览</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">清理旧的静态文件</span></span><br><span class="line">hexo clean</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">生成静态文件</span></span><br><span class="line">hexo g</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">运行预览项目</span></span><br><span class="line">hexo s</span><br></pre></td></tr></table></figure>
-
-<span id="more"></span>
-
-
-<h3 id="Hexo配置文件详解（-config-yml）"><a href="#Hexo配置文件详解（-config-yml）" class="headerlink" title="Hexo配置文件详解（_config.yml）"></a>Hexo配置文件详解（_config.yml）</h3><h3 id="Hexo插件"><a href="#Hexo插件" class="headerlink" title="Hexo插件"></a>Hexo插件</h3><h4 id="文章排序、显隐插件"><a href="#文章排序、显隐插件" class="headerlink" title="文章排序、显隐插件"></a>文章排序、显隐插件</h4><p>插件：<strong>hexo-generator-index-custom</strong><br>详细见：<a href="https://github.com/im0o/hexo-generator-index-custom">https://github.com/im0o/hexo-generator-index-custom</a></p>
-<h4 id="搜索插件"><a href="#搜索插件" class="headerlink" title="搜索插件"></a>搜索插件</h4><h3 id="Next主题样式"><a href="#Next主题样式" class="headerlink" title="Next主题样式"></a>Next主题样式</h3><blockquote>
-<p>官方文档：<a href="https://theme-next.js.org/docs/getting-started/configuration.html">https://theme-next.js.org/docs/getting-started/configuration.html</a></p>
-</blockquote>
-<h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git clone https://github.com/next-theme/theme-next-docs</span><br><span class="line">cd theme-next-docs</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
-<h4 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h4><ol>
-<li>Hexo版本&gt;&#x3D;5.0</li>
-<li>在Hexo项目根目录下创建Next配置文件，命名为_config.next.yml</li>
-<li>首次创建Next配置文件时，可以直接复制theme-next-docs目录下的next默认配置文化<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Installed through npm</span></span><br><span class="line">cp node_modules/hexo-theme-next/_config.yml _config.next.yml</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Installed through Git</span></span><br><span class="line">cp themes/next/_config.yml _config.next.yml</span><br></pre></td></tr></table></figure></li>
-</ol>
-<h4 id="站点中的icon替换"><a href="#站点中的icon替换" class="headerlink" title="站点中的icon替换"></a>站点中的icon替换</h4><blockquote>
-<p>Next默认引了fontawsome样式，大部分直接替换即可 <a href="https://fontawesome.dashgame.com/">https://fontawesome.dashgame.com/</a></p>
-</blockquote>
-<h3 id="站点托管"><a href="#站点托管" class="headerlink" title="站点托管"></a>站点托管</h3><h4 id="腾讯云静态资源托管"><a href="#腾讯云静态资源托管" class="headerlink" title="腾讯云静态资源托管"></a>腾讯云静态资源托管</h4>]]></content>
-      <categories>
-        <category>Chore</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-        <tag>Hexo</tag>
-        <tag>Github</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Https</title>
     <url>/2021/09/13/Https/</url>
     <content><![CDATA[<h3 id="为什么需要加密？"><a href="#为什么需要加密？" class="headerlink" title="为什么需要加密？"></a><strong>为什么需要加密？</strong></h3><p>因为http的内容是明文传输的，明文数据会经过中间代理服务器、路由器、wifi热点、通信服务运营商等多个物理节点，如果信息在传输过程中被劫持，传输的内容就完全暴露了。劫持者还可以篡改传输的信息且不被双方察觉，这就是“中间人攻击”。</p>
@@ -523,18 +523,6 @@
       </tags>
   </entry>
   <entry>
-    <title>IPad配置开发环境</title>
-    <url>/2024/11/12/IPad%E9%85%8D%E7%BD%AE%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>Chore</category>
-      </categories>
-      <tags>
-        <tag>编程环境</tag>
-        <tag>IPad</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>JavaScript API</title>
     <url>/2024/12/30/JS%20API/</url>
     <content><![CDATA[<h2 id="InterSectionObserver"><a href="#InterSectionObserver" class="headerlink" title="InterSectionObserver"></a>InterSectionObserver</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 创建 IntersectionObserver 实例</span></span><br><span class="line"><span class="keyword">const</span> observer = <span class="keyword">new</span> <span class="title class_">IntersectionObserver</span>(<span class="function">(<span class="params">entries</span>) =&gt;</span> &#123;</span><br><span class="line">  entries.<span class="title function_">forEach</span>(<span class="function">(<span class="params">entry</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (entry.<span class="property">isIntersecting</span>) &#123;</span><br><span class="line">      <span class="comment">// 目标元素进入视口时的操作</span></span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`<span class="subst">$&#123;entry.target.id&#125;</span> 进入视口`</span>);</span><br><span class="line">      <span class="comment">// 例如在这里可以加载图片或触发其他动画效果</span></span><br><span class="line">      entry.<span class="property">target</span>.<span class="property">src</span> = <span class="string">&#x27;your_image.jpg&#x27;</span>;</span><br><span class="line">      <span class="comment">// 停止观察该元素（可选）</span></span><br><span class="line">      observer.<span class="title function_">unobserve</span>(entry.<span class="property">target</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 选择要观察的目标元素</span></span><br><span class="line"><span class="keyword">const</span> targetElement = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;your_element_id&#x27;</span>);</span><br><span class="line"><span class="comment">// 开始观察目标元素</span></span><br><span class="line">observer.<span class="title function_">observe</span>(targetElement);</span><br></pre></td></tr></table></figure>
@@ -550,6 +538,18 @@
       <tags>
         <tag>API</tag>
         <tag>工程化</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>IPad配置开发环境</title>
+    <url>/2024/11/12/IPad%E9%85%8D%E7%BD%AE%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>Chore</category>
+      </categories>
+      <tags>
+        <tag>编程环境</tag>
+        <tag>IPad</tag>
       </tags>
   </entry>
   <entry>
@@ -686,6 +686,83 @@
       </tags>
   </entry>
   <entry>
+    <title>JavaSrcipt知识点</title>
+    <url>/2021/02/17/Javascript%E7%9F%A5%E8%AF%86%E7%82%B9/</url>
+    <content><![CDATA[<h4 id="1-script标签中async和defer的区别"><a href="#1-script标签中async和defer的区别" class="headerlink" title="1. script标签中async和defer的区别"></a>1. script标签中async和defer的区别</h4><p><img src="/../assets/Snipaste_2021-12-13_03-23-58.png" alt="image-20211025190555184"></p>
+<ul>
+<li>普通script标签：下载和执行都会阻塞Dom渲染</li>
+<li>defer：立即进行异步下载，等到HTML完全解析完后开始执行，有多个defer的标签时，会按照顺序下载执行</li>
+<li>async：立即进行异步下载，下载完后会立即执行同时阻塞Dom渲染，因为是下载完立即执行，不能保证多个加载时的先后顺序。</li>
+</ul>
+<span id="more"></span>
+]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Jira项目</title>
+    <url>/2022/03/02/Jira%E9%A1%B9%E7%9B%AE/</url>
+    <content><![CDATA[<h4 id="代码自动格式化工具：prettier"><a href="#代码自动格式化工具：prettier" class="headerlink" title="代码自动格式化工具：prettier"></a>代码自动格式化工具：prettier</h4><p>配置过程：<a href="https://prettier.io/docs/en/precommit.html">https://prettier.io/docs/en/precommit.html</a></p>
+<p><code>yarn add --dev --exact prettier</code></p>
+<p>新建<code>.prettierrc.json，.prettierignore</code>文件</p>
+<p>设置git commit预提交钩子</p>
+<p><code>npx mrm@2 lint-staged </code></p>
+<h4 id="规范git-commit工具：commitlint"><a href="#规范git-commit工具：commitlint" class="headerlink" title="规范git commit工具：commitlint"></a>规范git commit工具：commitlint</h4><p>配置过程：<a href="https://github.com/conventional-changelog/commitlint">https://github.com/conventional-changelog/commitlint</a></p>
+<p><code>yarn add --save-dev @commitlint/config-conventional @commitlint/cli</code></p>
+<p>新建 commitlint.config.js文件，引入规则module.exports &#x3D; {extends: [‘@commitlint&#x2F;config-conventional’]}</p>
+<span id="more"></span>
+
+<h4 id="常见MOCK方案"><a href="#常见MOCK方案" class="headerlink" title="常见MOCK方案"></a>常见MOCK方案</h4><h5 id="1-代码侵入（直接在代码中写死Mock数据，或请求本地的JSON文件"><a href="#1-代码侵入（直接在代码中写死Mock数据，或请求本地的JSON文件" class="headerlink" title="1. 代码侵入（直接在代码中写死Mock数据，或请求本地的JSON文件"></a>1. 代码侵入（直接在代码中写死Mock数据，或请求本地的JSON文件</h5><p>​	优点：无</p>
+<p>​	缺点：与真实server环境的切换比较麻烦（需要修改请求地址），一切需要侵入代码切换环境的行为都是不好的</p>
+<h5 id="2-请求拦截"><a href="#2-请求拦截" class="headerlink" title="2. 请求拦截"></a>2. 请求拦截</h5><p>​	代表：<a href="http://mockjs.com/">Mock.js</a></p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="title class_">Mock</span>.<span class="title function_">mock</span>(<span class="regexp">/\\\\/</span>api\\\\/visitor\\\\/list/, <span class="string">&#x27;get&#x27;</span>, &#123;</span><br><span class="line">  <span class="attr">code</span>: <span class="number">2000</span>,</span><br><span class="line">  <span class="attr">msg</span>: <span class="string">&#x27;ok&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;data|10&#x27;</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="string">&#x27;id|+1&#x27;</span>: <span class="number">6</span>,</span><br><span class="line">      <span class="string">&#x27;name&#x27;</span>: <span class="string">&#x27;@csentence(5)&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;tag&#x27;</span>: <span class="string">&#x27;@integer(6, 9)-@integer(10, 14)岁 @cword(&quot;零有&quot;, 1)基础&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;lesson_image&#x27;</span>: <span class="string">&quot;&lt;https://images.pexels.com/3737094/pexels-photo-3737094.jpeg&gt;&quot;</span>,</span><br><span class="line">      <span class="string">&#x27;lesson_package&#x27;</span>: <span class="string">&#x27;L1基础指令课&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;done&#x27;</span>: <span class="string">&#x27;@integer(10000, 99999)&#x27;</span>,</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>优点：</p>
+<ol>
+<li>与前端代码分离</li>
+<li>可生成随机数据</li>
+</ol>
+<p>缺点：</p>
+<ol>
+<li>数据都是动态生成的假数据，无法真实模拟增删改查的情况</li>
+<li>只支持ajax，不支持fetch（本质上是重写了ajax方法，两者的差别见：<a href="https://zhuanlan.zhihu.com/p/24594294">AJAX 之 XHR, Fetch 的对比</a>）</li>
+</ol>
+<h5 id="3-接口管理工具"><a href="#3-接口管理工具" class="headerlink" title="3. 接口管理工具"></a>3. 接口管理工具</h5><p>代表：rap，swagger，moco，yapi</p>
+<p>优点：</p>
+<p>​	1.配置功能强大，接口管理与Mock一体，后端修改接口Mock也跟着更改，可靠</p>
+<p>缺点：</p>
+<p>​	1.配置复杂，依赖后端</p>
+<p>​	2.一般会作为大团队的基础建设而存在</p>
+<h5 id="4-本地node服务器"><a href="#4-本地node服务器" class="headerlink" title="4. 本地node服务器"></a>4. 本地node服务器</h5><p>代表：<a href="https://github.com/typicode/json-server">json-server</a></p>
+<p>优点：</p>
+<p>​	1.配置简单，json-server甚至可以0代码30s启动一个REST API Server</p>
+<p>​	2.自定义程度高</p>
+<p>​	3.增删改查真是模拟</p>
+<h5 id="REST-API"><a href="#REST-API" class="headerlink" title="REST API"></a>REST API</h5><p>一句话总结：URI 代表 资源&#x2F;对象，METHOD 代表行为</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">GET /tickets // 列表</span><br><span class="line">GET /tickets/12 // 详情</span><br><span class="line">POST /tickets  // 增加</span><br><span class="line">PUT /tickets/12 // 替换</span><br><span class="line">PATCH /tickets/12 // 修改</span><br><span class="line">DELETE /tickets/12 // 删除</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="d-ts类型文件"><a href="#d-ts类型文件" class="headerlink" title="d.ts类型文件"></a>d.ts类型文件</h4><p>改造js文件为ts文件后，引入的qs库报错</p>
+<p><img src="/../assets/image-20211110193223804.png" alt="image-20211110193223804"></p>
+<p><code>yarn add @types/qs --save-dev   </code> 安装对应的ts补丁文件</p>
+<p><strong>d.ts文件的作用：说明书文件</strong></p>
+<p>JS 文件 + .d.ts 文件   &#x3D;&#x3D;&#x3D; ts 文件</p>
+<p>.d.ts 文件可以让 JS 文件继续维持自己JS文件的身份，而拥有TS的类型保护</p>
+<p>一般写业务代码不会用到，但是点击类型跳转一般会跳转到 .d.ts文件</p>
+]]></content>
+      <categories>
+        <category>Chore</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>JavaScript执行上下文</title>
     <url>/2021/02/17/Javascript%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87/</url>
     <content><![CDATA[<h4 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h4><h4 id="在看js垃圾回收时遇到相关问题，感觉自己对上下文对象理解的还是不够透彻（实在是太菜了）这就回来恶补。"><a href="#在看js垃圾回收时遇到相关问题，感觉自己对上下文对象理解的还是不够透彻（实在是太菜了）这就回来恶补。" class="headerlink" title="在看js垃圾回收时遇到相关问题，感觉自己对上下文对象理解的还是不够透彻（实在是太菜了）这就回来恶补。"></a>在看js垃圾回收时遇到相关问题，感觉自己对上下文对象理解的还是不够透彻（实在是太菜了）这就回来恶补。</h4><h4 id="执行上下文（Execution-Context）"><a href="#执行上下文（Execution-Context）" class="headerlink" title="执行上下文（Execution Context）"></a>执行上下文（Execution Context）</h4><ul>
@@ -806,83 +883,6 @@
       </tags>
   </entry>
   <entry>
-    <title>JavaSrcipt知识点</title>
-    <url>/2021/02/17/Javascript%E7%9F%A5%E8%AF%86%E7%82%B9/</url>
-    <content><![CDATA[<h4 id="1-script标签中async和defer的区别"><a href="#1-script标签中async和defer的区别" class="headerlink" title="1. script标签中async和defer的区别"></a>1. script标签中async和defer的区别</h4><p><img src="/../assets/Snipaste_2021-12-13_03-23-58.png" alt="image-20211025190555184"></p>
-<ul>
-<li>普通script标签：下载和执行都会阻塞Dom渲染</li>
-<li>defer：立即进行异步下载，等到HTML完全解析完后开始执行，有多个defer的标签时，会按照顺序下载执行</li>
-<li>async：立即进行异步下载，下载完后会立即执行同时阻塞Dom渲染，因为是下载完立即执行，不能保证多个加载时的先后顺序。</li>
-</ul>
-<span id="more"></span>
-]]></content>
-      <categories>
-        <category>JavaScript</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Jira项目</title>
-    <url>/2022/03/02/Jira%E9%A1%B9%E7%9B%AE/</url>
-    <content><![CDATA[<h4 id="代码自动格式化工具：prettier"><a href="#代码自动格式化工具：prettier" class="headerlink" title="代码自动格式化工具：prettier"></a>代码自动格式化工具：prettier</h4><p>配置过程：<a href="https://prettier.io/docs/en/precommit.html">https://prettier.io/docs/en/precommit.html</a></p>
-<p><code>yarn add --dev --exact prettier</code></p>
-<p>新建<code>.prettierrc.json，.prettierignore</code>文件</p>
-<p>设置git commit预提交钩子</p>
-<p><code>npx mrm@2 lint-staged </code></p>
-<h4 id="规范git-commit工具：commitlint"><a href="#规范git-commit工具：commitlint" class="headerlink" title="规范git commit工具：commitlint"></a>规范git commit工具：commitlint</h4><p>配置过程：<a href="https://github.com/conventional-changelog/commitlint">https://github.com/conventional-changelog/commitlint</a></p>
-<p><code>yarn add --save-dev @commitlint/config-conventional @commitlint/cli</code></p>
-<p>新建 commitlint.config.js文件，引入规则module.exports &#x3D; {extends: [‘@commitlint&#x2F;config-conventional’]}</p>
-<span id="more"></span>
-
-<h4 id="常见MOCK方案"><a href="#常见MOCK方案" class="headerlink" title="常见MOCK方案"></a>常见MOCK方案</h4><h5 id="1-代码侵入（直接在代码中写死Mock数据，或请求本地的JSON文件"><a href="#1-代码侵入（直接在代码中写死Mock数据，或请求本地的JSON文件" class="headerlink" title="1. 代码侵入（直接在代码中写死Mock数据，或请求本地的JSON文件"></a>1. 代码侵入（直接在代码中写死Mock数据，或请求本地的JSON文件</h5><p>​	优点：无</p>
-<p>​	缺点：与真实server环境的切换比较麻烦（需要修改请求地址），一切需要侵入代码切换环境的行为都是不好的</p>
-<h5 id="2-请求拦截"><a href="#2-请求拦截" class="headerlink" title="2. 请求拦截"></a>2. 请求拦截</h5><p>​	代表：<a href="http://mockjs.com/">Mock.js</a></p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="title class_">Mock</span>.<span class="title function_">mock</span>(<span class="regexp">/\\\\/</span>api\\\\/visitor\\\\/list/, <span class="string">&#x27;get&#x27;</span>, &#123;</span><br><span class="line">  <span class="attr">code</span>: <span class="number">2000</span>,</span><br><span class="line">  <span class="attr">msg</span>: <span class="string">&#x27;ok&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;data|10&#x27;</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="string">&#x27;id|+1&#x27;</span>: <span class="number">6</span>,</span><br><span class="line">      <span class="string">&#x27;name&#x27;</span>: <span class="string">&#x27;@csentence(5)&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;tag&#x27;</span>: <span class="string">&#x27;@integer(6, 9)-@integer(10, 14)岁 @cword(&quot;零有&quot;, 1)基础&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;lesson_image&#x27;</span>: <span class="string">&quot;&lt;https://images.pexels.com/3737094/pexels-photo-3737094.jpeg&gt;&quot;</span>,</span><br><span class="line">      <span class="string">&#x27;lesson_package&#x27;</span>: <span class="string">&#x27;L1基础指令课&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;done&#x27;</span>: <span class="string">&#x27;@integer(10000, 99999)&#x27;</span>,</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>优点：</p>
-<ol>
-<li>与前端代码分离</li>
-<li>可生成随机数据</li>
-</ol>
-<p>缺点：</p>
-<ol>
-<li>数据都是动态生成的假数据，无法真实模拟增删改查的情况</li>
-<li>只支持ajax，不支持fetch（本质上是重写了ajax方法，两者的差别见：<a href="https://zhuanlan.zhihu.com/p/24594294">AJAX 之 XHR, Fetch 的对比</a>）</li>
-</ol>
-<h5 id="3-接口管理工具"><a href="#3-接口管理工具" class="headerlink" title="3. 接口管理工具"></a>3. 接口管理工具</h5><p>代表：rap，swagger，moco，yapi</p>
-<p>优点：</p>
-<p>​	1.配置功能强大，接口管理与Mock一体，后端修改接口Mock也跟着更改，可靠</p>
-<p>缺点：</p>
-<p>​	1.配置复杂，依赖后端</p>
-<p>​	2.一般会作为大团队的基础建设而存在</p>
-<h5 id="4-本地node服务器"><a href="#4-本地node服务器" class="headerlink" title="4. 本地node服务器"></a>4. 本地node服务器</h5><p>代表：<a href="https://github.com/typicode/json-server">json-server</a></p>
-<p>优点：</p>
-<p>​	1.配置简单，json-server甚至可以0代码30s启动一个REST API Server</p>
-<p>​	2.自定义程度高</p>
-<p>​	3.增删改查真是模拟</p>
-<h5 id="REST-API"><a href="#REST-API" class="headerlink" title="REST API"></a>REST API</h5><p>一句话总结：URI 代表 资源&#x2F;对象，METHOD 代表行为</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">GET /tickets // 列表</span><br><span class="line">GET /tickets/12 // 详情</span><br><span class="line">POST /tickets  // 增加</span><br><span class="line">PUT /tickets/12 // 替换</span><br><span class="line">PATCH /tickets/12 // 修改</span><br><span class="line">DELETE /tickets/12 // 删除</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="d-ts类型文件"><a href="#d-ts类型文件" class="headerlink" title="d.ts类型文件"></a>d.ts类型文件</h4><p>改造js文件为ts文件后，引入的qs库报错</p>
-<p><img src="/../assets/image-20211110193223804.png" alt="image-20211110193223804"></p>
-<p><code>yarn add @types/qs --save-dev   </code> 安装对应的ts补丁文件</p>
-<p><strong>d.ts文件的作用：说明书文件</strong></p>
-<p>JS 文件 + .d.ts 文件   &#x3D;&#x3D;&#x3D; ts 文件</p>
-<p>.d.ts 文件可以让 JS 文件继续维持自己JS文件的身份，而拥有TS的类型保护</p>
-<p>一般写业务代码不会用到，但是点击类型跳转一般会跳转到 .d.ts文件</p>
-]]></content>
-      <categories>
-        <category>Chore</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Mini-React</title>
     <url>/2022/03/04/Mini-React/</url>
     <content><![CDATA[<h4 id="项目拆解："><a href="#项目拆解：" class="headerlink" title="项目拆解："></a>项目拆解：</h4><ol>
@@ -912,6 +912,103 @@
       <tags>
         <tag>JavaScript</tag>
         <tag>React</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Promise</title>
+    <url>/2021/09/03/Promise/</url>
+    <content><![CDATA[<h3 id="引言："><a href="#引言：" class="headerlink" title="引言："></a>引言：</h3><p>感觉promise的思想非常有意思，为了代码的可读性和可维护性提供了一种新的异步编程方法，接触了一段时间的工程代码也让我体会到代码可维护，可拓展的必要性。</p>
+<h3 id="为什么要用Promise？"><a href="#为什么要用Promise？" class="headerlink" title="为什么要用Promise？"></a>为什么要用Promise？</h3><p>对于异步操作，例如文件读取</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>)</span><br><span class="line"></span><br><span class="line">fs.<span class="title function_">readFile</span>(<span class="string">&#x27;./a.txt&#x27;</span>, <span class="string">&#x27;utf-8&#x27;</span>, <span class="keyword">function</span>(<span class="params">err, data</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (err) &#123;</span><br><span class="line">        <span class="keyword">throw</span> err;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(data);</span><br><span class="line">&#125;)</span><br><span class="line">fs.<span class="title function_">readFile</span>(<span class="string">&#x27;./b.txt&#x27;</span>, <span class="string">&#x27;utf-8&#x27;</span>, <span class="keyword">function</span>(<span class="params">err, data</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (err) &#123;</span><br><span class="line">        <span class="keyword">throw</span> err;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(data);</span><br><span class="line">&#125;)</span><br><span class="line">fs.<span class="title function_">readFile</span>(<span class="string">&#x27;./c.txt&#x27;</span>, <span class="string">&#x27;utf-8&#x27;</span>, <span class="keyword">function</span>(<span class="params">err, data</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (err) &#123;</span><br><span class="line">        <span class="keyword">throw</span> err;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(data);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+
+<p>输出结果：</p>
+<p><img src="/../assets/image-20210324010746141.png" alt="image-20210324010746141"></p>
+<p>由于读取文件为异步操作，输出的结果不确定。</p>
+<p>为了a -&gt; b -&gt; c依次读取文件：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">fs.<span class="title function_">readFile</span>(<span class="string">&#x27;./src/a.txt&#x27;</span>, <span class="string">&#x27;utf-8&#x27;</span>, <span class="keyword">function</span>(<span class="params">err, data</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (err) &#123;</span><br><span class="line">        <span class="keyword">throw</span> err;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(data);</span><br><span class="line">    fs.<span class="title function_">readFile</span>(<span class="string">&#x27;./src/b.txt&#x27;</span>, <span class="string">&#x27;utf-8&#x27;</span>, <span class="keyword">function</span>(<span class="params">err, data</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (err) &#123;</span><br><span class="line">            <span class="keyword">throw</span> err;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(data);</span><br><span class="line">        fs.<span class="title function_">readFile</span>(<span class="string">&#x27;./src/c.txt&#x27;</span>, <span class="string">&#x27;utf-8&#x27;</span>, <span class="keyword">function</span>(<span class="params">err, data</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (err) &#123;</span><br><span class="line">                <span class="keyword">throw</span> err;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">log</span>(data);</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>回调函数嵌套回调函数，导致了回调地狱，带来的问题也很明显，不便于维护，阅读，异常处理。</p>
+<p>使用promise：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>)</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">myReadFile</span>(<span class="params">url</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">        fs.<span class="title function_">readFile</span>(url, <span class="string">&#x27;utf-8&#x27;</span>, <span class="keyword">function</span>(<span class="params">err, data</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span> (err) &#123;</span><br><span class="line">                <span class="title function_">reject</span>(err);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="title function_">resolve</span>(data);</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">myReadFile</span>(<span class="string">&#x27;./a.txt&#x27;</span>)</span><br><span class="line">.<span class="title function_">then</span>(<span class="function"><span class="params">value</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(value);</span><br><span class="line">    <span class="keyword">return</span> <span class="title function_">myReadFile</span>(<span class="string">&#x27;./b.txt&#x27;</span>);</span><br><span class="line">&#125;)</span><br><span class="line">.<span class="title function_">then</span>(<span class="function"><span class="params">value</span>=&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(value);</span><br><span class="line">    <span class="keyword">return</span> <span class="title function_">myReadFile</span>(<span class="string">&#x27;./c.txt&#x27;</span>);</span><br><span class="line">&#125;)</span><br><span class="line">.<span class="title function_">then</span>(<span class="function"><span class="params">value</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(value);</span><br><span class="line">&#125;)</span><br><span class="line">.<span class="title function_">catch</span>(<span class="function"><span class="params">reason</span>=&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;reason&#x27;</span>, reason);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>由于异常穿透，异常只需要在最后捕获，代码的可读性和维护性也更高，解决了回调地狱的问题。</p>
+<h3 id="Promise的工作流程"><a href="#Promise的工作流程" class="headerlink" title="Promise的工作流程"></a>Promise的工作流程</h3><p><img src="/../assets/image-20210321164956018.png" alt="image-20210321164956018"></p>
+<h3 id="如何改变promise对象的状态？"><a href="#如何改变promise对象的状态？" class="headerlink" title="如何改变promise对象的状态？"></a>如何改变promise对象的状态？</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">  <span class="keyword">let</span> p = <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">//1. resolve 函数</span></span><br><span class="line">    <span class="comment">// resolve(&#x27;&#x27;); // pending   =&gt; fulfilled (resolved)</span></span><br><span class="line">    <span class="comment">//2. reject 函数</span></span><br><span class="line">    <span class="comment">// reject(&quot;&quot;);// pending  =&gt;  rejected </span></span><br><span class="line">    <span class="comment">//3. 抛出错误</span></span><br><span class="line">    <span class="comment">//throw &#x27;出问题了&#x27;;// pending  =&gt;  rejected</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Promise对象初始状态</li>
+</ul>
+<p><img src="/../assets/image-20210321172121084.png" alt="image-20210321172121084"></p>
+<ul>
+<li>Promise对象成功状态</li>
+</ul>
+<p><img src="/../assets/image-20210322004628047.png" alt="image-20210322004628047"></p>
+<ul>
+<li>Promise对象失败状态</li>
+</ul>
+<p><img src="/../assets/image-20210322004718603.png" alt="image-20210322004718603"></p>
+<h3 id="Promise-Api"><a href="#Promise-Api" class="headerlink" title="Promise Api"></a>Promise Api</h3><h4 id="Promise-prototype-then"><a href="#Promise-prototype-then" class="headerlink" title="Promise.prototype.then"></a>Promise.prototype.then</h4><figure class="highlight plaintext"><figcaption><span>方法返回一个 ```Promise```。它最多需要有两个参数：Promise 的成功和失败情况的回调函数。</span></figcaption><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">##### Promise.prototype.then()返回的新 promise 的结果状态由什么决定?</span><br><span class="line"></span><br><span class="line">​       **由 then()指定的回调函数执行的结果决定**</span><br><span class="line"></span><br><span class="line">1. 如果抛出异常, 新 promise 变为 rejected, *[[PromiseResult]]*为抛出的异常 </span><br><span class="line"></span><br><span class="line">2. 如果返回的是非 promise 的任意值, 或者没有返回值（相当于返回undefined），新 promise 变为 resolved, *[[PromiseResult]]*为返回的值 </span><br><span class="line"></span><br><span class="line">3. ***如果返回的是另一个新 promise, 此promise的状态成为新promise的状态，此 promise 的[[PromiseResult]]就会成为新 promise 的[[PromiseResult]]***</span><br><span class="line"></span><br><span class="line">```javascript</span><br><span class="line">let result = p.then(value =&gt; &#123;</span><br><span class="line">    // console.log(value);</span><br><span class="line">    //1. 抛出错误</span><br><span class="line">    // throw &#x27;出了问题&#x27;;</span><br><span class="line">    //2. 返回结果是非 Promise 类型的对象</span><br><span class="line">    // return 521;</span><br><span class="line">    //3. 返回结果是 Promise 对象</span><br><span class="line">    // return new Promise((resolve, reject) =&gt; &#123;</span><br><span class="line">    //     // resolve(&#x27;success&#x27;);</span><br><span class="line">    //     reject(&#x27;error&#x27;);</span><br><span class="line">    // &#125;);</span><br><span class="line">&#125;, reason =&gt; &#123;</span><br><span class="line">    console.warn(reason);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h5 id="then的链式调用"><a href="#then的链式调用" class="headerlink" title="then的链式调用"></a>then的链式调用</h5><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> p = <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="title function_">resolve</span>(<span class="string">&#x27;OK&#x27;</span>);</span><br><span class="line">    &#125;, <span class="number">1000</span>);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// 链式调用</span></span><br><span class="line">p.<span class="title function_">then</span>(<span class="function"><span class="params">value</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="title function_">resolve</span>(<span class="string">&quot;success&quot;</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;).<span class="title function_">then</span>(<span class="function"><span class="params">value</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(value);</span><br><span class="line">&#125;).<span class="title function_">then</span>(<span class="function"><span class="params">value</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(value);<span class="comment">//输出undefine，原因：上一次的then方法返回值为undefine，所以上一次返回一个参数为undefine，状态为resolve的promise对象</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="Promise-resolve"><a href="#Promise-resolve" class="headerlink" title="Promise.resolve"></a>Promise.resolve</h4><ul>
+<li>如果传入的参数为 非Promise类型的对象, 则返回的结果为成功promise对象</li>
+<li>如果传入的参数为 Promise 对象, 则参数的结果决定了 resolve 的结果</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> p1 = <span class="title class_">Promise</span>.<span class="title function_">resolve</span>(<span class="number">521</span>);</span><br><span class="line"><span class="keyword">let</span> p2 = <span class="title class_">Promise</span>.<span class="title function_">resolve</span>(<span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// resolve(&#x27;OK&#x27;);</span></span><br><span class="line">    <span class="title function_">reject</span>(<span class="string">&#x27;Error&#x27;</span>);</span><br><span class="line">&#125;));</span><br><span class="line"><span class="comment">// console.log(p2);</span></span><br><span class="line">p2.<span class="title function_">catch</span>(<span class="function"><span class="params">reason</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(reason);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="Promise-reject"><a href="#Promise-reject" class="headerlink" title="Promise.reject"></a>Promise.reject</h4><p>Promise.reject(reason)方法返回一个失败的promise对象（无论reason是什么）</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> p3 = <span class="title class_">Promise</span>.<span class="title function_">reject</span>(<span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="title function_">resolve</span>(<span class="string">&#x27;OK&#x27;</span>);</span><br><span class="line">&#125;));</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(p3);</span><br></pre></td></tr></table></figure>
+
+<p>输出：</p>
+<p><img src="/../assets/image-20210321171102762.png" alt="image-20210321171102762"></p>
+<h4 id="Promise-prototype-catch"><a href="#Promise-prototype-catch" class="headerlink" title="Promise.prototype.catch"></a>Promise.prototype.catch</h4><p><strong>catch()</strong> 方法返回一个Promise，只处理拒绝的情况。它的行为与调用<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise/then"><code>Promise.prototype.then(undefined, onRejected)</code></a>相同。</p>
+<h3 id="Promise关键问题"><a href="#Promise关键问题" class="headerlink" title="Promise关键问题"></a>Promise关键问题</h3><h4 id="Promise可以执行多个成功-失败的回调"><a href="#Promise可以执行多个成功-失败的回调" class="headerlink" title="Promise可以执行多个成功&#x2F;失败的回调"></a>Promise可以执行多个成功&#x2F;失败的回调</h4><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> p = <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="title function_">resolve</span>(<span class="string">&#x27;OK&#x27;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">///指定回调 - 1</span></span><br><span class="line">p.<span class="title function_">then</span>(<span class="function"><span class="params">value</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(value);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">//指定回调 - 2</span></span><br><span class="line">p.<span class="title function_">then</span>(<span class="function"><span class="params">value</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="title function_">alert</span>(value);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h4 id="异常穿透"><a href="#异常穿透" class="headerlink" title="异常穿透"></a>异常穿透</h4><ol>
+<li><p>当使用 promise 的 then 链式调用时, 可以在最后指定失败的回调。</p>
+</li>
+<li><p>前面任何操作出了异常, 都会传到最后失败的回调中处理</p>
+</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> p = <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="comment">//resolve(&#x27;OK&#x27;);</span></span><br><span class="line">        <span class="title function_">reject</span>(<span class="string">&#x27;Err&#x27;</span>);</span><br><span class="line">    &#125;, <span class="number">1000</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">p.<span class="title function_">then</span>(<span class="function"><span class="params">value</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// console.log(111);</span></span><br><span class="line">    <span class="keyword">throw</span> <span class="string">&#x27;失败啦!&#x27;</span>;</span><br><span class="line">&#125;).<span class="title function_">then</span>(<span class="function"><span class="params">value</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">222</span>);</span><br><span class="line">&#125;).<span class="title function_">then</span>(<span class="function"><span class="params">value</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">333</span>);</span><br><span class="line">&#125;).<span class="title function_">catch</span>(<span class="function"><span class="params">reason</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">warn</span>(reason); <span class="comment">// 如果前面then有设置失败的回调，则会在前面就被捕获</span></span><br><span class="line">&#125;).<span class="title function_">then</span>(<span class="function"><span class="params">value</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(value)</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;hyz&#x27;</span>)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// output:</span></span><br><span class="line"><span class="comment">// Err</span></span><br><span class="line"><span class="comment">// undefined</span></span><br><span class="line"><span class="comment">// hyz</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="如何中断Promise链？"><a href="#如何中断Promise链？" class="headerlink" title="如何中断Promise链？"></a>如何中断Promise链？</h4><p>添加一个pendding状态的promise</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">p.<span class="title function_">then</span>(<span class="function"><span class="params">value</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">111</span>);</span><br><span class="line">    <span class="comment">//有且只有一个方式</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">() =&gt;</span> &#123;&#125;);</span><br><span class="line">&#125;).<span class="title function_">then</span>(<span class="function"><span class="params">value</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">222</span>);</span><br><span class="line">&#125;).<span class="title function_">then</span>(<span class="function"><span class="params">value</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">333</span>);</span><br><span class="line">&#125;).<span class="title function_">catch</span>(<span class="function"><span class="params">reason</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">warn</span>(reason);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="Async与Await"><a href="#Async与Await" class="headerlink" title="Async与Await"></a>Async与Await</h3><p>Async&#x2F;Await 是js异步编程的终极解决方案</p>
+<h4 id="Async函数"><a href="#Async函数" class="headerlink" title="Async函数"></a>Async函数</h4><p>返回值规则与Promise.prototype.then()相同</p>
+<ul>
+<li>函数的返回值为 promise 对象</li>
+<li>promise 对象的结果由 async 函数执行的返回值决定</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">main</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="comment">//1. 如果返回值是一个非Promise类型的数据</span></span><br><span class="line">    <span class="comment">// return 521;</span></span><br><span class="line">    <span class="comment">//2. 如果返回的是一个Promise对象</span></span><br><span class="line">    <span class="comment">// return new Promise((resolve, reject) =&gt; &#123;</span></span><br><span class="line">    <span class="comment">//     // resolve(&#x27;OK&#x27;);</span></span><br><span class="line">    <span class="comment">//     reject(&#x27;Error&#x27;);</span></span><br><span class="line">    <span class="comment">// &#125;);</span></span><br><span class="line">    <span class="comment">//3. 抛出异常</span></span><br><span class="line">    <span class="keyword">throw</span> <span class="string">&quot;Oh NO&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Await表达式"><a href="#Await表达式" class="headerlink" title="Await表达式"></a>Await表达式</h4><ul>
+<li>await 右侧的表达式一般为 promise 对象, 但也可以是其它的值</li>
+<li>如果表达式是 promise 对象, await 返回的是 promise 成功的值([[PromiseResult]])</li>
+<li>如果表达式是其它值, 直接将此值作为 await 的返回值</li>
+</ul>
+<h4 id="mentoon："><a href="#mentoon：" class="headerlink" title="mentoon："></a>mentoon：</h4><ol>
+<li>await 必须写在 async 函数中, 但 async 函数中可以没有 await</li>
+<li>如果 await 的 promise 失败了, 就会抛出异常, 需要通过 try…catch 捕获处理</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">main</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="keyword">let</span> p = <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="comment">// resolve(&#x27;OK&#x27;);</span></span><br><span class="line">        <span class="title function_">reject</span>(<span class="string">&#x27;Error&#x27;</span>);</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="comment">//1. 右侧为promise的情况</span></span><br><span class="line">    <span class="comment">// let res = await p;</span></span><br><span class="line">    <span class="comment">//2. 右侧为其他类型的数据</span></span><br><span class="line">    <span class="comment">// let res2 = await 20;</span></span><br><span class="line">    <span class="comment">//3. 如果promise是失败的状态</span></span><br><span class="line">    <span class="keyword">try</span>&#123;</span><br><span class="line">        <span class="keyword">let</span> res3 = <span class="keyword">await</span> p;</span><br><span class="line">    &#125;<span class="keyword">catch</span>(e)&#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(e);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">main</span>();</span><br></pre></td></tr></table></figure>
+
+<h3 id="实践："><a href="#实践：" class="headerlink" title="实践："></a>实践：</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">fs.<span class="title function_">readFile</span>(<span class="string">&#x27;./resource/1.html&#x27;</span>, <span class="function">(<span class="params">err, data1</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span>(err) <span class="keyword">throw</span> err;</span><br><span class="line">    fs.<span class="title function_">readFile</span>(<span class="string">&#x27;./resource/2.html&#x27;</span>, <span class="function">(<span class="params">err, data2</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span>(err) <span class="keyword">throw</span> err;</span><br><span class="line">        fs.<span class="title function_">readFile</span>(<span class="string">&#x27;./resource/3.html&#x27;</span>, <span class="function">(<span class="params">err, data3</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">if</span>(err) <span class="keyword">throw</span> err;</span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">log</span>(data1 + data2 + data3);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">//async 与 await</span></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">main</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="keyword">try</span>&#123;</span><br><span class="line">        <span class="comment">//读取第一个文件的内容</span></span><br><span class="line">        <span class="keyword">let</span> data1 = <span class="keyword">await</span> <span class="title function_">mineReadFile</span>(<span class="string">&#x27;./resource/1x.html&#x27;</span>);</span><br><span class="line">        <span class="keyword">let</span> data2 = <span class="keyword">await</span> <span class="title function_">mineReadFile</span>(<span class="string">&#x27;./resource/2.html&#x27;</span>);</span><br><span class="line">        <span class="keyword">let</span> data3 = <span class="keyword">await</span> <span class="title function_">mineReadFile</span>(<span class="string">&#x27;./resource/3.html&#x27;</span>);</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(data1 + data2 + data3);</span><br><span class="line">    &#125;<span class="keyword">catch</span>(e)&#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(e.<span class="property">code</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="async-await-封装ajax"><a href="#async-await-封装ajax" class="headerlink" title="async await 封装ajax"></a>async await 封装ajax</h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">&quot;btn&quot;</span>&gt;</span>点击获取段子<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">        <span class="comment">//axios</span></span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">function</span> <span class="title function_">sendAJAX</span>(<span class="params">url</span>)&#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span></span><br><span class="line"><span class="language-javascript">                <span class="keyword">const</span> xhr = <span class="keyword">new</span> <span class="title class_">XMLHttpRequest</span>();</span></span><br><span class="line"><span class="language-javascript">                xhr.<span class="property">responseType</span> = <span class="string">&#x27;json&#x27;</span>;</span></span><br><span class="line"><span class="language-javascript">                xhr.<span class="title function_">open</span>(<span class="string">&quot;GET&quot;</span>, url);</span></span><br><span class="line"><span class="language-javascript">                xhr.<span class="title function_">send</span>();</span></span><br><span class="line"><span class="language-javascript">                <span class="comment">//处理结果</span></span></span><br><span class="line"><span class="language-javascript">                xhr.<span class="property">onreadystatechange</span> = <span class="keyword">function</span>(<span class="params"></span>)&#123;</span></span><br><span class="line"><span class="language-javascript">                    <span class="keyword">if</span>(xhr.<span class="property">readyState</span> === <span class="number">4</span>)&#123;</span></span><br><span class="line"><span class="language-javascript">                        <span class="comment">//判断成功</span></span></span><br><span class="line"><span class="language-javascript">                        <span class="keyword">if</span>(xhr.<span class="property">status</span> &gt;= <span class="number">200</span> &amp;&amp; xhr.<span class="property">status</span> &lt; <span class="number">300</span>)&#123;</span></span><br><span class="line"><span class="language-javascript">                            <span class="comment">//成功的结果</span></span></span><br><span class="line"><span class="language-javascript">                            <span class="title function_">resolve</span>(xhr.<span class="property">response</span>);</span></span><br><span class="line"><span class="language-javascript">                        &#125;<span class="keyword">else</span>&#123;</span></span><br><span class="line"><span class="language-javascript">                            <span class="title function_">reject</span>(xhr.<span class="property">status</span>);</span></span><br><span class="line"><span class="language-javascript">                        &#125;</span></span><br><span class="line"><span class="language-javascript">                    &#125;</span></span><br><span class="line"><span class="language-javascript">                &#125;</span></span><br><span class="line"><span class="language-javascript">            &#125;);</span></span><br><span class="line"><span class="language-javascript">        &#125;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">        <span class="comment">//段子接口地址 https://api.apiopen.top/getJoke</span></span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">let</span> btn = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;#btn&#x27;</span>);</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">        btn.<span class="title function_">addEventListener</span>(<span class="string">&#x27;click&#x27;</span>,<span class="keyword">async</span> <span class="keyword">function</span>(<span class="params"></span>)&#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="comment">//获取段子信息</span></span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">let</span> duanzi = <span class="keyword">await</span> <span class="title function_">sendAJAX</span>(<span class="string">&#x27;https://api.apiopen.top/getJoke&#x27;</span>);</span></span><br><span class="line"><span class="language-javascript">            <span class="variable language_">console</span>.<span class="title function_">log</span>(duanzi);</span></span><br><span class="line"><span class="language-javascript">        &#125;);</span></span><br><span class="line"><span class="language-javascript">    </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">async1</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;async1 start&#x27;</span>)</span><br><span class="line">    <span class="keyword">await</span> <span class="title function_">async2</span>()</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;async1 end&#x27;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">async2</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;async2&#x27;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;script start&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;setTimeout&#x27;</span>)</span><br><span class="line">&#125;, <span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="title function_">async1</span>();</span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="keyword">function</span> (<span class="params">resolve</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;promise1&#x27;</span>)</span><br><span class="line">    <span class="title function_">resolve</span>()</span><br><span class="line">&#125;).<span class="title function_">then</span>(<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;promise2&#x27;</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;script end&#x27;</span>)</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
       </tags>
   </entry>
   <entry>
@@ -1014,103 +1111,6 @@
       <tags>
         <tag>JavaScript</tag>
         <tag>Node</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Promise</title>
-    <url>/2021/09/03/Promise/</url>
-    <content><![CDATA[<h3 id="引言："><a href="#引言：" class="headerlink" title="引言："></a>引言：</h3><p>感觉promise的思想非常有意思，为了代码的可读性和可维护性提供了一种新的异步编程方法，接触了一段时间的工程代码也让我体会到代码可维护，可拓展的必要性。</p>
-<h3 id="为什么要用Promise？"><a href="#为什么要用Promise？" class="headerlink" title="为什么要用Promise？"></a>为什么要用Promise？</h3><p>对于异步操作，例如文件读取</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>)</span><br><span class="line"></span><br><span class="line">fs.<span class="title function_">readFile</span>(<span class="string">&#x27;./a.txt&#x27;</span>, <span class="string">&#x27;utf-8&#x27;</span>, <span class="keyword">function</span>(<span class="params">err, data</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (err) &#123;</span><br><span class="line">        <span class="keyword">throw</span> err;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(data);</span><br><span class="line">&#125;)</span><br><span class="line">fs.<span class="title function_">readFile</span>(<span class="string">&#x27;./b.txt&#x27;</span>, <span class="string">&#x27;utf-8&#x27;</span>, <span class="keyword">function</span>(<span class="params">err, data</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (err) &#123;</span><br><span class="line">        <span class="keyword">throw</span> err;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(data);</span><br><span class="line">&#125;)</span><br><span class="line">fs.<span class="title function_">readFile</span>(<span class="string">&#x27;./c.txt&#x27;</span>, <span class="string">&#x27;utf-8&#x27;</span>, <span class="keyword">function</span>(<span class="params">err, data</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (err) &#123;</span><br><span class="line">        <span class="keyword">throw</span> err;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(data);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<span id="more"></span>
-
-
-<p>输出结果：</p>
-<p><img src="/../assets/image-20210324010746141.png" alt="image-20210324010746141"></p>
-<p>由于读取文件为异步操作，输出的结果不确定。</p>
-<p>为了a -&gt; b -&gt; c依次读取文件：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">fs.<span class="title function_">readFile</span>(<span class="string">&#x27;./src/a.txt&#x27;</span>, <span class="string">&#x27;utf-8&#x27;</span>, <span class="keyword">function</span>(<span class="params">err, data</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (err) &#123;</span><br><span class="line">        <span class="keyword">throw</span> err;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(data);</span><br><span class="line">    fs.<span class="title function_">readFile</span>(<span class="string">&#x27;./src/b.txt&#x27;</span>, <span class="string">&#x27;utf-8&#x27;</span>, <span class="keyword">function</span>(<span class="params">err, data</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (err) &#123;</span><br><span class="line">            <span class="keyword">throw</span> err;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(data);</span><br><span class="line">        fs.<span class="title function_">readFile</span>(<span class="string">&#x27;./src/c.txt&#x27;</span>, <span class="string">&#x27;utf-8&#x27;</span>, <span class="keyword">function</span>(<span class="params">err, data</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (err) &#123;</span><br><span class="line">                <span class="keyword">throw</span> err;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">log</span>(data);</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>回调函数嵌套回调函数，导致了回调地狱，带来的问题也很明显，不便于维护，阅读，异常处理。</p>
-<p>使用promise：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>)</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">myReadFile</span>(<span class="params">url</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">        fs.<span class="title function_">readFile</span>(url, <span class="string">&#x27;utf-8&#x27;</span>, <span class="keyword">function</span>(<span class="params">err, data</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span> (err) &#123;</span><br><span class="line">                <span class="title function_">reject</span>(err);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="title function_">resolve</span>(data);</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">myReadFile</span>(<span class="string">&#x27;./a.txt&#x27;</span>)</span><br><span class="line">.<span class="title function_">then</span>(<span class="function"><span class="params">value</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(value);</span><br><span class="line">    <span class="keyword">return</span> <span class="title function_">myReadFile</span>(<span class="string">&#x27;./b.txt&#x27;</span>);</span><br><span class="line">&#125;)</span><br><span class="line">.<span class="title function_">then</span>(<span class="function"><span class="params">value</span>=&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(value);</span><br><span class="line">    <span class="keyword">return</span> <span class="title function_">myReadFile</span>(<span class="string">&#x27;./c.txt&#x27;</span>);</span><br><span class="line">&#125;)</span><br><span class="line">.<span class="title function_">then</span>(<span class="function"><span class="params">value</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(value);</span><br><span class="line">&#125;)</span><br><span class="line">.<span class="title function_">catch</span>(<span class="function"><span class="params">reason</span>=&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;reason&#x27;</span>, reason);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<p>由于异常穿透，异常只需要在最后捕获，代码的可读性和维护性也更高，解决了回调地狱的问题。</p>
-<h3 id="Promise的工作流程"><a href="#Promise的工作流程" class="headerlink" title="Promise的工作流程"></a>Promise的工作流程</h3><p><img src="/../assets/image-20210321164956018.png" alt="image-20210321164956018"></p>
-<h3 id="如何改变promise对象的状态？"><a href="#如何改变promise对象的状态？" class="headerlink" title="如何改变promise对象的状态？"></a>如何改变promise对象的状态？</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">  <span class="keyword">let</span> p = <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">//1. resolve 函数</span></span><br><span class="line">    <span class="comment">// resolve(&#x27;&#x27;); // pending   =&gt; fulfilled (resolved)</span></span><br><span class="line">    <span class="comment">//2. reject 函数</span></span><br><span class="line">    <span class="comment">// reject(&quot;&quot;);// pending  =&gt;  rejected </span></span><br><span class="line">    <span class="comment">//3. 抛出错误</span></span><br><span class="line">    <span class="comment">//throw &#x27;出问题了&#x27;;// pending  =&gt;  rejected</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>Promise对象初始状态</li>
-</ul>
-<p><img src="/../assets/image-20210321172121084.png" alt="image-20210321172121084"></p>
-<ul>
-<li>Promise对象成功状态</li>
-</ul>
-<p><img src="/../assets/image-20210322004628047.png" alt="image-20210322004628047"></p>
-<ul>
-<li>Promise对象失败状态</li>
-</ul>
-<p><img src="/../assets/image-20210322004718603.png" alt="image-20210322004718603"></p>
-<h3 id="Promise-Api"><a href="#Promise-Api" class="headerlink" title="Promise Api"></a>Promise Api</h3><h4 id="Promise-prototype-then"><a href="#Promise-prototype-then" class="headerlink" title="Promise.prototype.then"></a>Promise.prototype.then</h4><figure class="highlight plaintext"><figcaption><span>方法返回一个 ```Promise```。它最多需要有两个参数：Promise 的成功和失败情况的回调函数。</span></figcaption><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">##### Promise.prototype.then()返回的新 promise 的结果状态由什么决定?</span><br><span class="line"></span><br><span class="line">​       **由 then()指定的回调函数执行的结果决定**</span><br><span class="line"></span><br><span class="line">1. 如果抛出异常, 新 promise 变为 rejected, *[[PromiseResult]]*为抛出的异常 </span><br><span class="line"></span><br><span class="line">2. 如果返回的是非 promise 的任意值, 或者没有返回值（相当于返回undefined），新 promise 变为 resolved, *[[PromiseResult]]*为返回的值 </span><br><span class="line"></span><br><span class="line">3. ***如果返回的是另一个新 promise, 此promise的状态成为新promise的状态，此 promise 的[[PromiseResult]]就会成为新 promise 的[[PromiseResult]]***</span><br><span class="line"></span><br><span class="line">```javascript</span><br><span class="line">let result = p.then(value =&gt; &#123;</span><br><span class="line">    // console.log(value);</span><br><span class="line">    //1. 抛出错误</span><br><span class="line">    // throw &#x27;出了问题&#x27;;</span><br><span class="line">    //2. 返回结果是非 Promise 类型的对象</span><br><span class="line">    // return 521;</span><br><span class="line">    //3. 返回结果是 Promise 对象</span><br><span class="line">    // return new Promise((resolve, reject) =&gt; &#123;</span><br><span class="line">    //     // resolve(&#x27;success&#x27;);</span><br><span class="line">    //     reject(&#x27;error&#x27;);</span><br><span class="line">    // &#125;);</span><br><span class="line">&#125;, reason =&gt; &#123;</span><br><span class="line">    console.warn(reason);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<h5 id="then的链式调用"><a href="#then的链式调用" class="headerlink" title="then的链式调用"></a>then的链式调用</h5><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> p = <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="title function_">resolve</span>(<span class="string">&#x27;OK&#x27;</span>);</span><br><span class="line">    &#125;, <span class="number">1000</span>);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// 链式调用</span></span><br><span class="line">p.<span class="title function_">then</span>(<span class="function"><span class="params">value</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="title function_">resolve</span>(<span class="string">&quot;success&quot;</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;).<span class="title function_">then</span>(<span class="function"><span class="params">value</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(value);</span><br><span class="line">&#125;).<span class="title function_">then</span>(<span class="function"><span class="params">value</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(value);<span class="comment">//输出undefine，原因：上一次的then方法返回值为undefine，所以上一次返回一个参数为undefine，状态为resolve的promise对象</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<h4 id="Promise-resolve"><a href="#Promise-resolve" class="headerlink" title="Promise.resolve"></a>Promise.resolve</h4><ul>
-<li>如果传入的参数为 非Promise类型的对象, 则返回的结果为成功promise对象</li>
-<li>如果传入的参数为 Promise 对象, 则参数的结果决定了 resolve 的结果</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> p1 = <span class="title class_">Promise</span>.<span class="title function_">resolve</span>(<span class="number">521</span>);</span><br><span class="line"><span class="keyword">let</span> p2 = <span class="title class_">Promise</span>.<span class="title function_">resolve</span>(<span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// resolve(&#x27;OK&#x27;);</span></span><br><span class="line">    <span class="title function_">reject</span>(<span class="string">&#x27;Error&#x27;</span>);</span><br><span class="line">&#125;));</span><br><span class="line"><span class="comment">// console.log(p2);</span></span><br><span class="line">p2.<span class="title function_">catch</span>(<span class="function"><span class="params">reason</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(reason);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<h4 id="Promise-reject"><a href="#Promise-reject" class="headerlink" title="Promise.reject"></a>Promise.reject</h4><p>Promise.reject(reason)方法返回一个失败的promise对象（无论reason是什么）</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> p3 = <span class="title class_">Promise</span>.<span class="title function_">reject</span>(<span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="title function_">resolve</span>(<span class="string">&#x27;OK&#x27;</span>);</span><br><span class="line">&#125;));</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(p3);</span><br></pre></td></tr></table></figure>
-
-<p>输出：</p>
-<p><img src="/../assets/image-20210321171102762.png" alt="image-20210321171102762"></p>
-<h4 id="Promise-prototype-catch"><a href="#Promise-prototype-catch" class="headerlink" title="Promise.prototype.catch"></a>Promise.prototype.catch</h4><p><strong>catch()</strong> 方法返回一个Promise，只处理拒绝的情况。它的行为与调用<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise/then"><code>Promise.prototype.then(undefined, onRejected)</code></a>相同。</p>
-<h3 id="Promise关键问题"><a href="#Promise关键问题" class="headerlink" title="Promise关键问题"></a>Promise关键问题</h3><h4 id="Promise可以执行多个成功-失败的回调"><a href="#Promise可以执行多个成功-失败的回调" class="headerlink" title="Promise可以执行多个成功&#x2F;失败的回调"></a>Promise可以执行多个成功&#x2F;失败的回调</h4><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> p = <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="title function_">resolve</span>(<span class="string">&#x27;OK&#x27;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">///指定回调 - 1</span></span><br><span class="line">p.<span class="title function_">then</span>(<span class="function"><span class="params">value</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(value);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">//指定回调 - 2</span></span><br><span class="line">p.<span class="title function_">then</span>(<span class="function"><span class="params">value</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="title function_">alert</span>(value);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<h4 id="异常穿透"><a href="#异常穿透" class="headerlink" title="异常穿透"></a>异常穿透</h4><ol>
-<li><p>当使用 promise 的 then 链式调用时, 可以在最后指定失败的回调。</p>
-</li>
-<li><p>前面任何操作出了异常, 都会传到最后失败的回调中处理</p>
-</li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> p = <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="comment">//resolve(&#x27;OK&#x27;);</span></span><br><span class="line">        <span class="title function_">reject</span>(<span class="string">&#x27;Err&#x27;</span>);</span><br><span class="line">    &#125;, <span class="number">1000</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">p.<span class="title function_">then</span>(<span class="function"><span class="params">value</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// console.log(111);</span></span><br><span class="line">    <span class="keyword">throw</span> <span class="string">&#x27;失败啦!&#x27;</span>;</span><br><span class="line">&#125;).<span class="title function_">then</span>(<span class="function"><span class="params">value</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">222</span>);</span><br><span class="line">&#125;).<span class="title function_">then</span>(<span class="function"><span class="params">value</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">333</span>);</span><br><span class="line">&#125;).<span class="title function_">catch</span>(<span class="function"><span class="params">reason</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">warn</span>(reason); <span class="comment">// 如果前面then有设置失败的回调，则会在前面就被捕获</span></span><br><span class="line">&#125;).<span class="title function_">then</span>(<span class="function"><span class="params">value</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(value)</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;hyz&#x27;</span>)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// output:</span></span><br><span class="line"><span class="comment">// Err</span></span><br><span class="line"><span class="comment">// undefined</span></span><br><span class="line"><span class="comment">// hyz</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="如何中断Promise链？"><a href="#如何中断Promise链？" class="headerlink" title="如何中断Promise链？"></a>如何中断Promise链？</h4><p>添加一个pendding状态的promise</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">p.<span class="title function_">then</span>(<span class="function"><span class="params">value</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">111</span>);</span><br><span class="line">    <span class="comment">//有且只有一个方式</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">() =&gt;</span> &#123;&#125;);</span><br><span class="line">&#125;).<span class="title function_">then</span>(<span class="function"><span class="params">value</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">222</span>);</span><br><span class="line">&#125;).<span class="title function_">then</span>(<span class="function"><span class="params">value</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">333</span>);</span><br><span class="line">&#125;).<span class="title function_">catch</span>(<span class="function"><span class="params">reason</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">warn</span>(reason);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<h3 id="Async与Await"><a href="#Async与Await" class="headerlink" title="Async与Await"></a>Async与Await</h3><p>Async&#x2F;Await 是js异步编程的终极解决方案</p>
-<h4 id="Async函数"><a href="#Async函数" class="headerlink" title="Async函数"></a>Async函数</h4><p>返回值规则与Promise.prototype.then()相同</p>
-<ul>
-<li>函数的返回值为 promise 对象</li>
-<li>promise 对象的结果由 async 函数执行的返回值决定</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">main</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="comment">//1. 如果返回值是一个非Promise类型的数据</span></span><br><span class="line">    <span class="comment">// return 521;</span></span><br><span class="line">    <span class="comment">//2. 如果返回的是一个Promise对象</span></span><br><span class="line">    <span class="comment">// return new Promise((resolve, reject) =&gt; &#123;</span></span><br><span class="line">    <span class="comment">//     // resolve(&#x27;OK&#x27;);</span></span><br><span class="line">    <span class="comment">//     reject(&#x27;Error&#x27;);</span></span><br><span class="line">    <span class="comment">// &#125;);</span></span><br><span class="line">    <span class="comment">//3. 抛出异常</span></span><br><span class="line">    <span class="keyword">throw</span> <span class="string">&quot;Oh NO&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="Await表达式"><a href="#Await表达式" class="headerlink" title="Await表达式"></a>Await表达式</h4><ul>
-<li>await 右侧的表达式一般为 promise 对象, 但也可以是其它的值</li>
-<li>如果表达式是 promise 对象, await 返回的是 promise 成功的值([[PromiseResult]])</li>
-<li>如果表达式是其它值, 直接将此值作为 await 的返回值</li>
-</ul>
-<h4 id="mentoon："><a href="#mentoon：" class="headerlink" title="mentoon："></a>mentoon：</h4><ol>
-<li>await 必须写在 async 函数中, 但 async 函数中可以没有 await</li>
-<li>如果 await 的 promise 失败了, 就会抛出异常, 需要通过 try…catch 捕获处理</li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">main</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="keyword">let</span> p = <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="comment">// resolve(&#x27;OK&#x27;);</span></span><br><span class="line">        <span class="title function_">reject</span>(<span class="string">&#x27;Error&#x27;</span>);</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="comment">//1. 右侧为promise的情况</span></span><br><span class="line">    <span class="comment">// let res = await p;</span></span><br><span class="line">    <span class="comment">//2. 右侧为其他类型的数据</span></span><br><span class="line">    <span class="comment">// let res2 = await 20;</span></span><br><span class="line">    <span class="comment">//3. 如果promise是失败的状态</span></span><br><span class="line">    <span class="keyword">try</span>&#123;</span><br><span class="line">        <span class="keyword">let</span> res3 = <span class="keyword">await</span> p;</span><br><span class="line">    &#125;<span class="keyword">catch</span>(e)&#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(e);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">main</span>();</span><br></pre></td></tr></table></figure>
-
-<h3 id="实践："><a href="#实践：" class="headerlink" title="实践："></a>实践：</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">fs.<span class="title function_">readFile</span>(<span class="string">&#x27;./resource/1.html&#x27;</span>, <span class="function">(<span class="params">err, data1</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span>(err) <span class="keyword">throw</span> err;</span><br><span class="line">    fs.<span class="title function_">readFile</span>(<span class="string">&#x27;./resource/2.html&#x27;</span>, <span class="function">(<span class="params">err, data2</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span>(err) <span class="keyword">throw</span> err;</span><br><span class="line">        fs.<span class="title function_">readFile</span>(<span class="string">&#x27;./resource/3.html&#x27;</span>, <span class="function">(<span class="params">err, data3</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">if</span>(err) <span class="keyword">throw</span> err;</span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">log</span>(data1 + data2 + data3);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">//async 与 await</span></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">main</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="keyword">try</span>&#123;</span><br><span class="line">        <span class="comment">//读取第一个文件的内容</span></span><br><span class="line">        <span class="keyword">let</span> data1 = <span class="keyword">await</span> <span class="title function_">mineReadFile</span>(<span class="string">&#x27;./resource/1x.html&#x27;</span>);</span><br><span class="line">        <span class="keyword">let</span> data2 = <span class="keyword">await</span> <span class="title function_">mineReadFile</span>(<span class="string">&#x27;./resource/2.html&#x27;</span>);</span><br><span class="line">        <span class="keyword">let</span> data3 = <span class="keyword">await</span> <span class="title function_">mineReadFile</span>(<span class="string">&#x27;./resource/3.html&#x27;</span>);</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(data1 + data2 + data3);</span><br><span class="line">    &#125;<span class="keyword">catch</span>(e)&#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(e.<span class="property">code</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="async-await-封装ajax"><a href="#async-await-封装ajax" class="headerlink" title="async await 封装ajax"></a>async await 封装ajax</h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">&quot;btn&quot;</span>&gt;</span>点击获取段子<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">        <span class="comment">//axios</span></span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">function</span> <span class="title function_">sendAJAX</span>(<span class="params">url</span>)&#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span></span><br><span class="line"><span class="language-javascript">                <span class="keyword">const</span> xhr = <span class="keyword">new</span> <span class="title class_">XMLHttpRequest</span>();</span></span><br><span class="line"><span class="language-javascript">                xhr.<span class="property">responseType</span> = <span class="string">&#x27;json&#x27;</span>;</span></span><br><span class="line"><span class="language-javascript">                xhr.<span class="title function_">open</span>(<span class="string">&quot;GET&quot;</span>, url);</span></span><br><span class="line"><span class="language-javascript">                xhr.<span class="title function_">send</span>();</span></span><br><span class="line"><span class="language-javascript">                <span class="comment">//处理结果</span></span></span><br><span class="line"><span class="language-javascript">                xhr.<span class="property">onreadystatechange</span> = <span class="keyword">function</span>(<span class="params"></span>)&#123;</span></span><br><span class="line"><span class="language-javascript">                    <span class="keyword">if</span>(xhr.<span class="property">readyState</span> === <span class="number">4</span>)&#123;</span></span><br><span class="line"><span class="language-javascript">                        <span class="comment">//判断成功</span></span></span><br><span class="line"><span class="language-javascript">                        <span class="keyword">if</span>(xhr.<span class="property">status</span> &gt;= <span class="number">200</span> &amp;&amp; xhr.<span class="property">status</span> &lt; <span class="number">300</span>)&#123;</span></span><br><span class="line"><span class="language-javascript">                            <span class="comment">//成功的结果</span></span></span><br><span class="line"><span class="language-javascript">                            <span class="title function_">resolve</span>(xhr.<span class="property">response</span>);</span></span><br><span class="line"><span class="language-javascript">                        &#125;<span class="keyword">else</span>&#123;</span></span><br><span class="line"><span class="language-javascript">                            <span class="title function_">reject</span>(xhr.<span class="property">status</span>);</span></span><br><span class="line"><span class="language-javascript">                        &#125;</span></span><br><span class="line"><span class="language-javascript">                    &#125;</span></span><br><span class="line"><span class="language-javascript">                &#125;</span></span><br><span class="line"><span class="language-javascript">            &#125;);</span></span><br><span class="line"><span class="language-javascript">        &#125;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">        <span class="comment">//段子接口地址 https://api.apiopen.top/getJoke</span></span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">let</span> btn = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;#btn&#x27;</span>);</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">        btn.<span class="title function_">addEventListener</span>(<span class="string">&#x27;click&#x27;</span>,<span class="keyword">async</span> <span class="keyword">function</span>(<span class="params"></span>)&#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="comment">//获取段子信息</span></span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">let</span> duanzi = <span class="keyword">await</span> <span class="title function_">sendAJAX</span>(<span class="string">&#x27;https://api.apiopen.top/getJoke&#x27;</span>);</span></span><br><span class="line"><span class="language-javascript">            <span class="variable language_">console</span>.<span class="title function_">log</span>(duanzi);</span></span><br><span class="line"><span class="language-javascript">        &#125;);</span></span><br><span class="line"><span class="language-javascript">    </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">async1</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;async1 start&#x27;</span>)</span><br><span class="line">    <span class="keyword">await</span> <span class="title function_">async2</span>()</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;async1 end&#x27;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">async2</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;async2&#x27;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;script start&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;setTimeout&#x27;</span>)</span><br><span class="line">&#125;, <span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="title function_">async1</span>();</span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="keyword">function</span> (<span class="params">resolve</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;promise1&#x27;</span>)</span><br><span class="line">    <span class="title function_">resolve</span>()</span><br><span class="line">&#125;).<span class="title function_">then</span>(<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;promise2&#x27;</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;script end&#x27;</span>)</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>JavaScript</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
       </tags>
   </entry>
   <entry>
@@ -1393,132 +1393,6 @@
       </tags>
   </entry>
   <entry>
-    <title>React组件性能优化</title>
-    <url>/2021/10/14/React%E7%BB%84%E4%BB%B6%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</url>
-    <content><![CDATA[<h3 id="React-性能优化思路"><a href="#React-性能优化思路" class="headerlink" title="React 性能优化思路"></a>React 性能优化思路</h3><p>我觉得React 性能优化的理念的主要方向就是这两个：</p>
-<ol>
-<li><strong>减少重新 render 的次数。因为在 React 里最重(花时间最长)的一块就是 reconciliation(简单的可以理解为 diff)，如果不 render，就不会 reconciliation。</strong></li>
-<li><strong>减少计算的量。主要是减少重复计算，对于函数式组件来说，每次 render 都会重新从头开始执行函数调用。</strong></li>
-</ol>
-<p>在使用类组件的时候，使用的 React 优化 API 主要是：<code>shouldComponentUpdate</code>和  <code>PureComponent</code>，这两个 API 所提供的解决思路都是为了<strong>减少重新 render 的次数</strong>，主要是减少父组件更新而子组件也更新的情况。</p>
-<p>但是在函数式组件里面没有声明周期也没有类，那如何来做性能优化呢？</p>
-<p><strong>先分个类，组件什么时候会重新执行？</strong></p>
-<ol>
-<li><strong>组件自己的状态改变</strong></li>
-<li><strong>父组件重新渲染，导致子组件重新渲染，但是父组件的 props 没有改变</strong></li>
-<li><strong>父组件重新渲染，导致子组件重新渲染，但是父组件传递的 props 改变</strong></li>
-</ol>
-<p>针对第二点，在FC中，可以通过memo减少rerender</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Component</span>(<span class="params">props</span>) &#123;</span><br><span class="line">   <span class="comment">/* 使用 props 渲染 */</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> <span class="title class_">MyComponent</span> = <span class="title class_">React</span>.<span class="title function_">memo</span>(<span class="title class_">Component</span>);</span><br></pre></td></tr></table></figure>
-
-<p>通过 <code>React.memo</code> 包裹的组件在 props 不变的情况下，这个被包裹的组件是不会重新渲染的(相当于PureComonent)</p>
-<p>默认情况下其只会对 props 的复杂对象做浅层对比(浅层对比就是只会对比前后两次 props 对象引用是否相同，不会对比对象里面的内容是否相同)，如果你想要控制对比过程，那么请将自定义的比较函数通过第二个参数传入来实现。</p>
-<span id="more"></span>
-
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">MyComponent</span>(<span class="params">props</span>) &#123;</span><br><span class="line">  <span class="comment">/* 使用 props 渲染 */</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">areEqual</span>(<span class="params">prevProps, nextProps</span>) &#123;</span><br><span class="line">  <span class="comment">/*</span></span><br><span class="line"><span class="comment">  如果把 nextProps 传入 render 方法的返回结果与</span></span><br><span class="line"><span class="comment">  将 prevProps 传入 render 方法的返回结果一致则返回 true，</span></span><br><span class="line"><span class="comment">  否则返回 false</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">React</span>.<span class="title function_">memo</span>(<span class="title class_">MyComponent</span>, areEqual);</span><br></pre></td></tr></table></figure>
-
-<h3 id="组件性能优化"><a href="#组件性能优化" class="headerlink" title="组件性能优化"></a>组件性能优化</h3><p>React 组件是一个树形结构，且每个节点都是懒计算的（类似于 Thunk 的概念）。当一个节点不需要重新计算（重绘）时，他的子树都不会计算（重绘）。<strong>所以我们做性能优化的目标，就是在尽量离根节点近的位置，拦截不必要的节点重算，从而减少重绘的计算量。</strong></p>
-<h5 id="React-memo"><a href="#React-memo" class="headerlink" title="React.memo"></a>React.memo</h5><p>阻止节点重绘主要通过 React.memo 方法生成特殊的组件节点。它接受两个传参：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="title class_">React</span>.<span class="title function_">memo</span>(<span class="title class_">Component</span>, areEqual);</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>Component：组件</p>
-</li>
-<li><p>areEqual：比较函数<br>比较函数的入参有两个，arg0 为 前一次渲染的 props, arg1 为本次渲染的 props。如果返回 true，则该节点本次渲染将被标记为无需重新计算，从而使其所有子节点、孙子节点都无需计算。<br>areEqual 如果不传，默认使用</p>
-</li>
-</ul>
-<figure class="highlight lisp"><table><tr><td class="code"><pre><span class="line">(<span class="name">prevProps</span>, nextProps) =&gt; shallowEqual(<span class="name">prevProps</span>, nextProps)</span><br></pre></td></tr></table></figure>
-
-<p>做为比较函数。</p>
-<h5 id="如何定位优化点"><a href="#如何定位优化点" class="headerlink" title="如何定位优化点"></a>如何定位优化点</h5><p>使用前一章节提到 React DevTools 中的 Profiling 功能，record 发生卡顿的操作，从耗时长的组件逐个查看，找到那些跟此次操作无关的上层渲染节点，尝试使用 React.memo 包裹这些组件。</p>
-<h5 id="不要为了优化而优化"><a href="#不要为了优化而优化" class="headerlink" title="不要为了优化而优化"></a>不要为了优化而优化</h5><p>在没有性能问题前，不用去纠结是否要用 Profiling、React.memo、useMemo、useCallback 去优化性能，这些不一定能带来性能提升，反而肯定会带来首屏的性能下降。大多数情况下，React 现有算法以能满足性能需求。</p>
-<h5 id="对于一个组件，有三样东西会让她重绘"><a href="#对于一个组件，有三样东西会让她重绘" class="headerlink" title="对于一个组件，有三样东西会让她重绘"></a>对于一个组件，有三样东西会让她重绘</h5><ol>
-<li>State 变更</li>
-<li>依赖的 context 变更</li>
-<li>父组件重绘</li>
-</ol>
-<p>所以用 React.memo 包裹之后，并不是说性能就会有多大的提高。如果组件中依赖的 context 中，有一部分并不是此组件需要的数据，但会经常变更，也会导致组件经常重绘。这时候我们可以增加一层组件，把依赖 context 中的数据，通过增加的一层父组件取出来，然后通过 props 传给真正渲染的组件，把 React.memo 加在真正渲染的组件上，来达到屏蔽 context 变更引起的重绘问题。</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; useMemo, useContext &#125; <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">SomeContext</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;./SomeContext&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">PickContextData</span>(<span class="params">props</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> ctx = <span class="title function_">useContext</span>(<span class="title class_">SomeContext</span>);</span><br><span class="line">  <span class="keyword">const</span> someDataFromContext = <span class="title function_">useMemo</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> ctx.<span class="property">data</span>;</span><br><span class="line">  &#125;, [ctx.<span class="property">data</span>]);</span><br><span class="line">  <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">RenderComponent</span> <span class="attr">data</span>=<span class="string">&#123;someDataFromContext&#125;</span> &#123;<span class="attr">...props</span>&#125; /&gt;</span></span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title class_">RenderComponent</span> = <span class="title class_">React</span>.<span class="title function_">memo</span>(<span class="function">(<span class="params">props</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// 略</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<p>更通用点，可以封装出 react-redux 的 connect 函数，传入 selector 来取所需的 Context 数据。</p>
-]]></content>
-      <categories>
-        <category>React</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-        <tag>Hooks</tag>
-        <tag>React</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>React组件通信</title>
-    <url>/2021/10/07/React%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1/</url>
-    <content><![CDATA[<h3 id="组件通信"><a href="#组件通信" class="headerlink" title="组件通信"></a>组件通信</h3><h5 id="爷孙组件通信"><a href="#爷孙组件通信" class="headerlink" title="爷孙组件通信"></a>爷孙组件通信</h5><p>爷孙组件通信主要有 3 种方式：</p>
-<ol>
-<li>将孙子组件的 props 封装在一个固定字段中</li>
-<li>通过 children 透传</li>
-<li>通过 context 传递</li>
-</ol>
-<p>假设有个三层组件，爷爷分别给儿子和孙子发红包</p>
-<p>先看青铜解决方案：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Grandpa</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> [someMoneyForMe] = <span class="title function_">useState</span>(<span class="number">100</span>);</span><br><span class="line">  <span class="keyword">const</span> [someMoneyForDaddy] = <span class="title function_">useState</span>(<span class="number">101</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">Daddy</span> <span class="attr">money</span>=<span class="string">&#123;someMoneyForDaddy&#125;</span> <span class="attr">moneyForSon</span>=<span class="string">&#123;someMoneyForMe&#125;</span> /&gt;</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Daddy</span>(<span class="params">props: &#123; money: number; moneyForSon: number &#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; money, moneyForSon &#125; = props;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;daddy&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">h2</span>&gt;</span>This is Daddy, received $&#123;money&#125;<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">Me</span> <span class="attr">money</span>=<span class="string">&#123;moneyForSon&#125;</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Me</span>(<span class="params">props: &#123; money: number &#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; money &#125; = props;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;son&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">h3</span>&gt;</span>This is Me, received $&#123;money&#125;<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>Daddy 组件会透传爷爷给孙子的组件给 Me。这种方案的缺点很明显，以后爷爷要给 Daddy 和 Me 发糖果的时候，Daddy 还得加字段。</p>
-<p><strong>将孙子组件的 props 封装在一个固定字段中</strong></p>
-<p>按照 1 的方案，我们可以固定给 Daddy 添加一个 sonProps 的字段，然后将 Grandpa 需要传给孙子的状态全部通过 sonProps 传递</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Grandpa</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> [someMoneyForMe] = <span class="title function_">useState</span>(<span class="number">100</span>);</span><br><span class="line">  <span class="keyword">const</span> [someMoneyForDaddy] = <span class="title function_">useState</span>(<span class="number">101</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">Daddy</span> <span class="attr">money</span>=<span class="string">&#123;someMoneyForDaddy&#125;</span> <span class="attr">sonProps</span>=<span class="string">&#123;&#123;money:</span> <span class="attr">someMoneyForMe</span>&#125;&#125; /&gt;</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Daddy</span>(<span class="params">props: &#123; money: number; sonProps: Parameters&lt;<span class="keyword">typeof</span> Me&gt;[<span class="number">0</span>]; &#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; money, sonProps &#125; = props;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;daddy&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">h2</span>&gt;</span>This is Daddy, received $&#123;money&#125;<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">Me</span> &#123;<span class="attr">...sonProps</span>&#125;/&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Me</span>(<span class="params">props: &#123; money: number &#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; money &#125; = props;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;son&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">h3</span>&gt;</span>This is Me, received $&#123;money&#125;<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这样以后要给 Me 加字段，就不用改 Daddy 了。<strong>但要测试 Daddy 时还得 mock Me 组件的数据，Daddy 和 Son 耦合。</strong></p>
-<p><strong>通过 children 透传</strong></p>
-<p>children 类似于 vue 中的 slot，可以完成一些嵌套组件通信的功能</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Grandpa</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> [someMoneyForMe] = <span class="title function_">useState</span>(<span class="number">100</span>);</span><br><span class="line">  <span class="keyword">const</span> [someMoneyForDaddy] = <span class="title function_">useState</span>(<span class="number">101</span>);</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">Daddy</span> <span class="attr">money</span>=<span class="string">&#123;someMoneyForDaddy&#125;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">Me</span> <span class="attr">money</span>=<span class="string">&#123;someMoneyForMe&#125;</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">Daddy</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Daddy</span>(<span class="params">props: &#123; money: number; children?: React.ChildNode &#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; money, children &#125; = props;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;daddy&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">h2</span>&gt;</span>This is Daddy, received $&#123;money&#125;<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      &#123;children&#125;</span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Me</span>(<span class="params">props: &#123; money: number &#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; money &#125; = props;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;son&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">h3</span>&gt;</span>This is Me, received $&#123;money&#125;<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>将 Daddy 的嵌套部分用 children 替代后，解耦了子组件和孙子组件的依赖关系，Daddy 组件更加独立。</p>
-<p>作为替代，也可以传递一个组件实例：</p>
-<p><code><Daddy money=&#123;someMoneyForDaddy&#125; me=&#123;<Me money=&#123;someMoneyForMe&#125; /> </code></p>
-<p><strong>三种方案的决策</strong></p>
-<ol>
-<li>第一种方案一般用于固定结构和跨组件有互相依赖的场景，多见于 UI 框架中的复合组件与原子组件的设计中</li>
-<li>第二种常用在嵌套层级不深的业务代码中，比如表单场景。<strong>优点是顶层 Grandpa 的业务收敛度很高，一眼能看清 UI 结构及状态绑定关系，相当于拍平了 React 组件树</strong></li>
-<li>第三种比较通用，适合复杂嵌套透传场景。缺点是范式代码较多，且会造成 react dev tools 层级过多；Context 无法在父组件看出依赖关系，必须到子组件文件中才能知道数据来源</li>
-</ol>
-]]></content>
-      <categories>
-        <category>React</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-        <tag>Hooks</tag>
-        <tag>React</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Web3相关学习</title>
-    <url>/2024/10/29/Web3%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/</url>
-    <content><![CDATA[<p>先开个坑，准备下Web3相关的学习</p>
-<h2 id="学习路线"><a href="#学习路线" class="headerlink" title="学习路线"></a>学习路线</h2><ul>
-<li><strong>Web3开发学习路线</strong>: <a href="https://54web3.cc/blog/roadmap/learning-path-web3">https://54web3.cc/blog/roadmap/learning-path-web3</a></li>
-<li><strong>Web3 入门计划</strong>: <a href="https://cubic-leaf-731.notion.site/web3-202208-09-1623ccd15c2148a1ae00ed8794d153b1">https://cubic-leaf-731.notion.site/web3-202208-09-1623ccd15c2148a1ae00ed8794d153b1</a></li>
-<li><strong>Web3从入门到精通开发学习路线</strong>：<a href="https://juejin.cn/post/7307185531330838543">https://juejin.cn/post/7307185531330838543</a></li>
-</ul>
-<h3 id="WEEK-1-区块链的基础知识"><a href="#WEEK-1-区块链的基础知识" class="headerlink" title="WEEK 1: 区块链的基础知识"></a><strong>WEEK 1: 区块链的基础知识</strong></h3><ul>
-<li>密码学基础</li>
-<li>区块链基础</li>
-<li>相关金融知识</li>
-<li>学习比特币底层技术</li>
-<li>学习以太坊原理</li>
-</ul>
-<!-- ![image-20241105](../assets/Week1：区块链基础知识.png) -->]]></content>
-      <categories>
-        <category>Chore</category>
-      </categories>
-      <tags>
-        <tag>Web3</tag>
-        <tag>区块链</tag>
-        <tag>智能合约</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Redux</title>
     <url>/2021/10/11/Redux/</url>
     <content><![CDATA[<h2 id="Redux"><a href="#Redux" class="headerlink" title="Redux"></a>Redux</h2><h3 id="设计思想"><a href="#设计思想" class="headerlink" title="设计思想"></a>设计思想</h3><ul>
@@ -1604,6 +1478,159 @@
         <tag>JavaScript</tag>
         <tag>React</tag>
         <tag>Redux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>React组件通信</title>
+    <url>/2021/10/07/React%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1/</url>
+    <content><![CDATA[<h3 id="组件通信"><a href="#组件通信" class="headerlink" title="组件通信"></a>组件通信</h3><h5 id="爷孙组件通信"><a href="#爷孙组件通信" class="headerlink" title="爷孙组件通信"></a>爷孙组件通信</h5><p>爷孙组件通信主要有 3 种方式：</p>
+<ol>
+<li>将孙子组件的 props 封装在一个固定字段中</li>
+<li>通过 children 透传</li>
+<li>通过 context 传递</li>
+</ol>
+<p>假设有个三层组件，爷爷分别给儿子和孙子发红包</p>
+<p>先看青铜解决方案：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Grandpa</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> [someMoneyForMe] = <span class="title function_">useState</span>(<span class="number">100</span>);</span><br><span class="line">  <span class="keyword">const</span> [someMoneyForDaddy] = <span class="title function_">useState</span>(<span class="number">101</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">Daddy</span> <span class="attr">money</span>=<span class="string">&#123;someMoneyForDaddy&#125;</span> <span class="attr">moneyForSon</span>=<span class="string">&#123;someMoneyForMe&#125;</span> /&gt;</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Daddy</span>(<span class="params">props: &#123; money: number; moneyForSon: number &#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; money, moneyForSon &#125; = props;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;daddy&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">h2</span>&gt;</span>This is Daddy, received $&#123;money&#125;<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">Me</span> <span class="attr">money</span>=<span class="string">&#123;moneyForSon&#125;</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Me</span>(<span class="params">props: &#123; money: number &#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; money &#125; = props;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;son&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">h3</span>&gt;</span>This is Me, received $&#123;money&#125;<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Daddy 组件会透传爷爷给孙子的组件给 Me。这种方案的缺点很明显，以后爷爷要给 Daddy 和 Me 发糖果的时候，Daddy 还得加字段。</p>
+<p><strong>将孙子组件的 props 封装在一个固定字段中</strong></p>
+<p>按照 1 的方案，我们可以固定给 Daddy 添加一个 sonProps 的字段，然后将 Grandpa 需要传给孙子的状态全部通过 sonProps 传递</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Grandpa</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> [someMoneyForMe] = <span class="title function_">useState</span>(<span class="number">100</span>);</span><br><span class="line">  <span class="keyword">const</span> [someMoneyForDaddy] = <span class="title function_">useState</span>(<span class="number">101</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">Daddy</span> <span class="attr">money</span>=<span class="string">&#123;someMoneyForDaddy&#125;</span> <span class="attr">sonProps</span>=<span class="string">&#123;&#123;money:</span> <span class="attr">someMoneyForMe</span>&#125;&#125; /&gt;</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Daddy</span>(<span class="params">props: &#123; money: number; sonProps: Parameters&lt;<span class="keyword">typeof</span> Me&gt;[<span class="number">0</span>]; &#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; money, sonProps &#125; = props;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;daddy&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">h2</span>&gt;</span>This is Daddy, received $&#123;money&#125;<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">Me</span> &#123;<span class="attr">...sonProps</span>&#125;/&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Me</span>(<span class="params">props: &#123; money: number &#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; money &#125; = props;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;son&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">h3</span>&gt;</span>This is Me, received $&#123;money&#125;<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样以后要给 Me 加字段，就不用改 Daddy 了。<strong>但要测试 Daddy 时还得 mock Me 组件的数据，Daddy 和 Son 耦合。</strong></p>
+<p><strong>通过 children 透传</strong></p>
+<p>children 类似于 vue 中的 slot，可以完成一些嵌套组件通信的功能</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Grandpa</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> [someMoneyForMe] = <span class="title function_">useState</span>(<span class="number">100</span>);</span><br><span class="line">  <span class="keyword">const</span> [someMoneyForDaddy] = <span class="title function_">useState</span>(<span class="number">101</span>);</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">Daddy</span> <span class="attr">money</span>=<span class="string">&#123;someMoneyForDaddy&#125;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">Me</span> <span class="attr">money</span>=<span class="string">&#123;someMoneyForMe&#125;</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">Daddy</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Daddy</span>(<span class="params">props: &#123; money: number; children?: React.ChildNode &#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; money, children &#125; = props;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;daddy&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">h2</span>&gt;</span>This is Daddy, received $&#123;money&#125;<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      &#123;children&#125;</span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Me</span>(<span class="params">props: &#123; money: number &#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; money &#125; = props;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;son&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">h3</span>&gt;</span>This is Me, received $&#123;money&#125;<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>将 Daddy 的嵌套部分用 children 替代后，解耦了子组件和孙子组件的依赖关系，Daddy 组件更加独立。</p>
+<p>作为替代，也可以传递一个组件实例：</p>
+<p><code><Daddy money=&#123;someMoneyForDaddy&#125; me=&#123;<Me money=&#123;someMoneyForMe&#125; /> </code></p>
+<p><strong>三种方案的决策</strong></p>
+<ol>
+<li>第一种方案一般用于固定结构和跨组件有互相依赖的场景，多见于 UI 框架中的复合组件与原子组件的设计中</li>
+<li>第二种常用在嵌套层级不深的业务代码中，比如表单场景。<strong>优点是顶层 Grandpa 的业务收敛度很高，一眼能看清 UI 结构及状态绑定关系，相当于拍平了 React 组件树</strong></li>
+<li>第三种比较通用，适合复杂嵌套透传场景。缺点是范式代码较多，且会造成 react dev tools 层级过多；Context 无法在父组件看出依赖关系，必须到子组件文件中才能知道数据来源</li>
+</ol>
+]]></content>
+      <categories>
+        <category>React</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>Hooks</tag>
+        <tag>React</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>React组件性能优化</title>
+    <url>/2021/10/14/React%E7%BB%84%E4%BB%B6%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</url>
+    <content><![CDATA[<h3 id="React-性能优化思路"><a href="#React-性能优化思路" class="headerlink" title="React 性能优化思路"></a>React 性能优化思路</h3><p>我觉得React 性能优化的理念的主要方向就是这两个：</p>
+<ol>
+<li><strong>减少重新 render 的次数。因为在 React 里最重(花时间最长)的一块就是 reconciliation(简单的可以理解为 diff)，如果不 render，就不会 reconciliation。</strong></li>
+<li><strong>减少计算的量。主要是减少重复计算，对于函数式组件来说，每次 render 都会重新从头开始执行函数调用。</strong></li>
+</ol>
+<p>在使用类组件的时候，使用的 React 优化 API 主要是：<code>shouldComponentUpdate</code>和  <code>PureComponent</code>，这两个 API 所提供的解决思路都是为了<strong>减少重新 render 的次数</strong>，主要是减少父组件更新而子组件也更新的情况。</p>
+<p>但是在函数式组件里面没有声明周期也没有类，那如何来做性能优化呢？</p>
+<p><strong>先分个类，组件什么时候会重新执行？</strong></p>
+<ol>
+<li><strong>组件自己的状态改变</strong></li>
+<li><strong>父组件重新渲染，导致子组件重新渲染，但是父组件的 props 没有改变</strong></li>
+<li><strong>父组件重新渲染，导致子组件重新渲染，但是父组件传递的 props 改变</strong></li>
+</ol>
+<p>针对第二点，在FC中，可以通过memo减少rerender</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Component</span>(<span class="params">props</span>) &#123;</span><br><span class="line">   <span class="comment">/* 使用 props 渲染 */</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> <span class="title class_">MyComponent</span> = <span class="title class_">React</span>.<span class="title function_">memo</span>(<span class="title class_">Component</span>);</span><br></pre></td></tr></table></figure>
+
+<p>通过 <code>React.memo</code> 包裹的组件在 props 不变的情况下，这个被包裹的组件是不会重新渲染的(相当于PureComonent)</p>
+<p>默认情况下其只会对 props 的复杂对象做浅层对比(浅层对比就是只会对比前后两次 props 对象引用是否相同，不会对比对象里面的内容是否相同)，如果你想要控制对比过程，那么请将自定义的比较函数通过第二个参数传入来实现。</p>
+<span id="more"></span>
+
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">MyComponent</span>(<span class="params">props</span>) &#123;</span><br><span class="line">  <span class="comment">/* 使用 props 渲染 */</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">areEqual</span>(<span class="params">prevProps, nextProps</span>) &#123;</span><br><span class="line">  <span class="comment">/*</span></span><br><span class="line"><span class="comment">  如果把 nextProps 传入 render 方法的返回结果与</span></span><br><span class="line"><span class="comment">  将 prevProps 传入 render 方法的返回结果一致则返回 true，</span></span><br><span class="line"><span class="comment">  否则返回 false</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">React</span>.<span class="title function_">memo</span>(<span class="title class_">MyComponent</span>, areEqual);</span><br></pre></td></tr></table></figure>
+
+<h3 id="组件性能优化"><a href="#组件性能优化" class="headerlink" title="组件性能优化"></a>组件性能优化</h3><p>React 组件是一个树形结构，且每个节点都是懒计算的（类似于 Thunk 的概念）。当一个节点不需要重新计算（重绘）时，他的子树都不会计算（重绘）。<strong>所以我们做性能优化的目标，就是在尽量离根节点近的位置，拦截不必要的节点重算，从而减少重绘的计算量。</strong></p>
+<h5 id="React-memo"><a href="#React-memo" class="headerlink" title="React.memo"></a>React.memo</h5><p>阻止节点重绘主要通过 React.memo 方法生成特殊的组件节点。它接受两个传参：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="title class_">React</span>.<span class="title function_">memo</span>(<span class="title class_">Component</span>, areEqual);</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>Component：组件</p>
+</li>
+<li><p>areEqual：比较函数<br>比较函数的入参有两个，arg0 为 前一次渲染的 props, arg1 为本次渲染的 props。如果返回 true，则该节点本次渲染将被标记为无需重新计算，从而使其所有子节点、孙子节点都无需计算。<br>areEqual 如果不传，默认使用</p>
+</li>
+</ul>
+<figure class="highlight lisp"><table><tr><td class="code"><pre><span class="line">(<span class="name">prevProps</span>, nextProps) =&gt; shallowEqual(<span class="name">prevProps</span>, nextProps)</span><br></pre></td></tr></table></figure>
+
+<p>做为比较函数。</p>
+<h5 id="如何定位优化点"><a href="#如何定位优化点" class="headerlink" title="如何定位优化点"></a>如何定位优化点</h5><p>使用前一章节提到 React DevTools 中的 Profiling 功能，record 发生卡顿的操作，从耗时长的组件逐个查看，找到那些跟此次操作无关的上层渲染节点，尝试使用 React.memo 包裹这些组件。</p>
+<h5 id="不要为了优化而优化"><a href="#不要为了优化而优化" class="headerlink" title="不要为了优化而优化"></a>不要为了优化而优化</h5><p>在没有性能问题前，不用去纠结是否要用 Profiling、React.memo、useMemo、useCallback 去优化性能，这些不一定能带来性能提升，反而肯定会带来首屏的性能下降。大多数情况下，React 现有算法以能满足性能需求。</p>
+<h5 id="对于一个组件，有三样东西会让她重绘"><a href="#对于一个组件，有三样东西会让她重绘" class="headerlink" title="对于一个组件，有三样东西会让她重绘"></a>对于一个组件，有三样东西会让她重绘</h5><ol>
+<li>State 变更</li>
+<li>依赖的 context 变更</li>
+<li>父组件重绘</li>
+</ol>
+<p>所以用 React.memo 包裹之后，并不是说性能就会有多大的提高。如果组件中依赖的 context 中，有一部分并不是此组件需要的数据，但会经常变更，也会导致组件经常重绘。这时候我们可以增加一层组件，把依赖 context 中的数据，通过增加的一层父组件取出来，然后通过 props 传给真正渲染的组件，把 React.memo 加在真正渲染的组件上，来达到屏蔽 context 变更引起的重绘问题。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; useMemo, useContext &#125; <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">SomeContext</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;./SomeContext&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">PickContextData</span>(<span class="params">props</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> ctx = <span class="title function_">useContext</span>(<span class="title class_">SomeContext</span>);</span><br><span class="line">  <span class="keyword">const</span> someDataFromContext = <span class="title function_">useMemo</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> ctx.<span class="property">data</span>;</span><br><span class="line">  &#125;, [ctx.<span class="property">data</span>]);</span><br><span class="line">  <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">RenderComponent</span> <span class="attr">data</span>=<span class="string">&#123;someDataFromContext&#125;</span> &#123;<span class="attr">...props</span>&#125; /&gt;</span></span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title class_">RenderComponent</span> = <span class="title class_">React</span>.<span class="title function_">memo</span>(<span class="function">(<span class="params">props</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// 略</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>更通用点，可以封装出 react-redux 的 connect 函数，传入 selector 来取所需的 Context 数据。</p>
+]]></content>
+      <categories>
+        <category>React</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>Hooks</tag>
+        <tag>React</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>TradingView使用</title>
+    <url>/2025/06/05/TradingView%E4%BD%BF%E7%94%A8/</url>
+    <content><![CDATA[<h2 id="TradingView-自定义Plugin使用"><a href="#TradingView-自定义Plugin使用" class="headerlink" title="TradingView 自定义Plugin使用"></a>TradingView 自定义Plugin使用</h2><p>结合官方文档：<a href="https://tradingview.github.io/lightweight-charts/docs/plugins/intro">https://tradingview.github.io/lightweight-charts/docs/plugins/intro</a> 食用</p>
+<h4 id="1-Series-Primitives"><a href="#1-Series-Primitives" class="headerlink" title="1. Series Primitives"></a>1. Series Primitives</h4><ol>
+<li>生命周期<ul>
+<li>attached：添加到图表时触发，附加方法通过一个参数调用，该参数包含图表、系列以及用于请求更新的回调函数</li>
+<li>detached：移除图表时触发</li>
+</ul>
+</li>
+<li>更新视图<br>您的原语应该在方法中更新视图 updateAllViews()，以便渲染器被调用时，它们能够使用最新信息进行绘制。当库需要更新和重绘图表时，它会调用此方法。如果您想通知库应该触发更新，可以使用requestUpdate附加生命周期方法提供的回调。</li>
+</ol>
+<p>该接口会调用一下getter来绘制视图</p>
+<ul>
+<li>paneViews</li>
+<li>priceAxisPaneViews</li>
+<li>timeAxisPaneViews</li>
+<li>priceAxisViews</li>
+<li>timeAxisViews</li>
+</ul>
+<h4 id="2-Views"><a href="#2-Views" class="headerlink" title="2. Views"></a>2. Views</h4><p>该接口可用于定义一个视图，该视图提供一个渲染器（实现该 接口），以便使用CanvasRenderingContext2DIPrimitivePaneRenderer API 在图表的相应区域进行绘制 </p>
+<h4 id="3-Renderer"><a href="#3-Renderer" class="headerlink" title="3. Renderer"></a>3. Renderer</h4><ul>
+<li>draw方法<br>渲染器提供了一个接口，在该接口上应执行CanvasRenderingTarget2D绘图逻辑（使用 浏览器的 2D Canvas API ）。由Fancy CanvasCanvasRenderingTarget2D库提供 。</li>
+</ul>
+<h4 id="CanvasRenderingTarget2D"><a href="#CanvasRenderingTarget2D" class="headerlink" title="CanvasRenderingTarget2D"></a>CanvasRenderingTarget2D</h4><p>CanvasRenderingTarget2D提供了两个可以使用的渲染范围：</p>
+<p>useMediaCoordinateSpace<br>useBitmapCoordinateSpace</p>
+<h4 id="useMediaCoordinateSpace和useBitmapCoordinateSpace的区别"><a href="#useMediaCoordinateSpace和useBitmapCoordinateSpace的区别" class="headerlink" title="useMediaCoordinateSpace和useBitmapCoordinateSpace的区别"></a>useMediaCoordinateSpace和useBitmapCoordinateSpace的区别</h4><ul>
+<li><p>useBitmapCoordinateSpace如果您想使用实际设备像素作为坐标尺寸进行绘制，可以使用 。提供的范围（类型为 BitmapCoordinatesRenderingScope）包含以下只读值：</p>
+<ul>
+<li>context （CanvasRenderingContext2D）。可用于渲染的上下文。</li>
+<li>horizontalPixelRatio（数字）</li>
+<li>verticalPixelRatio（数字）</li>
+<li>bitmapSize（尺寸）。位图尺寸中画布的高度和宽度。</li>
+<li>mediaSize（尺寸）。画布在媒体尺寸中的高度和宽度。</li>
+</ul>
+</li>
+<li><p>useMediaCoordinateSpace如果您想使用媒体尺寸作为坐标大小进行绘制，可以使用 。提供的范围（类型为 MediaCoordinatesRenderingScope）包含以下只读值：</p>
+<ul>
+<li>context （CanvasRenderingContext2D）。可用于渲染的上下文。</li>
+<li>mediaSize（尺寸）。画布在媒体尺寸中的高度和宽度。</li>
+</ul>
+</li>
+</ul>
+<h3 id="自定义Plugin实践-k线图上绘制用户头像"><a href="#自定义Plugin实践-k线图上绘制用户头像" class="headerlink" title="自定义Plugin实践 - k线图上绘制用户头像"></a>自定义Plugin实践 - k线图上绘制用户头像</h3><p><img src="/../assets/trading-view-plugin-demo.png" alt="DEMO示例"></p>
+]]></content>
+      <categories>
+        <category>前端工程化</category>
+      </categories>
+      <tags>
+        <tag>工程化</tag>
+        <tag>前端</tag>
       </tags>
   </entry>
   <entry>
@@ -1960,18 +1987,6 @@ module: &#123;
       </tags>
   </entry>
   <entry>
-    <title>require() 源码解读</title>
-    <url>/2021/08/21/require%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/</url>
-    <content><![CDATA[<span id="more"></span>
-]]></content>
-      <categories>
-        <category>JavaScript</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Webpack</title>
     <url>/2022/04/14/Webpack/</url>
     <content><![CDATA[<h3 id="Webpack-是什么"><a href="#Webpack-是什么" class="headerlink" title="Webpack 是什么"></a>Webpack 是什么</h3><p>webpack 是一种<strong>前端资源构建工具</strong>，一个静态模块打包器(module bundler)。</p>
@@ -2012,6 +2027,33 @@ webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后�
       </tags>
   </entry>
   <entry>
+    <title>Webpack运行时runtime做了什么事情</title>
+    <url>/2025/05/28/Webpack%E8%BF%90%E8%A1%8C%E6%97%B6runtime%E5%81%9A%E4%BA%86%E5%93%AA%E4%BA%9B%E4%BA%8B%E6%83%85/</url>
+    <content><![CDATA[<h2 id="Webpack-Runtime"><a href="#Webpack-Runtime" class="headerlink" title="Webpack Runtime"></a>Webpack Runtime</h2><p>webpack 的 runtime，也就是 webpack 最后生成的代码，实现了一个自定义的模块加载系统，替代浏览器原生的模块机制：</p>
+<p><strong>webpack_modules</strong>: 维护一个所有模块的数组。将入口模块解析为 AST，根据 AST 深度优先搜索所有的模块，并构建出这个模块数组。每个模块都由一个包裹函数 (module, module.exports, <strong>webpack_require</strong>) 对模块进行包裹构成。<br><strong>webpack_require</strong>(moduleId): 手动实现加载一个模块。对已加载过的模块进行缓存，对未加载过的模块，执行 id 定位到 <strong>webpack_modules</strong> 中的包裹函数，执行并返回 module.exports，并缓存<br><strong>webpack_require</strong>(0): 运行第一个模块，即运行入口模块<br>另外，当涉及到多个 chunk 的打包方式中，比如 code spliting，webpack 中会有 jsonp 加载 chunk 的运行时代码。</p>
+<p>以下是 webpack runtime 的最简代码，配置示例可见 node-examples</p>
+]]></content>
+      <categories>
+        <category>前端工程化</category>
+      </categories>
+      <tags>
+        <tag>工程化</tag>
+        <tag>前端</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>require() 源码解读</title>
+    <url>/2021/08/21/require%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/</url>
+    <content><![CDATA[<span id="more"></span>
+]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>书单 / BookList</title>
     <url>/2024/09/26/%E4%B9%A6%E5%8D%95/</url>
     <content><![CDATA[<h4 id="专业向"><a href="#专业向" class="headerlink" title="专业向"></a>专业向</h4><h5 id="计算机（4）"><a href="#计算机（4）" class="headerlink" title="计算机（4）"></a>计算机（4）</h5><ul>
@@ -2048,66 +2090,34 @@ webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后�
       </categories>
   </entry>
   <entry>
-    <title>函数式编程</title>
-    <url>/2021/10/08/%E4%BB%80%E4%B9%88%E6%98%AF%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/</url>
-    <content><![CDATA[<h4 id="什么是函数式编程？"><a href="#什么是函数式编程？" class="headerlink" title="什么是函数式编程？"></a>什么是函数式编程？</h4><p>函数式编程具有五个鲜明的特点。</p>
-<p><strong>1. 函数是”第一等公民”</strong></p>
-<p>指的是函数与其他数据类型一样，处于平等地位，可以赋值给其他变量，也可以作为参数，传入另一个函数，或者作为别的函数的返回值。</p>
-<p>举例来说，下面代码中的print变量就是一个函数，可以作为另一个函数的参数。</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">　　<span class="keyword">var</span> print = <span class="keyword">function</span>(<span class="params">i</span>)&#123; <span class="variable language_">console</span>.<span class="title function_">log</span>(i);&#125;;</span><br><span class="line"></span><br><span class="line">　　[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>].<span class="title function_">forEach</span>(print);</span><br></pre></td></tr></table></figure>
-
-<p><strong>2. 只用”表达式”，不用”语句”</strong></p>
-<p>“表达式”（expression）是一个单纯的运算过程，总是有返回值；”语句”（statement）是执行某种操作，没有返回值。函数式编程要求，只使用表达式，不使用语句。也就是说，每一步都是单纯的运算，而且都有返回值。</p>
-<p>原因是函数式编程的开发动机，一开始就是为了处理运算（computation），不考虑系统的读写（I&#x2F;O）。”语句”属于对系统的读写操作，所以就被排斥在外。</p>
-<p>当然，实际应用中，不做I&#x2F;O是不可能的。因此，编程过程中，函数式编程只要求把I&#x2F;O限制到最小，不要有不必要的读写行为，保持计算过程的单纯性。</p>
-<span id="more"></span>
-
-<p><strong>3. 没有”副作用”</strong></p>
-<p>所谓”副作用”（side effect），指的是函数内部与外部互动（最典型的情况，就是修改全局变量的值），产生运算以外的其他结果。</p>
-<p>函数式编程强调没有”副作用”，意味着函数要保持独立，所有功能就是返回一个新的值，没有其他行为，尤其是不得修改外部变量的值。</p>
-<p><strong>4. 不修改状态</strong></p>
-<p>上一点已经提到，函数式编程只是返回新的值，不修改系统变量。因此，不修改变量，也是它的一个重要特点。</p>
-<p>在其他类型的语言中，变量往往用来保存”状态”（state）。不修改变量，意味着状态不能保存在变量中。函数式编程使用参数保存状态，最好的例子就是递归。下面的代码是一个将字符串逆序排列的函数，它演示了不同的参数如何决定了运算所处的”状态”。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function reverse(string) &#123;</span><br><span class="line">　　if(string.length == 0) &#123;</span><br><span class="line">　　　　return string;</span><br><span class="line">　　&#125; else &#123;</span><br><span class="line">　　　　return reverse(string.substring(1, string.length)) + string.substring(0, 1);</span><br><span class="line">　　&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>由于使用了递归，函数式语言的运行速度比较慢，这是它长期不能在业界推广的主要原因。</p>
-<p><strong>5. 引用透明</strong></p>
-<p>引用透明（Referential transparency），指的是函数的运行不依赖于外部变量或”状态”，只依赖于输入的参数，任何时候只要参数相同，引用函数所得到的返回值总是相同的。</p>
-<p>有了前面的第三点和第四点，这点是很显然的。其他类型的语言，函数的返回值往往与系统状态有关，不同的状态之下，返回值是不一样的。这就叫”引用不透明”，很不利于观察和理解程序的行为。</p>
-<h4 id="函数式编程的意义"><a href="#函数式编程的意义" class="headerlink" title="函数式编程的意义"></a>函数式编程的意义</h4><p><strong>1. 代码简洁，开发快速</strong></p>
-<p>函数式编程大量使用函数，减少了代码的重复，因此程序比较短，开发速度较快。</p>
-<p><strong>2. 更方便的代码管理</strong></p>
-<p>函数式编程不依赖、也不会改变外界的状态，只要给定输入参数，返回的结果必定相同。因此，每一个函数都可以被看做独立单元，很有利于进行单元测试（unit testing）和除错（debugging），以及模块化组合。</p>
-]]></content>
+    <title>Web3相关学习</title>
+    <url>/2024/10/29/Web3%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/</url>
+    <content><![CDATA[<p>先开个坑，准备下Web3相关的学习</p>
+<h2 id="学习路线"><a href="#学习路线" class="headerlink" title="学习路线"></a>学习路线</h2><ul>
+<li><strong>Web3开发学习路线</strong>: <a href="https://54web3.cc/blog/roadmap/learning-path-web3">https://54web3.cc/blog/roadmap/learning-path-web3</a></li>
+<li><strong>Web3 入门计划</strong>: <a href="https://cubic-leaf-731.notion.site/web3-202208-09-1623ccd15c2148a1ae00ed8794d153b1">https://cubic-leaf-731.notion.site/web3-202208-09-1623ccd15c2148a1ae00ed8794d153b1</a></li>
+<li><strong>Web3从入门到精通开发学习路线</strong>：<a href="https://juejin.cn/post/7307185531330838543">https://juejin.cn/post/7307185531330838543</a></li>
+</ul>
+<h3 id="WEEK-1-区块链的基础知识"><a href="#WEEK-1-区块链的基础知识" class="headerlink" title="WEEK 1: 区块链的基础知识"></a><strong>WEEK 1: 区块链的基础知识</strong></h3><ul>
+<li>密码学基础</li>
+<li>区块链基础</li>
+<li>相关金融知识</li>
+<li>学习比特币底层技术</li>
+<li>学习以太坊原理</li>
+</ul>
+<!-- ![image-20241105](../assets/Week1：区块链基础知识.png) -->]]></content>
       <categories>
         <category>Chore</category>
       </categories>
       <tags>
-        <tag>JavaScript</tag>
-        <tag>Functional Programming</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Web Development Trend</title>
-    <url>/2024/12/05/%E5%89%8D%E7%AB%AF%E5%8F%91%E5%B1%95%E8%B6%8B%E5%8A%BF/</url>
-    <content><![CDATA[<h2 id="前端供需关系"><a href="#前端供需关系" class="headerlink" title="前端供需关系"></a>前端供需关系</h2><h2 id="新的样式解决方案和组件库现状-发展"><a href="#新的样式解决方案和组件库现状-发展" class="headerlink" title="新的样式解决方案和组件库现状&amp;发展"></a>新的样式解决方案和组件库现状&amp;发展</h2><blockquote>
-<p>样式如何结合组件库去使用</p>
-</blockquote>
-<h3 id="CSS-in-JS-style-component"><a href="#CSS-in-JS-style-component" class="headerlink" title="CSS in JS: style component"></a>CSS in JS: style component</h3><p>能够实现CSS模块化，专注于</p>
-<p>语义差，不利于SSO<br>运行时编译</p>
-<h3 id="Tailwind-CSS"><a href="#Tailwind-CSS" class="headerlink" title="Tailwind CSS"></a>Tailwind CSS</h3><p>语义好，利于AI学习，AI</p>
-<h3 id="Shadcn"><a href="#Shadcn" class="headerlink" title="Shadcn"></a>Shadcn</h3><h3 id="HeadlessUI"><a href="#HeadlessUI" class="headerlink" title="HeadlessUI"></a>HeadlessUI</h3><h3 id="Radix"><a href="#Radix" class="headerlink" title="Radix"></a>Radix</h3><p>主题样式</p>
-]]></content>
-      <categories>
-        <category>chore</category>
-      </categories>
-      <tags>
-        <tag>前端</tag>
+        <tag>Web3</tag>
+        <tag>区块链</tag>
+        <tag>智能合约</tag>
       </tags>
   </entry>
   <entry>
     <title>前端安全相关</title>
-    <url>/2025/01/10/%E5%89%8D%E7%AB%AF%E5%AE%89%E5%85%A8%E7%9B%B8%E5%85%B3/</url>
+    <url>/2025/01/12/%E5%89%8D%E7%AB%AF%E5%AE%89%E5%85%A8%E7%9B%B8%E5%85%B3/</url>
     <content><![CDATA[<h2 id="XSS"><a href="#XSS" class="headerlink" title="XSS"></a>XSS</h2><p><strong>跨站脚本攻击（XSS，Cross - Site Scripting）</strong>攻击者通过在目标网站中注入恶意脚本，来获取用户的敏感信息、执行恶意操作等。这些恶意脚本通常是 JavaScript</p>
 <h3 id="整体过程"><a href="#整体过程" class="headerlink" title="整体过程"></a>整体过程</h3><p>攻击者提交恶意代码 -&gt; 浏览器执行恶意代码</p>
 <h3 id="攻击方式"><a href="#攻击方式" class="headerlink" title="攻击方式"></a>攻击方式</h3><h4 id="反射型XSS"><a href="#反射型XSS" class="headerlink" title="反射型XSS"></a>反射型XSS</h4><p>示例：一个简单的搜索功能，用户在搜索框输入内容后，服务器将用户输入的内容直接在页面上显示。攻击者构造一个类似 <code>http://example.com/search?q=&lt;script&gt;alert(&#39;XSS&#39;)&lt;/script&gt;</code> 的 URL，当用户点击这个链接，就会弹出一个警告框显示 “XSS”。</p>
@@ -2159,8 +2169,66 @@ webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后�
       </tags>
   </entry>
   <entry>
+    <title>Web Development Trend</title>
+    <url>/2024/12/05/%E5%89%8D%E7%AB%AF%E5%8F%91%E5%B1%95%E8%B6%8B%E5%8A%BF/</url>
+    <content><![CDATA[<h2 id="前端供需关系"><a href="#前端供需关系" class="headerlink" title="前端供需关系"></a>前端供需关系</h2><h2 id="新的样式解决方案和组件库现状-发展"><a href="#新的样式解决方案和组件库现状-发展" class="headerlink" title="新的样式解决方案和组件库现状&amp;发展"></a>新的样式解决方案和组件库现状&amp;发展</h2><blockquote>
+<p>样式如何结合组件库去使用</p>
+</blockquote>
+<h3 id="CSS-in-JS-style-component"><a href="#CSS-in-JS-style-component" class="headerlink" title="CSS in JS: style component"></a>CSS in JS: style component</h3><p>能够实现CSS模块化，专注于</p>
+<p>语义差，不利于SSO<br>运行时编译</p>
+<h3 id="Tailwind-CSS"><a href="#Tailwind-CSS" class="headerlink" title="Tailwind CSS"></a>Tailwind CSS</h3><p>语义好，利于AI学习，AI</p>
+<h3 id="Shadcn"><a href="#Shadcn" class="headerlink" title="Shadcn"></a>Shadcn</h3><h3 id="HeadlessUI"><a href="#HeadlessUI" class="headerlink" title="HeadlessUI"></a>HeadlessUI</h3><h3 id="Radix"><a href="#Radix" class="headerlink" title="Radix"></a>Radix</h3><p>主题样式</p>
+]]></content>
+      <categories>
+        <category>chore</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>函数式编程</title>
+    <url>/2021/10/08/%E4%BB%80%E4%B9%88%E6%98%AF%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/</url>
+    <content><![CDATA[<h4 id="什么是函数式编程？"><a href="#什么是函数式编程？" class="headerlink" title="什么是函数式编程？"></a>什么是函数式编程？</h4><p>函数式编程具有五个鲜明的特点。</p>
+<p><strong>1. 函数是”第一等公民”</strong></p>
+<p>指的是函数与其他数据类型一样，处于平等地位，可以赋值给其他变量，也可以作为参数，传入另一个函数，或者作为别的函数的返回值。</p>
+<p>举例来说，下面代码中的print变量就是一个函数，可以作为另一个函数的参数。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">　　<span class="keyword">var</span> print = <span class="keyword">function</span>(<span class="params">i</span>)&#123; <span class="variable language_">console</span>.<span class="title function_">log</span>(i);&#125;;</span><br><span class="line"></span><br><span class="line">　　[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>].<span class="title function_">forEach</span>(print);</span><br></pre></td></tr></table></figure>
+
+<p><strong>2. 只用”表达式”，不用”语句”</strong></p>
+<p>“表达式”（expression）是一个单纯的运算过程，总是有返回值；”语句”（statement）是执行某种操作，没有返回值。函数式编程要求，只使用表达式，不使用语句。也就是说，每一步都是单纯的运算，而且都有返回值。</p>
+<p>原因是函数式编程的开发动机，一开始就是为了处理运算（computation），不考虑系统的读写（I&#x2F;O）。”语句”属于对系统的读写操作，所以就被排斥在外。</p>
+<p>当然，实际应用中，不做I&#x2F;O是不可能的。因此，编程过程中，函数式编程只要求把I&#x2F;O限制到最小，不要有不必要的读写行为，保持计算过程的单纯性。</p>
+<span id="more"></span>
+
+<p><strong>3. 没有”副作用”</strong></p>
+<p>所谓”副作用”（side effect），指的是函数内部与外部互动（最典型的情况，就是修改全局变量的值），产生运算以外的其他结果。</p>
+<p>函数式编程强调没有”副作用”，意味着函数要保持独立，所有功能就是返回一个新的值，没有其他行为，尤其是不得修改外部变量的值。</p>
+<p><strong>4. 不修改状态</strong></p>
+<p>上一点已经提到，函数式编程只是返回新的值，不修改系统变量。因此，不修改变量，也是它的一个重要特点。</p>
+<p>在其他类型的语言中，变量往往用来保存”状态”（state）。不修改变量，意味着状态不能保存在变量中。函数式编程使用参数保存状态，最好的例子就是递归。下面的代码是一个将字符串逆序排列的函数，它演示了不同的参数如何决定了运算所处的”状态”。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function reverse(string) &#123;</span><br><span class="line">　　if(string.length == 0) &#123;</span><br><span class="line">　　　　return string;</span><br><span class="line">　　&#125; else &#123;</span><br><span class="line">　　　　return reverse(string.substring(1, string.length)) + string.substring(0, 1);</span><br><span class="line">　　&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>由于使用了递归，函数式语言的运行速度比较慢，这是它长期不能在业界推广的主要原因。</p>
+<p><strong>5. 引用透明</strong></p>
+<p>引用透明（Referential transparency），指的是函数的运行不依赖于外部变量或”状态”，只依赖于输入的参数，任何时候只要参数相同，引用函数所得到的返回值总是相同的。</p>
+<p>有了前面的第三点和第四点，这点是很显然的。其他类型的语言，函数的返回值往往与系统状态有关，不同的状态之下，返回值是不一样的。这就叫”引用不透明”，很不利于观察和理解程序的行为。</p>
+<h4 id="函数式编程的意义"><a href="#函数式编程的意义" class="headerlink" title="函数式编程的意义"></a>函数式编程的意义</h4><p><strong>1. 代码简洁，开发快速</strong></p>
+<p>函数式编程大量使用函数，减少了代码的重复，因此程序比较短，开发速度较快。</p>
+<p><strong>2. 更方便的代码管理</strong></p>
+<p>函数式编程不依赖、也不会改变外界的状态，只要给定输入参数，返回的结果必定相同。因此，每一个函数都可以被看做独立单元，很有利于进行单元测试（unit testing）和除错（debugging），以及模块化组合。</p>
+]]></content>
+      <categories>
+        <category>Chore</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>Functional Programming</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>前端模块化</title>
-    <url>/2024/12/30/%E5%89%8D%E7%AB%AF%E6%A8%A1%E5%9D%97%E5%8C%96/</url>
+    <url>/2025/03/27/%E5%89%8D%E7%AB%AF%E6%A8%A1%E5%9D%97%E5%8C%96/</url>
     <content><![CDATA[<h2 id="CommonJS-ESModule-UMD等模块化方案"><a href="#CommonJS-ESModule-UMD等模块化方案" class="headerlink" title="CommonJS&#x2F;ESModule&#x2F;UMD等模块化方案"></a>CommonJS&#x2F;ESModule&#x2F;UMD等模块化方案</h2><h3 id="CommonJS"><a href="#CommonJS" class="headerlink" title="CommonJS"></a>CommonJS</h3><ul>
 <li><p>使用<code>require</code>，<code>export</code>进行导入导出</p>
 </li>
@@ -2270,10 +2338,9 @@ webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后�
 </ol>
 </li>
 </ul>
-<h4 id="4、成熟的第三方npm包是怎么去做构建的（以Lodash为例）"><a href="#4、成熟的第三方npm包是怎么去做构建的（以Lodash为例）" class="headerlink" title="4、成熟的第三方npm包是怎么去做构建的（以Lodash为例）"></a>4、成熟的第三方npm包是怎么去做构建的（以Lodash为例）</h4><figure class="highlight plaintext"><figcaption><span>的源码采用定义全局对象，「无模块化」设计，核心是通过构建工具将函数集合打包为多种格式：</span></figcaption><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">源码组织：所有工具函数（如 map、filter）定义在全局对象上。</span><br><span class="line">构建工具：使用定制的构建系统，将源码转换为：</span><br><span class="line">```CJS``` 格式：```lodash/index.js```</span><br><span class="line">```ESM``` 格式：```lodash-es/index.js```</span><br><span class="line">```UMD``` 格式：```dist/lodash.js```（可通过 CDN 引入）</span><br><span class="line"></span><br><span class="line">#### 5、如何把开发的NPM包打成不同的格式（ESM，CJS，UMD）</span><br><span class="line">详见：[打包示例](https://github.com/huangyunt/Learning-Demo/tree/master/esm%2Ccjs%2Cumd%E6%89%93%E5%8C%85%E7%A4%BA%E4%BE%8B)</span><br><span class="line">- js代码</span><br><span class="line">  ``` javaScript</span><br><span class="line">  export function capitalize(str) &#123;</span><br><span class="line">    if (!str) return &#x27;&#x27;;</span><br><span class="line">    return str.charAt(0).toUpperCase() + str.slice(1);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  export function truncate(str, maxLength = 10, suffix = &#x27;...&#x27;) &#123;</span><br><span class="line">    if (str.length &lt;= maxLength) return str;</span><br><span class="line">    return str.slice(0, maxLength) + suffix;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  export default &#123;</span><br><span class="line">    capitalize,</span><br><span class="line">    truncate</span><br><span class="line">  &#125;;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>webpack配置文件<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> &#123; <span class="title class_">CleanWebpackPlugin</span> &#125; = <span class="built_in">require</span>(<span class="string">&#x27;clean-webpack-plugin&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> <span class="title class_">TerserPlugin</span> = <span class="built_in">require</span>(<span class="string">&#x27;terser-webpack-plugin&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 公共配置</span></span><br><span class="line"><span class="keyword">const</span> commonConfig = &#123;</span><br><span class="line">    <span class="attr">mode</span>: <span class="string">&#x27;production&#x27;</span>,</span><br><span class="line">    <span class="attr">entry</span>: <span class="string">&#x27;./src/index.js&#x27;</span>,</span><br><span class="line">    <span class="attr">module</span>: &#123;</span><br><span class="line">        <span class="attr">rules</span>: [</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="attr">test</span>: <span class="regexp">/\.js$/</span>,</span><br><span class="line">                <span class="attr">exclude</span>: <span class="regexp">/node_modules/</span>,</span><br><span class="line">                <span class="comment">// use: &#123;</span></span><br><span class="line">                <span class="comment">//   loader: &#x27;babel-loader&#x27;,</span></span><br><span class="line">                <span class="comment">//   options: &#123;</span></span><br><span class="line">                <span class="comment">//     presets: [&#x27;@babel/preset-env&#x27;]</span></span><br><span class="line">                <span class="comment">//   &#125;</span></span><br><span class="line">                <span class="comment">// &#125;</span></span><br><span class="line">            &#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">plugins</span>: [</span><br><span class="line">        <span class="comment">// new CleanWebpackPlugin() // 清理dist目录</span></span><br><span class="line">    ],</span><br><span class="line">    <span class="attr">resolve</span>: &#123;</span><br><span class="line">        <span class="attr">extensions</span>: [<span class="string">&#x27;.js&#x27;</span>]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ESM 配置</span></span><br><span class="line"><span class="keyword">const</span> esmConfig = &#123;</span><br><span class="line">    ...commonConfig,</span><br><span class="line">    <span class="attr">output</span>: &#123;</span><br><span class="line">        <span class="attr">path</span>: path.<span class="title function_">resolve</span>(__dirname, <span class="string">&#x27;dist&#x27;</span>),</span><br><span class="line">        <span class="attr">filename</span>: <span class="string">&#x27;string-utils.esm.js&#x27;</span>,</span><br><span class="line">        <span class="attr">library</span>: &#123;</span><br><span class="line">            <span class="attr">type</span>: <span class="string">&#x27;module&#x27;</span> <span class="comment">// 输出ESM格式</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">experiments</span>: &#123;</span><br><span class="line">        <span class="attr">outputModule</span>: <span class="literal">true</span> <span class="comment">// 启用ESM输出</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">optimization</span>: &#123;</span><br><span class="line">        <span class="attr">minimize</span>: <span class="literal">false</span> <span class="comment">// 开发环境不压缩</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// CJS 配置</span></span><br><span class="line"><span class="keyword">const</span> cjsConfig = &#123;</span><br><span class="line">    ...commonConfig,</span><br><span class="line">    <span class="attr">output</span>: &#123;</span><br><span class="line">        <span class="attr">path</span>: path.<span class="title function_">resolve</span>(__dirname, <span class="string">&#x27;dist&#x27;</span>),</span><br><span class="line">        <span class="attr">filename</span>: <span class="string">&#x27;string-utils.cjs.js&#x27;</span>,</span><br><span class="line">        <span class="attr">library</span>: &#123;</span><br><span class="line">            <span class="attr">type</span>: <span class="string">&#x27;commonjs2&#x27;</span> <span class="comment">// 输出CJS格式</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">target</span>: <span class="string">&#x27;node&#x27;</span>, <span class="comment">// 针对Node.js环境</span></span><br><span class="line">    <span class="attr">optimization</span>: &#123;</span><br><span class="line">        <span class="attr">minimize</span>: <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// UMD 配置（开发环境）</span></span><br><span class="line"><span class="keyword">const</span> umdDevConfig = &#123;</span><br><span class="line">    ...commonConfig,</span><br><span class="line">    <span class="attr">output</span>: &#123;</span><br><span class="line">        <span class="attr">path</span>: path.<span class="title function_">resolve</span>(__dirname, <span class="string">&#x27;dist&#x27;</span>),</span><br><span class="line">        <span class="attr">filename</span>: <span class="string">&#x27;string-utils.umd.js&#x27;</span>,</span><br><span class="line">        <span class="attr">library</span>: &#123;</span><br><span class="line">            <span class="attr">name</span>: <span class="string">&#x27;StringUtils&#x27;</span>, <span class="comment">// 全局变量名</span></span><br><span class="line">            <span class="attr">type</span>: <span class="string">&#x27;umd&#x27;</span> <span class="comment">// 输出UMD格式</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">globalObject</span>: <span class="string">&#x27;this&#x27;</span> <span class="comment">// 兼容浏览器和Node.js</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">optimization</span>: &#123;</span><br><span class="line">        <span class="attr">minimize</span>: <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = [esmConfig, cjsConfig, umdDevConfig, umdProdConfig];</span><br></pre></td></tr></table></figure></li>
-</ul>
+<h4 id="4、成熟的第三方npm包是怎么去做构建的（以Lodash为例）"><a href="#4、成熟的第三方npm包是怎么去做构建的（以Lodash为例）" class="headerlink" title="4、成熟的第三方npm包是怎么去做构建的（以Lodash为例）"></a>4、成熟的第三方npm包是怎么去做构建的（以Lodash为例）</h4><p><strong>Lodash</strong> 的源码采用定义全局对象，「无模块化」设计，核心是通过构建工具将函数集合打包为多种格式：</p>
+<p>源码组织：所有工具函数（如 map、filter）定义在全局对象上。<br>构建工具：使用定制的构建系统，将源码转换为：<br><strong>CJS 格式</strong>：lodash&#x2F;index.js<br><strong>ESM 格式</strong>：lodash-es&#x2F;index.js<br><strong>UMD 格式</strong>：dist&#x2F;lodash.js（可通过 CDN 引入）</p>
+<h4 id="5、如何把开发的NPM包打成不同的格式（ESM，CJS，UMD）"><a href="#5、如何把开发的NPM包打成不同的格式（ESM，CJS，UMD）" class="headerlink" title="5、如何把开发的NPM包打成不同的格式（ESM，CJS，UMD）"></a>5、如何把开发的NPM包打成不同的格式（ESM，CJS，UMD）</h4><p>详见：<a href="https://github.com/huangyunt/Learning-Demo/tree/master/esm%2Ccjs%2Cumd%E6%89%93%E5%8C%85%E7%A4%BA%E4%BE%8B">打包示例</a><br>js代码<br>  <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">capitalize</span>(<span class="params">str</span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (!str) <span class="keyword">return</span> <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">  <span class="keyword">return</span> str.<span class="title function_">charAt</span>(<span class="number">0</span>).<span class="title function_">toUpperCase</span>() + str.<span class="title function_">slice</span>(<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">truncate</span>(<span class="params">str, maxLength = <span class="number">10</span>, suffix = <span class="string">&#x27;...&#x27;</span></span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (str.<span class="property">length</span> &lt;= maxLength) <span class="keyword">return</span> str;</span><br><span class="line">  <span class="keyword">return</span> str.<span class="title function_">slice</span>(<span class="number">0</span>, maxLength) + suffix;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  capitalize,</span><br><span class="line">  truncate</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><br>webpack配置文件<br>  <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> &#123; <span class="title class_">CleanWebpackPlugin</span> &#125; = <span class="built_in">require</span>(<span class="string">&#x27;clean-webpack-plugin&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> <span class="title class_">TerserPlugin</span> = <span class="built_in">require</span>(<span class="string">&#x27;terser-webpack-plugin&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 公共配置</span></span><br><span class="line"><span class="keyword">const</span> commonConfig = &#123;</span><br><span class="line">    <span class="attr">mode</span>: <span class="string">&#x27;production&#x27;</span>,</span><br><span class="line">    <span class="attr">entry</span>: <span class="string">&#x27;./src/index.js&#x27;</span>,</span><br><span class="line">    <span class="attr">module</span>: &#123;</span><br><span class="line">        <span class="attr">rules</span>: [</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="attr">test</span>: <span class="regexp">/\.js$/</span>,</span><br><span class="line">                <span class="attr">exclude</span>: <span class="regexp">/node_modules/</span>,</span><br><span class="line">                <span class="comment">// use: &#123;</span></span><br><span class="line">                <span class="comment">//   loader: &#x27;babel-loader&#x27;,</span></span><br><span class="line">                <span class="comment">//   options: &#123;</span></span><br><span class="line">                <span class="comment">//     presets: [&#x27;@babel/preset-env&#x27;]</span></span><br><span class="line">                <span class="comment">//   &#125;</span></span><br><span class="line">                <span class="comment">// &#125;</span></span><br><span class="line">            &#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">plugins</span>: [</span><br><span class="line">        <span class="comment">// new CleanWebpackPlugin() // 清理dist目录</span></span><br><span class="line">    ],</span><br><span class="line">    <span class="attr">resolve</span>: &#123;</span><br><span class="line">        <span class="attr">extensions</span>: [<span class="string">&#x27;.js&#x27;</span>]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ESM 配置</span></span><br><span class="line"><span class="keyword">const</span> esmConfig = &#123;</span><br><span class="line">    ...commonConfig,</span><br><span class="line">    <span class="attr">output</span>: &#123;</span><br><span class="line">        <span class="attr">path</span>: path.<span class="title function_">resolve</span>(__dirname, <span class="string">&#x27;dist&#x27;</span>),</span><br><span class="line">        <span class="attr">filename</span>: <span class="string">&#x27;string-utils.esm.js&#x27;</span>,</span><br><span class="line">        <span class="attr">library</span>: &#123;</span><br><span class="line">            <span class="attr">type</span>: <span class="string">&#x27;module&#x27;</span> <span class="comment">// 输出ESM格式</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">experiments</span>: &#123;</span><br><span class="line">        <span class="attr">outputModule</span>: <span class="literal">true</span> <span class="comment">// 启用ESM输出</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">optimization</span>: &#123;</span><br><span class="line">        <span class="attr">minimize</span>: <span class="literal">false</span> <span class="comment">// 开发环境不压缩</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// CJS 配置</span></span><br><span class="line"><span class="keyword">const</span> cjsConfig = &#123;</span><br><span class="line">    ...commonConfig,</span><br><span class="line">    <span class="attr">output</span>: &#123;</span><br><span class="line">        <span class="attr">path</span>: path.<span class="title function_">resolve</span>(__dirname, <span class="string">&#x27;dist&#x27;</span>),</span><br><span class="line">        <span class="attr">filename</span>: <span class="string">&#x27;string-utils.cjs.js&#x27;</span>,</span><br><span class="line">        <span class="attr">library</span>: &#123;</span><br><span class="line">            <span class="attr">type</span>: <span class="string">&#x27;commonjs2&#x27;</span> <span class="comment">// 输出CJS格式</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">target</span>: <span class="string">&#x27;node&#x27;</span>, <span class="comment">// 针对Node.js环境</span></span><br><span class="line">    <span class="attr">optimization</span>: &#123;</span><br><span class="line">        <span class="attr">minimize</span>: <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// UMD 配置（开发环境）</span></span><br><span class="line"><span class="keyword">const</span> umdDevConfig = &#123;</span><br><span class="line">    ...commonConfig,</span><br><span class="line">    <span class="attr">output</span>: &#123;</span><br><span class="line">        <span class="attr">path</span>: path.<span class="title function_">resolve</span>(__dirname, <span class="string">&#x27;dist&#x27;</span>),</span><br><span class="line">        <span class="attr">filename</span>: <span class="string">&#x27;string-utils.umd.js&#x27;</span>,</span><br><span class="line">        <span class="attr">library</span>: &#123;</span><br><span class="line">            <span class="attr">name</span>: <span class="string">&#x27;StringUtils&#x27;</span>, <span class="comment">// 全局变量名</span></span><br><span class="line">            <span class="attr">type</span>: <span class="string">&#x27;umd&#x27;</span> <span class="comment">// 输出UMD格式</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">globalObject</span>: <span class="string">&#x27;this&#x27;</span> <span class="comment">// 兼容浏览器和Node.js</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">optimization</span>: &#123;</span><br><span class="line">        <span class="attr">minimize</span>: <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = [esmConfig, cjsConfig, umdDevConfig, umdProdConfig];</span><br></pre></td></tr></table></figure></p>
 ]]></content>
       <categories>
         <category>前端工程化</category>
@@ -2281,6 +2348,21 @@ webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后�
       <tags>
         <tag>工程化</tag>
         <tag>前端</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>加密货币的本质</title>
+    <url>/2024/11/04/%E5%8A%A0%E5%AF%86%E8%B4%A7%E5%B8%81%E7%9A%84%E6%9C%AC%E8%B4%A8/</url>
+    <content><![CDATA[<h2 id="钱的本质"><a href="#钱的本质" class="headerlink" title="钱的本质"></a>钱的本质</h2><p>共识、可信性</p>
+<h3 id="比特币的可信性"><a href="#比特币的可信性" class="headerlink" title="比特币的可信性"></a>比特币的可信性</h3><p>比特币要解决的核心问题，就是创造一种可信的数字凭证。由于这种凭证可信，所以能够当做货币。<br>比特币的技术基础是加密学，因为只有加密学才能保证它的可信性。一旦加密被破解，它就没法当作货币了。这也是这一类数字凭证被称为”加密货币”的原因。<br>技术人员对比特币感兴趣，还有一个重要原因。任何需要可靠的数字凭证的场合，也许都可以用到这种技术。</p>
+]]></content>
+      <categories>
+        <category>Web3</category>
+      </categories>
+      <tags>
+        <tag>Web3</tag>
+        <tag>比特币</tag>
+        <tag>加密货币</tag>
       </tags>
   </entry>
   <entry>
@@ -2321,23 +2403,8 @@ webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后�
       </tags>
   </entry>
   <entry>
-    <title>加密货币的本质</title>
-    <url>/2024/11/04/%E5%8A%A0%E5%AF%86%E8%B4%A7%E5%B8%81%E7%9A%84%E6%9C%AC%E8%B4%A8/</url>
-    <content><![CDATA[<h2 id="钱的本质"><a href="#钱的本质" class="headerlink" title="钱的本质"></a>钱的本质</h2><p>共识、可信性</p>
-<h3 id="比特币的可信性"><a href="#比特币的可信性" class="headerlink" title="比特币的可信性"></a>比特币的可信性</h3><p>比特币要解决的核心问题，就是创造一种可信的数字凭证。由于这种凭证可信，所以能够当做货币。<br>比特币的技术基础是加密学，因为只有加密学才能保证它的可信性。一旦加密被破解，它就没法当作货币了。这也是这一类数字凭证被称为”加密货币”的原因。<br>技术人员对比特币感兴趣，还有一个重要原因。任何需要可靠的数字凭证的场合，也许都可以用到这种技术。</p>
-]]></content>
-      <categories>
-        <category>Web3</category>
-      </categories>
-      <tags>
-        <tag>Web3</tag>
-        <tag>比特币</tag>
-        <tag>加密货币</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>包管理器</title>
-    <url>/2025/05/27/%E5%8C%85%E7%AE%A1%E7%90%86%E5%99%A8/</url>
+    <url>/2025/03/13/%E5%8C%85%E7%AE%A1%E7%90%86%E5%99%A8/</url>
     <content><![CDATA[<h2 id="包管理器"><a href="#包管理器" class="headerlink" title="包管理器"></a>包管理器</h2><h3 id="Npm-Yarn"><a href="#Npm-Yarn" class="headerlink" title="Npm&#x2F;Yarn"></a>Npm&#x2F;Yarn</h3><h4 id="Npm发包"><a href="#Npm发包" class="headerlink" title="Npm发包"></a>Npm发包</h4><h5 id="files"><a href="#files" class="headerlink" title="files"></a>files</h5><p>指定哪些文件会被打包发布（后面详细描述）。</p>
 <h5 id="main、browser、exports、module"><a href="#main、browser、exports、module" class="headerlink" title="main、browser、exports、module"></a>main、browser、exports、module</h5><p>这四个字段都是用来定义包的入口，<code>npm</code> 只规定了 <code>main</code> 和 <code>browser</code> 这两个字段，<code>exports</code> 是 <code>nodejs</code> 的规范，<code>module</code> 一般被构建工具所支持。</p>
 <h5 id="main"><a href="#main" class="headerlink" title="main"></a>main</h5><p><code>main</code> 规定了包的主要入口点，默认值为 <code>index.js</code>。</p>
@@ -2367,29 +2434,6 @@ webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后�
       </tags>
   </entry>
   <entry>
-    <title>区块链基础知识</title>
-    <url>/2024/11/01/%E5%8C%BA%E5%9D%97%E9%93%BE%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</url>
-    <content><![CDATA[<h2 id="区块链的本质"><a href="#区块链的本质" class="headerlink" title="区块链的本质"></a>区块链的本质</h2><p>区块链是什么？一言以蔽之：<strong>特殊的分布式数据库</strong><br>区块链的主要作用还是储存信息，任何需要保存的信息，都可以写入区块链，也可以从里面读取。</p>
-<p>其次，任何人都可以架设服务器，加入区块链网络，成为一个节点。区块链的世界里面，没有中心节点，每个节点都是平等的，都保存着整个数据库。你可以向任何一个节点，写入&#x2F;读取数据，因为所有节点最后都会同步，保证区块链一致。</p>
-<h2 id="区块链的最大特点"><a href="#区块链的最大特点" class="headerlink" title="区块链的最大特点"></a>区块链的最大特点</h2><p>去中心化、保持一致性（算力证明增加叛徒成本）</p>
-<h3 id="拜占庭将军问题"><a href="#拜占庭将军问题" class="headerlink" title="拜占庭将军问题"></a>拜占庭将军问题</h3><blockquote>
-<p>如何解决在所有网络节点存在故障、恶意节点时，保证其余部分结点的准确性和一致性</p>
-</blockquote>
-<h4 id="拜占庭容错（将军-副官模型）"><a href="#拜占庭容错（将军-副官模型）" class="headerlink" title="拜占庭容错（将军-副官模型）"></a>拜占庭容错（将军-副官模型）</h4><ol>
-<li>忠诚的副官遵守同一个命令</li>
-<li>若将军忠诚，则忠诚的副官会执行他的命令<br>m: 恶意副官的个数；n: 总人数<br>当 n&gt;3m, 问题可解</li>
-</ol>
-]]></content>
-      <categories>
-        <category>Web3</category>
-      </categories>
-      <tags>
-        <tag>Web3</tag>
-        <tag>区块链</tag>
-        <tag>智能合约</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>同源和跨域</title>
     <url>/2025/01/10/%E5%90%8C%E6%BA%90%E5%92%8C%E8%B7%A8%E5%9F%9F/</url>
     <content><![CDATA[<p>| 比较杂的知识点，同源跨域、服务器代理、简单请求非简单请求</p>
@@ -2413,6 +2457,29 @@ webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后�
       </categories>
       <tags>
         <tag>前端安全</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>区块链基础知识</title>
+    <url>/2024/11/01/%E5%8C%BA%E5%9D%97%E9%93%BE%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</url>
+    <content><![CDATA[<h2 id="区块链的本质"><a href="#区块链的本质" class="headerlink" title="区块链的本质"></a>区块链的本质</h2><p>区块链是什么？一言以蔽之：<strong>特殊的分布式数据库</strong><br>区块链的主要作用还是储存信息，任何需要保存的信息，都可以写入区块链，也可以从里面读取。</p>
+<p>其次，任何人都可以架设服务器，加入区块链网络，成为一个节点。区块链的世界里面，没有中心节点，每个节点都是平等的，都保存着整个数据库。你可以向任何一个节点，写入&#x2F;读取数据，因为所有节点最后都会同步，保证区块链一致。</p>
+<h2 id="区块链的最大特点"><a href="#区块链的最大特点" class="headerlink" title="区块链的最大特点"></a>区块链的最大特点</h2><p>去中心化、保持一致性（算力证明增加叛徒成本）</p>
+<h3 id="拜占庭将军问题"><a href="#拜占庭将军问题" class="headerlink" title="拜占庭将军问题"></a>拜占庭将军问题</h3><blockquote>
+<p>如何解决在所有网络节点存在故障、恶意节点时，保证其余部分结点的准确性和一致性</p>
+</blockquote>
+<h4 id="拜占庭容错（将军-副官模型）"><a href="#拜占庭容错（将军-副官模型）" class="headerlink" title="拜占庭容错（将军-副官模型）"></a>拜占庭容错（将军-副官模型）</h4><ol>
+<li>忠诚的副官遵守同一个命令</li>
+<li>若将军忠诚，则忠诚的副官会执行他的命令<br>m: 恶意副官的个数；n: 总人数<br>当 n&gt;3m, 问题可解</li>
+</ol>
+]]></content>
+      <categories>
+        <category>Web3</category>
+      </categories>
+      <tags>
+        <tag>Web3</tag>
+        <tag>区块链</tag>
+        <tag>智能合约</tag>
       </tags>
   </entry>
   <entry>
@@ -2565,6 +2632,18 @@ webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后�
       </tags>
   </entry>
   <entry>
+    <title>微信小程序开发</title>
+    <url>/2025/06/05/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91/</url>
+    <content><![CDATA[<h2 id="微信小程序开发"><a href="#微信小程序开发" class="headerlink" title="微信小程序开发"></a>微信小程序开发</h2>]]></content>
+      <categories>
+        <category>小程序</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+        <tag>微信小程序</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>成为老师</title>
     <url>/2024/10/29/%E6%88%90%E4%B8%BA%E8%80%81%E5%B8%88/</url>
     <content><![CDATA[]]></content>
@@ -2620,6 +2699,99 @@ webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后�
 <p><strong>标签、分类功能</strong><br>所有文章整理了一版，对所有文章分标签、分类展示</p>
 <p><strong>文章显示字数统计、浏览时间</strong><br>引入<code>hexo-word-counter</code>这个插件来实现的，还会统计代码字数，算是个锦上添花的功能吧^^</p>
 ]]></content>
+  </entry>
+  <entry>
+    <title>比特币</title>
+    <url>/2024/11/05/%E6%AF%94%E7%89%B9%E5%B8%81/</url>
+    <content><![CDATA[<blockquote class="blockquote-center">
+    <p><b>不要被学术界的思维限制了头脑，不要被程序员的思维限制了想象力。</b></p>
+</blockquote>
+
+<h2 id="比特币中的密码学"><a href="#比特币中的密码学" class="headerlink" title="比特币中的密码学"></a>比特币中的密码学</h2><h3 id="比特币中的哈希特性"><a href="#比特币中的哈希特性" class="headerlink" title="比特币中的哈希特性"></a>比特币中的哈希特性</h3><!-- > 容易验证，不容易计算 -->
+<h4 id="Collision-resistance-抗哈希碰撞"><a href="#Collision-resistance-抗哈希碰撞" class="headerlink" title="Collision resistance (抗哈希碰撞)"></a>Collision resistance (抗哈希碰撞)</h4><blockquote>
+<p>没有高效的方法来人为的制造哈希碰撞</p>
+</blockquote>
+<ul>
+<li><strong>Collision resistance的定义</strong>：给定X，没有高效的方法找到Y，使得H(X) &#x3D; H(Y)</li>
+<li><strong>Collision resistance的特性</strong>：无法用数学证明</li>
+<li><strong>MD5哈希函数</strong>：以前认为是Collision resistance，后来被鉴定为不安全的哈希函数，可通过人为的方式制造哈希碰撞</li>
+<li><strong>比特币中使用的哈希函数</strong>：SHA-256（Secure Hash Algorithm）</li>
+</ul>
+<h4 id="Hiding"><a href="#Hiding" class="headerlink" title="Hiding"></a>Hiding</h4><blockquote>
+<p>哈希的过程单向不可逆</p>
+</blockquote>
+<ul>
+<li><strong>Hiding的定义</strong>：输入值的空间够大，且分布均匀，取值可能性相同<br>实际场景如何实现Hiding（保证分布均匀）：输入值 + 随机数（输入X || nonce随机数）后经过Hash</li>
+</ul>
+<h4 id="Puzzle-friendly"><a href="#Puzzle-friendly" class="headerlink" title="Puzzle friendly"></a>Puzzle friendly</h4><blockquote>
+<p>事先无法知道什么样的输入能得到一个什么样的哈希值，只能一个个尝试</p>
+</blockquote>
+<p>比如挖矿，H(nonce + block header) &lt;&#x3D; target，没有捷径，只能去尝试多个nonce来找到解 &#x3D;&gt; proof of work</p>
+<h3 id="比特币中的账户管理"><a href="#比特币中的账户管理" class="headerlink" title="比特币中的账户管理"></a>比特币中的账户管理</h3><p>非对称加密（asymmetric encryption algorithm）：加密解密不用同一个密钥，加密用公钥，解密用私钥<br>去中心化，每个用户本地自己生成一组公钥和私钥，公钥相当于银行账号，私钥相当于账号密码<br>比特币交易过程中，为了能知道交易是由谁发起，需要用私钥将交易签名，公钥验证</p>
+<p>两个人生成的公钥私钥相同怎么办（256位的值，产生两组相同公钥私钥的概率微乎其微）</p>
+<p>message取hash-&gt;hash取签名</p>
+<span id="more"></span>
+
+<h2 id="比特币的数据结构"><a href="#比特币的数据结构" class="headerlink" title="比特币的数据结构"></a>比特币的数据结构</h2><h3 id="Block-chain（区块链）"><a href="#Block-chain（区块链）" class="headerlink" title="Block chain（区块链）"></a>Block chain（区块链）</h3><blockquote>
+<p>本质上是一个链表，通过Hash pointers相连</p>
+</blockquote>
+<h4 id="Hash-pointers（哈希指针）"><a href="#Hash-pointers（哈希指针）" class="headerlink" title="Hash pointers（哈希指针）"></a>Hash pointers（哈希指针）</h4><p>当前区块的地址<br>前一个哈希指针 + 当前区块计算出的哈希值 </p>
+<h4 id="Genesis-block（创始区块）"><a href="#Genesis-block（创始区块）" class="headerlink" title="Genesis block（创始区块）"></a>Genesis block（创始区块）</h4><p>区块链中的第一个区块</p>
+<h4 id="Most-recent-block（最近使用区块）"><a href="#Most-recent-block（最近使用区块）" class="headerlink" title="Most recent block（最近使用区块）"></a>Most recent block（最近使用区块）</h4><p>区块链末尾的区块，指的是最近被添加到区块链的区块</p>
+<h4 id="Block（区块）"><a href="#Block（区块）" class="headerlink" title="Block（区块）"></a>Block（区块）</h4><p>每一个区块构成：</p>
+<h5 id="Block-header"><a href="#Block-header" class="headerlink" title="Block header"></a>Block header</h5><blockquote>
+<p>只有Block header会用Hash pointer串联</p>
+</blockquote>
+<ul>
+<li>Version（用的是比特币哪个版本的协议）</li>
+<li>Hash of previous block header（前一个区块头的hash）</li>
+<li>Merkle root hash（merkle tree的根哈希，能保证Block body里的Transaction list没有被篡改）</li>
+<li>Target（挖矿的难度目标阈值, H(block header) &lt;&#x3D; target, block header这里存的是目标阈值的编码nbits）</li>
+<li>Nonce（随机数）</li>
+</ul>
+<h5 id="Block-body"><a href="#Block-body" class="headerlink" title="Block body"></a>Block body</h5><ul>
+<li>Transaction list（交易列表）</li>
+</ul>
+<h3 id="Merkle-tree（默克尔树）"><a href="#Merkle-tree（默克尔树）" class="headerlink" title="Merkle tree（默克尔树）"></a>Merkle tree（默克尔树）</h3><p>比特币中各个区块用Hash Pointer连接在一起，各个区块包含的交易信息是组织成Merkle tree的形式<br>Merkle tree结构：二叉树的形式，最底层是交易记录，中间层都是下一层哈希值计算出的结果，树中的root hash可以用来判断是否有一个节点发生变更，因为任何一个节点的变更都会导致root hash发生变化<br><img src="/../assets/merkle-tree.png" alt="image-20241105"></p>
+<p>比特币节点分类</p>
+<ul>
+<li>Full node（全节点）：保存区块的全部信息，Block header + Block body，用于验证每一个交易，又叫 Fully validating node</li>
+<li>Light node（轻节点）：手机上的比特币钱包，只保存Block header（也就是只保存了Merkle tree的Root hash），无法独立验证交易的可靠性，系统中大部分节点是轻节点</li>
+</ul>
+<p>如何向轻节点证明某个交易已经被写入区块链？<br>用户A，用户B（轻节点），转账 A –&gt; B，A需要向B证明已经转账，如何证明：Merkle proof&#x2F;Proof of menbership：证明Merkle tree包含了某个交易，时间复杂度为 O(logn)<br>过程详见：<br><img src="/../assets/merkle-proof.png" alt="image-20241105"></p>
+<blockquote>
+<p>全节点把缺失信息发给轻节点，轻节点通过计算验证Root Hash相同，则代表交易已被写入到区块里</p>
+</blockquote>
+<p>全节点发送的哈希值可能被伪造吗，来保持上层的哈希值符合要求？<br>不行，因为哈希满足<strong>Collision resistance</strong>的特性，无法人为制造哈希碰撞</p>
+<p>Proof of non-menbership（证明交易记录不在树里）：</p>
+<ul>
+<li>全节点发送整颗merkle tree给轻节点，轻节点验证各个节点、各层有没有出现问题，如果都没问题，证明只有这些叶子节点，则只需要判断叶子节点有没有包含该交易记录。复杂度 O(n)</li>
+<li>假定叶子结点</li>
+</ul>
+<p>无环的数据结构都可以用hash pointer代替普通指针</p>
+<h2 id="比特币的共识协议"><a href="#比特币的共识协议" class="headerlink" title="比特币的共识协议"></a>比特币的共识协议</h2><p>比特币的交易过程<br><img src="/../assets/bitcon-trading-process.png" alt="image-20241105"></p>
+<p>比特币中区块的指针</p>
+<ul>
+<li>指向前一个区块</li>
+<li>指向币的来源：证明钱不是凭空捏造，是有记录的，防止Double spending</li>
+</ul>
+<p>转账：A -&gt; B A需要知道B的公钥，B也需要知道A的公钥，<br>签名验证的过程？不太理解<br>交易记录通过A的私钥加密后 – 接收方通过A的公钥解密</p>
+<p>如何写入区块链？</p>
+<p>账本内容需要取得分布式的共识（distributed consensus）：一致性<br>Cap Theorem: 只能同时满足其中两个特性<br>Consistency（一致性）<br>Availability（可用性）<br>Partition tolerance（分区容错性：</p>
+<p>Paxos协议：</p>
+<p>Consensus in Bitcoin（解决的问题：存在恶意节点，假设大多数节点好的，少部分恶意节点，如何设计一个共识协议）</p>
+<ul>
+<li>直接投票是否可行？女巫攻击–恶意节点生成超过半数以上的账号，获取投票权</li>
+</ul>
+]]></content>
+      <categories>
+        <category>加密货币</category>
+      </categories>
+      <tags>
+        <tag>Web3</tag>
+        <tag>比特币</tag>
+        <tag>加密货币</tag>
+      </tags>
   </entry>
   <entry>
     <title>浏览器架构和事件循环</title>
@@ -2749,99 +2921,6 @@ webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后�
       </categories>
       <tags>
         <tag>Chrome</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>比特币</title>
-    <url>/2024/11/05/%E6%AF%94%E7%89%B9%E5%B8%81/</url>
-    <content><![CDATA[<blockquote class="blockquote-center">
-    <p><b>不要被学术界的思维限制了头脑，不要被程序员的思维限制了想象力。</b></p>
-</blockquote>
-
-<h2 id="比特币中的密码学"><a href="#比特币中的密码学" class="headerlink" title="比特币中的密码学"></a>比特币中的密码学</h2><h3 id="比特币中的哈希特性"><a href="#比特币中的哈希特性" class="headerlink" title="比特币中的哈希特性"></a>比特币中的哈希特性</h3><!-- > 容易验证，不容易计算 -->
-<h4 id="Collision-resistance-抗哈希碰撞"><a href="#Collision-resistance-抗哈希碰撞" class="headerlink" title="Collision resistance (抗哈希碰撞)"></a>Collision resistance (抗哈希碰撞)</h4><blockquote>
-<p>没有高效的方法来人为的制造哈希碰撞</p>
-</blockquote>
-<ul>
-<li><strong>Collision resistance的定义</strong>：给定X，没有高效的方法找到Y，使得H(X) &#x3D; H(Y)</li>
-<li><strong>Collision resistance的特性</strong>：无法用数学证明</li>
-<li><strong>MD5哈希函数</strong>：以前认为是Collision resistance，后来被鉴定为不安全的哈希函数，可通过人为的方式制造哈希碰撞</li>
-<li><strong>比特币中使用的哈希函数</strong>：SHA-256（Secure Hash Algorithm）</li>
-</ul>
-<h4 id="Hiding"><a href="#Hiding" class="headerlink" title="Hiding"></a>Hiding</h4><blockquote>
-<p>哈希的过程单向不可逆</p>
-</blockquote>
-<ul>
-<li><strong>Hiding的定义</strong>：输入值的空间够大，且分布均匀，取值可能性相同<br>实际场景如何实现Hiding（保证分布均匀）：输入值 + 随机数（输入X || nonce随机数）后经过Hash</li>
-</ul>
-<h4 id="Puzzle-friendly"><a href="#Puzzle-friendly" class="headerlink" title="Puzzle friendly"></a>Puzzle friendly</h4><blockquote>
-<p>事先无法知道什么样的输入能得到一个什么样的哈希值，只能一个个尝试</p>
-</blockquote>
-<p>比如挖矿，H(nonce + block header) &lt;&#x3D; target，没有捷径，只能去尝试多个nonce来找到解 &#x3D;&gt; proof of work</p>
-<h3 id="比特币中的账户管理"><a href="#比特币中的账户管理" class="headerlink" title="比特币中的账户管理"></a>比特币中的账户管理</h3><p>非对称加密（asymmetric encryption algorithm）：加密解密不用同一个密钥，加密用公钥，解密用私钥<br>去中心化，每个用户本地自己生成一组公钥和私钥，公钥相当于银行账号，私钥相当于账号密码<br>比特币交易过程中，为了能知道交易是由谁发起，需要用私钥将交易签名，公钥验证</p>
-<p>两个人生成的公钥私钥相同怎么办（256位的值，产生两组相同公钥私钥的概率微乎其微）</p>
-<p>message取hash-&gt;hash取签名</p>
-<span id="more"></span>
-
-<h2 id="比特币的数据结构"><a href="#比特币的数据结构" class="headerlink" title="比特币的数据结构"></a>比特币的数据结构</h2><h3 id="Block-chain（区块链）"><a href="#Block-chain（区块链）" class="headerlink" title="Block chain（区块链）"></a>Block chain（区块链）</h3><blockquote>
-<p>本质上是一个链表，通过Hash pointers相连</p>
-</blockquote>
-<h4 id="Hash-pointers（哈希指针）"><a href="#Hash-pointers（哈希指针）" class="headerlink" title="Hash pointers（哈希指针）"></a>Hash pointers（哈希指针）</h4><p>当前区块的地址<br>前一个哈希指针 + 当前区块计算出的哈希值 </p>
-<h4 id="Genesis-block（创始区块）"><a href="#Genesis-block（创始区块）" class="headerlink" title="Genesis block（创始区块）"></a>Genesis block（创始区块）</h4><p>区块链中的第一个区块</p>
-<h4 id="Most-recent-block（最近使用区块）"><a href="#Most-recent-block（最近使用区块）" class="headerlink" title="Most recent block（最近使用区块）"></a>Most recent block（最近使用区块）</h4><p>区块链末尾的区块，指的是最近被添加到区块链的区块</p>
-<h4 id="Block（区块）"><a href="#Block（区块）" class="headerlink" title="Block（区块）"></a>Block（区块）</h4><p>每一个区块构成：</p>
-<h5 id="Block-header"><a href="#Block-header" class="headerlink" title="Block header"></a>Block header</h5><blockquote>
-<p>只有Block header会用Hash pointer串联</p>
-</blockquote>
-<ul>
-<li>Version（用的是比特币哪个版本的协议）</li>
-<li>Hash of previous block header（前一个区块头的hash）</li>
-<li>Merkle root hash（merkle tree的根哈希，能保证Block body里的Transaction list没有被篡改）</li>
-<li>Target（挖矿的难度目标阈值, H(block header) &lt;&#x3D; target, block header这里存的是目标阈值的编码nbits）</li>
-<li>Nonce（随机数）</li>
-</ul>
-<h5 id="Block-body"><a href="#Block-body" class="headerlink" title="Block body"></a>Block body</h5><ul>
-<li>Transaction list（交易列表）</li>
-</ul>
-<h3 id="Merkle-tree（默克尔树）"><a href="#Merkle-tree（默克尔树）" class="headerlink" title="Merkle tree（默克尔树）"></a>Merkle tree（默克尔树）</h3><p>比特币中各个区块用Hash Pointer连接在一起，各个区块包含的交易信息是组织成Merkle tree的形式<br>Merkle tree结构：二叉树的形式，最底层是交易记录，中间层都是下一层哈希值计算出的结果，树中的root hash可以用来判断是否有一个节点发生变更，因为任何一个节点的变更都会导致root hash发生变化<br><img src="/../assets/merkle-tree.png" alt="image-20241105"></p>
-<p>比特币节点分类</p>
-<ul>
-<li>Full node（全节点）：保存区块的全部信息，Block header + Block body，用于验证每一个交易，又叫 Fully validating node</li>
-<li>Light node（轻节点）：手机上的比特币钱包，只保存Block header（也就是只保存了Merkle tree的Root hash），无法独立验证交易的可靠性，系统中大部分节点是轻节点</li>
-</ul>
-<p>如何向轻节点证明某个交易已经被写入区块链？<br>用户A，用户B（轻节点），转账 A –&gt; B，A需要向B证明已经转账，如何证明：Merkle proof&#x2F;Proof of menbership：证明Merkle tree包含了某个交易，时间复杂度为 O(logn)<br>过程详见：<br><img src="/../assets/merkle-proof.png" alt="image-20241105"></p>
-<blockquote>
-<p>全节点把缺失信息发给轻节点，轻节点通过计算验证Root Hash相同，则代表交易已被写入到区块里</p>
-</blockquote>
-<p>全节点发送的哈希值可能被伪造吗，来保持上层的哈希值符合要求？<br>不行，因为哈希满足<strong>Collision resistance</strong>的特性，无法人为制造哈希碰撞</p>
-<p>Proof of non-menbership（证明交易记录不在树里）：</p>
-<ul>
-<li>全节点发送整颗merkle tree给轻节点，轻节点验证各个节点、各层有没有出现问题，如果都没问题，证明只有这些叶子节点，则只需要判断叶子节点有没有包含该交易记录。复杂度 O(n)</li>
-<li>假定叶子结点</li>
-</ul>
-<p>无环的数据结构都可以用hash pointer代替普通指针</p>
-<h2 id="比特币的共识协议"><a href="#比特币的共识协议" class="headerlink" title="比特币的共识协议"></a>比特币的共识协议</h2><p>比特币的交易过程<br><img src="/../assets/bitcon-trading-process.png" alt="image-20241105"></p>
-<p>比特币中区块的指针</p>
-<ul>
-<li>指向前一个区块</li>
-<li>指向币的来源：证明钱不是凭空捏造，是有记录的，防止Double spending</li>
-</ul>
-<p>转账：A -&gt; B A需要知道B的公钥，B也需要知道A的公钥，<br>签名验证的过程？不太理解<br>交易记录通过A的私钥加密后 – 接收方通过A的公钥解密</p>
-<p>如何写入区块链？</p>
-<p>账本内容需要取得分布式的共识（distributed consensus）：一致性<br>Cap Theorem: 只能同时满足其中两个特性<br>Consistency（一致性）<br>Availability（可用性）<br>Partition tolerance（分区容错性：</p>
-<p>Paxos协议：</p>
-<p>Consensus in Bitcoin（解决的问题：存在恶意节点，假设大多数节点好的，少部分恶意节点，如何设计一个共识协议）</p>
-<ul>
-<li>直接投票是否可行？女巫攻击–恶意节点生成超过半数以上的账号，获取投票权</li>
-</ul>
-]]></content>
-      <categories>
-        <category>加密货币</category>
-      </categories>
-      <tags>
-        <tag>Web3</tag>
-        <tag>比特币</tag>
-        <tag>加密货币</tag>
       </tags>
   </entry>
 </search>

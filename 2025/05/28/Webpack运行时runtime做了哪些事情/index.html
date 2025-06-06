@@ -19,29 +19,29 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.21.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="包管理器Npm&#x2F;YarnNpm发包files指定哪些文件会被打包发布（后面详细描述）。 main、browser、exports、module这四个字段都是用来定义包的入口，npm 只规定了 main 和 browser 这两个字段，exports 是 nodejs 的规范，module 一般被构建工具所支持。 mainmain 规定了包的主要入口点，默认值为 index.js。 如果你">
+    <meta name="description" content="Webpack Runtimewebpack 的 runtime，也就是 webpack 最后生成的代码，实现了一个自定义的模块加载系统，替代浏览器原生的模块机制： webpack_modules: 维护一个所有模块的数组。将入口模块解析为 AST，根据 AST 深度优先搜索所有的模块，并构建出这个模块数组。每个模块都由一个包裹函数 (module, module.exports, webpack">
 <meta property="og:type" content="article">
-<meta property="og:title" content="包管理器">
-<meta property="og:url" content="http://example.com/2025/05/27/%E5%8C%85%E7%AE%A1%E7%90%86%E5%99%A8/index.html">
+<meta property="og:title" content="Webpack运行时runtime做了什么事情">
+<meta property="og:url" content="http://example.com/2025/05/28/Webpack%E8%BF%90%E8%A1%8C%E6%97%B6runtime%E5%81%9A%E4%BA%86%E5%93%AA%E4%BA%9B%E4%BA%8B%E6%83%85/index.html">
 <meta property="og:site_name" content="Huangyuntse">
-<meta property="og:description" content="包管理器Npm&#x2F;YarnNpm发包files指定哪些文件会被打包发布（后面详细描述）。 main、browser、exports、module这四个字段都是用来定义包的入口，npm 只规定了 main 和 browser 这两个字段，exports 是 nodejs 的规范，module 一般被构建工具所支持。 mainmain 规定了包的主要入口点，默认值为 index.js。 如果你">
+<meta property="og:description" content="Webpack Runtimewebpack 的 runtime，也就是 webpack 最后生成的代码，实现了一个自定义的模块加载系统，替代浏览器原生的模块机制： webpack_modules: 维护一个所有模块的数组。将入口模块解析为 AST，根据 AST 深度优先搜索所有的模块，并构建出这个模块数组。每个模块都由一个包裹函数 (module, module.exports, webpack">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2025-05-27T03:02:23.667Z">
-<meta property="article:modified_time" content="2025-05-27T03:02:41.946Z">
+<meta property="article:published_time" content="2025-05-28T03:36:20.639Z">
+<meta property="article:modified_time" content="2025-06-06T05:13:35.427Z">
 <meta property="article:author" content="Huangyuntse">
 <meta property="article:tag" content="工程化">
 <meta property="article:tag" content="前端">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="http://example.com/2025/05/27/%E5%8C%85%E7%AE%A1%E7%90%86%E5%99%A8/">
+<link rel="canonical" href="http://example.com/2025/05/28/Webpack%E8%BF%90%E8%A1%8C%E6%97%B6runtime%E5%81%9A%E4%BA%86%E5%93%AA%E4%BA%9B%E4%BA%8B%E6%83%85/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2025/05/27/%E5%8C%85%E7%AE%A1%E7%90%86%E5%99%A8/","path":"2025/05/27/包管理器/","title":"包管理器"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2025/05/28/Webpack%E8%BF%90%E8%A1%8C%E6%97%B6runtime%E5%81%9A%E4%BA%86%E5%93%AA%E4%BA%9B%E4%BA%8B%E6%83%85/","path":"2025/05/28/Webpack运行时runtime做了哪些事情/","title":"Webpack运行时runtime做了什么事情"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>包管理器 | Huangyuntse</title>
+<title>Webpack运行时runtime做了什么事情 | Huangyuntse</title>
   
 
 
@@ -89,7 +89,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-文章"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>文章</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">16</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">45</span></a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">27</span></a></li><li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-文章"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>文章</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">17</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">48</span></a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">28</span></a></li><li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -140,7 +140,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8C%85%E7%AE%A1%E7%90%86%E5%99%A8"><span class="nav-number">1.</span> <span class="nav-text">包管理器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Npm-Yarn"><span class="nav-number">1.1.</span> <span class="nav-text">Npm&#x2F;Yarn</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Npm%E5%8F%91%E5%8C%85"><span class="nav-number">1.1.1.</span> <span class="nav-text">Npm发包</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#files"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">files</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#main%E3%80%81browser%E3%80%81exports%E3%80%81module"><span class="nav-number">1.1.1.2.</span> <span class="nav-text">main、browser、exports、module</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#main"><span class="nav-number">1.1.1.3.</span> <span class="nav-text">main</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Pnpm"><span class="nav-number">1.2.</span> <span class="nav-text">Pnpm</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CI-CD"><span class="nav-number">2.</span> <span class="nav-text">CI&#x2F;CD</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#npm-scripts"><span class="nav-number">2.1.</span> <span class="nav-text">npm scripts</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#package-json"><span class="nav-number">2.2.</span> <span class="nav-text">package.json</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#peerDependencies"><span class="nav-number">2.2.1.</span> <span class="nav-text">peerDependencies</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#github-action"><span class="nav-number">2.3.</span> <span class="nav-text">github action</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#deploy"><span class="nav-number">2.4.</span> <span class="nav-text">deploy</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Webpack-Runtime"><span class="nav-number">1.</span> <span class="nav-text">Webpack Runtime</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -155,18 +155,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">45</span>
+          <span class="site-state-item-count">48</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-count">17</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-count">28</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -201,7 +201,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2025/05/27/%E5%8C%85%E7%AE%A1%E7%90%86%E5%99%A8/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/05/28/Webpack%E8%BF%90%E8%A1%8C%E6%97%B6runtime%E5%81%9A%E4%BA%86%E5%93%AA%E4%BA%9B%E4%BA%8B%E6%83%85/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://avatars.githubusercontent.com/u/73687768?v=4">
@@ -214,12 +214,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="包管理器 | Huangyuntse">
+      <meta itemprop="name" content="Webpack运行时runtime做了什么事情 | Huangyuntse">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          包管理器
+          Webpack运行时runtime做了什么事情
         </h1>
 
         <div class="post-meta-container">
@@ -229,9 +229,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2025-05-27 11:02:23 / 修改时间：11:02:41" itemprop="dateCreated datePublished" datetime="2025-05-27T11:02:23+08:00">2025-05-27</time>
+      <time title="创建时间：2025-05-28 11:36:20" itemprop="dateCreated datePublished" datetime="2025-05-28T11:36:20+08:00">2025-05-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-06-06 13:13:35" itemprop="dateModified" datetime="2025-06-06T13:13:35+08:00">2025-06-06</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -249,7 +255,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>234</span>
+      <span>233</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -266,26 +272,10 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><h2 id="包管理器"><a href="#包管理器" class="headerlink" title="包管理器"></a>包管理器</h2><h3 id="Npm-Yarn"><a href="#Npm-Yarn" class="headerlink" title="Npm&#x2F;Yarn"></a>Npm&#x2F;Yarn</h3><h4 id="Npm发包"><a href="#Npm发包" class="headerlink" title="Npm发包"></a>Npm发包</h4><h5 id="files"><a href="#files" class="headerlink" title="files"></a>files</h5><p>指定哪些文件会被打包发布（后面详细描述）。</p>
-<h5 id="main、browser、exports、module"><a href="#main、browser、exports、module" class="headerlink" title="main、browser、exports、module"></a>main、browser、exports、module</h5><p>这四个字段都是用来定义包的入口，<code>npm</code> 只规定了 <code>main</code> 和 <code>browser</code> 这两个字段，<code>exports</code> 是 <code>nodejs</code> 的规范，<code>module</code> 一般被构建工具所支持。</p>
-<h5 id="main"><a href="#main" class="headerlink" title="main"></a>main</h5><p><code>main</code> 规定了包的主要入口点，默认值为 <code>index.js</code>。</p>
-<p>如果你的包名为 <code>foo</code> 可以通过 <code>require(&quot;foo&quot;)</code> 引入对应模块导出的内容，所以这应该是个 CommonJS 模块，除非你设置了 <code>&quot;type&quot;: &quot;module&quot;</code>。</p>
-<h3 id="Pnpm"><a href="#Pnpm" class="headerlink" title="Pnpm"></a>Pnpm</h3><ul>
-<li>省空间</li>
-<li>解决幽灵依赖的问题</li>
-</ul>
-<p>如何确定一个项目的包管理工具？</p>
-<ul>
-<li>lock文件、package.json下packageManager字段来判断</li>
-</ul>
-<p>如何确定包管理工具的版本号？</p>
-<ul>
-<li>engines字段</li>
-</ul>
-<h2 id="CI-CD"><a href="#CI-CD" class="headerlink" title="CI&#x2F;CD"></a>CI&#x2F;CD</h2><h3 id="npm-scripts"><a href="#npm-scripts" class="headerlink" title="npm scripts"></a>npm scripts</h3><h3 id="package-json"><a href="#package-json" class="headerlink" title="package.json"></a>package.json</h3><h4 id="peerDependencies"><a href="#peerDependencies" class="headerlink" title="peerDependencies"></a>peerDependencies</h4><ul>
-<li>项目安装的某个依赖存在peerDependencies，项目又没有声明这个依赖，那项目会自动安装吗，会autoinstall</li>
-</ul>
-<h3 id="github-action"><a href="#github-action" class="headerlink" title="github action"></a>github action</h3><h3 id="deploy"><a href="#deploy" class="headerlink" title="deploy"></a>deploy</h3>
+    <div class="post-body" itemprop="articleBody"><h2 id="Webpack-Runtime"><a href="#Webpack-Runtime" class="headerlink" title="Webpack Runtime"></a>Webpack Runtime</h2><p>webpack 的 runtime，也就是 webpack 最后生成的代码，实现了一个自定义的模块加载系统，替代浏览器原生的模块机制：</p>
+<p><strong>webpack_modules</strong>: 维护一个所有模块的数组。将入口模块解析为 AST，根据 AST 深度优先搜索所有的模块，并构建出这个模块数组。每个模块都由一个包裹函数 (module, module.exports, <strong>webpack_require</strong>) 对模块进行包裹构成。<br><strong>webpack_require</strong>(moduleId): 手动实现加载一个模块。对已加载过的模块进行缓存，对未加载过的模块，执行 id 定位到 <strong>webpack_modules</strong> 中的包裹函数，执行并返回 module.exports，并缓存<br><strong>webpack_require</strong>(0): 运行第一个模块，即运行入口模块<br>另外，当涉及到多个 chunk 的打包方式中，比如 code spliting，webpack 中会有 jsonp 加载 chunk 的运行时代码。</p>
+<p>以下是 webpack runtime 的最简代码，配置示例可见 node-examples</p>
+
     </div>
 
     
@@ -302,11 +292,14 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2025/03/12/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/" rel="prev" title="微信小程序">
-                  <i class="fa fa-angle-left"></i> 微信小程序
+                <a href="/2025/03/27/%E5%89%8D%E7%AB%AF%E6%A8%A1%E5%9D%97%E5%8C%96/" rel="prev" title="前端模块化">
+                  <i class="fa fa-angle-left"></i> 前端模块化
                 </a>
             </div>
             <div class="post-nav-item">
+                <a href="/2025/06/05/TradingView%E4%BD%BF%E7%94%A8/" rel="next" title="TradingView使用">
+                  TradingView使用 <i class="fa fa-angle-right"></i>
+                </a>
             </div>
           </div>
     </footer>
@@ -337,13 +330,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">39k</span>
+    <span title="站点总字数">40k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">2:21</span>
+    <span title="站点阅读时长">2:24</span>
   </span>
 </div>
 
