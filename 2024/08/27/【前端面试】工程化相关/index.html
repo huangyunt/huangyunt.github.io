@@ -19,15 +19,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.21.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="前端工程化">
+    <meta name="description" content="包管理器Pnpm是怎么解决幽灵依赖的hard link + symbolic link peerdependencies相关如何确定一个项目用的包管理器版本：enigne字段1234&quot;engines&quot;: &#123;  &quot;node&quot;: &quot;&gt;&#x3D;14.0.0&quot;,  &quot;npm&quot;: &quot;&gt;&#x3D;7.0.0&amp;qu">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【前端面试】工程化相关">
 <meta property="og:url" content="http://example.com/2024/08/27/%E3%80%90%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E3%80%91%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%9B%B8%E5%85%B3/index.html">
 <meta property="og:site_name" content="Huangyuntse">
-<meta property="og:description" content="前端工程化">
+<meta property="og:description" content="包管理器Pnpm是怎么解决幽灵依赖的hard link + symbolic link peerdependencies相关如何确定一个项目用的包管理器版本：enigne字段1234&quot;engines&quot;: &#123;  &quot;node&quot;: &quot;&gt;&#x3D;14.0.0&quot;,  &quot;npm&quot;: &quot;&gt;&#x3D;7.0.0&amp;qu">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-08-27T02:00:00.000Z">
-<meta property="article:modified_time" content="2025-06-10T05:43:03.179Z">
+<meta property="article:modified_time" content="2025-06-13T09:45:02.621Z">
 <meta property="article:author" content="Huangyuntse">
 <meta property="article:tag" content="前端工程化">
 <meta name="twitter:card" content="summary">
@@ -88,7 +88,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-文章"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>文章</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">12</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">53</span></a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">30</span></a></li><li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-文章"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>文章</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">12</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">52</span></a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">30</span></a></li><li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -139,7 +139,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%8C%96"><span class="nav-number">1.</span> <span class="nav-text">前端工程化</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8C%85%E7%AE%A1%E7%90%86%E5%99%A8"><span class="nav-number">1.</span> <span class="nav-text">包管理器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Pnpm%E6%98%AF%E6%80%8E%E4%B9%88%E8%A7%A3%E5%86%B3%E5%B9%BD%E7%81%B5%E4%BE%9D%E8%B5%96%E7%9A%84"><span class="nav-number">1.1.</span> <span class="nav-text">Pnpm是怎么解决幽灵依赖的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#peerdependencies%E7%9B%B8%E5%85%B3"><span class="nav-number">1.2.</span> <span class="nav-text">peerdependencies相关</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E7%A1%AE%E5%AE%9A%E4%B8%80%E4%B8%AA%E9%A1%B9%E7%9B%AE%E7%94%A8%E7%9A%84%E5%8C%85%E7%AE%A1%E7%90%86%E5%99%A8%E7%89%88%E6%9C%AC%EF%BC%9Aenigne%E5%AD%97%E6%AE%B5"><span class="nav-number">1.3.</span> <span class="nav-text">如何确定一个项目用的包管理器版本：enigne字段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E9%81%BF%E5%85%8D%E4%B8%9A%E5%8A%A1%E9%A1%B9%E7%9B%AE%E8%A2%AB%E5%8F%91%E5%88%B0npm%E4%B8%8A"><span class="nav-number">1.4.</span> <span class="nav-text">如何避免业务项目被发到npm上</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9C%A8-package-json-%E4%B8%AD%E6%B7%BB%E5%8A%A0-private-%E5%AD%97%E6%AE%B5"><span class="nav-number">1.4.1.</span> <span class="nav-text">在 package.json 中添加 private 字段</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-npmignore-%E6%88%96-gitignore-%E6%96%87%E4%BB%B6"><span class="nav-number">1.4.2.</span> <span class="nav-text">使用 .npmignore 或 .gitignore 文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E9%A2%84%E5%8F%91%E5%B8%83%E9%92%A9%E5%AD%90"><span class="nav-number">1.4.3.</span> <span class="nav-text">设置预发布钩子</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-npmrc-%E6%96%87%E4%BB%B6%E9%94%81%E5%AE%9A%E5%8F%91%E5%B8%83%E6%BA%90"><span class="nav-number">1.4.4.</span> <span class="nav-text">使用 .npmrc 文件锁定发布源</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#package-json"><span class="nav-number">2.</span> <span class="nav-text">package.json</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#package-json-%E4%B8%AD-main-module-browser-exports-%E5%AD%97%E6%AE%B5%E6%9C%89%E4%BD%95%E5%8C%BA%E5%88%AB"><span class="nav-number">2.1.</span> <span class="nav-text">package.json 中 main&#x2F;module&#x2F;browser&#x2F;exports 字段有何区别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Webpack"><span class="nav-number">3.</span> <span class="nav-text">Webpack</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#webpack-%E7%9A%84-loader-%E7%9A%84%E6%9C%BA%E5%88%B6%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">3.1.</span> <span class="nav-text">webpack 的 loader 的机制是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#webpack-%E4%BD%BF%E7%94%A8%E7%9A%84%E6%98%AF%E4%BB%80%E4%B9%88%E6%A8%A1%E5%9D%97%EF%BC%9FAMD%E3%80%81UMD"><span class="nav-number">3.2.</span> <span class="nav-text">webpack 使用的是什么模块？AMD、UMD</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#webpack-%E7%9A%84%E6%8F%92%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">3.3.</span> <span class="nav-text">webpack 的插件系统是什么？</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -154,7 +154,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">53</span>
+          <span class="site-state-item-count">52</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -236,7 +236,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-06-10 13:43:03" itemprop="dateModified" datetime="2025-06-10T13:43:03+08:00">2025-06-10</time>
+      <time title="修改时间：2025-06-13 17:45:02" itemprop="dateModified" datetime="2025-06-13T17:45:02+08:00">2025-06-13</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -254,7 +254,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>5</span>
+      <span>252</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -271,7 +271,16 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><h2 id="前端工程化"><a href="#前端工程化" class="headerlink" title="前端工程化"></a>前端工程化</h2>
+    <div class="post-body" itemprop="articleBody"><h2 id="包管理器"><a href="#包管理器" class="headerlink" title="包管理器"></a>包管理器</h2><h3 id="Pnpm是怎么解决幽灵依赖的"><a href="#Pnpm是怎么解决幽灵依赖的" class="headerlink" title="Pnpm是怎么解决幽灵依赖的"></a>Pnpm是怎么解决幽灵依赖的</h3><p>hard link + symbolic link</p>
+<h3 id="peerdependencies相关"><a href="#peerdependencies相关" class="headerlink" title="peerdependencies相关"></a>peerdependencies相关</h3><h3 id="如何确定一个项目用的包管理器版本：enigne字段"><a href="#如何确定一个项目用的包管理器版本：enigne字段" class="headerlink" title="如何确定一个项目用的包管理器版本：enigne字段"></a>如何确定一个项目用的包管理器版本：enigne字段</h3><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">&quot;engines&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;node&quot;</span><span class="punctuation">:</span> <span class="string">&quot;&gt;=14.0.0&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;npm&quot;</span><span class="punctuation">:</span> <span class="string">&quot;&gt;=7.0.0&quot;</span>  <span class="comment">// 项目要求的 npm 最低版本</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="如何避免业务项目被发到npm上"><a href="#如何避免业务项目被发到npm上" class="headerlink" title="如何避免业务项目被发到npm上"></a>如何避免业务项目被发到npm上</h3><h4 id="在-package-json-中添加-private-字段"><a href="#在-package-json-中添加-private-字段" class="headerlink" title="在 package.json 中添加 private 字段"></a>在 package.json 中添加 private 字段</h4><p>在项目的 package.json 文件中添加 private: true 字段，这是最直接的方式。当 private 为 true 时，npm 会拒绝发布该项目。</p>
+<h4 id="使用-npmignore-或-gitignore-文件"><a href="#使用-npmignore-或-gitignore-文件" class="headerlink" title="使用 .npmignore 或 .gitignore 文件"></a>使用 .npmignore 或 .gitignore 文件</h4><p>将项目中的所有文件添加到忽略列表，确保没有文件被发布。.npmignore 会覆盖 .gitignore 的规则。</p>
+<h4 id="设置预发布钩子"><a href="#设置预发布钩子" class="headerlink" title="设置预发布钩子"></a>设置预发布钩子</h4><p>在 package.json 中添加 prepublishOnly 脚本，使其在发布前失败：</p>
+<h4 id="使用-npmrc-文件锁定发布源"><a href="#使用-npmrc-文件锁定发布源" class="headerlink" title="使用 .npmrc 文件锁定发布源"></a>使用 .npmrc 文件锁定发布源</h4><p>在项目根目录创建 .npmrc 文件，设置为私有源或无效源：</p>
+<span id="more"></span>
+
+<h2 id="package-json"><a href="#package-json" class="headerlink" title="package.json"></a>package.json</h2><h3 id="package-json-中-main-module-browser-exports-字段有何区别"><a href="#package-json-中-main-module-browser-exports-字段有何区别" class="headerlink" title="package.json 中 main&#x2F;module&#x2F;browser&#x2F;exports 字段有何区别"></a>package.json 中 main&#x2F;module&#x2F;browser&#x2F;exports 字段有何区别</h3><h2 id="Webpack"><a href="#Webpack" class="headerlink" title="Webpack"></a>Webpack</h2><h3 id="webpack-的-loader-的机制是什么？"><a href="#webpack-的-loader-的机制是什么？" class="headerlink" title="webpack 的 loader 的机制是什么？"></a>webpack 的 loader 的机制是什么？</h3><h3 id="webpack-使用的是什么模块？AMD、UMD"><a href="#webpack-使用的是什么模块？AMD、UMD" class="headerlink" title="webpack 使用的是什么模块？AMD、UMD"></a>webpack 使用的是什么模块？AMD、UMD</h3><h3 id="webpack-的插件系统是什么？"><a href="#webpack-的插件系统是什么？" class="headerlink" title="webpack 的插件系统是什么？"></a>webpack 的插件系统是什么？</h3>
     </div>
 
     
@@ -331,7 +340,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">2:28</span>
+    <span title="站点阅读时长">2:29</span>
   </span>
 </div>
 
