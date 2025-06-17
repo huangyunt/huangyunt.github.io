@@ -1493,59 +1493,6 @@
       </tags>
   </entry>
   <entry>
-    <title>TradingView使用</title>
-    <url>/2025/06/05/TradingView%E4%BD%BF%E7%94%A8/</url>
-    <content><![CDATA[<h2 id="TradingView-自定义Plugin使用"><a href="#TradingView-自定义Plugin使用" class="headerlink" title="TradingView 自定义Plugin使用"></a>TradingView 自定义Plugin使用</h2><p>结合官方文档：<a href="https://tradingview.github.io/lightweight-charts/docs/plugins/intro">https://tradingview.github.io/lightweight-charts/docs/plugins/intro</a> 食用</p>
-<h4 id="1-Series-Primitives"><a href="#1-Series-Primitives" class="headerlink" title="1. Series Primitives"></a>1. Series Primitives</h4><ol>
-<li>生命周期<ul>
-<li>attached：添加到图表时触发，附加方法通过一个参数调用，该参数包含图表、系列以及用于请求更新的回调函数</li>
-<li>detached：移除图表时触发</li>
-</ul>
-</li>
-<li>更新视图<br>您的原语应该在方法中更新视图 updateAllViews()，以便渲染器被调用时，它们能够使用最新信息进行绘制。当库需要更新和重绘图表时，它会调用此方法。如果您想通知库应该触发更新，可以使用requestUpdate附加生命周期方法提供的回调。</li>
-</ol>
-<p>该接口会调用一下getter来绘制视图</p>
-<ul>
-<li>paneViews</li>
-<li>priceAxisPaneViews</li>
-<li>timeAxisPaneViews</li>
-<li>priceAxisViews</li>
-<li>timeAxisViews</li>
-</ul>
-<h4 id="2-Views"><a href="#2-Views" class="headerlink" title="2. Views"></a>2. Views</h4><p>该接口可用于定义一个视图，该视图提供一个渲染器（实现该 接口），以便使用CanvasRenderingContext2DIPrimitivePaneRenderer API 在图表的相应区域进行绘制 </p>
-<h4 id="3-Renderer"><a href="#3-Renderer" class="headerlink" title="3. Renderer"></a>3. Renderer</h4><ul>
-<li>draw方法<br>渲染器提供了一个接口，在该接口上应执行CanvasRenderingTarget2D绘图逻辑（使用 浏览器的 2D Canvas API ）。由Fancy CanvasCanvasRenderingTarget2D库提供 。</li>
-</ul>
-<h4 id="CanvasRenderingTarget2D"><a href="#CanvasRenderingTarget2D" class="headerlink" title="CanvasRenderingTarget2D"></a>CanvasRenderingTarget2D</h4><p>CanvasRenderingTarget2D提供了两个可以使用的渲染范围：</p>
-<p>useMediaCoordinateSpace<br>useBitmapCoordinateSpace</p>
-<h4 id="useMediaCoordinateSpace和useBitmapCoordinateSpace的区别"><a href="#useMediaCoordinateSpace和useBitmapCoordinateSpace的区别" class="headerlink" title="useMediaCoordinateSpace和useBitmapCoordinateSpace的区别"></a>useMediaCoordinateSpace和useBitmapCoordinateSpace的区别</h4><ul>
-<li><p>useBitmapCoordinateSpace如果您想使用实际设备像素作为坐标尺寸进行绘制，可以使用 。提供的范围（类型为 BitmapCoordinatesRenderingScope）包含以下只读值：</p>
-<ul>
-<li>context （CanvasRenderingContext2D）。可用于渲染的上下文。</li>
-<li>horizontalPixelRatio（数字）</li>
-<li>verticalPixelRatio（数字）</li>
-<li>bitmapSize（尺寸）。位图尺寸中画布的高度和宽度。</li>
-<li>mediaSize（尺寸）。画布在媒体尺寸中的高度和宽度。</li>
-</ul>
-</li>
-<li><p>useMediaCoordinateSpace如果您想使用媒体尺寸作为坐标大小进行绘制，可以使用 。提供的范围（类型为 MediaCoordinatesRenderingScope）包含以下只读值：</p>
-<ul>
-<li>context （CanvasRenderingContext2D）。可用于渲染的上下文。</li>
-<li>mediaSize（尺寸）。画布在媒体尺寸中的高度和宽度。</li>
-</ul>
-</li>
-</ul>
-<h3 id="自定义Plugin实践-k线图上绘制用户头像"><a href="#自定义Plugin实践-k线图上绘制用户头像" class="headerlink" title="自定义Plugin实践 - k线图上绘制用户头像"></a>自定义Plugin实践 - k线图上绘制用户头像</h3><p><img src="/../assets/trading-view-plugin-demo.png" alt="DEMO示例"></p>
-]]></content>
-      <categories>
-        <category>前端工程化</category>
-      </categories>
-      <tags>
-        <tag>工程化</tag>
-        <tag>前端</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Redux</title>
     <url>/2021/10/11/Redux/</url>
     <content><![CDATA[<h2 id="Redux"><a href="#Redux" class="headerlink" title="Redux"></a>Redux</h2><h3 id="设计思想"><a href="#设计思想" class="headerlink" title="设计思想"></a>设计思想</h3><ul>
@@ -1631,6 +1578,59 @@
         <tag>JavaScript</tag>
         <tag>React</tag>
         <tag>Redux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>TradingView使用</title>
+    <url>/2025/06/05/TradingView%E4%BD%BF%E7%94%A8/</url>
+    <content><![CDATA[<h2 id="TradingView-自定义Plugin使用"><a href="#TradingView-自定义Plugin使用" class="headerlink" title="TradingView 自定义Plugin使用"></a>TradingView 自定义Plugin使用</h2><p>结合官方文档：<a href="https://tradingview.github.io/lightweight-charts/docs/plugins/intro">https://tradingview.github.io/lightweight-charts/docs/plugins/intro</a> 食用</p>
+<h4 id="1-Series-Primitives"><a href="#1-Series-Primitives" class="headerlink" title="1. Series Primitives"></a>1. Series Primitives</h4><ol>
+<li>生命周期<ul>
+<li>attached：添加到图表时触发，附加方法通过一个参数调用，该参数包含图表、系列以及用于请求更新的回调函数</li>
+<li>detached：移除图表时触发</li>
+</ul>
+</li>
+<li>更新视图<br>您的原语应该在方法中更新视图 updateAllViews()，以便渲染器被调用时，它们能够使用最新信息进行绘制。当库需要更新和重绘图表时，它会调用此方法。如果您想通知库应该触发更新，可以使用requestUpdate附加生命周期方法提供的回调。</li>
+</ol>
+<p>该接口会调用一下getter来绘制视图</p>
+<ul>
+<li>paneViews</li>
+<li>priceAxisPaneViews</li>
+<li>timeAxisPaneViews</li>
+<li>priceAxisViews</li>
+<li>timeAxisViews</li>
+</ul>
+<h4 id="2-Views"><a href="#2-Views" class="headerlink" title="2. Views"></a>2. Views</h4><p>该接口可用于定义一个视图，该视图提供一个渲染器（实现该 接口），以便使用CanvasRenderingContext2DIPrimitivePaneRenderer API 在图表的相应区域进行绘制 </p>
+<h4 id="3-Renderer"><a href="#3-Renderer" class="headerlink" title="3. Renderer"></a>3. Renderer</h4><ul>
+<li>draw方法<br>渲染器提供了一个接口，在该接口上应执行CanvasRenderingTarget2D绘图逻辑（使用 浏览器的 2D Canvas API ）。由Fancy CanvasCanvasRenderingTarget2D库提供 。</li>
+</ul>
+<h4 id="CanvasRenderingTarget2D"><a href="#CanvasRenderingTarget2D" class="headerlink" title="CanvasRenderingTarget2D"></a>CanvasRenderingTarget2D</h4><p>CanvasRenderingTarget2D提供了两个可以使用的渲染范围：</p>
+<p>useMediaCoordinateSpace<br>useBitmapCoordinateSpace</p>
+<h4 id="useMediaCoordinateSpace和useBitmapCoordinateSpace的区别"><a href="#useMediaCoordinateSpace和useBitmapCoordinateSpace的区别" class="headerlink" title="useMediaCoordinateSpace和useBitmapCoordinateSpace的区别"></a>useMediaCoordinateSpace和useBitmapCoordinateSpace的区别</h4><ul>
+<li><p>useBitmapCoordinateSpace如果您想使用实际设备像素作为坐标尺寸进行绘制，可以使用 。提供的范围（类型为 BitmapCoordinatesRenderingScope）包含以下只读值：</p>
+<ul>
+<li>context （CanvasRenderingContext2D）。可用于渲染的上下文。</li>
+<li>horizontalPixelRatio（数字）</li>
+<li>verticalPixelRatio（数字）</li>
+<li>bitmapSize（尺寸）。位图尺寸中画布的高度和宽度。</li>
+<li>mediaSize（尺寸）。画布在媒体尺寸中的高度和宽度。</li>
+</ul>
+</li>
+<li><p>useMediaCoordinateSpace如果您想使用媒体尺寸作为坐标大小进行绘制，可以使用 。提供的范围（类型为 MediaCoordinatesRenderingScope）包含以下只读值：</p>
+<ul>
+<li>context （CanvasRenderingContext2D）。可用于渲染的上下文。</li>
+<li>mediaSize（尺寸）。画布在媒体尺寸中的高度和宽度。</li>
+</ul>
+</li>
+</ul>
+<h3 id="自定义Plugin实践-k线图上绘制用户头像"><a href="#自定义Plugin实践-k线图上绘制用户头像" class="headerlink" title="自定义Plugin实践 - k线图上绘制用户头像"></a>自定义Plugin实践 - k线图上绘制用户头像</h3><p><img src="/../assets/trading-view-plugin-demo.png" alt="DEMO示例"></p>
+]]></content>
+      <categories>
+        <category>前端工程化</category>
+      </categories>
+      <tags>
+        <tag>工程化</tag>
+        <tag>前端</tag>
       </tags>
   </entry>
   <entry>
@@ -2104,14 +2104,79 @@ webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后�
 <h3 id="Promise相关"><a href="#Promise相关" class="headerlink" title="Promise相关"></a>Promise相关</h3><ul>
 <li>解决回调地狱的问题</li>
 <li>异常穿透</li>
-<li></li>
+<li>Promise.all</li>
+<li>Promise.allSettled</li>
+<li>Promise.race</li>
+<li>Promise.any</li>
 </ul>
-]]></content>
+<h3 id="事件循环"><a href="#事件循环" class="headerlink" title="事件循环"></a>事件循环</h3><p>见：<a href="https://huangyunt.github.io/2021/10/09/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%9E%B6%E6%9E%84%E5%92%8C%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/">浏览器架构和事件循环</a></p>
+<h3 id="this相关"><a href="#this相关" class="headerlink" title="this相关"></a>this相关</h3><p>见：<a href="https://huangyunt.github.io/2021/02/17/Javascript%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87/#this-%E6%8C%87%E5%90%91">this指向</a></p>
+<h3 id="什么是-Iterable-对象，与-Array-有什么区别"><a href="#什么是-Iterable-对象，与-Array-有什么区别" class="headerlink" title="什么是 Iterable 对象，与 Array 有什么区别"></a>什么是 Iterable 对象，与 Array 有什么区别</h3><p>Iterable包含一个名为 [Symbol.iterator] 的方法，该方法返回一个迭代器（Iterator）对象。例如</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> myIterable = &#123;</span><br><span class="line">  <span class="attr">data</span>: [<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>],</span><br><span class="line">  [<span class="title class_">Symbol</span>.<span class="property">iterator</span>]() &#123;</span><br><span class="line">    <span class="keyword">let</span> index = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      <span class="attr">next</span>: <span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (index &lt; <span class="variable language_">this</span>.<span class="property">data</span>.<span class="property">length</span>) &#123;</span><br><span class="line">          <span class="keyword">return</span> &#123; <span class="attr">value</span>: <span class="variable language_">this</span>.<span class="property">data</span>[index++], <span class="attr">done</span>: <span class="literal">false</span> &#125;;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> &#123; <span class="attr">value</span>: <span class="literal">undefined</span>, <span class="attr">done</span>: <span class="literal">true</span> &#125;;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="异步加载-JS-脚本时，async-与-defer-有何区别"><a href="#异步加载-JS-脚本时，async-与-defer-有何区别" class="headerlink" title="异步加载 JS 脚本时，async 与 defer 有何区别"></a>异步加载 JS 脚本时，async 与 defer 有何区别</h3>]]></content>
       <categories>
         <category>前端面试</category>
       </categories>
       <tags>
         <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【前端面试】React相关</title>
+    <url>/2024/08/23/%E3%80%90%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E3%80%91React%E7%9B%B8%E5%85%B3/</url>
+    <content><![CDATA[<h2 id="React"><a href="#React" class="headerlink" title="React"></a>React</h2><h3 id="React有哪些hooks"><a href="#React有哪些hooks" class="headerlink" title="React有哪些hooks"></a>React有哪些hooks</h3><ul>
+<li>useState</li>
+<li>useEffect</li>
+<li>useRef</li>
+<li>useMemo</li>
+<li>useCallback</li>
+<li>useContext</li>
+<li>useReducer</li>
+<li>useLayoutEffect</li>
+<li>useTransition</li>
+<li>useId</li>
+<li>useDebugValue</li>
+<li>useDeferredValue</li>
+</ul>
+<h3 id="useLayoutEffect和useEffect的区别"><a href="#useLayoutEffect和useEffect的区别" class="headerlink" title="useLayoutEffect和useEffect的区别"></a>useLayoutEffect和useEffect的区别</h3><p><strong>useEffect</strong>：异步执行，在浏览器完成渲染后（页面已绘制）<br><strong>useLayoutEffect</strong>：同步执行，在 DOM 更新后、浏览器绘制前（用户不可见），适用于需要读取 DOM 布局或强制同步更新的场景（如测量 DOM、修改样式）。</p>
+<h3 id="如何借助interSectionObserver实现一个dom可见性的自定义hook"><a href="#如何借助interSectionObserver实现一个dom可见性的自定义hook" class="headerlink" title="如何借助interSectionObserver实现一个dom可见性的自定义hook"></a>如何借助interSectionObserver实现一个dom可见性的自定义hook</h3><p>有一个关键点是Ref的更新在useEffect执行前</p>
+<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; useEffect, useState, useRef &#125; <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="title function_">useInView</span> = (<span class="params"></span></span><br><span class="line"><span class="params">    options = &#123;</span></span><br><span class="line"><span class="params">        root: <span class="literal">null</span>,</span></span><br><span class="line"><span class="params">        rootMargin: <span class="string">&#x27;0px 0px&#x27;</span>,</span></span><br><span class="line"><span class="params">        threshold: <span class="number">1</span>,</span></span><br><span class="line"><span class="params">    &#125;,</span></span><br><span class="line"><span class="params">    triggerOnce = <span class="literal">false</span>, <span class="comment">// 是否只触发一次</span></span></span><br><span class="line"><span class="params"></span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">const</span> [inView, setInView] = <span class="title function_">useState</span>(<span class="literal">false</span>);</span><br><span class="line">    <span class="keyword">const</span> targetRef = <span class="title function_">useRef</span>(<span class="literal">null</span>);</span><br><span class="line"></span><br><span class="line">    <span class="title function_">useEffect</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> observer = <span class="keyword">new</span> <span class="title class_">IntersectionObserver</span>(<span class="function">(<span class="params">entries</span>) =&gt;</span> &#123;</span><br><span class="line">            entries.<span class="title function_">forEach</span>(<span class="function">(<span class="params">entry</span>) =&gt;</span> &#123;</span><br><span class="line">                <span class="keyword">if</span> (entry.<span class="property">isIntersecting</span>) &#123;</span><br><span class="line">                    <span class="title function_">setInView</span>(<span class="literal">true</span>);</span><br><span class="line">                    <span class="keyword">if</span> (triggerOnce) &#123;</span><br><span class="line">                        <span class="comment">// 触发一次后结束监听</span></span><br><span class="line">                        observer.<span class="title function_">unobserve</span>(entry.<span class="property">target</span>);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="title function_">setInView</span>(<span class="literal">false</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;, options);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (targetRef.<span class="property">current</span>) &#123;</span><br><span class="line">            <span class="comment">// 开始监听</span></span><br><span class="line">            observer.<span class="title function_">observe</span>(targetRef.<span class="property">current</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="function">() =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (targetRef.<span class="property">current</span>) &#123;</span><br><span class="line">                <span class="comment">// 组件卸载时结束监听</span></span><br><span class="line">                observer.<span class="title function_">unobserve</span>(targetRef.<span class="property">current</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;, [options, triggerOnce]);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> [targetRef, inView];</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> useInView;</span><br></pre></td></tr></table></figure>
+
+<h3 id="useEffect-中如何使用-async-await"><a href="#useEffect-中如何使用-async-await" class="headerlink" title="useEffect 中如何使用 async&#x2F;await"></a>useEffect 中如何使用 async&#x2F;await</h3><ol>
+<li>async函数抽离到外部 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">fetchMyAPI</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">let</span> response = <span class="keyword">await</span> <span class="title function_">fetch</span>(<span class="string">&quot;api/data&quot;</span>);</span><br><span class="line">  response = <span class="keyword">await</span> res.<span class="title function_">json</span>();</span><br><span class="line">  å<span class="title function_">dataSet</span>(response);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">useEffect</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="title function_">fetchMyAPI</span>();</span><br><span class="line">&#125;, []);</span><br></pre></td></tr></table></figure></li>
+</ol>
+<span id="more"></span>
+
+<ol start="2">
+<li>async立即执行函数<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="title function_">useEffect</span>(<span class="function">() =&gt;</span> &#123; </span><br><span class="line">   (<span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">anyNameFunction</span>(<span class="params"></span>) &#123; </span><br><span class="line">     <span class="keyword">await</span> <span class="title function_">loadContent</span>(); </span><br><span class="line">   &#125;)(); </span><br><span class="line"> &#125;, []);</span><br></pre></td></tr></table></figure></li>
+<li>ahooks - useAsyncEffect<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">useAsyncEffect</span>(<span class="params"></span></span><br><span class="line"><span class="params">    <span class="attr">effect</span>: () =&gt; <span class="title class_">AsyncGenerator</span>&lt;<span class="built_in">void</span>, <span class="built_in">void</span>, <span class="built_in">void</span>&gt; | <span class="title class_">Promise</span>&lt;<span class="built_in">void</span>&gt;,</span></span><br><span class="line"><span class="params">    deps?: <span class="title class_">DependencyList</span>,</span></span><br><span class="line"><span class="params"></span>) &#123;</span><br><span class="line">    <span class="title function_">useEffect</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">const</span> e = <span class="title function_">effect</span>();</span><br><span class="line">      <span class="keyword">let</span> cancelled = <span class="literal">false</span>;</span><br><span class="line">      <span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">execute</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="title function_">isAsyncGenerator</span>(e)) &#123;</span><br><span class="line">            <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">              <span class="keyword">const</span> result = <span class="keyword">await</span> e.<span class="title function_">next</span>();</span><br><span class="line">                <span class="keyword">if</span> (result.<span class="property">done</span> || cancelled) &#123;</span><br><span class="line">                  <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">          &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">await</span> e;</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="title function_">execute</span>();</span><br><span class="line">      <span class="keyword">return</span> <span class="function">() =&gt;</span> &#123;</span><br><span class="line">        cancelled = <span class="literal">true</span>;</span><br><span class="line">      &#125;;</span><br><span class="line">    &#125;, deps);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="React-hooks如何实现类似Redux的状态管理"><a href="#React-hooks如何实现类似Redux的状态管理" class="headerlink" title="React hooks如何实现类似Redux的状态管理"></a>React hooks如何实现类似Redux的状态管理</h3><p>useContext+useReducer</p>
+<h3 id="React-key的作用"><a href="#React-key的作用" class="headerlink" title="React key的作用"></a>React key的作用</h3><p>虚拟dom的标识，diff用</p>
+<h3 id="React-useCallback使用场景"><a href="#React-useCallback使用场景" class="headerlink" title="React useCallback使用场景"></a>React useCallback使用场景</h3><ol>
+<li>作为props传递的函数，集合memo一起使用；</li>
+<li>作为更新触发的依赖项 主要目的是为了避免高昂的计算和不必要的重复渲染</li>
+</ol>
+<h3 id="React闭包陷阱"><a href="#React闭包陷阱" class="headerlink" title="React闭包陷阱"></a>React闭包陷阱</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">React</span>, &#123; useState, useEffect &#125; <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Counter</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> [count, setCount] = <span class="title function_">useState</span>(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">  <span class="title function_">useEffect</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 模拟一个异步操作，例如网络请求</span></span><br><span class="line">    <span class="keyword">const</span> intervalId = <span class="built_in">setInterval</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="comment">// 这里的 count 捕获的是 useEffect 第一次运行时 count 的值 (0)</span></span><br><span class="line">      <span class="comment">// 因此，每次执行都会是 0 + 1 = 1，而不是递增</span></span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;Stale count in setInterval:&#x27;</span>, count);</span><br><span class="line">      <span class="title function_">setCount</span>(count + <span class="number">1</span>); <span class="comment">// 这是一个闭包陷阱！</span></span><br><span class="line">    &#125;, <span class="number">1000</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="function">() =&gt;</span> <span class="built_in">clearInterval</span>(intervalId);</span><br><span class="line">  &#125;, []); <span class="comment">// 依赖项为空数组，表示只在组件挂载时执行一次</span></span><br><span class="line">          <span class="comment">// 导致 setInterval 内部的 count 始终是初始值 0</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">p</span>&gt;</span>Count: &#123;count&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;()</span> =&gt;</span> setCount(count + 1)&#125;&gt;Increment<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">Counter</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="React-reconcile"><a href="#React-reconcile" class="headerlink" title="React reconcile"></a>React reconcile</h3><p><a href="https://zh-hans.legacy.reactjs.org/docs/reconciliation.html#motivation">https://zh-hans.legacy.reactjs.org/docs/reconciliation.html#motivation</a></p>
+<h3 id="当多次重复点击按钮时，以下三个-Heading-是如何渲染的"><a href="#当多次重复点击按钮时，以下三个-Heading-是如何渲染的" class="headerlink" title="当多次重复点击按钮时，以下三个 Heading 是如何渲染的"></a>当多次重复点击按钮时，以下三个 Heading 是如何渲染的</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">React</span>, &#123; memo, useMemo, useState &#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">const</span> <span class="title class_">Heading</span> = <span class="title function_">memo</span>(<span class="function">(<span class="params">&#123; style, title &#125;</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;Rendered:&quot;</span>, title); </span><br><span class="line">  <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">h1</span> <span class="attr">style</span>=<span class="string">&#123;style&#125;</span>&gt;</span>&#123;title&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span>;</span><br><span class="line">&#125;);</span><br><span class="line"> </span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">function</span> <span class="title function_">App</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> [count, setCount] = <span class="title function_">useState</span>(<span class="number">0</span>);</span><br><span class="line"> </span><br><span class="line">  <span class="keyword">const</span> normalStyle = &#123;</span><br><span class="line">    <span class="attr">backgroundColor</span>: <span class="string">&quot;teal&quot;</span>,</span><br><span class="line">    <span class="attr">color</span>: <span class="string">&quot;white&quot;</span>,</span><br><span class="line">  &#125;;</span><br><span class="line"> </span><br><span class="line">  <span class="keyword">const</span> memoizedStyle = <span class="title function_">useMemo</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      <span class="attr">backgroundColor</span>: <span class="string">&quot;red&quot;</span>,</span><br><span class="line">      <span class="attr">color</span>: <span class="string">&quot;white&quot;</span>,</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;, []);</span><br><span class="line"> </span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">button</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">        <span class="attr">onClick</span>=<span class="string">&#123;()</span> =&gt;</span> &#123;</span></span><br><span class="line"><span class="language-xml">          setCount(count + 1);</span></span><br><span class="line"><span class="language-xml">        &#125;&#125;</span></span><br><span class="line"><span class="language-xml">      &gt;</span></span><br><span class="line"><span class="language-xml">        Increment &#123;count&#125;</span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">Heading</span> <span class="attr">style</span>=<span class="string">&#123;memoizedStyle&#125;</span> <span class="attr">title</span>=<span class="string">&quot;Memoized&quot;</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">Heading</span> <span class="attr">style</span>=<span class="string">&#123;normalStyle&#125;</span> <span class="attr">title</span>=<span class="string">&quot;Normal&quot;</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">Heading</span> <span class="attr">title</span>=<span class="string">&quot;React.memo Normal&quot;</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="setState代码输出"><a href="#setState代码输出" class="headerlink" title="setState代码输出"></a>setState代码输出</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; useState &#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">function</span> <span class="title function_">App</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> [todo, setTodo] = <span class="title function_">useState</span>(&#123; <span class="attr">id</span>: <span class="number">1</span>, <span class="attr">status</span>: <span class="string">&quot;TODO&quot;</span> &#125;);</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;App&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">button</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">        <span class="attr">onClick</span>=<span class="string">&#123;()</span> =&gt;</span> &#123;</span></span><br><span class="line"><span class="language-xml">          todo.status = !todo.status;</span></span><br><span class="line"><span class="language-xml">          setTodo(todo);</span></span><br><span class="line"><span class="language-xml">        &#125;&#125;</span></span><br><span class="line"><span class="language-xml">      &gt;</span></span><br><span class="line"><span class="language-xml">        Toggle Status</span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">h1</span>&gt;</span>&#123;todo.status&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="useCallback和useMemo性能优化"><a href="#useCallback和useMemo性能优化" class="headerlink" title="useCallback和useMemo性能优化"></a>useCallback和useMemo性能优化</h3><h3 id="优化React项目性能"><a href="#优化React项目性能" class="headerlink" title="优化React项目性能"></a>优化React项目性能</h3><ol>
+<li>避免不必要的渲染，shouldComponentUpdate、React.memo、React.useMemo、React.useCallback。</li>
+<li>代码分割，React.lazy 动态加载组件</li>
+<li>使用 <code>react-query</code>，对请求响应进行缓存、重发等，避免多次请求，减少网络 IO 消耗及优化渲染次数</li>
+<li>使用 <code>useDebounce</code>，对值及事件处理函数进行防抖，避免状态频繁变动，优化渲染次数</li>
+<li>使用 <code>useImmer</code></li>
+</ol>
+<h3 id="React-19"><a href="#React-19" class="headerlink" title="React 19"></a>React 19</h3>]]></content>
+      <categories>
+        <category>前端面试</category>
+      </categories>
+      <tags>
+        <tag>React</tag>
       </tags>
   </entry>
   <entry>
@@ -2167,13 +2232,16 @@ webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后�
 <h4 id="使用-npmrc-文件锁定发布源"><a href="#使用-npmrc-文件锁定发布源" class="headerlink" title="使用 .npmrc 文件锁定发布源"></a>使用 .npmrc 文件锁定发布源</h4><p>在项目根目录创建 .npmrc 文件，设置为私有源或无效源：</p>
 <span id="more"></span>
 
-<h2 id="package-json"><a href="#package-json" class="headerlink" title="package.json"></a>package.json</h2><h3 id="package-json-中-main-module-browser-exports-字段有何区别"><a href="#package-json-中-main-module-browser-exports-字段有何区别" class="headerlink" title="package.json 中 main&#x2F;module&#x2F;browser&#x2F;exports 字段有何区别"></a>package.json 中 main&#x2F;module&#x2F;browser&#x2F;exports 字段有何区别</h3><h3 id="peerdependencies相关"><a href="#peerdependencies相关" class="headerlink" title="peerdependencies相关"></a>peerdependencies相关</h3><h2 id="Webpack"><a href="#Webpack" class="headerlink" title="Webpack"></a>Webpack</h2><h3 id="webpack-的-loader-的机制是什么，有哪些常用的loader？"><a href="#webpack-的-loader-的机制是什么，有哪些常用的loader？" class="headerlink" title="webpack 的 loader 的机制是什么，有哪些常用的loader？"></a>webpack 的 loader 的机制是什么，有哪些常用的loader？</h3><p>本质上是一个函数，做文件转换，处理的操作，输入输出都是文件，常用loader有ts-loader，less-loader，babel-loader</p>
+<h2 id="package-json"><a href="#package-json" class="headerlink" title="package.json"></a>package.json</h2><h3 id="package-json-中-main-module-browser-exports-字段有何区别"><a href="#package-json-中-main-module-browser-exports-字段有何区别" class="headerlink" title="package.json 中 main&#x2F;module&#x2F;browser&#x2F;exports 字段有何区别"></a>package.json 中 main&#x2F;module&#x2F;browser&#x2F;exports 字段有何区别</h3><p>以antd为例，main一般放Commonjs入口，module放ESModule入口，unpkg放UMD入口<br><img src="/../assets/antd%20packagejson%E7%A4%BA%E4%BE%8B.png" alt="alt text"></p>
+<h3 id="peerdependencies相关"><a href="#peerdependencies相关" class="headerlink" title="peerdependencies相关"></a>peerdependencies相关</h3><p>peerDependencies用于声明当前包依赖的宿主环境必须安装的依赖，主要作用是约束宿主项目的依赖版本，确保插件与宿主环境兼容</p>
+<h2 id="Webpack"><a href="#Webpack" class="headerlink" title="Webpack"></a>Webpack</h2><h3 id="webpack-的-loader-的机制是什么，有哪些常用的loader？"><a href="#webpack-的-loader-的机制是什么，有哪些常用的loader？" class="headerlink" title="webpack 的 loader 的机制是什么，有哪些常用的loader？"></a>webpack 的 loader 的机制是什么，有哪些常用的loader？</h3><p>本质上是一个函数，做文件转换，处理的操作，输入输出都是文件，常用loader有ts-loader，less-loader，babel-loader</p>
 <h3 id="webpack默认打包成什么产物？UMD、CJS、ESM"><a href="#webpack默认打包成什么产物？UMD、CJS、ESM" class="headerlink" title="webpack默认打包成什么产物？UMD、CJS、ESM"></a>webpack默认打包成什么产物？UMD、CJS、ESM</h3><p>类似于UMD的那种iife</p>
 <h3 id="webpack-的插件系统是什么，有哪些常用的plugin？"><a href="#webpack-的插件系统是什么，有哪些常用的plugin？" class="headerlink" title="webpack 的插件系统是什么，有哪些常用的plugin？"></a>webpack 的插件系统是什么，有哪些常用的plugin？</h3><p>用于在webpack打包构建的生命周期里去做一些逻辑，常用plugin有：</p>
 <ul>
 <li><strong>HtmlWebpackPlugin</strong>：生成 HTML 文件并自动注入打包后的 JS&#x2F;CSS</li>
 <li><strong>TerserPlugin</strong>：压缩和混淆 JavaScript 代码</li>
 <li><strong>SplitChunksPlugin</strong>：自动分割公共代码和第三方库（Webpack 内置）</li>
+<li><strong>BundleAnalyzerPlugin</strong>：产物体积分析</li>
 </ul>
 <h3 id="webpack有哪两种代码分割模式"><a href="#webpack有哪两种代码分割模式" class="headerlink" title="webpack有哪两种代码分割模式"></a>webpack有哪两种代码分割模式</h3><p><strong>打包分离（bundle spliting）</strong><br>  为了更好的缓存，把代码分割成一个个小文件<br><strong>代码分离（code spliting）</strong><br>  动态，按需的加载代码</p>
 <h3 id="webpack-splitchunk有哪些配置"><a href="#webpack-splitchunk有哪些配置" class="headerlink" title="webpack splitchunk有哪些配置"></a>webpack splitchunk有哪些配置</h3><ul>
@@ -2212,50 +2280,19 @@ webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后�
       </tags>
   </entry>
   <entry>
-    <title>【前端面试】React相关</title>
-    <url>/2024/08/23/%E3%80%90%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E3%80%91React%E7%9B%B8%E5%85%B3/</url>
-    <content><![CDATA[<h2 id="React"><a href="#React" class="headerlink" title="React"></a>React</h2><h3 id="useEffect-中如何使用-async-await"><a href="#useEffect-中如何使用-async-await" class="headerlink" title="useEffect 中如何使用 async&#x2F;await"></a>useEffect 中如何使用 async&#x2F;await</h3><ol>
-<li>async函数抽离到外部 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">fetchMyAPI</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">let</span> response = <span class="keyword">await</span> <span class="title function_">fetch</span>(<span class="string">&quot;api/data&quot;</span>);</span><br><span class="line">  response = <span class="keyword">await</span> res.<span class="title function_">json</span>();</span><br><span class="line">  å<span class="title function_">dataSet</span>(response);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">useEffect</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="title function_">fetchMyAPI</span>();</span><br><span class="line">&#125;, []);</span><br></pre></td></tr></table></figure></li>
-</ol>
-<span id="more"></span>
-
-<ol start="2">
-<li>async立即执行函数<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="title function_">useEffect</span>(<span class="function">() =&gt;</span> &#123; </span><br><span class="line">   (<span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">anyNameFunction</span>(<span class="params"></span>) &#123; </span><br><span class="line">     <span class="keyword">await</span> <span class="title function_">loadContent</span>(); </span><br><span class="line">   &#125;)(); </span><br><span class="line"> &#125;, []);</span><br></pre></td></tr></table></figure></li>
-<li>ahooks - useAsyncEffect<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">useAsyncEffect</span>(<span class="params"></span></span><br><span class="line"><span class="params">    <span class="attr">effect</span>: () =&gt; <span class="title class_">AsyncGenerator</span>&lt;<span class="built_in">void</span>, <span class="built_in">void</span>, <span class="built_in">void</span>&gt; | <span class="title class_">Promise</span>&lt;<span class="built_in">void</span>&gt;,</span></span><br><span class="line"><span class="params">    deps?: <span class="title class_">DependencyList</span>,</span></span><br><span class="line"><span class="params"></span>) &#123;</span><br><span class="line">    <span class="title function_">useEffect</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">const</span> e = <span class="title function_">effect</span>();</span><br><span class="line">      <span class="keyword">let</span> cancelled = <span class="literal">false</span>;</span><br><span class="line">      <span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">execute</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="title function_">isAsyncGenerator</span>(e)) &#123;</span><br><span class="line">            <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">              <span class="keyword">const</span> result = <span class="keyword">await</span> e.<span class="title function_">next</span>();</span><br><span class="line">                <span class="keyword">if</span> (result.<span class="property">done</span> || cancelled) &#123;</span><br><span class="line">                  <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">          &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">await</span> e;</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="title function_">execute</span>();</span><br><span class="line">      <span class="keyword">return</span> <span class="function">() =&gt;</span> &#123;</span><br><span class="line">        cancelled = <span class="literal">true</span>;</span><br><span class="line">      &#125;;</span><br><span class="line">    &#125;, deps);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ol>
-<h3 id="React-hooks如何实现类似Redux的状态管理"><a href="#React-hooks如何实现类似Redux的状态管理" class="headerlink" title="React hooks如何实现类似Redux的状态管理"></a>React hooks如何实现类似Redux的状态管理</h3><p>useContext+useReducer</p>
-<h3 id="React-key的作用"><a href="#React-key的作用" class="headerlink" title="React key的作用"></a>React key的作用</h3><h3 id="React-useCallback使用场景"><a href="#React-useCallback使用场景" class="headerlink" title="React useCallback使用场景"></a>React useCallback使用场景</h3><ol>
-<li>作为props传递的函数，集合memo一起使用；</li>
-<li>作为更新触发的依赖项 主要目的是为了避免高昂的计算和不必要的重复渲染</li>
-</ol>
-<h3 id="React闭包陷阱"><a href="#React闭包陷阱" class="headerlink" title="React闭包陷阱"></a>React闭包陷阱</h3><h3 id="React-reconcile"><a href="#React-reconcile" class="headerlink" title="React reconcile"></a>React reconcile</h3><p><a href="https://zh-hans.legacy.reactjs.org/docs/reconciliation.html#motivation">https://zh-hans.legacy.reactjs.org/docs/reconciliation.html#motivation</a></p>
-<h3 id="特殊的React-Hooks"><a href="#特殊的React-Hooks" class="headerlink" title="特殊的React Hooks"></a>特殊的React Hooks</h3><h4 id="useTransition"><a href="#useTransition" class="headerlink" title="useTransition"></a>useTransition</h4><h4 id="useOptimistic"><a href="#useOptimistic" class="headerlink" title="useOptimistic"></a>useOptimistic</h4><h4 id="useSyncExternalStore"><a href="#useSyncExternalStore" class="headerlink" title="useSyncExternalStore"></a>useSyncExternalStore</h4><h4 id="useImperativeHandle"><a href="#useImperativeHandle" class="headerlink" title="useImperativeHandle"></a>useImperativeHandle</h4><h3 id="当多次重复点击按钮时，以下三个-Heading-是如何渲染的"><a href="#当多次重复点击按钮时，以下三个-Heading-是如何渲染的" class="headerlink" title="当多次重复点击按钮时，以下三个 Heading 是如何渲染的"></a>当多次重复点击按钮时，以下三个 Heading 是如何渲染的</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">React</span>, &#123; memo, useMemo, useState &#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">const</span> <span class="title class_">Heading</span> = <span class="title function_">memo</span>(<span class="function">(<span class="params">&#123; style, title &#125;</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;Rendered:&quot;</span>, title); </span><br><span class="line">  <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">h1</span> <span class="attr">style</span>=<span class="string">&#123;style&#125;</span>&gt;</span>&#123;title&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span>;</span><br><span class="line">&#125;);</span><br><span class="line"> </span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">function</span> <span class="title function_">App</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> [count, setCount] = <span class="title function_">useState</span>(<span class="number">0</span>);</span><br><span class="line"> </span><br><span class="line">  <span class="keyword">const</span> normalStyle = &#123;</span><br><span class="line">    <span class="attr">backgroundColor</span>: <span class="string">&quot;teal&quot;</span>,</span><br><span class="line">    <span class="attr">color</span>: <span class="string">&quot;white&quot;</span>,</span><br><span class="line">  &#125;;</span><br><span class="line"> </span><br><span class="line">  <span class="keyword">const</span> memoizedStyle = <span class="title function_">useMemo</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      <span class="attr">backgroundColor</span>: <span class="string">&quot;red&quot;</span>,</span><br><span class="line">      <span class="attr">color</span>: <span class="string">&quot;white&quot;</span>,</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;, []);</span><br><span class="line"> </span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">button</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">        <span class="attr">onClick</span>=<span class="string">&#123;()</span> =&gt;</span> &#123;</span></span><br><span class="line"><span class="language-xml">          setCount(count + 1);</span></span><br><span class="line"><span class="language-xml">        &#125;&#125;</span></span><br><span class="line"><span class="language-xml">      &gt;</span></span><br><span class="line"><span class="language-xml">        Increment &#123;count&#125;</span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">Heading</span> <span class="attr">style</span>=<span class="string">&#123;memoizedStyle&#125;</span> <span class="attr">title</span>=<span class="string">&quot;Memoized&quot;</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">Heading</span> <span class="attr">style</span>=<span class="string">&#123;normalStyle&#125;</span> <span class="attr">title</span>=<span class="string">&quot;Normal&quot;</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">Heading</span> <span class="attr">title</span>=<span class="string">&quot;React.memo Normal&quot;</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="setState代码输出"><a href="#setState代码输出" class="headerlink" title="setState代码输出"></a>setState代码输出</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; useState &#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">function</span> <span class="title function_">App</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> [todo, setTodo] = <span class="title function_">useState</span>(&#123; <span class="attr">id</span>: <span class="number">1</span>, <span class="attr">status</span>: <span class="string">&quot;TODO&quot;</span> &#125;);</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;App&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">button</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">        <span class="attr">onClick</span>=<span class="string">&#123;()</span> =&gt;</span> &#123;</span></span><br><span class="line"><span class="language-xml">          todo.status = !todo.status;</span></span><br><span class="line"><span class="language-xml">          setTodo(todo);</span></span><br><span class="line"><span class="language-xml">        &#125;&#125;</span></span><br><span class="line"><span class="language-xml">      &gt;</span></span><br><span class="line"><span class="language-xml">        Toggle Status</span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">h1</span>&gt;</span>&#123;todo.status&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="useCallback和useMemo性能优化"><a href="#useCallback和useMemo性能优化" class="headerlink" title="useCallback和useMemo性能优化"></a>useCallback和useMemo性能优化</h3><h3 id="优化React项目性能"><a href="#优化React项目性能" class="headerlink" title="优化React项目性能"></a>优化React项目性能</h3><ol>
-<li>避免不必要的渲染，shouldComponentUpdate、React.memo、React.useMemo、React.useCallback。</li>
-<li>代码分割，React.lazy 动态加载组件</li>
-<li>使用 <code>react-query</code>，对请求响应进行缓存、重发等，避免多次请求，减少网络 IO 消耗及优化渲染次数</li>
-<li>使用 <code>useDebounce</code>，对值及事件处理函数进行防抖，避免状态频繁变动，优化渲染次数</li>
-<li>使用 <code>useImmer</code></li>
-</ol>
-<h3 id="React-19"><a href="#React-19" class="headerlink" title="React 19"></a>React 19</h3>]]></content>
-      <categories>
-        <category>前端面试</category>
-      </categories>
-      <tags>
-        <tag>React</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>【前端面试】计算机网络</title>
     <url>/2024/08/19/%E3%80%90%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E3%80%91%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/</url>
     <content><![CDATA[<h2 id="计算机网络"><a href="#计算机网络" class="headerlink" title="计算机网络"></a>计算机网络</h2><h3 id="正向代理和反向代理"><a href="#正向代理和反向代理" class="headerlink" title="正向代理和反向代理"></a>正向代理和反向代理</h3><h4 id="正向代理"><a href="#正向代理" class="headerlink" title="正向代理"></a>正向代理</h4><p>正向代理是代理客户端，服务器无法感知客户端，客户端的请求都发往代理服务器，代理服务器替客户端发送请求给服务器，并把服务器响应的数据返回给客户端</p>
 <p>应用：翻墙，接口转发实现跨域</p>
 <h4 id="反向代理"><a href="#反向代理" class="headerlink" title="反向代理"></a>反向代理</h4><p>反向代理是代理服务器，客户端无法感知服务器</p>
 <p>应用：负载均衡</p>
-<span id="more"></span>]]></content>
+<span id="more"></span>
+
+<h3 id="HTTP常见状态码"><a href="#HTTP常见状态码" class="headerlink" title="HTTP常见状态码"></a>HTTP常见状态码</h3><p>见：<a href="https://huangyunt.github.io/2021/09/20/HTTP/">HTTP</a></p>
+<h3 id="HTTP缓存"><a href="#HTTP缓存" class="headerlink" title="HTTP缓存"></a>HTTP缓存</h3><p>见：<a href="https://huangyunt.github.io/2021/09/18/HTTP%E7%BC%93%E5%AD%98/">HTTP缓存</a></p>
+<h3 id="HTTPS"><a href="#HTTPS" class="headerlink" title="HTTPS"></a>HTTPS</h3><p>见：<a href="https://huangyunt.github.io/2021/09/13/Https/">HTTPS</a></p>
+<h3 id="Cookie有哪些字段"><a href="#Cookie有哪些字段" class="headerlink" title="Cookie有哪些字段"></a>Cookie有哪些字段</h3><p>key、value、domain、httponly、samesite</p>
+]]></content>
       <categories>
         <category>前端面试</category>
       </categories>
@@ -2535,6 +2572,21 @@ webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后�
       </tags>
   </entry>
   <entry>
+    <title>加密货币的本质</title>
+    <url>/2024/11/04/%E5%8A%A0%E5%AF%86%E8%B4%A7%E5%B8%81%E7%9A%84%E6%9C%AC%E8%B4%A8/</url>
+    <content><![CDATA[<h2 id="钱的本质"><a href="#钱的本质" class="headerlink" title="钱的本质"></a>钱的本质</h2><p>共识、可信性</p>
+<h3 id="比特币的可信性"><a href="#比特币的可信性" class="headerlink" title="比特币的可信性"></a>比特币的可信性</h3><p>比特币要解决的核心问题，就是创造一种可信的数字凭证。由于这种凭证可信，所以能够当做货币。<br>比特币的技术基础是加密学，因为只有加密学才能保证它的可信性。一旦加密被破解，它就没法当作货币了。这也是这一类数字凭证被称为”加密货币”的原因。<br>技术人员对比特币感兴趣，还有一个重要原因。任何需要可靠的数字凭证的场合，也许都可以用到这种技术。</p>
+]]></content>
+      <categories>
+        <category>Web3/加密货币</category>
+      </categories>
+      <tags>
+        <tag>Web3</tag>
+        <tag>比特币</tag>
+        <tag>加密货币</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>包管理器</title>
     <url>/2025/03/13/%E5%8C%85%E7%AE%A1%E7%90%86%E5%99%A8/</url>
     <content><![CDATA[<h2 id="包管理器"><a href="#包管理器" class="headerlink" title="包管理器"></a>包管理器</h2><h3 id="Npm-Yarn"><a href="#Npm-Yarn" class="headerlink" title="Npm&#x2F;Yarn"></a>Npm&#x2F;Yarn</h3><h4 id="Npm发包"><a href="#Npm发包" class="headerlink" title="Npm发包"></a>Npm发包</h4><h5 id="files"><a href="#files" class="headerlink" title="files"></a>files</h5><p>指定哪些文件会被打包发布（后面详细描述）。</p>
@@ -2617,21 +2669,6 @@ webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后�
       </categories>
       <tags>
         <tag>前端安全</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>加密货币的本质</title>
-    <url>/2024/11/04/%E5%8A%A0%E5%AF%86%E8%B4%A7%E5%B8%81%E7%9A%84%E6%9C%AC%E8%B4%A8/</url>
-    <content><![CDATA[<h2 id="钱的本质"><a href="#钱的本质" class="headerlink" title="钱的本质"></a>钱的本质</h2><p>共识、可信性</p>
-<h3 id="比特币的可信性"><a href="#比特币的可信性" class="headerlink" title="比特币的可信性"></a>比特币的可信性</h3><p>比特币要解决的核心问题，就是创造一种可信的数字凭证。由于这种凭证可信，所以能够当做货币。<br>比特币的技术基础是加密学，因为只有加密学才能保证它的可信性。一旦加密被破解，它就没法当作货币了。这也是这一类数字凭证被称为”加密货币”的原因。<br>技术人员对比特币感兴趣，还有一个重要原因。任何需要可靠的数字凭证的场合，也许都可以用到这种技术。</p>
-]]></content>
-      <categories>
-        <category>Web3/加密货币</category>
-      </categories>
-      <tags>
-        <tag>Web3</tag>
-        <tag>比特币</tag>
-        <tag>加密货币</tag>
       </tags>
   </entry>
   <entry>
@@ -2782,6 +2819,18 @@ webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后�
       </tags>
   </entry>
   <entry>
+    <title>微信小程序开发</title>
+    <url>/2025/06/05/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91/</url>
+    <content><![CDATA[<h2 id="微信小程序开发"><a href="#微信小程序开发" class="headerlink" title="微信小程序开发"></a>微信小程序开发</h2>]]></content>
+      <categories>
+        <category>小程序</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+        <tag>微信小程序</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>站点更新日志 / ChangeLog</title>
     <url>/2024/10/28/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97/</url>
     <content><![CDATA[<!-- ### 前言
@@ -2829,18 +2878,6 @@ webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后�
 <p><strong>标签、分类功能</strong><br>所有文章整理了一版，对所有文章分标签、分类展示</p>
 <p><strong>文章显示字数统计、浏览时间</strong><br>引入<code>hexo-word-counter</code>这个插件来实现的，还会统计代码字数，算是个锦上添花的功能吧^^</p>
 ]]></content>
-  </entry>
-  <entry>
-    <title>微信小程序开发</title>
-    <url>/2025/06/05/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91/</url>
-    <content><![CDATA[<h2 id="微信小程序开发"><a href="#微信小程序开发" class="headerlink" title="微信小程序开发"></a>微信小程序开发</h2>]]></content>
-      <categories>
-        <category>小程序</category>
-      </categories>
-      <tags>
-        <tag>前端</tag>
-        <tag>微信小程序</tag>
-      </tags>
   </entry>
   <entry>
     <title>比特币</title>
@@ -3043,7 +3080,7 @@ webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后�
 </tbody></table>
 <h3 id="事件循环加入宏任务微任务"><a href="#事件循环加入宏任务微任务" class="headerlink" title="事件循环加入宏任务微任务"></a>事件循环加入宏任务微任务</h3><ol>
 <li>Call Stack调用栈清空</li>
-<li><strong>清空</strong>当前微任务队列</li>
+<li><strong>清空</strong>当前微任务队列，若有新增微任务，会加入当前队列尾部继续执行。</li>
 <li>尝试DOM渲染</li>
 <li>执行event loop </li>
 <li>取出任务队列里的一个宏任务，入栈执行</li>

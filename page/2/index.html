@@ -231,7 +231,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-06-12 15:48:32" itemprop="dateModified" datetime="2025-06-12T15:48:32+08:00">2025-06-12</time>
+      <time title="修改时间：2025-06-16 15:46:42" itemprop="dateModified" datetime="2025-06-16T15:46:42+08:00">2025-06-16</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -249,14 +249,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>437</span>
+      <span>795</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>2 分钟</span>
+      <span>3 分钟</span>
     </span>
 </div>
 
@@ -267,7 +267,25 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="React"><a href="#React" class="headerlink" title="React"></a>React</h2><h3 id="useEffect-中如何使用-async-await"><a href="#useEffect-中如何使用-async-await" class="headerlink" title="useEffect 中如何使用 async&#x2F;await"></a>useEffect 中如何使用 async&#x2F;await</h3><ol>
+          <h2 id="React"><a href="#React" class="headerlink" title="React"></a>React</h2><h3 id="React有哪些hooks"><a href="#React有哪些hooks" class="headerlink" title="React有哪些hooks"></a>React有哪些hooks</h3><ul>
+<li>useState</li>
+<li>useEffect</li>
+<li>useRef</li>
+<li>useMemo</li>
+<li>useCallback</li>
+<li>useContext</li>
+<li>useReducer</li>
+<li>useLayoutEffect</li>
+<li>useTransition</li>
+<li>useId</li>
+<li>useDebugValue</li>
+<li>useDeferredValue</li>
+</ul>
+<h3 id="useLayoutEffect和useEffect的区别"><a href="#useLayoutEffect和useEffect的区别" class="headerlink" title="useLayoutEffect和useEffect的区别"></a>useLayoutEffect和useEffect的区别</h3><p><strong>useEffect</strong>：异步执行，在浏览器完成渲染后（页面已绘制）<br><strong>useLayoutEffect</strong>：同步执行，在 DOM 更新后、浏览器绘制前（用户不可见），适用于需要读取 DOM 布局或强制同步更新的场景（如测量 DOM、修改样式）。</p>
+<h3 id="如何借助interSectionObserver实现一个dom可见性的自定义hook"><a href="#如何借助interSectionObserver实现一个dom可见性的自定义hook" class="headerlink" title="如何借助interSectionObserver实现一个dom可见性的自定义hook"></a>如何借助interSectionObserver实现一个dom可见性的自定义hook</h3><p>有一个关键点是Ref的更新在useEffect执行前</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; useEffect, useState, useRef &#125; <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="title function_">useInView</span> = (<span class="params"></span></span><br><span class="line"><span class="params">    options = &#123;</span></span><br><span class="line"><span class="params">        root: <span class="literal">null</span>,</span></span><br><span class="line"><span class="params">        rootMargin: <span class="string">&#x27;0px 0px&#x27;</span>,</span></span><br><span class="line"><span class="params">        threshold: <span class="number">1</span>,</span></span><br><span class="line"><span class="params">    &#125;,</span></span><br><span class="line"><span class="params">    triggerOnce = <span class="literal">false</span>, <span class="comment">// 是否只触发一次</span></span></span><br><span class="line"><span class="params"></span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">const</span> [inView, setInView] = <span class="title function_">useState</span>(<span class="literal">false</span>);</span><br><span class="line">    <span class="keyword">const</span> targetRef = <span class="title function_">useRef</span>(<span class="literal">null</span>);</span><br><span class="line"></span><br><span class="line">    <span class="title function_">useEffect</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> observer = <span class="keyword">new</span> <span class="title class_">IntersectionObserver</span>(<span class="function">(<span class="params">entries</span>) =&gt;</span> &#123;</span><br><span class="line">            entries.<span class="title function_">forEach</span>(<span class="function">(<span class="params">entry</span>) =&gt;</span> &#123;</span><br><span class="line">                <span class="keyword">if</span> (entry.<span class="property">isIntersecting</span>) &#123;</span><br><span class="line">                    <span class="title function_">setInView</span>(<span class="literal">true</span>);</span><br><span class="line">                    <span class="keyword">if</span> (triggerOnce) &#123;</span><br><span class="line">                        <span class="comment">// 触发一次后结束监听</span></span><br><span class="line">                        observer.<span class="title function_">unobserve</span>(entry.<span class="property">target</span>);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="title function_">setInView</span>(<span class="literal">false</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;, options);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (targetRef.<span class="property">current</span>) &#123;</span><br><span class="line">            <span class="comment">// 开始监听</span></span><br><span class="line">            observer.<span class="title function_">observe</span>(targetRef.<span class="property">current</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="function">() =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (targetRef.<span class="property">current</span>) &#123;</span><br><span class="line">                <span class="comment">// 组件卸载时结束监听</span></span><br><span class="line">                observer.<span class="title function_">unobserve</span>(targetRef.<span class="property">current</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;, [options, triggerOnce]);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> [targetRef, inView];</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> useInView;</span><br></pre></td></tr></table></figure>
+
+<h3 id="useEffect-中如何使用-async-await"><a href="#useEffect-中如何使用-async-await" class="headerlink" title="useEffect 中如何使用 async&#x2F;await"></a>useEffect 中如何使用 async&#x2F;await</h3><ol>
 <li>async函数抽离到外部 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">fetchMyAPI</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">let</span> response = <span class="keyword">await</span> <span class="title function_">fetch</span>(<span class="string">&quot;api/data&quot;</span>);</span><br><span class="line">  response = <span class="keyword">await</span> res.<span class="title function_">json</span>();</span><br><span class="line">  å<span class="title function_">dataSet</span>(response);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">useEffect</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="title function_">fetchMyAPI</span>();</span><br><span class="line">&#125;, []);</span><br></pre></td></tr></table></figure></li>
 </ol>
           <!--noindex-->
@@ -339,7 +357,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-06-12 15:48:21" itemprop="dateModified" datetime="2025-06-12T15:48:21+08:00">2025-06-12</time>
+      <time title="修改时间：2025-06-17 18:05:21" itemprop="dateModified" datetime="2025-06-17T18:05:21+08:00">2025-06-17</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -357,7 +375,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>45</span>
+      <span>152</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -555,7 +573,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-06-12 15:48:14" itemprop="dateModified" datetime="2025-06-12T15:48:14+08:00">2025-06-12</time>
+      <time title="修改时间：2025-06-17 18:02:28" itemprop="dateModified" datetime="2025-06-17T18:02:28+08:00">2025-06-17</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -573,7 +591,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>128</span>
+      <span>157</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -1347,7 +1365,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">2:31</span>
+    <span title="站点阅读时长">2:34</span>
   </span>
 </div>
 
