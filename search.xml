@@ -1,88 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>CSS</title>
-    <url>/2021/02/07/CSS/</url>
-    <content><![CDATA[<h3 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h3><p>最近看了两本书《CSS揭秘》和《CSS权威指南》恶补一下CSS（自己真是菜到天际），记录一些有意思的问题</p>
-<span id="more"></span>
-
-<h3 id="1-CSS高度由什么决定？"><a href="#1-CSS高度由什么决定？" class="headerlink" title="1. CSS高度由什么决定？"></a>1. CSS高度由什么决定？</h3><h4 id="块级元素"><a href="#块级元素" class="headerlink" title="块级元素"></a>块级元素</h4><p>一个块级元素div的高度一般是与自身的<strong>CSS样式</strong>和<strong>内部元素的高度总和</strong>有关</p>
-<ul>
-<li><code>div</code>设置了height后，整个盒模型的高度基本确定，其内部元素再高也无法改变<code>div</code>的高度</li>
-<li>当<code>div</code>不设置height时，其高度和内部文档流元素高度的总和有关</li>
-</ul>
-<h5 id="块级元素不设置高度，内有块级元素时"><a href="#块级元素不设置高度，内有块级元素时" class="headerlink" title="块级元素不设置高度，内有块级元素时"></a>块级元素不设置高度，内有块级元素时</h5><p>会被子元素的height、padding、border撑起来</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css">    *&#123;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">margin</span>: <span class="number">0</span>;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">padding</span>: <span class="number">0</span>;</span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css">    <span class="selector-class">.parent</span>&#123;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">outline</span>: <span class="number">5px</span> solid red;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">width</span>: <span class="number">300px</span>;</span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css">    <span class="selector-class">.child</span>&#123;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">height</span>:<span class="number">400px</span>;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">border</span>: <span class="number">5px</span> solid green;</span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;parent&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;child&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>如图，父级元素不设高度，高度为子元素height+border</p>
-<div style="display: flex; justify-content: center; align-items: center;">
-    <img src="C:\Users\H\AppData\Roaming\Typora\typora-user-images\image-20211120195130235.png"
-        alt="image-20211120195130235" style="zoom:50%;" />
-    <img src="C:\Users\H\AppData\Roaming\Typora\typora-user-images\image-20211120195056819.png"
-        alt="image-20211120195056819" style="zoom:50%;" />
-</div>
-
-
-
-<h5 id="子元素设置margin时"><a href="#子元素设置margin时" class="headerlink" title="子元素设置margin时"></a>子元素设置margin时</h5><p>父元素高度无法被子元素垂直方向上margin撑开</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css">    * &#123;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">margin</span>: <span class="number">0px</span>;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">padding</span>: <span class="number">0px</span>;</span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css"></span></span><br><span class="line"><span class="language-css">    <span class="selector-class">.parent</span> &#123;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">outline</span>: <span class="number">5px</span> solid red;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">width</span>: <span class="number">300px</span>;</span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css"></span></span><br><span class="line"><span class="language-css">    <span class="selector-class">.child</span> &#123;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">height</span>: <span class="number">400px</span>;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">border</span>: <span class="number">5px</span> solid green;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">margin</span>: <span class="number">20px</span>;</span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;parent&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;child&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<div style="display: flex; justify-content: center; align-items: center;">
-    <img src="C:\Users\H\AppData\Roaming\Typora\typora-user-images\image-20211120202203417.png"
-        alt="image-20211120202203417" style="zoom:50%;" />
-    <img src="C:\Users\H\AppData\Roaming\Typora\typora-user-images\image-20211120202344779.png"
-        alt="image-20211120202344779" style="zoom:50%;" />
-</div>
-
-<p><strong>解决方案：父元素设置border&#x2F;padding&#x2F;overflow：hidden</strong></p>
-<p><strong>总结：父元素高度能被子元素的height、border、padding撑开，如果父元元素在垂直方向上有<code>border</code>,<code>padding</code>（只要在逻辑上存在，不论大小）以及<code>overflow:hidden</code>，都能被子元素的<code>margin</code>撑开，否则只能撑开父元素的宽度</strong></p>
-<h3 id="2-CSS宽度由什么决定？"><a href="#2-CSS宽度由什么决定？" class="headerlink" title="2. CSS宽度由什么决定？"></a>2. CSS宽度由什么决定？</h3><h4 id="行内-行内块元素"><a href="#行内-行内块元素" class="headerlink" title="行内&#x2F;行内块元素"></a>行内&#x2F;行内块元素</h4><p>行内元素&#x2F;行内块的宽度是由它的内容决定的，行内元素不能设置宽高</p>
-<h4 id="块级元素-1"><a href="#块级元素-1" class="headerlink" title="块级元素"></a>块级元素</h4><p>一个块级元素宽度当不设置样式时默认为父级元素的100%<strong>（这个100%是自适应的，并不相当于width：100%）</strong></p>
-<h3 id="3-为什么margin-top-padding-top设置百分比基于父元素的宽度计算的？"><a href="#3-为什么margin-top-padding-top设置百分比基于父元素的宽度计算的？" class="headerlink" title="3. 为什么margin-top&#x2F;padding-top设置百分比基于父元素的宽度计算的？"></a>3. 为什么margin-top&#x2F;padding-top设置百分比基于父元素的宽度计算的？</h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css">        <span class="selector-class">.parent</span> &#123;</span></span><br><span class="line"><span class="language-css">            <span class="attribute">width</span>: <span class="number">300px</span>;</span></span><br><span class="line"><span class="language-css">            <span class="attribute">height</span>: <span class="number">400px</span>;</span></span><br><span class="line"><span class="language-css">            <span class="attribute">border</span>: <span class="number">5px</span> solid red;</span></span><br><span class="line"><span class="language-css">        &#125;</span></span><br><span class="line"><span class="language-css">        <span class="selector-class">.child</span> &#123;</span></span><br><span class="line"><span class="language-css">            <span class="attribute">height</span>: <span class="number">200px</span>;</span></span><br><span class="line"><span class="language-css">            <span class="attribute">margin-top</span>: <span class="number">50%</span>;</span></span><br><span class="line"><span class="language-css">            <span class="attribute">background-color</span>: green;</span></span><br><span class="line"><span class="language-css">        &#125;</span></span><br><span class="line"><span class="language-css">    </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;parent&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;child&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<img src="C:\Users\H\AppData\Roaming\Typora\typora-user-images\image-20211120194334386.png" alt="image-20211120194334386" style="zoom:50%;" />
-
-<p>这里利用margin-top：50%将子元素挤到最下方贴底，然而这里的百分比是相对于父级宽度计算的。</p>
-<p>CSS权威指南中的解释：若是相对于父元素的高度计算会形成死循环。<br><em><strong>“我们认为，正常流中的大多数元素都会足够高以包含其后代元素（包括外边距），如果一个元素的上下外边距是父元素的height的百分数，就可能导致一个无限循环，父元素的height会增加，以适应后代元素上下外边距的增加，而相应的，上下外边距因为父元素height的增加也会增加，形成无限循环。”</strong></em></p>
-<p><strong>本质上是因为css中高度是可以自适应的，基于父级高度的百分比计算会导致无限循环的问题</strong>。</p>
-<h3 id="4-flex：1"><a href="#4-flex：1" class="headerlink" title="4. flex：1"></a>4. flex：1</h3><p><code>flex：x</code> 相当于 <code>flex-grow: x，flex-shrink：1，flex-basis：0%；</code></p>
-<p><code> flex-grow: 定义项目的放大比例,0为不放大</code></p>
-<p><code>flex-shrink: 定义了项目的缩小比例，默认为1，即如果空间不足，该项目将缩小。 </code></p>
-<p><code>flex-basis: 定义了在分配多余空间之前，项目占据的主轴空间。浏览器根据这个属性，计算主轴是否有多余空间。它的默认值为auto，即项目的本来大小。   </code></p>
-<figure class="highlight plaintext"><figcaption><span>``` 的含义是分配**主轴**方向上的剩余空间！</span></figcaption><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">所以对于竖直的两栏布局，只需要改变一下主轴方向即可</span><br><span class="line"></span><br><span class="line">```html</span><br><span class="line">&lt;style&gt;</span><br><span class="line">    body &#123;</span><br><span class="line">        height: 100%;</span><br><span class="line">        width: 100%;</span><br><span class="line">    &#125;</span><br><span class="line">    .f-box &#123;</span><br><span class="line">        display: flex;</span><br><span class="line">        flex-direction: column;</span><br><span class="line">        border: 5px solid gray;</span><br><span class="line">        height: 100%;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    .top &#123;</span><br><span class="line">        height: 100px;</span><br><span class="line">        background-color: red;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    .bot &#123;</span><br><span class="line">        flex: 1;</span><br><span class="line">        background-color:blue;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line"></span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;div class=&quot;f-box&quot;&gt;</span><br><span class="line">    &lt;div class=&quot;top&quot;&gt;&lt;/div&gt;</span><br><span class="line">    &lt;div class=&quot;bot&quot;&gt;&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="5-display：none，visibility：hidden，opacity：0-的区别"><a href="#5-display：none，visibility：hidden，opacity：0-的区别" class="headerlink" title="5. display：none，visibility：hidden，opacity：0  的区别"></a>5. <code>display：none，visibility：hidden，opacity：0</code>  的区别</h3><h4 id="display-none"><a href="#display-none" class="headerlink" title="display: none;"></a>display: none;</h4><ol>
-<li>DOM 结构：浏览器不会渲染 display 属性为 none 的元素，不占据空间；</li>
-<li><strong>事件监听：无法进行 DOM 事件监听；</strong></li>
-<li>性能：动态改变此属性时会引起重排，性能较差；</li>
-<li>继承：不会被子元素继承，毕竟子类也不会被渲染；</li>
-<li>transition：transition 不支持 display。</li>
-</ol>
-<h4 id="visibility-hidden"><a href="#visibility-hidden" class="headerlink" title="visibility: hidden;"></a>visibility: hidden;</h4><ol>
-<li>DOM 结构：元素被隐藏，但是会被渲染不会消失，占据空间；</li>
-<li><strong>事件监听：无法进行 DOM 事件监听；</strong></li>
-<li>性 能：动态改变此属性时会引起重绘，性能较高；</li>
-<li>继 承：会被子元素继承，子元素可以通过设置 visibility: visible; 来取消隐藏；</li>
-<li>transition：visibility 会立即显示，隐藏时会延时</li>
-</ol>
-<h4 id="opacity-0"><a href="#opacity-0" class="headerlink" title="opacity: 0;"></a>opacity: 0;</h4><ol>
-<li>DOM 结构：透明度为 100%，元素隐藏，占据空间；</li>
-<li><strong>事件监听：可以进行 DOM 事件监听；</strong></li>
-<li>性 能：提升为合成层，不会触发重绘，性能较高；</li>
-<li>继 承：会被子元素继承,且，子元素并不能通过 opacity: 1 来取消隐藏；</li>
-<li>transition：opacity 可以延时显示和隐藏</li>
-</ol>
-]]></content>
-      <categories>
-        <category>CSS</category>
-      </categories>
-      <tags>
-        <tag>CSS</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>HTTP</title>
     <url>/2021/09/20/HTTP/</url>
     <content><![CDATA[<h2 id="HTTP-有哪些常见状态码"><a href="#HTTP-有哪些常见状态码" class="headerlink" title="HTTP 有哪些常见状态码"></a>HTTP 有哪些常见状态码</h2><h3 id="2xx（成功状态码）"><a href="#2xx（成功状态码）" class="headerlink" title="2xx（成功状态码）"></a>2xx（成功状态码）</h3><h4 id="200-OK"><a href="#200-OK" class="headerlink" title="200 OK"></a>200 OK</h4><blockquote>
@@ -217,6 +135,88 @@
         <tag>Network</tag>
         <tag>Http</tag>
         <tag>Https</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>CSS</title>
+    <url>/2021/02/07/CSS/</url>
+    <content><![CDATA[<h3 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h3><p>最近看了两本书《CSS揭秘》和《CSS权威指南》恶补一下CSS（自己真是菜到天际），记录一些有意思的问题</p>
+<span id="more"></span>
+
+<h3 id="1-CSS高度由什么决定？"><a href="#1-CSS高度由什么决定？" class="headerlink" title="1. CSS高度由什么决定？"></a>1. CSS高度由什么决定？</h3><h4 id="块级元素"><a href="#块级元素" class="headerlink" title="块级元素"></a>块级元素</h4><p>一个块级元素div的高度一般是与自身的<strong>CSS样式</strong>和<strong>内部元素的高度总和</strong>有关</p>
+<ul>
+<li><code>div</code>设置了height后，整个盒模型的高度基本确定，其内部元素再高也无法改变<code>div</code>的高度</li>
+<li>当<code>div</code>不设置height时，其高度和内部文档流元素高度的总和有关</li>
+</ul>
+<h5 id="块级元素不设置高度，内有块级元素时"><a href="#块级元素不设置高度，内有块级元素时" class="headerlink" title="块级元素不设置高度，内有块级元素时"></a>块级元素不设置高度，内有块级元素时</h5><p>会被子元素的height、padding、border撑起来</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css">    *&#123;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">margin</span>: <span class="number">0</span>;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">padding</span>: <span class="number">0</span>;</span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css">    <span class="selector-class">.parent</span>&#123;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">outline</span>: <span class="number">5px</span> solid red;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">width</span>: <span class="number">300px</span>;</span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css">    <span class="selector-class">.child</span>&#123;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">height</span>:<span class="number">400px</span>;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">border</span>: <span class="number">5px</span> solid green;</span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;parent&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;child&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>如图，父级元素不设高度，高度为子元素height+border</p>
+<div style="display: flex; justify-content: center; align-items: center;">
+    <img src="C:\Users\H\AppData\Roaming\Typora\typora-user-images\image-20211120195130235.png"
+        alt="image-20211120195130235" style="zoom:50%;" />
+    <img src="C:\Users\H\AppData\Roaming\Typora\typora-user-images\image-20211120195056819.png"
+        alt="image-20211120195056819" style="zoom:50%;" />
+</div>
+
+
+
+<h5 id="子元素设置margin时"><a href="#子元素设置margin时" class="headerlink" title="子元素设置margin时"></a>子元素设置margin时</h5><p>父元素高度无法被子元素垂直方向上margin撑开</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css">    * &#123;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">margin</span>: <span class="number">0px</span>;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">padding</span>: <span class="number">0px</span>;</span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css"></span></span><br><span class="line"><span class="language-css">    <span class="selector-class">.parent</span> &#123;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">outline</span>: <span class="number">5px</span> solid red;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">width</span>: <span class="number">300px</span>;</span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css"></span></span><br><span class="line"><span class="language-css">    <span class="selector-class">.child</span> &#123;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">height</span>: <span class="number">400px</span>;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">border</span>: <span class="number">5px</span> solid green;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">margin</span>: <span class="number">20px</span>;</span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;parent&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;child&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<div style="display: flex; justify-content: center; align-items: center;">
+    <img src="C:\Users\H\AppData\Roaming\Typora\typora-user-images\image-20211120202203417.png"
+        alt="image-20211120202203417" style="zoom:50%;" />
+    <img src="C:\Users\H\AppData\Roaming\Typora\typora-user-images\image-20211120202344779.png"
+        alt="image-20211120202344779" style="zoom:50%;" />
+</div>
+
+<p><strong>解决方案：父元素设置border&#x2F;padding&#x2F;overflow：hidden</strong></p>
+<p><strong>总结：父元素高度能被子元素的height、border、padding撑开，如果父元元素在垂直方向上有<code>border</code>,<code>padding</code>（只要在逻辑上存在，不论大小）以及<code>overflow:hidden</code>，都能被子元素的<code>margin</code>撑开，否则只能撑开父元素的宽度</strong></p>
+<h3 id="2-CSS宽度由什么决定？"><a href="#2-CSS宽度由什么决定？" class="headerlink" title="2. CSS宽度由什么决定？"></a>2. CSS宽度由什么决定？</h3><h4 id="行内-行内块元素"><a href="#行内-行内块元素" class="headerlink" title="行内&#x2F;行内块元素"></a>行内&#x2F;行内块元素</h4><p>行内元素&#x2F;行内块的宽度是由它的内容决定的，行内元素不能设置宽高</p>
+<h4 id="块级元素-1"><a href="#块级元素-1" class="headerlink" title="块级元素"></a>块级元素</h4><p>一个块级元素宽度当不设置样式时默认为父级元素的100%<strong>（这个100%是自适应的，并不相当于width：100%）</strong></p>
+<h3 id="3-为什么margin-top-padding-top设置百分比基于父元素的宽度计算的？"><a href="#3-为什么margin-top-padding-top设置百分比基于父元素的宽度计算的？" class="headerlink" title="3. 为什么margin-top&#x2F;padding-top设置百分比基于父元素的宽度计算的？"></a>3. 为什么margin-top&#x2F;padding-top设置百分比基于父元素的宽度计算的？</h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css">        <span class="selector-class">.parent</span> &#123;</span></span><br><span class="line"><span class="language-css">            <span class="attribute">width</span>: <span class="number">300px</span>;</span></span><br><span class="line"><span class="language-css">            <span class="attribute">height</span>: <span class="number">400px</span>;</span></span><br><span class="line"><span class="language-css">            <span class="attribute">border</span>: <span class="number">5px</span> solid red;</span></span><br><span class="line"><span class="language-css">        &#125;</span></span><br><span class="line"><span class="language-css">        <span class="selector-class">.child</span> &#123;</span></span><br><span class="line"><span class="language-css">            <span class="attribute">height</span>: <span class="number">200px</span>;</span></span><br><span class="line"><span class="language-css">            <span class="attribute">margin-top</span>: <span class="number">50%</span>;</span></span><br><span class="line"><span class="language-css">            <span class="attribute">background-color</span>: green;</span></span><br><span class="line"><span class="language-css">        &#125;</span></span><br><span class="line"><span class="language-css">    </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;parent&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;child&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<img src="C:\Users\H\AppData\Roaming\Typora\typora-user-images\image-20211120194334386.png" alt="image-20211120194334386" style="zoom:50%;" />
+
+<p>这里利用margin-top：50%将子元素挤到最下方贴底，然而这里的百分比是相对于父级宽度计算的。</p>
+<p>CSS权威指南中的解释：若是相对于父元素的高度计算会形成死循环。<br><em><strong>“我们认为，正常流中的大多数元素都会足够高以包含其后代元素（包括外边距），如果一个元素的上下外边距是父元素的height的百分数，就可能导致一个无限循环，父元素的height会增加，以适应后代元素上下外边距的增加，而相应的，上下外边距因为父元素height的增加也会增加，形成无限循环。”</strong></em></p>
+<p><strong>本质上是因为css中高度是可以自适应的，基于父级高度的百分比计算会导致无限循环的问题</strong>。</p>
+<h3 id="4-flex：1"><a href="#4-flex：1" class="headerlink" title="4. flex：1"></a>4. flex：1</h3><p><code>flex：x</code> 相当于 <code>flex-grow: x，flex-shrink：1，flex-basis：0%；</code></p>
+<p><code> flex-grow: 定义项目的放大比例,0为不放大</code></p>
+<p><code>flex-shrink: 定义了项目的缩小比例，默认为1，即如果空间不足，该项目将缩小。 </code></p>
+<p><code>flex-basis: 定义了在分配多余空间之前，项目占据的主轴空间。浏览器根据这个属性，计算主轴是否有多余空间。它的默认值为auto，即项目的本来大小。   </code></p>
+<figure class="highlight plaintext"><figcaption><span>``` 的含义是分配**主轴**方向上的剩余空间！</span></figcaption><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">所以对于竖直的两栏布局，只需要改变一下主轴方向即可</span><br><span class="line"></span><br><span class="line">```html</span><br><span class="line">&lt;style&gt;</span><br><span class="line">    body &#123;</span><br><span class="line">        height: 100%;</span><br><span class="line">        width: 100%;</span><br><span class="line">    &#125;</span><br><span class="line">    .f-box &#123;</span><br><span class="line">        display: flex;</span><br><span class="line">        flex-direction: column;</span><br><span class="line">        border: 5px solid gray;</span><br><span class="line">        height: 100%;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    .top &#123;</span><br><span class="line">        height: 100px;</span><br><span class="line">        background-color: red;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    .bot &#123;</span><br><span class="line">        flex: 1;</span><br><span class="line">        background-color:blue;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line"></span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;div class=&quot;f-box&quot;&gt;</span><br><span class="line">    &lt;div class=&quot;top&quot;&gt;&lt;/div&gt;</span><br><span class="line">    &lt;div class=&quot;bot&quot;&gt;&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="5-display：none，visibility：hidden，opacity：0-的区别"><a href="#5-display：none，visibility：hidden，opacity：0-的区别" class="headerlink" title="5. display：none，visibility：hidden，opacity：0  的区别"></a>5. <code>display：none，visibility：hidden，opacity：0</code>  的区别</h3><h4 id="display-none"><a href="#display-none" class="headerlink" title="display: none;"></a>display: none;</h4><ol>
+<li>DOM 结构：浏览器不会渲染 display 属性为 none 的元素，不占据空间；</li>
+<li><strong>事件监听：无法进行 DOM 事件监听；</strong></li>
+<li>性能：动态改变此属性时会引起重排，性能较差；</li>
+<li>继承：不会被子元素继承，毕竟子类也不会被渲染；</li>
+<li>transition：transition 不支持 display。</li>
+</ol>
+<h4 id="visibility-hidden"><a href="#visibility-hidden" class="headerlink" title="visibility: hidden;"></a>visibility: hidden;</h4><ol>
+<li>DOM 结构：元素被隐藏，但是会被渲染不会消失，占据空间；</li>
+<li><strong>事件监听：无法进行 DOM 事件监听；</strong></li>
+<li>性 能：动态改变此属性时会引起重绘，性能较高；</li>
+<li>继 承：会被子元素继承，子元素可以通过设置 visibility: visible; 来取消隐藏；</li>
+<li>transition：visibility 会立即显示，隐藏时会延时</li>
+</ol>
+<h4 id="opacity-0"><a href="#opacity-0" class="headerlink" title="opacity: 0;"></a>opacity: 0;</h4><ol>
+<li>DOM 结构：透明度为 100%，元素隐藏，占据空间；</li>
+<li><strong>事件监听：可以进行 DOM 事件监听；</strong></li>
+<li>性 能：提升为合成层，不会触发重绘，性能较高；</li>
+<li>继 承：会被子元素继承,且，子元素并不能通过 opacity: 1 来取消隐藏；</li>
+<li>transition：opacity 可以延时显示和隐藏</li>
+</ol>
+]]></content>
+      <categories>
+        <category>CSS</category>
+      </categories>
+      <tags>
+        <tag>CSS</tag>
       </tags>
   </entry>
   <entry>
@@ -523,18 +523,6 @@
       </tags>
   </entry>
   <entry>
-    <title>IPad配置开发环境</title>
-    <url>/2024/11/12/IPad%E9%85%8D%E7%BD%AE%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>Chore</category>
-      </categories>
-      <tags>
-        <tag>编程环境</tag>
-        <tag>IPad</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>JavaScript API</title>
     <url>/2024/12/30/JS%20API/</url>
     <content><![CDATA[<h2 id="InterSectionObserver"><a href="#InterSectionObserver" class="headerlink" title="InterSectionObserver"></a>InterSectionObserver</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 创建 IntersectionObserver 实例</span></span><br><span class="line"><span class="keyword">const</span> observer = <span class="keyword">new</span> <span class="title class_">IntersectionObserver</span>(<span class="function">(<span class="params">entries</span>) =&gt;</span> &#123;</span><br><span class="line">  entries.<span class="title function_">forEach</span>(<span class="function">(<span class="params">entry</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (entry.<span class="property">isIntersecting</span>) &#123;</span><br><span class="line">      <span class="comment">// 目标元素进入视口时的操作</span></span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`<span class="subst">$&#123;entry.target.id&#125;</span> 进入视口`</span>);</span><br><span class="line">      <span class="comment">// 例如在这里可以加载图片或触发其他动画效果</span></span><br><span class="line">      entry.<span class="property">target</span>.<span class="property">src</span> = <span class="string">&#x27;your_image.jpg&#x27;</span>;</span><br><span class="line">      <span class="comment">// 停止观察该元素（可选）</span></span><br><span class="line">      observer.<span class="title function_">unobserve</span>(entry.<span class="property">target</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 选择要观察的目标元素</span></span><br><span class="line"><span class="keyword">const</span> targetElement = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;your_element_id&#x27;</span>);</span><br><span class="line"><span class="comment">// 开始观察目标元素</span></span><br><span class="line">observer.<span class="title function_">observe</span>(targetElement);</span><br></pre></td></tr></table></figure>
@@ -550,6 +538,18 @@
       <tags>
         <tag>API</tag>
         <tag>工程化</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>IPad配置开发环境</title>
+    <url>/2024/11/12/IPad%E9%85%8D%E7%BD%AE%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>Chore</category>
+      </categories>
+      <tags>
+        <tag>编程环境</tag>
+        <tag>IPad</tag>
       </tags>
   </entry>
   <entry>
@@ -1634,6 +1634,87 @@
       </tags>
   </entry>
   <entry>
+    <title>Web3相关学习</title>
+    <url>/2024/10/29/Web3%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/</url>
+    <content><![CDATA[<p>先开个坑，准备下Web3相关的学习</p>
+<h2 id="学习路线"><a href="#学习路线" class="headerlink" title="学习路线"></a>学习路线</h2><ul>
+<li><strong>Web3入门计划</strong>： <a href="https://cubic-leaf-731.notion.site/web3-202208-09-1623ccd15c2148a1ae00ed8794d153b1">polebug大佬学习记录</a></li>
+<li><strong>Web3开发学习路线</strong>： <a href="https://54web3.cc/blog/roadmap/learning-path-web3">https://54web3.cc/blog/roadmap/learning-path-web3</a></li>
+<li><strong>Web3从入门到精通开发学习路线</strong>：<a href="https://juejin.cn/post/7307185531330838543">https://juejin.cn/post/7307185531330838543</a></li>
+</ul>
+<h3 id="WEEK-1-区块链的基础知识"><a href="#WEEK-1-区块链的基础知识" class="headerlink" title="WEEK 1: 区块链的基础知识"></a><strong>WEEK 1: 区块链的基础知识</strong></h3><ul>
+<li>密码学基础</li>
+<li>区块链基础</li>
+<li>相关金融知识</li>
+<li>学习比特币底层技术</li>
+<li>学习以太坊原理</li>
+</ul>
+<!-- ![image-20241105](../assets/Week1：区块链基础知识.png) -->]]></content>
+      <categories>
+        <category>Web3/加密货币</category>
+      </categories>
+      <tags>
+        <tag>Web3</tag>
+        <tag>区块链</tag>
+        <tag>智能合约</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Webpack</title>
+    <url>/2022/04/14/Webpack/</url>
+    <content><![CDATA[<h3 id="Webpack-是什么"><a href="#Webpack-是什么" class="headerlink" title="Webpack 是什么"></a>Webpack 是什么</h3><p>webpack 是一种<strong>前端资源构建工具</strong>，一个静态模块打包器(module bundler)。</p>
+<p>在webpack 看来, 前端的所有资源文件(js&#x2F;json&#x2F;css&#x2F;img&#x2F;less&#x2F;…)都会作为模块处理。<br>它将根据模块的依赖关系进行静态分析，打包生成对应的静态资源(bundle)。</p>
+<h3 id="Webpack-五个核心概念"><a href="#Webpack-五个核心概念" class="headerlink" title="Webpack 五个核心概念"></a>Webpack 五个核心概念</h3><h4 id="Entry"><a href="#Entry" class="headerlink" title="Entry"></a>Entry</h4><p>入口(Entry)：指示 webpack 以哪个文件为入口起点开始打包，分析构建内部依赖图。</p>
+<h4 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h4><p>输出(Output)：指示 webpack 打包后的资源 bundles 输出到哪里去，以及如何命名。</p>
+<h4 id="Loader"><a href="#Loader" class="headerlink" title="Loader"></a>Loader</h4><p>Loader：让 webpack 能够去处理那些非 JS 的文件，比如样式文件、图片文件(webpack 自身只理解<br>JS)</p>
+<h4 id="Plugins"><a href="#Plugins" class="headerlink" title="Plugins"></a>Plugins</h4><p>插件(Plugins)：可以用于执行范围更广的任务。插件的范围包括，从打包优化和压缩，<br>一直到重新定义环境中的变量等。</p>
+<span id="more"></span>
+
+<h4 id="Mode"><a href="#Mode" class="headerlink" title="Mode"></a>Mode</h4><p>模式(Mode)：指示 webpack 使用相应模式的配置。</p>
+<ol>
+<li><p>development:  </p>
+<p> 会将 DefinePlugin 中 <code>process.env.NODE_ENV</code> 的值设置为 development。</p>
+<p>启用 </p>
+<figure class="highlight plaintext"><figcaption><span>和 ```NamedModulesPlugin```。</span></figcaption><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">   特点： 能让代码本地调试运行的环境。</span><br><span class="line"></span><br><span class="line">2. production</span><br><span class="line"></span><br><span class="line">   会将 DefinePlugin 中 ```process.env.NODE_ENV``` 的值设置为 production。</span><br><span class="line"></span><br><span class="line">   启用 </span><br><span class="line"></span><br><span class="line">   ```FlagDependencyUsagePlugin,```</span><br><span class="line"></span><br><span class="line">   ```FlagIncludedChunksPlugin,``` </span><br><span class="line"></span><br><span class="line">   ```ModuleConcatenationPlugin,``` </span><br><span class="line"></span><br><span class="line">   ```NoEmitOnErrorsPlugin,```</span><br><span class="line"></span><br><span class="line">    ```OccurrenceOrderPlugin,```</span><br><span class="line"></span><br><span class="line">   ```SideEffectsFlagPlugin 和 TerserPlugin```。</span><br><span class="line"></span><br><span class="line">   特点： 能让代码优化上线运行的环境。</span><br><span class="line"></span><br><span class="line">   </span><br><span class="line"></span><br><span class="line">### 编译打包应用</span><br><span class="line"></span><br><span class="line">创建 src 下的 js 等文件后，不需要配置 webpack.config.js 文件，在命令行就可以编译打包。</span><br><span class="line"></span><br><span class="line">指令：</span><br><span class="line"></span><br><span class="line">- 开发环境：</span><br><span class="line">```shell</span><br><span class="line">webpack ./src/index.js -o ./build/built.js --mode=development</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>  webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后输出到 .&#x2F;build&#x2F;built.js 整体打包环境，是开发环境</p>
+<ul>
+<li>生产环境：<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">webpack ./src/index.js -o ./build/built.js --mode=production</span><br></pre></td></tr></table></figure>
+webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后输出到 .&#x2F;build&#x2F;built.js 整体打包环境，是生产环境</li>
+</ul>
+<p>结论：</p>
+<ol>
+<li>webpack 本身能处理 js&#x2F;json 资源，不能处理 css&#x2F;img 等其他资源</li>
+<li>生产环境和开发环境将 ES6 模块化编译成浏览器能识别的模块化，但是不能处理 ES6 的基本语法转化为 ES5（需要借助 loader）</li>
+<li>生产环境比开发环境多一个压缩 js 代码</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// resolve用来拼接绝对路径的方法</span></span><br><span class="line"><span class="keyword">const</span> &#123; resolve &#125; = <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>);</span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="comment">// webpack配置</span></span><br><span class="line">  <span class="comment">// 入口起点</span></span><br><span class="line">  <span class="attr">entry</span>: <span class="string">&#x27;./src/index.js&#x27;</span>,</span><br><span class="line">  <span class="comment">// 输出</span></span><br><span class="line">  <span class="attr">output</span>: &#123;</span><br><span class="line">    <span class="comment">// 输出文件名</span></span><br><span class="line">    <span class="attr">filename</span>: <span class="string">&#x27;built.js&#x27;</span>,</span><br><span class="line">    <span class="comment">// 输出路径</span></span><br><span class="line">    <span class="comment">// __dirname nodejs的变量，代表当前文件的目录绝对路径</span></span><br><span class="line">    <span class="attr">path</span>: <span class="title function_">resolve</span>(__dirname, <span class="string">&#x27;build&#x27;</span>)</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// loader的配置</span></span><br><span class="line">  <span class="attr">module</span>: &#123;</span><br><span class="line">    <span class="attr">rules</span>: [</span><br><span class="line">      <span class="comment">// 详细loader配置</span></span><br><span class="line">      <span class="comment">// 不同文件必须配置不同loader处理</span></span><br><span class="line">      &#123; </span><br><span class="line">        <span class="comment">// 匹配哪些文件</span></span><br><span class="line">        <span class="attr">test</span>: <span class="regexp">/\.css$/</span>,</span><br><span class="line">        <span class="comment">// 使用哪些loader进行处理</span></span><br><span class="line">        <span class="attr">use</span>: [</span><br><span class="line">          <span class="comment">// use数组中loader执行顺序：从右到左，从下到上 依次执行</span></span><br><span class="line">          <span class="comment">// 创建style标签，将js中的样式资源插入进行，添加到head中生效</span></span><br><span class="line">          <span class="string">&#x27;style-loader&#x27;</span>,</span><br><span class="line">          <span class="comment">// 将css文件变成commonjs模块加载js中，里面内容是样式字符串</span></span><br><span class="line">          <span class="string">&#x27;css-loader&#x27;</span></span><br><span class="line">        ]</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">test</span>: <span class="regexp">/\.less$/</span>,</span><br><span class="line">        <span class="attr">use</span>: [</span><br><span class="line">          <span class="string">&#x27;style-loader&#x27;</span>,</span><br><span class="line">          <span class="string">&#x27;css-loader&#x27;</span>,</span><br><span class="line">          <span class="comment">// 将less文件编译成css文件</span></span><br><span class="line">          <span class="comment">// 需要下载 less-loader和less</span></span><br><span class="line">           <span class="string">&#x27;less-loader&#x27;</span></span><br><span class="line">        ]</span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// plugins的配置</span></span><br><span class="line">  <span class="attr">plugins</span>: [</span><br><span class="line">    <span class="comment">// 详细plugins的配置</span></span><br><span class="line">  ],</span><br><span class="line">  <span class="comment">// 模式</span></span><br><span class="line">  <span class="attr">mode</span>: <span class="string">&#x27;development&#x27;</span>, <span class="comment">// 开发模式</span></span><br><span class="line">  <span class="comment">// mode: &#x27;production&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>前端工程化</category>
+      </categories>
+      <tags>
+        <tag>Webpack</tag>
+        <tag>打包工具</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Webpack运行时runtime做了什么事情</title>
+    <url>/2025/05/28/Webpack%E8%BF%90%E8%A1%8C%E6%97%B6runtime%E5%81%9A%E4%BA%86%E5%93%AA%E4%BA%9B%E4%BA%8B%E6%83%85/</url>
+    <content><![CDATA[<h2 id="Webpack-Runtime"><a href="#Webpack-Runtime" class="headerlink" title="Webpack Runtime"></a>Webpack Runtime</h2><p>webpack 的 runtime，也就是 webpack 最后生成的代码，实现了一个自定义的模块加载系统，替代浏览器原生的模块机制：</p>
+<p><strong>webpack_modules</strong>: 维护一个所有模块的数组。将入口模块解析为 AST，根据 AST 深度优先搜索所有的模块，并构建出这个模块数组。每个模块都由一个包裹函数 (module, module.exports, <strong>webpack_require</strong>) 对模块进行包裹构成。<br><strong>webpack_require</strong>(moduleId): 手动实现加载一个模块。对已加载过的模块进行缓存，对未加载过的模块，执行 id 定位到 <strong>webpack_modules</strong> 中的包裹函数，执行并返回 module.exports，并缓存<br><strong>webpack_require</strong>(0): 运行第一个模块，即运行入口模块<br>另外，当涉及到多个 chunk 的打包方式中，比如 code spliting，webpack 中会有 jsonp 加载 chunk 的运行时代码。</p>
+<p>以下是 webpack runtime 的最简代码，配置示例可见 node-examples</p>
+]]></content>
+      <categories>
+        <category>前端工程化</category>
+      </categories>
+      <tags>
+        <tag>工程化</tag>
+        <tag>前端</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>TypeScript入门</title>
     <url>/2021/10/14/Typescript%E5%85%A5%E9%97%A8/</url>
     <content><![CDATA[<h3 id="TypeScript简介"><a href="#TypeScript简介" class="headerlink" title="TypeScript简介"></a>TypeScript简介</h3><ol>
@@ -1987,87 +2068,6 @@ module: &#123;
       </tags>
   </entry>
   <entry>
-    <title>Web3相关学习</title>
-    <url>/2024/10/29/Web3%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/</url>
-    <content><![CDATA[<p>先开个坑，准备下Web3相关的学习</p>
-<h2 id="学习路线"><a href="#学习路线" class="headerlink" title="学习路线"></a>学习路线</h2><ul>
-<li><strong>Web3入门计划</strong>： <a href="https://cubic-leaf-731.notion.site/web3-202208-09-1623ccd15c2148a1ae00ed8794d153b1">polebug大佬学习记录</a></li>
-<li><strong>Web3开发学习路线</strong>： <a href="https://54web3.cc/blog/roadmap/learning-path-web3">https://54web3.cc/blog/roadmap/learning-path-web3</a></li>
-<li><strong>Web3从入门到精通开发学习路线</strong>：<a href="https://juejin.cn/post/7307185531330838543">https://juejin.cn/post/7307185531330838543</a></li>
-</ul>
-<h3 id="WEEK-1-区块链的基础知识"><a href="#WEEK-1-区块链的基础知识" class="headerlink" title="WEEK 1: 区块链的基础知识"></a><strong>WEEK 1: 区块链的基础知识</strong></h3><ul>
-<li>密码学基础</li>
-<li>区块链基础</li>
-<li>相关金融知识</li>
-<li>学习比特币底层技术</li>
-<li>学习以太坊原理</li>
-</ul>
-<!-- ![image-20241105](../assets/Week1：区块链基础知识.png) -->]]></content>
-      <categories>
-        <category>Web3/加密货币</category>
-      </categories>
-      <tags>
-        <tag>Web3</tag>
-        <tag>区块链</tag>
-        <tag>智能合约</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Webpack</title>
-    <url>/2022/04/14/Webpack/</url>
-    <content><![CDATA[<h3 id="Webpack-是什么"><a href="#Webpack-是什么" class="headerlink" title="Webpack 是什么"></a>Webpack 是什么</h3><p>webpack 是一种<strong>前端资源构建工具</strong>，一个静态模块打包器(module bundler)。</p>
-<p>在webpack 看来, 前端的所有资源文件(js&#x2F;json&#x2F;css&#x2F;img&#x2F;less&#x2F;…)都会作为模块处理。<br>它将根据模块的依赖关系进行静态分析，打包生成对应的静态资源(bundle)。</p>
-<h3 id="Webpack-五个核心概念"><a href="#Webpack-五个核心概念" class="headerlink" title="Webpack 五个核心概念"></a>Webpack 五个核心概念</h3><h4 id="Entry"><a href="#Entry" class="headerlink" title="Entry"></a>Entry</h4><p>入口(Entry)：指示 webpack 以哪个文件为入口起点开始打包，分析构建内部依赖图。</p>
-<h4 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h4><p>输出(Output)：指示 webpack 打包后的资源 bundles 输出到哪里去，以及如何命名。</p>
-<h4 id="Loader"><a href="#Loader" class="headerlink" title="Loader"></a>Loader</h4><p>Loader：让 webpack 能够去处理那些非 JS 的文件，比如样式文件、图片文件(webpack 自身只理解<br>JS)</p>
-<h4 id="Plugins"><a href="#Plugins" class="headerlink" title="Plugins"></a>Plugins</h4><p>插件(Plugins)：可以用于执行范围更广的任务。插件的范围包括，从打包优化和压缩，<br>一直到重新定义环境中的变量等。</p>
-<span id="more"></span>
-
-<h4 id="Mode"><a href="#Mode" class="headerlink" title="Mode"></a>Mode</h4><p>模式(Mode)：指示 webpack 使用相应模式的配置。</p>
-<ol>
-<li><p>development:  </p>
-<p> 会将 DefinePlugin 中 <code>process.env.NODE_ENV</code> 的值设置为 development。</p>
-<p>启用 </p>
-<figure class="highlight plaintext"><figcaption><span>和 ```NamedModulesPlugin```。</span></figcaption><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">   特点： 能让代码本地调试运行的环境。</span><br><span class="line"></span><br><span class="line">2. production</span><br><span class="line"></span><br><span class="line">   会将 DefinePlugin 中 ```process.env.NODE_ENV``` 的值设置为 production。</span><br><span class="line"></span><br><span class="line">   启用 </span><br><span class="line"></span><br><span class="line">   ```FlagDependencyUsagePlugin,```</span><br><span class="line"></span><br><span class="line">   ```FlagIncludedChunksPlugin,``` </span><br><span class="line"></span><br><span class="line">   ```ModuleConcatenationPlugin,``` </span><br><span class="line"></span><br><span class="line">   ```NoEmitOnErrorsPlugin,```</span><br><span class="line"></span><br><span class="line">    ```OccurrenceOrderPlugin,```</span><br><span class="line"></span><br><span class="line">   ```SideEffectsFlagPlugin 和 TerserPlugin```。</span><br><span class="line"></span><br><span class="line">   特点： 能让代码优化上线运行的环境。</span><br><span class="line"></span><br><span class="line">   </span><br><span class="line"></span><br><span class="line">### 编译打包应用</span><br><span class="line"></span><br><span class="line">创建 src 下的 js 等文件后，不需要配置 webpack.config.js 文件，在命令行就可以编译打包。</span><br><span class="line"></span><br><span class="line">指令：</span><br><span class="line"></span><br><span class="line">- 开发环境：</span><br><span class="line">```shell</span><br><span class="line">webpack ./src/index.js -o ./build/built.js --mode=development</span><br></pre></td></tr></table></figure></li>
-</ol>
-<p>  webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后输出到 .&#x2F;build&#x2F;built.js 整体打包环境，是开发环境</p>
-<ul>
-<li>生产环境：<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">webpack ./src/index.js -o ./build/built.js --mode=production</span><br></pre></td></tr></table></figure>
-webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后输出到 .&#x2F;build&#x2F;built.js 整体打包环境，是生产环境</li>
-</ul>
-<p>结论：</p>
-<ol>
-<li>webpack 本身能处理 js&#x2F;json 资源，不能处理 css&#x2F;img 等其他资源</li>
-<li>生产环境和开发环境将 ES6 模块化编译成浏览器能识别的模块化，但是不能处理 ES6 的基本语法转化为 ES5（需要借助 loader）</li>
-<li>生产环境比开发环境多一个压缩 js 代码</li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// resolve用来拼接绝对路径的方法</span></span><br><span class="line"><span class="keyword">const</span> &#123; resolve &#125; = <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>);</span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="comment">// webpack配置</span></span><br><span class="line">  <span class="comment">// 入口起点</span></span><br><span class="line">  <span class="attr">entry</span>: <span class="string">&#x27;./src/index.js&#x27;</span>,</span><br><span class="line">  <span class="comment">// 输出</span></span><br><span class="line">  <span class="attr">output</span>: &#123;</span><br><span class="line">    <span class="comment">// 输出文件名</span></span><br><span class="line">    <span class="attr">filename</span>: <span class="string">&#x27;built.js&#x27;</span>,</span><br><span class="line">    <span class="comment">// 输出路径</span></span><br><span class="line">    <span class="comment">// __dirname nodejs的变量，代表当前文件的目录绝对路径</span></span><br><span class="line">    <span class="attr">path</span>: <span class="title function_">resolve</span>(__dirname, <span class="string">&#x27;build&#x27;</span>)</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// loader的配置</span></span><br><span class="line">  <span class="attr">module</span>: &#123;</span><br><span class="line">    <span class="attr">rules</span>: [</span><br><span class="line">      <span class="comment">// 详细loader配置</span></span><br><span class="line">      <span class="comment">// 不同文件必须配置不同loader处理</span></span><br><span class="line">      &#123; </span><br><span class="line">        <span class="comment">// 匹配哪些文件</span></span><br><span class="line">        <span class="attr">test</span>: <span class="regexp">/\.css$/</span>,</span><br><span class="line">        <span class="comment">// 使用哪些loader进行处理</span></span><br><span class="line">        <span class="attr">use</span>: [</span><br><span class="line">          <span class="comment">// use数组中loader执行顺序：从右到左，从下到上 依次执行</span></span><br><span class="line">          <span class="comment">// 创建style标签，将js中的样式资源插入进行，添加到head中生效</span></span><br><span class="line">          <span class="string">&#x27;style-loader&#x27;</span>,</span><br><span class="line">          <span class="comment">// 将css文件变成commonjs模块加载js中，里面内容是样式字符串</span></span><br><span class="line">          <span class="string">&#x27;css-loader&#x27;</span></span><br><span class="line">        ]</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">test</span>: <span class="regexp">/\.less$/</span>,</span><br><span class="line">        <span class="attr">use</span>: [</span><br><span class="line">          <span class="string">&#x27;style-loader&#x27;</span>,</span><br><span class="line">          <span class="string">&#x27;css-loader&#x27;</span>,</span><br><span class="line">          <span class="comment">// 将less文件编译成css文件</span></span><br><span class="line">          <span class="comment">// 需要下载 less-loader和less</span></span><br><span class="line">           <span class="string">&#x27;less-loader&#x27;</span></span><br><span class="line">        ]</span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// plugins的配置</span></span><br><span class="line">  <span class="attr">plugins</span>: [</span><br><span class="line">    <span class="comment">// 详细plugins的配置</span></span><br><span class="line">  ],</span><br><span class="line">  <span class="comment">// 模式</span></span><br><span class="line">  <span class="attr">mode</span>: <span class="string">&#x27;development&#x27;</span>, <span class="comment">// 开发模式</span></span><br><span class="line">  <span class="comment">// mode: &#x27;production&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>前端工程化</category>
-      </categories>
-      <tags>
-        <tag>Webpack</tag>
-        <tag>打包工具</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Webpack运行时runtime做了什么事情</title>
-    <url>/2025/05/28/Webpack%E8%BF%90%E8%A1%8C%E6%97%B6runtime%E5%81%9A%E4%BA%86%E5%93%AA%E4%BA%9B%E4%BA%8B%E6%83%85/</url>
-    <content><![CDATA[<h2 id="Webpack-Runtime"><a href="#Webpack-Runtime" class="headerlink" title="Webpack Runtime"></a>Webpack Runtime</h2><p>webpack 的 runtime，也就是 webpack 最后生成的代码，实现了一个自定义的模块加载系统，替代浏览器原生的模块机制：</p>
-<p><strong>webpack_modules</strong>: 维护一个所有模块的数组。将入口模块解析为 AST，根据 AST 深度优先搜索所有的模块，并构建出这个模块数组。每个模块都由一个包裹函数 (module, module.exports, <strong>webpack_require</strong>) 对模块进行包裹构成。<br><strong>webpack_require</strong>(moduleId): 手动实现加载一个模块。对已加载过的模块进行缓存，对未加载过的模块，执行 id 定位到 <strong>webpack_modules</strong> 中的包裹函数，执行并返回 module.exports，并缓存<br><strong>webpack_require</strong>(0): 运行第一个模块，即运行入口模块<br>另外，当涉及到多个 chunk 的打包方式中，比如 code spliting，webpack 中会有 jsonp 加载 chunk 的运行时代码。</p>
-<p>以下是 webpack runtime 的最简代码，配置示例可见 node-examples</p>
-]]></content>
-      <categories>
-        <category>前端工程化</category>
-      </categories>
-      <tags>
-        <tag>工程化</tag>
-        <tag>前端</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>package lockfile的作用</title>
     <url>/2025/06/09/package.json%E5%92%8Clockfile%E7%9A%84%E4%BD%9C%E7%94%A8/</url>
     <content><![CDATA[<h2 id="package-json-和-package-lock-json"><a href="#package-json-和-package-lock-json" class="headerlink" title="package.json 和 package-lock.json"></a>package.json 和 package-lock.json</h2>]]></content>
@@ -2171,7 +2171,7 @@ webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后�
 <li>使用 <code>useDebounce</code>，对值及事件处理函数进行防抖，避免状态频繁变动，优化渲染次数</li>
 <li>使用 <code>useImmer</code></li>
 </ol>
-<h3 id="React-19"><a href="#React-19" class="headerlink" title="React 19"></a>React 19</h3>]]></content>
+<h3 id="React的新特性"><a href="#React的新特性" class="headerlink" title="React的新特性"></a>React的新特性</h3>]]></content>
       <categories>
         <category>前端面试</category>
       </categories>
@@ -2218,6 +2218,22 @@ webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后�
       </categories>
       <tags>
         <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【前端面试】场景题</title>
+    <url>/2024/08/27/%E3%80%90%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E3%80%91%E5%9C%BA%E6%99%AF%E9%A2%98/</url>
+    <content><![CDATA[<blockquote class="blockquote-center">
+    <p><b>记录面试中遇到一些比较有意思的场景题</b></p>
+</blockquote>
+
+<h2 id="虚拟滚动是如何去实现的（长列表，大表格）"><a href="#虚拟滚动是如何去实现的（长列表，大表格）" class="headerlink" title="虚拟滚动是如何去实现的（长列表，大表格）"></a>虚拟滚动是如何去实现的（长列表，大表格）</h2><p>1、监听滚轮事件&#x2F;触摸事件，记录列表的总偏移量。<br>2、根据总偏移量计算列表的可视元素起始索引。<br>3、从起始索引渲染元素至视口底部。<br>4、当总偏移量更新时，重新渲染可视元素列表。<br>5、为可视元素列表前后加入缓冲元素。<br>6、在滚动量比较小时，直接修改可视元素列表的偏移量。<br>7、在滚动量比较大时（比如拖动滚动条），会重新渲染整个列表。<br>事件节流。</p>
+]]></content>
+      <categories>
+        <category>前端面试</category>
+      </categories>
+      <tags>
+        <tag>前端工程化</tag>
       </tags>
   </entry>
   <entry>
@@ -2858,11 +2874,11 @@ webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后�
 
 <h3 id="2024-11、2024-12更新"><a href="#2024-11、2024-12更新" class="headerlink" title="2024-11、2024-12更新"></a>2024-11、2024-12更新</h3><p>主要是之前前端相关知识的文章整理、比特币相关学习</p>
 <ul>
-<li><a href="http://localhost:4000/2024/11/05/%E6%AF%94%E7%89%B9%E5%B8%81/">比特币</a></li>
-<li><a href="http://localhost:4000/2021/10/01/React%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/">React最佳实践</a></li>
-<li><a href="http://localhost:4000/2024/11/05/%E6%AF%94%E7%89%B9%E5%B8%81/">Redux</a></li>
-<li><a href="http://localhost:4000/2021/09/20/HTTP/">HTTP</a></li>
-<li><a href="http://localhost:4000/2021/09/18/HTTP%E7%BC%93%E5%AD%98/">HTTP缓存</a></li>
+<li><a href="https://huangyunt.github.io/2024/11/05/%E6%AF%94%E7%89%B9%E5%B8%81/">比特币</a></li>
+<li><a href="https://huangyunt.github.io/2021/10/01/React%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/">React最佳实践</a></li>
+<li><a href="https://huangyunt.github.io/2021/10/11/Redux/">Redux</a></li>
+<li><a href="https://huangyunt.github.io/2021/09/20/HTTP/">HTTP</a></li>
+<li><a href="https://huangyunt.github.io/2021/09/18/HTTP%E7%BC%93%E5%AD%98/">HTTP缓存</a></li>
 </ul>
 <hr>
 <h3 id="2024-10更新"><a href="#2024-10更新" class="headerlink" title="2024-10更新"></a>2024-10更新</h3><p><strong>腾讯云托管站点</strong><br>主要是解决Github Page部署后国内内网无法访问的问题（搜了下是DNS污染的问题，不太好解决，暂时先迁到腾讯云上去托管站点了）</p>
