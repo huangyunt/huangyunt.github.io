@@ -15,33 +15,17 @@
 <figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css">    *&#123;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">margin</span>: <span class="number">0</span>;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">padding</span>: <span class="number">0</span>;</span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css">    <span class="selector-class">.parent</span>&#123;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">outline</span>: <span class="number">5px</span> solid red;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">width</span>: <span class="number">300px</span>;</span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css">    <span class="selector-class">.child</span>&#123;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">height</span>:<span class="number">400px</span>;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">border</span>: <span class="number">5px</span> solid green;</span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;parent&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;child&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p>如图，父级元素不设高度，高度为子元素height+border</p>
-<div style="display: flex; justify-content: center; align-items: center;">
-    <img src="C:\Users\H\AppData\Roaming\Typora\typora-user-images\image-20211120195130235.png"
-        alt="image-20211120195130235" style="zoom:50%;" />
-    <img src="C:\Users\H\AppData\Roaming\Typora\typora-user-images\image-20211120195056819.png"
-        alt="image-20211120195056819" style="zoom:50%;" />
-</div>
-
-
-
+<p><img src="/../assets/image-20211120195130235.png" alt="image-20210930012419754"><br><img src="/../assets/image-20211120195056819.png" alt="image-20210930012419754"></p>
 <h5 id="子元素设置margin时"><a href="#子元素设置margin时" class="headerlink" title="子元素设置margin时"></a>子元素设置margin时</h5><p>父元素高度无法被子元素垂直方向上margin撑开</p>
 <figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css">    * &#123;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">margin</span>: <span class="number">0px</span>;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">padding</span>: <span class="number">0px</span>;</span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css"></span></span><br><span class="line"><span class="language-css">    <span class="selector-class">.parent</span> &#123;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">outline</span>: <span class="number">5px</span> solid red;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">width</span>: <span class="number">300px</span>;</span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css"></span></span><br><span class="line"><span class="language-css">    <span class="selector-class">.child</span> &#123;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">height</span>: <span class="number">400px</span>;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">border</span>: <span class="number">5px</span> solid green;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">margin</span>: <span class="number">20px</span>;</span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;parent&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;child&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<div style="display: flex; justify-content: center; align-items: center;">
-    <img src="C:\Users\H\AppData\Roaming\Typora\typora-user-images\image-20211120202203417.png"
-        alt="image-20211120202203417" style="zoom:50%;" />
-    <img src="C:\Users\H\AppData\Roaming\Typora\typora-user-images\image-20211120202344779.png"
-        alt="image-20211120202344779" style="zoom:50%;" />
-</div>
-
+<p><img src="/../assets/image-20211120202203417.png" alt="image-20210930012419754"><br><img src="/../assets/image-20211120202344779.png" alt="image-20210930012419754"></p>
 <p><strong>解决方案：父元素设置border&#x2F;padding&#x2F;overflow：hidden</strong></p>
 <p><strong>总结：父元素高度能被子元素的height、border、padding撑开，如果父元元素在垂直方向上有<code>border</code>,<code>padding</code>（只要在逻辑上存在，不论大小）以及<code>overflow:hidden</code>，都能被子元素的<code>margin</code>撑开，否则只能撑开父元素的宽度</strong></p>
 <h3 id="2-CSS宽度由什么决定？"><a href="#2-CSS宽度由什么决定？" class="headerlink" title="2. CSS宽度由什么决定？"></a>2. CSS宽度由什么决定？</h3><h4 id="行内-行内块元素"><a href="#行内-行内块元素" class="headerlink" title="行内&#x2F;行内块元素"></a>行内&#x2F;行内块元素</h4><p>行内元素&#x2F;行内块的宽度是由它的内容决定的，行内元素不能设置宽高</p>
 <h4 id="块级元素-1"><a href="#块级元素-1" class="headerlink" title="块级元素"></a>块级元素</h4><p>一个块级元素宽度当不设置样式时默认为父级元素的100%<strong>（这个100%是自适应的，并不相当于width：100%）</strong></p>
 <h3 id="3-为什么margin-top-padding-top设置百分比基于父元素的宽度计算的？"><a href="#3-为什么margin-top-padding-top设置百分比基于父元素的宽度计算的？" class="headerlink" title="3. 为什么margin-top&#x2F;padding-top设置百分比基于父元素的宽度计算的？"></a>3. 为什么margin-top&#x2F;padding-top设置百分比基于父元素的宽度计算的？</h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css">        <span class="selector-class">.parent</span> &#123;</span></span><br><span class="line"><span class="language-css">            <span class="attribute">width</span>: <span class="number">300px</span>;</span></span><br><span class="line"><span class="language-css">            <span class="attribute">height</span>: <span class="number">400px</span>;</span></span><br><span class="line"><span class="language-css">            <span class="attribute">border</span>: <span class="number">5px</span> solid red;</span></span><br><span class="line"><span class="language-css">        &#125;</span></span><br><span class="line"><span class="language-css">        <span class="selector-class">.child</span> &#123;</span></span><br><span class="line"><span class="language-css">            <span class="attribute">height</span>: <span class="number">200px</span>;</span></span><br><span class="line"><span class="language-css">            <span class="attribute">margin-top</span>: <span class="number">50%</span>;</span></span><br><span class="line"><span class="language-css">            <span class="attribute">background-color</span>: green;</span></span><br><span class="line"><span class="language-css">        &#125;</span></span><br><span class="line"><span class="language-css">    </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;parent&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;child&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<img src="C:\Users\H\AppData\Roaming\Typora\typora-user-images\image-20211120194334386.png" alt="image-20211120194334386" style="zoom:50%;" />
-
+<p><img src="/../assets/image-20211120194334386.png" alt="image-20211120194334386"></p>
 <p>这里利用margin-top：50%将子元素挤到最下方贴底，然而这里的百分比是相对于父级宽度计算的。</p>
 <p>CSS权威指南中的解释：若是相对于父元素的高度计算会形成死循环。<br><em><strong>“我们认为，正常流中的大多数元素都会足够高以包含其后代元素（包括外边距），如果一个元素的上下外边距是父元素的height的百分数，就可能导致一个无限循环，父元素的height会增加，以适应后代元素上下外边距的增加，而相应的，上下外边距因为父元素height的增加也会增加，形成无限循环。”</strong></em></p>
 <p><strong>本质上是因为css中高度是可以自适应的，基于父级高度的百分比计算会导致无限循环的问题</strong>。</p>
@@ -1246,10 +1230,7 @@
 <h3 id="React的实现"><a href="#React的实现" class="headerlink" title="React的实现"></a>React的实现</h3><ul>
 <li>DIff算法</li>
 </ul>
-<img src="../assets/image-20220210212319207.png" alt="image-20220210212319207" style="zoom:40%;" />
-
-
-
+<p><img src="/../assets/image-20220210212319207.png" alt="image-20220210212319207"></p>
 <h3 id="React解决状态管理问题"><a href="#React解决状态管理问题" class="headerlink" title="React解决状态管理问题"></a>React解决状态管理问题</h3><p>先说结论：使用状态管理库</p>
 <ul>
 <li><p>状态管理库核心思想：将状态抽离到ui外部进行统一管理。</p>
@@ -1336,25 +1317,20 @@
   <entry>
     <title>React生态</title>
     <url>/2021/09/30/React%E7%94%9F%E6%80%81/</url>
-    <content><![CDATA[<h3 id="React-DevTools"><a href="#React-DevTools" class="headerlink" title="React DevTools"></a>React DevTools</h3><h5 id="General-设置"><a href="#General-设置" class="headerlink" title="General 设置"></a>General 设置</h5><img src="../assets/image-20220222024702149.png" alt="image-20220222024702149" />
-
+    <content><![CDATA[<h3 id="React-DevTools"><a href="#React-DevTools" class="headerlink" title="React DevTools"></a>React DevTools</h3><h5 id="General-设置"><a href="#General-设置" class="headerlink" title="General 设置"></a>General 设置</h5><p><img src="/../assets/image-20220222024702149.png" alt="image-20220222024702149.png"></p>
 <p>General 面板中最重要的功能就是 **”Highlight updates when components render”**。勾选上之后，可以查看 React 重绘时，页面哪些部分有更新。在遇到性能问题时，可以快速帮助决策在哪部分不需要重绘的组件部分添加 React.memo 阻止重绘。</p>
-<h5 id="Debugging-设置"><a href="#Debugging-设置" class="headerlink" title="Debugging 设置"></a>Debugging 设置</h5><img src="..\assets\image-20220222024832097.png" alt="image-20220222024832097" />
-
+<h5 id="Debugging-设置"><a href="#Debugging-设置" class="headerlink" title="Debugging 设置"></a>Debugging 设置</h5><p><img src="/../assets/image-20220222024832097.png" alt="image-20220222024832097"></p>
 <p><strong>“Append components stacks to console warnings and errors.”</strong></p>
 <p>可以帮助我们定位 React 报错信息来自哪个组件</p>
 <span id="more"></span>
 
 
-<h5 id="Components-设置"><a href="#Components-设置" class="headerlink" title="Components 设置"></a>Components 设置</h5><img src="..\assets\image-20220222024936104.png" alt="image-20220222024936104"/>
-
+<h5 id="Components-设置"><a href="#Components-设置" class="headerlink" title="Components 设置"></a>Components 设置</h5><p><img src="/../assets/image-20220222024936104.png" alt="image-20220222024936104"></p>
 <p><strong>“Hide components where…”</strong></p>
 <p>此项在过滤组件树时有用。比如，大多数应用可能会在顶层有很多 Context.Provider，就可以过滤 Context 类型、不显示。当我们只关心业务逻辑层的组件时，可以过滤掉 DOM 组件，减少树的节点</p>
-<h5 id="Profiler-设置"><a href="#Profiler-设置" class="headerlink" title="Profiler 设置"></a>Profiler 设置</h5><img src="..\assets\image-20220222025024293.png" alt="image-20220222025024293"/>
-
+<h5 id="Profiler-设置"><a href="#Profiler-设置" class="headerlink" title="Profiler 设置"></a>Profiler 设置</h5><p><img src="/../assets/image-20220222025024293.png" alt="image-20220222025024293"></p>
 <p><strong>“Record why each component rendered while profiling”</strong></p>
-<img src="..\assets\image-20220222025054509.png" alt="image-20220222025054509" />
-
+<p><img src="/../assets/image-20220222025054509.png" alt="image-20220222025054509"></p>
 <p>勾选之后会在渲染火焰图的 hover 面板中看到 **”Why did this render”**。</p>
 <h5 id="现在有哪些-render-原因呢？"><a href="#现在有哪些-render-原因呢？" class="headerlink" title="现在有哪些 render 原因呢？"></a>现在有哪些 render 原因呢？</h5><ul>
 <li><p><strong>Props changed</strong></p>
@@ -1374,11 +1350,9 @@
 </li>
 </ul>
 <h5 id="React-组件检视器"><a href="#React-组件检视器" class="headerlink" title="React 组件检视器"></a>React 组件检视器</h5><p>用法和 DevTools 的元素面板类似，可以直接在页面上定位到元素对应的 React Component。并且可以实时查看当前组件内部的 hooks 状态，返回的组件树</p>
-<img src="..\assets\image-20220222025129591.png" alt="image-20220222025129591"/>
-
+<p><img src="/../assets/image-20220222025129591.png" alt="image-20220222025129591"></p>
 <p>右上角的四个图标</p>
-<img src="..\assets\image-20220222025154916.png" alt="image-20220222025154916"/>
-
+<p><img src="/../assets/image-20220222025154916.png" alt="image-20220222025154916"></p>
 <p>分别作用如下：</p>
 <ul>
 <li>模拟 ReactLazy 懒加载组件 Suspense 状态</li>
@@ -1746,10 +1720,7 @@
 
 
 
-<h5 id="类型别名"><a href="#类型别名" class="headerlink" title="类型别名"></a>类型别名</h5><img src="..\Picture\image-20220225230844666.png" alt="image-20220225230844666" />
-
-
-
+<h5 id="类型别名"><a href="#类型别名" class="headerlink" title="类型别名"></a>类型别名</h5><p><img src="/../assets/image-20220225230844666.png" alt="image-20220225230844666"></p>
 <h5 id="类型断言"><a href="#类型断言" class="headerlink" title="类型断言"></a>类型断言</h5><ul>
 <li><p>有些情况下，变量的类型对于我们来说是很明确，但是TS编译器却并不清楚，此时，可以通过类型断言来告诉编译器变量的类型，断言有两种形式：</p>
 <ul>
@@ -1765,12 +1736,9 @@ let strLength: number = (someValue as string).length;
 </ul>
 </li>
 </ul>
-<h5 id="类型保卫与类型守护"><a href="#类型保卫与类型守护" class="headerlink" title="类型保卫与类型守护"></a>类型保卫与类型守护</h5><img src="..\assets\image-20220225231806225.png" alt="image-20220225231806225" />
-
-<img src="..\assets\image-20220225232035688.png" alt="image-20220225232035688" />
-
-<img src="..\assets\image-20220225232336109.png" alt="image-20220225232336109" />
-
+<h5 id="类型保卫与类型守护"><a href="#类型保卫与类型守护" class="headerlink" title="类型保卫与类型守护"></a>类型保卫与类型守护</h5><p><img src="/../assets/image-20220225231806225.png" alt="image-20220225230844666"></p>
+<p><img src="/../assets/image-20220225232035688.png" alt="image-20220225230844666"></p>
+<p><img src="/../assets/image-20220225232336109.png" alt="image-20220225230844666"></p>
 <h5 id="d-ts文件-declare"><a href="#d-ts文件-declare" class="headerlink" title="d.ts文件&#x2F;declare"></a>d.ts文件&#x2F;declare</h5><p>安装第三方模块（例如lodash）时</p>
 <p><img src="/..%5Cassets%5Cimage-20220225193949940.png" alt="image-20220225193949940"></p>
 <p>原因是lodash是使用js编写的，没有类型声明，如下，camelCase函数没有类型声明</p>
@@ -2008,18 +1976,6 @@ webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后�
       </tags>
   </entry>
   <entry>
-    <title>require() 源码解读</title>
-    <url>/2021/08/21/require%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/</url>
-    <content><![CDATA[<span id="more"></span>
-]]></content>
-      <categories>
-        <category>JavaScript</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>【前端面试】JavaScript相关</title>
     <url>/2024/08/21/%E3%80%90%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E3%80%91JavaScript%E7%9B%B8%E5%85%B3/</url>
     <content><![CDATA[<h4 id="let、const的区别"><a href="#let、const的区别" class="headerlink" title="let、const的区别"></a>let、const的区别</h4><ul>
@@ -2044,6 +2000,18 @@ webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后�
 <h4 id="异步加载-JS-脚本时，async-与-defer-有何区别"><a href="#异步加载-JS-脚本时，async-与-defer-有何区别" class="headerlink" title="异步加载 JS 脚本时，async 与 defer 有何区别"></a>异步加载 JS 脚本时，async 与 defer 有何区别</h4>]]></content>
       <categories>
         <category>前端面试</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>require() 源码解读</title>
+    <url>/2021/08/21/require%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/</url>
+    <content><![CDATA[<span id="more"></span>
+]]></content>
+      <categories>
+        <category>JavaScript</category>
       </categories>
       <tags>
         <tag>JavaScript</tag>
@@ -2324,6 +2292,24 @@ webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后�
       </tags>
   </entry>
   <entry>
+    <title>Web Development Trend</title>
+    <url>/2024/12/05/%E5%89%8D%E7%AB%AF%E5%8F%91%E5%B1%95%E8%B6%8B%E5%8A%BF/</url>
+    <content><![CDATA[<h2 id="前端供需关系"><a href="#前端供需关系" class="headerlink" title="前端供需关系"></a>前端供需关系</h2><h2 id="新的样式解决方案和组件库现状-发展"><a href="#新的样式解决方案和组件库现状-发展" class="headerlink" title="新的样式解决方案和组件库现状&amp;发展"></a>新的样式解决方案和组件库现状&amp;发展</h2><blockquote>
+<p>样式如何结合组件库去使用</p>
+</blockquote>
+<h3 id="CSS-in-JS-style-component"><a href="#CSS-in-JS-style-component" class="headerlink" title="CSS in JS: style component"></a>CSS in JS: style component</h3><p>能够实现CSS模块化，专注于</p>
+<p>语义差，不利于SSO<br>运行时编译</p>
+<h3 id="Tailwind-CSS"><a href="#Tailwind-CSS" class="headerlink" title="Tailwind CSS"></a>Tailwind CSS</h3><p>语义好，利于AI学习，AI</p>
+<h3 id="Shadcn"><a href="#Shadcn" class="headerlink" title="Shadcn"></a>Shadcn</h3><h3 id="HeadlessUI"><a href="#HeadlessUI" class="headerlink" title="HeadlessUI"></a>HeadlessUI</h3><h3 id="Radix"><a href="#Radix" class="headerlink" title="Radix"></a>Radix</h3><p>主题样式</p>
+]]></content>
+      <categories>
+        <category>Chore</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>前端安全相关</title>
     <url>/2025/01/12/%E5%89%8D%E7%AB%AF%E5%AE%89%E5%85%A8%E7%9B%B8%E5%85%B3/</url>
     <content><![CDATA[<h4 id="XSS"><a href="#XSS" class="headerlink" title="XSS"></a>XSS</h4><p><strong>跨站脚本攻击（XSS，Cross - Site Scripting）</strong>攻击者通过在目标网站中注入恶意脚本，来获取用户的敏感信息、执行恶意操作等。这些恶意脚本通常是 JavaScript</p>
@@ -2370,24 +2356,6 @@ webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后�
       </categories>
       <tags>
         <tag>前端安全</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Web Development Trend</title>
-    <url>/2024/12/05/%E5%89%8D%E7%AB%AF%E5%8F%91%E5%B1%95%E8%B6%8B%E5%8A%BF/</url>
-    <content><![CDATA[<h2 id="前端供需关系"><a href="#前端供需关系" class="headerlink" title="前端供需关系"></a>前端供需关系</h2><h2 id="新的样式解决方案和组件库现状-发展"><a href="#新的样式解决方案和组件库现状-发展" class="headerlink" title="新的样式解决方案和组件库现状&amp;发展"></a>新的样式解决方案和组件库现状&amp;发展</h2><blockquote>
-<p>样式如何结合组件库去使用</p>
-</blockquote>
-<h3 id="CSS-in-JS-style-component"><a href="#CSS-in-JS-style-component" class="headerlink" title="CSS in JS: style component"></a>CSS in JS: style component</h3><p>能够实现CSS模块化，专注于</p>
-<p>语义差，不利于SSO<br>运行时编译</p>
-<h3 id="Tailwind-CSS"><a href="#Tailwind-CSS" class="headerlink" title="Tailwind CSS"></a>Tailwind CSS</h3><p>语义好，利于AI学习，AI</p>
-<h3 id="Shadcn"><a href="#Shadcn" class="headerlink" title="Shadcn"></a>Shadcn</h3><h3 id="HeadlessUI"><a href="#HeadlessUI" class="headerlink" title="HeadlessUI"></a>HeadlessUI</h3><h3 id="Radix"><a href="#Radix" class="headerlink" title="Radix"></a>Radix</h3><p>主题样式</p>
-]]></content>
-      <categories>
-        <category>Chore</category>
-      </categories>
-      <tags>
-        <tag>前端</tag>
       </tags>
   </entry>
   <entry>
@@ -2785,6 +2753,8 @@ webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后�
 <li><a href="https://huangyunt.github.io/2021/09/20/HTTP/">包管理器</a></li>
 </ul>
 <hr>
+<span id="more"></span>
+
 <h4 id="2024-11、2024-12更新"><a href="#2024-11、2024-12更新" class="headerlink" title="2024-11、2024-12更新"></a>2024-11、2024-12更新</h4><blockquote>
 <p>主要是之前前端相关知识的文章整理、比特币相关学习</p>
 </blockquote>
@@ -2799,8 +2769,6 @@ webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后�
 <h4 id="2024-10更新"><a href="#2024-10更新" class="headerlink" title="2024-10更新"></a>2024-10更新</h4><h5 id="腾讯云托管站点"><a href="#腾讯云托管站点" class="headerlink" title="腾讯云托管站点"></a>腾讯云托管站点</h5><p>主要是解决Github Page部署后国内内网无法访问的问题（搜了下是DNS污染的问题，不太好解决，暂时先迁到腾讯云上去托管站点了）</p>
 <h5 id="部分文章重新整理一版"><a href="#部分文章重新整理一版" class="headerlink" title="部分文章重新整理一版"></a>部分文章重新整理一版</h5><p>整理了一系列陈年老文章，主要是一些文章之前的格式在博客里不太兼容，还有部分内容在迁移的过程中有丢失，都加以补充了</p>
 <h5 id="文章置顶、排序、显隐功能"><a href="#文章置顶、排序、显隐功能" class="headerlink" title="文章置顶、排序、显隐功能"></a>文章置顶、排序、显隐功能</h5><p>引了个<code>hexo-generator-index-custom</code>插件来置顶、排序文章</p>
-<span id="more"></span>
-
 <hr>
 <h4 id="2024-9更新"><a href="#2024-9更新" class="headerlink" title="2024-9更新"></a>2024-9更新</h4><h5 id="Hexo-Next建站"><a href="#Hexo-Next建站" class="headerlink" title="Hexo+Next建站"></a>Hexo+Next建站</h5><p>基于Hexo V7.3 + Next V8.2 搭建了个人博客站点</p>
 <h5 id="搜索功能"><a href="#搜索功能" class="headerlink" title="搜索功能"></a>搜索功能</h5><p>加入了文章搜索功能。会很好用吧？(大概</p>

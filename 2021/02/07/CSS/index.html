@@ -26,17 +26,17 @@
 <meta property="og:site_name" content="Huangyuntse">
 <meta property="og:description" content="写在前面最近看了两本书《CSS揭秘》和《CSS权威指南》恶补一下CSS（自己真是菜到天际），记录一些有意思的问题">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="c:\Users\H\AppData\Roaming\Typora\typora-user-images\image-20211120195130235.png">
-<meta property="og:image" content="c:\Users\H\AppData\Roaming\Typora\typora-user-images\image-20211120195056819.png">
-<meta property="og:image" content="c:\Users\H\AppData\Roaming\Typora\typora-user-images\image-20211120202203417.png">
-<meta property="og:image" content="c:\Users\H\AppData\Roaming\Typora\typora-user-images\image-20211120202344779.png">
-<meta property="og:image" content="c:\Users\H\AppData\Roaming\Typora\typora-user-images\image-20211120194334386.png">
+<meta property="og:image" content="http://example.com/assets/image-20211120195130235.png">
+<meta property="og:image" content="http://example.com/assets/image-20211120195056819.png">
+<meta property="og:image" content="http://example.com/assets/image-20211120202203417.png">
+<meta property="og:image" content="http://example.com/assets/image-20211120202344779.png">
+<meta property="og:image" content="http://example.com/assets/image-20211120194334386.png">
 <meta property="article:published_time" content="2021-02-07T02:00:00.000Z">
-<meta property="article:modified_time" content="2024-09-23T06:31:53.274Z">
+<meta property="article:modified_time" content="2025-06-22T12:22:24.238Z">
 <meta property="article:author" content="Huangyuntse">
 <meta property="article:tag" content="CSS">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="c:\Users\H\AppData\Roaming\Typora\typora-user-images\image-20211120195130235.png">
+<meta name="twitter:image" content="http://example.com/assets/image-20211120195130235.png">
 
 
 <link rel="canonical" href="http://example.com/2021/02/07/CSS/">
@@ -253,14 +253,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>1.3k</span>
+      <span>1.2k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>5 分钟</span>
+      <span>4 分钟</span>
     </span>
 </div>
 
@@ -282,33 +282,17 @@
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css">    *&#123;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">margin</span>: <span class="number">0</span>;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">padding</span>: <span class="number">0</span>;</span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css">    <span class="selector-class">.parent</span>&#123;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">outline</span>: <span class="number">5px</span> solid red;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">width</span>: <span class="number">300px</span>;</span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css">    <span class="selector-class">.child</span>&#123;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">height</span>:<span class="number">400px</span>;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">border</span>: <span class="number">5px</span> solid green;</span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;parent&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;child&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p>如图，父级元素不设高度，高度为子元素height+border</p>
-<div style="display: flex; justify-content: center; align-items: center;">
-    <img src="C:\Users\H\AppData\Roaming\Typora\typora-user-images\image-20211120195130235.png"
-        alt="image-20211120195130235" style="zoom:50%;" />
-    <img src="C:\Users\H\AppData\Roaming\Typora\typora-user-images\image-20211120195056819.png"
-        alt="image-20211120195056819" style="zoom:50%;" />
-</div>
-
-
-
+<p><img src="/../assets/image-20211120195130235.png" alt="image-20210930012419754"><br><img src="/../assets/image-20211120195056819.png" alt="image-20210930012419754"></p>
 <h5 id="子元素设置margin时"><a href="#子元素设置margin时" class="headerlink" title="子元素设置margin时"></a>子元素设置margin时</h5><p>父元素高度无法被子元素垂直方向上margin撑开</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css">    * &#123;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">margin</span>: <span class="number">0px</span>;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">padding</span>: <span class="number">0px</span>;</span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css"></span></span><br><span class="line"><span class="language-css">    <span class="selector-class">.parent</span> &#123;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">outline</span>: <span class="number">5px</span> solid red;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">width</span>: <span class="number">300px</span>;</span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css"></span></span><br><span class="line"><span class="language-css">    <span class="selector-class">.child</span> &#123;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">height</span>: <span class="number">400px</span>;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">border</span>: <span class="number">5px</span> solid green;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">margin</span>: <span class="number">20px</span>;</span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;parent&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;child&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<div style="display: flex; justify-content: center; align-items: center;">
-    <img src="C:\Users\H\AppData\Roaming\Typora\typora-user-images\image-20211120202203417.png"
-        alt="image-20211120202203417" style="zoom:50%;" />
-    <img src="C:\Users\H\AppData\Roaming\Typora\typora-user-images\image-20211120202344779.png"
-        alt="image-20211120202344779" style="zoom:50%;" />
-</div>
-
+<p><img src="/../assets/image-20211120202203417.png" alt="image-20210930012419754"><br><img src="/../assets/image-20211120202344779.png" alt="image-20210930012419754"></p>
 <p><strong>解决方案：父元素设置border&#x2F;padding&#x2F;overflow：hidden</strong></p>
 <p><strong>总结：父元素高度能被子元素的height、border、padding撑开，如果父元元素在垂直方向上有<code>border</code>,<code>padding</code>（只要在逻辑上存在，不论大小）以及<code>overflow:hidden</code>，都能被子元素的<code>margin</code>撑开，否则只能撑开父元素的宽度</strong></p>
 <h3 id="2-CSS宽度由什么决定？"><a href="#2-CSS宽度由什么决定？" class="headerlink" title="2. CSS宽度由什么决定？"></a>2. CSS宽度由什么决定？</h3><h4 id="行内-行内块元素"><a href="#行内-行内块元素" class="headerlink" title="行内&#x2F;行内块元素"></a>行内&#x2F;行内块元素</h4><p>行内元素&#x2F;行内块的宽度是由它的内容决定的，行内元素不能设置宽高</p>
 <h4 id="块级元素-1"><a href="#块级元素-1" class="headerlink" title="块级元素"></a>块级元素</h4><p>一个块级元素宽度当不设置样式时默认为父级元素的100%<strong>（这个100%是自适应的，并不相当于width：100%）</strong></p>
 <h3 id="3-为什么margin-top-padding-top设置百分比基于父元素的宽度计算的？"><a href="#3-为什么margin-top-padding-top设置百分比基于父元素的宽度计算的？" class="headerlink" title="3. 为什么margin-top&#x2F;padding-top设置百分比基于父元素的宽度计算的？"></a>3. 为什么margin-top&#x2F;padding-top设置百分比基于父元素的宽度计算的？</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css">        <span class="selector-class">.parent</span> &#123;</span></span><br><span class="line"><span class="language-css">            <span class="attribute">width</span>: <span class="number">300px</span>;</span></span><br><span class="line"><span class="language-css">            <span class="attribute">height</span>: <span class="number">400px</span>;</span></span><br><span class="line"><span class="language-css">            <span class="attribute">border</span>: <span class="number">5px</span> solid red;</span></span><br><span class="line"><span class="language-css">        &#125;</span></span><br><span class="line"><span class="language-css">        <span class="selector-class">.child</span> &#123;</span></span><br><span class="line"><span class="language-css">            <span class="attribute">height</span>: <span class="number">200px</span>;</span></span><br><span class="line"><span class="language-css">            <span class="attribute">margin-top</span>: <span class="number">50%</span>;</span></span><br><span class="line"><span class="language-css">            <span class="attribute">background-color</span>: green;</span></span><br><span class="line"><span class="language-css">        &#125;</span></span><br><span class="line"><span class="language-css">    </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;parent&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;child&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<img src="C:\Users\H\AppData\Roaming\Typora\typora-user-images\image-20211120194334386.png" alt="image-20211120194334386" style="zoom:50%;" />
-
+<p><img src="/../assets/image-20211120194334386.png" alt="image-20211120194334386"></p>
 <p>这里利用margin-top：50%将子元素挤到最下方贴底，然而这里的百分比是相对于父级宽度计算的。</p>
 <p>CSS权威指南中的解释：若是相对于父元素的高度计算会形成死循环。<br><em><strong>“我们认为，正常流中的大多数元素都会足够高以包含其后代元素（包括外边距），如果一个元素的上下外边距是父元素的height的百分数，就可能导致一个无限循环，父元素的height会增加，以适应后代元素上下外边距的增加，而相应的，上下外边距因为父元素height的增加也会增加，形成无限循环。”</strong></em></p>
 <p><strong>本质上是因为css中高度是可以自适应的，基于父级高度的百分比计算会导致无限循环的问题</strong>。</p>
@@ -398,7 +382,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">2:33</span>
+    <span title="站点阅读时长">2:32</span>
   </span>
 </div>
 
