@@ -19,17 +19,17 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.21.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="HTTP缓存机制HTTP缓存过程 第一次发送请求 - 服务器响应，响应标头带上Cache-Control、Expires、ETag、Last-Modified第二次发送请求 - 先根据Cache-Control、Expires判断强缓存是否失效，如果失效，If-None-Match中的上一次ETag和If-Modified-Since中的上一次Last-Modified来判断是否变更，如果没有变更">
+    <meta name="description" content="HTTP缓存过程 第一次发送请求 - 服务器响应，响应标头带上Cache-Control、Expires、ETag、Last-Modified第二次发送请求 - 先根据Cache-Control、Expires判断强缓存是否失效，如果失效，If-None-Match中的上一次ETag和If-Modified-Since中的上一次Last-Modified来判断是否变更，如果没有变更，返回304让浏">
 <meta property="og:type" content="article">
 <meta property="og:title" content="HTTP缓存">
 <meta property="og:url" content="http://example.com/2021/09/18/HTTP%E7%BC%93%E5%AD%98/index.html">
 <meta property="og:site_name" content="Huangyuntse">
-<meta property="og:description" content="HTTP缓存机制HTTP缓存过程 第一次发送请求 - 服务器响应，响应标头带上Cache-Control、Expires、ETag、Last-Modified第二次发送请求 - 先根据Cache-Control、Expires判断强缓存是否失效，如果失效，If-None-Match中的上一次ETag和If-Modified-Since中的上一次Last-Modified来判断是否变更，如果没有变更">
+<meta property="og:description" content="HTTP缓存过程 第一次发送请求 - 服务器响应，响应标头带上Cache-Control、Expires、ETag、Last-Modified第二次发送请求 - 先根据Cache-Control、Expires判断强缓存是否失效，如果失效，If-None-Match中的上一次ETag和If-Modified-Since中的上一次Last-Modified来判断是否变更，如果没有变更，返回304让浏">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/assets/HTTP%E7%BC%93%E5%AD%98%E8%BF%87%E7%A8%8B.png">
 <meta property="og:image" content="http://example.com/assets/HTTP%E7%BC%93%E5%AD%98%E7%AD%96%E7%95%A5.png">
 <meta property="article:published_time" content="2021-09-18T02:00:00.000Z">
-<meta property="article:modified_time" content="2025-06-09T10:26:48.692Z">
+<meta property="article:modified_time" content="2025-06-22T12:13:46.528Z">
 <meta property="article:author" content="Huangyuntse">
 <meta property="article:tag" content="Network">
 <meta property="article:tag" content="Http">
@@ -143,7 +143,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP%E7%BC%93%E5%AD%98%E6%9C%BA%E5%88%B6"><span class="nav-number">1.</span> <span class="nav-text">HTTP缓存机制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP%E7%BC%93%E5%AD%98%E8%BF%87%E7%A8%8B"><span class="nav-number">1.1.</span> <span class="nav-text">HTTP缓存过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%BA%E7%BC%93%E5%AD%98"><span class="nav-number">1.2.</span> <span class="nav-text">强缓存</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Cache-Control"><span class="nav-number">1.2.1.</span> <span class="nav-text">Cache-Control</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Expires"><span class="nav-number">1.2.2.</span> <span class="nav-text">Expires</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%8F%E5%95%86%E7%BC%93%E5%AD%98"><span class="nav-number">1.3.</span> <span class="nav-text">协商缓存</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ETag-If-None-Match"><span class="nav-number">1.3.1.</span> <span class="nav-text">ETag&#x2F;If-None-Match</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Last-Modified-If-Modified-Since"><span class="nav-number">1.3.2.</span> <span class="nav-text">Last-Modified&#x2F;If-Modified-Since</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0ETag%EF%BC%9F"><span class="nav-number">1.3.3.</span> <span class="nav-text">如何实现ETag？</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%93%E5%AD%98%E7%AD%96%E7%95%A5"><span class="nav-number">1.4.</span> <span class="nav-text">缓存策略</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#HTTP%E7%BC%93%E5%AD%98%E8%BF%87%E7%A8%8B"><span class="nav-number">1.</span> <span class="nav-text">HTTP缓存过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%BA%E7%BC%93%E5%AD%98"><span class="nav-number">2.</span> <span class="nav-text">强缓存</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Cache-Control"><span class="nav-number">2.1.</span> <span class="nav-text">Cache-Control</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Expires"><span class="nav-number">2.2.</span> <span class="nav-text">Expires</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8D%8F%E5%95%86%E7%BC%93%E5%AD%98"><span class="nav-number">3.</span> <span class="nav-text">协商缓存</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#ETag-If-None-Match"><span class="nav-number">3.1.</span> <span class="nav-text">ETag&#x2F;If-None-Match</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Last-Modified-If-Modified-Since"><span class="nav-number">3.2.</span> <span class="nav-text">Last-Modified&#x2F;If-Modified-Since</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0ETag%EF%BC%9F"><span class="nav-number">3.3.</span> <span class="nav-text">如何实现ETag？</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BC%93%E5%AD%98%E7%AD%96%E7%95%A5"><span class="nav-number">4.</span> <span class="nav-text">缓存策略</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -268,11 +268,11 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><h2 id="HTTP缓存机制"><a href="#HTTP缓存机制" class="headerlink" title="HTTP缓存机制"></a>HTTP缓存机制</h2><h3 id="HTTP缓存过程"><a href="#HTTP缓存过程" class="headerlink" title="HTTP缓存过程"></a>HTTP缓存过程</h3><blockquote>
+    <div class="post-body" itemprop="articleBody"><h4 id="HTTP缓存过程"><a href="#HTTP缓存过程" class="headerlink" title="HTTP缓存过程"></a>HTTP缓存过程</h4><blockquote>
 <p>第一次发送请求 - 服务器响应，响应标头带上Cache-Control、Expires、ETag、Last-Modified<br>第二次发送请求 - 先根据Cache-Control、Expires判断强缓存是否失效，如果失效，If-None-Match中的上一次ETag和If-Modified-Since中的上一次Last-Modified来判断是否变更，如果没有变更，返回304让浏览器使用本地缓存</p>
 </blockquote>
 <p><img src="/../assets/HTTP%E7%BC%93%E5%AD%98%E8%BF%87%E7%A8%8B.png" alt="image-20210808204737157"></p>
-<h3 id="强缓存"><a href="#强缓存" class="headerlink" title="强缓存"></a>强缓存</h3><h4 id="Cache-Control"><a href="#Cache-Control" class="headerlink" title="Cache-Control"></a>Cache-Control</h4><blockquote>
+<h4 id="强缓存"><a href="#强缓存" class="headerlink" title="强缓存"></a>强缓存</h4><h5 id="Cache-Control"><a href="#Cache-Control" class="headerlink" title="Cache-Control"></a>Cache-Control</h5><blockquote>
 <p>Cache-Control 是 HTTP&#x2F;1.1 中新增的属性，在请求头和响应头中都可以使用，常用的属性值如有：</p>
 </blockquote>
 <ul>
@@ -283,21 +283,21 @@
 <li>public：响应可以被中间代理、CDN 等缓存</li>
 <li>must-revalidate：在缓存过期前可以使用，过期后必须向服务器验证</li>
 </ul>
-<h4 id="Expires"><a href="#Expires" class="headerlink" title="Expires"></a>Expires</h4><blockquote>
+<h5 id="Expires"><a href="#Expires" class="headerlink" title="Expires"></a>Expires</h5><blockquote>
 <p>Expires 的值是一个 HTTP 日期，在浏览器发起请求时，会根据系统时间和 Expires 的值进行比较，如果系统时间超过了 Expires 的值，缓存失效。</p>
 </blockquote>
 <p>由于和系统时间进行比较，所以当系统时间和服务器时间不一致的时候，会有缓存有效期不准的问题。Expires 的优先级在三个 Header 属性中是最低的。</p>
-<h3 id="协商缓存"><a href="#协商缓存" class="headerlink" title="协商缓存"></a>协商缓存</h3><blockquote>
+<h4 id="协商缓存"><a href="#协商缓存" class="headerlink" title="协商缓存"></a>协商缓存</h4><blockquote>
 <p>当浏览器的强缓存失效的时候或者请求头中设置了不走强缓存，并且在请求头中设置了If-Modified-Since 或者 If-None-Match 的时候，会将这两个属性值到服务端去验证是否命中协商缓存，如果命中了协商缓存，会返回 304 状态，加载浏览器缓存，并且响应头会设置 Last-Modified 或者 ETag 属性。</p>
 </blockquote>
-<h4 id="ETag-If-None-Match"><a href="#ETag-If-None-Match" class="headerlink" title="ETag&#x2F;If-None-Match"></a>ETag&#x2F;If-None-Match</h4><blockquote>
+<h5 id="ETag-If-None-Match"><a href="#ETag-If-None-Match" class="headerlink" title="ETag&#x2F;If-None-Match"></a>ETag&#x2F;If-None-Match</h5><blockquote>
 <p>ETag&#x2F;If-None-Match 的值是一串 hash 码，代表的是一个资源的标识符，当服务端的文件变化的时候，它的 hash码会随之改变</p>
 </blockquote>
-<h4 id="Last-Modified-If-Modified-Since"><a href="#Last-Modified-If-Modified-Since" class="headerlink" title="Last-Modified&#x2F;If-Modified-Since"></a>Last-Modified&#x2F;If-Modified-Since</h4><blockquote>
+<h5 id="Last-Modified-If-Modified-Since"><a href="#Last-Modified-If-Modified-Since" class="headerlink" title="Last-Modified&#x2F;If-Modified-Since"></a>Last-Modified&#x2F;If-Modified-Since</h5><blockquote>
 <p>Last-Modified&#x2F;If-Modified-Since 的值代表的是文件的最后修改时间</p>
 </blockquote>
-<h4 id="如何实现ETag？"><a href="#如何实现ETag？" class="headerlink" title="如何实现ETag？"></a>如何实现ETag？</h4><p>Nginx中ETag是如何实现的： 上次修改时间 + content-length</p>
-<h3 id="缓存策略"><a href="#缓存策略" class="headerlink" title="缓存策略"></a>缓存策略</h3><blockquote>
+<h5 id="如何实现ETag？"><a href="#如何实现ETag？" class="headerlink" title="如何实现ETag？"></a>如何实现ETag？</h5><p>Nginx中ETag是如何实现的： 上次修改时间 + content-length</p>
+<h4 id="缓存策略"><a href="#缓存策略" class="headerlink" title="缓存策略"></a>缓存策略</h4><blockquote>
 <p>题目：<a target="_blank" rel="noopener" href="https://q.shanyue.tech/fe/http/193">简述你们前端项目中资源的缓存配置策略</a><br>  题目：<a target="_blank" rel="noopener" href="https://q.shanyue.tech/fe/http/600">现代前端应用应如何配置 HTTP 缓存机制</a><br>  关于 http 缓存配置的最佳实践为以下两条：</p>
 </blockquote>
 <ul>
@@ -378,7 +378,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">2:34</span>
+    <span title="站点阅读时长">2:33</span>
   </span>
 </div>
 

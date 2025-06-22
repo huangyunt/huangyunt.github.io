@@ -29,7 +29,7 @@
 <meta property="og:image" content="http://example.com/assets/image-20210513212400962.png">
 <meta property="og:image" content="http://example.com/assets/image-20210513214044731.png">
 <meta property="article:published_time" content="2021-09-13T02:00:00.000Z">
-<meta property="article:modified_time" content="2025-06-09T10:26:50.777Z">
+<meta property="article:modified_time" content="2025-06-22T12:14:48.885Z">
 <meta property="article:author" content="Huangyuntse">
 <meta property="article:tag" content="Network">
 <meta property="article:tag" content="Https">
@@ -143,7 +143,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E5%8A%A0%E5%AF%86%EF%BC%9F"><span class="nav-number">1.</span> <span class="nav-text">为什么需要加密？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%A8%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E5%8F%AF%E8%A1%8C%E5%90%97%EF%BC%9F"><span class="nav-number">2.</span> <span class="nav-text">用对称加密可行吗？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%A8%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E5%8F%AF%E8%A1%8C%E5%90%97%EF%BC%9F"><span class="nav-number">3.</span> <span class="nav-text">用非对称加密可行吗？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%82%A3%E7%94%A8%E4%B8%A4%E7%BB%84%E5%85%AC%E9%92%A5%E7%A7%81%E9%92%A5%EF%BC%8C%E6%98%AF%E5%90%A6%E5%B0%B1%E8%83%BD%E4%BF%9D%E8%AF%81%E5%8F%8C%E5%90%91%E4%BC%A0%E8%BE%93%E9%83%BD%E5%AE%89%E5%85%A8%E4%BA%86%EF%BC%9F"><span class="nav-number">4.</span> <span class="nav-text">那用两组公钥私钥，是否就能保证双向传输都安全了？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86-%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86"><span class="nav-number">5.</span> <span class="nav-text">非对称加密 + 对称加密</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%AD%E9%97%B4%E4%BA%BA%E6%94%BB%E5%87%BB"><span class="nav-number">6.</span> <span class="nav-text">中间人攻击</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E8%AF%81%E6%98%8E%E6%B5%8F%E8%A7%88%E5%99%A8%E6%94%B6%E5%88%B0%E7%9A%84%E5%85%AC%E9%92%A5%E4%B8%80%E5%AE%9A%E6%98%AF%E8%AF%A5%E7%BD%91%E7%AB%99%E7%9A%84%E5%85%AC%E9%92%A5%EF%BC%9F"><span class="nav-number">7.</span> <span class="nav-text">如何证明浏览器收到的公钥一定是该网站的公钥？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6"><span class="nav-number">7.1.</span> <span class="nav-text">数字证书</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E6%94%BE%E9%98%B2%E6%AD%A2%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6%E8%A2%AB%E7%AF%A1%E6%94%B9%EF%BC%9F"><span class="nav-number">8.</span> <span class="nav-text">如何放防止数字证书被篡改？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%AD%E9%97%B4%E4%BA%BA%E6%9C%89%E5%8F%AF%E8%83%BD%E7%AF%A1%E6%94%B9%E8%AF%A5%E8%AF%81%E4%B9%A6%E5%90%97%EF%BC%9F"><span class="nav-number">9.</span> <span class="nav-text">中间人有可能篡改该证书吗？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%AD%E9%97%B4%E4%BA%BA%E6%9C%89%E5%8F%AF%E8%83%BD%E6%8A%8A%E8%AF%81%E4%B9%A6%E6%8E%89%E5%8C%85%E5%90%97%EF%BC%9F"><span class="nav-number">10.</span> <span class="nav-text">中间人有可能把证书掉包吗？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E5%88%B6%E4%BD%9C%E6%95%B0%E5%AD%97%E7%AD%BE%E5%90%8D%E6%97%B6%E9%9C%80%E8%A6%81hash%E4%B8%80%E6%AC%A1%EF%BC%9F"><span class="nav-number">11.</span> <span class="nav-text">为什么制作数字签名时需要hash一次？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%8E%E4%B9%88%E8%AF%81%E6%98%8ECA%E6%9C%BA%E6%9E%84%E7%9A%84%E5%85%AC%E9%92%A5%E6%98%AF%E5%8F%AF%E4%BF%A1%E7%9A%84%EF%BC%9F"><span class="nav-number">12.</span> <span class="nav-text">怎么证明CA机构的公钥是可信的？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AF%8F%E6%AC%A1%E8%BF%9B%E8%A1%8CHTTPS%E8%AF%B7%E6%B1%82%E6%97%B6%E9%83%BD%E5%BF%85%E9%A1%BB%E5%9C%A8SSL-TLS%E5%B1%82%E8%BF%9B%E8%A1%8C%E6%8F%A1%E6%89%8B%E4%BC%A0%E8%BE%93%E5%AF%86%E9%92%A5%E5%90%97%EF%BC%9F"><span class="nav-number">13.</span> <span class="nav-text">每次进行HTTPS请求时都必须在SSL&#x2F;TLS层进行握手传输密钥吗？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">14.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E5%8A%A0%E5%AF%86%EF%BC%9F"><span class="nav-number">1.</span> <span class="nav-text">为什么需要加密？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%A8%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E5%8F%AF%E8%A1%8C%E5%90%97%EF%BC%9F"><span class="nav-number">2.</span> <span class="nav-text">用对称加密可行吗？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%A8%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E5%8F%AF%E8%A1%8C%E5%90%97%EF%BC%9F"><span class="nav-number">3.</span> <span class="nav-text">用非对称加密可行吗？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%82%A3%E7%94%A8%E4%B8%A4%E7%BB%84%E5%85%AC%E9%92%A5%E7%A7%81%E9%92%A5%EF%BC%8C%E6%98%AF%E5%90%A6%E5%B0%B1%E8%83%BD%E4%BF%9D%E8%AF%81%E5%8F%8C%E5%90%91%E4%BC%A0%E8%BE%93%E9%83%BD%E5%AE%89%E5%85%A8%E4%BA%86%EF%BC%9F"><span class="nav-number">4.</span> <span class="nav-text">那用两组公钥私钥，是否就能保证双向传输都安全了？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86-%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86"><span class="nav-number">5.</span> <span class="nav-text">非对称加密 + 对称加密</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%AD%E9%97%B4%E4%BA%BA%E6%94%BB%E5%87%BB"><span class="nav-number">6.</span> <span class="nav-text">中间人攻击</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E8%AF%81%E6%98%8E%E6%B5%8F%E8%A7%88%E5%99%A8%E6%94%B6%E5%88%B0%E7%9A%84%E5%85%AC%E9%92%A5%E4%B8%80%E5%AE%9A%E6%98%AF%E8%AF%A5%E7%BD%91%E7%AB%99%E7%9A%84%E5%85%AC%E9%92%A5%EF%BC%9F"><span class="nav-number">7.</span> <span class="nav-text">如何证明浏览器收到的公钥一定是该网站的公钥？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6"><span class="nav-number">8.</span> <span class="nav-text">数字证书</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E6%94%BE%E9%98%B2%E6%AD%A2%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6%E8%A2%AB%E7%AF%A1%E6%94%B9%EF%BC%9F"><span class="nav-number">9.</span> <span class="nav-text">如何放防止数字证书被篡改？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%AD%E9%97%B4%E4%BA%BA%E6%9C%89%E5%8F%AF%E8%83%BD%E7%AF%A1%E6%94%B9%E8%AF%A5%E8%AF%81%E4%B9%A6%E5%90%97%EF%BC%9F"><span class="nav-number">10.</span> <span class="nav-text">中间人有可能篡改该证书吗？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%AD%E9%97%B4%E4%BA%BA%E6%9C%89%E5%8F%AF%E8%83%BD%E6%8A%8A%E8%AF%81%E4%B9%A6%E6%8E%89%E5%8C%85%E5%90%97%EF%BC%9F"><span class="nav-number">11.</span> <span class="nav-text">中间人有可能把证书掉包吗？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E5%88%B6%E4%BD%9C%E6%95%B0%E5%AD%97%E7%AD%BE%E5%90%8D%E6%97%B6%E9%9C%80%E8%A6%81hash%E4%B8%80%E6%AC%A1%EF%BC%9F"><span class="nav-number">12.</span> <span class="nav-text">为什么制作数字签名时需要hash一次？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%80%8E%E4%B9%88%E8%AF%81%E6%98%8ECA%E6%9C%BA%E6%9E%84%E7%9A%84%E5%85%AC%E9%92%A5%E6%98%AF%E5%8F%AF%E4%BF%A1%E7%9A%84%EF%BC%9F"><span class="nav-number">13.</span> <span class="nav-text">怎么证明CA机构的公钥是可信的？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%AF%8F%E6%AC%A1%E8%BF%9B%E8%A1%8CHTTPS%E8%AF%B7%E6%B1%82%E6%97%B6%E9%83%BD%E5%BF%85%E9%A1%BB%E5%9C%A8SSL-TLS%E5%B1%82%E8%BF%9B%E8%A1%8C%E6%8F%A1%E6%89%8B%E4%BC%A0%E8%BE%93%E5%AF%86%E9%92%A5%E5%90%97%EF%BC%9F"><span class="nav-number">14.</span> <span class="nav-text">每次进行HTTPS请求时都必须在SSL&#x2F;TLS层进行握手传输密钥吗？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">15.</span> <span class="nav-text">总结</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -268,14 +268,14 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><h3 id="为什么需要加密？"><a href="#为什么需要加密？" class="headerlink" title="为什么需要加密？"></a><strong>为什么需要加密？</strong></h3><p>因为http的内容是明文传输的，明文数据会经过中间代理服务器、路由器、wifi热点、通信服务运营商等多个物理节点，如果信息在传输过程中被劫持，传输的内容就完全暴露了。劫持者还可以篡改传输的信息且不被双方察觉，这就是“中间人攻击”。</p>
-<h3 id="用对称加密可行吗？"><a href="#用对称加密可行吗？" class="headerlink" title="用对称加密可行吗？"></a><strong>用对称加密可行吗？</strong></h3><p>对称加密最大的问题就是密钥的传输，而密钥的传输又需要加密（反复套娃），故而单纯的对称加密是无法解决问题的。</p>
+    <div class="post-body" itemprop="articleBody"><h4 id="为什么需要加密？"><a href="#为什么需要加密？" class="headerlink" title="为什么需要加密？"></a><strong>为什么需要加密？</strong></h4><p>因为http的内容是明文传输的，明文数据会经过中间代理服务器、路由器、wifi热点、通信服务运营商等多个物理节点，如果信息在传输过程中被劫持，传输的内容就完全暴露了。劫持者还可以篡改传输的信息且不被双方察觉，这就是“中间人攻击”。</p>
+<h4 id="用对称加密可行吗？"><a href="#用对称加密可行吗？" class="headerlink" title="用对称加密可行吗？"></a><strong>用对称加密可行吗？</strong></h4><p>对称加密最大的问题就是密钥的传输，而密钥的传输又需要加密（反复套娃），故而单纯的对称加密是无法解决问题的。</p>
 <span id="more"></span>
 
 
-<h3 id="用非对称加密可行吗？"><a href="#用非对称加密可行吗？" class="headerlink" title="用非对称加密可行吗？"></a>用非对称加密可行吗？</h3><p>鉴于非对称加密的机制，我们可能会有这种思路：服务器先把公钥以明文方式传输给浏览器，之后浏览器向服务器传数据前都先用这个公钥加密好再传，这条数据的安全似乎可以保障了！<strong>因为只有服务器有相应的私钥能解开公钥加密的数据</strong>。</p>
+<h4 id="用非对称加密可行吗？"><a href="#用非对称加密可行吗？" class="headerlink" title="用非对称加密可行吗？"></a>用非对称加密可行吗？</h4><p>鉴于非对称加密的机制，我们可能会有这种思路：服务器先把公钥以明文方式传输给浏览器，之后浏览器向服务器传数据前都先用这个公钥加密好再传，这条数据的安全似乎可以保障了！<strong>因为只有服务器有相应的私钥能解开公钥加密的数据</strong>。</p>
 <p>然而反过来<strong>由服务器到浏览器的这条路怎么保障安全？</strong>如果服务器用它的私钥加密数据传给浏览器，那么浏览器用公钥可以解密它，而这个公钥是一开始通过明文传输给浏览器的，若这个公钥被中间人劫持到了，那他也能用该公钥解密服务器传来的信息了。所以<strong>目前似乎只能保证由浏览器向服务器传输数据的安全性</strong></p>
-<h3 id="那用两组公钥私钥，是否就能保证双向传输都安全了？"><a href="#那用两组公钥私钥，是否就能保证双向传输都安全了？" class="headerlink" title="那用两组公钥私钥，是否就能保证双向传输都安全了？"></a>那用两组公钥私钥，是否就能保证双向传输都安全了？</h3><ol>
+<h4 id="那用两组公钥私钥，是否就能保证双向传输都安全了？"><a href="#那用两组公钥私钥，是否就能保证双向传输都安全了？" class="headerlink" title="那用两组公钥私钥，是否就能保证双向传输都安全了？"></a>那用两组公钥私钥，是否就能保证双向传输都安全了？</h4><ol>
 <li>某网站服务器拥有公钥A与对应的私钥A’；浏览器拥有公钥B与对应的私钥B’。</li>
 <li>浏览器把公钥B明文传输给服务器。</li>
 <li>服务器把公钥A明文给传输浏览器。</li>
@@ -283,7 +283,7 @@
 <li>同理，服务器向浏览器传输的内容都用公钥B加密，浏览器收到后用私钥B’解密。同上也可以保证这条数据的安全。</li>
 </ol>
 <p>然而这又引出了一个新的问题，非对称加密非常耗时，如何解决？（见RSA算法）而且这种方法真的安全了吗？</p>
-<h3 id="非对称加密-对称加密"><a href="#非对称加密-对称加密" class="headerlink" title="非对称加密 + 对称加密"></a>非对称加密 + 对称加密</h3><ol>
+<h4 id="非对称加密-对称加密"><a href="#非对称加密-对称加密" class="headerlink" title="非对称加密 + 对称加密"></a>非对称加密 + 对称加密</h4><ol>
 <li>某网站拥有用于非对称加密的公钥A、私钥A’。</li>
 <li>浏览器向网站服务器请求，服务器把公钥A明文给传输浏览器。</li>
 <li>浏览器随机生成一个用于对称加密的密钥X，用公钥A加密后传给服务器。</li>
@@ -291,7 +291,7 @@
 <li>这样双方就都拥有密钥X了，且别人无法知道它。之后双方所有数据都通过密钥X加密解密即可。</li>
 </ol>
 <p>这基本上就是https采用的方案了，但仍然还是有漏洞。</p>
-<h3 id="中间人攻击"><a href="#中间人攻击" class="headerlink" title="中间人攻击"></a>中间人攻击</h3><p>中间人攻击（MITMA，man in the middle attack）<br>中间人攻击是一种网络攻击类型 ，应用与LAN局域网中。这种攻击的方式是 hacker 置身于两个通信 paties 之间，窃取数据。</p>
+<h4 id="中间人攻击"><a href="#中间人攻击" class="headerlink" title="中间人攻击"></a>中间人攻击</h4><p>中间人攻击（MITMA，man in the middle attack）<br>中间人攻击是一种网络攻击类型 ，应用与LAN局域网中。这种攻击的方式是 hacker 置身于两个通信 paties 之间，窃取数据。</p>
 <p>中间人攻击允许黑客截获双方之间的数据，它可能是服务器和客户端或客户端到客户端或服务器到服务器。</p>
 <p><img src="/../assets/image-20210513212400962.png" alt="image-20210513212400962"></p>
 <p>如果在数据传输过程中，中间人劫持到了数据，此时他的确无法得到浏览器生成的密钥X，这个密钥本身被公钥A加密了，只有服务器才有私钥A’解开它，然而中间人却完全不需要拿到私钥A’就能干坏事了。请看：</p>
@@ -304,11 +304,11 @@
 <li>服务器拿到后用私钥A’解密得到密钥X。</li>
 </ol>
 <p>这样在双方都不会发现异常的情况下，中间人掉包了服务器传来的公钥，进而得到了密钥X。<strong>根本原因是浏览器无法确认收到的公钥是不是网站自己的，</strong>因为公钥本身是明文传输的，难道还得对公钥的传输进行加密？这似乎变成鸡生蛋、蛋生鸡的问题了。解法是什么？</p>
-<h3 id="如何证明浏览器收到的公钥一定是该网站的公钥？"><a href="#如何证明浏览器收到的公钥一定是该网站的公钥？" class="headerlink" title="如何证明浏览器收到的公钥一定是该网站的公钥？"></a><strong>如何证明浏览器收到的公钥一定是该网站的公钥？</strong></h3><p>网站是否有个‘身份证’来证明自己的公钥合法？这个‘身份证’又由谁来颁发？</p>
+<h4 id="如何证明浏览器收到的公钥一定是该网站的公钥？"><a href="#如何证明浏览器收到的公钥一定是该网站的公钥？" class="headerlink" title="如何证明浏览器收到的公钥一定是该网站的公钥？"></a><strong>如何证明浏览器收到的公钥一定是该网站的公钥？</strong></h4><p>网站是否有个‘身份证’来证明自己的公钥合法？这个‘身份证’又由谁来颁发？</p>
 <p><strong>CA机构</strong>，它是如今互联网世界正常运作的前提，而CA机构颁发的“身份证”就是<strong>数字证书</strong>。</p>
 <h4 id="数字证书"><a href="#数字证书" class="headerlink" title="数字证书"></a><strong>数字证书</strong></h4><p>网站在使用HTTPS前，需要向<strong>CA机构</strong>申领一份<strong>数字证书</strong>，数字证书里含有证书持有者信息、域名、公钥信息等。服务器把证书传输给浏览器，浏览器从证书里获取公钥就行了，证书就如身份证，证明“该公钥对应该网站”。</p>
 <p>而这里又有一个显而易见的问题，“<strong>证书本身的传输过程中，如何防止被篡改”</strong>？即如何证明证书本身的真实性？身份证运用了一些防伪技术，而数字证书怎么防伪呢？</p>
-<h3 id="如何放防止数字证书被篡改？"><a href="#如何放防止数字证书被篡改？" class="headerlink" title="如何放防止数字证书被篡改？"></a><strong>如何放防止数字证书被篡改？</strong></h3><p>我们把证书原本的内容生成一份“签名”，比对证书内容和签名是否一致就能判别是否被篡改。这就是数字证书的“防伪技术”，这里的“签名”就叫<code>数字签名</code>：</p>
+<h4 id="如何放防止数字证书被篡改？"><a href="#如何放防止数字证书被篡改？" class="headerlink" title="如何放防止数字证书被篡改？"></a><strong>如何放防止数字证书被篡改？</strong></h4><p>我们把证书原本的内容生成一份“签名”，比对证书内容和签名是否一致就能判别是否被篡改。这就是数字证书的“防伪技术”，这里的“签名”就叫<code>数字签名</code>：</p>
 <p>数字签名的制作过程：</p>
 <ol>
 <li>CA机构拥有非对称加密的私钥和公钥。</li>
@@ -324,17 +324,17 @@
 <li>显然通过以上步骤，T’应当等于S‘，除非明文或签名被篡改。所以此时比较S’是否等于T’，等于则表明证书可信。</li>
 </ol>
 <p><img src="/../assets/image-20210513214044731.png" alt="image-20210513214044731"></p>
-<h3 id="中间人有可能篡改该证书吗？"><a href="#中间人有可能篡改该证书吗？" class="headerlink" title="中间人有可能篡改该证书吗？"></a><strong>中间人有可能篡改该证书吗？</strong></h3><p>假设中间人篡改了证书的原文，由于他没有CA机构的私钥，所以无法得到此时加密后签名，无法相应地篡改签名。浏览器收到该证书后会发现原文和签名解密后的值不一致，则说明证书已被篡改，证书不可信</p>
-<h3 id="中间人有可能把证书掉包吗？"><a href="#中间人有可能把证书掉包吗？" class="headerlink" title="中间人有可能把证书掉包吗？"></a><strong>中间人有可能把证书掉包吗？</strong></h3><p>假设有另一个网站B也拿到了CA机构认证的证书，它想劫持网站A的信息。于是它成为中间人拦截到了A传给浏览器的证书，然后替换成自己的证书，传给浏览器，之后浏览器就会错误地拿到B的证书里的公钥了。</p>
+<h4 id="中间人有可能篡改该证书吗？"><a href="#中间人有可能篡改该证书吗？" class="headerlink" title="中间人有可能篡改该证书吗？"></a><strong>中间人有可能篡改该证书吗？</strong></h4><p>假设中间人篡改了证书的原文，由于他没有CA机构的私钥，所以无法得到此时加密后签名，无法相应地篡改签名。浏览器收到该证书后会发现原文和签名解密后的值不一致，则说明证书已被篡改，证书不可信</p>
+<h4 id="中间人有可能把证书掉包吗？"><a href="#中间人有可能把证书掉包吗？" class="headerlink" title="中间人有可能把证书掉包吗？"></a><strong>中间人有可能把证书掉包吗？</strong></h4><p>假设有另一个网站B也拿到了CA机构认证的证书，它想劫持网站A的信息。于是它成为中间人拦截到了A传给浏览器的证书，然后替换成自己的证书，传给浏览器，之后浏览器就会错误地拿到B的证书里的公钥了。</p>
 <p>其实这并不会发生，因为证书一定是无法被篡改的，所以网站B掉包的一定也是正规的证书，而证书黎里包含了网站的信息，包括域名，浏览器把证书里的域名与自己请求的域名比对一下就知道有没有被掉包了。</p>
-<h3 id="为什么制作数字签名时需要hash一次？"><a href="#为什么制作数字签名时需要hash一次？" class="headerlink" title="为什么制作数字签名时需要hash一次？"></a><strong>为什么制作数字签名时需要hash一次？</strong></h3><p>最显然的是性能问题，非对称加密效率较差，证书信息一般较长，比较耗时。而hash后得到的是固定长度的信息（比如用md5算法hash后可以得到固定的128位的值），这样加解密就快很多。</p>
-<h3 id="怎么证明CA机构的公钥是可信的？"><a href="#怎么证明CA机构的公钥是可信的？" class="headerlink" title="怎么证明CA机构的公钥是可信的？"></a><strong>怎么证明CA机构的公钥是可信的？</strong></h3><p>“浏览器保有它的公钥”，这是个什么保有法？怎么证明这个公钥是否可信？</p>
+<h4 id="为什么制作数字签名时需要hash一次？"><a href="#为什么制作数字签名时需要hash一次？" class="headerlink" title="为什么制作数字签名时需要hash一次？"></a><strong>为什么制作数字签名时需要hash一次？</strong></h4><p>最显然的是性能问题，非对称加密效率较差，证书信息一般较长，比较耗时。而hash后得到的是固定长度的信息（比如用md5算法hash后可以得到固定的128位的值），这样加解密就快很多。</p>
+<h4 id="怎么证明CA机构的公钥是可信的？"><a href="#怎么证明CA机构的公钥是可信的？" class="headerlink" title="怎么证明CA机构的公钥是可信的？"></a><strong>怎么证明CA机构的公钥是可信的？</strong></h4><p>“浏览器保有它的公钥”，这是个什么保有法？怎么证明这个公钥是否可信？</p>
 <p>让我们回想一下数字证书到底是干啥的？没错，为了证明某公钥是可信的，即“该公钥是否对应该网站”，那CA机构的公钥是否也可以用数字证书来证明？没错，操作系统、浏览器本身会预装一些它们信任的根证书，如果其中会有CA机构的根证书，这样就可以拿到它对应的可信公钥了。</p>
 <p>实际上证书之间的认证也可以不止一层，可以A信任B，B信任C，以此类推，我们把它叫做<code>信任链</code>或<code>数字证书链</code>。也就是一连串的数字证书，由根证书为起点，透过层层信任，使终端实体证书的持有者可以获得转授的信任，以证明身份。</p>
 <p>另外，不知你们是否遇到过网站访问不了、提示需安装证书的情况？这里安装的就是根证书。说明浏览器不认给这个网站颁发证书的机构，那么你就得手动下载安装该机构的根证书（风险自己承担XD）。安装后，你就有了它的公钥，就可以用它验证服务器发来的证书是否可信了。</p>
-<h3 id="每次进行HTTPS请求时都必须在SSL-TLS层进行握手传输密钥吗？"><a href="#每次进行HTTPS请求时都必须在SSL-TLS层进行握手传输密钥吗？" class="headerlink" title="每次进行HTTPS请求时都必须在SSL&#x2F;TLS层进行握手传输密钥吗？"></a><strong>每次进行HTTPS请求时都</strong>必须<strong>在SSL&#x2F;TLS层进行握手传输密钥吗？</strong></h3><p>显然每次请求都经历一次密钥传输过程非常耗时，那怎么达到只传输一次呢？</p>
+<h4 id="每次进行HTTPS请求时都必须在SSL-TLS层进行握手传输密钥吗？"><a href="#每次进行HTTPS请求时都必须在SSL-TLS层进行握手传输密钥吗？" class="headerlink" title="每次进行HTTPS请求时都必须在SSL&#x2F;TLS层进行握手传输密钥吗？"></a><strong>每次进行HTTPS请求时都</strong>必须<strong>在SSL&#x2F;TLS层进行握手传输密钥吗？</strong></h4><p>显然每次请求都经历一次密钥传输过程非常耗时，那怎么达到只传输一次呢？</p>
 <p>服务器会为每个浏览器（或客户端软件）维护一个session ID，在TLS握手阶段传给浏览器，浏览器生成好密钥传给服务器后，服务器会把该密钥存到相应的session ID下，之后浏览器每次请求都会携带session ID，服务器会根据session ID找到相应的密钥并进行解密加密操作，这样就不必要每次重新制作、传输密钥了！</p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a><strong>总结</strong></h3><p>TLS建立连接的整个过程（SSL、TLS握手有一些区别，不同版本间也有区别，不过大致过程就是这样）：</p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a><strong>总结</strong></h4><p>TLS建立连接的整个过程（SSL、TLS握手有一些区别，不同版本间也有区别，不过大致过程就是这样）</p>
 
     </div>
 
@@ -396,7 +396,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">2:34</span>
+    <span title="站点阅读时长">2:33</span>
   </span>
 </div>
 

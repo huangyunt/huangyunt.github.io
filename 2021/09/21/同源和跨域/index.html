@@ -19,25 +19,25 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.21.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="| 比较杂的知识点，同源跨域、服务器代理、简单请求非简单请求 同源和跨域为什么要有同源策略 本质上是浏览器有cookie这么个玩意，比如移动端app就没有同源限制 防止CSRF攻击">
+    <meta name="description" content="比较杂的知识点，同源跨域、服务器代理、简单请求非简单请求  为什么要有同源策略 本质上是浏览器有cookie这么个玩意，比如移动端app就没有同源限制 防止CSRF攻击">
 <meta property="og:type" content="article">
 <meta property="og:title" content="同源和跨域">
-<meta property="og:url" content="http://example.com/2025/01/10/%E5%90%8C%E6%BA%90%E5%92%8C%E8%B7%A8%E5%9F%9F/index.html">
+<meta property="og:url" content="http://example.com/2021/09/21/%E5%90%8C%E6%BA%90%E5%92%8C%E8%B7%A8%E5%9F%9F/index.html">
 <meta property="og:site_name" content="Huangyuntse">
-<meta property="og:description" content="| 比较杂的知识点，同源跨域、服务器代理、简单请求非简单请求 同源和跨域为什么要有同源策略 本质上是浏览器有cookie这么个玩意，比如移动端app就没有同源限制 防止CSRF攻击">
+<meta property="og:description" content="比较杂的知识点，同源跨域、服务器代理、简单请求非简单请求  为什么要有同源策略 本质上是浏览器有cookie这么个玩意，比如移动端app就没有同源限制 防止CSRF攻击">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2025-01-10T03:31:26.593Z">
-<meta property="article:modified_time" content="2025-06-09T10:25:46.812Z">
+<meta property="article:published_time" content="2021-09-21T02:00:00.000Z">
+<meta property="article:modified_time" content="2025-06-22T12:10:29.589Z">
 <meta property="article:author" content="Huangyuntse">
 <meta property="article:tag" content="前端安全">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="http://example.com/2025/01/10/%E5%90%8C%E6%BA%90%E5%92%8C%E8%B7%A8%E5%9F%9F/">
+<link rel="canonical" href="http://example.com/2021/09/21/%E5%90%8C%E6%BA%90%E5%92%8C%E8%B7%A8%E5%9F%9F/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2025/01/10/%E5%90%8C%E6%BA%90%E5%92%8C%E8%B7%A8%E5%9F%9F/","path":"2025/01/10/同源和跨域/","title":"同源和跨域"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2021/09/21/%E5%90%8C%E6%BA%90%E5%92%8C%E8%B7%A8%E5%9F%9F/","path":"2021/09/21/同源和跨域/","title":"同源和跨域"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
 <title>同源和跨域 | Huangyuntse</title>
@@ -139,7 +139,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%8C%E6%BA%90%E5%92%8C%E8%B7%A8%E5%9F%9F"><span class="nav-number">1.</span> <span class="nav-text">同源和跨域</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E6%9C%89%E5%90%8C%E6%BA%90%E7%AD%96%E7%95%A5"><span class="nav-number">1.1.</span> <span class="nav-text">为什么要有同源策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98"><span class="nav-number">1.2.</span> <span class="nav-text">如何解决跨域问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#jsonp"><span class="nav-number">1.2.1.</span> <span class="nav-text">jsonp</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#cors"><span class="nav-number">1.2.2.</span> <span class="nav-text">cors</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E8%AF%B7%E6%B1%82"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">简单请求</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%9D%9E%E7%AE%80%E5%8D%95%E8%AF%B7%E6%B1%82"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">非简单请求</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BB%A3%E7%90%86"><span class="nav-number">1.2.3.</span> <span class="nav-text">服务器代理</span></a></li></ol></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E6%9C%89%E5%90%8C%E6%BA%90%E7%AD%96%E7%95%A5"><span class="nav-number">1.</span> <span class="nav-text">为什么要有同源策略</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98"><span class="nav-number">2.</span> <span class="nav-text">如何解决跨域问题</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BB%A3%E7%90%86"><span class="nav-number">2.1.</span> <span class="nav-text">服务器代理</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#JSONP"><span class="nav-number">2.2.</span> <span class="nav-text">JSONP</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#CORS"><span class="nav-number">2.3.</span> <span class="nav-text">CORS</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E8%AF%B7%E6%B1%82"><span class="nav-number">2.3.1.</span> <span class="nav-text">简单请求</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E9%9D%9E%E7%AE%80%E5%8D%95%E8%AF%B7%E6%B1%82"><span class="nav-number">2.3.2.</span> <span class="nav-text">非简单请求</span></a></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -200,7 +200,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2025/01/10/%E5%90%8C%E6%BA%90%E5%92%8C%E8%B7%A8%E5%9F%9F/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/21/%E5%90%8C%E6%BA%90%E5%92%8C%E8%B7%A8%E5%9F%9F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://avatars.githubusercontent.com/u/73687768?v=4">
@@ -229,7 +229,7 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2025-01-10 11:31:26" itemprop="dateCreated datePublished" datetime="2025-01-10T11:31:26+08:00">2025-01-10</time>
+      <time title="创建时间：2021-09-21 10:00:00" itemprop="dateCreated datePublished" datetime="2021-09-21T10:00:00+08:00">2021-09-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -247,7 +247,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>370</span>
+      <span>365</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -264,22 +264,24 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>| 比较杂的知识点，同源跨域、服务器代理、简单请求非简单请求</p>
-<h2 id="同源和跨域"><a href="#同源和跨域" class="headerlink" title="同源和跨域"></a>同源和跨域</h2><h3 id="为什么要有同源策略"><a href="#为什么要有同源策略" class="headerlink" title="为什么要有同源策略"></a>为什么要有同源策略</h3><ul>
+    <div class="post-body" itemprop="articleBody"><blockquote>
+<p>比较杂的知识点，同源跨域、服务器代理、简单请求非简单请求</p>
+</blockquote>
+<h4 id="为什么要有同源策略"><a href="#为什么要有同源策略" class="headerlink" title="为什么要有同源策略"></a>为什么要有同源策略</h4><ul>
 <li>本质上是浏览器有cookie这么个玩意，比如移动端app就没有同源限制</li>
 <li>防止CSRF攻击</li>
 </ul>
 <span id="more"></span>
 
-<h3 id="如何解决跨域问题"><a href="#如何解决跨域问题" class="headerlink" title="如何解决跨域问题"></a>如何解决跨域问题</h3><h4 id="jsonp"><a href="#jsonp" class="headerlink" title="jsonp"></a>jsonp</h4><p><strong>jsonp</strong>的原理就是利用<code>&lt;script&gt;</code>标签没有跨域限制，通过<code>&lt;script&gt;</code>标签src属性，发送带有callback参数的GET请求，服务端将接口返回数据拼凑到callback函数中，返回给浏览器，浏览器解析执行，从而前端拿到callback函数返回的数据。</p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">createScriptTag</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> script = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&#x27;script&#x27;</span>);</span><br><span class="line">  script.<span class="property">type</span> = <span class="string">&#x27;text/javascript&#x27;</span>;</span><br><span class="line">  <span class="comment">// 设置请求的URL，假设服务端接口为http://example.com/api/data，同时指定回调函数名为handleData</span></span><br><span class="line">  script.<span class="property">src</span> = <span class="string">&#x27;http://example.com/api/data?callback=handleData&#x27;</span>;</span><br><span class="line">  <span class="variable language_">document</span>.<span class="property">body</span>.<span class="title function_">appendChild</span>(script);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义回调函数</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">handleData</span>(<span class="params">data</span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(data);</span><br><span class="line">  <span class="comment">// 在这里可以对返回的JSON数据进行处理，如更新页面内容等</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>服务器会返回一个函数调用，类似于 <code>handleData(&#123;&quot;data&quot;: &quot;value&quot;&#125;)</code> 的内容</p>
-<h4 id="cors"><a href="#cors" class="headerlink" title="cors"></a>cors</h4><p>| 本质上是通过服务端来允许<br>配置受信任的域名，允许受信任域名的跨域请求</p>
-<h5 id="简单请求"><a href="#简单请求" class="headerlink" title="简单请求"></a>简单请求</h5><h5 id="非简单请求"><a href="#非简单请求" class="headerlink" title="非简单请求"></a>非简单请求</h5><h4 id="服务器代理"><a href="#服务器代理" class="headerlink" title="服务器代理"></a>服务器代理</h4><ul>
+<h4 id="如何解决跨域问题"><a href="#如何解决跨域问题" class="headerlink" title="如何解决跨域问题"></a>如何解决跨域问题</h4><h5 id="服务器代理"><a href="#服务器代理" class="headerlink" title="服务器代理"></a>服务器代理</h5><ul>
 <li>开发环境webpack-dev-server</li>
 <li>生产环境nginx代理服务器部署在同源域名下，转发请求到对应的服务器上（当时配置：某个域名下的某个路径，关联到后端appkey上）</li>
 </ul>
-
+<h5 id="JSONP"><a href="#JSONP" class="headerlink" title="JSONP"></a>JSONP</h5><p><strong>jsonp</strong>的原理就是利用<code>&lt;script&gt;</code>标签没有跨域限制，通过<code>&lt;script&gt;</code>标签src属性，发送带有callback参数的GET请求，服务端将接口返回数据拼凑到callback函数中，返回给浏览器，浏览器解析执行，从而前端拿到callback函数返回的数据。</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">createScriptTag</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> script = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&#x27;script&#x27;</span>);</span><br><span class="line">  script.<span class="property">type</span> = <span class="string">&#x27;text/javascript&#x27;</span>;</span><br><span class="line">  <span class="comment">// 设置请求的URL，假设服务端接口为http://example.com/api/data，同时指定回调函数名为handleData</span></span><br><span class="line">  script.<span class="property">src</span> = <span class="string">&#x27;http://example.com/api/data?callback=handleData&#x27;</span>;</span><br><span class="line">  <span class="variable language_">document</span>.<span class="property">body</span>.<span class="title function_">appendChild</span>(script);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义回调函数</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">handleData</span>(<span class="params">data</span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(data);</span><br><span class="line">  <span class="comment">// 在这里可以对返回的JSON数据进行处理，如更新页面内容等</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>服务器会返回一个函数调用，类似于 <code>handleData(&#123;&quot;data&quot;: &quot;value&quot;&#125;)</code> 的内容</p>
+<h5 id="CORS"><a href="#CORS" class="headerlink" title="CORS"></a>CORS</h5><p>| 本质上是通过服务端来允许<br>配置受信任的域名，允许受信任域名的跨域请求</p>
+<h6 id="简单请求"><a href="#简单请求" class="headerlink" title="简单请求"></a>简单请求</h6><h6 id="非简单请求"><a href="#非简单请求" class="headerlink" title="非简单请求"></a>非简单请求</h6>
     </div>
 
     
@@ -295,13 +297,13 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2024/12/30/JS%20API/" rel="prev" title="JavaScript API">
-                  <i class="fa fa-angle-left"></i> JavaScript API
+                <a href="/2021/09/20/HTTP/" rel="prev" title="HTTP">
+                  <i class="fa fa-angle-left"></i> HTTP
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2025/01/12/%E5%89%8D%E7%AB%AF%E5%AE%89%E5%85%A8%E7%9B%B8%E5%85%B3/" rel="next" title="前端安全相关">
-                  前端安全相关 <i class="fa fa-angle-right"></i>
+                <a href="/2021/09/29/React%E5%8E%9F%E7%90%86/" rel="next" title="React原理">
+                  React原理 <i class="fa fa-angle-right"></i>
                 </a>
             </div>
           </div>
@@ -339,7 +341,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">2:34</span>
+    <span title="站点阅读时长">2:33</span>
   </span>
 </div>
 

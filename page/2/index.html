@@ -195,111 +195,6 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/08/27/%E3%80%90%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E3%80%91%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%9B%B8%E5%85%B3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/73687768?v=4">
-      <meta itemprop="name" content="Huangyuntse">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Huangyuntse">
-      <meta itemprop="description" content="也无风雨也无晴">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Huangyuntse">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/08/27/%E3%80%90%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E3%80%91%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%9B%B8%E5%85%B3/" class="post-title-link" itemprop="url">【前端面试】工程化相关</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2024-08-27 10:00:00" itemprop="dateCreated datePublished" datetime="2024-08-27T10:00:00+08:00">2024-08-27</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">前端面试</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>1.1k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>4 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="包管理器"><a href="#包管理器" class="headerlink" title="包管理器"></a>包管理器</h2><h3 id="Pnpm是怎么解决幽灵依赖的"><a href="#Pnpm是怎么解决幽灵依赖的" class="headerlink" title="Pnpm是怎么解决幽灵依赖的"></a>Pnpm是怎么解决幽灵依赖的</h3><p>hard link + symbolic link</p>
-<h3 id="如何确定一个项目用的包管理器版本：enigne字段"><a href="#如何确定一个项目用的包管理器版本：enigne字段" class="headerlink" title="如何确定一个项目用的包管理器版本：enigne字段"></a>如何确定一个项目用的包管理器版本：enigne字段</h3><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">&quot;engines&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;node&quot;</span><span class="punctuation">:</span> <span class="string">&quot;&gt;=14.0.0&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;npm&quot;</span><span class="punctuation">:</span> <span class="string">&quot;&gt;=7.0.0&quot;</span>  <span class="comment">// 项目要求的 npm 最低版本</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="如何避免业务项目被发到npm上"><a href="#如何避免业务项目被发到npm上" class="headerlink" title="如何避免业务项目被发到npm上"></a>如何避免业务项目被发到npm上</h3><h4 id="在-package-json-中添加-private-字段"><a href="#在-package-json-中添加-private-字段" class="headerlink" title="在 package.json 中添加 private 字段"></a>在 package.json 中添加 private 字段</h4><p>在项目的 package.json 文件中添加 private: true 字段，这是最直接的方式。当 private 为 true 时，npm 会拒绝发布该项目。</p>
-<h4 id="使用-npmignore-或-gitignore-文件"><a href="#使用-npmignore-或-gitignore-文件" class="headerlink" title="使用 .npmignore 或 .gitignore 文件"></a>使用 .npmignore 或 .gitignore 文件</h4><p>将项目中的所有文件添加到忽略列表，确保没有文件被发布。.npmignore 会覆盖 .gitignore 的规则。</p>
-<h4 id="设置预发布钩子"><a href="#设置预发布钩子" class="headerlink" title="设置预发布钩子"></a>设置预发布钩子</h4><p>在 package.json 中添加 prepublishOnly 脚本，使其在发布前失败：</p>
-<h4 id="使用-npmrc-文件锁定发布源"><a href="#使用-npmrc-文件锁定发布源" class="headerlink" title="使用 .npmrc 文件锁定发布源"></a>使用 .npmrc 文件锁定发布源</h4><p>在项目根目录创建 .npmrc 文件，设置为私有源或无效源：</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2024/08/27/%E3%80%90%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E3%80%91%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%9B%B8%E5%85%B3/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="http://example.com/2024/08/27/%E3%80%90%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E3%80%91%E5%9C%BA%E6%99%AF%E9%A2%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -369,8 +264,113 @@
     <p><b>记录面试中遇到一些比较有意思的场景题</b></p>
 </blockquote>
 
-<h2 id="虚拟滚动是如何去实现的（长列表，大表格）"><a href="#虚拟滚动是如何去实现的（长列表，大表格）" class="headerlink" title="虚拟滚动是如何去实现的（长列表，大表格）"></a>虚拟滚动是如何去实现的（长列表，大表格）</h2><p>1、监听滚轮事件&#x2F;触摸事件，记录列表的总偏移量。<br>2、根据总偏移量计算列表的可视元素起始索引。<br>3、从起始索引渲染元素至视口底部。<br>4、当总偏移量更新时，重新渲染可视元素列表。<br>5、为可视元素列表前后加入缓冲元素。<br>6、在滚动量比较小时，直接修改可视元素列表的偏移量。<br>7、在滚动量比较大时（比如拖动滚动条），会重新渲染整个列表。<br>事件节流。</p>
+<h4 id="虚拟滚动是如何去实现的（长列表，大表格）"><a href="#虚拟滚动是如何去实现的（长列表，大表格）" class="headerlink" title="虚拟滚动是如何去实现的（长列表，大表格）"></a>虚拟滚动是如何去实现的（长列表，大表格）</h4><p>1、监听滚轮事件&#x2F;触摸事件，记录列表的总偏移量。<br>2、根据总偏移量计算列表的可视元素起始索引。<br>3、从起始索引渲染元素至视口底部。<br>4、当总偏移量更新时，重新渲染可视元素列表。<br>5、为可视元素列表前后加入缓冲元素。<br>6、在滚动量比较小时，直接修改可视元素列表的偏移量。<br>7、在滚动量比较大时（比如拖动滚动条），会重新渲染整个列表。<br>事件节流。</p>
 
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/08/27/%E3%80%90%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E3%80%91%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%9B%B8%E5%85%B3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/73687768?v=4">
+      <meta itemprop="name" content="Huangyuntse">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Huangyuntse">
+      <meta itemprop="description" content="也无风雨也无晴">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Huangyuntse">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/08/27/%E3%80%90%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E3%80%91%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%9B%B8%E5%85%B3/" class="post-title-link" itemprop="url">【前端面试】工程化相关</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-08-27 10:00:00" itemprop="dateCreated datePublished" datetime="2024-08-27T10:00:00+08:00">2024-08-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">前端面试</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.1k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>4 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h4 id="包管理器"><a href="#包管理器" class="headerlink" title="包管理器"></a>包管理器</h4><h5 id="Pnpm是怎么解决幽灵依赖的"><a href="#Pnpm是怎么解决幽灵依赖的" class="headerlink" title="Pnpm是怎么解决幽灵依赖的"></a>Pnpm是怎么解决幽灵依赖的</h5><p>hard link + symbolic link</p>
+<h5 id="如何确定一个项目用的包管理器版本：enigne字段"><a href="#如何确定一个项目用的包管理器版本：enigne字段" class="headerlink" title="如何确定一个项目用的包管理器版本：enigne字段"></a>如何确定一个项目用的包管理器版本：enigne字段</h5><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">&quot;engines&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;node&quot;</span><span class="punctuation">:</span> <span class="string">&quot;&gt;=14.0.0&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;npm&quot;</span><span class="punctuation">:</span> <span class="string">&quot;&gt;=7.0.0&quot;</span>  <span class="comment">// 项目要求的 npm 最低版本</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="如何避免业务项目被发到npm上"><a href="#如何避免业务项目被发到npm上" class="headerlink" title="如何避免业务项目被发到npm上"></a>如何避免业务项目被发到npm上</h5><h5 id="在-package-json-中添加-private-字段"><a href="#在-package-json-中添加-private-字段" class="headerlink" title="在 package.json 中添加 private 字段"></a>在 package.json 中添加 private 字段</h5><p>在项目的 package.json 文件中添加 private: true 字段，这是最直接的方式。当 private 为 true 时，npm 会拒绝发布该项目。</p>
+<h5 id="使用-npmignore-或-gitignore-文件"><a href="#使用-npmignore-或-gitignore-文件" class="headerlink" title="使用 .npmignore 或 .gitignore 文件"></a>使用 .npmignore 或 .gitignore 文件</h5><p>将项目中的所有文件添加到忽略列表，确保没有文件被发布。.npmignore 会覆盖 .gitignore 的规则。</p>
+<h5 id="设置预发布钩子"><a href="#设置预发布钩子" class="headerlink" title="设置预发布钩子"></a>设置预发布钩子</h5><p>在 package.json 中添加 prepublishOnly 脚本，使其在发布前失败：</p>
+<h5 id="使用-npmrc-文件锁定发布源"><a href="#使用-npmrc-文件锁定发布源" class="headerlink" title="使用 .npmrc 文件锁定发布源"></a>使用 .npmrc 文件锁定发布源</h5><p>在项目根目录创建 .npmrc 文件，设置为私有源或无效源：</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/08/27/%E3%80%90%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E3%80%91%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%9B%B8%E5%85%B3/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -443,7 +443,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>798</span>
+      <span>797</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -461,7 +461,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="React"><a href="#React" class="headerlink" title="React"></a>React</h2><h3 id="React有哪些hooks"><a href="#React有哪些hooks" class="headerlink" title="React有哪些hooks"></a>React有哪些hooks</h3><ul>
+          <h4 id="React有哪些hooks"><a href="#React有哪些hooks" class="headerlink" title="React有哪些hooks"></a>React有哪些hooks</h4><ul>
 <li>useState</li>
 <li>useEffect</li>
 <li>useRef</li>
@@ -475,11 +475,11 @@
 <li>useDebugValue</li>
 <li>useDeferredValue</li>
 </ul>
-<h3 id="useLayoutEffect和useEffect的区别"><a href="#useLayoutEffect和useEffect的区别" class="headerlink" title="useLayoutEffect和useEffect的区别"></a>useLayoutEffect和useEffect的区别</h3><p><strong>useEffect</strong>：异步执行，在浏览器完成渲染后（页面已绘制）<br><strong>useLayoutEffect</strong>：同步执行，在 DOM 更新后、浏览器绘制前（用户不可见），适用于需要读取 DOM 布局或强制同步更新的场景（如测量 DOM、修改样式）。</p>
-<h3 id="如何借助interSectionObserver实现一个dom可见性的自定义hook"><a href="#如何借助interSectionObserver实现一个dom可见性的自定义hook" class="headerlink" title="如何借助interSectionObserver实现一个dom可见性的自定义hook"></a>如何借助interSectionObserver实现一个dom可见性的自定义hook</h3><p>有一个关键点是Ref的更新在useEffect执行前</p>
+<h4 id="useLayoutEffect和useEffect的区别"><a href="#useLayoutEffect和useEffect的区别" class="headerlink" title="useLayoutEffect和useEffect的区别"></a>useLayoutEffect和useEffect的区别</h4><p><strong>useEffect</strong>：异步执行，在浏览器完成渲染后（页面已绘制）<br><strong>useLayoutEffect</strong>：同步执行，在 DOM 更新后、浏览器绘制前（用户不可见），适用于需要读取 DOM 布局或强制同步更新的场景（如测量 DOM、修改样式）。</p>
+<h4 id="如何借助interSectionObserver实现一个dom可见性的自定义hook"><a href="#如何借助interSectionObserver实现一个dom可见性的自定义hook" class="headerlink" title="如何借助interSectionObserver实现一个dom可见性的自定义hook"></a>如何借助interSectionObserver实现一个dom可见性的自定义hook</h4><p>有一个关键点是Ref的更新在useEffect执行前</p>
 <figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; useEffect, useState, useRef &#125; <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="title function_">useInView</span> = (<span class="params"></span></span><br><span class="line"><span class="params">    options = &#123;</span></span><br><span class="line"><span class="params">        root: <span class="literal">null</span>,</span></span><br><span class="line"><span class="params">        rootMargin: <span class="string">&#x27;0px 0px&#x27;</span>,</span></span><br><span class="line"><span class="params">        threshold: <span class="number">1</span>,</span></span><br><span class="line"><span class="params">    &#125;,</span></span><br><span class="line"><span class="params">    triggerOnce = <span class="literal">false</span>, <span class="comment">// 是否只触发一次</span></span></span><br><span class="line"><span class="params"></span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">const</span> [inView, setInView] = <span class="title function_">useState</span>(<span class="literal">false</span>);</span><br><span class="line">    <span class="keyword">const</span> targetRef = <span class="title function_">useRef</span>(<span class="literal">null</span>);</span><br><span class="line"></span><br><span class="line">    <span class="title function_">useEffect</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> observer = <span class="keyword">new</span> <span class="title class_">IntersectionObserver</span>(<span class="function">(<span class="params">entries</span>) =&gt;</span> &#123;</span><br><span class="line">            entries.<span class="title function_">forEach</span>(<span class="function">(<span class="params">entry</span>) =&gt;</span> &#123;</span><br><span class="line">                <span class="keyword">if</span> (entry.<span class="property">isIntersecting</span>) &#123;</span><br><span class="line">                    <span class="title function_">setInView</span>(<span class="literal">true</span>);</span><br><span class="line">                    <span class="keyword">if</span> (triggerOnce) &#123;</span><br><span class="line">                        <span class="comment">// 触发一次后结束监听</span></span><br><span class="line">                        observer.<span class="title function_">unobserve</span>(entry.<span class="property">target</span>);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="title function_">setInView</span>(<span class="literal">false</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;, options);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (targetRef.<span class="property">current</span>) &#123;</span><br><span class="line">            <span class="comment">// 开始监听</span></span><br><span class="line">            observer.<span class="title function_">observe</span>(targetRef.<span class="property">current</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="function">() =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (targetRef.<span class="property">current</span>) &#123;</span><br><span class="line">                <span class="comment">// 组件卸载时结束监听</span></span><br><span class="line">                observer.<span class="title function_">unobserve</span>(targetRef.<span class="property">current</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;, [options, triggerOnce]);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> [targetRef, inView];</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> useInView;</span><br></pre></td></tr></table></figure>
 
-<h3 id="useEffect-中如何使用-async-await"><a href="#useEffect-中如何使用-async-await" class="headerlink" title="useEffect 中如何使用 async&#x2F;await"></a>useEffect 中如何使用 async&#x2F;await</h3><ol>
+<h4 id="useEffect-中如何使用-async-await"><a href="#useEffect-中如何使用-async-await" class="headerlink" title="useEffect 中如何使用 async&#x2F;await"></a>useEffect 中如何使用 async&#x2F;await</h4><ol>
 <li>async函数抽离到外部 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">fetchMyAPI</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">let</span> response = <span class="keyword">await</span> <span class="title function_">fetch</span>(<span class="string">&quot;api/data&quot;</span>);</span><br><span class="line">  response = <span class="keyword">await</span> res.<span class="title function_">json</span>();</span><br><span class="line">  å<span class="title function_">dataSet</span>(response);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">useEffect</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="title function_">fetchMyAPI</span>();</span><br><span class="line">&#125;, []);</span><br></pre></td></tr></table></figure></li>
 </ol>
           <!--noindex-->
@@ -562,7 +562,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>152</span>
+      <span>151</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -580,7 +580,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="JavaScript"><a href="#JavaScript" class="headerlink" title="JavaScript"></a>JavaScript</h2><h3 id="let、const的区别"><a href="#let、const的区别" class="headerlink" title="let、const的区别"></a>let、const的区别</h3><ul>
+          <h4 id="let、const的区别"><a href="#let、const的区别" class="headerlink" title="let、const的区别"></a>let、const的区别</h4><ul>
 <li>块级作用域</li>
 <li>重复声明变量会报错</li>
 <li>不能在声明前访问</li>
@@ -636,7 +636,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/08/21/%E3%80%90%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E3%80%91%E4%BB%A3%E7%A0%81%E7%BC%96%E7%A8%8B%E9%A2%98/" class="post-title-link" itemprop="url">【前端面试】代码编程题</a>
+          <a href="/2024/08/21/%E3%80%90%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E3%80%91%E4%BB%A3%E7%A0%81%E7%BC%96%E7%A8%8B%E9%A2%98/" class="post-title-link" itemprop="url">【前端面试】JavaScript Coding练习</a>
         </h2>
 
         <div class="post-meta-container">
@@ -665,7 +665,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>926</span>
+      <span>897</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -683,7 +683,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="JavaScript-Coding"><a href="#JavaScript-Coding" class="headerlink" title="JavaScript Coding"></a>JavaScript Coding</h2><h3 id="数组去重方法"><a href="#数组去重方法" class="headerlink" title="数组去重方法"></a>数组去重方法</h3><h3 id="对象拷贝方法"><a href="#对象拷贝方法" class="headerlink" title="对象拷贝方法"></a>对象拷贝方法</h3><h3 id="数组交集、并集、差集"><a href="#数组交集、并集、差集" class="headerlink" title="数组交集、并集、差集"></a>数组交集、并集、差集</h3><h3 id="数组扁平"><a href="#数组扁平" class="headerlink" title="数组扁平"></a>数组扁平</h3>
+          <h4 id="数组去重方法"><a href="#数组去重方法" class="headerlink" title="数组去重方法"></a>数组去重方法</h4><h4 id="对象拷贝方法"><a href="#对象拷贝方法" class="headerlink" title="对象拷贝方法"></a>对象拷贝方法</h4><h4 id="数组交集、并集、差集"><a href="#数组交集、并集、差集" class="headerlink" title="数组交集、并集、差集"></a>数组交集、并集、差集</h4><h4 id="数组扁平"><a href="#数组扁平" class="headerlink" title="数组扁平"></a>数组扁平</h4>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2024/08/21/%E3%80%90%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E3%80%91%E4%BB%A3%E7%A0%81%E7%BC%96%E7%A8%8B%E9%A2%98/#more" rel="contents">
@@ -782,9 +782,9 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="计算机网络"><a href="#计算机网络" class="headerlink" title="计算机网络"></a>计算机网络</h2><h3 id="正向代理和反向代理"><a href="#正向代理和反向代理" class="headerlink" title="正向代理和反向代理"></a>正向代理和反向代理</h3><h4 id="正向代理"><a href="#正向代理" class="headerlink" title="正向代理"></a>正向代理</h4><p>正向代理是代理客户端，服务器无法感知客户端，客户端的请求都发往代理服务器，代理服务器替客户端发送请求给服务器，并把服务器响应的数据返回给客户端</p>
+          <h4 id="计算机网络"><a href="#计算机网络" class="headerlink" title="计算机网络"></a>计算机网络</h4><h5 id="正向代理和反向代理"><a href="#正向代理和反向代理" class="headerlink" title="正向代理和反向代理"></a>正向代理和反向代理</h5><h6 id="正向代理"><a href="#正向代理" class="headerlink" title="正向代理"></a>正向代理</h6><p>正向代理是代理客户端，服务器无法感知客户端，客户端的请求都发往代理服务器，代理服务器替客户端发送请求给服务器，并把服务器响应的数据返回给客户端</p>
 <p>应用：翻墙，接口转发实现跨域</p>
-<h4 id="反向代理"><a href="#反向代理" class="headerlink" title="反向代理"></a>反向代理</h4><p>反向代理是代理服务器，客户端无法感知服务器</p>
+<h6 id="反向代理"><a href="#反向代理" class="headerlink" title="反向代理"></a>反向代理</h6><p>反向代理是代理服务器，客户端无法感知服务器</p>
 <p>应用：负载均衡</p>
           <!--noindex-->
             <div class="post-button">
@@ -884,12 +884,11 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h3 id="Webpack-是什么"><a href="#Webpack-是什么" class="headerlink" title="Webpack 是什么"></a>Webpack 是什么</h3><p>webpack 是一种<strong>前端资源构建工具</strong>，一个静态模块打包器(module bundler)。</p>
-<p>在webpack 看来, 前端的所有资源文件(js&#x2F;json&#x2F;css&#x2F;img&#x2F;less&#x2F;…)都会作为模块处理。<br>它将根据模块的依赖关系进行静态分析，打包生成对应的静态资源(bundle)。</p>
-<h3 id="Webpack-五个核心概念"><a href="#Webpack-五个核心概念" class="headerlink" title="Webpack 五个核心概念"></a>Webpack 五个核心概念</h3><h4 id="Entry"><a href="#Entry" class="headerlink" title="Entry"></a>Entry</h4><p>入口(Entry)：指示 webpack 以哪个文件为入口起点开始打包，分析构建内部依赖图。</p>
-<h4 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h4><p>输出(Output)：指示 webpack 打包后的资源 bundles 输出到哪里去，以及如何命名。</p>
-<h4 id="Loader"><a href="#Loader" class="headerlink" title="Loader"></a>Loader</h4><p>Loader：让 webpack 能够去处理那些非 JS 的文件，比如样式文件、图片文件(webpack 自身只理解<br>JS)</p>
-<h4 id="Plugins"><a href="#Plugins" class="headerlink" title="Plugins"></a>Plugins</h4><p>插件(Plugins)：可以用于执行范围更广的任务。插件的范围包括，从打包优化和压缩，<br>一直到重新定义环境中的变量等。</p>
+          <h4 id="Webpack-是什么"><a href="#Webpack-是什么" class="headerlink" title="Webpack 是什么"></a>Webpack 是什么</h4><p>webpack 是一种<strong>前端资源构建工具</strong>，一个静态模块打包器(module bundler)。<br>在webpack 看来, 前端的所有资源文件(js&#x2F;json&#x2F;css&#x2F;img&#x2F;less&#x2F;…)都会作为模块处理。<br>它将根据模块的依赖关系进行静态分析，打包生成对应的静态资源(bundle)。</p>
+<h4 id="Webpack-五个核心概念"><a href="#Webpack-五个核心概念" class="headerlink" title="Webpack 五个核心概念"></a>Webpack 五个核心概念</h4><h5 id="Entry"><a href="#Entry" class="headerlink" title="Entry"></a>Entry</h5><p>入口(Entry)：指示 webpack 以哪个文件为入口起点开始打包，分析构建内部依赖图。</p>
+<h5 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h5><p>输出(Output)：指示 webpack 打包后的资源 bundles 输出到哪里去，以及如何命名。</p>
+<h5 id="Loader"><a href="#Loader" class="headerlink" title="Loader"></a>Loader</h5><p>Loader：让 webpack 能够去处理那些非 JS 的文件，比如样式文件、图片文件(webpack 自身只理解<br>JS)</p>
+<h5 id="Plugins"><a href="#Plugins" class="headerlink" title="Plugins"></a>Plugins</h5><p>插件(Plugins)：可以用于执行范围更广的任务。插件的范围包括，从打包优化和压缩，<br>一直到重新定义环境中的变量等。</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2022/04/14/Webpack/#more" rel="contents">
@@ -1271,7 +1270,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">2:34</span>
+    <span title="站点阅读时长">2:33</span>
   </span>
 </div>
 

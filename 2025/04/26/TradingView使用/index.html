@@ -19,16 +19,16 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.21.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="TradingView 自定义Plugin使用结合官方文档：https:&#x2F;&#x2F;tradingview.github.io&#x2F;lightweight-charts&#x2F;docs&#x2F;plugins&#x2F;intro 食用代码见：tradingview示例：K线图绘制图片 1. Series Primitives 生命周期 attached：添加到图表时触发，附加方法通过一个参数调用，该参数包含图表、系列以及用于请求更">
+    <meta name="description" content="结合官方文档：https:&#x2F;&#x2F;tradingview.github.io&#x2F;lightweight-charts&#x2F;docs&#x2F;plugins&#x2F;intro 食用代码见：tradingview示例：K线图绘制图片 Series Primitives生命周期 attached：添加到图表时触发，附加方法通过一个参数调用，该参数包含图表、系列以及用于请求更新的回调函数 detached：移除图表时触发">
 <meta property="og:type" content="article">
-<meta property="og:title" content="TradingView使用">
+<meta property="og:title" content="TradingView自定义Plugin使用">
 <meta property="og:url" content="http://example.com/2025/04/26/TradingView%E4%BD%BF%E7%94%A8/index.html">
 <meta property="og:site_name" content="Huangyuntse">
-<meta property="og:description" content="TradingView 自定义Plugin使用结合官方文档：https:&#x2F;&#x2F;tradingview.github.io&#x2F;lightweight-charts&#x2F;docs&#x2F;plugins&#x2F;intro 食用代码见：tradingview示例：K线图绘制图片 1. Series Primitives 生命周期 attached：添加到图表时触发，附加方法通过一个参数调用，该参数包含图表、系列以及用于请求更">
+<meta property="og:description" content="结合官方文档：https:&#x2F;&#x2F;tradingview.github.io&#x2F;lightweight-charts&#x2F;docs&#x2F;plugins&#x2F;intro 食用代码见：tradingview示例：K线图绘制图片 Series Primitives生命周期 attached：添加到图表时触发，附加方法通过一个参数调用，该参数包含图表、系列以及用于请求更新的回调函数 detached：移除图表时触发">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/assets/trading-view-plugin-demo.png">
 <meta property="article:published_time" content="2025-04-26T02:00:00.000Z">
-<meta property="article:modified_time" content="2025-06-22T06:58:44.406Z">
+<meta property="article:modified_time" content="2025-06-22T09:56:05.967Z">
 <meta property="article:author" content="Huangyuntse">
 <meta property="article:tag" content="工程化">
 <meta property="article:tag" content="前端">
@@ -40,10 +40,10 @@
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2025/04/26/TradingView%E4%BD%BF%E7%94%A8/","path":"2025/04/26/TradingView使用/","title":"TradingView使用"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2025/04/26/TradingView%E4%BD%BF%E7%94%A8/","path":"2025/04/26/TradingView使用/","title":"TradingView自定义Plugin使用"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>TradingView使用 | Huangyuntse</title>
+<title>TradingView自定义Plugin使用 | Huangyuntse</title>
   
 
 
@@ -142,7 +142,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#TradingView-%E8%87%AA%E5%AE%9A%E4%B9%89Plugin%E4%BD%BF%E7%94%A8"><span class="nav-number">1.</span> <span class="nav-text">TradingView 自定义Plugin使用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Series-Primitives"><span class="nav-number">1.0.1.</span> <span class="nav-text">1. Series Primitives</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Views"><span class="nav-number">1.0.2.</span> <span class="nav-text">2. Views</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-Renderer"><span class="nav-number">1.0.3.</span> <span class="nav-text">3. Renderer</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CanvasRenderingTarget2D"><span class="nav-number">1.0.4.</span> <span class="nav-text">CanvasRenderingTarget2D</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#useMediaCoordinateSpace%E5%92%8CuseBitmapCoordinateSpace%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.0.5.</span> <span class="nav-text">useMediaCoordinateSpace和useBitmapCoordinateSpace的区别</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89Plugin%E5%AE%9E%E8%B7%B5-k%E7%BA%BF%E5%9B%BE%E4%B8%8A%E7%BB%98%E5%88%B6%E7%94%A8%E6%88%B7%E5%A4%B4%E5%83%8F"><span class="nav-number">1.1.</span> <span class="nav-text">自定义Plugin实践 - k线图上绘制用户头像</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Series-Primitives"><span class="nav-number">1.</span> <span class="nav-text">Series Primitives</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="nav-number">1.1.</span> <span class="nav-text">生命周期</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9B%B4%E6%96%B0%E8%A7%86%E5%9B%BE"><span class="nav-number">1.2.</span> <span class="nav-text">更新视图</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Views"><span class="nav-number">2.</span> <span class="nav-text">Views</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Renderer"><span class="nav-number">3.</span> <span class="nav-text">Renderer</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#CanvasRenderingTarget2D"><span class="nav-number">3.1.</span> <span class="nav-text">CanvasRenderingTarget2D</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#useMediaCoordinateSpace%E5%92%8CuseBitmapCoordinateSpace%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">3.2.</span> <span class="nav-text">useMediaCoordinateSpace和useBitmapCoordinateSpace的区别</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89Plugin%E5%AE%9E%E8%B7%B5-k%E7%BA%BF%E5%9B%BE%E4%B8%8A%E7%BB%98%E5%88%B6%E7%94%A8%E6%88%B7%E5%A4%B4%E5%83%8F"><span class="nav-number">4.</span> <span class="nav-text">自定义Plugin实践 - k线图上绘制用户头像</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -216,12 +216,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="TradingView使用 | Huangyuntse">
+      <meta itemprop="name" content="TradingView自定义Plugin使用 | Huangyuntse">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          TradingView使用
+          TradingView自定义Plugin使用
         </h1>
 
         <div class="post-meta-container">
@@ -250,7 +250,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>499</span>
+      <span>489</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -267,18 +267,14 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><h2 id="TradingView-自定义Plugin使用"><a href="#TradingView-自定义Plugin使用" class="headerlink" title="TradingView 自定义Plugin使用"></a>TradingView 自定义Plugin使用</h2><p>结合官方文档：<a target="_blank" rel="noopener" href="https://tradingview.github.io/lightweight-charts/docs/plugins/intro">https://tradingview.github.io/lightweight-charts/docs/plugins/intro</a> 食用<br>代码见：<a target="_blank" rel="noopener" href="https://github.com/huangyunt/Learning-Demo/tree/master/tradingview%E7%A4%BA%E4%BE%8B%EF%BC%9AK%E7%BA%BF%E5%9B%BE%E7%BB%98%E5%88%B6%E5%9B%BE%E7%89%87">tradingview示例：K线图绘制图片</a></p>
-<h4 id="1-Series-Primitives"><a href="#1-Series-Primitives" class="headerlink" title="1. Series Primitives"></a>1. Series Primitives</h4><ol>
-<li>生命周期<ul>
+    <div class="post-body" itemprop="articleBody"><p>结合官方文档：<a target="_blank" rel="noopener" href="https://tradingview.github.io/lightweight-charts/docs/plugins/intro">https://tradingview.github.io/lightweight-charts/docs/plugins/intro</a> 食用<br>代码见：<a target="_blank" rel="noopener" href="https://github.com/huangyunt/Learning-Demo/tree/master/tradingview%E7%A4%BA%E4%BE%8B%EF%BC%9AK%E7%BA%BF%E5%9B%BE%E7%BB%98%E5%88%B6%E5%9B%BE%E7%89%87">tradingview示例：K线图绘制图片</a></p>
+<h4 id="Series-Primitives"><a href="#Series-Primitives" class="headerlink" title="Series Primitives"></a>Series Primitives</h4><h5 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h5><ul>
 <li>attached：添加到图表时触发，附加方法通过一个参数调用，该参数包含图表、系列以及用于请求更新的回调函数</li>
 <li>detached：移除图表时触发</li>
 </ul>
-</li>
-<li>更新视图<br>原语应该在方法中更新视图 updateAllViews()，以便渲染器被调用时，它们能够使用最新信息进行绘制。当库需要更新和重绘图表时，它会调用此方法。如果想通知库应该触发更新，可以使用requestUpdate附加生命周期方法提供的回调。</li>
-</ol>
 <span id="more"></span>
 
-
+<h5 id="更新视图"><a href="#更新视图" class="headerlink" title="更新视图"></a>更新视图</h5><p>原语应该在方法中更新视图 updateAllViews()，以便渲染器被调用时，它们能够使用最新信息进行绘制。当库需要更新和重绘图表时，它会调用此方法。如果想通知库应该触发更新，可以使用requestUpdate附加生命周期方法提供的回调。</p>
 <p>该接口会调用一下getter来绘制视图</p>
 <ul>
 <li>paneViews</li>
@@ -287,14 +283,10 @@
 <li>priceAxisViews</li>
 <li>timeAxisViews</li>
 </ul>
-<h4 id="2-Views"><a href="#2-Views" class="headerlink" title="2. Views"></a>2. Views</h4><p>该接口可用于定义一个视图，该视图提供一个渲染器（实现该 接口），以便使用CanvasRenderingContext2DIPrimitivePaneRenderer API 在图表的相应区域进行绘制 </p>
-<h4 id="3-Renderer"><a href="#3-Renderer" class="headerlink" title="3. Renderer"></a>3. Renderer</h4><ul>
-<li>draw方法<br>渲染器提供了一个接口，在该接口上应执行CanvasRenderingTarget2D绘图逻辑（使用 浏览器的 2D Canvas API ）。由Fancy CanvasCanvasRenderingTarget2D库提供 。</li>
-</ul>
-<h4 id="CanvasRenderingTarget2D"><a href="#CanvasRenderingTarget2D" class="headerlink" title="CanvasRenderingTarget2D"></a>CanvasRenderingTarget2D</h4><p>CanvasRenderingTarget2D提供了两个可以使用的渲染范围：</p>
-<p>useMediaCoordinateSpace<br>useBitmapCoordinateSpace</p>
-<h4 id="useMediaCoordinateSpace和useBitmapCoordinateSpace的区别"><a href="#useMediaCoordinateSpace和useBitmapCoordinateSpace的区别" class="headerlink" title="useMediaCoordinateSpace和useBitmapCoordinateSpace的区别"></a>useMediaCoordinateSpace和useBitmapCoordinateSpace的区别</h4><ul>
-<li><p>useBitmapCoordinateSpace如果您想使用实际设备像素作为坐标尺寸进行绘制，可以使用 。提供的范围（类型为 BitmapCoordinatesRenderingScope）包含以下只读值：</p>
+<h4 id="Views"><a href="#Views" class="headerlink" title="Views"></a>Views</h4><p>该接口可用于定义一个视图，该视图提供一个渲染器（实现该 接口），以便使用CanvasRenderingContext2D 和 IPrimitivePaneRenderer API 在图表的相应区域进行绘制 </p>
+<h4 id="Renderer"><a href="#Renderer" class="headerlink" title="Renderer"></a>Renderer</h4><p>draw方法：渲染器提供了一个接口，在该接口上应执行CanvasRenderingTarget2D绘图逻辑（使用 浏览器的 2D Canvas API ）。由Fancy CanvasCanvasRenderingTarget2D库提供 。</p>
+<h5 id="CanvasRenderingTarget2D"><a href="#CanvasRenderingTarget2D" class="headerlink" title="CanvasRenderingTarget2D"></a>CanvasRenderingTarget2D</h5><p>CanvasRenderingTarget2D提供了两个可以使用的渲染范围：<br>useMediaCoordinateSpace<br>useBitmapCoordinateSpace</p>
+<h5 id="useMediaCoordinateSpace和useBitmapCoordinateSpace的区别"><a href="#useMediaCoordinateSpace和useBitmapCoordinateSpace的区别" class="headerlink" title="useMediaCoordinateSpace和useBitmapCoordinateSpace的区别"></a>useMediaCoordinateSpace和useBitmapCoordinateSpace的区别</h5><p>useBitmapCoordinateSpace如果您想使用实际设备像素作为坐标尺寸进行绘制，可以使用 。提供的范围（类型为 BitmapCoordinatesRenderingScope）包含以下只读值：</p>
 <ul>
 <li>context （CanvasRenderingContext2D）。可用于渲染的上下文。</li>
 <li>horizontalPixelRatio（数字）</li>
@@ -302,15 +294,12 @@
 <li>bitmapSize（尺寸）。位图尺寸中画布的高度和宽度。</li>
 <li>mediaSize（尺寸）。画布在媒体尺寸中的高度和宽度。</li>
 </ul>
-</li>
-<li><p>useMediaCoordinateSpace如果您想使用媒体尺寸作为坐标大小进行绘制，可以使用 。提供的范围（类型为 MediaCoordinatesRenderingScope）包含以下只读值：</p>
+<p>useMediaCoordinateSpace如果您想使用媒体尺寸作为坐标大小进行绘制，可以使用 。提供的范围（类型为 MediaCoordinatesRenderingScope）包含以下只读值：</p>
 <ul>
 <li>context （CanvasRenderingContext2D）。可用于渲染的上下文。</li>
 <li>mediaSize（尺寸）。画布在媒体尺寸中的高度和宽度。</li>
 </ul>
-</li>
-</ul>
-<h3 id="自定义Plugin实践-k线图上绘制用户头像"><a href="#自定义Plugin实践-k线图上绘制用户头像" class="headerlink" title="自定义Plugin实践 - k线图上绘制用户头像"></a>自定义Plugin实践 - k线图上绘制用户头像</h3><p><img src="/../assets/trading-view-plugin-demo.png" alt="DEMO示例"></p>
+<h4 id="自定义Plugin实践-k线图上绘制用户头像"><a href="#自定义Plugin实践-k线图上绘制用户头像" class="headerlink" title="自定义Plugin实践 - k线图上绘制用户头像"></a>自定义Plugin实践 - k线图上绘制用户头像</h4><p><img src="/../assets/trading-view-plugin-demo.png" alt="DEMO示例"></p>
 
     </div>
 
@@ -372,7 +361,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">2:34</span>
+    <span title="站点阅读时长">2:33</span>
   </span>
 </div>
 

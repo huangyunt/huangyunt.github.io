@@ -242,7 +242,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>2k</span>
+      <span>2.1k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -260,17 +260,20 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="HTTP-有哪些常见状态码"><a href="#HTTP-有哪些常见状态码" class="headerlink" title="HTTP 有哪些常见状态码"></a>HTTP 有哪些常见状态码</h2><h3 id="2xx（成功状态码）"><a href="#2xx（成功状态码）" class="headerlink" title="2xx（成功状态码）"></a>2xx（成功状态码）</h3><h4 id="200-OK"><a href="#200-OK" class="headerlink" title="200 OK"></a>200 OK</h4><blockquote>
+          <blockquote>
+<p>HTTP相关，状态码，HTTP1&#x2F;2&#x2F;3、简单请求和非简单请求</p>
+</blockquote>
+<h3 id="HTTP-有哪些常见状态码"><a href="#HTTP-有哪些常见状态码" class="headerlink" title="HTTP 有哪些常见状态码"></a>HTTP 有哪些常见状态码</h3><h4 id="2xx（成功状态码）"><a href="#2xx（成功状态码）" class="headerlink" title="2xx（成功状态码）"></a>2xx（成功状态码）</h4><h5 id="200-OK"><a href="#200-OK" class="headerlink" title="200 OK"></a>200 OK</h5><blockquote>
 <p>请求成功，服务器已成功处理了客户端的请求，并返回了请求的内容。</p>
 </blockquote>
-<h3 id="3xx（重定向状态码）"><a href="#3xx（重定向状态码）" class="headerlink" title="3xx（重定向状态码）"></a>3xx（重定向状态码）</h3><h4 id="301-Moved-Permanently"><a href="#301-Moved-Permanently" class="headerlink" title="301 Moved Permanently"></a>301 Moved Permanently</h4><blockquote>
+<h4 id="3xx（重定向状态码）"><a href="#3xx（重定向状态码）" class="headerlink" title="3xx（重定向状态码）"></a>3xx（重定向状态码）</h4><h5 id="301-Moved-Permanently"><a href="#301-Moved-Permanently" class="headerlink" title="301 Moved Permanently"></a>301 Moved Permanently</h5><blockquote>
 <p>被请求的资源已永久移动到新位置，服务器返回这个状态码时，会在响应头的 Location 字段给出资源的新 URL。搜索引擎会更新其索引中的链接。</p>
 </blockquote>
 <p>应用场景：如果一个网站更改了页面的 URL 结构，希望将旧的 URL 永久重定向到新的 URL</p>
-<h4 id="302-Found"><a href="#302-Found" class="headerlink" title="302 Found"></a>302 Found</h4><blockquote>
+<h5 id="302-Found"><a href="#302-Found" class="headerlink" title="302 Found"></a>302 Found</h5><blockquote>
 <p>表示请求的资源临时移动到了新位置。与 301 不同的是，搜索引擎不会更新索引中的链接</p>
 </blockquote>
-<h4 id="304-Not-Modified"><a href="#304-Not-Modified" class="headerlink" title="304 Not Modified"></a>304 Not Modified</h4><blockquote>
+<h5 id="304-Not-Modified"><a href="#304-Not-Modified" class="headerlink" title="304 Not Modified"></a>304 Not Modified</h5><blockquote>
 <p>说明无需再次传输请求的内容，也就是说可以使用缓存的内容</p>
 </blockquote>
           <!--noindex-->
@@ -371,11 +374,11 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="HTTP缓存机制"><a href="#HTTP缓存机制" class="headerlink" title="HTTP缓存机制"></a>HTTP缓存机制</h2><h3 id="HTTP缓存过程"><a href="#HTTP缓存过程" class="headerlink" title="HTTP缓存过程"></a>HTTP缓存过程</h3><blockquote>
+          <h4 id="HTTP缓存过程"><a href="#HTTP缓存过程" class="headerlink" title="HTTP缓存过程"></a>HTTP缓存过程</h4><blockquote>
 <p>第一次发送请求 - 服务器响应，响应标头带上Cache-Control、Expires、ETag、Last-Modified<br>第二次发送请求 - 先根据Cache-Control、Expires判断强缓存是否失效，如果失效，If-None-Match中的上一次ETag和If-Modified-Since中的上一次Last-Modified来判断是否变更，如果没有变更，返回304让浏览器使用本地缓存</p>
 </blockquote>
 <p><img src="/../assets/HTTP%E7%BC%93%E5%AD%98%E8%BF%87%E7%A8%8B.png" alt="image-20210808204737157"></p>
-<h3 id="强缓存"><a href="#强缓存" class="headerlink" title="强缓存"></a>强缓存</h3><h4 id="Cache-Control"><a href="#Cache-Control" class="headerlink" title="Cache-Control"></a>Cache-Control</h4><blockquote>
+<h4 id="强缓存"><a href="#强缓存" class="headerlink" title="强缓存"></a>强缓存</h4><h5 id="Cache-Control"><a href="#Cache-Control" class="headerlink" title="Cache-Control"></a>Cache-Control</h5><blockquote>
 <p>Cache-Control 是 HTTP&#x2F;1.1 中新增的属性，在请求头和响应头中都可以使用，常用的属性值如有：</p>
 </blockquote>
 <ul>
@@ -386,21 +389,21 @@
 <li>public：响应可以被中间代理、CDN 等缓存</li>
 <li>must-revalidate：在缓存过期前可以使用，过期后必须向服务器验证</li>
 </ul>
-<h4 id="Expires"><a href="#Expires" class="headerlink" title="Expires"></a>Expires</h4><blockquote>
+<h5 id="Expires"><a href="#Expires" class="headerlink" title="Expires"></a>Expires</h5><blockquote>
 <p>Expires 的值是一个 HTTP 日期，在浏览器发起请求时，会根据系统时间和 Expires 的值进行比较，如果系统时间超过了 Expires 的值，缓存失效。</p>
 </blockquote>
 <p>由于和系统时间进行比较，所以当系统时间和服务器时间不一致的时候，会有缓存有效期不准的问题。Expires 的优先级在三个 Header 属性中是最低的。</p>
-<h3 id="协商缓存"><a href="#协商缓存" class="headerlink" title="协商缓存"></a>协商缓存</h3><blockquote>
+<h4 id="协商缓存"><a href="#协商缓存" class="headerlink" title="协商缓存"></a>协商缓存</h4><blockquote>
 <p>当浏览器的强缓存失效的时候或者请求头中设置了不走强缓存，并且在请求头中设置了If-Modified-Since 或者 If-None-Match 的时候，会将这两个属性值到服务端去验证是否命中协商缓存，如果命中了协商缓存，会返回 304 状态，加载浏览器缓存，并且响应头会设置 Last-Modified 或者 ETag 属性。</p>
 </blockquote>
-<h4 id="ETag-If-None-Match"><a href="#ETag-If-None-Match" class="headerlink" title="ETag&#x2F;If-None-Match"></a>ETag&#x2F;If-None-Match</h4><blockquote>
+<h5 id="ETag-If-None-Match"><a href="#ETag-If-None-Match" class="headerlink" title="ETag&#x2F;If-None-Match"></a>ETag&#x2F;If-None-Match</h5><blockquote>
 <p>ETag&#x2F;If-None-Match 的值是一串 hash 码，代表的是一个资源的标识符，当服务端的文件变化的时候，它的 hash码会随之改变</p>
 </blockquote>
-<h4 id="Last-Modified-If-Modified-Since"><a href="#Last-Modified-If-Modified-Since" class="headerlink" title="Last-Modified&#x2F;If-Modified-Since"></a>Last-Modified&#x2F;If-Modified-Since</h4><blockquote>
+<h5 id="Last-Modified-If-Modified-Since"><a href="#Last-Modified-If-Modified-Since" class="headerlink" title="Last-Modified&#x2F;If-Modified-Since"></a>Last-Modified&#x2F;If-Modified-Since</h5><blockquote>
 <p>Last-Modified&#x2F;If-Modified-Since 的值代表的是文件的最后修改时间</p>
 </blockquote>
-<h4 id="如何实现ETag？"><a href="#如何实现ETag？" class="headerlink" title="如何实现ETag？"></a>如何实现ETag？</h4><p>Nginx中ETag是如何实现的： 上次修改时间 + content-length</p>
-<h3 id="缓存策略"><a href="#缓存策略" class="headerlink" title="缓存策略"></a>缓存策略</h3><blockquote>
+<h5 id="如何实现ETag？"><a href="#如何实现ETag？" class="headerlink" title="如何实现ETag？"></a>如何实现ETag？</h5><p>Nginx中ETag是如何实现的： 上次修改时间 + content-length</p>
+<h4 id="缓存策略"><a href="#缓存策略" class="headerlink" title="缓存策略"></a>缓存策略</h4><blockquote>
 <p>题目：<a target="_blank" rel="noopener" href="https://q.shanyue.tech/fe/http/193">简述你们前端项目中资源的缓存配置策略</a><br>  题目：<a target="_blank" rel="noopener" href="https://q.shanyue.tech/fe/http/600">现代前端应用应如何配置 HTTP 缓存机制</a><br>  关于 http 缓存配置的最佳实践为以下两条：</p>
 </blockquote>
 <ul>
@@ -511,8 +514,8 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h3 id="为什么需要加密？"><a href="#为什么需要加密？" class="headerlink" title="为什么需要加密？"></a><strong>为什么需要加密？</strong></h3><p>因为http的内容是明文传输的，明文数据会经过中间代理服务器、路由器、wifi热点、通信服务运营商等多个物理节点，如果信息在传输过程中被劫持，传输的内容就完全暴露了。劫持者还可以篡改传输的信息且不被双方察觉，这就是“中间人攻击”。</p>
-<h3 id="用对称加密可行吗？"><a href="#用对称加密可行吗？" class="headerlink" title="用对称加密可行吗？"></a><strong>用对称加密可行吗？</strong></h3><p>对称加密最大的问题就是密钥的传输，而密钥的传输又需要加密（反复套娃），故而单纯的对称加密是无法解决问题的。</p>
+          <h4 id="为什么需要加密？"><a href="#为什么需要加密？" class="headerlink" title="为什么需要加密？"></a><strong>为什么需要加密？</strong></h4><p>因为http的内容是明文传输的，明文数据会经过中间代理服务器、路由器、wifi热点、通信服务运营商等多个物理节点，如果信息在传输过程中被劫持，传输的内容就完全暴露了。劫持者还可以篡改传输的信息且不被双方察觉，这就是“中间人攻击”。</p>
+<h4 id="用对称加密可行吗？"><a href="#用对称加密可行吗？" class="headerlink" title="用对称加密可行吗？"></a><strong>用对称加密可行吗？</strong></h4><p>对称加密最大的问题就是密钥的传输，而密钥的传输又需要加密（反复套娃），故而单纯的对称加密是无法解决问题的。</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2021/09/13/Https/#more" rel="contents">
@@ -1323,7 +1326,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">2:34</span>
+    <span title="站点阅读时长">2:33</span>
   </span>
 </div>
 

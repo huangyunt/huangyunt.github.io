@@ -242,14 +242,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>2.1k</span>
+      <span>2k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>8 分钟</span>
+      <span>7 分钟</span>
     </span>
 </div>
 
@@ -260,17 +260,18 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><ol>
+          <p>背景：</p>
+<ol>
 <li>希望利用 css 变量实现 dark 和 light 模式的切换</li>
 <li>原有的工程都是 less 形式定义的 css，并且还有 less 的函数，比如 fade 等，不想手动改 less 的函数，希望该插件能支持解析 less 函数</li>
 <li>需要支持局部不切换模式，比如某个区域是固定的 light 模式</li>
 </ol>
-<h1 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h1><h2 id="第一步：less-变量转换成-css-变量"><a href="#第一步：less-变量转换成-css-变量" class="headerlink" title="第一步：less 变量转换成 css 变量"></a>第一步：less 变量转换成 css 变量</h2><p>这一步比较简单，less 已经提供了字段用于转换，只需要添加一个配置项就可以，就是<code>globalVars</code>属性。</p>
+<h4 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h4><h5 id="第一步：less-变量转换成-css-变量"><a href="#第一步：less-变量转换成-css-变量" class="headerlink" title="第一步：less 变量转换成 css 变量"></a>第一步：less 变量转换成 css 变量</h5><p>这一步比较简单，less 已经提供了字段用于转换，只需要添加一个配置项就可以，就是<code>globalVars</code>属性。</p>
 <p>可以查看<a href="https://link.juejin.cn/?target=https://codebase.byted.org/repo/lark/dark-mode-css-var/-/blob/example/config/webpack.dm-cssvar.config.js">example 代码</a>参考</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">loader</span>: <span class="string">&#x27;less-loader&#x27;</span>,</span><br><span class="line">    <span class="attr">options</span>: &#123;</span><br><span class="line">      <span class="attr">globalVars</span>: <span class="title class_">LessGlobalCSSVars</span>,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">loader</span>: <span class="string">&#x27;less-loader&#x27;</span>,</span><br><span class="line">    <span class="attr">options</span>: &#123;</span><br><span class="line">      <span class="attr">globalVars</span>: <span class="title class_">LessGlobalCSSVars</span>,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p><code>LessGlobalCSSVars</code>大概长这个样子</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">&quot;bg-body&quot;</span>: <span class="string">&quot;var(--bg-body)&quot;</span>,</span><br><span class="line">    <span class="string">&quot;static-white&quot;</span>: <span class="string">&quot;var(--static-white)&quot;</span>,</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">&quot;bg-body&quot;</span>: <span class="string">&quot;var(--bg-body)&quot;</span>,</span><br><span class="line">    <span class="string">&quot;static-white&quot;</span>: <span class="string">&quot;var(--static-white)&quot;</span>,</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2022/03/01/%E5%A6%82%E4%BD%95%E5%88%A9%E7%94%A8css%20var%E5%81%9A%E4%B8%80%E4%B8%AAdark%20mode%E6%96%B9%E6%A1%88/#more" rel="contents">
@@ -369,7 +370,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h3 id="React-性能优化思路"><a href="#React-性能优化思路" class="headerlink" title="React 性能优化思路"></a>React 性能优化思路</h3><p>我觉得React 性能优化的理念的主要方向就是这两个：</p>
+          <h4 id="React-性能优化思路"><a href="#React-性能优化思路" class="headerlink" title="React 性能优化思路"></a>React 性能优化思路</h4><p>我觉得React 性能优化的理念的主要方向就是这两个：</p>
 <ol>
 <li><strong>减少重新 render 的次数。因为在 React 里最重(花时间最长)的一块就是 reconciliation(简单的可以理解为 diff)，如果不 render，就不会 reconciliation。</strong></li>
 <li><strong>减少计算的量。主要是减少重复计算，对于函数式组件来说，每次 render 都会重新从头开始执行函数调用。</strong></li>
@@ -467,14 +468,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>2.9k</span>
+      <span>2.6k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>10 分钟</span>
+      <span>9 分钟</span>
     </span>
 </div>
 
@@ -485,41 +486,26 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h3 id="TypeScript简介"><a href="#TypeScript简介" class="headerlink" title="TypeScript简介"></a>TypeScript简介</h3><ol>
+          <h4 id="TypeScript简介"><a href="#TypeScript简介" class="headerlink" title="TypeScript简介"></a>TypeScript简介</h4><ol>
 <li>TypeScript是JavaScript的超集。</li>
 <li>它对JS进行了扩展，向JS中引入了类型的概念，并添加了许多新的特性。</li>
 <li>TS代码需要通过编译器编译为JS，然后再交由JS解析器执行。</li>
 <li>TS完全兼容JS，换言之，任何的JS代码都可以直接当成JS使用。</li>
 <li>相较于JS而言，TS拥有了静态类型，更加严格的语法，更强大的功能；TS可以在代码执行前就完成代码的检查，减小了运行时异常的出现的几率；TS代码可以编译为任意版本的JS代码，可有效解决不同JS运行环境的兼容问题；同样的功能，TS的代码量要大于JS，但由于TS的代码结构更加清晰，变量类型更加明确，在后期代码的维护中TS却远远胜于JS。</li>
 </ol>
-<h3 id="TypeScript-开发环境搭建"><a href="#TypeScript-开发环境搭建" class="headerlink" title="TypeScript 开发环境搭建"></a>TypeScript 开发环境搭建</h3><ol>
-<li><p>下载Node.js</p>
-<ul>
+<h4 id="TypeScript-开发环境搭建"><a href="#TypeScript-开发环境搭建" class="headerlink" title="TypeScript 开发环境搭建"></a>TypeScript 开发环境搭建</h4><h5 id="下载Node-js"><a href="#下载Node-js" class="headerlink" title="下载Node.js"></a>下载Node.js</h5><ul>
 <li>64位：<a target="_blank" rel="noopener" href="https://nodejs.org/dist/v14.15.1/node-v14.15.1-x64.msi">https://nodejs.org/dist/v14.15.1/node-v14.15.1-x64.msi</a></li>
 <li>32位：<a target="_blank" rel="noopener" href="https://nodejs.org/dist/v14.15.1/node-v14.15.1-x86.msi">https://nodejs.org/dist/v14.15.1/node-v14.15.1-x86.msi</a></li>
 </ul>
-</li>
-<li><p>安装Node.js</p>
-</li>
-<li><p>使用npm全局安装typescript</p>
-<ul>
+<h5 id="安装Node-js"><a href="#安装Node-js" class="headerlink" title="安装Node.js"></a>安装Node.js</h5><h5 id="使用npm全局安装typescript"><a href="#使用npm全局安装typescript" class="headerlink" title="使用npm全局安装typescript"></a>使用npm全局安装typescript</h5><ul>
 <li>进入命令行</li>
 <li>输入：npm i -g typescript</li>
 </ul>
-</li>
-<li><p>创建一个ts文件</p>
-</li>
-<li><p>使用tsc对ts文件进行编译</p>
-<ul>
-<li><p>进入命令行</p>
-</li>
-<li><p>进入ts文件所在目录</p>
-</li>
-<li><p>执行命令：tsc xxx.ts</p>
-</li>
+<h5 id="创建一个ts文件"><a href="#创建一个ts文件" class="headerlink" title="创建一个ts文件"></a>创建一个ts文件</h5><h5 id="使用tsc对ts文件进行编译"><a href="#使用tsc对ts文件进行编译" class="headerlink" title="使用tsc对ts文件进行编译"></a>使用tsc对ts文件进行编译</h5><ul>
+<li>进入命令行</li>
+<li>进入ts文件所在目录</li>
+<li>执行命令：tsc xxx.ts</li>
 </ul>
-</li>
-</ol>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2021/10/14/Typescript%E5%85%A5%E9%97%A8/#more" rel="contents">
@@ -725,11 +711,11 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="Redux"><a href="#Redux" class="headerlink" title="Redux"></a>Redux</h2><h3 id="设计思想"><a href="#设计思想" class="headerlink" title="设计思想"></a>设计思想</h3><ul>
+          <h3 id="Redux"><a href="#Redux" class="headerlink" title="Redux"></a>Redux</h3><h4 id="设计思想"><a href="#设计思想" class="headerlink" title="设计思想"></a>设计思想</h4><ul>
 <li>（1）Web 应用是一个状态机，视图与状态是一一对应的。</li>
 <li>（2）所有的状态，保存在一个对象里面。</li>
 </ul>
-<h3 id="Action"><a href="#Action" class="headerlink" title="Action"></a>Action</h3><ol>
+<h4 id="Action"><a href="#Action" class="headerlink" title="Action"></a>Action</h4><ol>
 <li><p>Action 就是 View 发出的通知，表示 State 应该要发生变化了。</p>
 </li>
 <li><p>Action 是一个对象，其中的<code>type</code>属性是必须的，表示 Action 的名称，Action 描述当前发生的事情。</p>
@@ -1185,7 +1171,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>604</span>
+      <span>583</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -1203,10 +1189,10 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h3 id="React-DevTools"><a href="#React-DevTools" class="headerlink" title="React DevTools"></a>React DevTools</h3><h5 id="General-设置"><a href="#General-设置" class="headerlink" title="General 设置"></a>General 设置</h5><img src="../assets/image-20220222024702149.png" alt="image-20220222024702149" style="zoom:33%;" />
+          <h3 id="React-DevTools"><a href="#React-DevTools" class="headerlink" title="React DevTools"></a>React DevTools</h3><h5 id="General-设置"><a href="#General-设置" class="headerlink" title="General 设置"></a>General 设置</h5><img src="../assets/image-20220222024702149.png" alt="image-20220222024702149" />
 
 <p>General 面板中最重要的功能就是 **”Highlight updates when components render”**。勾选上之后，可以查看 React 重绘时，页面哪些部分有更新。在遇到性能问题时，可以快速帮助决策在哪部分不需要重绘的组件部分添加 React.memo 阻止重绘。</p>
-<h5 id="Debugging-设置"><a href="#Debugging-设置" class="headerlink" title="Debugging 设置"></a>Debugging 设置</h5><img src="..\assets\image-20220222024832097.png" alt="image-20220222024832097" style="zoom:33%;" />
+<h5 id="Debugging-设置"><a href="#Debugging-设置" class="headerlink" title="Debugging 设置"></a>Debugging 设置</h5><img src="..\assets\image-20220222024832097.png" alt="image-20220222024832097" />
 
 <p><strong>“Append components stacks to console warnings and errors.”</strong></p>
 <p>可以帮助我们定位 React 报错信息来自哪个组件</p>
@@ -1308,7 +1294,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="React的设计思路"><a href="#React的设计思路" class="headerlink" title="React的设计思路"></a>React的设计思路</h2><ul>
+          <h3 id="React的设计思路"><a href="#React的设计思路" class="headerlink" title="React的设计思路"></a>React的设计思路</h3><ul>
 <li><p>解决UI编程的痛点</p>
 <ol>
 <li><p>状态更新，UI不会自动更新，需要手动调dom api进行更新</p>
@@ -1397,7 +1383,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">2:34</span>
+    <span title="站点阅读时长">2:33</span>
   </span>
 </div>
 

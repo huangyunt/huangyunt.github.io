@@ -19,15 +19,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.21.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="包管理器Npm&#x2F;YarnNpm发包files指定哪些文件会被打包发布（后面详细描述）。 main、browser、exports、module这四个字段都是用来定义包的入口，npm 只规定了 main 和 browser 这两个字段，exports 是 nodejs 的规范，module 一般被构建工具所支持。 mainmain 规定了包的主要入口点，默认值为 index.js。 如果你">
+    <meta name="description" content="Npm&#x2F;Yarn 如何通过Npm发包files指定哪些文件会被打包发布（后面详细描述）。 main、browser、exports、module这四个字段都是用来定义包的入口，npm 只规定了 main 和 browser 这两个字段，exports 是 nodejs 的规范，module 一般被构建工具所支持。 mainmain 规定了包的主要入口点，默认值为 index.js。如果你">
 <meta property="og:type" content="article">
 <meta property="og:title" content="包管理器">
 <meta property="og:url" content="http://example.com/2025/03/13/%E5%8C%85%E7%AE%A1%E7%90%86%E5%99%A8/index.html">
 <meta property="og:site_name" content="Huangyuntse">
-<meta property="og:description" content="包管理器Npm&#x2F;YarnNpm发包files指定哪些文件会被打包发布（后面详细描述）。 main、browser、exports、module这四个字段都是用来定义包的入口，npm 只规定了 main 和 browser 这两个字段，exports 是 nodejs 的规范，module 一般被构建工具所支持。 mainmain 规定了包的主要入口点，默认值为 index.js。 如果你">
+<meta property="og:description" content="Npm&#x2F;Yarn 如何通过Npm发包files指定哪些文件会被打包发布（后面详细描述）。 main、browser、exports、module这四个字段都是用来定义包的入口，npm 只规定了 main 和 browser 这两个字段，exports 是 nodejs 的规范，module 一般被构建工具所支持。 mainmain 规定了包的主要入口点，默认值为 index.js。如果你">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-03-13T02:00:00.000Z">
-<meta property="article:modified_time" content="2025-06-12T07:49:07.322Z">
+<meta property="article:modified_time" content="2025-06-22T09:52:20.701Z">
 <meta property="article:author" content="Huangyuntse">
 <meta property="article:tag" content="工程化">
 <meta property="article:tag" content="前端">
@@ -140,7 +140,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8C%85%E7%AE%A1%E7%90%86%E5%99%A8"><span class="nav-number">1.</span> <span class="nav-text">包管理器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Npm-Yarn"><span class="nav-number">1.1.</span> <span class="nav-text">Npm&#x2F;Yarn</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Npm%E5%8F%91%E5%8C%85"><span class="nav-number">1.1.1.</span> <span class="nav-text">Npm发包</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#files"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">files</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#main%E3%80%81browser%E3%80%81exports%E3%80%81module"><span class="nav-number">1.1.1.2.</span> <span class="nav-text">main、browser、exports、module</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#main"><span class="nav-number">1.1.1.3.</span> <span class="nav-text">main</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Pnpm"><span class="nav-number">1.2.</span> <span class="nav-text">Pnpm</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CI-CD"><span class="nav-number">2.</span> <span class="nav-text">CI&#x2F;CD</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#npm-scripts"><span class="nav-number">2.1.</span> <span class="nav-text">npm scripts</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#package-json"><span class="nav-number">2.2.</span> <span class="nav-text">package.json</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#lock%E6%96%87%E4%BB%B6"><span class="nav-number">2.2.1.</span> <span class="nav-text">lock文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#peerDependencies"><span class="nav-number">2.2.2.</span> <span class="nav-text">peerDependencies</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#github-action"><span class="nav-number">2.3.</span> <span class="nav-text">github action</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#deploy"><span class="nav-number">2.4.</span> <span class="nav-text">deploy</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Npm-Yarn"><span class="nav-number">1.</span> <span class="nav-text">Npm&#x2F;Yarn</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87Npm%E5%8F%91%E5%8C%85"><span class="nav-number">1.1.</span> <span class="nav-text">如何通过Npm发包</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#files"><span class="nav-number">1.1.1.</span> <span class="nav-text">files</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#main%E3%80%81browser%E3%80%81exports%E3%80%81module"><span class="nav-number">1.1.2.</span> <span class="nav-text">main、browser、exports、module</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#main"><span class="nav-number">1.1.3.</span> <span class="nav-text">main</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Pnpm"><span class="nav-number">2.</span> <span class="nav-text">Pnpm</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CI-CD"><span class="nav-number">3.</span> <span class="nav-text">CI&#x2F;CD</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#npm-scripts"><span class="nav-number">3.1.</span> <span class="nav-text">npm scripts</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#package-json-lock%E6%96%87%E4%BB%B6"><span class="nav-number">3.2.</span> <span class="nav-text">package.json.lock文件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#peerDependencies"><span class="nav-number">3.3.</span> <span class="nav-text">peerDependencies</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#github-action"><span class="nav-number">3.4.</span> <span class="nav-text">github action</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#deploy"><span class="nav-number">3.5.</span> <span class="nav-text">deploy</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -248,7 +248,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>250</span>
+      <span>208</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -265,31 +265,26 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><h2 id="包管理器"><a href="#包管理器" class="headerlink" title="包管理器"></a>包管理器</h2><h3 id="Npm-Yarn"><a href="#Npm-Yarn" class="headerlink" title="Npm&#x2F;Yarn"></a>Npm&#x2F;Yarn</h3><h4 id="Npm发包"><a href="#Npm发包" class="headerlink" title="Npm发包"></a>Npm发包</h4><h5 id="files"><a href="#files" class="headerlink" title="files"></a>files</h5><p>指定哪些文件会被打包发布（后面详细描述）。</p>
-<h5 id="main、browser、exports、module"><a href="#main、browser、exports、module" class="headerlink" title="main、browser、exports、module"></a>main、browser、exports、module</h5><p>这四个字段都是用来定义包的入口，<code>npm</code> 只规定了 <code>main</code> 和 <code>browser</code> 这两个字段，<code>exports</code> 是 <code>nodejs</code> 的规范，<code>module</code> 一般被构建工具所支持。</p>
-<h5 id="main"><a href="#main" class="headerlink" title="main"></a>main</h5><p><code>main</code> 规定了包的主要入口点，默认值为 <code>index.js</code>。</p>
-<p>如果你的包名为 <code>foo</code> 可以通过 <code>require(&quot;foo&quot;)</code> 引入对应模块导出的内容，所以这应该是个 CommonJS 模块，除非你设置了 <code>&quot;type&quot;: &quot;module&quot;</code>。</p>
+    <div class="post-body" itemprop="articleBody"><h4 id="Npm-Yarn"><a href="#Npm-Yarn" class="headerlink" title="Npm&#x2F;Yarn"></a>Npm&#x2F;Yarn</h4><hr>
+<h5 id="如何通过Npm发包"><a href="#如何通过Npm发包" class="headerlink" title="如何通过Npm发包"></a>如何通过Npm发包</h5><h6 id="files"><a href="#files" class="headerlink" title="files"></a>files</h6><p>指定哪些文件会被打包发布（后面详细描述）。</p>
+<h6 id="main、browser、exports、module"><a href="#main、browser、exports、module" class="headerlink" title="main、browser、exports、module"></a>main、browser、exports、module</h6><p>这四个字段都是用来定义包的入口，<code>npm</code> 只规定了 <code>main</code> 和 <code>browser</code> 这两个字段，<code>exports</code> 是 <code>nodejs</code> 的规范，<code>module</code> 一般被构建工具所支持。</p>
+<h6 id="main"><a href="#main" class="headerlink" title="main"></a>main</h6><p><code>main</code> 规定了包的主要入口点，默认值为 <code>index.js</code>。<br>如果你的包名为 <code>foo</code> 可以通过 <code>require(&quot;foo&quot;)</code> 引入对应模块导出的内容，所以这应该是个 CommonJS 模块，除非你设置了 <code>&quot;type&quot;: &quot;module&quot;</code>。</p>
 <span id="more"></span>
 
-<h3 id="Pnpm"><a href="#Pnpm" class="headerlink" title="Pnpm"></a>Pnpm</h3><ul>
+
+<hr>
+<h4 id="Pnpm"><a href="#Pnpm" class="headerlink" title="Pnpm"></a>Pnpm</h4><ul>
 <li>省空间</li>
 <li>解决幽灵依赖的问题</li>
 </ul>
-<p>如何确定一个项目的包管理工具？</p>
-<ul>
-<li>lock文件、package.json下packageManager字段来判断</li>
-</ul>
-<p>如何确定包管理工具的版本号？</p>
-<ul>
-<li>engines字段</li>
-</ul>
-<h2 id="CI-CD"><a href="#CI-CD" class="headerlink" title="CI&#x2F;CD"></a>CI&#x2F;CD</h2><h3 id="npm-scripts"><a href="#npm-scripts" class="headerlink" title="npm scripts"></a>npm scripts</h3><h3 id="package-json"><a href="#package-json" class="headerlink" title="package.json"></a>package.json</h3><h4 id="lock文件"><a href="#lock文件" class="headerlink" title="lock文件"></a>lock文件</h4><ul>
+<hr>
+<h4 id="CI-CD"><a href="#CI-CD" class="headerlink" title="CI&#x2F;CD"></a>CI&#x2F;CD</h4><h5 id="npm-scripts"><a href="#npm-scripts" class="headerlink" title="npm scripts"></a>npm scripts</h5><h5 id="package-json-lock文件"><a href="#package-json-lock文件" class="headerlink" title="package.json.lock文件"></a>package.json.lock文件</h5><ul>
 <li>第三方包需要锁定版本号吗</li>
 </ul>
-<h4 id="peerDependencies"><a href="#peerDependencies" class="headerlink" title="peerDependencies"></a>peerDependencies</h4><ul>
+<h5 id="peerDependencies"><a href="#peerDependencies" class="headerlink" title="peerDependencies"></a>peerDependencies</h5><ul>
 <li>项目安装的某个依赖存在peerDependencies，项目又没有声明这个依赖，那项目会自动安装吗，会autoinstall</li>
 </ul>
-<h3 id="github-action"><a href="#github-action" class="headerlink" title="github action"></a>github action</h3><h3 id="deploy"><a href="#deploy" class="headerlink" title="deploy"></a>deploy</h3>
+<h5 id="github-action"><a href="#github-action" class="headerlink" title="github action"></a>github action</h5><h5 id="deploy"><a href="#deploy" class="headerlink" title="deploy"></a>deploy</h5>
     </div>
 
     
@@ -350,7 +345,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">2:34</span>
+    <span title="站点阅读时长">2:33</span>
   </span>
 </div>
 

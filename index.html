@@ -274,7 +274,9 @@
 
 ------ -->
 
-<h3 id="2024-4、2024-5、2024-6-更新"><a href="#2024-4、2024-5、2024-6-更新" class="headerlink" title="2024-4、2024-5、2024-6 更新"></a>2024-4、2024-5、2024-6 更新</h3><p><strong>前端工程化相关学习</strong></p>
+<h4 id="2024-4、2024-5、2024-6-更新"><a href="#2024-4、2024-5、2024-6-更新" class="headerlink" title="2024-4、2024-5、2024-6 更新"></a>2024-4、2024-5、2024-6 更新</h4><blockquote>
+<p>前端工程化相关学习</p>
+</blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://huangyunt.github.io/2024/11/05/%E6%AF%94%E7%89%B9%E5%B8%81/">Webpack运行时runtime做了什么事情</a></li>
 <li><a target="_blank" rel="noopener" href="https://huangyunt.github.io/2021/10/01/React%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/">TradingView使用</a></li>
@@ -282,7 +284,9 @@
 <li><a target="_blank" rel="noopener" href="https://huangyunt.github.io/2021/09/20/HTTP/">包管理器</a></li>
 </ul>
 <hr>
-<h3 id="2024-11、2024-12更新"><a href="#2024-11、2024-12更新" class="headerlink" title="2024-11、2024-12更新"></a>2024-11、2024-12更新</h3><p><strong>主要是之前前端相关知识的文章整理、比特币相关学习</strong></p>
+<h4 id="2024-11、2024-12更新"><a href="#2024-11、2024-12更新" class="headerlink" title="2024-11、2024-12更新"></a>2024-11、2024-12更新</h4><blockquote>
+<p>主要是之前前端相关知识的文章整理、比特币相关学习</p>
+</blockquote>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://huangyunt.github.io/2024/11/05/%E6%AF%94%E7%89%B9%E5%B8%81/">比特币</a></li>
 <li><a target="_blank" rel="noopener" href="https://huangyunt.github.io/2021/10/01/React%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/">React最佳实践</a></li>
@@ -291,9 +295,9 @@
 <li><a target="_blank" rel="noopener" href="https://huangyunt.github.io/2021/09/18/HTTP%E7%BC%93%E5%AD%98/">HTTP缓存</a></li>
 </ul>
 <hr>
-<h3 id="2024-10更新"><a href="#2024-10更新" class="headerlink" title="2024-10更新"></a>2024-10更新</h3><p><strong>腾讯云托管站点</strong><br>主要是解决Github Page部署后国内内网无法访问的问题（搜了下是DNS污染的问题，不太好解决，暂时先迁到腾讯云上去托管站点了）</p>
-<p><strong>部分文章重新整理一版</strong><br>整理了一系列陈年老文章，主要是一些文章之前的格式在博客里不太兼容，还有部分内容在迁移的过程中有丢失，都加以补充了</p>
-<p><strong>文章置顶、排序、显隐功能</strong><br>引了个<code>hexo-generator-index-custom</code>插件来置顶、排序文章</p>
+<h4 id="2024-10更新"><a href="#2024-10更新" class="headerlink" title="2024-10更新"></a>2024-10更新</h4><h5 id="腾讯云托管站点"><a href="#腾讯云托管站点" class="headerlink" title="腾讯云托管站点"></a>腾讯云托管站点</h5><p>主要是解决Github Page部署后国内内网无法访问的问题（搜了下是DNS污染的问题，不太好解决，暂时先迁到腾讯云上去托管站点了）</p>
+<h5 id="部分文章重新整理一版"><a href="#部分文章重新整理一版" class="headerlink" title="部分文章重新整理一版"></a>部分文章重新整理一版</h5><p>整理了一系列陈年老文章，主要是一些文章之前的格式在博客里不太兼容，还有部分内容在迁移的过程中有丢失，都加以补充了</p>
+<h5 id="文章置顶、排序、显隐功能"><a href="#文章置顶、排序、显隐功能" class="headerlink" title="文章置顶、排序、显隐功能"></a>文章置顶、排序、显隐功能</h5><p>引了个<code>hexo-generator-index-custom</code>插件来置顶、排序文章</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2024/10/28/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97/#more" rel="contents">
@@ -374,7 +378,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>234</span>
+      <span>235</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -392,8 +396,11 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="Webpack-Runtime"><a href="#Webpack-Runtime" class="headerlink" title="Webpack Runtime"></a>Webpack Runtime</h2><p>webpack 的 runtime，也就是 webpack 最后生成的代码，实现了一个自定义的模块加载系统，替代浏览器原生的模块机制：</p>
-<p><strong>webpack_modules</strong>: 维护一个所有模块的数组。将入口模块解析为 AST，根据 AST 深度优先搜索所有的模块，并构建出这个模块数组。每个模块都由一个包裹函数 (module, module.exports, <strong>webpack_require</strong>) 对模块进行包裹构成。<br><strong>webpack_require</strong>(moduleId): 手动实现加载一个模块。对已加载过的模块进行缓存，对未加载过的模块，执行 id 定位到 <strong>webpack_modules</strong> 中的包裹函数，执行并返回 module.exports，并缓存<br><strong>webpack_require</strong>(0): 运行第一个模块，即运行入口模块<br>另外，当涉及到多个 chunk 的打包方式中，比如 code spliting，webpack 中会有 jsonp 加载 chunk 的运行时代码。</p>
+          <p>webpack 的 runtime，也就是 webpack 最后生成的代码，实现了一个自定义的模块加载系统，替代浏览器原生的模块机制</p>
+<h4 id="webpack-modules"><a href="#webpack-modules" class="headerlink" title="webpack_modules"></a><strong>webpack_modules</strong></h4><p> 维护一个所有模块的数组。将入口模块解析为 AST，根据 AST 深度优先搜索所有的模块，并构建出这个模块数组。每个模块都由一个包裹函数 (module, module.exports, <strong>webpack_require</strong>) 对模块进行包裹构成。</p>
+<h4 id="webpack-require-moduleId"><a href="#webpack-require-moduleId" class="headerlink" title="webpack_require(moduleId)"></a><strong>webpack_require</strong>(moduleId)</h4><p>手动实现加载一个模块。对已加载过的模块进行缓存，对未加载过的模块，执行 id 定位到 </p>
+<h4 id="webpack-modules-1"><a href="#webpack-modules-1" class="headerlink" title="webpack_modules"></a><strong>webpack_modules</strong></h4><p>webpack_modules中的包裹函数，执行并返回 module.exports，并缓存</p>
+<h4 id="webpack-require-0"><a href="#webpack-require-0" class="headerlink" title="webpack_require(0)"></a><strong>webpack_require</strong>(0)</h4><p><em>webpack_require</em>_(0)运行第一个模块，即运行入口模块，另外，当涉及到多个 chunk 的打包方式中，比如 code spliting，webpack 中会有 jsonp 加载 chunk 的运行时代码。</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2025/05/28/Webpack%E8%BF%90%E8%A1%8C%E6%97%B6runtime%E5%81%9A%E4%BA%86%E5%93%AA%E4%BA%9B%E4%BA%8B%E6%83%85/#more" rel="contents">
@@ -445,7 +452,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2025/04/26/TradingView%E4%BD%BF%E7%94%A8/" class="post-title-link" itemprop="url">TradingView使用</a>
+          <a href="/2025/04/26/TradingView%E4%BD%BF%E7%94%A8/" class="post-title-link" itemprop="url">TradingView自定义Plugin使用</a>
         </h2>
 
         <div class="post-meta-container">
@@ -474,7 +481,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>499</span>
+      <span>489</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -492,15 +499,11 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="TradingView-自定义Plugin使用"><a href="#TradingView-自定义Plugin使用" class="headerlink" title="TradingView 自定义Plugin使用"></a>TradingView 自定义Plugin使用</h2><p>结合官方文档：<a target="_blank" rel="noopener" href="https://tradingview.github.io/lightweight-charts/docs/plugins/intro">https://tradingview.github.io/lightweight-charts/docs/plugins/intro</a> 食用<br>代码见：<a target="_blank" rel="noopener" href="https://github.com/huangyunt/Learning-Demo/tree/master/tradingview%E7%A4%BA%E4%BE%8B%EF%BC%9AK%E7%BA%BF%E5%9B%BE%E7%BB%98%E5%88%B6%E5%9B%BE%E7%89%87">tradingview示例：K线图绘制图片</a></p>
-<h4 id="1-Series-Primitives"><a href="#1-Series-Primitives" class="headerlink" title="1. Series Primitives"></a>1. Series Primitives</h4><ol>
-<li>生命周期<ul>
+          <p>结合官方文档：<a target="_blank" rel="noopener" href="https://tradingview.github.io/lightweight-charts/docs/plugins/intro">https://tradingview.github.io/lightweight-charts/docs/plugins/intro</a> 食用<br>代码见：<a target="_blank" rel="noopener" href="https://github.com/huangyunt/Learning-Demo/tree/master/tradingview%E7%A4%BA%E4%BE%8B%EF%BC%9AK%E7%BA%BF%E5%9B%BE%E7%BB%98%E5%88%B6%E5%9B%BE%E7%89%87">tradingview示例：K线图绘制图片</a></p>
+<h4 id="Series-Primitives"><a href="#Series-Primitives" class="headerlink" title="Series Primitives"></a>Series Primitives</h4><h5 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h5><ul>
 <li>attached：添加到图表时触发，附加方法通过一个参数调用，该参数包含图表、系列以及用于请求更新的回调函数</li>
 <li>detached：移除图表时触发</li>
 </ul>
-</li>
-<li>更新视图<br>原语应该在方法中更新视图 updateAllViews()，以便渲染器被调用时，它们能够使用最新信息进行绘制。当库需要更新和重绘图表时，它会调用此方法。如果想通知库应该触发更新，可以使用requestUpdate附加生命周期方法提供的回调。</li>
-</ol>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2025/04/26/TradingView%E4%BD%BF%E7%94%A8/#more" rel="contents">
@@ -686,7 +689,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>250</span>
+      <span>208</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -704,10 +707,10 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="包管理器"><a href="#包管理器" class="headerlink" title="包管理器"></a>包管理器</h2><h3 id="Npm-Yarn"><a href="#Npm-Yarn" class="headerlink" title="Npm&#x2F;Yarn"></a>Npm&#x2F;Yarn</h3><h4 id="Npm发包"><a href="#Npm发包" class="headerlink" title="Npm发包"></a>Npm发包</h4><h5 id="files"><a href="#files" class="headerlink" title="files"></a>files</h5><p>指定哪些文件会被打包发布（后面详细描述）。</p>
-<h5 id="main、browser、exports、module"><a href="#main、browser、exports、module" class="headerlink" title="main、browser、exports、module"></a>main、browser、exports、module</h5><p>这四个字段都是用来定义包的入口，<code>npm</code> 只规定了 <code>main</code> 和 <code>browser</code> 这两个字段，<code>exports</code> 是 <code>nodejs</code> 的规范，<code>module</code> 一般被构建工具所支持。</p>
-<h5 id="main"><a href="#main" class="headerlink" title="main"></a>main</h5><p><code>main</code> 规定了包的主要入口点，默认值为 <code>index.js</code>。</p>
-<p>如果你的包名为 <code>foo</code> 可以通过 <code>require(&quot;foo&quot;)</code> 引入对应模块导出的内容，所以这应该是个 CommonJS 模块，除非你设置了 <code>&quot;type&quot;: &quot;module&quot;</code>。</p>
+          <h4 id="Npm-Yarn"><a href="#Npm-Yarn" class="headerlink" title="Npm&#x2F;Yarn"></a>Npm&#x2F;Yarn</h4><hr>
+<h5 id="如何通过Npm发包"><a href="#如何通过Npm发包" class="headerlink" title="如何通过Npm发包"></a>如何通过Npm发包</h5><h6 id="files"><a href="#files" class="headerlink" title="files"></a>files</h6><p>指定哪些文件会被打包发布（后面详细描述）。</p>
+<h6 id="main、browser、exports、module"><a href="#main、browser、exports、module" class="headerlink" title="main、browser、exports、module"></a>main、browser、exports、module</h6><p>这四个字段都是用来定义包的入口，<code>npm</code> 只规定了 <code>main</code> 和 <code>browser</code> 这两个字段，<code>exports</code> 是 <code>nodejs</code> 的规范，<code>module</code> 一般被构建工具所支持。</p>
+<h6 id="main"><a href="#main" class="headerlink" title="main"></a>main</h6><p><code>main</code> 规定了包的主要入口点，默认值为 <code>index.js</code>。<br>如果你的包名为 <code>foo</code> 可以通过 <code>require(&quot;foo&quot;)</code> 引入对应模块导出的内容，所以这应该是个 CommonJS 模块，除非你设置了 <code>&quot;type&quot;: &quot;module&quot;</code>。</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2025/03/13/%E5%8C%85%E7%AE%A1%E7%90%86%E5%99%A8/#more" rel="contents">
@@ -806,9 +809,9 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="XSS"><a href="#XSS" class="headerlink" title="XSS"></a>XSS</h2><p><strong>跨站脚本攻击（XSS，Cross - Site Scripting）</strong>攻击者通过在目标网站中注入恶意脚本，来获取用户的敏感信息、执行恶意操作等。这些恶意脚本通常是 JavaScript</p>
-<h3 id="整体过程"><a href="#整体过程" class="headerlink" title="整体过程"></a>整体过程</h3><p>攻击者提交恶意代码 -&gt; 浏览器执行恶意代码</p>
-<h3 id="攻击方式"><a href="#攻击方式" class="headerlink" title="攻击方式"></a>攻击方式</h3><h4 id="反射型XSS"><a href="#反射型XSS" class="headerlink" title="反射型XSS"></a>反射型XSS</h4><p>示例：一个简单的搜索功能，用户在搜索框输入内容后，服务器将用户输入的内容直接在页面上显示。攻击者构造一个类似 <code>http://example.com/search?q=&lt;script&gt;alert(&#39;XSS&#39;)&lt;/script&gt;</code> 的 URL，当用户点击这个链接，就会弹出一个警告框显示 “XSS”。</p>
+          <h4 id="XSS"><a href="#XSS" class="headerlink" title="XSS"></a>XSS</h4><p><strong>跨站脚本攻击（XSS，Cross - Site Scripting）</strong>攻击者通过在目标网站中注入恶意脚本，来获取用户的敏感信息、执行恶意操作等。这些恶意脚本通常是 JavaScript</p>
+<h5 id="整体过程"><a href="#整体过程" class="headerlink" title="整体过程"></a>整体过程</h5><p>攻击者提交恶意代码 -&gt; 浏览器执行恶意代码</p>
+<h5 id="反射型XSS"><a href="#反射型XSS" class="headerlink" title="反射型XSS"></a>反射型XSS</h5><p>示例：一个简单的搜索功能，用户在搜索框输入内容后，服务器将用户输入的内容直接在页面上显示。攻击者构造一个类似 <code>http://example.com/search?q=&lt;script&gt;alert(&#39;XSS&#39;)&lt;/script&gt;</code> 的 URL，当用户点击这个链接，就会弹出一个警告框显示 “XSS”。</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2025/01/12/%E5%89%8D%E7%AB%AF%E5%AE%89%E5%85%A8%E7%9B%B8%E5%85%B3/#more" rel="contents">
@@ -1002,8 +1005,8 @@
     <p><b>不要被学术界的思维限制了头脑，不要被程序员的思维限制了想象力。</b></p>
 </blockquote>
 
-<h2 id="比特币中的密码学"><a href="#比特币中的密码学" class="headerlink" title="比特币中的密码学"></a>比特币中的密码学</h2><h3 id="比特币中的哈希特性"><a href="#比特币中的哈希特性" class="headerlink" title="比特币中的哈希特性"></a>比特币中的哈希特性</h3><!-- > 容易验证，不容易计算 -->
-<h4 id="Collision-resistance-抗哈希碰撞"><a href="#Collision-resistance-抗哈希碰撞" class="headerlink" title="Collision resistance (抗哈希碰撞)"></a>Collision resistance (抗哈希碰撞)</h4><blockquote>
+<h3 id="比特币中的密码学"><a href="#比特币中的密码学" class="headerlink" title="比特币中的密码学"></a>比特币中的密码学</h3><h4 id="比特币中的哈希特性"><a href="#比特币中的哈希特性" class="headerlink" title="比特币中的哈希特性"></a>比特币中的哈希特性</h4><!-- > 容易验证，不容易计算 -->
+<h5 id="Collision-resistance-抗哈希碰撞"><a href="#Collision-resistance-抗哈希碰撞" class="headerlink" title="Collision resistance (抗哈希碰撞)"></a>Collision resistance (抗哈希碰撞)</h5><blockquote>
 <p>没有高效的方法来人为的制造哈希碰撞</p>
 </blockquote>
 <ul>
@@ -1012,17 +1015,17 @@
 <li><strong>MD5哈希函数</strong>：以前认为是Collision resistance，后来被鉴定为不安全的哈希函数，可通过人为的方式制造哈希碰撞</li>
 <li><strong>比特币中使用的哈希函数</strong>：SHA-256（Secure Hash Algorithm）</li>
 </ul>
-<h4 id="Hiding"><a href="#Hiding" class="headerlink" title="Hiding"></a>Hiding</h4><blockquote>
+<h5 id="Hiding"><a href="#Hiding" class="headerlink" title="Hiding"></a>Hiding</h5><blockquote>
 <p>哈希的过程单向不可逆</p>
 </blockquote>
 <ul>
 <li><strong>Hiding的定义</strong>：输入值的空间够大，且分布均匀，取值可能性相同<br>实际场景如何实现Hiding（保证分布均匀）：输入值 + 随机数（输入X || nonce随机数）后经过Hash</li>
 </ul>
-<h4 id="Puzzle-friendly"><a href="#Puzzle-friendly" class="headerlink" title="Puzzle friendly"></a>Puzzle friendly</h4><blockquote>
+<h5 id="Puzzle-friendly"><a href="#Puzzle-friendly" class="headerlink" title="Puzzle friendly"></a>Puzzle friendly</h5><blockquote>
 <p>事先无法知道什么样的输入能得到一个什么样的哈希值，只能一个个尝试</p>
 </blockquote>
 <p>比如挖矿，H(nonce + block header) &lt;&#x3D; target，没有捷径，只能去尝试多个nonce来找到解 &#x3D;&gt; proof of work</p>
-<h3 id="比特币中的账户管理"><a href="#比特币中的账户管理" class="headerlink" title="比特币中的账户管理"></a>比特币中的账户管理</h3><p>非对称加密（asymmetric encryption algorithm）：加密解密不用同一个密钥，加密用公钥，解密用私钥<br>去中心化，每个用户本地自己生成一组公钥和私钥，公钥相当于银行账号，私钥相当于账号密码<br>比特币交易过程中，为了能知道交易是由谁发起，需要用私钥将交易签名，公钥验证</p>
+<h4 id="比特币中的账户管理"><a href="#比特币中的账户管理" class="headerlink" title="比特币中的账户管理"></a>比特币中的账户管理</h4><p>非对称加密（asymmetric encryption algorithm）：加密解密不用同一个密钥，加密用公钥，解密用私钥<br>去中心化，每个用户本地自己生成一组公钥和私钥，公钥相当于银行账号，私钥相当于账号密码<br>比特币交易过程中，为了能知道交易是由谁发起，需要用私钥将交易签名，公钥验证</p>
 <p>两个人生成的公钥私钥相同怎么办（256位的值，产生两组相同公钥私钥的概率微乎其微）</p>
 <p>message取hash-&gt;hash取签名</p>
           <!--noindex-->
@@ -1124,12 +1127,12 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>先开个坑，准备下Web3相关的学习</p>
-<h2 id="学习路线"><a href="#学习路线" class="headerlink" title="学习路线"></a>学习路线</h2><ul>
+<h3 id="学习路线"><a href="#学习路线" class="headerlink" title="学习路线"></a>学习路线</h3><ul>
 <li><strong>Web3入门计划</strong>： <a target="_blank" rel="noopener" href="https://cubic-leaf-731.notion.site/web3-202208-09-1623ccd15c2148a1ae00ed8794d153b1">polebug大佬学习记录</a></li>
 <li><strong>Web3开发学习路线</strong>： <a target="_blank" rel="noopener" href="https://54web3.cc/blog/roadmap/learning-path-web3">https://54web3.cc/blog/roadmap/learning-path-web3</a></li>
 <li><strong>Web3从入门到精通开发学习路线</strong>：<a target="_blank" rel="noopener" href="https://juejin.cn/post/7307185531330838543">https://juejin.cn/post/7307185531330838543</a></li>
 </ul>
-<h3 id="WEEK-1-区块链的基础知识"><a href="#WEEK-1-区块链的基础知识" class="headerlink" title="WEEK 1: 区块链的基础知识"></a><strong>WEEK 1: 区块链的基础知识</strong></h3><ul>
+<h4 id="WEEK-1-区块链的基础知识"><a href="#WEEK-1-区块链的基础知识" class="headerlink" title="WEEK 1: 区块链的基础知识"></a><strong>WEEK 1: 区块链的基础知识</strong></h4><ul>
 <li>密码学基础</li>
 <li>区块链基础</li>
 <li>相关金融知识</li>
@@ -1227,12 +1230,12 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h3 id="Hexo介绍"><a href="#Hexo介绍" class="headerlink" title="Hexo介绍"></a>Hexo介绍</h3><p>Hexo是一款基于Node.js的开源静态博客框架，用于快速、简单且高效地搭建静态博客网站。本质上是一个静态网站生成器，新增文章只需要编辑md文件，通过运行命令再生成像html的静态文件。</p>
-<h3 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">全局安装hexo脚手架</span></span><br><span class="line">npm install -g hexo-cli</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建一blog项目</span></span><br><span class="line">hexo init blog</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">进入项目</span></span><br><span class="line">cd blog</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">安装依赖包</span></span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
+          <h4 id="Hexo介绍"><a href="#Hexo介绍" class="headerlink" title="Hexo介绍"></a>Hexo介绍</h4><p>Hexo是一款基于Node.js的开源静态博客框架，用于快速、简单且高效地搭建静态博客网站。本质上是一个静态网站生成器，新增文章只需要编辑md文件，通过运行命令再生成像html的静态文件。</p>
+<h4 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">全局安装hexo脚手架</span></span><br><span class="line">npm install -g hexo-cli</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建一blog项目</span></span><br><span class="line">hexo init blog</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">进入项目</span></span><br><span class="line">cd blog</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">安装依赖包</span></span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
 
-<h3 id="其他操作"><a href="#其他操作" class="headerlink" title="其他操作"></a>其他操作</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">右键 Git Bush，用户项目自动化部署</span></span><br><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+<h4 id="其他操作"><a href="#其他操作" class="headerlink" title="其他操作"></a>其他操作</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">右键 Git Bush，用户项目自动化部署</span></span><br><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
 
-<h3 id="项目预览"><a href="#项目预览" class="headerlink" title="项目预览"></a>项目预览</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">清理旧的静态文件</span></span><br><span class="line">hexo clean</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">生成静态文件</span></span><br><span class="line">hexo g</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">运行预览项目</span></span><br><span class="line">hexo s</span><br></pre></td></tr></table></figure>
+<h4 id="项目预览"><a href="#项目预览" class="headerlink" title="项目预览"></a>项目预览</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">清理旧的静态文件</span></span><br><span class="line">hexo clean</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">生成静态文件</span></span><br><span class="line">hexo g</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">运行预览项目</span></span><br><span class="line">hexo s</span><br></pre></td></tr></table></figure>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2024/09/21/Hexo%20+%20Next%20+%20GitHub%20Page%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/#more" rel="contents">
@@ -1287,7 +1290,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">2:34</span>
+    <span title="站点阅读时长">2:33</span>
   </span>
 </div>
 
