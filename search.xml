@@ -6,7 +6,7 @@
     <content><![CDATA[<h3 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h3><p>最近看了两本书《CSS揭秘》和《CSS权威指南》恶补一下CSS（自己真是菜到天际），记录一些有意思的问题</p>
 <span id="more"></span>
 
-<h3 id="1-CSS高度由什么决定？"><a href="#1-CSS高度由什么决定？" class="headerlink" title="1. CSS高度由什么决定？"></a>1. CSS高度由什么决定？</h3><h4 id="块级元素"><a href="#块级元素" class="headerlink" title="块级元素"></a>块级元素</h4><p>一个块级元素div的高度一般是与自身的<strong>CSS样式</strong>和<strong>内部元素的高度总和</strong>有关</p>
+<h3 id="CSS高度由什么决定？"><a href="#CSS高度由什么决定？" class="headerlink" title="CSS高度由什么决定？"></a>CSS高度由什么决定？</h3><h4 id="块级元素"><a href="#块级元素" class="headerlink" title="块级元素"></a>块级元素</h4><p>一个块级元素div的高度一般是与自身的<strong>CSS样式</strong>和<strong>内部元素的高度总和</strong>有关</p>
 <ul>
 <li><code>div</code>设置了height后，整个盒模型的高度基本确定，其内部元素再高也无法改变<code>div</code>的高度</li>
 <li>当<code>div</code>不设置height时，其高度和内部文档流元素高度的总和有关</li>
@@ -21,23 +21,67 @@
 <p><img src="/../assets/image-20211120202203417.png" alt="image-20210930012419754"><br><img src="/../assets/image-20211120202344779.png" alt="image-20210930012419754"></p>
 <p><strong>解决方案：父元素设置border&#x2F;padding&#x2F;overflow：hidden</strong></p>
 <p><strong>总结：父元素高度能被子元素的height、border、padding撑开，如果父元元素在垂直方向上有<code>border</code>,<code>padding</code>（只要在逻辑上存在，不论大小）以及<code>overflow:hidden</code>，都能被子元素的<code>margin</code>撑开，否则只能撑开父元素的宽度</strong></p>
-<h3 id="2-CSS宽度由什么决定？"><a href="#2-CSS宽度由什么决定？" class="headerlink" title="2. CSS宽度由什么决定？"></a>2. CSS宽度由什么决定？</h3><h4 id="行内-行内块元素"><a href="#行内-行内块元素" class="headerlink" title="行内&#x2F;行内块元素"></a>行内&#x2F;行内块元素</h4><p>行内元素&#x2F;行内块的宽度是由它的内容决定的，行内元素不能设置宽高</p>
+<hr>
+<h3 id="CSS宽度由什么决定？"><a href="#CSS宽度由什么决定？" class="headerlink" title="CSS宽度由什么决定？"></a>CSS宽度由什么决定？</h3><h4 id="行内-行内块元素"><a href="#行内-行内块元素" class="headerlink" title="行内&#x2F;行内块元素"></a>行内&#x2F;行内块元素</h4><p>行内元素&#x2F;行内块的宽度是由它的内容决定的，行内元素不能设置宽高</p>
 <h4 id="块级元素-1"><a href="#块级元素-1" class="headerlink" title="块级元素"></a>块级元素</h4><p>一个块级元素宽度当不设置样式时默认为父级元素的100%<strong>（这个100%是自适应的，并不相当于width：100%）</strong></p>
-<h3 id="3-为什么margin-top-padding-top设置百分比基于父元素的宽度计算的？"><a href="#3-为什么margin-top-padding-top设置百分比基于父元素的宽度计算的？" class="headerlink" title="3. 为什么margin-top&#x2F;padding-top设置百分比基于父元素的宽度计算的？"></a>3. 为什么margin-top&#x2F;padding-top设置百分比基于父元素的宽度计算的？</h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css">        <span class="selector-class">.parent</span> &#123;</span></span><br><span class="line"><span class="language-css">            <span class="attribute">width</span>: <span class="number">300px</span>;</span></span><br><span class="line"><span class="language-css">            <span class="attribute">height</span>: <span class="number">400px</span>;</span></span><br><span class="line"><span class="language-css">            <span class="attribute">border</span>: <span class="number">5px</span> solid red;</span></span><br><span class="line"><span class="language-css">        &#125;</span></span><br><span class="line"><span class="language-css">        <span class="selector-class">.child</span> &#123;</span></span><br><span class="line"><span class="language-css">            <span class="attribute">height</span>: <span class="number">200px</span>;</span></span><br><span class="line"><span class="language-css">            <span class="attribute">margin-top</span>: <span class="number">50%</span>;</span></span><br><span class="line"><span class="language-css">            <span class="attribute">background-color</span>: green;</span></span><br><span class="line"><span class="language-css">        &#125;</span></span><br><span class="line"><span class="language-css">    </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;parent&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;child&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="为什么margin-top-padding-top设置百分比基于父元素的宽度计算的？"><a href="#为什么margin-top-padding-top设置百分比基于父元素的宽度计算的？" class="headerlink" title="为什么margin-top&#x2F;padding-top设置百分比基于父元素的宽度计算的？"></a>为什么margin-top&#x2F;padding-top设置百分比基于父元素的宽度计算的？</h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css">        <span class="selector-class">.parent</span> &#123;</span></span><br><span class="line"><span class="language-css">            <span class="attribute">width</span>: <span class="number">300px</span>;</span></span><br><span class="line"><span class="language-css">            <span class="attribute">height</span>: <span class="number">400px</span>;</span></span><br><span class="line"><span class="language-css">            <span class="attribute">border</span>: <span class="number">5px</span> solid red;</span></span><br><span class="line"><span class="language-css">        &#125;</span></span><br><span class="line"><span class="language-css">        <span class="selector-class">.child</span> &#123;</span></span><br><span class="line"><span class="language-css">            <span class="attribute">height</span>: <span class="number">200px</span>;</span></span><br><span class="line"><span class="language-css">            <span class="attribute">margin-top</span>: <span class="number">50%</span>;</span></span><br><span class="line"><span class="language-css">            <span class="attribute">background-color</span>: green;</span></span><br><span class="line"><span class="language-css">        &#125;</span></span><br><span class="line"><span class="language-css">    </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;parent&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;child&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p><img src="/../assets/image-20211120194334386.png" alt="image-20211120194334386"></p>
 <p>这里利用margin-top：50%将子元素挤到最下方贴底，然而这里的百分比是相对于父级宽度计算的。</p>
 <p>CSS权威指南中的解释：若是相对于父元素的高度计算会形成死循环。<br><em><strong>“我们认为，正常流中的大多数元素都会足够高以包含其后代元素（包括外边距），如果一个元素的上下外边距是父元素的height的百分数，就可能导致一个无限循环，父元素的height会增加，以适应后代元素上下外边距的增加，而相应的，上下外边距因为父元素height的增加也会增加，形成无限循环。”</strong></em></p>
 <p><strong>本质上是因为css中高度是可以自适应的，基于父级高度的百分比计算会导致无限循环的问题</strong>。</p>
-<h3 id="4-flex：1"><a href="#4-flex：1" class="headerlink" title="4. flex：1"></a>4. flex：1</h3><p><code>flex：x</code> 相当于 <code>flex-grow: x，flex-shrink：1，flex-basis：0%；</code></p>
+<hr>
+<h3 id="CSS定位"><a href="#CSS定位" class="headerlink" title="CSS定位"></a>CSS定位</h3><h4 id="static定位"><a href="#static定位" class="headerlink" title="static定位"></a>static定位</h4><p><strong>static</strong>是<strong>position</strong>属性的默认值。</p>
+<p><strong>static</strong>定位所导致的元素位置，是浏览器自主决定的，<strong>static</strong>定位下<strong>top</strong>、<strong>bottom</strong>、<strong>left</strong>、<strong>right</strong>这四个属性无效。</p>
+<h4 id="relative"><a href="#relative" class="headerlink" title="relative"></a>relative</h4><p><strong>relative</strong>表示，相对于默认位置（即<strong>static</strong>时的位置）进行偏移，即定位基点是元素的默认位置。</p>
+<h4 id="absolute"><a href="#absolute" class="headerlink" title="absolute"></a>absolute</h4><p><strong>absolute</strong>表示，相对于祖先元素第一个非<strong>static</strong>的父元素进行偏移，若没有任何一个祖先元素符合，则根据html根元素进行偏移</p>
+<h4 id="fixed"><a href="#fixed" class="headerlink" title="fixed"></a>fixed</h4><p><strong>fixed</strong>表示，相对于视口（viewport，浏览器窗口）进行偏移，即定位基点是浏览器视口。实现类似固定在网页上一样的效果</p>
+<h4 id="sticky"><a href="#sticky" class="headerlink" title="sticky"></a>sticky</h4><p><strong>sticky</strong>布局类似<strong>relative</strong>和<strong>fixed</strong>的结合：一些时候是<strong>relative</strong>定位（定位基点是自身默认位置），另一些时候自动变成<strong>fixed</strong>定位（定位基点是视口）。</p>
+<p>它的具体规则是，当页面滚动，父元素开始脱离视口时（即部分不可见），只要与<strong>sticky</strong>元素的距离达到生效门槛，<strong>relative</strong>定位自动切换为<strong>fixed</strong>定位；等到父元素完全脱离视口时（即完全不可见），<strong>fixed</strong>定位自动切换回relative定位。</p>
+<hr>
+<h3 id="Flex布局"><a href="#Flex布局" class="headerlink" title="Flex布局"></a>Flex布局</h3><h4 id="容器属性"><a href="#容器属性" class="headerlink" title="容器属性"></a>容器属性</h4><h5 id="flex-direction"><a href="#flex-direction" class="headerlink" title="flex-direction"></a>flex-direction</h5><p><strong>flex-direction</strong>属性决定主轴的方向（即项目的排列方向）。</p>
+<h5 id="flex-wrap"><a href="#flex-wrap" class="headerlink" title="flex-wrap"></a>flex-wrap</h5><p>默认情况下，项目都排在一条线（又称”轴线”）上。<strong>flex-wrap</strong>属性定义，如果一条轴线排不下，如何换行。</p>
+<h5 id="justify-content"><a href="#justify-content" class="headerlink" title="justify-content"></a>justify-content</h5><p><strong>justify-content</strong>属性定义了项目在主轴上的对齐方式。</p>
+<h5 id="align-items"><a href="#align-items" class="headerlink" title="align-items"></a>align-items</h5><p><strong>align-items</strong>属性定义项目在副轴上如何对齐。</p>
+<h5 id="align-content"><a href="#align-content" class="headerlink" title="align-content"></a>align-content</h5><p><strong>align-content</strong>属性定义了多根轴线的对齐方式。如果项目只有一根轴线，该属性不起作用。</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">align-content</span>: flex-start | flex-end | center | space-between | space-around | stretch;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="项目属性"><a href="#项目属性" class="headerlink" title="项目属性"></a>项目属性</h4><h5 id="order"><a href="#order" class="headerlink" title="order"></a>order</h5><p><strong>order</strong>属性定义项目的排列顺序。数值越小，排列越靠前，默认为0。</p>
+<!-- ##### flex-grow
+##### flex-shrink
+##### flex-basis -->
+
+<h5 id="flex"><a href="#flex" class="headerlink" title="flex"></a>flex</h5><p><strong>flex</strong>属性是<strong>flex-grow</strong>, <strong>flex-shrink</strong> 和 <strong>flex-basis</strong>的简写，默认值为0 1 auto。后两个属性可选。</p>
+<h6 id="flex：1"><a href="#flex：1" class="headerlink" title="flex：1"></a>flex：1</h6><p><code>flex：x</code> 相当于 <code>flex-grow: x，flex-shrink：1，flex-basis：0%；</code></p>
 <p><code> flex-grow: 定义项目的放大比例,0为不放大</code></p>
 <p><code>flex-shrink: 定义了项目的缩小比例，默认为1，即如果空间不足，该项目将缩小。 </code></p>
 <p><code>flex-basis: 定义了在分配多余空间之前，项目占据的主轴空间。浏览器根据这个属性，计算主轴是否有多余空间。它的默认值为auto，即项目的本来大小。   </code></p>
 <figure class="highlight plaintext"><figcaption><span>``` 的含义是分配**主轴**方向上的剩余空间！</span></figcaption><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">所以对于竖直的两栏布局，只需要改变一下主轴方向即可</span><br><span class="line"></span><br><span class="line">```html</span><br><span class="line">&lt;style&gt;</span><br><span class="line">    body &#123;</span><br><span class="line">        height: 100%;</span><br><span class="line">        width: 100%;</span><br><span class="line">    &#125;</span><br><span class="line">    .f-box &#123;</span><br><span class="line">        display: flex;</span><br><span class="line">        flex-direction: column;</span><br><span class="line">        border: 5px solid gray;</span><br><span class="line">        height: 100%;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    .top &#123;</span><br><span class="line">        height: 100px;</span><br><span class="line">        background-color: red;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    .bot &#123;</span><br><span class="line">        flex: 1;</span><br><span class="line">        background-color:blue;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line"></span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;div class=&quot;f-box&quot;&gt;</span><br><span class="line">    &lt;div class=&quot;top&quot;&gt;&lt;/div&gt;</span><br><span class="line">    &lt;div class=&quot;bot&quot;&gt;&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure>
 
 
+<h5 id="align-self"><a href="#align-self" class="headerlink" title="align-self"></a>align-self</h5><p><strong>align-self</strong>属性允许单个项目有与其他项目不一样的对齐方式，可覆盖<strong>align-items</strong>属性。默认值为<strong>auto</strong>，表示继承父元素的<strong>align-items</strong>属性，如果没有父元素，则等同于<strong>stretch</strong>。</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.item</span> &#123;</span><br><span class="line">  <span class="attribute">align-self</span>: auto | flex-start | flex-end | center | baseline | stretch;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="5-display：none，visibility：hidden，opacity：0-的区别"><a href="#5-display：none，visibility：hidden，opacity：0-的区别" class="headerlink" title="5. display：none，visibility：hidden，opacity：0  的区别"></a>5. <code>display：none，visibility：hidden，opacity：0</code>  的区别</h3><h4 id="display-none"><a href="#display-none" class="headerlink" title="display: none;"></a>display: none;</h4><ol>
+<p><img src="/../assets/css-flex.png" alt="alt text"></p>
+<hr>
+<h3 id="Grid布局"><a href="#Grid布局" class="headerlink" title="Grid布局"></a>Grid布局</h3><p>Grid 布局的属性分成两类。一类定义在容器上面，称为容器属性；另一类定义在项目上面，称为项目属性</p>
+<h4 id="容器属性-1"><a href="#容器属性-1" class="headerlink" title="容器属性"></a>容器属性</h4><h5 id="display-grid"><a href="#display-grid" class="headerlink" title="display: grid"></a>display: grid</h5><p>指定网格布局</p>
+<h5 id="grid-template-columns-属性，grid-template-rows-属性"><a href="#grid-template-columns-属性，grid-template-rows-属性" class="headerlink" title="grid-template-columns 属性，grid-template-rows 属性"></a>grid-template-columns 属性，grid-template-rows 属性</h5><p>容器指定了网格布局以后，接着就要划分行和列。grid-template-columns属性定义每一列的列宽，grid-template-rows属性定义每一行的行高。</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: grid;</span><br><span class="line">  <span class="attribute">grid-template-columns</span>: <span class="number">100px</span> <span class="number">100px</span> <span class="number">100px</span>;</span><br><span class="line">  <span class="attribute">grid-template-rows</span>: <span class="number">100px</span> <span class="number">100px</span> <span class="number">100px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>用repeat改写如下：</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: grid;</span><br><span class="line">  <span class="attribute">grid-template-columns</span>: <span class="built_in">repeat</span>(<span class="number">3</span>, <span class="number">33.33%</span>);</span><br><span class="line">  <span class="attribute">grid-template-rows</span>: <span class="built_in">repeat</span>(<span class="number">3</span>, <span class="number">33.33%</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>用fr改写如下：</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: grid;</span><br><span class="line">  <span class="attribute">grid-template-columns</span>: <span class="number">1</span>fr <span class="number">1</span>fr <span class="number">1</span>fr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>fr还可以与绝对长度的单位结合使用</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: grid;</span><br><span class="line">  <span class="attribute">grid-template-columns</span>: <span class="number">150px</span> <span class="number">1</span>fr <span class="number">2</span>fr; // 类似<span class="attribute">flex</span> <span class="number">1</span>，<span class="attribute">flex</span> <span class="number">2</span>这样分配剩余空间</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="grid-row-gap、grid-column-gap、grid-gap-属性"><a href="#grid-row-gap、grid-column-gap、grid-gap-属性" class="headerlink" title="grid-row-gap、grid-column-gap、grid-gap 属性"></a>grid-row-gap、grid-column-gap、grid-gap 属性</h5><p>grid-row-gap属性设置行与行的间隔（行间距），grid-column-gap属性设置列与列的间隔（列间距）。</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">  <span class="attribute">grid-row</span>-<span class="attribute">gap</span>: <span class="number">20px</span>;</span><br><span class="line">  <span class="attribute">grid-column</span>-<span class="attribute">gap</span>: <span class="number">20px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="项目属性-1"><a href="#项目属性-1" class="headerlink" title="项目属性"></a>项目属性</h4><hr>
+<h3 id="display：none，visibility：hidden，opacity：0-的区别"><a href="#display：none，visibility：hidden，opacity：0-的区别" class="headerlink" title="display：none，visibility：hidden，opacity：0  的区别"></a><code>display：none，visibility：hidden，opacity：0</code>  的区别</h3><h4 id="display-none"><a href="#display-none" class="headerlink" title="display: none;"></a>display: none;</h4><ol>
 <li>DOM 结构：浏览器不会渲染 display 属性为 none 的元素，不占据空间；</li>
 <li><strong>事件监听：无法进行 DOM 事件监听；</strong></li>
 <li>性能：动态改变此属性时会引起重排，性能较差；</li>
@@ -116,7 +160,7 @@
 <p>一般表现为应用层服务 (upstream) 超时，如查库操作耗时十分钟，超过了 Nginx 配置的超时时间</p>
 </blockquote>
 <hr>
-<h3 id="HTTP-状态码-502-和-504-有什么区别"><a href="#HTTP-状态码-502-和-504-有什么区别" class="headerlink" title="HTTP 状态码 502 和 504 有什么区别"></a>HTTP 状态码 502 和 504 有什么区别</h3><p>这两种异常状态码都与网关 Gateway 有关，首先明确两个概念</p>
+<h4 id="HTTP-状态码-502-和-504-有什么区别"><a href="#HTTP-状态码-502-和-504-有什么区别" class="headerlink" title="HTTP 状态码 502 和 504 有什么区别"></a>HTTP 状态码 502 和 504 有什么区别</h4><p>这两种异常状态码都与网关 Gateway 有关，首先明确两个概念</p>
 <ul>
 <li>Proxy (Gateway)，反向代理层或者网关层。在公司级应用中一般使用 Nginx 扮演这个角色</li>
 <li>Application (upstream serrver)，应用层服务，作为 Proxy 层的上游服务。在公司中一般为各种语言编写的服务器应用，如 Go&#x2F;Java&#x2F;Python&#x2F;PHP&#x2F;Node 等</li>
@@ -207,6 +251,42 @@
       </tags>
   </entry>
   <entry>
+    <title>Hexo + Next + GitHub Page搭建个人博客</title>
+    <url>/2024/09/21/Hexo%20+%20Next%20+%20GitHub%20Page%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
+    <content><![CDATA[<h4 id="Hexo介绍"><a href="#Hexo介绍" class="headerlink" title="Hexo介绍"></a>Hexo介绍</h4><p>Hexo是一款基于Node.js的开源静态博客框架，用于快速、简单且高效地搭建静态博客网站。本质上是一个静态网站生成器，新增文章只需要编辑md文件，通过运行命令再生成像html的静态文件。</p>
+<h4 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">全局安装hexo脚手架</span></span><br><span class="line">npm install -g hexo-cli</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建一blog项目</span></span><br><span class="line">hexo init blog</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">进入项目</span></span><br><span class="line">cd blog</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">安装依赖包</span></span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
+
+<h4 id="其他操作"><a href="#其他操作" class="headerlink" title="其他操作"></a>其他操作</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">右键 Git Bush，用户项目自动化部署</span></span><br><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+
+<h4 id="项目预览"><a href="#项目预览" class="headerlink" title="项目预览"></a>项目预览</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">清理旧的静态文件</span></span><br><span class="line">hexo clean</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">生成静态文件</span></span><br><span class="line">hexo g</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">运行预览项目</span></span><br><span class="line">hexo s</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+
+<h4 id="Hexo配置文件详解（-config-yml）"><a href="#Hexo配置文件详解（-config-yml）" class="headerlink" title="Hexo配置文件详解（_config.yml）"></a>Hexo配置文件详解（_config.yml）</h4><h4 id="Hexo插件"><a href="#Hexo插件" class="headerlink" title="Hexo插件"></a>Hexo插件</h4><h5 id="文章排序、显隐插件"><a href="#文章排序、显隐插件" class="headerlink" title="文章排序、显隐插件"></a>文章排序、显隐插件</h5><p>插件：<strong>hexo-generator-index-custom</strong><br>详细见：<a href="https://github.com/im0o/hexo-generator-index-custom">https://github.com/im0o/hexo-generator-index-custom</a></p>
+<h5 id="搜索插件"><a href="#搜索插件" class="headerlink" title="搜索插件"></a>搜索插件</h5><h4 id="Next主题样式"><a href="#Next主题样式" class="headerlink" title="Next主题样式"></a>Next主题样式</h4><blockquote>
+<p>官方文档：<a href="https://theme-next.js.org/docs/getting-started/configuration.html">https://theme-next.js.org/docs/getting-started/configuration.html</a></p>
+</blockquote>
+<h5 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h5><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git clone https://github.com/next-theme/theme-next-docs</span><br><span class="line">cd theme-next-docs</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
+<h5 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h5><ol>
+<li>Hexo版本&gt;&#x3D;5.0</li>
+<li>在Hexo项目根目录下创建Next配置文件，命名为_config.next.yml</li>
+<li>首次创建Next配置文件时，可以直接复制theme-next-docs目录下的next默认配置文化<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Installed through npm</span></span><br><span class="line">cp node_modules/hexo-theme-next/_config.yml _config.next.yml</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Installed through Git</span></span><br><span class="line">cp themes/next/_config.yml _config.next.yml</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h5 id="站点中的icon替换"><a href="#站点中的icon替换" class="headerlink" title="站点中的icon替换"></a>站点中的icon替换</h5><blockquote>
+<p>Next默认引了fontawsome样式，大部分直接替换即可 <a href="https://fontawesome.dashgame.com/">https://fontawesome.dashgame.com/</a></p>
+</blockquote>
+<h4 id="站点托管"><a href="#站点托管" class="headerlink" title="站点托管"></a>站点托管</h4><h5 id="腾讯云静态资源托管"><a href="#腾讯云静态资源托管" class="headerlink" title="腾讯云静态资源托管"></a>腾讯云静态资源托管</h5>]]></content>
+      <categories>
+        <category>Chore</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>Hexo</tag>
+        <tag>Github</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>HTTP缓存</title>
     <url>/2021/09/18/HTTP%E7%BC%93%E5%AD%98/</url>
     <content><![CDATA[<h4 id="HTTP缓存过程"><a href="#HTTP缓存过程" class="headerlink" title="HTTP缓存过程"></a>HTTP缓存过程</h4><blockquote>
@@ -268,39 +348,102 @@
       </tags>
   </entry>
   <entry>
-    <title>Hexo + Next + GitHub Page搭建个人博客</title>
-    <url>/2024/09/21/Hexo%20+%20Next%20+%20GitHub%20Page%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
-    <content><![CDATA[<h4 id="Hexo介绍"><a href="#Hexo介绍" class="headerlink" title="Hexo介绍"></a>Hexo介绍</h4><p>Hexo是一款基于Node.js的开源静态博客框架，用于快速、简单且高效地搭建静态博客网站。本质上是一个静态网站生成器，新增文章只需要编辑md文件，通过运行命令再生成像html的静态文件。</p>
-<h4 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">全局安装hexo脚手架</span></span><br><span class="line">npm install -g hexo-cli</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建一blog项目</span></span><br><span class="line">hexo init blog</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">进入项目</span></span><br><span class="line">cd blog</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">安装依赖包</span></span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
-
-<h4 id="其他操作"><a href="#其他操作" class="headerlink" title="其他操作"></a>其他操作</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">右键 Git Bush，用户项目自动化部署</span></span><br><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
-
-<h4 id="项目预览"><a href="#项目预览" class="headerlink" title="项目预览"></a>项目预览</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">清理旧的静态文件</span></span><br><span class="line">hexo clean</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">生成静态文件</span></span><br><span class="line">hexo g</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">运行预览项目</span></span><br><span class="line">hexo s</span><br></pre></td></tr></table></figure>
-
-<span id="more"></span>
-
-
-<h4 id="Hexo配置文件详解（-config-yml）"><a href="#Hexo配置文件详解（-config-yml）" class="headerlink" title="Hexo配置文件详解（_config.yml）"></a>Hexo配置文件详解（_config.yml）</h4><h4 id="Hexo插件"><a href="#Hexo插件" class="headerlink" title="Hexo插件"></a>Hexo插件</h4><h5 id="文章排序、显隐插件"><a href="#文章排序、显隐插件" class="headerlink" title="文章排序、显隐插件"></a>文章排序、显隐插件</h5><p>插件：<strong>hexo-generator-index-custom</strong><br>详细见：<a href="https://github.com/im0o/hexo-generator-index-custom">https://github.com/im0o/hexo-generator-index-custom</a></p>
-<h5 id="搜索插件"><a href="#搜索插件" class="headerlink" title="搜索插件"></a>搜索插件</h5><h4 id="Next主题样式"><a href="#Next主题样式" class="headerlink" title="Next主题样式"></a>Next主题样式</h4><blockquote>
-<p>官方文档：<a href="https://theme-next.js.org/docs/getting-started/configuration.html">https://theme-next.js.org/docs/getting-started/configuration.html</a></p>
-</blockquote>
-<h5 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h5><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git clone https://github.com/next-theme/theme-next-docs</span><br><span class="line">cd theme-next-docs</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
-<h5 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h5><ol>
-<li>Hexo版本&gt;&#x3D;5.0</li>
-<li>在Hexo项目根目录下创建Next配置文件，命名为_config.next.yml</li>
-<li>首次创建Next配置文件时，可以直接复制theme-next-docs目录下的next默认配置文化<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Installed through npm</span></span><br><span class="line">cp node_modules/hexo-theme-next/_config.yml _config.next.yml</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Installed through Git</span></span><br><span class="line">cp themes/next/_config.yml _config.next.yml</span><br></pre></td></tr></table></figure></li>
-</ol>
-<h5 id="站点中的icon替换"><a href="#站点中的icon替换" class="headerlink" title="站点中的icon替换"></a>站点中的icon替换</h5><blockquote>
-<p>Next默认引了fontawsome样式，大部分直接替换即可 <a href="https://fontawesome.dashgame.com/">https://fontawesome.dashgame.com/</a></p>
-</blockquote>
-<h4 id="站点托管"><a href="#站点托管" class="headerlink" title="站点托管"></a>站点托管</h4><h5 id="腾讯云静态资源托管"><a href="#腾讯云静态资源托管" class="headerlink" title="腾讯云静态资源托管"></a>腾讯云静态资源托管</h5>]]></content>
+    <title>IPad配置开发环境</title>
+    <url>/2024/11/12/IPad%E9%85%8D%E7%BD%AE%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</url>
+    <content><![CDATA[]]></content>
       <categories>
         <category>Chore</category>
       </categories>
       <tags>
-        <tag>JavaScript</tag>
-        <tag>Hexo</tag>
-        <tag>Github</tag>
+        <tag>编程环境</tag>
+        <tag>IPad</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Https</title>
+    <url>/2021/09/13/Https/</url>
+    <content><![CDATA[<h4 id="为什么需要加密？"><a href="#为什么需要加密？" class="headerlink" title="为什么需要加密？"></a><strong>为什么需要加密？</strong></h4><p>因为http的内容是明文传输的，明文数据会经过中间代理服务器、路由器、wifi热点、通信服务运营商等多个物理节点，如果信息在传输过程中被劫持，传输的内容就完全暴露了。劫持者还可以篡改传输的信息且不被双方察觉，这就是“中间人攻击”。</p>
+<h4 id="用对称加密可行吗？"><a href="#用对称加密可行吗？" class="headerlink" title="用对称加密可行吗？"></a><strong>用对称加密可行吗？</strong></h4><p>对称加密最大的问题就是密钥的传输，而密钥的传输又需要加密（反复套娃），故而单纯的对称加密是无法解决问题的。</p>
+<span id="more"></span>
+
+
+<h4 id="用非对称加密可行吗？"><a href="#用非对称加密可行吗？" class="headerlink" title="用非对称加密可行吗？"></a>用非对称加密可行吗？</h4><p>鉴于非对称加密的机制，我们可能会有这种思路：服务器先把公钥以明文方式传输给浏览器，之后浏览器向服务器传数据前都先用这个公钥加密好再传，这条数据的安全似乎可以保障了！<strong>因为只有服务器有相应的私钥能解开公钥加密的数据</strong>。</p>
+<p>然而反过来<strong>由服务器到浏览器的这条路怎么保障安全？</strong>如果服务器用它的私钥加密数据传给浏览器，那么浏览器用公钥可以解密它，而这个公钥是一开始通过明文传输给浏览器的，若这个公钥被中间人劫持到了，那他也能用该公钥解密服务器传来的信息了。所以<strong>目前似乎只能保证由浏览器向服务器传输数据的安全性</strong></p>
+<h4 id="那用两组公钥私钥，是否就能保证双向传输都安全了？"><a href="#那用两组公钥私钥，是否就能保证双向传输都安全了？" class="headerlink" title="那用两组公钥私钥，是否就能保证双向传输都安全了？"></a>那用两组公钥私钥，是否就能保证双向传输都安全了？</h4><ol>
+<li>某网站服务器拥有公钥A与对应的私钥A’；浏览器拥有公钥B与对应的私钥B’。</li>
+<li>浏览器把公钥B明文传输给服务器。</li>
+<li>服务器把公钥A明文给传输浏览器。</li>
+<li>之后浏览器向服务器传输的内容都用公钥A加密，服务器收到后用私钥A’解密。由于只有服务器拥有私钥A’，所以能保证这条数据的安全。</li>
+<li>同理，服务器向浏览器传输的内容都用公钥B加密，浏览器收到后用私钥B’解密。同上也可以保证这条数据的安全。</li>
+</ol>
+<p>然而这又引出了一个新的问题，非对称加密非常耗时，如何解决？（见RSA算法）而且这种方法真的安全了吗？</p>
+<h4 id="非对称加密-对称加密"><a href="#非对称加密-对称加密" class="headerlink" title="非对称加密 + 对称加密"></a>非对称加密 + 对称加密</h4><ol>
+<li>某网站拥有用于非对称加密的公钥A、私钥A’。</li>
+<li>浏览器向网站服务器请求，服务器把公钥A明文给传输浏览器。</li>
+<li>浏览器随机生成一个用于对称加密的密钥X，用公钥A加密后传给服务器。</li>
+<li>服务器拿到后用私钥A’解密得到密钥X。</li>
+<li>这样双方就都拥有密钥X了，且别人无法知道它。之后双方所有数据都通过密钥X加密解密即可。</li>
+</ol>
+<p>这基本上就是https采用的方案了，但仍然还是有漏洞。</p>
+<h4 id="中间人攻击"><a href="#中间人攻击" class="headerlink" title="中间人攻击"></a>中间人攻击</h4><p>中间人攻击（MITMA，man in the middle attack）<br>中间人攻击是一种网络攻击类型 ，应用与LAN局域网中。这种攻击的方式是 hacker 置身于两个通信 paties 之间，窃取数据。</p>
+<p>中间人攻击允许黑客截获双方之间的数据，它可能是服务器和客户端或客户端到客户端或服务器到服务器。</p>
+<p><img src="/../assets/image-20210513212400962.png" alt="image-20210513212400962"></p>
+<p>如果在数据传输过程中，中间人劫持到了数据，此时他的确无法得到浏览器生成的密钥X，这个密钥本身被公钥A加密了，只有服务器才有私钥A’解开它，然而中间人却完全不需要拿到私钥A’就能干坏事了。请看：</p>
+<ol>
+<li>某网站有用于非对称加密的公钥A、私钥A’。</li>
+<li>浏览器向网站服务器请求，服务器把公钥A明文给传输浏览器。</li>
+<li><strong>中间人劫持到公钥A，保存下来，把数据包中的公钥A替换成自己伪造的公钥B（它当然也拥有公钥B对应的私钥B’）</strong>。</li>
+<li>浏览器生成一个用于对称加密的密钥X，用<strong>公钥B</strong>（浏览器无法得知公钥被替换了）加密后传给服务器。</li>
+<li><strong>中间人劫持后用私钥B’解密得到密钥X，再用公钥A加密后传给服务器</strong>。</li>
+<li>服务器拿到后用私钥A’解密得到密钥X。</li>
+</ol>
+<p>这样在双方都不会发现异常的情况下，中间人掉包了服务器传来的公钥，进而得到了密钥X。<strong>根本原因是浏览器无法确认收到的公钥是不是网站自己的，</strong>因为公钥本身是明文传输的，难道还得对公钥的传输进行加密？这似乎变成鸡生蛋、蛋生鸡的问题了。解法是什么？</p>
+<h4 id="如何证明浏览器收到的公钥一定是该网站的公钥？"><a href="#如何证明浏览器收到的公钥一定是该网站的公钥？" class="headerlink" title="如何证明浏览器收到的公钥一定是该网站的公钥？"></a><strong>如何证明浏览器收到的公钥一定是该网站的公钥？</strong></h4><p>网站是否有个‘身份证’来证明自己的公钥合法？这个‘身份证’又由谁来颁发？</p>
+<p><strong>CA机构</strong>，它是如今互联网世界正常运作的前提，而CA机构颁发的“身份证”就是<strong>数字证书</strong>。</p>
+<h4 id="数字证书"><a href="#数字证书" class="headerlink" title="数字证书"></a><strong>数字证书</strong></h4><p>网站在使用HTTPS前，需要向<strong>CA机构</strong>申领一份<strong>数字证书</strong>，数字证书里含有证书持有者信息、域名、公钥信息等。服务器把证书传输给浏览器，浏览器从证书里获取公钥就行了，证书就如身份证，证明“该公钥对应该网站”。</p>
+<p>而这里又有一个显而易见的问题，“<strong>证书本身的传输过程中，如何防止被篡改”</strong>？即如何证明证书本身的真实性？身份证运用了一些防伪技术，而数字证书怎么防伪呢？</p>
+<h4 id="如何放防止数字证书被篡改？"><a href="#如何放防止数字证书被篡改？" class="headerlink" title="如何放防止数字证书被篡改？"></a><strong>如何放防止数字证书被篡改？</strong></h4><p>我们把证书原本的内容生成一份“签名”，比对证书内容和签名是否一致就能判别是否被篡改。这就是数字证书的“防伪技术”，这里的“签名”就叫<code>数字签名</code>：</p>
+<p>数字签名的制作过程：</p>
+<ol>
+<li>CA机构拥有非对称加密的私钥和公钥。</li>
+<li>CA机构对证书明文数据T进行hash。</li>
+<li>对hash后的值用私钥加密，得到数字签名S。</li>
+</ol>
+<p>明文和数字签名共同组成了数字证书，这样一份数字证书就可以颁发给网站了。<br>那浏览器拿到服务器传来的数字证书后，如何验证它是不是真的？（有没有被篡改、掉包）</p>
+<p>浏览器验证过程：</p>
+<ol>
+<li>拿到证书，得到明文T，签名S。</li>
+<li>用CA机构的公钥对S解密（由于是浏览器信任的机构，所以浏览器保有它的公钥。详情见下文），得到S’。</li>
+<li>用证书里指明的hash算法对明文T进行hash得到T’。</li>
+<li>显然通过以上步骤，T’应当等于S‘，除非明文或签名被篡改。所以此时比较S’是否等于T’，等于则表明证书可信。</li>
+</ol>
+<p><img src="/../assets/image-20210513214044731.png" alt="image-20210513214044731"></p>
+<h4 id="中间人有可能篡改该证书吗？"><a href="#中间人有可能篡改该证书吗？" class="headerlink" title="中间人有可能篡改该证书吗？"></a><strong>中间人有可能篡改该证书吗？</strong></h4><p>假设中间人篡改了证书的原文，由于他没有CA机构的私钥，所以无法得到此时加密后签名，无法相应地篡改签名。浏览器收到该证书后会发现原文和签名解密后的值不一致，则说明证书已被篡改，证书不可信</p>
+<h4 id="中间人有可能把证书掉包吗？"><a href="#中间人有可能把证书掉包吗？" class="headerlink" title="中间人有可能把证书掉包吗？"></a><strong>中间人有可能把证书掉包吗？</strong></h4><p>假设有另一个网站B也拿到了CA机构认证的证书，它想劫持网站A的信息。于是它成为中间人拦截到了A传给浏览器的证书，然后替换成自己的证书，传给浏览器，之后浏览器就会错误地拿到B的证书里的公钥了。</p>
+<p>其实这并不会发生，因为证书一定是无法被篡改的，所以网站B掉包的一定也是正规的证书，而证书黎里包含了网站的信息，包括域名，浏览器把证书里的域名与自己请求的域名比对一下就知道有没有被掉包了。</p>
+<h4 id="为什么制作数字签名时需要hash一次？"><a href="#为什么制作数字签名时需要hash一次？" class="headerlink" title="为什么制作数字签名时需要hash一次？"></a><strong>为什么制作数字签名时需要hash一次？</strong></h4><p>最显然的是性能问题，非对称加密效率较差，证书信息一般较长，比较耗时。而hash后得到的是固定长度的信息（比如用md5算法hash后可以得到固定的128位的值），这样加解密就快很多。</p>
+<h4 id="怎么证明CA机构的公钥是可信的？"><a href="#怎么证明CA机构的公钥是可信的？" class="headerlink" title="怎么证明CA机构的公钥是可信的？"></a><strong>怎么证明CA机构的公钥是可信的？</strong></h4><p>“浏览器保有它的公钥”，这是个什么保有法？怎么证明这个公钥是否可信？</p>
+<p>让我们回想一下数字证书到底是干啥的？没错，为了证明某公钥是可信的，即“该公钥是否对应该网站”，那CA机构的公钥是否也可以用数字证书来证明？没错，操作系统、浏览器本身会预装一些它们信任的根证书，如果其中会有CA机构的根证书，这样就可以拿到它对应的可信公钥了。</p>
+<p>实际上证书之间的认证也可以不止一层，可以A信任B，B信任C，以此类推，我们把它叫做<code>信任链</code>或<code>数字证书链</code>。也就是一连串的数字证书，由根证书为起点，透过层层信任，使终端实体证书的持有者可以获得转授的信任，以证明身份。</p>
+<p>另外，不知你们是否遇到过网站访问不了、提示需安装证书的情况？这里安装的就是根证书。说明浏览器不认给这个网站颁发证书的机构，那么你就得手动下载安装该机构的根证书（风险自己承担XD）。安装后，你就有了它的公钥，就可以用它验证服务器发来的证书是否可信了。</p>
+<h4 id="每次进行HTTPS请求时都必须在SSL-TLS层进行握手传输密钥吗？"><a href="#每次进行HTTPS请求时都必须在SSL-TLS层进行握手传输密钥吗？" class="headerlink" title="每次进行HTTPS请求时都必须在SSL&#x2F;TLS层进行握手传输密钥吗？"></a><strong>每次进行HTTPS请求时都</strong>必须<strong>在SSL&#x2F;TLS层进行握手传输密钥吗？</strong></h4><p>显然每次请求都经历一次密钥传输过程非常耗时，那怎么达到只传输一次呢？</p>
+<p>服务器会为每个浏览器（或客户端软件）维护一个session ID，在TLS握手阶段传给浏览器，浏览器生成好密钥传给服务器后，服务器会把该密钥存到相应的session ID下，之后浏览器每次请求都会携带session ID，服务器会根据session ID找到相应的密钥并进行解密加密操作，这样就不必要每次重新制作、传输密钥了！</p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a><strong>总结</strong></h4><p>TLS建立连接的整个过程（SSL、TLS握手有一些区别，不同版本间也有区别，不过大致过程就是这样）</p>
+<ul>
+<li>首先客户端通过 URL 访问服务器建立 SSL 连接。</li>
+<li>服务端收到客户端请求后，会将网站支持的证书信息（证书中包含公钥）传送一份给客户端。</li>
+<li>客户端的服务器开始协商 TLS 连接的安全等级，也就是信息加密的等级。</li>
+<li>客户端的浏览器根据双方同意的安全等级，建立会话密钥，然后利用网站的公钥将会话密钥加密，并传送给网站。</li>
+<li>服务器利用自己的私钥解密出会话密钥。</li>
+<li>服务器利用会话密钥加密与客户端之间的通信。</li>
+</ul>
+]]></content>
+      <categories>
+        <category>计算机网络</category>
+      </categories>
+      <tags>
+        <tag>Network</tag>
+        <tag>Https</tag>
       </tags>
   </entry>
   <entry>
@@ -428,97 +571,6 @@
         <tag>JavaScript</tag>
         <tag>Hooks</tag>
         <tag>React</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Https</title>
-    <url>/2021/09/13/Https/</url>
-    <content><![CDATA[<h4 id="为什么需要加密？"><a href="#为什么需要加密？" class="headerlink" title="为什么需要加密？"></a><strong>为什么需要加密？</strong></h4><p>因为http的内容是明文传输的，明文数据会经过中间代理服务器、路由器、wifi热点、通信服务运营商等多个物理节点，如果信息在传输过程中被劫持，传输的内容就完全暴露了。劫持者还可以篡改传输的信息且不被双方察觉，这就是“中间人攻击”。</p>
-<h4 id="用对称加密可行吗？"><a href="#用对称加密可行吗？" class="headerlink" title="用对称加密可行吗？"></a><strong>用对称加密可行吗？</strong></h4><p>对称加密最大的问题就是密钥的传输，而密钥的传输又需要加密（反复套娃），故而单纯的对称加密是无法解决问题的。</p>
-<span id="more"></span>
-
-
-<h4 id="用非对称加密可行吗？"><a href="#用非对称加密可行吗？" class="headerlink" title="用非对称加密可行吗？"></a>用非对称加密可行吗？</h4><p>鉴于非对称加密的机制，我们可能会有这种思路：服务器先把公钥以明文方式传输给浏览器，之后浏览器向服务器传数据前都先用这个公钥加密好再传，这条数据的安全似乎可以保障了！<strong>因为只有服务器有相应的私钥能解开公钥加密的数据</strong>。</p>
-<p>然而反过来<strong>由服务器到浏览器的这条路怎么保障安全？</strong>如果服务器用它的私钥加密数据传给浏览器，那么浏览器用公钥可以解密它，而这个公钥是一开始通过明文传输给浏览器的，若这个公钥被中间人劫持到了，那他也能用该公钥解密服务器传来的信息了。所以<strong>目前似乎只能保证由浏览器向服务器传输数据的安全性</strong></p>
-<h4 id="那用两组公钥私钥，是否就能保证双向传输都安全了？"><a href="#那用两组公钥私钥，是否就能保证双向传输都安全了？" class="headerlink" title="那用两组公钥私钥，是否就能保证双向传输都安全了？"></a>那用两组公钥私钥，是否就能保证双向传输都安全了？</h4><ol>
-<li>某网站服务器拥有公钥A与对应的私钥A’；浏览器拥有公钥B与对应的私钥B’。</li>
-<li>浏览器把公钥B明文传输给服务器。</li>
-<li>服务器把公钥A明文给传输浏览器。</li>
-<li>之后浏览器向服务器传输的内容都用公钥A加密，服务器收到后用私钥A’解密。由于只有服务器拥有私钥A’，所以能保证这条数据的安全。</li>
-<li>同理，服务器向浏览器传输的内容都用公钥B加密，浏览器收到后用私钥B’解密。同上也可以保证这条数据的安全。</li>
-</ol>
-<p>然而这又引出了一个新的问题，非对称加密非常耗时，如何解决？（见RSA算法）而且这种方法真的安全了吗？</p>
-<h4 id="非对称加密-对称加密"><a href="#非对称加密-对称加密" class="headerlink" title="非对称加密 + 对称加密"></a>非对称加密 + 对称加密</h4><ol>
-<li>某网站拥有用于非对称加密的公钥A、私钥A’。</li>
-<li>浏览器向网站服务器请求，服务器把公钥A明文给传输浏览器。</li>
-<li>浏览器随机生成一个用于对称加密的密钥X，用公钥A加密后传给服务器。</li>
-<li>服务器拿到后用私钥A’解密得到密钥X。</li>
-<li>这样双方就都拥有密钥X了，且别人无法知道它。之后双方所有数据都通过密钥X加密解密即可。</li>
-</ol>
-<p>这基本上就是https采用的方案了，但仍然还是有漏洞。</p>
-<h4 id="中间人攻击"><a href="#中间人攻击" class="headerlink" title="中间人攻击"></a>中间人攻击</h4><p>中间人攻击（MITMA，man in the middle attack）<br>中间人攻击是一种网络攻击类型 ，应用与LAN局域网中。这种攻击的方式是 hacker 置身于两个通信 paties 之间，窃取数据。</p>
-<p>中间人攻击允许黑客截获双方之间的数据，它可能是服务器和客户端或客户端到客户端或服务器到服务器。</p>
-<p><img src="/../assets/image-20210513212400962.png" alt="image-20210513212400962"></p>
-<p>如果在数据传输过程中，中间人劫持到了数据，此时他的确无法得到浏览器生成的密钥X，这个密钥本身被公钥A加密了，只有服务器才有私钥A’解开它，然而中间人却完全不需要拿到私钥A’就能干坏事了。请看：</p>
-<ol>
-<li>某网站有用于非对称加密的公钥A、私钥A’。</li>
-<li>浏览器向网站服务器请求，服务器把公钥A明文给传输浏览器。</li>
-<li><strong>中间人劫持到公钥A，保存下来，把数据包中的公钥A替换成自己伪造的公钥B（它当然也拥有公钥B对应的私钥B’）</strong>。</li>
-<li>浏览器生成一个用于对称加密的密钥X，用<strong>公钥B</strong>（浏览器无法得知公钥被替换了）加密后传给服务器。</li>
-<li><strong>中间人劫持后用私钥B’解密得到密钥X，再用公钥A加密后传给服务器</strong>。</li>
-<li>服务器拿到后用私钥A’解密得到密钥X。</li>
-</ol>
-<p>这样在双方都不会发现异常的情况下，中间人掉包了服务器传来的公钥，进而得到了密钥X。<strong>根本原因是浏览器无法确认收到的公钥是不是网站自己的，</strong>因为公钥本身是明文传输的，难道还得对公钥的传输进行加密？这似乎变成鸡生蛋、蛋生鸡的问题了。解法是什么？</p>
-<h4 id="如何证明浏览器收到的公钥一定是该网站的公钥？"><a href="#如何证明浏览器收到的公钥一定是该网站的公钥？" class="headerlink" title="如何证明浏览器收到的公钥一定是该网站的公钥？"></a><strong>如何证明浏览器收到的公钥一定是该网站的公钥？</strong></h4><p>网站是否有个‘身份证’来证明自己的公钥合法？这个‘身份证’又由谁来颁发？</p>
-<p><strong>CA机构</strong>，它是如今互联网世界正常运作的前提，而CA机构颁发的“身份证”就是<strong>数字证书</strong>。</p>
-<h4 id="数字证书"><a href="#数字证书" class="headerlink" title="数字证书"></a><strong>数字证书</strong></h4><p>网站在使用HTTPS前，需要向<strong>CA机构</strong>申领一份<strong>数字证书</strong>，数字证书里含有证书持有者信息、域名、公钥信息等。服务器把证书传输给浏览器，浏览器从证书里获取公钥就行了，证书就如身份证，证明“该公钥对应该网站”。</p>
-<p>而这里又有一个显而易见的问题，“<strong>证书本身的传输过程中，如何防止被篡改”</strong>？即如何证明证书本身的真实性？身份证运用了一些防伪技术，而数字证书怎么防伪呢？</p>
-<h4 id="如何放防止数字证书被篡改？"><a href="#如何放防止数字证书被篡改？" class="headerlink" title="如何放防止数字证书被篡改？"></a><strong>如何放防止数字证书被篡改？</strong></h4><p>我们把证书原本的内容生成一份“签名”，比对证书内容和签名是否一致就能判别是否被篡改。这就是数字证书的“防伪技术”，这里的“签名”就叫<code>数字签名</code>：</p>
-<p>数字签名的制作过程：</p>
-<ol>
-<li>CA机构拥有非对称加密的私钥和公钥。</li>
-<li>CA机构对证书明文数据T进行hash。</li>
-<li>对hash后的值用私钥加密，得到数字签名S。</li>
-</ol>
-<p>明文和数字签名共同组成了数字证书，这样一份数字证书就可以颁发给网站了。<br>那浏览器拿到服务器传来的数字证书后，如何验证它是不是真的？（有没有被篡改、掉包）</p>
-<p>浏览器验证过程：</p>
-<ol>
-<li>拿到证书，得到明文T，签名S。</li>
-<li>用CA机构的公钥对S解密（由于是浏览器信任的机构，所以浏览器保有它的公钥。详情见下文），得到S’。</li>
-<li>用证书里指明的hash算法对明文T进行hash得到T’。</li>
-<li>显然通过以上步骤，T’应当等于S‘，除非明文或签名被篡改。所以此时比较S’是否等于T’，等于则表明证书可信。</li>
-</ol>
-<p><img src="/../assets/image-20210513214044731.png" alt="image-20210513214044731"></p>
-<h4 id="中间人有可能篡改该证书吗？"><a href="#中间人有可能篡改该证书吗？" class="headerlink" title="中间人有可能篡改该证书吗？"></a><strong>中间人有可能篡改该证书吗？</strong></h4><p>假设中间人篡改了证书的原文，由于他没有CA机构的私钥，所以无法得到此时加密后签名，无法相应地篡改签名。浏览器收到该证书后会发现原文和签名解密后的值不一致，则说明证书已被篡改，证书不可信</p>
-<h4 id="中间人有可能把证书掉包吗？"><a href="#中间人有可能把证书掉包吗？" class="headerlink" title="中间人有可能把证书掉包吗？"></a><strong>中间人有可能把证书掉包吗？</strong></h4><p>假设有另一个网站B也拿到了CA机构认证的证书，它想劫持网站A的信息。于是它成为中间人拦截到了A传给浏览器的证书，然后替换成自己的证书，传给浏览器，之后浏览器就会错误地拿到B的证书里的公钥了。</p>
-<p>其实这并不会发生，因为证书一定是无法被篡改的，所以网站B掉包的一定也是正规的证书，而证书黎里包含了网站的信息，包括域名，浏览器把证书里的域名与自己请求的域名比对一下就知道有没有被掉包了。</p>
-<h4 id="为什么制作数字签名时需要hash一次？"><a href="#为什么制作数字签名时需要hash一次？" class="headerlink" title="为什么制作数字签名时需要hash一次？"></a><strong>为什么制作数字签名时需要hash一次？</strong></h4><p>最显然的是性能问题，非对称加密效率较差，证书信息一般较长，比较耗时。而hash后得到的是固定长度的信息（比如用md5算法hash后可以得到固定的128位的值），这样加解密就快很多。</p>
-<h4 id="怎么证明CA机构的公钥是可信的？"><a href="#怎么证明CA机构的公钥是可信的？" class="headerlink" title="怎么证明CA机构的公钥是可信的？"></a><strong>怎么证明CA机构的公钥是可信的？</strong></h4><p>“浏览器保有它的公钥”，这是个什么保有法？怎么证明这个公钥是否可信？</p>
-<p>让我们回想一下数字证书到底是干啥的？没错，为了证明某公钥是可信的，即“该公钥是否对应该网站”，那CA机构的公钥是否也可以用数字证书来证明？没错，操作系统、浏览器本身会预装一些它们信任的根证书，如果其中会有CA机构的根证书，这样就可以拿到它对应的可信公钥了。</p>
-<p>实际上证书之间的认证也可以不止一层，可以A信任B，B信任C，以此类推，我们把它叫做<code>信任链</code>或<code>数字证书链</code>。也就是一连串的数字证书，由根证书为起点，透过层层信任，使终端实体证书的持有者可以获得转授的信任，以证明身份。</p>
-<p>另外，不知你们是否遇到过网站访问不了、提示需安装证书的情况？这里安装的就是根证书。说明浏览器不认给这个网站颁发证书的机构，那么你就得手动下载安装该机构的根证书（风险自己承担XD）。安装后，你就有了它的公钥，就可以用它验证服务器发来的证书是否可信了。</p>
-<h4 id="每次进行HTTPS请求时都必须在SSL-TLS层进行握手传输密钥吗？"><a href="#每次进行HTTPS请求时都必须在SSL-TLS层进行握手传输密钥吗？" class="headerlink" title="每次进行HTTPS请求时都必须在SSL&#x2F;TLS层进行握手传输密钥吗？"></a><strong>每次进行HTTPS请求时都</strong>必须<strong>在SSL&#x2F;TLS层进行握手传输密钥吗？</strong></h4><p>显然每次请求都经历一次密钥传输过程非常耗时，那怎么达到只传输一次呢？</p>
-<p>服务器会为每个浏览器（或客户端软件）维护一个session ID，在TLS握手阶段传给浏览器，浏览器生成好密钥传给服务器后，服务器会把该密钥存到相应的session ID下，之后浏览器每次请求都会携带session ID，服务器会根据session ID找到相应的密钥并进行解密加密操作，这样就不必要每次重新制作、传输密钥了！</p>
-<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a><strong>总结</strong></h4><p>TLS建立连接的整个过程（SSL、TLS握手有一些区别，不同版本间也有区别，不过大致过程就是这样）</p>
-]]></content>
-      <categories>
-        <category>计算机网络</category>
-      </categories>
-      <tags>
-        <tag>Network</tag>
-        <tag>Https</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>IPad配置开发环境</title>
-    <url>/2024/11/12/IPad%E9%85%8D%E7%BD%AE%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>Chore</category>
-      </categories>
-      <tags>
-        <tag>编程环境</tag>
-        <tag>IPad</tag>
       </tags>
   </entry>
   <entry>
@@ -1001,6 +1053,32 @@
       <tags>
         <tag>JavaScript</tag>
         <tag>Node</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>React Fiber</title>
+    <url>/2021/11/27/React%20Fiber/</url>
+    <content><![CDATA[<p>React Fiber 本质上是一种基于<strong>双链表的数据结构和协调算法</strong>的结合体，它是 React 16.x 版本后对渲染机制的核心重构，它的主要目标是解决大型应用中渲染卡顿的问题，实现更高效的任务调度和更流畅的用户体验。</p>
+<h4 id="React的概念"><a href="#React的概念" class="headerlink" title="React的概念"></a>React的概念</h4><ul>
+<li>Virtual DOM 层，描述页面长什么样。</li>
+<li>Reconciler 层，负责调用组件生命周期方法，进行 Diff 运算等。</li>
+<li>Renderer 层，根据不同的平台，渲染出相应的页面，比较常见的是 ReactDOM 和<br>ReactNative。</li>
+</ul>
+<h4 id="为什么需要React-Fiber"><a href="#为什么需要React-Fiber" class="headerlink" title="为什么需要React Fiber"></a>为什么需要React Fiber</h4><h5 id="Reconciler"><a href="#Reconciler" class="headerlink" title="Reconciler"></a>Reconciler</h5><p>React 使用的算法将一棵树与另一棵树进行比较，”找不同”的过程就叫做 reconciliation 。<br>实际上，在每次更改时重新渲染整个应用程序仅适用于最琐碎的应用程序；在现实世界的应用程<br>序中，它在性能方面的成本高得令人望而却步。 React 进行了优化，可以在保持出色性能的同<br>时创建整个应用程序重新渲染的外观。<br>Reconciliation 是通常理解为“虚拟 DOM”背后的算法，”当你渲染一个 React 应用程序时，一个<br>描述应用程序的节点树被生成并保存在内存中。然后这个树被刷新到渲染环境——例如，在浏览<br>器应用程序的情况下，它被转换为一组 DOM 操作。当应用程序更新时（通常通过 setState），<br>会生成一棵新树。新树与之前的树进行比较，以计算需要哪些操作来更新呈现的应用程序</p>
+<h4 id="Fiber-Reconciler的执行过程"><a href="#Fiber-Reconciler的执行过程" class="headerlink" title="Fiber Reconciler的执行过程"></a>Fiber Reconciler的执行过程</h4><p>Fiber在执行过程，会分为两个阶段<br><img src="/../assets/fiber%E6%89%A7%E8%A1%8C.png" alt="alt text"></p>
+<h5 id="Reconciliation-Phase"><a href="#Reconciliation-Phase" class="headerlink" title="Reconciliation Phase"></a>Reconciliation Phase</h5><p>这些在react fiber中可能执行多次</p>
+<h5 id="Commit-Phase"><a href="#Commit-Phase" class="headerlink" title="Commit Phase"></a>Commit Phase</h5><p>这些只能执行一次</p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><h4 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h4><ul>
+<li><a href="https://juejin.cn/post/6844903582622285831">React Fiber</a></li>
+<li><a href="https://juejin.cn/post/6984949525928476703">React Fiber很难? 六个问题助你理解 React Fiber</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>React</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>React</tag>
       </tags>
   </entry>
   <entry>
@@ -1558,48 +1636,42 @@
       </tags>
   </entry>
   <entry>
-    <title>TradingView自定义Plugin使用</title>
-    <url>/2025/04/26/TradingView%E4%BD%BF%E7%94%A8/</url>
-    <content><![CDATA[<p>结合官方文档：<a href="https://tradingview.github.io/lightweight-charts/docs/plugins/intro">https://tradingview.github.io/lightweight-charts/docs/plugins/intro</a> 食用<br>代码见：<a href="https://github.com/huangyunt/Learning-Demo/tree/master/tradingview%E7%A4%BA%E4%BE%8B%EF%BC%9AK%E7%BA%BF%E5%9B%BE%E7%BB%98%E5%88%B6%E5%9B%BE%E7%89%87">tradingview示例：K线图绘制图片</a></p>
-<h4 id="Series-Primitives"><a href="#Series-Primitives" class="headerlink" title="Series Primitives"></a>Series Primitives</h4><h5 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h5><ul>
-<li>attached：添加到图表时触发，附加方法通过一个参数调用，该参数包含图表、系列以及用于请求更新的回调函数</li>
-<li>detached：移除图表时触发</li>
-</ul>
+    <title>Webpack</title>
+    <url>/2022/04/14/Webpack/</url>
+    <content><![CDATA[<h4 id="Webpack-是什么"><a href="#Webpack-是什么" class="headerlink" title="Webpack 是什么"></a>Webpack 是什么</h4><p>webpack 是一种<strong>前端资源构建工具</strong>，一个静态模块打包器(module bundler)。<br>在webpack 看来, 前端的所有资源文件(js&#x2F;json&#x2F;css&#x2F;img&#x2F;less&#x2F;…)都会作为模块处理。<br>它将根据模块的依赖关系进行静态分析，打包生成对应的静态资源(bundle)。</p>
+<h4 id="Webpack-五个核心概念"><a href="#Webpack-五个核心概念" class="headerlink" title="Webpack 五个核心概念"></a>Webpack 五个核心概念</h4><h5 id="Entry"><a href="#Entry" class="headerlink" title="Entry"></a>Entry</h5><p>入口(Entry)：指示 webpack 以哪个文件为入口起点开始打包，分析构建内部依赖图。</p>
+<h5 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h5><p>输出(Output)：指示 webpack 打包后的资源 bundles 输出到哪里去，以及如何命名。</p>
+<h5 id="Loader"><a href="#Loader" class="headerlink" title="Loader"></a>Loader</h5><p>Loader：让 webpack 能够去处理那些非 JS 的文件，比如样式文件、图片文件(webpack 自身只理解<br>JS)</p>
+<h5 id="Plugins"><a href="#Plugins" class="headerlink" title="Plugins"></a>Plugins</h5><p>插件(Plugins)：可以用于执行范围更广的任务。插件的范围包括，从打包优化和压缩，<br>一直到重新定义环境中的变量等。</p>
 <span id="more"></span>
 
-<h5 id="更新视图"><a href="#更新视图" class="headerlink" title="更新视图"></a>更新视图</h5><p>原语应该在方法中更新视图 updateAllViews()，以便渲染器被调用时，它们能够使用最新信息进行绘制。当库需要更新和重绘图表时，它会调用此方法。如果想通知库应该触发更新，可以使用requestUpdate附加生命周期方法提供的回调。</p>
-<p>该接口会调用一下getter来绘制视图</p>
+<h5 id="Mode"><a href="#Mode" class="headerlink" title="Mode"></a>Mode</h5><p>模式(Mode)：指示 webpack 使用相应模式的配置。</p>
+<ol>
+<li><p>development:  </p>
+<p> 会将 DefinePlugin 中 <code>process.env.NODE_ENV</code> 的值设置为 development。</p>
+<p>启用 </p>
+<figure class="highlight plaintext"><figcaption><span>和 ```NamedModulesPlugin```。</span></figcaption><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">   特点： 能让代码本地调试运行的环境。</span><br><span class="line"></span><br><span class="line">2. production</span><br><span class="line"></span><br><span class="line">   会将 DefinePlugin 中 ```process.env.NODE_ENV``` 的值设置为 production。</span><br><span class="line"></span><br><span class="line">   启用 </span><br><span class="line"></span><br><span class="line">   ```FlagDependencyUsagePlugin,```</span><br><span class="line"></span><br><span class="line">   ```FlagIncludedChunksPlugin,``` </span><br><span class="line"></span><br><span class="line">   ```ModuleConcatenationPlugin,``` </span><br><span class="line"></span><br><span class="line">   ```NoEmitOnErrorsPlugin,```</span><br><span class="line"></span><br><span class="line">    ```OccurrenceOrderPlugin,```</span><br><span class="line"></span><br><span class="line">   ```SideEffectsFlagPlugin 和 TerserPlugin```。</span><br><span class="line"></span><br><span class="line">   特点： 能让代码优化上线运行的环境。</span><br><span class="line"></span><br><span class="line">   </span><br><span class="line"></span><br><span class="line">#### 编译打包应用</span><br><span class="line"></span><br><span class="line">创建 src 下的 js 等文件后，不需要配置 webpack.config.js 文件，在命令行就可以编译打包。</span><br><span class="line"></span><br><span class="line">指令：</span><br><span class="line"></span><br><span class="line">- 开发环境：</span><br><span class="line">```shell</span><br><span class="line">webpack ./src/index.js -o ./build/built.js --mode=development</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>  webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后输出到 .&#x2F;build&#x2F;built.js 整体打包环境，是开发环境</p>
 <ul>
-<li>paneViews</li>
-<li>priceAxisPaneViews</li>
-<li>timeAxisPaneViews</li>
-<li>priceAxisViews</li>
-<li>timeAxisViews</li>
+<li>生产环境：<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">webpack ./src/index.js -o ./build/built.js --mode=production</span><br></pre></td></tr></table></figure>
+webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后输出到 .&#x2F;build&#x2F;built.js 整体打包环境，是生产环境</li>
 </ul>
-<h4 id="Views"><a href="#Views" class="headerlink" title="Views"></a>Views</h4><p>该接口可用于定义一个视图，该视图提供一个渲染器（实现该 接口），以便使用CanvasRenderingContext2D 和 IPrimitivePaneRenderer API 在图表的相应区域进行绘制 </p>
-<h4 id="Renderer"><a href="#Renderer" class="headerlink" title="Renderer"></a>Renderer</h4><p>draw方法：渲染器提供了一个接口，在该接口上应执行CanvasRenderingTarget2D绘图逻辑（使用 浏览器的 2D Canvas API ）。由Fancy CanvasCanvasRenderingTarget2D库提供 。</p>
-<h5 id="CanvasRenderingTarget2D"><a href="#CanvasRenderingTarget2D" class="headerlink" title="CanvasRenderingTarget2D"></a>CanvasRenderingTarget2D</h5><p>CanvasRenderingTarget2D提供了两个可以使用的渲染范围：<br>useMediaCoordinateSpace<br>useBitmapCoordinateSpace</p>
-<h5 id="useMediaCoordinateSpace和useBitmapCoordinateSpace的区别"><a href="#useMediaCoordinateSpace和useBitmapCoordinateSpace的区别" class="headerlink" title="useMediaCoordinateSpace和useBitmapCoordinateSpace的区别"></a>useMediaCoordinateSpace和useBitmapCoordinateSpace的区别</h5><p>useBitmapCoordinateSpace如果您想使用实际设备像素作为坐标尺寸进行绘制，可以使用 。提供的范围（类型为 BitmapCoordinatesRenderingScope）包含以下只读值：</p>
-<ul>
-<li>context （CanvasRenderingContext2D）。可用于渲染的上下文。</li>
-<li>horizontalPixelRatio（数字）</li>
-<li>verticalPixelRatio（数字）</li>
-<li>bitmapSize（尺寸）。位图尺寸中画布的高度和宽度。</li>
-<li>mediaSize（尺寸）。画布在媒体尺寸中的高度和宽度。</li>
-</ul>
-<p>useMediaCoordinateSpace如果您想使用媒体尺寸作为坐标大小进行绘制，可以使用 。提供的范围（类型为 MediaCoordinatesRenderingScope）包含以下只读值：</p>
-<ul>
-<li>context （CanvasRenderingContext2D）。可用于渲染的上下文。</li>
-<li>mediaSize（尺寸）。画布在媒体尺寸中的高度和宽度。</li>
-</ul>
-<h4 id="自定义Plugin实践-k线图上绘制用户头像"><a href="#自定义Plugin实践-k线图上绘制用户头像" class="headerlink" title="自定义Plugin实践 - k线图上绘制用户头像"></a>自定义Plugin实践 - k线图上绘制用户头像</h4><p><img src="/../assets/trading-view-plugin-demo.png" alt="DEMO示例"></p>
+<p>结论：</p>
+<ol>
+<li>webpack 本身能处理 js&#x2F;json 资源，不能处理 css&#x2F;img 等其他资源</li>
+<li>生产环境和开发环境将 ES6 模块化编译成浏览器能识别的模块化，但是不能处理 ES6 的基本语法转化为 ES5（需要借助 loader）</li>
+<li>生产环境比开发环境多一个压缩 js 代码</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// resolve用来拼接绝对路径的方法</span></span><br><span class="line"><span class="keyword">const</span> &#123; resolve &#125; = <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>);</span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="comment">// webpack配置</span></span><br><span class="line">  <span class="comment">// 入口起点</span></span><br><span class="line">  <span class="attr">entry</span>: <span class="string">&#x27;./src/index.js&#x27;</span>,</span><br><span class="line">  <span class="comment">// 输出</span></span><br><span class="line">  <span class="attr">output</span>: &#123;</span><br><span class="line">    <span class="comment">// 输出文件名</span></span><br><span class="line">    <span class="attr">filename</span>: <span class="string">&#x27;built.js&#x27;</span>,</span><br><span class="line">    <span class="comment">// 输出路径</span></span><br><span class="line">    <span class="comment">// __dirname nodejs的变量，代表当前文件的目录绝对路径</span></span><br><span class="line">    <span class="attr">path</span>: <span class="title function_">resolve</span>(__dirname, <span class="string">&#x27;build&#x27;</span>)</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// loader的配置</span></span><br><span class="line">  <span class="attr">module</span>: &#123;</span><br><span class="line">    <span class="attr">rules</span>: [</span><br><span class="line">      <span class="comment">// 详细loader配置</span></span><br><span class="line">      <span class="comment">// 不同文件必须配置不同loader处理</span></span><br><span class="line">      &#123; </span><br><span class="line">        <span class="comment">// 匹配哪些文件</span></span><br><span class="line">        <span class="attr">test</span>: <span class="regexp">/\.css$/</span>,</span><br><span class="line">        <span class="comment">// 使用哪些loader进行处理</span></span><br><span class="line">        <span class="attr">use</span>: [</span><br><span class="line">          <span class="comment">// use数组中loader执行顺序：从右到左，从下到上 依次执行</span></span><br><span class="line">          <span class="comment">// 创建style标签，将js中的样式资源插入进行，添加到head中生效</span></span><br><span class="line">          <span class="string">&#x27;style-loader&#x27;</span>,</span><br><span class="line">          <span class="comment">// 将css文件变成commonjs模块加载js中，里面内容是样式字符串</span></span><br><span class="line">          <span class="string">&#x27;css-loader&#x27;</span></span><br><span class="line">        ]</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">test</span>: <span class="regexp">/\.less$/</span>,</span><br><span class="line">        <span class="attr">use</span>: [</span><br><span class="line">          <span class="string">&#x27;style-loader&#x27;</span>,</span><br><span class="line">          <span class="string">&#x27;css-loader&#x27;</span>,</span><br><span class="line">          <span class="comment">// 将less文件编译成css文件</span></span><br><span class="line">          <span class="comment">// 需要下载 less-loader和less</span></span><br><span class="line">           <span class="string">&#x27;less-loader&#x27;</span></span><br><span class="line">        ]</span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// plugins的配置</span></span><br><span class="line">  <span class="attr">plugins</span>: [</span><br><span class="line">    <span class="comment">// 详细plugins的配置</span></span><br><span class="line">  ],</span><br><span class="line">  <span class="comment">// 模式</span></span><br><span class="line">  <span class="attr">mode</span>: <span class="string">&#x27;development&#x27;</span>, <span class="comment">// 开发模式</span></span><br><span class="line">  <span class="comment">// mode: &#x27;production&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
 ]]></content>
       <categories>
         <category>前端工程化</category>
       </categories>
       <tags>
-        <tag>工程化</tag>
-        <tag>前端</tag>
+        <tag>Webpack</tag>
+        <tag>打包工具</tag>
       </tags>
   </entry>
   <entry>
@@ -1906,45 +1978,6 @@ let strLength: number = (someValue as string).length;
       </tags>
   </entry>
   <entry>
-    <title>Webpack</title>
-    <url>/2022/04/14/Webpack/</url>
-    <content><![CDATA[<h4 id="Webpack-是什么"><a href="#Webpack-是什么" class="headerlink" title="Webpack 是什么"></a>Webpack 是什么</h4><p>webpack 是一种<strong>前端资源构建工具</strong>，一个静态模块打包器(module bundler)。<br>在webpack 看来, 前端的所有资源文件(js&#x2F;json&#x2F;css&#x2F;img&#x2F;less&#x2F;…)都会作为模块处理。<br>它将根据模块的依赖关系进行静态分析，打包生成对应的静态资源(bundle)。</p>
-<h4 id="Webpack-五个核心概念"><a href="#Webpack-五个核心概念" class="headerlink" title="Webpack 五个核心概念"></a>Webpack 五个核心概念</h4><h5 id="Entry"><a href="#Entry" class="headerlink" title="Entry"></a>Entry</h5><p>入口(Entry)：指示 webpack 以哪个文件为入口起点开始打包，分析构建内部依赖图。</p>
-<h5 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h5><p>输出(Output)：指示 webpack 打包后的资源 bundles 输出到哪里去，以及如何命名。</p>
-<h5 id="Loader"><a href="#Loader" class="headerlink" title="Loader"></a>Loader</h5><p>Loader：让 webpack 能够去处理那些非 JS 的文件，比如样式文件、图片文件(webpack 自身只理解<br>JS)</p>
-<h5 id="Plugins"><a href="#Plugins" class="headerlink" title="Plugins"></a>Plugins</h5><p>插件(Plugins)：可以用于执行范围更广的任务。插件的范围包括，从打包优化和压缩，<br>一直到重新定义环境中的变量等。</p>
-<span id="more"></span>
-
-<h5 id="Mode"><a href="#Mode" class="headerlink" title="Mode"></a>Mode</h5><p>模式(Mode)：指示 webpack 使用相应模式的配置。</p>
-<ol>
-<li><p>development:  </p>
-<p> 会将 DefinePlugin 中 <code>process.env.NODE_ENV</code> 的值设置为 development。</p>
-<p>启用 </p>
-<figure class="highlight plaintext"><figcaption><span>和 ```NamedModulesPlugin```。</span></figcaption><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">   特点： 能让代码本地调试运行的环境。</span><br><span class="line"></span><br><span class="line">2. production</span><br><span class="line"></span><br><span class="line">   会将 DefinePlugin 中 ```process.env.NODE_ENV``` 的值设置为 production。</span><br><span class="line"></span><br><span class="line">   启用 </span><br><span class="line"></span><br><span class="line">   ```FlagDependencyUsagePlugin,```</span><br><span class="line"></span><br><span class="line">   ```FlagIncludedChunksPlugin,``` </span><br><span class="line"></span><br><span class="line">   ```ModuleConcatenationPlugin,``` </span><br><span class="line"></span><br><span class="line">   ```NoEmitOnErrorsPlugin,```</span><br><span class="line"></span><br><span class="line">    ```OccurrenceOrderPlugin,```</span><br><span class="line"></span><br><span class="line">   ```SideEffectsFlagPlugin 和 TerserPlugin```。</span><br><span class="line"></span><br><span class="line">   特点： 能让代码优化上线运行的环境。</span><br><span class="line"></span><br><span class="line">   </span><br><span class="line"></span><br><span class="line">#### 编译打包应用</span><br><span class="line"></span><br><span class="line">创建 src 下的 js 等文件后，不需要配置 webpack.config.js 文件，在命令行就可以编译打包。</span><br><span class="line"></span><br><span class="line">指令：</span><br><span class="line"></span><br><span class="line">- 开发环境：</span><br><span class="line">```shell</span><br><span class="line">webpack ./src/index.js -o ./build/built.js --mode=development</span><br></pre></td></tr></table></figure></li>
-</ol>
-<p>  webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后输出到 .&#x2F;build&#x2F;built.js 整体打包环境，是开发环境</p>
-<ul>
-<li>生产环境：<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">webpack ./src/index.js -o ./build/built.js --mode=production</span><br></pre></td></tr></table></figure>
-webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后输出到 .&#x2F;build&#x2F;built.js 整体打包环境，是生产环境</li>
-</ul>
-<p>结论：</p>
-<ol>
-<li>webpack 本身能处理 js&#x2F;json 资源，不能处理 css&#x2F;img 等其他资源</li>
-<li>生产环境和开发环境将 ES6 模块化编译成浏览器能识别的模块化，但是不能处理 ES6 的基本语法转化为 ES5（需要借助 loader）</li>
-<li>生产环境比开发环境多一个压缩 js 代码</li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// resolve用来拼接绝对路径的方法</span></span><br><span class="line"><span class="keyword">const</span> &#123; resolve &#125; = <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>);</span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="comment">// webpack配置</span></span><br><span class="line">  <span class="comment">// 入口起点</span></span><br><span class="line">  <span class="attr">entry</span>: <span class="string">&#x27;./src/index.js&#x27;</span>,</span><br><span class="line">  <span class="comment">// 输出</span></span><br><span class="line">  <span class="attr">output</span>: &#123;</span><br><span class="line">    <span class="comment">// 输出文件名</span></span><br><span class="line">    <span class="attr">filename</span>: <span class="string">&#x27;built.js&#x27;</span>,</span><br><span class="line">    <span class="comment">// 输出路径</span></span><br><span class="line">    <span class="comment">// __dirname nodejs的变量，代表当前文件的目录绝对路径</span></span><br><span class="line">    <span class="attr">path</span>: <span class="title function_">resolve</span>(__dirname, <span class="string">&#x27;build&#x27;</span>)</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// loader的配置</span></span><br><span class="line">  <span class="attr">module</span>: &#123;</span><br><span class="line">    <span class="attr">rules</span>: [</span><br><span class="line">      <span class="comment">// 详细loader配置</span></span><br><span class="line">      <span class="comment">// 不同文件必须配置不同loader处理</span></span><br><span class="line">      &#123; </span><br><span class="line">        <span class="comment">// 匹配哪些文件</span></span><br><span class="line">        <span class="attr">test</span>: <span class="regexp">/\.css$/</span>,</span><br><span class="line">        <span class="comment">// 使用哪些loader进行处理</span></span><br><span class="line">        <span class="attr">use</span>: [</span><br><span class="line">          <span class="comment">// use数组中loader执行顺序：从右到左，从下到上 依次执行</span></span><br><span class="line">          <span class="comment">// 创建style标签，将js中的样式资源插入进行，添加到head中生效</span></span><br><span class="line">          <span class="string">&#x27;style-loader&#x27;</span>,</span><br><span class="line">          <span class="comment">// 将css文件变成commonjs模块加载js中，里面内容是样式字符串</span></span><br><span class="line">          <span class="string">&#x27;css-loader&#x27;</span></span><br><span class="line">        ]</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">test</span>: <span class="regexp">/\.less$/</span>,</span><br><span class="line">        <span class="attr">use</span>: [</span><br><span class="line">          <span class="string">&#x27;style-loader&#x27;</span>,</span><br><span class="line">          <span class="string">&#x27;css-loader&#x27;</span>,</span><br><span class="line">          <span class="comment">// 将less文件编译成css文件</span></span><br><span class="line">          <span class="comment">// 需要下载 less-loader和less</span></span><br><span class="line">           <span class="string">&#x27;less-loader&#x27;</span></span><br><span class="line">        ]</span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// plugins的配置</span></span><br><span class="line">  <span class="attr">plugins</span>: [</span><br><span class="line">    <span class="comment">// 详细plugins的配置</span></span><br><span class="line">  ],</span><br><span class="line">  <span class="comment">// 模式</span></span><br><span class="line">  <span class="attr">mode</span>: <span class="string">&#x27;development&#x27;</span>, <span class="comment">// 开发模式</span></span><br><span class="line">  <span class="comment">// mode: &#x27;production&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>前端工程化</category>
-      </categories>
-      <tags>
-        <tag>Webpack</tag>
-        <tag>打包工具</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Webpack运行时runtime做了什么事情</title>
     <url>/2025/05/28/Webpack%E8%BF%90%E8%A1%8C%E6%97%B6runtime%E5%81%9A%E4%BA%86%E5%93%AA%E4%BA%9B%E4%BA%8B%E6%83%85/</url>
     <content><![CDATA[<p>webpack 的 runtime，也就是 webpack 最后生成的代码，实现了一个自定义的模块加载系统，替代浏览器原生的模块机制</p>
@@ -1976,6 +2009,18 @@ webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后�
       </tags>
   </entry>
   <entry>
+    <title>require() 源码解读</title>
+    <url>/2021/08/21/require%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/</url>
+    <content><![CDATA[<span id="more"></span>
+]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>【前端面试】JavaScript相关</title>
     <url>/2024/08/21/%E3%80%90%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E3%80%91JavaScript%E7%9B%B8%E5%85%B3/</url>
     <content><![CDATA[<h4 id="let、const的区别"><a href="#let、const的区别" class="headerlink" title="let、const的区别"></a>let、const的区别</h4><ul>
@@ -2000,18 +2045,6 @@ webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后�
 <h4 id="异步加载-JS-脚本时，async-与-defer-有何区别"><a href="#异步加载-JS-脚本时，async-与-defer-有何区别" class="headerlink" title="异步加载 JS 脚本时，async 与 defer 有何区别"></a>异步加载 JS 脚本时，async 与 defer 有何区别</h4>]]></content>
       <categories>
         <category>前端面试</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>require() 源码解读</title>
-    <url>/2021/08/21/require%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/</url>
-    <content><![CDATA[<span id="more"></span>
-]]></content>
-      <categories>
-        <category>JavaScript</category>
       </categories>
       <tags>
         <tag>JavaScript</tag>
@@ -2573,6 +2606,51 @@ webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后�
       </categories>
       <tags>
         <tag>前端安全</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>如何使用TradingView的自定义Plugin</title>
+    <url>/2025/04/26/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8TradingView%E7%9A%84%E8%87%AA%E5%AE%9A%E4%B9%89Plugin/</url>
+    <content><![CDATA[<p>结合官方文档：<a href="https://tradingview.github.io/lightweight-charts/docs/plugins/intro">https://tradingview.github.io/lightweight-charts/docs/plugins/intro</a> 食用<br>代码见：<a href="https://github.com/huangyunt/Learning-Demo/tree/master/tradingview%E7%A4%BA%E4%BE%8B%EF%BC%9AK%E7%BA%BF%E5%9B%BE%E7%BB%98%E5%88%B6%E5%9B%BE%E7%89%87">tradingview示例：K线图绘制图片</a></p>
+<h4 id="Series-Primitives"><a href="#Series-Primitives" class="headerlink" title="Series Primitives"></a>Series Primitives</h4><h5 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h5><ul>
+<li>attached：添加到图表时触发，附加方法通过一个参数调用，该参数包含图表、系列以及用于请求更新的回调函数</li>
+<li>detached：移除图表时触发</li>
+</ul>
+<span id="more"></span>
+
+<h5 id="更新视图"><a href="#更新视图" class="headerlink" title="更新视图"></a>更新视图</h5><p>原语应该在方法中更新视图 updateAllViews()，以便渲染器被调用时，它们能够使用最新信息进行绘制。当库需要更新和重绘图表时，它会调用此方法。如果想通知库应该触发更新，可以使用requestUpdate附加生命周期方法提供的回调。</p>
+<p>该接口会调用一下getter来绘制视图</p>
+<ul>
+<li>paneViews</li>
+<li>priceAxisPaneViews</li>
+<li>timeAxisPaneViews</li>
+<li>priceAxisViews</li>
+<li>timeAxisViews</li>
+</ul>
+<h4 id="Views"><a href="#Views" class="headerlink" title="Views"></a>Views</h4><p>该接口可用于定义一个视图，该视图提供一个渲染器（实现该 接口），以便使用CanvasRenderingContext2D 和 IPrimitivePaneRenderer API 在图表的相应区域进行绘制 </p>
+<h4 id="Renderer"><a href="#Renderer" class="headerlink" title="Renderer"></a>Renderer</h4><p>draw方法：渲染器提供了一个接口，在该接口上应执行CanvasRenderingTarget2D绘图逻辑（使用 浏览器的 2D Canvas API ）。由Fancy CanvasCanvasRenderingTarget2D库提供 。</p>
+<h5 id="CanvasRenderingTarget2D"><a href="#CanvasRenderingTarget2D" class="headerlink" title="CanvasRenderingTarget2D"></a>CanvasRenderingTarget2D</h5><p>CanvasRenderingTarget2D提供了两个可以使用的渲染范围：<br>useMediaCoordinateSpace<br>useBitmapCoordinateSpace</p>
+<h5 id="useMediaCoordinateSpace和useBitmapCoordinateSpace的区别"><a href="#useMediaCoordinateSpace和useBitmapCoordinateSpace的区别" class="headerlink" title="useMediaCoordinateSpace和useBitmapCoordinateSpace的区别"></a>useMediaCoordinateSpace和useBitmapCoordinateSpace的区别</h5><p>useBitmapCoordinateSpace如果您想使用实际设备像素作为坐标尺寸进行绘制，可以使用 。提供的范围（类型为 BitmapCoordinatesRenderingScope）包含以下只读值：</p>
+<ul>
+<li>context （CanvasRenderingContext2D）。可用于渲染的上下文。</li>
+<li>horizontalPixelRatio（数字）</li>
+<li>verticalPixelRatio（数字）</li>
+<li>bitmapSize（尺寸）。位图尺寸中画布的高度和宽度。</li>
+<li>mediaSize（尺寸）。画布在媒体尺寸中的高度和宽度。</li>
+</ul>
+<p>useMediaCoordinateSpace如果您想使用媒体尺寸作为坐标大小进行绘制，可以使用 。提供的范围（类型为 MediaCoordinatesRenderingScope）包含以下只读值：</p>
+<ul>
+<li>context （CanvasRenderingContext2D）。可用于渲染的上下文。</li>
+<li>mediaSize（尺寸）。画布在媒体尺寸中的高度和宽度。</li>
+</ul>
+<h4 id="自定义Plugin实践-k线图上绘制用户头像"><a href="#自定义Plugin实践-k线图上绘制用户头像" class="headerlink" title="自定义Plugin实践 - k线图上绘制用户头像"></a>自定义Plugin实践 - k线图上绘制用户头像</h4><p><img src="/../assets/trading-view-plugin-demo.png" alt="DEMO示例"></p>
+]]></content>
+      <categories>
+        <category>开发杂记</category>
+      </categories>
+      <tags>
+        <tag>前端可视化</tag>
+        <tag>TradingView</tag>
       </tags>
   </entry>
   <entry>
