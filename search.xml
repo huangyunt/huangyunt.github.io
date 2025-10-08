@@ -359,6 +359,93 @@
       </tags>
   </entry>
   <entry>
+    <title>Https</title>
+    <url>/2021/09/13/Https/</url>
+    <content><![CDATA[<h4 id="为什么需要加密？"><a href="#为什么需要加密？" class="headerlink" title="为什么需要加密？"></a><strong>为什么需要加密？</strong></h4><p>因为http的内容是明文传输的，明文数据会经过中间代理服务器、路由器、wifi热点、通信服务运营商等多个物理节点，如果信息在传输过程中被劫持，传输的内容就完全暴露了。劫持者还可以篡改传输的信息且不被双方察觉，这就是“中间人攻击”。</p>
+<h4 id="用对称加密可行吗？"><a href="#用对称加密可行吗？" class="headerlink" title="用对称加密可行吗？"></a><strong>用对称加密可行吗？</strong></h4><p>对称加密最大的问题就是密钥的传输，而密钥的传输又需要加密（反复套娃），故而单纯的对称加密是无法解决问题的。</p>
+<span id="more"></span>
+
+
+<h4 id="用非对称加密可行吗？"><a href="#用非对称加密可行吗？" class="headerlink" title="用非对称加密可行吗？"></a>用非对称加密可行吗？</h4><p>鉴于非对称加密的机制，我们可能会有这种思路：服务器先把公钥以明文方式传输给浏览器，之后浏览器向服务器传数据前都先用这个公钥加密好再传，这条数据的安全似乎可以保障了！<strong>因为只有服务器有相应的私钥能解开公钥加密的数据</strong>。</p>
+<p>然而反过来<strong>由服务器到浏览器的这条路怎么保障安全？</strong>如果服务器用它的私钥加密数据传给浏览器，那么浏览器用公钥可以解密它，而这个公钥是一开始通过明文传输给浏览器的，若这个公钥被中间人劫持到了，那他也能用该公钥解密服务器传来的信息了。所以<strong>目前似乎只能保证由浏览器向服务器传输数据的安全性</strong></p>
+<h4 id="那用两组公钥私钥，是否就能保证双向传输都安全了？"><a href="#那用两组公钥私钥，是否就能保证双向传输都安全了？" class="headerlink" title="那用两组公钥私钥，是否就能保证双向传输都安全了？"></a>那用两组公钥私钥，是否就能保证双向传输都安全了？</h4><ol>
+<li>某网站服务器拥有公钥A与对应的私钥A’；浏览器拥有公钥B与对应的私钥B’。</li>
+<li>浏览器把公钥B明文传输给服务器。</li>
+<li>服务器把公钥A明文给传输浏览器。</li>
+<li>之后浏览器向服务器传输的内容都用公钥A加密，服务器收到后用私钥A’解密。由于只有服务器拥有私钥A’，所以能保证这条数据的安全。</li>
+<li>同理，服务器向浏览器传输的内容都用公钥B加密，浏览器收到后用私钥B’解密。同上也可以保证这条数据的安全。</li>
+</ol>
+<p>然而这又引出了一个新的问题，非对称加密非常耗时，如何解决？（见RSA算法）而且这种方法真的安全了吗？</p>
+<h4 id="非对称加密-对称加密"><a href="#非对称加密-对称加密" class="headerlink" title="非对称加密 + 对称加密"></a>非对称加密 + 对称加密</h4><ol>
+<li>某网站拥有用于非对称加密的公钥A、私钥A’。</li>
+<li>浏览器向网站服务器请求，服务器把公钥A明文给传输浏览器。</li>
+<li>浏览器随机生成一个用于对称加密的密钥X，用公钥A加密后传给服务器。</li>
+<li>服务器拿到后用私钥A’解密得到密钥X。</li>
+<li>这样双方就都拥有密钥X了，且别人无法知道它。之后双方所有数据都通过密钥X加密解密即可。</li>
+</ol>
+<p>这基本上就是https采用的方案了，但仍然还是有漏洞。</p>
+<h4 id="中间人攻击"><a href="#中间人攻击" class="headerlink" title="中间人攻击"></a>中间人攻击</h4><p>中间人攻击（MITMA，man in the middle attack）<br>中间人攻击是一种网络攻击类型 ，应用与LAN局域网中。这种攻击的方式是 hacker 置身于两个通信 paties 之间，窃取数据。</p>
+<p>中间人攻击允许黑客截获双方之间的数据，它可能是服务器和客户端或客户端到客户端或服务器到服务器。</p>
+<p><img src="/../assets/image-20210513212400962.png" alt="image-20210513212400962"></p>
+<p>如果在数据传输过程中，中间人劫持到了数据，此时他的确无法得到浏览器生成的密钥X，这个密钥本身被公钥A加密了，只有服务器才有私钥A’解开它，然而中间人却完全不需要拿到私钥A’就能干坏事了。请看：</p>
+<ol>
+<li>某网站有用于非对称加密的公钥A、私钥A’。</li>
+<li>浏览器向网站服务器请求，服务器把公钥A明文给传输浏览器。</li>
+<li><strong>中间人劫持到公钥A，保存下来，把数据包中的公钥A替换成自己伪造的公钥B（它当然也拥有公钥B对应的私钥B’）</strong>。</li>
+<li>浏览器生成一个用于对称加密的密钥X，用<strong>公钥B</strong>（浏览器无法得知公钥被替换了）加密后传给服务器。</li>
+<li><strong>中间人劫持后用私钥B’解密得到密钥X，再用公钥A加密后传给服务器</strong>。</li>
+<li>服务器拿到后用私钥A’解密得到密钥X。</li>
+</ol>
+<p>这样在双方都不会发现异常的情况下，中间人掉包了服务器传来的公钥，进而得到了密钥X。<strong>根本原因是浏览器无法确认收到的公钥是不是网站自己的，</strong>因为公钥本身是明文传输的，难道还得对公钥的传输进行加密？这似乎变成鸡生蛋、蛋生鸡的问题了。解法是什么？</p>
+<h4 id="如何证明浏览器收到的公钥一定是该网站的公钥？"><a href="#如何证明浏览器收到的公钥一定是该网站的公钥？" class="headerlink" title="如何证明浏览器收到的公钥一定是该网站的公钥？"></a><strong>如何证明浏览器收到的公钥一定是该网站的公钥？</strong></h4><p>网站是否有个‘身份证’来证明自己的公钥合法？这个‘身份证’又由谁来颁发？</p>
+<p><strong>CA机构</strong>，它是如今互联网世界正常运作的前提，而CA机构颁发的“身份证”就是<strong>数字证书</strong>。</p>
+<h4 id="数字证书"><a href="#数字证书" class="headerlink" title="数字证书"></a><strong>数字证书</strong></h4><p>网站在使用HTTPS前，需要向<strong>CA机构</strong>申领一份<strong>数字证书</strong>，数字证书里含有证书持有者信息、域名、公钥信息等。服务器把证书传输给浏览器，浏览器从证书里获取公钥就行了，证书就如身份证，证明“该公钥对应该网站”。</p>
+<p>而这里又有一个显而易见的问题，“<strong>证书本身的传输过程中，如何防止被篡改”</strong>？即如何证明证书本身的真实性？身份证运用了一些防伪技术，而数字证书怎么防伪呢？</p>
+<h4 id="如何放防止数字证书被篡改？"><a href="#如何放防止数字证书被篡改？" class="headerlink" title="如何放防止数字证书被篡改？"></a><strong>如何放防止数字证书被篡改？</strong></h4><p>我们把证书原本的内容生成一份“签名”，比对证书内容和签名是否一致就能判别是否被篡改。这就是数字证书的“防伪技术”，这里的“签名”就叫<code>数字签名</code>：</p>
+<p>数字签名的制作过程：</p>
+<ol>
+<li>CA机构拥有非对称加密的私钥和公钥。</li>
+<li>CA机构对证书明文数据T进行hash。</li>
+<li>对hash后的值用私钥加密，得到数字签名S。</li>
+</ol>
+<p>明文和数字签名共同组成了数字证书，这样一份数字证书就可以颁发给网站了。<br>那浏览器拿到服务器传来的数字证书后，如何验证它是不是真的？（有没有被篡改、掉包）</p>
+<p>浏览器验证过程：</p>
+<ol>
+<li>拿到证书，得到明文T，签名S。</li>
+<li>用CA机构的公钥对S解密（由于是浏览器信任的机构，所以浏览器保有它的公钥。详情见下文），得到S’。</li>
+<li>用证书里指明的hash算法对明文T进行hash得到T’。</li>
+<li>显然通过以上步骤，T’应当等于S‘，除非明文或签名被篡改。所以此时比较S’是否等于T’，等于则表明证书可信。</li>
+</ol>
+<p><img src="/../assets/image-20210513214044731.png" alt="image-20210513214044731"></p>
+<h4 id="中间人有可能篡改该证书吗？"><a href="#中间人有可能篡改该证书吗？" class="headerlink" title="中间人有可能篡改该证书吗？"></a><strong>中间人有可能篡改该证书吗？</strong></h4><p>假设中间人篡改了证书的原文，由于他没有CA机构的私钥，所以无法得到此时加密后签名，无法相应地篡改签名。浏览器收到该证书后会发现原文和签名解密后的值不一致，则说明证书已被篡改，证书不可信</p>
+<h4 id="中间人有可能把证书掉包吗？"><a href="#中间人有可能把证书掉包吗？" class="headerlink" title="中间人有可能把证书掉包吗？"></a><strong>中间人有可能把证书掉包吗？</strong></h4><p>假设有另一个网站B也拿到了CA机构认证的证书，它想劫持网站A的信息。于是它成为中间人拦截到了A传给浏览器的证书，然后替换成自己的证书，传给浏览器，之后浏览器就会错误地拿到B的证书里的公钥了。</p>
+<p>其实这并不会发生，因为证书一定是无法被篡改的，所以网站B掉包的一定也是正规的证书，而证书黎里包含了网站的信息，包括域名，浏览器把证书里的域名与自己请求的域名比对一下就知道有没有被掉包了。</p>
+<h4 id="为什么制作数字签名时需要hash一次？"><a href="#为什么制作数字签名时需要hash一次？" class="headerlink" title="为什么制作数字签名时需要hash一次？"></a><strong>为什么制作数字签名时需要hash一次？</strong></h4><p>最显然的是性能问题，非对称加密效率较差，证书信息一般较长，比较耗时。而hash后得到的是固定长度的信息（比如用md5算法hash后可以得到固定的128位的值），这样加解密就快很多。</p>
+<h4 id="怎么证明CA机构的公钥是可信的？"><a href="#怎么证明CA机构的公钥是可信的？" class="headerlink" title="怎么证明CA机构的公钥是可信的？"></a><strong>怎么证明CA机构的公钥是可信的？</strong></h4><p>“浏览器保有它的公钥”，这是个什么保有法？怎么证明这个公钥是否可信？</p>
+<p>让我们回想一下数字证书到底是干啥的？没错，为了证明某公钥是可信的，即“该公钥是否对应该网站”，那CA机构的公钥是否也可以用数字证书来证明？没错，操作系统、浏览器本身会预装一些它们信任的根证书，如果其中会有CA机构的根证书，这样就可以拿到它对应的可信公钥了。</p>
+<p>实际上证书之间的认证也可以不止一层，可以A信任B，B信任C，以此类推，我们把它叫做<code>信任链</code>或<code>数字证书链</code>。也就是一连串的数字证书，由根证书为起点，透过层层信任，使终端实体证书的持有者可以获得转授的信任，以证明身份。</p>
+<p>另外，不知你们是否遇到过网站访问不了、提示需安装证书的情况？这里安装的就是根证书。说明浏览器不认给这个网站颁发证书的机构，那么你就得手动下载安装该机构的根证书（风险自己承担XD）。安装后，你就有了它的公钥，就可以用它验证服务器发来的证书是否可信了。</p>
+<h4 id="每次进行HTTPS请求时都必须在SSL-TLS层进行握手传输密钥吗？"><a href="#每次进行HTTPS请求时都必须在SSL-TLS层进行握手传输密钥吗？" class="headerlink" title="每次进行HTTPS请求时都必须在SSL&#x2F;TLS层进行握手传输密钥吗？"></a><strong>每次进行HTTPS请求时都</strong>必须<strong>在SSL&#x2F;TLS层进行握手传输密钥吗？</strong></h4><p>显然每次请求都经历一次密钥传输过程非常耗时，那怎么达到只传输一次呢？</p>
+<p>服务器会为每个浏览器（或客户端软件）维护一个session ID，在TLS握手阶段传给浏览器，浏览器生成好密钥传给服务器后，服务器会把该密钥存到相应的session ID下，之后浏览器每次请求都会携带session ID，服务器会根据session ID找到相应的密钥并进行解密加密操作，这样就不必要每次重新制作、传输密钥了！</p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a><strong>总结</strong></h4><p>TLS建立连接的整个过程（SSL、TLS握手有一些区别，不同版本间也有区别，不过大致过程就是这样）</p>
+<ul>
+<li>首先客户端通过 URL 访问服务器建立 SSL 连接。</li>
+<li>服务端收到客户端请求后，会将网站支持的证书信息（证书中包含公钥）传送一份给客户端。</li>
+<li>客户端的服务器开始协商 TLS 连接的安全等级，也就是信息加密的等级。</li>
+<li>客户端的浏览器根据双方同意的安全等级，建立会话密钥，然后利用网站的公钥将会话密钥加密，并传送给网站。</li>
+<li>服务器利用自己的私钥解密出会话密钥。</li>
+<li>服务器利用会话密钥加密与客户端之间的通信。</li>
+</ul>
+]]></content>
+      <categories>
+        <category>计算机网络</category>
+      </categories>
+      <tags>
+        <tag>Network</tag>
+        <tag>Https</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Hooks</title>
     <url>/2021/10/12/Hooks/</url>
     <content><![CDATA[<h3 id="hooks的作用"><a href="#hooks的作用" class="headerlink" title="hooks的作用"></a>hooks的作用</h3><p><strong>钩子（hook）就是 React 函数组件的副效应解决方案，用来为函数组件引入副效应。</strong> 函数组件的主体只应该用来返回组件的 HTML 代码，所有的其他操作（副效应）都必须通过钩子引入。</p>
@@ -486,93 +573,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Https</title>
-    <url>/2021/09/13/Https/</url>
-    <content><![CDATA[<h4 id="为什么需要加密？"><a href="#为什么需要加密？" class="headerlink" title="为什么需要加密？"></a><strong>为什么需要加密？</strong></h4><p>因为http的内容是明文传输的，明文数据会经过中间代理服务器、路由器、wifi热点、通信服务运营商等多个物理节点，如果信息在传输过程中被劫持，传输的内容就完全暴露了。劫持者还可以篡改传输的信息且不被双方察觉，这就是“中间人攻击”。</p>
-<h4 id="用对称加密可行吗？"><a href="#用对称加密可行吗？" class="headerlink" title="用对称加密可行吗？"></a><strong>用对称加密可行吗？</strong></h4><p>对称加密最大的问题就是密钥的传输，而密钥的传输又需要加密（反复套娃），故而单纯的对称加密是无法解决问题的。</p>
-<span id="more"></span>
-
-
-<h4 id="用非对称加密可行吗？"><a href="#用非对称加密可行吗？" class="headerlink" title="用非对称加密可行吗？"></a>用非对称加密可行吗？</h4><p>鉴于非对称加密的机制，我们可能会有这种思路：服务器先把公钥以明文方式传输给浏览器，之后浏览器向服务器传数据前都先用这个公钥加密好再传，这条数据的安全似乎可以保障了！<strong>因为只有服务器有相应的私钥能解开公钥加密的数据</strong>。</p>
-<p>然而反过来<strong>由服务器到浏览器的这条路怎么保障安全？</strong>如果服务器用它的私钥加密数据传给浏览器，那么浏览器用公钥可以解密它，而这个公钥是一开始通过明文传输给浏览器的，若这个公钥被中间人劫持到了，那他也能用该公钥解密服务器传来的信息了。所以<strong>目前似乎只能保证由浏览器向服务器传输数据的安全性</strong></p>
-<h4 id="那用两组公钥私钥，是否就能保证双向传输都安全了？"><a href="#那用两组公钥私钥，是否就能保证双向传输都安全了？" class="headerlink" title="那用两组公钥私钥，是否就能保证双向传输都安全了？"></a>那用两组公钥私钥，是否就能保证双向传输都安全了？</h4><ol>
-<li>某网站服务器拥有公钥A与对应的私钥A’；浏览器拥有公钥B与对应的私钥B’。</li>
-<li>浏览器把公钥B明文传输给服务器。</li>
-<li>服务器把公钥A明文给传输浏览器。</li>
-<li>之后浏览器向服务器传输的内容都用公钥A加密，服务器收到后用私钥A’解密。由于只有服务器拥有私钥A’，所以能保证这条数据的安全。</li>
-<li>同理，服务器向浏览器传输的内容都用公钥B加密，浏览器收到后用私钥B’解密。同上也可以保证这条数据的安全。</li>
-</ol>
-<p>然而这又引出了一个新的问题，非对称加密非常耗时，如何解决？（见RSA算法）而且这种方法真的安全了吗？</p>
-<h4 id="非对称加密-对称加密"><a href="#非对称加密-对称加密" class="headerlink" title="非对称加密 + 对称加密"></a>非对称加密 + 对称加密</h4><ol>
-<li>某网站拥有用于非对称加密的公钥A、私钥A’。</li>
-<li>浏览器向网站服务器请求，服务器把公钥A明文给传输浏览器。</li>
-<li>浏览器随机生成一个用于对称加密的密钥X，用公钥A加密后传给服务器。</li>
-<li>服务器拿到后用私钥A’解密得到密钥X。</li>
-<li>这样双方就都拥有密钥X了，且别人无法知道它。之后双方所有数据都通过密钥X加密解密即可。</li>
-</ol>
-<p>这基本上就是https采用的方案了，但仍然还是有漏洞。</p>
-<h4 id="中间人攻击"><a href="#中间人攻击" class="headerlink" title="中间人攻击"></a>中间人攻击</h4><p>中间人攻击（MITMA，man in the middle attack）<br>中间人攻击是一种网络攻击类型 ，应用与LAN局域网中。这种攻击的方式是 hacker 置身于两个通信 paties 之间，窃取数据。</p>
-<p>中间人攻击允许黑客截获双方之间的数据，它可能是服务器和客户端或客户端到客户端或服务器到服务器。</p>
-<p><img src="/../assets/image-20210513212400962.png" alt="image-20210513212400962"></p>
-<p>如果在数据传输过程中，中间人劫持到了数据，此时他的确无法得到浏览器生成的密钥X，这个密钥本身被公钥A加密了，只有服务器才有私钥A’解开它，然而中间人却完全不需要拿到私钥A’就能干坏事了。请看：</p>
-<ol>
-<li>某网站有用于非对称加密的公钥A、私钥A’。</li>
-<li>浏览器向网站服务器请求，服务器把公钥A明文给传输浏览器。</li>
-<li><strong>中间人劫持到公钥A，保存下来，把数据包中的公钥A替换成自己伪造的公钥B（它当然也拥有公钥B对应的私钥B’）</strong>。</li>
-<li>浏览器生成一个用于对称加密的密钥X，用<strong>公钥B</strong>（浏览器无法得知公钥被替换了）加密后传给服务器。</li>
-<li><strong>中间人劫持后用私钥B’解密得到密钥X，再用公钥A加密后传给服务器</strong>。</li>
-<li>服务器拿到后用私钥A’解密得到密钥X。</li>
-</ol>
-<p>这样在双方都不会发现异常的情况下，中间人掉包了服务器传来的公钥，进而得到了密钥X。<strong>根本原因是浏览器无法确认收到的公钥是不是网站自己的，</strong>因为公钥本身是明文传输的，难道还得对公钥的传输进行加密？这似乎变成鸡生蛋、蛋生鸡的问题了。解法是什么？</p>
-<h4 id="如何证明浏览器收到的公钥一定是该网站的公钥？"><a href="#如何证明浏览器收到的公钥一定是该网站的公钥？" class="headerlink" title="如何证明浏览器收到的公钥一定是该网站的公钥？"></a><strong>如何证明浏览器收到的公钥一定是该网站的公钥？</strong></h4><p>网站是否有个‘身份证’来证明自己的公钥合法？这个‘身份证’又由谁来颁发？</p>
-<p><strong>CA机构</strong>，它是如今互联网世界正常运作的前提，而CA机构颁发的“身份证”就是<strong>数字证书</strong>。</p>
-<h4 id="数字证书"><a href="#数字证书" class="headerlink" title="数字证书"></a><strong>数字证书</strong></h4><p>网站在使用HTTPS前，需要向<strong>CA机构</strong>申领一份<strong>数字证书</strong>，数字证书里含有证书持有者信息、域名、公钥信息等。服务器把证书传输给浏览器，浏览器从证书里获取公钥就行了，证书就如身份证，证明“该公钥对应该网站”。</p>
-<p>而这里又有一个显而易见的问题，“<strong>证书本身的传输过程中，如何防止被篡改”</strong>？即如何证明证书本身的真实性？身份证运用了一些防伪技术，而数字证书怎么防伪呢？</p>
-<h4 id="如何放防止数字证书被篡改？"><a href="#如何放防止数字证书被篡改？" class="headerlink" title="如何放防止数字证书被篡改？"></a><strong>如何放防止数字证书被篡改？</strong></h4><p>我们把证书原本的内容生成一份“签名”，比对证书内容和签名是否一致就能判别是否被篡改。这就是数字证书的“防伪技术”，这里的“签名”就叫<code>数字签名</code>：</p>
-<p>数字签名的制作过程：</p>
-<ol>
-<li>CA机构拥有非对称加密的私钥和公钥。</li>
-<li>CA机构对证书明文数据T进行hash。</li>
-<li>对hash后的值用私钥加密，得到数字签名S。</li>
-</ol>
-<p>明文和数字签名共同组成了数字证书，这样一份数字证书就可以颁发给网站了。<br>那浏览器拿到服务器传来的数字证书后，如何验证它是不是真的？（有没有被篡改、掉包）</p>
-<p>浏览器验证过程：</p>
-<ol>
-<li>拿到证书，得到明文T，签名S。</li>
-<li>用CA机构的公钥对S解密（由于是浏览器信任的机构，所以浏览器保有它的公钥。详情见下文），得到S’。</li>
-<li>用证书里指明的hash算法对明文T进行hash得到T’。</li>
-<li>显然通过以上步骤，T’应当等于S‘，除非明文或签名被篡改。所以此时比较S’是否等于T’，等于则表明证书可信。</li>
-</ol>
-<p><img src="/../assets/image-20210513214044731.png" alt="image-20210513214044731"></p>
-<h4 id="中间人有可能篡改该证书吗？"><a href="#中间人有可能篡改该证书吗？" class="headerlink" title="中间人有可能篡改该证书吗？"></a><strong>中间人有可能篡改该证书吗？</strong></h4><p>假设中间人篡改了证书的原文，由于他没有CA机构的私钥，所以无法得到此时加密后签名，无法相应地篡改签名。浏览器收到该证书后会发现原文和签名解密后的值不一致，则说明证书已被篡改，证书不可信</p>
-<h4 id="中间人有可能把证书掉包吗？"><a href="#中间人有可能把证书掉包吗？" class="headerlink" title="中间人有可能把证书掉包吗？"></a><strong>中间人有可能把证书掉包吗？</strong></h4><p>假设有另一个网站B也拿到了CA机构认证的证书，它想劫持网站A的信息。于是它成为中间人拦截到了A传给浏览器的证书，然后替换成自己的证书，传给浏览器，之后浏览器就会错误地拿到B的证书里的公钥了。</p>
-<p>其实这并不会发生，因为证书一定是无法被篡改的，所以网站B掉包的一定也是正规的证书，而证书黎里包含了网站的信息，包括域名，浏览器把证书里的域名与自己请求的域名比对一下就知道有没有被掉包了。</p>
-<h4 id="为什么制作数字签名时需要hash一次？"><a href="#为什么制作数字签名时需要hash一次？" class="headerlink" title="为什么制作数字签名时需要hash一次？"></a><strong>为什么制作数字签名时需要hash一次？</strong></h4><p>最显然的是性能问题，非对称加密效率较差，证书信息一般较长，比较耗时。而hash后得到的是固定长度的信息（比如用md5算法hash后可以得到固定的128位的值），这样加解密就快很多。</p>
-<h4 id="怎么证明CA机构的公钥是可信的？"><a href="#怎么证明CA机构的公钥是可信的？" class="headerlink" title="怎么证明CA机构的公钥是可信的？"></a><strong>怎么证明CA机构的公钥是可信的？</strong></h4><p>“浏览器保有它的公钥”，这是个什么保有法？怎么证明这个公钥是否可信？</p>
-<p>让我们回想一下数字证书到底是干啥的？没错，为了证明某公钥是可信的，即“该公钥是否对应该网站”，那CA机构的公钥是否也可以用数字证书来证明？没错，操作系统、浏览器本身会预装一些它们信任的根证书，如果其中会有CA机构的根证书，这样就可以拿到它对应的可信公钥了。</p>
-<p>实际上证书之间的认证也可以不止一层，可以A信任B，B信任C，以此类推，我们把它叫做<code>信任链</code>或<code>数字证书链</code>。也就是一连串的数字证书，由根证书为起点，透过层层信任，使终端实体证书的持有者可以获得转授的信任，以证明身份。</p>
-<p>另外，不知你们是否遇到过网站访问不了、提示需安装证书的情况？这里安装的就是根证书。说明浏览器不认给这个网站颁发证书的机构，那么你就得手动下载安装该机构的根证书（风险自己承担XD）。安装后，你就有了它的公钥，就可以用它验证服务器发来的证书是否可信了。</p>
-<h4 id="每次进行HTTPS请求时都必须在SSL-TLS层进行握手传输密钥吗？"><a href="#每次进行HTTPS请求时都必须在SSL-TLS层进行握手传输密钥吗？" class="headerlink" title="每次进行HTTPS请求时都必须在SSL&#x2F;TLS层进行握手传输密钥吗？"></a><strong>每次进行HTTPS请求时都</strong>必须<strong>在SSL&#x2F;TLS层进行握手传输密钥吗？</strong></h4><p>显然每次请求都经历一次密钥传输过程非常耗时，那怎么达到只传输一次呢？</p>
-<p>服务器会为每个浏览器（或客户端软件）维护一个session ID，在TLS握手阶段传给浏览器，浏览器生成好密钥传给服务器后，服务器会把该密钥存到相应的session ID下，之后浏览器每次请求都会携带session ID，服务器会根据session ID找到相应的密钥并进行解密加密操作，这样就不必要每次重新制作、传输密钥了！</p>
-<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a><strong>总结</strong></h4><p>TLS建立连接的整个过程（SSL、TLS握手有一些区别，不同版本间也有区别，不过大致过程就是这样）</p>
-<ul>
-<li>首先客户端通过 URL 访问服务器建立 SSL 连接。</li>
-<li>服务端收到客户端请求后，会将网站支持的证书信息（证书中包含公钥）传送一份给客户端。</li>
-<li>客户端的服务器开始协商 TLS 连接的安全等级，也就是信息加密的等级。</li>
-<li>客户端的浏览器根据双方同意的安全等级，建立会话密钥，然后利用网站的公钥将会话密钥加密，并传送给网站。</li>
-<li>服务器利用自己的私钥解密出会话密钥。</li>
-<li>服务器利用会话密钥加密与客户端之间的通信。</li>
-</ul>
-]]></content>
-      <categories>
-        <category>计算机网络</category>
-      </categories>
-      <tags>
-        <tag>Network</tag>
-        <tag>Https</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>IPad配置开发环境</title>
     <url>/2024/11/12/IPad%E9%85%8D%E7%BD%AE%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</url>
     <content><![CDATA[]]></content>
@@ -582,24 +582,6 @@
       <tags>
         <tag>编程环境</tag>
         <tag>IPad</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>JavaScript API</title>
-    <url>/2024/12/30/JS%20API/</url>
-    <content><![CDATA[<h2 id="InterSectionObserver"><a href="#InterSectionObserver" class="headerlink" title="InterSectionObserver"></a>InterSectionObserver</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 创建 IntersectionObserver 实例</span></span><br><span class="line"><span class="keyword">const</span> observer = <span class="keyword">new</span> <span class="title class_">IntersectionObserver</span>(<span class="function">(<span class="params">entries</span>) =&gt;</span> &#123;</span><br><span class="line">  entries.<span class="title function_">forEach</span>(<span class="function">(<span class="params">entry</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (entry.<span class="property">isIntersecting</span>) &#123;</span><br><span class="line">      <span class="comment">// 目标元素进入视口时的操作</span></span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`<span class="subst">$&#123;entry.target.id&#125;</span> 进入视口`</span>);</span><br><span class="line">      <span class="comment">// 例如在这里可以加载图片或触发其他动画效果</span></span><br><span class="line">      entry.<span class="property">target</span>.<span class="property">src</span> = <span class="string">&#x27;your_image.jpg&#x27;</span>;</span><br><span class="line">      <span class="comment">// 停止观察该元素（可选）</span></span><br><span class="line">      observer.<span class="title function_">unobserve</span>(entry.<span class="property">target</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 选择要观察的目标元素</span></span><br><span class="line"><span class="keyword">const</span> targetElement = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;your_element_id&#x27;</span>);</span><br><span class="line"><span class="comment">// 开始观察目标元素</span></span><br><span class="line">observer.<span class="title function_">observe</span>(targetElement);</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="MutationObserver"><a href="#MutationObserver" class="headerlink" title="MutationObserver"></a>MutationObserver</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 创建 MutationObserver 实例</span></span><br><span class="line"><span class="keyword">const</span> observer = <span class="keyword">new</span> <span class="title class_">MutationObserver</span>(<span class="function">(<span class="params">mutationsList</span>) =&gt;</span> &#123;</span><br><span class="line">  mutationsList.<span class="title function_">forEach</span>(<span class="function">(<span class="params">mutation</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (mutation.<span class="property">type</span> === <span class="string">&#x27;childList&#x27;</span>) &#123;</span><br><span class="line">      <span class="comment">// 子节点列表发生变化时的操作</span></span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;子节点列表发生变化&#x27;</span>);</span><br><span class="line">      <span class="comment">// 可以在这里对新增或删除的子节点进行进一步处理</span></span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (mutation.<span class="property">type</span> === <span class="string">&#x27;attributes&#x27;</span>) &#123;</span><br><span class="line">      <span class="comment">// 属性发生变化时的操作</span></span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`属性 <span class="subst">$&#123;mutation.attributeName&#125;</span> 发生变化`</span>);</span><br><span class="line">      <span class="comment">// 根据属性变化进行相应的样式更新或逻辑处理</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 选择要观察的目标节点</span></span><br><span class="line"><span class="keyword">const</span> targetNode = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;your_target_node_id&#x27;</span>);</span><br><span class="line"><span class="comment">// 配置观察选项</span></span><br><span class="line"><span class="keyword">const</span> config = &#123; <span class="attr">attributes</span>: <span class="literal">true</span>, <span class="attr">childList</span>: <span class="literal">true</span>, <span class="attr">subtree</span>: <span class="literal">true</span> &#125;;</span><br><span class="line"><span class="comment">// 开始观察目标节点</span></span><br><span class="line">observer.<span class="title function_">observe</span>(targetNode, config);</span><br></pre></td></tr></table></figure>
-
-<h2 id="PerformanceObserver"><a href="#PerformanceObserver" class="headerlink" title="PerformanceObserver"></a>PerformanceObserver</h2><h2 id="requestAnimationFrame"><a href="#requestAnimationFrame" class="headerlink" title="requestAnimationFrame"></a>requestAnimationFrame</h2><h3 id="requestAnimationFrame的概念"><a href="#requestAnimationFrame的概念" class="headerlink" title="requestAnimationFrame的概念"></a>requestAnimationFrame的概念</h3><p>通俗点讲就是该API能以浏览器的显示频率来作为其动画动作的频率，比如浏览器每10ms刷新一次，动画回调也每10ms调用一次，这样就不会存在过度绘制的问题，动画不会掉帧，自然流畅。</p>
-<h3 id="requestAnimationFrame的作用"><a href="#requestAnimationFrame的作用" class="headerlink" title="requestAnimationFrame的作用"></a>requestAnimationFrame的作用</h3><h3 id="requestAnimationFrame的优势"><a href="#requestAnimationFrame的优势" class="headerlink" title="requestAnimationFrame的优势"></a>requestAnimationFrame的优势</h3><h3 id="requestAnimationFrame的优势应用场景"><a href="#requestAnimationFrame的优势应用场景" class="headerlink" title="requestAnimationFrame的优势应用场景"></a>requestAnimationFrame的优势应用场景</h3><h2 id="requestIdleCallback"><a href="#requestIdleCallback" class="headerlink" title="requestIdleCallback"></a>requestIdleCallback</h2>]]></content>
-      <categories>
-        <category>JavaScript</category>
-      </categories>
-      <tags>
-        <tag>API</tag>
-        <tag>工程化</tag>
       </tags>
   </entry>
   <entry>
@@ -641,6 +623,41 @@
       </categories>
       <tags>
         <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JavaScript API</title>
+    <url>/2024/12/30/JS%20API/</url>
+    <content><![CDATA[<h2 id="InterSectionObserver"><a href="#InterSectionObserver" class="headerlink" title="InterSectionObserver"></a>InterSectionObserver</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 创建 IntersectionObserver 实例</span></span><br><span class="line"><span class="keyword">const</span> observer = <span class="keyword">new</span> <span class="title class_">IntersectionObserver</span>(<span class="function">(<span class="params">entries</span>) =&gt;</span> &#123;</span><br><span class="line">  entries.<span class="title function_">forEach</span>(<span class="function">(<span class="params">entry</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (entry.<span class="property">isIntersecting</span>) &#123;</span><br><span class="line">      <span class="comment">// 目标元素进入视口时的操作</span></span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`<span class="subst">$&#123;entry.target.id&#125;</span> 进入视口`</span>);</span><br><span class="line">      <span class="comment">// 例如在这里可以加载图片或触发其他动画效果</span></span><br><span class="line">      entry.<span class="property">target</span>.<span class="property">src</span> = <span class="string">&#x27;your_image.jpg&#x27;</span>;</span><br><span class="line">      <span class="comment">// 停止观察该元素（可选）</span></span><br><span class="line">      observer.<span class="title function_">unobserve</span>(entry.<span class="property">target</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 选择要观察的目标元素</span></span><br><span class="line"><span class="keyword">const</span> targetElement = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;your_element_id&#x27;</span>);</span><br><span class="line"><span class="comment">// 开始观察目标元素</span></span><br><span class="line">observer.<span class="title function_">observe</span>(targetElement);</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="MutationObserver"><a href="#MutationObserver" class="headerlink" title="MutationObserver"></a>MutationObserver</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 创建 MutationObserver 实例</span></span><br><span class="line"><span class="keyword">const</span> observer = <span class="keyword">new</span> <span class="title class_">MutationObserver</span>(<span class="function">(<span class="params">mutationsList</span>) =&gt;</span> &#123;</span><br><span class="line">  mutationsList.<span class="title function_">forEach</span>(<span class="function">(<span class="params">mutation</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (mutation.<span class="property">type</span> === <span class="string">&#x27;childList&#x27;</span>) &#123;</span><br><span class="line">      <span class="comment">// 子节点列表发生变化时的操作</span></span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;子节点列表发生变化&#x27;</span>);</span><br><span class="line">      <span class="comment">// 可以在这里对新增或删除的子节点进行进一步处理</span></span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (mutation.<span class="property">type</span> === <span class="string">&#x27;attributes&#x27;</span>) &#123;</span><br><span class="line">      <span class="comment">// 属性发生变化时的操作</span></span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`属性 <span class="subst">$&#123;mutation.attributeName&#125;</span> 发生变化`</span>);</span><br><span class="line">      <span class="comment">// 根据属性变化进行相应的样式更新或逻辑处理</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 选择要观察的目标节点</span></span><br><span class="line"><span class="keyword">const</span> targetNode = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;your_target_node_id&#x27;</span>);</span><br><span class="line"><span class="comment">// 配置观察选项</span></span><br><span class="line"><span class="keyword">const</span> config = &#123; <span class="attr">attributes</span>: <span class="literal">true</span>, <span class="attr">childList</span>: <span class="literal">true</span>, <span class="attr">subtree</span>: <span class="literal">true</span> &#125;;</span><br><span class="line"><span class="comment">// 开始观察目标节点</span></span><br><span class="line">observer.<span class="title function_">observe</span>(targetNode, config);</span><br></pre></td></tr></table></figure>
+
+<h2 id="PerformanceObserver"><a href="#PerformanceObserver" class="headerlink" title="PerformanceObserver"></a>PerformanceObserver</h2><h2 id="requestAnimationFrame"><a href="#requestAnimationFrame" class="headerlink" title="requestAnimationFrame"></a>requestAnimationFrame</h2><h3 id="requestAnimationFrame的概念"><a href="#requestAnimationFrame的概念" class="headerlink" title="requestAnimationFrame的概念"></a>requestAnimationFrame的概念</h3><p>通俗点讲就是该API能以浏览器的显示频率来作为其动画动作的频率，比如浏览器每10ms刷新一次，动画回调也每10ms调用一次，这样就不会存在过度绘制的问题，动画不会掉帧，自然流畅。</p>
+<h3 id="requestAnimationFrame的作用"><a href="#requestAnimationFrame的作用" class="headerlink" title="requestAnimationFrame的作用"></a>requestAnimationFrame的作用</h3><h3 id="requestAnimationFrame的优势"><a href="#requestAnimationFrame的优势" class="headerlink" title="requestAnimationFrame的优势"></a>requestAnimationFrame的优势</h3><h3 id="requestAnimationFrame的优势应用场景"><a href="#requestAnimationFrame的优势应用场景" class="headerlink" title="requestAnimationFrame的优势应用场景"></a>requestAnimationFrame的优势应用场景</h3><h2 id="requestIdleCallback"><a href="#requestIdleCallback" class="headerlink" title="requestIdleCallback"></a>requestIdleCallback</h2>]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>API</tag>
+        <tag>工程化</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JS二进制：File、Blob、FileReader、ArrayBuffer、Base64</title>
+    <url>/2025/09/06/JS%E4%BA%8C%E8%BF%9B%E5%88%B6%EF%BC%9AFile%E3%80%81Blob%E3%80%81FileReader%E3%80%81ArrayBuffer%E3%80%81Base64/</url>
+    <content><![CDATA[<h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><blockquote>
+<p>JavaScript 提供了一些 API 来处理文件或原始文件数据，例如：File、Blob、FileReader、ArrayBuffer、base64 等</p>
+</blockquote>
+<p><img src="/image.png" alt="alt text"></p>
+]]></content>
+      <categories>
+        <category>二进制</category>
+        <category>文件</category>
+      </categories>
+      <tags>
+        <tag>二进制</tag>
+        <tag>文件上传</tag>
       </tags>
   </entry>
   <entry>
@@ -874,6 +891,41 @@
       </categories>
       <tags>
         <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>MCP学习</title>
+    <url>/2025/08/27/MCP%E5%AD%A6%E4%B9%A0/</url>
+    <content><![CDATA[<h3 id="MCP概述"><a href="#MCP概述" class="headerlink" title="MCP概述"></a>MCP概述</h3><p>MCP（Model Context Protocol）模型上下文协议</p>
+<h3 id="MCP用途"><a href="#MCP用途" class="headerlink" title="MCP用途"></a>MCP用途</h3><p>能让模型更好的使用各类工具（大模型本身只会问答）<br><img src="/../assets/mcp-0.png" alt="image-2025-8-26"></p>
+<h3 id="MCP-Host"><a href="#MCP-Host" class="headerlink" title="MCP Host"></a>MCP Host</h3><p>支持MCP协议的软件，Cursor，Claude Desktop，Cline</p>
+<h3 id="MCP-Server"><a href="#MCP-Server" class="headerlink" title="MCP Server"></a>MCP Server</h3><p>本质上是一个符合MCP协议的程序，不一定联网<br><img src="/../assets/mcp-1.png" alt="image-2025-8-26-1"></p>
+<ul>
+<li><p>timeout: 60 （连接MCP Server的超时时间）</p>
+</li>
+<li><p>command: uv (程序)</p>
+</li>
+<li><p>transportType: stdio、sse（client和MCP Server沟通的方式）<br>以一个 MCP Server 为例<br><img src="/../assets/mcp-2.png" alt="image-2025-8-26-2"></p>
+</li>
+<li><p>MCP Server，MCP Host，用户，模型交互流程<br><img src="/../assets/mcp-3.png" alt="image-2025-8-26-3"></p>
+</li>
+<li><p>如何使用别人写的MCP Server</p>
+<ul>
+<li>mcp.so</li>
+<li>mcpmarket.com</li>
+<li>smithery.ai</li>
+</ul>
+</li>
+</ul>
+<p>MCP Server一般用 Python 或 Node 编写，对应启动程序 -&gt; uvx，npx</p>
+<h3 id="开发一个MCP-Server"><a href="#开发一个MCP-Server" class="headerlink" title="开发一个MCP Server"></a>开发一个MCP Server</h3><h3 id="MCP底层协议"><a href="#MCP底层协议" class="headerlink" title="MCP底层协议"></a>MCP底层协议</h3><h3 id="MCP的含义和地位"><a href="#MCP的含义和地位" class="headerlink" title="MCP的含义和地位"></a>MCP的含义和地位</h3>]]></content>
+      <categories>
+        <category>AI技术</category>
+      </categories>
+      <tags>
+        <tag>MCP</tag>
+        <tag>Ai</tag>
+        <tag>Agent</tag>
       </tags>
   </entry>
   <entry>
@@ -1520,48 +1572,6 @@
       </tags>
   </entry>
   <entry>
-    <title>React组件通信</title>
-    <url>/2021/10/07/React%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1/</url>
-    <content><![CDATA[<h3 id="组件通信"><a href="#组件通信" class="headerlink" title="组件通信"></a>组件通信</h3><h5 id="爷孙组件通信"><a href="#爷孙组件通信" class="headerlink" title="爷孙组件通信"></a>爷孙组件通信</h5><p>爷孙组件通信主要有 3 种方式：</p>
-<ol>
-<li>将孙子组件的 props 封装在一个固定字段中</li>
-<li>通过 children 透传</li>
-<li>通过 context 传递</li>
-</ol>
-<p>假设有个三层组件，爷爷分别给儿子和孙子发红包</p>
-<p>先看青铜解决方案：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Grandpa</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> [someMoneyForMe] = <span class="title function_">useState</span>(<span class="number">100</span>);</span><br><span class="line">  <span class="keyword">const</span> [someMoneyForDaddy] = <span class="title function_">useState</span>(<span class="number">101</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">Daddy</span> <span class="attr">money</span>=<span class="string">&#123;someMoneyForDaddy&#125;</span> <span class="attr">moneyForSon</span>=<span class="string">&#123;someMoneyForMe&#125;</span> /&gt;</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Daddy</span>(<span class="params">props: &#123; money: number; moneyForSon: number &#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; money, moneyForSon &#125; = props;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;daddy&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">h2</span>&gt;</span>This is Daddy, received $&#123;money&#125;<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">Me</span> <span class="attr">money</span>=<span class="string">&#123;moneyForSon&#125;</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Me</span>(<span class="params">props: &#123; money: number &#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; money &#125; = props;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;son&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">h3</span>&gt;</span>This is Me, received $&#123;money&#125;<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>Daddy 组件会透传爷爷给孙子的组件给 Me。这种方案的缺点很明显，以后爷爷要给 Daddy 和 Me 发糖果的时候，Daddy 还得加字段。</p>
-<p><strong>将孙子组件的 props 封装在一个固定字段中</strong></p>
-<p>按照 1 的方案，我们可以固定给 Daddy 添加一个 sonProps 的字段，然后将 Grandpa 需要传给孙子的状态全部通过 sonProps 传递</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Grandpa</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> [someMoneyForMe] = <span class="title function_">useState</span>(<span class="number">100</span>);</span><br><span class="line">  <span class="keyword">const</span> [someMoneyForDaddy] = <span class="title function_">useState</span>(<span class="number">101</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">Daddy</span> <span class="attr">money</span>=<span class="string">&#123;someMoneyForDaddy&#125;</span> <span class="attr">sonProps</span>=<span class="string">&#123;&#123;money:</span> <span class="attr">someMoneyForMe</span>&#125;&#125; /&gt;</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Daddy</span>(<span class="params">props: &#123; money: number; sonProps: Parameters&lt;<span class="keyword">typeof</span> Me&gt;[<span class="number">0</span>]; &#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; money, sonProps &#125; = props;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;daddy&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">h2</span>&gt;</span>This is Daddy, received $&#123;money&#125;<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">Me</span> &#123;<span class="attr">...sonProps</span>&#125;/&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Me</span>(<span class="params">props: &#123; money: number &#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; money &#125; = props;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;son&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">h3</span>&gt;</span>This is Me, received $&#123;money&#125;<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这样以后要给 Me 加字段，就不用改 Daddy 了。<strong>但要测试 Daddy 时还得 mock Me 组件的数据，Daddy 和 Son 耦合。</strong></p>
-<p><strong>通过 children 透传</strong></p>
-<p>children 类似于 vue 中的 slot，可以完成一些嵌套组件通信的功能</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Grandpa</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> [someMoneyForMe] = <span class="title function_">useState</span>(<span class="number">100</span>);</span><br><span class="line">  <span class="keyword">const</span> [someMoneyForDaddy] = <span class="title function_">useState</span>(<span class="number">101</span>);</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">Daddy</span> <span class="attr">money</span>=<span class="string">&#123;someMoneyForDaddy&#125;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">Me</span> <span class="attr">money</span>=<span class="string">&#123;someMoneyForMe&#125;</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">Daddy</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Daddy</span>(<span class="params">props: &#123; money: number; children?: React.ChildNode &#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; money, children &#125; = props;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;daddy&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">h2</span>&gt;</span>This is Daddy, received $&#123;money&#125;<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      &#123;children&#125;</span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Me</span>(<span class="params">props: &#123; money: number &#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; money &#125; = props;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;son&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">h3</span>&gt;</span>This is Me, received $&#123;money&#125;<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>将 Daddy 的嵌套部分用 children 替代后，解耦了子组件和孙子组件的依赖关系，Daddy 组件更加独立。</p>
-<p>作为替代，也可以传递一个组件实例：</p>
-<p><code><Daddy money=&#123;someMoneyForDaddy&#125; me=&#123;<Me money=&#123;someMoneyForMe&#125; /> </code></p>
-<p><strong>三种方案的决策</strong></p>
-<ol>
-<li>第一种方案一般用于固定结构和跨组件有互相依赖的场景，多见于 UI 框架中的复合组件与原子组件的设计中</li>
-<li>第二种常用在嵌套层级不深的业务代码中，比如表单场景。<strong>优点是顶层 Grandpa 的业务收敛度很高，一眼能看清 UI 结构及状态绑定关系，相当于拍平了 React 组件树</strong></li>
-<li>第三种比较通用，适合复杂嵌套透传场景。缺点是范式代码较多，且会造成 react dev tools 层级过多；Context 无法在父组件看出依赖关系，必须到子组件文件中才能知道数据来源</li>
-</ol>
-]]></content>
-      <categories>
-        <category>React</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-        <tag>Hooks</tag>
-        <tag>React</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Redux</title>
     <url>/2021/10/11/Redux/</url>
     <content><![CDATA[<h3 id="Redux"><a href="#Redux" class="headerlink" title="Redux"></a>Redux</h3><h4 id="设计思想"><a href="#设计思想" class="headerlink" title="设计思想"></a>设计思想</h4><ul>
@@ -1647,6 +1657,48 @@
         <tag>JavaScript</tag>
         <tag>React</tag>
         <tag>Redux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>React组件通信</title>
+    <url>/2021/10/07/React%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1/</url>
+    <content><![CDATA[<h3 id="组件通信"><a href="#组件通信" class="headerlink" title="组件通信"></a>组件通信</h3><h5 id="爷孙组件通信"><a href="#爷孙组件通信" class="headerlink" title="爷孙组件通信"></a>爷孙组件通信</h5><p>爷孙组件通信主要有 3 种方式：</p>
+<ol>
+<li>将孙子组件的 props 封装在一个固定字段中</li>
+<li>通过 children 透传</li>
+<li>通过 context 传递</li>
+</ol>
+<p>假设有个三层组件，爷爷分别给儿子和孙子发红包</p>
+<p>先看青铜解决方案：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Grandpa</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> [someMoneyForMe] = <span class="title function_">useState</span>(<span class="number">100</span>);</span><br><span class="line">  <span class="keyword">const</span> [someMoneyForDaddy] = <span class="title function_">useState</span>(<span class="number">101</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">Daddy</span> <span class="attr">money</span>=<span class="string">&#123;someMoneyForDaddy&#125;</span> <span class="attr">moneyForSon</span>=<span class="string">&#123;someMoneyForMe&#125;</span> /&gt;</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Daddy</span>(<span class="params">props: &#123; money: number; moneyForSon: number &#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; money, moneyForSon &#125; = props;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;daddy&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">h2</span>&gt;</span>This is Daddy, received $&#123;money&#125;<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">Me</span> <span class="attr">money</span>=<span class="string">&#123;moneyForSon&#125;</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Me</span>(<span class="params">props: &#123; money: number &#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; money &#125; = props;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;son&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">h3</span>&gt;</span>This is Me, received $&#123;money&#125;<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Daddy 组件会透传爷爷给孙子的组件给 Me。这种方案的缺点很明显，以后爷爷要给 Daddy 和 Me 发糖果的时候，Daddy 还得加字段。</p>
+<p><strong>将孙子组件的 props 封装在一个固定字段中</strong></p>
+<p>按照 1 的方案，我们可以固定给 Daddy 添加一个 sonProps 的字段，然后将 Grandpa 需要传给孙子的状态全部通过 sonProps 传递</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Grandpa</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> [someMoneyForMe] = <span class="title function_">useState</span>(<span class="number">100</span>);</span><br><span class="line">  <span class="keyword">const</span> [someMoneyForDaddy] = <span class="title function_">useState</span>(<span class="number">101</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">Daddy</span> <span class="attr">money</span>=<span class="string">&#123;someMoneyForDaddy&#125;</span> <span class="attr">sonProps</span>=<span class="string">&#123;&#123;money:</span> <span class="attr">someMoneyForMe</span>&#125;&#125; /&gt;</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Daddy</span>(<span class="params">props: &#123; money: number; sonProps: Parameters&lt;<span class="keyword">typeof</span> Me&gt;[<span class="number">0</span>]; &#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; money, sonProps &#125; = props;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;daddy&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">h2</span>&gt;</span>This is Daddy, received $&#123;money&#125;<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">Me</span> &#123;<span class="attr">...sonProps</span>&#125;/&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Me</span>(<span class="params">props: &#123; money: number &#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; money &#125; = props;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;son&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">h3</span>&gt;</span>This is Me, received $&#123;money&#125;<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样以后要给 Me 加字段，就不用改 Daddy 了。<strong>但要测试 Daddy 时还得 mock Me 组件的数据，Daddy 和 Son 耦合。</strong></p>
+<p><strong>通过 children 透传</strong></p>
+<p>children 类似于 vue 中的 slot，可以完成一些嵌套组件通信的功能</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Grandpa</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> [someMoneyForMe] = <span class="title function_">useState</span>(<span class="number">100</span>);</span><br><span class="line">  <span class="keyword">const</span> [someMoneyForDaddy] = <span class="title function_">useState</span>(<span class="number">101</span>);</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">Daddy</span> <span class="attr">money</span>=<span class="string">&#123;someMoneyForDaddy&#125;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">Me</span> <span class="attr">money</span>=<span class="string">&#123;someMoneyForMe&#125;</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">Daddy</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Daddy</span>(<span class="params">props: &#123; money: number; children?: React.ChildNode &#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; money, children &#125; = props;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;daddy&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">h2</span>&gt;</span>This is Daddy, received $&#123;money&#125;<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      &#123;children&#125;</span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Me</span>(<span class="params">props: &#123; money: number &#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; money &#125; = props;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;son&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">h3</span>&gt;</span>This is Me, received $&#123;money&#125;<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>将 Daddy 的嵌套部分用 children 替代后，解耦了子组件和孙子组件的依赖关系，Daddy 组件更加独立。</p>
+<p>作为替代，也可以传递一个组件实例：</p>
+<p><code><Daddy money=&#123;someMoneyForDaddy&#125; me=&#123;<Me money=&#123;someMoneyForMe&#125; /> </code></p>
+<p><strong>三种方案的决策</strong></p>
+<ol>
+<li>第一种方案一般用于固定结构和跨组件有互相依赖的场景，多见于 UI 框架中的复合组件与原子组件的设计中</li>
+<li>第二种常用在嵌套层级不深的业务代码中，比如表单场景。<strong>优点是顶层 Grandpa 的业务收敛度很高，一眼能看清 UI 结构及状态绑定关系，相当于拍平了 React 组件树</strong></li>
+<li>第三种比较通用，适合复杂嵌套透传场景。缺点是范式代码较多，且会造成 react dev tools 层级过多；Context 无法在父组件看出依赖关系，必须到子组件文件中才能知道数据来源</li>
+</ol>
+]]></content>
+      <categories>
+        <category>React</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>Hooks</tag>
+        <tag>React</tag>
       </tags>
   </entry>
   <entry>
@@ -2130,36 +2182,6 @@ webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后�
       </tags>
   </entry>
   <entry>
-    <title>【前端面试】JavaScript相关</title>
-    <url>/2024/08/21/%E3%80%90%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E3%80%91JavaScript%E7%9B%B8%E5%85%B3/</url>
-    <content><![CDATA[<h4 id="let、const的区别"><a href="#let、const的区别" class="headerlink" title="let、const的区别"></a>let、const的区别</h4><ul>
-<li>块级作用域</li>
-<li>重复声明变量会报错</li>
-<li>不能在声明前访问</li>
-</ul>
-<span id="more"></span>
-
-<h4 id="Promise相关"><a href="#Promise相关" class="headerlink" title="Promise相关"></a>Promise相关</h4><ul>
-<li>解决回调地狱的问题</li>
-<li>异常穿透</li>
-<li>Promise.all</li>
-<li>Promise.allSettled</li>
-<li>Promise.race</li>
-<li>Promise.any</li>
-</ul>
-<h4 id="事件循环"><a href="#事件循环" class="headerlink" title="事件循环"></a>事件循环</h4><p>见：<a href="https://huangyunt.github.io/2021/10/09/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%9E%B6%E6%9E%84%E5%92%8C%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/">浏览器架构和事件循环</a></p>
-<h4 id="this相关"><a href="#this相关" class="headerlink" title="this相关"></a>this相关</h4><p>见：<a href="https://huangyunt.github.io/2021/02/17/Javascript%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87/#this-%E6%8C%87%E5%90%91">this指向</a></p>
-<h4 id="什么是-Iterable-对象，与-Array-有什么区别"><a href="#什么是-Iterable-对象，与-Array-有什么区别" class="headerlink" title="什么是 Iterable 对象，与 Array 有什么区别"></a>什么是 Iterable 对象，与 Array 有什么区别</h4><p>Iterable包含一个名为 [Symbol.iterator] 的方法，该方法返回一个迭代器（Iterator）对象。例如</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> myIterable = &#123;</span><br><span class="line">  <span class="attr">data</span>: [<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>],</span><br><span class="line">  [<span class="title class_">Symbol</span>.<span class="property">iterator</span>]() &#123;</span><br><span class="line">    <span class="keyword">let</span> index = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      <span class="attr">next</span>: <span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (index &lt; <span class="variable language_">this</span>.<span class="property">data</span>.<span class="property">length</span>) &#123;</span><br><span class="line">          <span class="keyword">return</span> &#123; <span class="attr">value</span>: <span class="variable language_">this</span>.<span class="property">data</span>[index++], <span class="attr">done</span>: <span class="literal">false</span> &#125;;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> &#123; <span class="attr">value</span>: <span class="literal">undefined</span>, <span class="attr">done</span>: <span class="literal">true</span> &#125;;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h4 id="异步加载-JS-脚本时，async-与-defer-有何区别"><a href="#异步加载-JS-脚本时，async-与-defer-有何区别" class="headerlink" title="异步加载 JS 脚本时，async 与 defer 有何区别"></a>异步加载 JS 脚本时，async 与 defer 有何区别</h4>]]></content>
-      <categories>
-        <category>前端面试</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>【前端面试】React相关</title>
     <url>/2024/08/23/%E3%80%90%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E3%80%91React%E7%9B%B8%E5%85%B3/</url>
     <content><![CDATA[<h4 id="React有哪些hooks"><a href="#React有哪些hooks" class="headerlink" title="React有哪些hooks"></a>React有哪些hooks</h4><ul>
@@ -2215,6 +2237,36 @@ webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后�
       </categories>
       <tags>
         <tag>React</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【前端面试】JavaScript相关</title>
+    <url>/2024/08/21/%E3%80%90%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E3%80%91JavaScript%E7%9B%B8%E5%85%B3/</url>
+    <content><![CDATA[<h4 id="let、const的区别"><a href="#let、const的区别" class="headerlink" title="let、const的区别"></a>let、const的区别</h4><ul>
+<li>块级作用域</li>
+<li>重复声明变量会报错</li>
+<li>不能在声明前访问</li>
+</ul>
+<span id="more"></span>
+
+<h4 id="Promise相关"><a href="#Promise相关" class="headerlink" title="Promise相关"></a>Promise相关</h4><ul>
+<li>解决回调地狱的问题</li>
+<li>异常穿透</li>
+<li>Promise.all</li>
+<li>Promise.allSettled</li>
+<li>Promise.race</li>
+<li>Promise.any</li>
+</ul>
+<h4 id="事件循环"><a href="#事件循环" class="headerlink" title="事件循环"></a>事件循环</h4><p>见：<a href="https://huangyunt.github.io/2021/10/09/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%9E%B6%E6%9E%84%E5%92%8C%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/">浏览器架构和事件循环</a></p>
+<h4 id="this相关"><a href="#this相关" class="headerlink" title="this相关"></a>this相关</h4><p>见：<a href="https://huangyunt.github.io/2021/02/17/Javascript%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87/#this-%E6%8C%87%E5%90%91">this指向</a></p>
+<h4 id="什么是-Iterable-对象，与-Array-有什么区别"><a href="#什么是-Iterable-对象，与-Array-有什么区别" class="headerlink" title="什么是 Iterable 对象，与 Array 有什么区别"></a>什么是 Iterable 对象，与 Array 有什么区别</h4><p>Iterable包含一个名为 [Symbol.iterator] 的方法，该方法返回一个迭代器（Iterator）对象。例如</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> myIterable = &#123;</span><br><span class="line">  <span class="attr">data</span>: [<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>],</span><br><span class="line">  [<span class="title class_">Symbol</span>.<span class="property">iterator</span>]() &#123;</span><br><span class="line">    <span class="keyword">let</span> index = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      <span class="attr">next</span>: <span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (index &lt; <span class="variable language_">this</span>.<span class="property">data</span>.<span class="property">length</span>) &#123;</span><br><span class="line">          <span class="keyword">return</span> &#123; <span class="attr">value</span>: <span class="variable language_">this</span>.<span class="property">data</span>[index++], <span class="attr">done</span>: <span class="literal">false</span> &#125;;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> &#123; <span class="attr">value</span>: <span class="literal">undefined</span>, <span class="attr">done</span>: <span class="literal">true</span> &#125;;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h4 id="异步加载-JS-脚本时，async-与-defer-有何区别"><a href="#异步加载-JS-脚本时，async-与-defer-有何区别" class="headerlink" title="异步加载 JS 脚本时，async 与 defer 有何区别"></a>异步加载 JS 脚本时，async 与 defer 有何区别</h4>]]></content>
+      <categories>
+        <category>前端面试</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
       </tags>
   </entry>
   <entry>
@@ -2459,6 +2511,24 @@ webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后�
       </tags>
   </entry>
   <entry>
+    <title>Web Development Trend</title>
+    <url>/2024/12/05/%E5%89%8D%E7%AB%AF%E5%8F%91%E5%B1%95%E8%B6%8B%E5%8A%BF/</url>
+    <content><![CDATA[<h2 id="前端供需关系"><a href="#前端供需关系" class="headerlink" title="前端供需关系"></a>前端供需关系</h2><h2 id="新的样式解决方案和组件库现状-发展"><a href="#新的样式解决方案和组件库现状-发展" class="headerlink" title="新的样式解决方案和组件库现状&amp;发展"></a>新的样式解决方案和组件库现状&amp;发展</h2><blockquote>
+<p>样式如何结合组件库去使用</p>
+</blockquote>
+<h3 id="CSS-in-JS-style-component"><a href="#CSS-in-JS-style-component" class="headerlink" title="CSS in JS: style component"></a>CSS in JS: style component</h3><p>能够实现CSS模块化，专注于</p>
+<p>语义差，不利于SSO<br>运行时编译</p>
+<h3 id="Tailwind-CSS"><a href="#Tailwind-CSS" class="headerlink" title="Tailwind CSS"></a>Tailwind CSS</h3><p>语义好，利于AI学习，AI</p>
+<h3 id="Shadcn"><a href="#Shadcn" class="headerlink" title="Shadcn"></a>Shadcn</h3><h3 id="HeadlessUI"><a href="#HeadlessUI" class="headerlink" title="HeadlessUI"></a>HeadlessUI</h3><h3 id="Radix"><a href="#Radix" class="headerlink" title="Radix"></a>Radix</h3><p>主题样式</p>
+]]></content>
+      <categories>
+        <category>Chore</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>前端安全相关</title>
     <url>/2025/01/12/%E5%89%8D%E7%AB%AF%E5%AE%89%E5%85%A8%E7%9B%B8%E5%85%B3/</url>
     <content><![CDATA[<h4 id="XSS"><a href="#XSS" class="headerlink" title="XSS"></a>XSS</h4><p><strong>跨站脚本攻击（XSS，Cross - Site Scripting）</strong>攻击者通过在目标网站中注入恶意脚本，来获取用户的敏感信息、执行恶意操作等。这些恶意脚本通常是 JavaScript</p>
@@ -2505,24 +2575,6 @@ webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后�
       </categories>
       <tags>
         <tag>前端安全</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Web Development Trend</title>
-    <url>/2024/12/05/%E5%89%8D%E7%AB%AF%E5%8F%91%E5%B1%95%E8%B6%8B%E5%8A%BF/</url>
-    <content><![CDATA[<h2 id="前端供需关系"><a href="#前端供需关系" class="headerlink" title="前端供需关系"></a>前端供需关系</h2><h2 id="新的样式解决方案和组件库现状-发展"><a href="#新的样式解决方案和组件库现状-发展" class="headerlink" title="新的样式解决方案和组件库现状&amp;发展"></a>新的样式解决方案和组件库现状&amp;发展</h2><blockquote>
-<p>样式如何结合组件库去使用</p>
-</blockquote>
-<h3 id="CSS-in-JS-style-component"><a href="#CSS-in-JS-style-component" class="headerlink" title="CSS in JS: style component"></a>CSS in JS: style component</h3><p>能够实现CSS模块化，专注于</p>
-<p>语义差，不利于SSO<br>运行时编译</p>
-<h3 id="Tailwind-CSS"><a href="#Tailwind-CSS" class="headerlink" title="Tailwind CSS"></a>Tailwind CSS</h3><p>语义好，利于AI学习，AI</p>
-<h3 id="Shadcn"><a href="#Shadcn" class="headerlink" title="Shadcn"></a>Shadcn</h3><h3 id="HeadlessUI"><a href="#HeadlessUI" class="headerlink" title="HeadlessUI"></a>HeadlessUI</h3><h3 id="Radix"><a href="#Radix" class="headerlink" title="Radix"></a>Radix</h3><p>主题样式</p>
-]]></content>
-      <categories>
-        <category>Chore</category>
-      </categories>
-      <tags>
-        <tag>前端</tag>
       </tags>
   </entry>
   <entry>
@@ -2901,6 +2953,78 @@ webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后�
 - 5、增强自己在圈子内的影响力。 -->]]></content>
   </entry>
   <entry>
+    <title>币圈知识体系</title>
+    <url>/2025/10/02/%E5%B8%81%E5%9C%88%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB/</url>
+    <content><![CDATA[<h4 id="币圈参与者和生态"><a href="#币圈参与者和生态" class="headerlink" title="币圈参与者和生态"></a>币圈参与者和生态</h4><ul>
+<li>长期资金：机构、投行、矿企</li>
+<li>风险投资：VC、加速器</li>
+<li>交易所与做市商：庄家、抽水、点差（插针，收割散户：以前存在，现在大所基本较少）</li>
+<li>量化基金：职业牌手、模型驱动</li>
+<li>开发者、项目方：发币者</li>
+<li>散户：韭菜</li>
+</ul>
+<hr>
+<h4 id="币圈基本构成"><a href="#币圈基本构成" class="headerlink" title="币圈基本构成"></a>币圈基本构成</h4><h5 id="现货市场（Spot-Market）"><a href="#现货市场（Spot-Market）" class="headerlink" title="现货市场（Spot Market）"></a>现货市场（Spot Market）</h5><ul>
+<li>一级市场：NFT铸造、土狗、盲盒、空投认购<br> 参与链上的初始发行环节（容易被套、被骗、资金盘）</li>
+<li>二级市场：交易所、DEX买卖<br>  中心化交易所买币或去中心化交易所链上买卖</li>
+</ul>
+<h5 id="衍生品市场（Derivatives-Market）：合约、期权"><a href="#衍生品市场（Derivatives-Market）：合约、期权" class="headerlink" title="衍生品市场（Derivatives Market）：合约、期权"></a>衍生品市场（Derivatives Market）：合约、期权</h5><ul>
+<li>合约</li>
+<li>期权</li>
+</ul>
+<span id="more"></span>
+
+<hr>
+<h4 id="钱包与资金通道"><a href="#钱包与资金通道" class="headerlink" title="钱包与资金通道"></a>钱包与资金通道</h4><h5 id="托管层级（安全性低到高）：交易所-热钱包-冷钱包"><a href="#托管层级（安全性低到高）：交易所-热钱包-冷钱包" class="headerlink" title="托管层级（安全性低到高）：交易所-&gt;热钱包-&gt;冷钱包"></a>托管层级（安全性低到高）：交易所-&gt;热钱包-&gt;冷钱包</h5><ul>
+<li>冷钱包：不联网，私钥、助记词物理存储（纸上、U盘），使用非常不便</li>
+<li>热钱包：联网的钱包，易受攻击</li>
+<li>交易所：相当于是银行，帮助保管资产</li>
+</ul>
+<h5 id="进出金"><a href="#进出金" class="headerlink" title="进出金"></a>进出金</h5><ul>
+<li>合规所</li>
+<li>KYC</li>
+<li>手续费</li>
+</ul>
+<p>原则：大额留冷钱包，流动资金留在所内</p>
+<hr>
+<h4 id="资产类别、风险和收益"><a href="#资产类别、风险和收益" class="headerlink" title="资产类别、风险和收益"></a>资产类别、风险和收益</h4><h5 id="BTC"><a href="#BTC" class="headerlink" title="BTC"></a>BTC</h5><p>共识最强，数字黄金：<a href="https://huangyunt.github.io/2024/11/05/%E6%AF%94%E7%89%B9%E5%B8%81/">比特币</a></p>
+<h5 id="ETH-主流公链"><a href="#ETH-主流公链" class="headerlink" title="ETH&#x2F;主流公链"></a>ETH&#x2F;主流公链</h5><p>万链之母，代表着技术与生态，很多二级链base在以太坊上开发，以太坊的地位类似于Android系统</p>
+<h5 id="稳定币"><a href="#稳定币" class="headerlink" title="稳定币"></a>稳定币</h5><p>USDT&#x2F;USDC，避险工具<br>风险：储备风险，发行方风险（正规发行方，有实际的资产储备）</p>
+<h5 id="DeFi蓝筹"><a href="#DeFi蓝筹" class="headerlink" title="DeFi蓝筹"></a>DeFi蓝筹</h5><p>链上活跃度相关</p>
+<h5 id="应用类代币-Meme-NFT"><a href="#应用类代币-Meme-NFT" class="headerlink" title="应用类代币&#x2F;Meme&#x2F;NFT"></a>应用类代币&#x2F;Meme&#x2F;NFT</h5><p>高波动，不确定性强，纯纯的炒作，没有任何基本盘</p>
+<h5 id="主流-山寨"><a href="#主流-山寨" class="headerlink" title="主流&#x2F;山寨"></a>主流&#x2F;山寨</h5><p>主流币：比特币、以太坊<br>山寨币（AltCoin）：其他</p>
+<hr>
+<h4 id="分析方法"><a href="#分析方法" class="headerlink" title="分析方法"></a>分析方法</h4><h5 id="基本面"><a href="#基本面" class="headerlink" title="基本面"></a>基本面</h5><ul>
+<li>政策：小川每天说啥，美联储，利率变化情况，各国监管有没有发生变化</li>
+<li>项目进展：官网、融资情况、技术更新、Twitter</li>
+<li>周期：牛市还是熊市</li>
+<li>BTC走势</li>
+</ul>
+<h5 id="技术面"><a href="#技术面" class="headerlink" title="技术面"></a>技术面</h5><ul>
+<li>趋势：支撑和阻力，上行还是下行，MACD、RSI、量价、均线</li>
+</ul>
+<p>基本面决定是否参与、技术面决定何时参与</p>
+<hr>
+<h4 id="影响交易胜率的关键因素"><a href="#影响交易胜率的关键因素" class="headerlink" title="影响交易胜率的关键因素"></a>影响交易胜率的关键因素</h4><ul>
+<li>消息面、资金面</li>
+<li>关注政策、行业动向</li>
+<li>如何判断主力资金的买入和卖出</li>
+<li>市场情绪，如何控制fomo，恐慌的抛售情绪</li>
+<li>仓位管理</li>
+<li>盈亏比</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Web3/加密货币</category>
+      </categories>
+      <tags>
+        <tag>Web3</tag>
+        <tag>区块链</tag>
+        <tag>智能合约</tag>
+        <tag>韭菜</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>微信小程序</title>
     <url>/2025/03/12/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/</url>
     <content><![CDATA[<blockquote class="blockquote-center">
@@ -2928,67 +3052,6 @@ webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后�
         <tag>前端</tag>
         <tag>微信小程序</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>站点更新日志 / ChangeLog</title>
-    <url>/2024/10/28/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97/</url>
-    <content><![CDATA[<!-- ### 前言
-兜兜转转终于是有时间把这个站点建起来了;D，本文主要是记录下站点更新日志，会按月进行归档，还会简单写一下后续更新的一些想法和计划
-
-想法还有很多
-
-功能上非常想做的是个一言主题的页面，还有日间/夜间模式切换，日程表、sitemap功能
-内容上可以补充的还有个人简介
-工程上能做的有域名简化（自定义域名），blog自动化部署（借助一些Github Webhooks），CDN加速（腾讯云），页面SEO相关优化
-
-那么，拭目以待吧~
-
------- -->
-
-<!-- ### 后续更新计划
-**自定义域名（SSL证书、地址映射）**
-**日间/夜间模式切换**
-**添加一言主题页面**
-**添加个人简介**
-**blog自动化部署**
-**日程表、sitemap探索**
-
------- -->
-
-<h4 id="2024-4、2024-5、2024-6-更新"><a href="#2024-4、2024-5、2024-6-更新" class="headerlink" title="2024-4、2024-5、2024-6 更新"></a>2024-4、2024-5、2024-6 更新</h4><blockquote>
-<p>前端工程化相关学习</p>
-</blockquote>
-<ul>
-<li><a href="https://huangyunt.github.io/2024/11/05/%E6%AF%94%E7%89%B9%E5%B8%81/">Webpack运行时runtime做了什么事情</a></li>
-<li><a href="https://huangyunt.github.io/2021/10/01/React%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/">TradingView使用</a></li>
-<li><a href="https://huangyunt.github.io/2021/10/11/Redux/">前端模块化</a></li>
-<li><a href="https://huangyunt.github.io/2021/09/20/HTTP/">包管理器</a></li>
-</ul>
-<hr>
-<span id="more"></span>
-
-<h4 id="2024-11、2024-12更新"><a href="#2024-11、2024-12更新" class="headerlink" title="2024-11、2024-12更新"></a>2024-11、2024-12更新</h4><blockquote>
-<p>主要是之前前端相关知识的文章整理、比特币相关学习</p>
-</blockquote>
-<ul>
-<li><a href="https://huangyunt.github.io/2024/11/05/%E6%AF%94%E7%89%B9%E5%B8%81/">比特币</a></li>
-<li><a href="https://huangyunt.github.io/2021/10/01/React%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/">React最佳实践</a></li>
-<li><a href="https://huangyunt.github.io/2021/10/11/Redux/">Redux</a></li>
-<li><a href="https://huangyunt.github.io/2021/09/20/HTTP/">HTTP</a></li>
-<li><a href="https://huangyunt.github.io/2021/09/18/HTTP%E7%BC%93%E5%AD%98/">HTTP缓存</a></li>
-</ul>
-<hr>
-<h4 id="2024-10更新"><a href="#2024-10更新" class="headerlink" title="2024-10更新"></a>2024-10更新</h4><h5 id="腾讯云托管站点"><a href="#腾讯云托管站点" class="headerlink" title="腾讯云托管站点"></a>腾讯云托管站点</h5><p>主要是解决Github Page部署后国内内网无法访问的问题（搜了下是DNS污染的问题，不太好解决，暂时先迁到腾讯云上去托管站点了）</p>
-<h5 id="部分文章重新整理一版"><a href="#部分文章重新整理一版" class="headerlink" title="部分文章重新整理一版"></a>部分文章重新整理一版</h5><p>整理了一系列陈年老文章，主要是一些文章之前的格式在博客里不太兼容，还有部分内容在迁移的过程中有丢失，都加以补充了</p>
-<h5 id="文章置顶、排序、显隐功能"><a href="#文章置顶、排序、显隐功能" class="headerlink" title="文章置顶、排序、显隐功能"></a>文章置顶、排序、显隐功能</h5><p>引了个<code>hexo-generator-index-custom</code>插件来置顶、排序文章</p>
-<hr>
-<h4 id="2024-9更新"><a href="#2024-9更新" class="headerlink" title="2024-9更新"></a>2024-9更新</h4><h5 id="Hexo-Next建站"><a href="#Hexo-Next建站" class="headerlink" title="Hexo+Next建站"></a>Hexo+Next建站</h5><p>基于Hexo V7.3 + Next V8.2 搭建了个人博客站点</p>
-<h5 id="搜索功能"><a href="#搜索功能" class="headerlink" title="搜索功能"></a>搜索功能</h5><p>加入了文章搜索功能。会很好用吧？(大概</p>
-<!-- ![](../assets/blog-search-example.png) -->
-
-<h5 id="标签、分类功能"><a href="#标签、分类功能" class="headerlink" title="标签、分类功能"></a>标签、分类功能</h5><p>所有文章整理了一版，对所有文章分标签、分类展示</p>
-<h5 id="文章显示字数统计、浏览时间"><a href="#文章显示字数统计、浏览时间" class="headerlink" title="文章显示字数统计、浏览时间"></a>文章显示字数统计、浏览时间</h5><p>引入<code>hexo-word-counter</code>这个插件来实现的，还会统计代码字数，算是个锦上添花的功能吧^^</p>
-]]></content>
   </entry>
   <entry>
     <title>比特币</title>
@@ -3085,6 +3148,67 @@ webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后�
         <tag>比特币</tag>
         <tag>加密货币</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>站点更新日志 / ChangeLog</title>
+    <url>/2024/10/28/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97/</url>
+    <content><![CDATA[<!-- ### 前言
+兜兜转转终于是有时间把这个站点建起来了;D，本文主要是记录下站点更新日志，会按月进行归档，还会简单写一下后续更新的一些想法和计划
+
+想法还有很多
+
+功能上非常想做的是个一言主题的页面，还有日间/夜间模式切换，日程表、sitemap功能
+内容上可以补充的还有个人简介
+工程上能做的有域名简化（自定义域名），blog自动化部署（借助一些Github Webhooks），CDN加速（腾讯云），页面SEO相关优化
+
+那么，拭目以待吧~
+
+------ -->
+
+<!-- ### 后续更新计划
+**自定义域名（SSL证书、地址映射）**
+**日间/夜间模式切换**
+**添加一言主题页面**
+**添加个人简介**
+**blog自动化部署**
+**日程表、sitemap探索**
+
+------ -->
+
+<h4 id="2024-4、2024-5、2024-6-更新"><a href="#2024-4、2024-5、2024-6-更新" class="headerlink" title="2024-4、2024-5、2024-6 更新"></a>2024-4、2024-5、2024-6 更新</h4><blockquote>
+<p>前端工程化相关学习</p>
+</blockquote>
+<ul>
+<li><a href="https://huangyunt.github.io/2024/11/05/%E6%AF%94%E7%89%B9%E5%B8%81/">Webpack运行时runtime做了什么事情</a></li>
+<li><a href="https://huangyunt.github.io/2021/10/01/React%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/">TradingView使用</a></li>
+<li><a href="https://huangyunt.github.io/2021/10/11/Redux/">前端模块化</a></li>
+<li><a href="https://huangyunt.github.io/2021/09/20/HTTP/">包管理器</a></li>
+</ul>
+<hr>
+<span id="more"></span>
+
+<h4 id="2024-11、2024-12更新"><a href="#2024-11、2024-12更新" class="headerlink" title="2024-11、2024-12更新"></a>2024-11、2024-12更新</h4><blockquote>
+<p>主要是之前前端相关知识的文章整理、比特币相关学习</p>
+</blockquote>
+<ul>
+<li><a href="https://huangyunt.github.io/2024/11/05/%E6%AF%94%E7%89%B9%E5%B8%81/">比特币</a></li>
+<li><a href="https://huangyunt.github.io/2021/10/01/React%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/">React最佳实践</a></li>
+<li><a href="https://huangyunt.github.io/2021/10/11/Redux/">Redux</a></li>
+<li><a href="https://huangyunt.github.io/2021/09/20/HTTP/">HTTP</a></li>
+<li><a href="https://huangyunt.github.io/2021/09/18/HTTP%E7%BC%93%E5%AD%98/">HTTP缓存</a></li>
+</ul>
+<hr>
+<h4 id="2024-10更新"><a href="#2024-10更新" class="headerlink" title="2024-10更新"></a>2024-10更新</h4><h5 id="腾讯云托管站点"><a href="#腾讯云托管站点" class="headerlink" title="腾讯云托管站点"></a>腾讯云托管站点</h5><p>主要是解决Github Page部署后国内内网无法访问的问题（搜了下是DNS污染的问题，不太好解决，暂时先迁到腾讯云上去托管站点了）</p>
+<h5 id="部分文章重新整理一版"><a href="#部分文章重新整理一版" class="headerlink" title="部分文章重新整理一版"></a>部分文章重新整理一版</h5><p>整理了一系列陈年老文章，主要是一些文章之前的格式在博客里不太兼容，还有部分内容在迁移的过程中有丢失，都加以补充了</p>
+<h5 id="文章置顶、排序、显隐功能"><a href="#文章置顶、排序、显隐功能" class="headerlink" title="文章置顶、排序、显隐功能"></a>文章置顶、排序、显隐功能</h5><p>引了个<code>hexo-generator-index-custom</code>插件来置顶、排序文章</p>
+<hr>
+<h4 id="2024-9更新"><a href="#2024-9更新" class="headerlink" title="2024-9更新"></a>2024-9更新</h4><h5 id="Hexo-Next建站"><a href="#Hexo-Next建站" class="headerlink" title="Hexo+Next建站"></a>Hexo+Next建站</h5><p>基于Hexo V7.3 + Next V8.2 搭建了个人博客站点</p>
+<h5 id="搜索功能"><a href="#搜索功能" class="headerlink" title="搜索功能"></a>搜索功能</h5><p>加入了文章搜索功能。会很好用吧？(大概</p>
+<!-- ![](../assets/blog-search-example.png) -->
+
+<h5 id="标签、分类功能"><a href="#标签、分类功能" class="headerlink" title="标签、分类功能"></a>标签、分类功能</h5><p>所有文章整理了一版，对所有文章分标签、分类展示</p>
+<h5 id="文章显示字数统计、浏览时间"><a href="#文章显示字数统计、浏览时间" class="headerlink" title="文章显示字数统计、浏览时间"></a>文章显示字数统计、浏览时间</h5><p>引入<code>hexo-word-counter</code>这个插件来实现的，还会统计代码字数，算是个锦上添花的功能吧^^</p>
+]]></content>
   </entry>
   <entry>
     <title>浏览器架构和事件循环</title>
