@@ -776,7 +776,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>797</span>
+      <span>798</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -794,7 +794,9 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h4 id="React有哪些hooks"><a href="#React有哪些hooks" class="headerlink" title="React有哪些hooks"></a>React有哪些hooks</h4><ul>
+          <h4 id="useEffectEvent"><a href="#useEffectEvent" class="headerlink" title="useEffectEvent"></a>useEffectEvent</h4><h4 id="React闭包陷阱"><a href="#React闭包陷阱" class="headerlink" title="React闭包陷阱"></a>React闭包陷阱</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">React</span>, &#123; useState, useEffect &#125; <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Counter</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> [count, setCount] = <span class="title function_">useState</span>(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">  <span class="title function_">useEffect</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 模拟一个异步操作，例如网络请求</span></span><br><span class="line">    <span class="keyword">const</span> intervalId = <span class="built_in">setInterval</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="comment">// 这里的 count 捕获的是 useEffect 第一次运行时 count 的值 (0)</span></span><br><span class="line">      <span class="comment">// 因此，每次执行都会是 0 + 1 = 1，而不是递增</span></span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;Stale count in setInterval:&#x27;</span>, count);</span><br><span class="line">      <span class="title function_">setCount</span>(count + <span class="number">1</span>); <span class="comment">// 这是一个闭包陷阱！</span></span><br><span class="line">    &#125;, <span class="number">1000</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="function">() =&gt;</span> <span class="built_in">clearInterval</span>(intervalId);</span><br><span class="line">  &#125;, []); <span class="comment">// 依赖项为空数组，表示只在组件挂载时执行一次</span></span><br><span class="line">          <span class="comment">// 导致 setInterval 内部的 count 始终是初始值 0</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">p</span>&gt;</span>Count: &#123;count&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;()</span> =&gt;</span> setCount(count + 1)&#125;&gt;Increment<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">Counter</span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="React有哪些hooks"><a href="#React有哪些hooks" class="headerlink" title="React有哪些hooks"></a>React有哪些hooks</h4><ul>
 <li>useState</li>
 <li>useEffect</li>
 <li>useRef</li>
@@ -1276,7 +1278,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">2:50</span>
+    <span title="站点阅读时长">2:51</span>
   </span>
 </div>
 

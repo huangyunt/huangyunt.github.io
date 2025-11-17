@@ -27,7 +27,7 @@
 <meta property="og:description" content="比较杂的知识点，同源跨域、服务器代理、简单请求非简单请求  为什么要有同源策略 本质上是浏览器有cookie这么个玩意，比如移动端app就没有同源限制 防止CSRF攻击">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-09-21T02:00:00.000Z">
-<meta property="article:modified_time" content="2025-06-22T12:10:29.589Z">
+<meta property="article:modified_time" content="2025-11-17T17:13:26.204Z">
 <meta property="article:author" content="Huangyuntse">
 <meta property="article:tag" content="前端安全">
 <meta name="twitter:card" content="summary">
@@ -139,7 +139,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E6%9C%89%E5%90%8C%E6%BA%90%E7%AD%96%E7%95%A5"><span class="nav-number">1.</span> <span class="nav-text">为什么要有同源策略</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98"><span class="nav-number">2.</span> <span class="nav-text">如何解决跨域问题</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BB%A3%E7%90%86"><span class="nav-number">2.1.</span> <span class="nav-text">服务器代理</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#JSONP"><span class="nav-number">2.2.</span> <span class="nav-text">JSONP</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#CORS"><span class="nav-number">2.3.</span> <span class="nav-text">CORS</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E8%AF%B7%E6%B1%82"><span class="nav-number">2.3.1.</span> <span class="nav-text">简单请求</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E9%9D%9E%E7%AE%80%E5%8D%95%E8%AF%B7%E6%B1%82"><span class="nav-number">2.3.2.</span> <span class="nav-text">非简单请求</span></a></li></ol></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E6%9C%89%E5%90%8C%E6%BA%90%E7%AD%96%E7%95%A5"><span class="nav-number">1.</span> <span class="nav-text">为什么要有同源策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98"><span class="nav-number">2.</span> <span class="nav-text">如何解决跨域问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BB%A3%E7%90%86"><span class="nav-number">2.1.</span> <span class="nav-text">服务器代理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CORS"><span class="nav-number">2.2.</span> <span class="nav-text">CORS</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E8%AF%B7%E6%B1%82%E5%92%8C%E9%9D%9E%E7%AE%80%E5%8D%95%E8%AF%B7%E6%B1%82"><span class="nav-number">2.2.1.</span> <span class="nav-text">简单请求和非简单请求</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E8%AF%B7%E6%B1%82%E5%92%8C%E9%9D%9E%E7%AE%80%E5%8D%95%E8%AF%B7%E6%B1%82%E7%9A%84CORS%E6%A0%A1%E9%AA%8C%E8%BF%87%E7%A8%8B"><span class="nav-number">2.2.2.</span> <span class="nav-text">简单请求和非简单请求的CORS校验过程</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#JSONP"><span class="nav-number">2.3.</span> <span class="nav-text">JSONP</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -247,14 +247,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>365</span>
+      <span>938</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
+      <span>3 分钟</span>
     </span>
 </div>
 
@@ -267,21 +267,40 @@
     <div class="post-body" itemprop="articleBody"><blockquote>
 <p>比较杂的知识点，同源跨域、服务器代理、简单请求非简单请求</p>
 </blockquote>
-<h4 id="为什么要有同源策略"><a href="#为什么要有同源策略" class="headerlink" title="为什么要有同源策略"></a>为什么要有同源策略</h4><ul>
+<h3 id="为什么要有同源策略"><a href="#为什么要有同源策略" class="headerlink" title="为什么要有同源策略"></a>为什么要有同源策略</h3><ol>
 <li>本质上是浏览器有cookie这么个玩意，比如移动端app就没有同源限制</li>
 <li>防止CSRF攻击</li>
-</ul>
+</ol>
 <span id="more"></span>
 
-<h4 id="如何解决跨域问题"><a href="#如何解决跨域问题" class="headerlink" title="如何解决跨域问题"></a>如何解决跨域问题</h4><h5 id="服务器代理"><a href="#服务器代理" class="headerlink" title="服务器代理"></a>服务器代理</h5><ul>
+<h3 id="如何解决跨域问题"><a href="#如何解决跨域问题" class="headerlink" title="如何解决跨域问题"></a>如何解决跨域问题</h3><h4 id="服务器代理"><a href="#服务器代理" class="headerlink" title="服务器代理"></a>服务器代理</h4><ul>
 <li>开发环境webpack-dev-server</li>
-<li>生产环境nginx代理服务器部署在同源域名下，转发请求到对应的服务器上（当时配置：某个域名下的某个路径，关联到后端appkey上）</li>
+<li>生产环境nginx代理服务器部署在同源域名下，转发请求到对应的服务器上（印象中公司项目的配置：某个域名下的某个路径，关联到后端appkey上）</li>
 </ul>
-<h5 id="JSONP"><a href="#JSONP" class="headerlink" title="JSONP"></a>JSONP</h5><p><strong>jsonp</strong>的原理就是利用<code>&lt;script&gt;</code>标签没有跨域限制，通过<code>&lt;script&gt;</code>标签src属性，发送带有callback参数的GET请求，服务端将接口返回数据拼凑到callback函数中，返回给浏览器，浏览器解析执行，从而前端拿到callback函数返回的数据。</p>
+<h4 id="CORS"><a href="#CORS" class="headerlink" title="CORS"></a>CORS</h4><p>| 本质上是通过服务端来允许<br>配置受信任的域名，允许受信任域名的跨域请求</p>
+<h5 id="简单请求和非简单请求"><a href="#简单请求和非简单请求" class="headerlink" title="简单请求和非简单请求"></a>简单请求和非简单请求</h5><p>满足以下条件就是一个简单请求:</p>
+<ol>
+<li><code>Method</code>: 请求的方法是 <code>GET</code>、<code>POST</code> 及 <code>HEAD</code></li>
+<li><code>Header</code>: 请求头是 <code>Content-Type</code>、<code>Accept-Language</code>、<code>Content-Language</code> 等</li>
+<li><code>Content-Type</code>: 请求类型是 <code>application/x-www-form-urlencoded</code>、<code>multipart/form-data</code> 或 <code>text/plain</code></li>
+</ol>
+<p><strong>当一个请求跨域且不是简单请求时就会发送 <code>OPTIONS</code> 预检请求</strong></p>
+<p>而在项目中常见的 <code>Content-Type: application/json</code> 及 <code>Authorization: &lt;token&gt;</code> 为典型的<strong>非简单请求</strong>，在发送请求时往往会带上 <code>Options</code></p>
+<h5 id="简单请求和非简单请求的CORS校验过程"><a href="#简单请求和非简单请求的CORS校验过程" class="headerlink" title="简单请求和非简单请求的CORS校验过程"></a>简单请求和非简单请求的CORS校验过程</h5><ul>
+<li><p>简单请求<br>请求头部带上 <code>Origin</code> 字段，标识发出请求的源地址；<br>服务端响应头 <code>Access-Control-Allow-Origin</code> 返回允许请求的源；<br>浏览器收到服务器的响应后，会<strong>检查</strong> <code>Access-Control-Allow-Origin</code> 允许的源和当前请求源是否一致，若一致，返回对应请求。若不一致，浏览器拦截请求，报跨域错误。</p>
+</li>
+<li><p>非简单请求<br>比如发送了一个 PUT 请求到 <a target="_blank" rel="noopener" href="https://api.example.com,并且会带上/">https://api.example.com，并且会带上</a> Authorization 头<br>会先发送预检请求：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">OPTIONS /users/1 HTTP/1.1</span><br><span class="line">Host: api.example.com</span><br><span class="line">Origin: https://www.myapp.com</span><br><span class="line">Access-Control-Request-Method: PUT</span><br><span class="line">Access-Control-Request-Headers: Authorization</span><br></pre></td></tr></table></figure>
+<p>服务器收到 OPTIONS 请求后，会根据自己的配置来判断是否允许该请求。如果允许，它会返回一个带有 Access-Control-Allow-* 系列头的响应。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 200 OK</span><br><span class="line">Access-Control-Allow-Origin: https://www.myapp.com</span><br><span class="line">Access-Control-Allow-Methods: GET, POST, PUT, DELETE</span><br><span class="line">Access-Control-Allow-Headers: Authorization, Content-Type</span><br><span class="line">Access-Control-Allow-Credentials: true</span><br><span class="line">Access-Control-Max-Age: 86400  // 预检结果的有效期，单位秒</span><br></pre></td></tr></table></figure>
+<p><code>Access-Control-Allow-Origin</code>: 明确允许的来源域。<br><code>Access-Control-Allow-Methods</code>: 明确允许的请求方法。<br><code>Access-Control-Allow-Headers</code>: 明确允许的请求头。<br><code>Access-Control-Max-Age</code>: 告诉浏览器预检结果可以缓存多久，在缓存有效期内，再次发送同样的请求就不需要再预检了。</p>
+<p>浏览器收到服务器的响应后，会<strong>检查</strong> Access-Control-Allow-* 头信息是否与自己想要发送的请求<strong>匹配</strong>。<br><strong>如果匹配</strong>：浏览器认为服务器允许该请求，于是发送真正的 PUT 请求。<br><strong>如果不匹配或服务器返回错误</strong>：浏览器会拦截请求，不会发送真正的请求，并在控制台报一个跨域错误。</p>
+</li>
+</ul>
+<h4 id="JSONP"><a href="#JSONP" class="headerlink" title="JSONP"></a>JSONP</h4><p><strong>jsonp</strong>的原理就是利用<code>&lt;script&gt;</code>标签没有跨域限制，通过<code>&lt;script&gt;</code>标签src属性，发送带有callback参数的GET请求，服务端将接口返回数据拼凑到callback函数中，返回给浏览器，浏览器解析执行，从而前端拿到callback函数返回的数据。</p>
 <figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">createScriptTag</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> script = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&#x27;script&#x27;</span>);</span><br><span class="line">  script.<span class="property">type</span> = <span class="string">&#x27;text/javascript&#x27;</span>;</span><br><span class="line">  <span class="comment">// 设置请求的URL，假设服务端接口为http://example.com/api/data，同时指定回调函数名为handleData</span></span><br><span class="line">  script.<span class="property">src</span> = <span class="string">&#x27;http://example.com/api/data?callback=handleData&#x27;</span>;</span><br><span class="line">  <span class="variable language_">document</span>.<span class="property">body</span>.<span class="title function_">appendChild</span>(script);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义回调函数</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">handleData</span>(<span class="params">data</span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(data);</span><br><span class="line">  <span class="comment">// 在这里可以对返回的JSON数据进行处理，如更新页面内容等</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>服务器会返回一个函数调用，类似于 <code>handleData(&#123;&quot;data&quot;: &quot;value&quot;&#125;)</code> 的内容</p>
-<h5 id="CORS"><a href="#CORS" class="headerlink" title="CORS"></a>CORS</h5><p>| 本质上是通过服务端来允许<br>配置受信任的域名，允许受信任域名的跨域请求</p>
-<h6 id="简单请求"><a href="#简单请求" class="headerlink" title="简单请求"></a>简单请求</h6><h6 id="非简单请求"><a href="#非简单请求" class="headerlink" title="非简单请求"></a>非简单请求</h6>
+
     </div>
 
     
@@ -341,7 +360,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">2:50</span>
+    <span title="站点阅读时长">2:51</span>
   </span>
 </div>
 
