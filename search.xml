@@ -608,8 +608,7 @@
 <p><img src="/image.png" alt="alt text"></p>
 ]]></content>
       <categories>
-        <category>二进制</category>
-        <category>文件</category>
+        <category>JavaScript</category>
       </categories>
       <tags>
         <tag>二进制</tag>
@@ -649,6 +648,62 @@
 </ol>
 <h2 id="原型对象中的constructor"><a href="#原型对象中的constructor" class="headerlink" title="原型对象中的constructor"></a>原型对象中的constructor</h2><p>看一段代码:</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function </span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JavaScript垃圾回收</title>
+    <url>/2021/02/18/JavaStript%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/</url>
+    <content><![CDATA[<h3 id="javascript垃圾回收主要分成两种方法："><a href="#javascript垃圾回收主要分成两种方法：" class="headerlink" title="javascript垃圾回收主要分成两种方法："></a>javascript垃圾回收主要分成两种方法：</h3><h3 id="1-引用计数"><a href="#1-引用计数" class="headerlink" title="1. 引用计数"></a>1. 引用计数</h3><h3 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h3><ul>
+<li><p>垃圾回收算法主要依赖于引用的概念。</p>
+</li>
+<li><p>在内存管理的环境中，一个对象如果有访问另一个对象的权限（隐式或者显式），叫做一个对象引用另一个对象。</p>
+</li>
+<li><p>例如，一个Javascript对象具有对它原型的引用（隐式引用）和对它属性的引用（显式引用）。</p>
+</li>
+<li><p>在这里，“对象”的概念不仅特指 JavaScript 对象，还包括函数作用域。</p>
+</li>
+</ul>
+<h3 id="引用计数垃圾收集"><a href="#引用计数垃圾收集" class="headerlink" title="引用计数垃圾收集"></a>引用计数垃圾收集</h3><p>这是最初级的垃圾收集算法。此算法把“对象是否不再需要”简化定义为“对象有没有其他对象引用到它”。如果没有引用指向该对象（零引用），对象将被垃圾回收机制回收。</p>
+<span id="more"></span>
+
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> o = &#123;</span><br><span class="line">  <span class="attr">a</span>: &#123;</span><br><span class="line">    <span class="attr">b</span>:<span class="number">2</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// 两个对象被创建，一个作为另一个的属性被引用，另一个被分配给变量o</span></span><br><span class="line"><span class="comment">// 很显然，没有一个可以被垃圾收集</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> o2 = o; <span class="comment">// o2变量是第二个对“这个对象”的引用</span></span><br><span class="line"></span><br><span class="line">o = <span class="number">1</span>;      <span class="comment">// 现在，“这个对象”只有一个o2变量的引用了，“这个对象”的原始引用o已经没有</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> oa = o2.<span class="property">a</span>; <span class="comment">// 引用“这个对象”的a属性</span></span><br><span class="line">               <span class="comment">// 现在，“这个对象”有两个引用了，一个是o2，一个是oa</span></span><br><span class="line"></span><br><span class="line">o2 = <span class="string">&quot;yo&quot;</span>; <span class="comment">// 虽然最初的对象现在已经是零引用了，可以被垃圾回收了</span></span><br><span class="line">           <span class="comment">// 但是它的属性a的对象还在被oa引用，所以还不能回收</span></span><br><span class="line"></span><br><span class="line">oa = <span class="literal">null</span>; <span class="comment">// a属性的那个对象现在也是零引用了</span></span><br><span class="line">           <span class="comment">// 它可以被垃圾回收了</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="2-标记清除"><a href="#2-标记清除" class="headerlink" title="2. 标记清除"></a>2. 标记清除</h3><p>JavaScript 中最常用的垃圾收集方式是标记清除。它的具体工作步骤如下：</p>
+<ol>
+<li>给存储在内存中的所有变量加上标记（当然可以使用任何标记方式）</li>
+<li>去掉当前执行环境中的变量，以及被执行环境中的变量引用的变量的标记</li>
+<li>第二步结束后仍被标记的变量将被视为准备删除的变量，因为此时的执行环境中的变量已经无法访问到这些变量了。</li>
+<li>完成内存清除工作，销毁那些带标记的值并回收它们所占用的内存空间。</li>
+</ol>
+<p>对于如下代码：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">1</span>,</span><br><span class="line">    b = <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">test1</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="keyword">var</span> c = <span class="number">3</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">test2</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="keyword">var</span> d = <span class="number">4</span>;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(a); </span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(b);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">test1</span>();</span><br><span class="line"></span><br><span class="line"><span class="title function_">test2</span>();</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>假设执行到test2()时，垃圾回收开始执行</p>
+<p>对于此时，内存情况为</p>
+<p><img src="/../assets/image-20210412150846546.png" alt="image-20210412150846546"></p>
+<p>开始第一步，将内存中的所有变量加上标记</p>
+<p><img src="/../assets/image-20210412151850990.png" alt="image-20210412151850990"></p>
+<p>去掉当前执行环境中的变量，以及被执行环境中的变量引用的变量的标记。简单分析一下，此时执行环境中可以访问的变量有 d ,然后我们通过作用域链可以访问到全局变量对象，因此 a 和 b 我们也是可以访问到的</p>
+<p><img src="/../assets/image-20210412152201055.png" alt="image-20210412152201055"></p>
+<p>此时只有 c 变量还保留有标记，说明 c 变量通过此时的环境已经访问不到了，所以 c 变量需要被清除掉来释放内存。</p>
+<p>最后垃圾收集器完成内存清除工作，销毁那些带标记的值并回收它们所占用的内存空间。</p>
+<p><img src="/../assets/image-20210412152245827.png" alt="image-20210412152245827"></p>
+<h3 id="缺点："><a href="#缺点：" class="headerlink" title="缺点："></a>缺点：</h3><ol>
+<li>标记清除法的第一个问题就是效率不高，因为在标记清除-阶段，整个程序将会等待，所有如果程序出现卡顿的情况你，那么就有可能是收集垃圾的情况。</li>
+<li>标记清除法的第二个问题是，从上面的例子我们可以看出，在清除之后内存空间不是连续的，即出现了内存碎片。如果后面需要一个比较大的连续的内存空间时，那将不能满足要求。而标记-整理方法可以有效地解决这个问题。与标记清除法相比，标记阶段没有什么不同，只是标记结束后，标记-整理方法会将活着的对象向内存的一边移动，最后清理掉边界的内存。不过可以想象，这种做法的效率没有标记-清除高。</li>
+</ol>
+<p>对比一下官方文档的解释:</p>
+<div><i>标记清除这个算法把“对象是否不再需要”简化定义为“对象是否可以获得”。这个算法假定设置一个叫做根（root）的对象（在Javascript里，根是全局对象）。垃圾回收器将定期从根开始，找所有从根开始引用的对象，然后找这些对象引用的对象……从根开始，垃圾回收器将找到所有可以获得的对象和收集所有不能获得的对象
+
+<h4 id="这里的‘根’指的应该是上下文对象"><a href="#这里的‘根’指的应该是上下文对象" class="headerlink" title="这里的‘根’指的应该是上下文对象"></a>这里的‘根’指的应该是上下文对象</h4><p>因为通过当前的执行上下文对象可以访问到当前环境中的变量，也可以通过作用域链去访问到其他上下文中的活动对象，从而可以判断得到所有可以获得的对象和所有不能获得的对象</p>
 ]]></content>
       <categories>
         <category>JavaScript</category>
@@ -817,62 +872,6 @@
       </tags>
   </entry>
   <entry>
-    <title>JavaScript垃圾回收</title>
-    <url>/2021/02/18/JavaStript%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/</url>
-    <content><![CDATA[<h3 id="javascript垃圾回收主要分成两种方法："><a href="#javascript垃圾回收主要分成两种方法：" class="headerlink" title="javascript垃圾回收主要分成两种方法："></a>javascript垃圾回收主要分成两种方法：</h3><h3 id="1-引用计数"><a href="#1-引用计数" class="headerlink" title="1. 引用计数"></a>1. 引用计数</h3><h3 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h3><ul>
-<li><p>垃圾回收算法主要依赖于引用的概念。</p>
-</li>
-<li><p>在内存管理的环境中，一个对象如果有访问另一个对象的权限（隐式或者显式），叫做一个对象引用另一个对象。</p>
-</li>
-<li><p>例如，一个Javascript对象具有对它原型的引用（隐式引用）和对它属性的引用（显式引用）。</p>
-</li>
-<li><p>在这里，“对象”的概念不仅特指 JavaScript 对象，还包括函数作用域。</p>
-</li>
-</ul>
-<h3 id="引用计数垃圾收集"><a href="#引用计数垃圾收集" class="headerlink" title="引用计数垃圾收集"></a>引用计数垃圾收集</h3><p>这是最初级的垃圾收集算法。此算法把“对象是否不再需要”简化定义为“对象有没有其他对象引用到它”。如果没有引用指向该对象（零引用），对象将被垃圾回收机制回收。</p>
-<span id="more"></span>
-
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> o = &#123;</span><br><span class="line">  <span class="attr">a</span>: &#123;</span><br><span class="line">    <span class="attr">b</span>:<span class="number">2</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// 两个对象被创建，一个作为另一个的属性被引用，另一个被分配给变量o</span></span><br><span class="line"><span class="comment">// 很显然，没有一个可以被垃圾收集</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> o2 = o; <span class="comment">// o2变量是第二个对“这个对象”的引用</span></span><br><span class="line"></span><br><span class="line">o = <span class="number">1</span>;      <span class="comment">// 现在，“这个对象”只有一个o2变量的引用了，“这个对象”的原始引用o已经没有</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> oa = o2.<span class="property">a</span>; <span class="comment">// 引用“这个对象”的a属性</span></span><br><span class="line">               <span class="comment">// 现在，“这个对象”有两个引用了，一个是o2，一个是oa</span></span><br><span class="line"></span><br><span class="line">o2 = <span class="string">&quot;yo&quot;</span>; <span class="comment">// 虽然最初的对象现在已经是零引用了，可以被垃圾回收了</span></span><br><span class="line">           <span class="comment">// 但是它的属性a的对象还在被oa引用，所以还不能回收</span></span><br><span class="line"></span><br><span class="line">oa = <span class="literal">null</span>; <span class="comment">// a属性的那个对象现在也是零引用了</span></span><br><span class="line">           <span class="comment">// 它可以被垃圾回收了</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="2-标记清除"><a href="#2-标记清除" class="headerlink" title="2. 标记清除"></a>2. 标记清除</h3><p>JavaScript 中最常用的垃圾收集方式是标记清除。它的具体工作步骤如下：</p>
-<ol>
-<li>给存储在内存中的所有变量加上标记（当然可以使用任何标记方式）</li>
-<li>去掉当前执行环境中的变量，以及被执行环境中的变量引用的变量的标记</li>
-<li>第二步结束后仍被标记的变量将被视为准备删除的变量，因为此时的执行环境中的变量已经无法访问到这些变量了。</li>
-<li>完成内存清除工作，销毁那些带标记的值并回收它们所占用的内存空间。</li>
-</ol>
-<p>对于如下代码：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">1</span>,</span><br><span class="line">    b = <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">test1</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="keyword">var</span> c = <span class="number">3</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">test2</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="keyword">var</span> d = <span class="number">4</span>;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(a); </span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(b);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">test1</span>();</span><br><span class="line"></span><br><span class="line"><span class="title function_">test2</span>();</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>假设执行到test2()时，垃圾回收开始执行</p>
-<p>对于此时，内存情况为</p>
-<p><img src="/../assets/image-20210412150846546.png" alt="image-20210412150846546"></p>
-<p>开始第一步，将内存中的所有变量加上标记</p>
-<p><img src="/../assets/image-20210412151850990.png" alt="image-20210412151850990"></p>
-<p>去掉当前执行环境中的变量，以及被执行环境中的变量引用的变量的标记。简单分析一下，此时执行环境中可以访问的变量有 d ,然后我们通过作用域链可以访问到全局变量对象，因此 a 和 b 我们也是可以访问到的</p>
-<p><img src="/../assets/image-20210412152201055.png" alt="image-20210412152201055"></p>
-<p>此时只有 c 变量还保留有标记，说明 c 变量通过此时的环境已经访问不到了，所以 c 变量需要被清除掉来释放内存。</p>
-<p>最后垃圾收集器完成内存清除工作，销毁那些带标记的值并回收它们所占用的内存空间。</p>
-<p><img src="/../assets/image-20210412152245827.png" alt="image-20210412152245827"></p>
-<h3 id="缺点："><a href="#缺点：" class="headerlink" title="缺点："></a>缺点：</h3><ol>
-<li>标记清除法的第一个问题就是效率不高，因为在标记清除-阶段，整个程序将会等待，所有如果程序出现卡顿的情况你，那么就有可能是收集垃圾的情况。</li>
-<li>标记清除法的第二个问题是，从上面的例子我们可以看出，在清除之后内存空间不是连续的，即出现了内存碎片。如果后面需要一个比较大的连续的内存空间时，那将不能满足要求。而标记-整理方法可以有效地解决这个问题。与标记清除法相比，标记阶段没有什么不同，只是标记结束后，标记-整理方法会将活着的对象向内存的一边移动，最后清理掉边界的内存。不过可以想象，这种做法的效率没有标记-清除高。</li>
-</ol>
-<p>对比一下官方文档的解释:</p>
-<div><i>标记清除这个算法把“对象是否不再需要”简化定义为“对象是否可以获得”。这个算法假定设置一个叫做根（root）的对象（在Javascript里，根是全局对象）。垃圾回收器将定期从根开始，找所有从根开始引用的对象，然后找这些对象引用的对象……从根开始，垃圾回收器将找到所有可以获得的对象和收集所有不能获得的对象
-
-<h4 id="这里的‘根’指的应该是上下文对象"><a href="#这里的‘根’指的应该是上下文对象" class="headerlink" title="这里的‘根’指的应该是上下文对象"></a>这里的‘根’指的应该是上下文对象</h4><p>因为通过当前的执行上下文对象可以访问到当前环境中的变量，也可以通过作用域链去访问到其他上下文中的活动对象，从而可以判断得到所有可以获得的对象和所有不能获得的对象</p>
-]]></content>
-      <categories>
-        <category>JavaScript</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>JavaSrcipt知识点</title>
     <url>/2021/02/17/Javascript%E7%9F%A5%E8%AF%86%E7%82%B9/</url>
     <content><![CDATA[<h4 id="1-script标签中async和defer的区别"><a href="#1-script标签中async和defer的区别" class="headerlink" title="1. script标签中async和defer的区别"></a>1. script标签中async和defer的区别</h4><p><img src="/../assets/Snipaste_2021-12-13_03-23-58.png" alt="image-20211025190555184"></p>
@@ -976,7 +975,7 @@
 <p>MCP Server一般用 Python 或 Node 编写，对应启动程序 -&gt; uvx，npx</p>
 <h3 id="开发一个MCP-Server"><a href="#开发一个MCP-Server" class="headerlink" title="开发一个MCP Server"></a>开发一个MCP Server</h3><h3 id="MCP底层协议"><a href="#MCP底层协议" class="headerlink" title="MCP底层协议"></a>MCP底层协议</h3><h3 id="MCP的含义和地位"><a href="#MCP的含义和地位" class="headerlink" title="MCP的含义和地位"></a>MCP的含义和地位</h3>]]></content>
       <categories>
-        <category>AI技术</category>
+        <category>AI相关</category>
       </categories>
       <tags>
         <tag>MCP</tag>
@@ -1216,6 +1215,32 @@
       </tags>
   </entry>
   <entry>
+    <title>React Fiber</title>
+    <url>/2021/11/27/React%20Fiber/</url>
+    <content><![CDATA[<p>React Fiber 本质上是一种基于<strong>双链表的数据结构和协调算法</strong>的结合体，它是 React 16.x 版本后对渲染机制的核心重构，它的主要目标是解决大型应用中渲染卡顿的问题，实现更高效的任务调度和更流畅的用户体验。</p>
+<h4 id="React的概念"><a href="#React的概念" class="headerlink" title="React的概念"></a>React的概念</h4><ul>
+<li>Virtual DOM 层，描述页面长什么样。</li>
+<li>Reconciler 层，负责调用组件生命周期方法，进行 Diff 运算等。</li>
+<li>Renderer 层，根据不同的平台，渲染出相应的页面，比较常见的是 ReactDOM 和<br>ReactNative。</li>
+</ul>
+<h4 id="为什么需要React-Fiber"><a href="#为什么需要React-Fiber" class="headerlink" title="为什么需要React Fiber"></a>为什么需要React Fiber</h4><h5 id="Reconciler"><a href="#Reconciler" class="headerlink" title="Reconciler"></a>Reconciler</h5><p>React 使用的算法将一棵树与另一棵树进行比较，”找不同”的过程就叫做 reconciliation 。<br>实际上，在每次更改时重新渲染整个应用程序仅适用于最琐碎的应用程序；在现实世界的应用程<br>序中，它在性能方面的成本高得令人望而却步。 React 进行了优化，可以在保持出色性能的同<br>时创建整个应用程序重新渲染的外观。<br>Reconciliation 是通常理解为“虚拟 DOM”背后的算法，”当你渲染一个 React 应用程序时，一个<br>描述应用程序的节点树被生成并保存在内存中。然后这个树被刷新到渲染环境——例如，在浏览<br>器应用程序的情况下，它被转换为一组 DOM 操作。当应用程序更新时（通常通过 setState），<br>会生成一棵新树。新树与之前的树进行比较，以计算需要哪些操作来更新呈现的应用程序</p>
+<h4 id="Fiber-Reconciler的执行过程"><a href="#Fiber-Reconciler的执行过程" class="headerlink" title="Fiber Reconciler的执行过程"></a>Fiber Reconciler的执行过程</h4><p>Fiber在执行过程，会分为两个阶段<br><img src="/../assets/fiber%E6%89%A7%E8%A1%8C.png" alt="alt text"></p>
+<h5 id="Reconciliation-Phase"><a href="#Reconciliation-Phase" class="headerlink" title="Reconciliation Phase"></a>Reconciliation Phase</h5><p>这些在react fiber中可能执行多次</p>
+<h5 id="Commit-Phase"><a href="#Commit-Phase" class="headerlink" title="Commit Phase"></a>Commit Phase</h5><p>这些只能执行一次</p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><h4 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h4><ul>
+<li><a href="https://juejin.cn/post/6844903582622285831">React Fiber</a></li>
+<li><a href="https://juejin.cn/post/6984949525928476703">React Fiber很难? 六个问题助你理解 React Fiber</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>React</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>React</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>React Router</title>
     <url>/2021/09/01/React-Router/</url>
     <content><![CDATA[<h3 id="SPA的理解"><a href="#SPA的理解" class="headerlink" title="SPA的理解"></a>SPA的理解</h3><ol>
@@ -1355,32 +1380,6 @@
 </ul>
 <p><strong>何时使用状态管理库？</strong></p>
 <p><strong>判断一个状态是不是只属于组件本身，如若是则不需要状态管理库</strong></p>
-]]></content>
-      <categories>
-        <category>React</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-        <tag>React</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>React Fiber</title>
-    <url>/2021/11/27/React%20Fiber/</url>
-    <content><![CDATA[<p>React Fiber 本质上是一种基于<strong>双链表的数据结构和协调算法</strong>的结合体，它是 React 16.x 版本后对渲染机制的核心重构，它的主要目标是解决大型应用中渲染卡顿的问题，实现更高效的任务调度和更流畅的用户体验。</p>
-<h4 id="React的概念"><a href="#React的概念" class="headerlink" title="React的概念"></a>React的概念</h4><ul>
-<li>Virtual DOM 层，描述页面长什么样。</li>
-<li>Reconciler 层，负责调用组件生命周期方法，进行 Diff 运算等。</li>
-<li>Renderer 层，根据不同的平台，渲染出相应的页面，比较常见的是 ReactDOM 和<br>ReactNative。</li>
-</ul>
-<h4 id="为什么需要React-Fiber"><a href="#为什么需要React-Fiber" class="headerlink" title="为什么需要React Fiber"></a>为什么需要React Fiber</h4><h5 id="Reconciler"><a href="#Reconciler" class="headerlink" title="Reconciler"></a>Reconciler</h5><p>React 使用的算法将一棵树与另一棵树进行比较，”找不同”的过程就叫做 reconciliation 。<br>实际上，在每次更改时重新渲染整个应用程序仅适用于最琐碎的应用程序；在现实世界的应用程<br>序中，它在性能方面的成本高得令人望而却步。 React 进行了优化，可以在保持出色性能的同<br>时创建整个应用程序重新渲染的外观。<br>Reconciliation 是通常理解为“虚拟 DOM”背后的算法，”当你渲染一个 React 应用程序时，一个<br>描述应用程序的节点树被生成并保存在内存中。然后这个树被刷新到渲染环境——例如，在浏览<br>器应用程序的情况下，它被转换为一组 DOM 操作。当应用程序更新时（通常通过 setState），<br>会生成一棵新树。新树与之前的树进行比较，以计算需要哪些操作来更新呈现的应用程序</p>
-<h4 id="Fiber-Reconciler的执行过程"><a href="#Fiber-Reconciler的执行过程" class="headerlink" title="Fiber Reconciler的执行过程"></a>Fiber Reconciler的执行过程</h4><p>Fiber在执行过程，会分为两个阶段<br><img src="/../assets/fiber%E6%89%A7%E8%A1%8C.png" alt="alt text"></p>
-<h5 id="Reconciliation-Phase"><a href="#Reconciliation-Phase" class="headerlink" title="Reconciliation Phase"></a>Reconciliation Phase</h5><p>这些在react fiber中可能执行多次</p>
-<h5 id="Commit-Phase"><a href="#Commit-Phase" class="headerlink" title="Commit Phase"></a>Commit Phase</h5><p>这些只能执行一次</p>
-<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><h4 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h4><ul>
-<li><a href="https://juejin.cn/post/6844903582622285831">React Fiber</a></li>
-<li><a href="https://juejin.cn/post/6984949525928476703">React Fiber很难? 六个问题助你理解 React Fiber</a></li>
-</ul>
 ]]></content>
       <categories>
         <category>React</category>
@@ -2499,7 +2498,7 @@ webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后�
 <h5 id="通信方式：stdio"><a href="#通信方式：stdio" class="headerlink" title="通信方式：stdio"></a>通信方式：stdio</h5><p>标准输入输出，</p>
 <h5 id="通信格式：JSON-RPC"><a href="#通信格式：JSON-RPC" class="headerlink" title="通信格式：JSON-RPC"></a>通信格式：JSON-RPC</h5>]]></content>
       <categories>
-        <category>AI技术</category>
+        <category>AI相关</category>
       </categories>
       <tags>
         <tag>MCP</tag>
