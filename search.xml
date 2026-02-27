@@ -111,6 +111,15 @@
       </tags>
   </entry>
   <entry>
+    <title>H5离线包</title>
+    <url>/2025/10/21/H5%E7%A6%BB%E7%BA%BF%E5%8C%85/</url>
+    <content><![CDATA[]]></content>
+      <tags>
+        <tag>性能优化</tag>
+        <tag>前端</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Git相关</title>
     <url>/2021/02/11/Git%E7%9B%B8%E5%85%B3/</url>
     <content><![CDATA[<h4 id="git-rebase-和-git-merge的区别"><a href="#git-rebase-和-git-merge的区别" class="headerlink" title="git rebase 和 git merge的区别"></a>git rebase 和 git merge的区别</h4><h5 id="处理冲突时的区别"><a href="#处理冲突时的区别" class="headerlink" title="处理冲突时的区别"></a>处理冲突时的区别</h5>]]></content>
@@ -119,15 +128,6 @@
       </categories>
       <tags>
         <tag>Git</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>H5离线包</title>
-    <url>/2025/10/21/H5%E7%A6%BB%E7%BA%BF%E5%8C%85/</url>
-    <content><![CDATA[]]></content>
-      <tags>
-        <tag>性能优化</tag>
-        <tag>前端</tag>
       </tags>
   </entry>
   <entry>
@@ -1016,6 +1016,199 @@
       </tags>
   </entry>
   <entry>
+    <title>NextJS学习【渲染】</title>
+    <url>/2025/12/29/NextJS%E5%AD%A6%E4%B9%A0%E3%80%90%E6%B8%B2%E6%9F%93%E7%AF%87%E3%80%91/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>React</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>React</tag>
+        <tag>NextJS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>NextJS学习【CLI、App Router路由、后端路由处理程序、中间件】</title>
+    <url>/2025/12/27/NextJs%E5%AD%A6%E4%B9%A0/</url>
+    <content><![CDATA[<h3 id="构建工具：Turbopack"><a href="#构建工具：Turbopack" class="headerlink" title="构建工具：Turbopack"></a>构建工具：Turbopack</h3><h3 id="React-Compiler"><a href="#React-Compiler" class="headerlink" title="React Compiler"></a>React Compiler</h3><h3 id="Next-CLI"><a href="#Next-CLI" class="headerlink" title="Next CLI"></a>Next CLI</h3><h4 id="next-dev"><a href="#next-dev" class="headerlink" title="next dev"></a>next dev</h4><p>自动具有热加载、错误报告</p>
+<h4 id="next-build"><a href="#next-build" class="headerlink" title="next build"></a>next build</h4><p><img src="/../assets/next-cli.png" alt="alt text"><br>Size：导航到该路由时下载的资源大小，每个路由的大小只包括它自己的依赖项<br>First Load JS：加载该页面时下载的资源大小<br>First load JS shared by all：所有路由共享的 JS 大小会被单独列出来</p>
+<p>生产环境开启 React profiler：next build –profile</p>
+<p>next build –debug</p>
+<h4 id="next-start"><a href="#next-start" class="headerlink" title="next start"></a>next start</h4><p>启动生产环境服务器</p>
+<h3 id="Next路由模式-App-Router"><a href="#Next路由模式-App-Router" class="headerlink" title="Next路由模式 App Router"></a>Next路由模式 App Router</h3><p><img src="/image-2.png" alt="alt text"></p>
+<h4 id="定义路由（Routes）"><a href="#定义路由（Routes）" class="headerlink" title="定义路由（Routes）"></a>定义路由（Routes）</h4><h4 id="定义页面（Pages）"><a href="#定义页面（Pages）" class="headerlink" title="定义页面（Pages）"></a>定义页面（Pages）</h4><h4 id="定义布局（Layouts）"><a href="#定义布局（Layouts）" class="headerlink" title="定义布局（Layouts）"></a>定义布局（Layouts）</h4><p>布局是指多个页面共享的 UI。在导航的时候，布局会保留状态、保持可交互性并且不会重新渲染，比如用来实现后台管理系统的侧边导航栏。</p>
+<p><strong>同一文件夹下如果有 layout.js 和 page.js，page 会作为 children 参数传入 layout。换句话说，layout 会包裹同层级的 page。</strong></p>
+<h5 id="根布局（Root-Layout）"><a href="#根布局（Root-Layout）" class="headerlink" title="根布局（Root Layout）"></a>根布局（Root Layout）</h5><p>布局支持嵌套，最顶层的布局称之为根布局（Root Layout），也就是 app&#x2F;layout.js。它会应用于所有的路由。除此之外，这个布局还有点特殊。<br>使用 create-next-app 默认创建的 layout.js 代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// app/layout.js</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">&#x27;./globals.css&#x27;</span></span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">Inter</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;next/font/google&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> inter = <span class="title class_">Inter</span>(&#123; <span class="attr">subsets</span>: [<span class="string">&#x27;latin&#x27;</span>] &#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> metadata = &#123;</span><br><span class="line">  <span class="attr">title</span>: <span class="string">&#x27;Create Next App&#x27;</span>,</span><br><span class="line">  <span class="attr">description</span>: <span class="string">&#x27;Generated by create next app&#x27;</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">function</span> <span class="title function_">RootLayout</span>(<span class="params">&#123; children &#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">body</span> <span class="attr">className</span>=<span class="string">&#123;inter.className&#125;</span>&gt;</span>&#123;children&#125;<span class="tag">&lt;/<span class="name">body</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">html</span>&gt;</span></span></span><br><span class="line">  )</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>app 目录必须包含根布局，也就是 app&#x2F;layout.js 这个文件是必需的。<br>根布局必须包含 html 和 body标签，其他布局不能包含这些标签。如果你要更改这些标签，不推荐直接修改<br>你可以使用路由组创建多个根布局。<br>默认根布局是服务端组件，且不能设置为客户端组件。</p>
+<h4 id="定义模版（Templates）"><a href="#定义模版（Templates）" class="headerlink" title="定义模版（Templates）"></a>定义模版（Templates）</h4><p>模板类似于布局，它也会传入每个子布局或者页面。但不会像布局那样维持状态。</p>
+<p>模板在路由切换时会为每一个 children 创建一个实例。这就意味着当用户在共享一个模板的路由间跳转的时候，将会重新挂载组件实例，重新创建 DOM 元素，不保留状态。</p>
+<p>template.js 代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// app/template.js</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">function</span> <span class="title function_">Template</span>(<span class="params">&#123; children &#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>&#123;children&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Layouts和Templates最大的区别就是状态的保持。如果同一目录下既有 template.js 也有 layout.js，最后的输出效果如下：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;<span class="title class_">Layout</span>&gt;</span><br><span class="line">  &#123;<span class="comment">/* 模板需要给一个唯一的 key */</span>&#125;</span><br><span class="line">  &lt;<span class="title class_">Template</span> key=&#123;routeParam&#125;&gt;&#123;children&#125;&lt;/<span class="title class_">Template</span>&gt;</span><br><span class="line">&lt;/<span class="title class_">Layout</span>&gt;</span><br></pre></td></tr></table></figure>
+<p>layout 会包裹 template，template 又会包裹 page。</p>
+<p>某些情况下，模板会比布局更适合：</p>
+<ul>
+<li><p>依赖于 useEffect 和 useState 的功能，比如记录页面访问数（维持状态就不会在路由切换时记录访问数了）、用户反馈表单（每次重新填写）等</p>
+</li>
+<li><p>更改框架的默认行为，举个例子，布局内的 Suspense 只会在布局加载的时候展示一次 fallback UI，当切换页面的时候不会展示。但是使用模板，fallback 会在每次路由切换的时候展示</p>
+</li>
+</ul>
+<p>Layout VS Template<br>布局和模板的特点就是：</p>
+<ul>
+<li>布局嵌套：支持多层布局嵌套，构建复杂的页面结构</li>
+<li>状态管理：布局会在页面切换时保持状态，而模板会重新渲染</li>
+<li>根布局：app&#x2F;layout.tsx 是必须存在的根布局文件</li>
+<li>渲染顺序：当布局和模板同时存在时，渲染顺序为 layout → template → page</li>
+</ul>
+<h4 id="定义加载界面（Loading-UI）"><a href="#定义加载界面（Loading-UI）" class="headerlink" title="定义加载界面（Loading UI）"></a>定义加载界面（Loading UI）</h4><h5 id="实现Loading-UI的几种方式"><a href="#实现Loading-UI的几种方式" class="headerlink" title="实现Loading UI的几种方式"></a>实现Loading UI的几种方式</h5><ol>
+<li>使用 page.js导出一个 async 函数</li>
+<li>React use函数</li>
+</ol>
+<h4 id="定义错误处理（Error-Handling）"><a href="#定义错误处理（Error-Handling）" class="headerlink" title="定义错误处理（Error Handling）"></a>定义错误处理（Error Handling）</h4><p>其实现借助了 React 的 Error Boundary 功能。简单来说，就是给 page.js 和 children 包了一层 ErrorBoundary。</p>
+<h4 id="定义-404-页面（不存在的路由）"><a href="#定义-404-页面（不存在的路由）" class="headerlink" title="定义 404 页面（不存在的路由）"></a>定义 404 页面（不存在的路由）</h4><p>关于 app&#x2F;not-found.js 一定要说明一点的是，它只能由两种情况触发：</p>
+<ol>
+<li>当组件抛出了 notFound 函数的时候</li>
+<li>当路由地址不匹配的时候</li>
+</ol>
+<p>只需要在 app 目录下新建一个 not-found.js</p>
+<h3 id="链接和导航"><a href="#链接和导航" class="headerlink" title="链接和导航"></a>链接和导航</h3><p>在 Next.js 中，有 4 种方式可以实现路由导航：</p>
+<ol>
+<li>使用 <Link> 组件</li>
+<li>使用 useRouter Hook（客户端组件）</li>
+<li>使用 redirect 函数（服务端组件）</li>
+<li>使用浏览器原生 History API</li>
+</ol>
+<h4 id="导航行为设置"><a href="#导航行为设置" class="headerlink" title="导航行为设置"></a>导航行为设置</h4><p>App Router 的默认行为是滚动到新路由的顶部，或者在前进后退导航时维持之前的滚动距离。</p>
+<p>如果你想要禁用这个行为，你可以给 <Link> 组件传递一个 scroll&#x3D;{false}属性，或者在使用 router.push和 router.replace的时候，设置 scroll: false：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// next/link</span></span><br><span class="line">&lt;<span class="title class_">Link</span> href=<span class="string">&quot;/dashboard&quot;</span> scroll=&#123;<span class="literal">false</span>&#125;&gt;</span><br><span class="line">  <span class="title class_">Dashboard</span></span><br><span class="line">&lt;/<span class="title class_">Link</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// useRouter</span></span><br><span class="line"><span class="keyword">import</span> &#123; useRouter &#125; <span class="keyword">from</span> <span class="string">&#x27;next/navigation&#x27;</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">const</span> router = <span class="title function_">useRouter</span>()</span><br><span class="line"> </span><br><span class="line">router.<span class="title function_">push</span>(<span class="string">&#x27;/dashboard&#x27;</span>, &#123; <span class="attr">scroll</span>: <span class="literal">false</span> &#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="动态路由"><a href="#动态路由" class="headerlink" title="动态路由"></a>动态路由</h3><p>使用动态路由，需要将文件夹的名字用方括号括住，比如 [id]、[slug]。这个路由的名字会作为 params prop 传给布局、 页面、 路由处理程序 以及 generateMetadata 函数。</p>
+<h4 id="folderName"><a href="#folderName" class="headerlink" title="[folderName]"></a>[folderName]</h4><p>当你访问 &#x2F;blog&#x2F;a的时候，params 的值为 { slug: ‘a’ }。</p>
+<p>当你访问 &#x2F;blog&#x2F;yayu的时候，params 的值为 { slug: ‘yayu’ }。</p>
+<h4 id="…folderName"><a href="#…folderName" class="headerlink" title="[…folderName]"></a>[…folderName]</h4><p>在命名文件夹的时候，如果在方括号内添加省略号，比如 […folderName]，这表示<strong>捕获所有后面所有的</strong>路由片段。</p>
+<p>当你访问 &#x2F;shop&#x2F;a的时候，params 的值为 { slug: [‘a’] }。</p>
+<p>当你访问 &#x2F;shop&#x2F;a&#x2F;b的时候，params 的值为 { slug: [‘a’, ‘b’] }。</p>
+<p>当你访问 &#x2F;shop&#x2F;a&#x2F;b&#x2F;c的时候，params 的值为 { slug: [‘a’, ‘b’, ‘c’] }。</p>
+<h4 id="…folderName-1"><a href="#…folderName-1" class="headerlink" title="[[…folderName]]"></a>[[…folderName]]</h4><p>它与上一种的区别就在于，不带参数的路由也会被匹配（就比如 &#x2F;shop）</p>
+<h3 id="路由组"><a href="#路由组" class="headerlink" title="路由组"></a>路由组</h3><p>在 app目录下，文件夹名称通常会被映射到 URL 中，但<strong>可以将文件夹标记为路由组，阻止文件夹名称被映射到 URL 中</strong>。</p>
+<p>使用路由组，可以将路由和项目文件按照逻辑进行分组，但不会影响 URL 路径结构。路由组可用于比如：</p>
+<ol>
+<li>按站点、意图、团队等将路由分组</li>
+<li>在同一层级中创建多个布局，甚至是创建多个根布局<br>那么该如何标记呢？把文件夹用括号括住就可以了，就比如 (dashboard)。</li>
+</ol>
+<h4 id="按逻辑分组"><a href="#按逻辑分组" class="headerlink" title="按逻辑分组"></a>按逻辑分组</h4><p><img src="/image-3.png" alt="alt text"></p>
+<h4 id="创建不同布局"><a href="#创建不同布局" class="headerlink" title="创建不同布局"></a>创建不同布局</h4><p>借助路由组，即便在同一层级，也可以创建不同的布局：<br><img src="/image-4.png" alt="alt text"></p>
+<h4 id="创建多个根布局"><a href="#创建多个根布局" class="headerlink" title="创建多个根布局"></a>创建多个根布局</h4><p><img src="/image-5.png" alt="alt text"><br>创建多个根布局，需要删除掉 app&#x2F;layout.js 文件，然后在每组都创建一个 layout.js文件。创建的时候要注意，因为是根布局，所以要有 <html> 和 <body> 标签。</p>
+<p>这个功能很实用，比如将前台购买页面和后台管理页面都放在一个项目里，一个 C 端，一个 B 端，两个项目的布局肯定不一样，借助路由组，就可以轻松实现区分。</p>
+<h3 id="平行路由"><a href="#平行路由" class="headerlink" title="平行路由"></a>平行路由</h3><p>类似Vue的插槽功能<br>平行路由跟路由组一样，不会影响 URL</p>
+<p>独立路由处理</p>
+<ol>
+<li>使用平行路由可以将单个布局拆分为多个插槽，使代码更易于管理，尤其适用于团队协作的时候</li>
+<li>每个插槽都可以定义自己的加载界面和错误状态，比如某个插槽加载速度比较慢，那就可以加一个加载效果，加载期间，也不会影响其他插槽的渲染和交互。当出现错误的时候，也只会在具体的插槽上出现错误提示，而不会影响页面其他部分，有效改善用户体验</li>
+<li>每个插槽都可以有自己独立的导航和状态管理，这使得插槽的功能更加丰富，比如在上面的例子中，我们在 @analytics 插槽下又建了查看页面 PV 的 &#x2F;page-views、查看访客的 &#x2F;visitors，使得同一个插槽区域可以根据路由显示不同的内容</li>
+</ol>
+<h4 id="用途1：条件渲染"><a href="#用途1：条件渲染" class="headerlink" title="用途1：条件渲染"></a>用途1：条件渲染</h4><h4 id="用途2：子导航"><a href="#用途2：子导航" class="headerlink" title="用途2：子导航"></a>用途2：子导航</h4><h4 id="default-js"><a href="#default-js" class="headerlink" title="default.js"></a>default.js</h4><p>为了解决这个问题，Next.js 提供了 default.js。当发生硬导航的时候，Next.js 会为不匹配的插槽呈现 default.js 中定义的内容，如果 default.js 没有定义，再渲染 404 错误。</p>
+<p>硬导航影响，软导航不变</p>
+<h3 id="拦截路由"><a href="#拦截路由" class="headerlink" title="拦截路由"></a>拦截路由</h3><p><a href="https://nextjs-app-route-interception.vercel.app/">https://nextjs-app-route-interception.vercel.app/</a></p>
+<p>同样一个路由地址，却展示了不同的内容。这就是拦截路由的效果。如果你在 dribbble.com 想要访问 dribbble.com&#x2F;shots&#x2F;xxxxx，此时会拦截 dribbble.com&#x2F;shots&#x2F;xxxxx 这个路由地址，以 Modal 的形式展现。而当直接访问 dribbble.com&#x2F;shots&#x2F;xxxxx 时，则是原本的样式。</p>
+<p>简单的来说，就是希望用户继续停留在重要的页面上。比如上述例子中的图片流页面，开发者肯定是希望用户能够持续在图片流页面浏览，如果点击一张图片就跳转出去，会打断用户的浏览体验，如果点击只展示一个 Modal，分享操作又会变得麻烦一点。拦截路由正好可以实现这样一种平衡。又比如任务列表页面，点击其中一项任务，弹出 Modal 让你能够编辑此任务，同时又可以方便的分享任务内容。</p>
+<h4 id="实现方式"><a href="#实现方式" class="headerlink" title="实现方式"></a>实现方式</h4><ol>
+<li>(.) 表示匹配同一层级</li>
+<li>(..) 表示匹配上一层级</li>
+<li>(..)(..) 表示匹配上上层级。</li>
+<li>(…) 表示匹配根目录</li>
+</ol>
+<h3 id="路由处理程序（网络请求）"><a href="#路由处理程序（网络请求）" class="headerlink" title="路由处理程序（网络请求）"></a>路由处理程序（网络请求）</h3><p>使用next框架做接口开发 – route handler</p>
+<h4 id="定义路由处理程序"><a href="#定义路由处理程序" class="headerlink" title="定义路由处理程序"></a>定义路由处理程序</h4><p>route.js<br><img src="/image-1.png" alt="alt text"></p>
+<p>该文件必须在 app目录下，可以在 app 嵌套的文件夹下，但是要注意 page.js和 route.js不能在同一层级同时存在。</p>
+<p>想想也能理解，page.js和 route.js本质上都是对路由的响应。page.js主要负责渲染 UI，route.js主要负责处理请求。如果同时存在，Next.js 就不知道用谁的逻辑了。</p>
+<h4 id="支持的请求方法"><a href="#支持的请求方法" class="headerlink" title="支持的请求方法"></a>支持的请求方法</h4><p>Next.js 支持 GET、POST、PUT、PATCH、DELETE、HEAD 和 OPTIONS 这些 HTTP 请求方法。如果传入了不支持的请求方法，Next.js 会返回 405 Method Not Allowed。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// route.js</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">GET</span>(<span class="params">request</span>) &#123;&#125;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">export</span> <span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">HEAD</span>(<span class="params">request</span>) &#123;&#125;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">export</span> <span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">POST</span>(<span class="params">request</span>) &#123;&#125;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">export</span> <span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">PUT</span>(<span class="params">request</span>) &#123;&#125;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">export</span> <span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">DELETE</span>(<span class="params">request</span>) &#123;&#125;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">export</span> <span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">PATCH</span>(<span class="params">request</span>) &#123;&#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">// 如果 `OPTIONS` 没有定义, Next.js 会自动实现 `OPTIONS`</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">OPTIONS</span>(<span class="params">request</span>) &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="实现一个Get请求"><a href="#实现一个Get请求" class="headerlink" title="实现一个Get请求"></a>实现一个Get请求</h4><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">NextResponse</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;next/server&#x27;</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">export</span> <span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">GET</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> res = <span class="keyword">await</span> <span class="title function_">fetch</span>(<span class="string">&#x27;https://jsonplaceholder.typicode.com/posts&#x27;</span>)</span><br><span class="line">  <span class="keyword">const</span> data = <span class="keyword">await</span> res.<span class="title function_">json</span>()</span><br><span class="line"> </span><br><span class="line">  <span class="keyword">return</span> <span class="title class_">NextResponse</span>.<span class="title function_">json</span>(&#123; data &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="实现一个Post请求"><a href="#实现一个Post请求" class="headerlink" title="实现一个Post请求"></a>实现一个Post请求</h4><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">POST</span>(<span class="params">request</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> article = <span class="keyword">await</span> request.<span class="title function_">json</span>()</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> <span class="title class_">NextResponse</span>.<span class="title function_">json</span>(&#123;</span><br><span class="line">    <span class="attr">id</span>: <span class="title class_">Math</span>.<span class="title function_">random</span>().<span class="title function_">toString</span>(<span class="number">36</span>).<span class="title function_">slice</span>(-<span class="number">8</span>),</span><br><span class="line">    <span class="attr">data</span>: article</span><br><span class="line">  &#125;, &#123; <span class="attr">status</span>: <span class="number">201</span> &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="传入参数"><a href="#传入参数" class="headerlink" title="传入参数"></a>传入参数</h4><p>每个请求方法的处理函数会被传入两个参数，一个 request，一个 context 。两个参数都是可选的：</p>
+<ol>
+<li><strong>request (optional)</strong><br>使用request对象，可以快捷的读取 cookies 和处理 URL。</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">GET</span>(<span class="params">request, context</span>) &#123;</span><br><span class="line">  <span class="comment">//  访问 /home, pathname 的值为 /home</span></span><br><span class="line">	<span class="keyword">const</span> pathname = request.<span class="property">nextUrl</span>.<span class="property">pathname</span></span><br><span class="line">	<span class="comment">// 访问 /home?name=lee, searchParams 的值为 &#123; &#x27;name&#x27;: &#x27;lee&#x27; &#125;</span></span><br><span class="line">	<span class="keyword">const</span> searchParams = request.<span class="property">nextUrl</span>.<span class="property">searchParams</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><strong>context (optional)</strong><br>context 只有一个值就是 params，它是一个包含当前动态路由参数的对象。</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// app/dashboard/[team]/route.js</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">GET</span>(<span class="params">request, &#123; params &#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> team = params.<span class="property">team</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当访问 &#x2F;dashboard&#x2F;1 时，params 的值为 { team: ‘1’ }</p>
+<p>app&#x2F;shop&#x2F;[tag]&#x2F;[item]&#x2F;route.js	<br>&#x2F;shop&#x2F;1&#x2F;2	<br>{ tag: ‘1’, item: ‘2’ }</p>
+<p>app&#x2F;blog&#x2F;[…slug]&#x2F;route.js	<br>&#x2F;blog&#x2F;1&#x2F;2	<br>{ slug: [‘1’, ‘2’] }</p>
+<h4 id="缓存行为"><a href="#缓存行为" class="headerlink" title="缓存行为"></a>缓存行为</h4><h5 id="默认缓存"><a href="#默认缓存" class="headerlink" title="默认缓存"></a>默认缓存</h5><h5 id="退出缓存"><a href="#退出缓存" class="headerlink" title="退出缓存"></a>退出缓存</h5><p>这些情况都会导致退出缓存：</p>
+<ol>
+<li>GET 请求使用 Request 对象</li>
+<li>使用其他 HTTP 方法，比如 POST</li>
+<li>路由段配置项手动声明为动态模式</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> dynamic = <span class="string">&#x27;force-dynamic&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">GET</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="title class_">Response</span>.<span class="title function_">json</span>(&#123; <span class="attr">data</span>: <span class="keyword">new</span> <span class="title class_">Date</span>().<span class="title function_">toLocaleTimeString</span>() &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="设置缓存"><a href="#设置缓存" class="headerlink" title="设置缓存"></a>设置缓存</h5><p>除了退出缓存，也可以设置缓存的时效，适用于一些重要性低、时效性低的页面。</p>
+<p>有两种常用的方案，一种是使用路由段配置项。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> revalidate = <span class="number">10</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">GET</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="title class_">Response</span>.<span class="title function_">json</span>(&#123; <span class="attr">data</span>: <span class="keyword">new</span> <span class="title class_">Date</span>().<span class="title function_">toLocaleTimeString</span>() &#125;)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> revalidate = <span class="number">10</span> 表示设置重新验证频率为 10s，但是要注意：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>这句代码的效果并不是设置服务器每 10s 会自动更新一次 &#x2F;api&#x2F;time。而是最少 10s 后才重新验证。</p>
+<p>举个例子，假设现在访问了 &#x2F;api&#x2F;time，此时时间设为 0s，10s 内持续访问，&#x2F;api&#x2F;time返回的都是之前缓存的结果。当 10s 过后，假设你第 12s 又访问了一次 &#x2F;api&#x2F;time，此时虽然超过了 10s，但依然会返回之前缓存的结果，但同时会触发服务器更新缓存，当你第 13s 再次访问的时候，就是更新后的结果。</p>
+<p>简单来说，超过 revalidate 设置时间的首次访问会触发缓存更新，如果更新成功，后续的返回就都是新的内容，直到下一次触发缓存更新。</p>
+<h3 id="中间件"><a href="#中间件" class="headerlink" title="中间件"></a>中间件</h3><p>使用中间件，可以拦截并控制应用里的所有请求和响应。</p>
+<p>比如可以基于传入的请求，重写、重定向、修改请求或响应头、甚至直接响应内容。一个比较常见的应用就是鉴权，在打开页面渲染具体的内容前，先判断用户是否登录，如果未登录，则跳转到登录页面。</p>
+<h4 id="中间件示例"><a href="#中间件示例" class="headerlink" title="中间件示例"></a>中间件示例</h4><p>写中间件，你需要在项目的根目录定义一个名为 middleware.js的文件：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// middleware.js</span></span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">NextResponse</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;next/server&#x27;</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">// 中间件可以是 async 函数，如果使用了 await</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">middleware</span>(<span class="params">request</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="title class_">NextResponse</span>.<span class="title function_">redirect</span>(<span class="keyword">new</span> <span class="title function_">URL</span>(<span class="string">&#x27;/home&#x27;</span>, request.<span class="property">url</span>))</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 设置匹配路径</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> config = &#123;</span><br><span class="line">  <span class="attr">matcher</span>: <span class="string">&#x27;/about/:path*&#x27;</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="设置匹配路径"><a href="#设置匹配路径" class="headerlink" title="设置匹配路径"></a>设置匹配路径</h4><h5 id="matcher配置项"><a href="#matcher配置项" class="headerlink" title="matcher配置项"></a>matcher配置项</h5><p>第一种是使用 matcher配置项，示例代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> config = &#123;</span><br><span class="line">  <span class="attr">matcher</span>: <span class="string">&#x27;/about/:path*&#x27;</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>matcher 不仅支持字符串形式，也支持数组形式，用于匹配多个路径：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> config = &#123;</span><br><span class="line">  <span class="attr">matcher</span>: [<span class="string">&#x27;/about/:path*&#x27;</span>, <span class="string">&#x27;/dashboard/:path*&#x27;</span>],</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>matcher 还可以判断查询参数、cookies、headers</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> config = &#123;</span><br><span class="line">  <span class="attr">matcher</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">source</span>: <span class="string">&#x27;/api/*&#x27;</span>,</span><br><span class="line">      <span class="attr">has</span>: [</span><br><span class="line">        &#123; <span class="attr">type</span>: <span class="string">&#x27;header&#x27;</span>, <span class="attr">key</span>: <span class="string">&#x27;Authorization&#x27;</span>, <span class="attr">value</span>: <span class="string">&#x27;Bearer Token&#x27;</span> &#125;,</span><br><span class="line">        &#123; <span class="attr">type</span>: <span class="string">&#x27;query&#x27;</span>, <span class="attr">key</span>: <span class="string">&#x27;userId&#x27;</span>, <span class="attr">value</span>: <span class="string">&#x27;123&#x27;</span> &#125;,</span><br><span class="line">      ],</span><br><span class="line">      <span class="attr">missing</span>: [&#123; <span class="attr">type</span>: <span class="string">&#x27;cookie&#x27;</span>, <span class="attr">key</span>: <span class="string">&#x27;session&#x27;</span>, <span class="attr">value</span>: <span class="string">&#x27;active&#x27;</span> &#125;],</span><br><span class="line">    &#125;,</span><br><span class="line">  ],</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="条件语句"><a href="#条件语句" class="headerlink" title="条件语句"></a>条件语句</h5><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">NextResponse</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;next/server&#x27;</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">middleware</span>(<span class="params">request</span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (request.<span class="property">nextUrl</span>.<span class="property">pathname</span>.<span class="title function_">startsWith</span>(<span class="string">&#x27;/about&#x27;</span>)) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="title class_">NextResponse</span>.<span class="title function_">rewrite</span>(<span class="keyword">new</span> <span class="title function_">URL</span>(<span class="string">&#x27;/about-2&#x27;</span>, request.<span class="property">url</span>))</span><br><span class="line">  &#125;</span><br><span class="line"> </span><br><span class="line">  <span class="keyword">if</span> (request.<span class="property">nextUrl</span>.<span class="property">pathname</span>.<span class="title function_">startsWith</span>(<span class="string">&#x27;/dashboard&#x27;</span>)) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="title class_">NextResponse</span>.<span class="title function_">rewrite</span>(<span class="keyword">new</span> <span class="title function_">URL</span>(<span class="string">&#x27;/dashboard/user&#x27;</span>, request.<span class="property">url</span>))</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="中间件逻辑"><a href="#中间件逻辑" class="headerlink" title="中间件逻辑"></a>中间件逻辑</h4><h5 id="设置和读取cookies"><a href="#设置和读取cookies" class="headerlink" title="设置和读取cookies"></a>设置和读取cookies</h5><p>用法跟路由处理程序一致，使用 NextRequest 和 NextResponse 快捷读取和设置 cookies。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">NextResponse</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;next/server&#x27;</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">middleware</span>(<span class="params">request</span>) &#123;</span><br><span class="line">  <span class="comment">// 假设传入的请求 header 里 &quot;Cookie:nextjs=fast&quot;</span></span><br><span class="line">  <span class="keyword">let</span> cookie = request.<span class="property">cookies</span>.<span class="title function_">get</span>(<span class="string">&#x27;nextjs&#x27;</span>)</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(cookie) <span class="comment">// =&gt; &#123; name: &#x27;nextjs&#x27;, value: &#x27;fast&#x27;, Path: &#x27;/&#x27; &#125;</span></span><br><span class="line">  <span class="keyword">const</span> allCookies = request.<span class="property">cookies</span>.<span class="title function_">getAll</span>()</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(allCookies) <span class="comment">// =&gt; [&#123; name: &#x27;nextjs&#x27;, value: &#x27;fast&#x27; &#125;]</span></span><br><span class="line"> </span><br><span class="line">  request.<span class="property">cookies</span>.<span class="title function_">has</span>(<span class="string">&#x27;nextjs&#x27;</span>) <span class="comment">// =&gt; true</span></span><br><span class="line">  request.<span class="property">cookies</span>.<span class="title function_">delete</span>(<span class="string">&#x27;nextjs&#x27;</span>)</span><br><span class="line">  request.<span class="property">cookies</span>.<span class="title function_">has</span>(<span class="string">&#x27;nextjs&#x27;</span>) <span class="comment">// =&gt; false</span></span><br><span class="line"> </span><br><span class="line">  <span class="comment">// 设置 cookies</span></span><br><span class="line">  <span class="keyword">const</span> response = <span class="title class_">NextResponse</span>.<span class="title function_">next</span>()</span><br><span class="line">  response.<span class="property">cookies</span>.<span class="title function_">set</span>(<span class="string">&#x27;vercel&#x27;</span>, <span class="string">&#x27;fast&#x27;</span>)</span><br><span class="line">  response.<span class="property">cookies</span>.<span class="title function_">set</span>(&#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;vercel&#x27;</span>,</span><br><span class="line">    <span class="attr">value</span>: <span class="string">&#x27;fast&#x27;</span>,</span><br><span class="line">    <span class="attr">path</span>: <span class="string">&#x27;/&#x27;</span>,</span><br><span class="line">  &#125;)</span><br><span class="line">  cookie = response.<span class="property">cookies</span>.<span class="title function_">get</span>(<span class="string">&#x27;vercel&#x27;</span>)</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(cookie) <span class="comment">// =&gt; &#123; name: &#x27;vercel&#x27;, value: &#x27;fast&#x27;, Path: &#x27;/&#x27; &#125;</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 响应 header 为 `Set-Cookie:vercel=fast;path=/test`</span></span><br><span class="line">  <span class="keyword">return</span> response</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里调用了 NextResponse.next() 这个方法，这个方法专门用在 middleware 中，因为中间件进行一层处理后，返回的结果还要在下一个逻辑中继续使用，此时就需要返回 NextResponse.next()</p>
+<h5 id="设置和读取headers"><a href="#设置和读取headers" class="headerlink" title="设置和读取headers"></a>设置和读取headers</h5><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// middleware.js </span></span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">NextResponse</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;next/server&#x27;</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">middleware</span>(<span class="params">request</span>) &#123;</span><br><span class="line">  <span class="comment">//  clone 请求标头</span></span><br><span class="line">  <span class="keyword">const</span> requestHeaders = <span class="keyword">new</span> <span class="title class_">Headers</span>(request.<span class="property">headers</span>)</span><br><span class="line">  requestHeaders.<span class="title function_">set</span>(<span class="string">&#x27;x-hello-from-middleware1&#x27;</span>, <span class="string">&#x27;hello&#x27;</span>)</span><br><span class="line"> </span><br><span class="line">  <span class="comment">// 你也可以在 NextResponse.rewrite 中设置请求标头</span></span><br><span class="line">  <span class="keyword">const</span> response = <span class="title class_">NextResponse</span>.<span class="title function_">next</span>(&#123;</span><br><span class="line">    <span class="attr">request</span>: &#123;</span><br><span class="line">      <span class="comment">// 设置新请求标头</span></span><br><span class="line">      <span class="attr">headers</span>: requestHeaders,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;)</span><br><span class="line"> </span><br><span class="line">  <span class="comment">// 设置新响应标头 `x-hello-from-middleware2`</span></span><br><span class="line">  response.<span class="property">headers</span>.<span class="title function_">set</span>(<span class="string">&#x27;x-hello-from-middleware2&#x27;</span>, <span class="string">&#x27;hello&#x27;</span>)</span><br><span class="line">  <span class="keyword">return</span> response</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="设置Cors"><a href="#设置Cors" class="headerlink" title="设置Cors"></a>设置Cors</h5><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">NextResponse</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;next/server&#x27;</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">const</span> allowedOrigins = [<span class="string">&#x27;https://acme.com&#x27;</span>, <span class="string">&#x27;https://my-app.org&#x27;</span>]</span><br><span class="line"> </span><br><span class="line"><span class="keyword">const</span> corsOptions = &#123;</span><br><span class="line">  <span class="string">&#x27;Access-Control-Allow-Methods&#x27;</span>: <span class="string">&#x27;GET, POST, PUT, DELETE, OPTIONS&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;Access-Control-Allow-Headers&#x27;</span>: <span class="string">&#x27;Content-Type, Authorization&#x27;</span>,</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">middleware</span>(<span class="params">request</span>) &#123;</span><br><span class="line">  <span class="comment">// Check the origin from the request</span></span><br><span class="line">  <span class="keyword">const</span> origin = request.<span class="property">headers</span>.<span class="title function_">get</span>(<span class="string">&#x27;origin&#x27;</span>) ?? <span class="string">&#x27;&#x27;</span></span><br><span class="line">  <span class="keyword">const</span> isAllowedOrigin = allowedOrigins.<span class="title function_">includes</span>(origin)</span><br><span class="line"> </span><br><span class="line">  <span class="comment">// Handle preflighted requests</span></span><br><span class="line">  <span class="keyword">const</span> isPreflight = request.<span class="property">method</span> === <span class="string">&#x27;OPTIONS&#x27;</span></span><br><span class="line"> </span><br><span class="line">  <span class="keyword">if</span> (isPreflight) &#123;</span><br><span class="line">    <span class="keyword">const</span> preflightHeaders = &#123;</span><br><span class="line">      ...(isAllowedOrigin &amp;&amp; &#123; <span class="string">&#x27;Access-Control-Allow-Origin&#x27;</span>: origin &#125;),</span><br><span class="line">      ...corsOptions,</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="title class_">NextResponse</span>.<span class="title function_">json</span>(&#123;&#125;, &#123; <span class="attr">headers</span>: preflightHeaders &#125;)</span><br><span class="line">  &#125;</span><br><span class="line"> </span><br><span class="line">  <span class="comment">// Handle simple requests</span></span><br><span class="line">  <span class="keyword">const</span> response = <span class="title class_">NextResponse</span>.<span class="title function_">next</span>()</span><br><span class="line"> </span><br><span class="line">  <span class="keyword">if</span> (isAllowedOrigin) &#123;</span><br><span class="line">    response.<span class="property">headers</span>.<span class="title function_">set</span>(<span class="string">&#x27;Access-Control-Allow-Origin&#x27;</span>, origin)</span><br><span class="line">  &#125;</span><br><span class="line"> </span><br><span class="line">  <span class="title class_">Object</span>.<span class="title function_">entries</span>(corsOptions).<span class="title function_">forEach</span>(<span class="function">(<span class="params">[key, value]</span>) =&gt;</span> &#123;</span><br><span class="line">    response.<span class="property">headers</span>.<span class="title function_">set</span>(key, value)</span><br><span class="line">  &#125;)</span><br><span class="line"> </span><br><span class="line">  <span class="keyword">return</span> response</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> config = &#123;</span><br><span class="line">  <span class="attr">matcher</span>: <span class="string">&#x27;/api/:path*&#x27;</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="直接响应"><a href="#直接响应" class="headerlink" title="直接响应"></a>直接响应</h5><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">NextResponse</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;next/server&#x27;</span></span><br><span class="line"><span class="keyword">import</span> &#123; isAuthenticated &#125; <span class="keyword">from</span> <span class="string">&#x27;@lib/auth&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> config = &#123;</span><br><span class="line">  <span class="attr">matcher</span>: <span class="string">&#x27;/api/:function*&#x27;</span>,</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">middleware</span>(<span class="params">request</span>) &#123;</span><br><span class="line">  <span class="comment">// 鉴权判断</span></span><br><span class="line">  <span class="keyword">if</span> (!<span class="title function_">isAuthenticated</span>(request)) &#123;</span><br><span class="line">    <span class="comment">// 返回错误信息</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">NextResponse</span>(</span><br><span class="line">      <span class="title class_">JSON</span>.<span class="title function_">stringify</span>(&#123; <span class="attr">success</span>: <span class="literal">false</span>, <span class="attr">message</span>: <span class="string">&#x27;authentication failed&#x27;</span> &#125;),</span><br><span class="line">      &#123; <span class="attr">status</span>: <span class="number">401</span>, <span class="attr">headers</span>: &#123; <span class="string">&#x27;content-type&#x27;</span>: <span class="string">&#x27;application/json&#x27;</span> &#125; &#125;</span><br><span class="line">    )</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="执行顺序"><a href="#执行顺序" class="headerlink" title="执行顺序"></a>执行顺序</h4><ol>
+<li>headers（next.config.js）</li>
+<li>redirects（next.config.js）</li>
+<li>中间件 (rewrites, redirects 等)</li>
+<li><strong>beforeFiles</strong> (next.config.js中的rewrites)</li>
+<li>基于文件系统的路由 (public&#x2F;, _next&#x2F;static&#x2F;, pages&#x2F;, app&#x2F; 等)</li>
+<li><strong>afterFiles</strong>(next.config.js中的rewrites)</li>
+<li>动态路由 (&#x2F;blog&#x2F;[slug])</li>
+<li>fallback中的 (next.config.js中的rewrites)</li>
+</ol>
+<p>注： beforeFiles 顾名思义，在基于文件系统的路由之前，afterFiles顾名思义，在基于文件系统的路由之后，fallback顾名思义，垫底执行。</p>
+]]></content>
+      <categories>
+        <category>React</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>React</tag>
+        <tag>NextJS</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Node中的process.env</title>
     <url>/2022/03/11/Node%E4%B8%AD%E7%9A%84process.env/</url>
     <content><![CDATA[<h4 id="process-env"><a href="#process-env" class="headerlink" title="process.env"></a>process.env</h4><p><code>process</code> 是 <code>Node.js</code> 中的 一个全局变量，提供来有关当前 Node.js 进程的信息并对其进行控制。而<code>process</code> 中的 <code>env</code> 则是返回包含用户环境的对象。可以通过 <code>process.env</code> 拿到当前项目运行环境的信息。</p>
@@ -1215,32 +1408,6 @@
       </tags>
   </entry>
   <entry>
-    <title>React Fiber</title>
-    <url>/2021/11/27/React%20Fiber/</url>
-    <content><![CDATA[<p>React Fiber 本质上是一种基于<strong>双链表的数据结构和协调算法</strong>的结合体，它是 React 16.x 版本后对渲染机制的核心重构，它的主要目标是解决大型应用中渲染卡顿的问题，实现更高效的任务调度和更流畅的用户体验。</p>
-<h4 id="React的概念"><a href="#React的概念" class="headerlink" title="React的概念"></a>React的概念</h4><ul>
-<li>Virtual DOM 层，描述页面长什么样。</li>
-<li>Reconciler 层，负责调用组件生命周期方法，进行 Diff 运算等。</li>
-<li>Renderer 层，根据不同的平台，渲染出相应的页面，比较常见的是 ReactDOM 和<br>ReactNative。</li>
-</ul>
-<h4 id="为什么需要React-Fiber"><a href="#为什么需要React-Fiber" class="headerlink" title="为什么需要React Fiber"></a>为什么需要React Fiber</h4><h5 id="Reconciler"><a href="#Reconciler" class="headerlink" title="Reconciler"></a>Reconciler</h5><p>React 使用的算法将一棵树与另一棵树进行比较，”找不同”的过程就叫做 reconciliation 。<br>实际上，在每次更改时重新渲染整个应用程序仅适用于最琐碎的应用程序；在现实世界的应用程<br>序中，它在性能方面的成本高得令人望而却步。 React 进行了优化，可以在保持出色性能的同<br>时创建整个应用程序重新渲染的外观。<br>Reconciliation 是通常理解为“虚拟 DOM”背后的算法，”当你渲染一个 React 应用程序时，一个<br>描述应用程序的节点树被生成并保存在内存中。然后这个树被刷新到渲染环境——例如，在浏览<br>器应用程序的情况下，它被转换为一组 DOM 操作。当应用程序更新时（通常通过 setState），<br>会生成一棵新树。新树与之前的树进行比较，以计算需要哪些操作来更新呈现的应用程序</p>
-<h4 id="Fiber-Reconciler的执行过程"><a href="#Fiber-Reconciler的执行过程" class="headerlink" title="Fiber Reconciler的执行过程"></a>Fiber Reconciler的执行过程</h4><p>Fiber在执行过程，会分为两个阶段<br><img src="/../assets/fiber%E6%89%A7%E8%A1%8C.png" alt="alt text"></p>
-<h5 id="Reconciliation-Phase"><a href="#Reconciliation-Phase" class="headerlink" title="Reconciliation Phase"></a>Reconciliation Phase</h5><p>这些在react fiber中可能执行多次</p>
-<h5 id="Commit-Phase"><a href="#Commit-Phase" class="headerlink" title="Commit Phase"></a>Commit Phase</h5><p>这些只能执行一次</p>
-<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><h4 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h4><ul>
-<li><a href="https://juejin.cn/post/6844903582622285831">React Fiber</a></li>
-<li><a href="https://juejin.cn/post/6984949525928476703">React Fiber很难? 六个问题助你理解 React Fiber</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>React</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-        <tag>React</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>React Router</title>
     <url>/2021/09/01/React-Router/</url>
     <content><![CDATA[<h3 id="SPA的理解"><a href="#SPA的理解" class="headerlink" title="SPA的理解"></a>SPA的理解</h3><ol>
@@ -1390,71 +1557,6 @@
       </tags>
   </entry>
   <entry>
-    <title>React最佳实践</title>
-    <url>/2021/10/01/React%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/</url>
-    <content><![CDATA[<h3 id="React"><a href="#React" class="headerlink" title="React"></a>React</h3><h4 id="事件机制，合成事件"><a href="#事件机制，合成事件" class="headerlink" title="事件机制，合成事件"></a>事件机制，合成事件</h4><h5 id="是什么"><a href="#是什么" class="headerlink" title="是什么"></a>是什么</h5><p>React 基于浏览器的事件机制⾃身实现了⼀套事件机制，包括事件注册、事件的合成、事件冒泡、事件派发等。<br>在 React 中这套事件机制被称之为合成事件</p>
-<h5 id="工作过程"><a href="#工作过程" class="headerlink" title="工作过程"></a>工作过程</h5><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">React</span> <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">App</span> <span class="keyword">extends</span> <span class="title class_ inherited__">React.Component</span>&#123;</span><br><span class="line"> <span class="title function_">constructor</span>(<span class="params">props</span>) &#123;</span><br><span class="line">    <span class="variable language_">super</span>(props);</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">parentRef</span> = <span class="title class_">React</span>.<span class="title function_">createRef</span>();</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">childRef</span> = <span class="title class_">React</span>.<span class="title function_">createRef</span>();</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> <span class="title function_">componentDidMount</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;React componentDidMount！&quot;</span>);</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">parentRef</span>.<span class="property">current</span>?.<span class="title function_">addEventListener</span>(<span class="string">&quot;click&quot;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;原⽣事件：⽗元素 DOM 事件监听！&quot;</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">childRef</span>.<span class="property">current</span>?.<span class="title function_">addEventListener</span>(<span class="string">&quot;click&quot;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;原⽣事件：⼦元素 DOM 事件监听！&quot;</span>);</span><br><span class="line">    &#125;);</span><br><span class="line"> </span><br><span class="line">    <span class="variable language_">document</span>.<span class="title function_">addEventListener</span>(<span class="string">&quot;click&quot;</span>, <span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;原⽣事件：document DOM 事件监听！&quot;</span>);</span><br><span class="line">    &#125;);</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> parentClickFun = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;React 事件：⽗元素事件监听！&quot;</span>);</span><br><span class="line"> &#125;;</span><br><span class="line"></span><br><span class="line"> childClickFun = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;React 事件：⼦元素事件监听！&quot;</span>);</span><br><span class="line"> &#125;;</span><br><span class="line"></span><br><span class="line"> <span class="title function_">render</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">ref</span>=<span class="string">&#123;this.parentRef&#125;</span> <span class="attr">onClick</span>=<span class="string">&#123;this.parentClickFun&#125;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">ref</span>=<span class="string">&#123;this.childRef&#125;</span> <span class="attr">onClick</span>=<span class="string">&#123;this.childClickFun&#125;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">                分析事件执⾏顺序</span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    );</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">App</span>;</span><br></pre></td></tr></table></figure>
-<p>最终输出</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">原⽣事件：⼦元素 DOM 事件监听！</span><br><span class="line">原⽣事件：⽗元素 DOM 事件监听！</span><br><span class="line">React 事件：⼦元素事件监听！</span><br><span class="line">React 事件：⽗元素事件监听！</span><br><span class="line">原⽣事件：document DOM 事件监听！</span><br></pre></td></tr></table></figure>
-
-<h5 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h5><ul>
-<li>React 上注册的事件最终会绑定在document这个 DOM 上，⽽不是 React 组件对应的 DOM(减少内存开销就是因为所有的事件都绑定在 document 上，其他节点没有绑定事件)<!-- - React ⾃身实现了⼀套事件冒泡机制，所以这也就是为什么我们 event.stopPropagation()⽆效的原因。 --></li>
-<li>React 通过队列的形式，从触发的组件向⽗组件回溯，然后调⽤他们 JSX 中定义的 callback</li>
-<li>React 有⼀套⾃⼰的合成事件 SyntheticEvent</li>
-</ul>
-<h4 id="React中引入CSS"><a href="#React中引入CSS" class="headerlink" title="React中引入CSS"></a>React中引入CSS</h4><h5 id="在组件内直接使⽤"><a href="#在组件内直接使⽤" class="headerlink" title="在组件内直接使⽤"></a>在组件内直接使⽤</h5><p>内联style引入</p>
-<h5 id="组件中引⼊-css-⽂件"><a href="#组件中引⼊-css-⽂件" class="headerlink" title="组件中引⼊ .css ⽂件"></a>组件中引⼊ .css ⽂件</h5><p>全局生效，样式之间会互相影响</p>
-<h5 id="组件中引⼊-module-css-⽂件"><a href="#组件中引⼊-module-css-⽂件" class="headerlink" title="组件中引⼊ .module.css ⽂件"></a>组件中引⼊ .module.css ⽂件</h5><p>将 css ⽂件作为⼀个模块引⼊，这个模块中的所有 css ，只作⽤于当前组件。不会影响当前组件的后代组件<br>这种⽅式是 webpack 特⼯的⽅案，只需要配置 webpack 配置⽂件中 <code>modules:true</code> 即可</p>
-<h5 id="CSS-in-JS"><a href="#CSS-in-JS" class="headerlink" title="CSS in JS"></a>CSS in JS</h5><p>CSS-in-JS， 是指⼀种模式，其中 CSS 由 JavaScript ⽣成⽽不是在外部⽂件中定义<br>此功能并不是 React 的⼀部分，⽽是由第三⽅库提供，例如：</p>
-<ul>
-<li>styled-components</li>
-<li>emotion</li>
-<li>glamorous</li>
-</ul>
-<p>本质是通过函数的调⽤，最终创建出⼀个组件：</p>
-<ul>
-<li>这个组件会被⾃动添加上⼀个不重复的class</li>
-<li>styled-components会给该class添加相关的样式</li>
-</ul>
-<h4 id="组件通信"><a href="#组件通信" class="headerlink" title="组件通信"></a>组件通信</h4><h4 id="高阶组件"><a href="#高阶组件" class="headerlink" title="高阶组件"></a>高阶组件</h4><p>本质上是一个函数，接收一个或多个组件作为参数，并返回一个组件</p>
-<h4 id="错误边界"><a href="#错误边界" class="headerlink" title="错误边界"></a>错误边界</h4><p>错误边界是一种 React 组件，<strong>这种组件可以捕获发生在其子组件树任何位置的 JavaScript 错误，并打印这些错误，同时展示降级 UI</strong>，而并不会渲染那些发生崩溃的子组件树。错误边界可以捕获发生在整个子组件树的渲染期间、生命周期方法以及构造函数中的错误。</p>
-<p>形成错误边界组件的两个条件：</p>
-<ul>
-<li>使⽤了 <code>static getDerivedStateFromError()</code></li>
-<li>使⽤了 <code>componentDidCatch()</code><br>抛出错误后，使⽤ <code>static getDerivedStateFromError()</code> 渲染备⽤ UI ，使⽤ componentDidCatch() 打印错误信息，如下：</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">ErrorBoundary</span> <span class="keyword">extends</span> <span class="title class_ inherited__">React.Component</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">props</span>) &#123;</span><br><span class="line">    <span class="variable language_">super</span>(props);</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">state</span> = &#123; <span class="attr">hasError</span>: <span class="literal">false</span> &#125;;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">static</span> <span class="title function_">getDerivedStateFromError</span>(<span class="params">error</span>) &#123;</span><br><span class="line">    <span class="comment">// 更新 state 使下一次渲染能够显示降级后的 UI</span></span><br><span class="line">    <span class="keyword">return</span> &#123; <span class="attr">hasError</span>: <span class="literal">true</span> &#125;;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">componentDidCatch</span>(<span class="params">error, errorInfo</span>) &#123;</span><br><span class="line">    <span class="comment">// 你同样可以将错误日志上报给服务器</span></span><br><span class="line">    <span class="title function_">logErrorToMyService</span>(error, errorInfo);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">render</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="variable language_">this</span>.<span class="property">state</span>.<span class="property">hasError</span>) &#123;</span><br><span class="line">      <span class="comment">// 你可以自定义降级后的 UI 并渲染</span></span><br><span class="line">      <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>Something went wrong.<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">props</span>.<span class="property">children</span>; </span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>下⾯这些情况⽆法捕获到异常：</p>
-<ul>
-<li>事件处理</li>
-<li>异步代码（例如 setTimeout 或 requestAnimationFrame 回调函数）</li>
-<li>服务端渲染</li>
-<li>它自身抛出来的错误（仅能捕获子组件抛出的错误）</li>
-</ul>
-<h4 id="setState更新，批量更新"><a href="#setState更新，批量更新" class="headerlink" title="setState更新，批量更新"></a>setState更新，批量更新</h4><h4 id="render原理（jsx经过babel编译）、render触发时机"><a href="#render原理（jsx经过babel编译）、render触发时机" class="headerlink" title="render原理（jsx经过babel编译）、render触发时机"></a>render原理（jsx经过babel编译）、render触发时机</h4><h4 id="Diff算法"><a href="#Diff算法" class="headerlink" title="Diff算法"></a>Diff算法</h4><h4 id="React-Portal"><a href="#React-Portal" class="headerlink" title="React Portal"></a>React Portal</h4><p>Portal 提供了一种将子节点渲染到存在于父组件以外的 DOM 节点的优秀的方案。<br><code>ReactDOM.createPortal(child, container)</code><br>第一个参数（child）是任何可渲染的 React 子元素，例如一个元素，字符串或 fragment。第二个参数（container）是一个 DOM 元素。</p>
-<h4 id="React-router"><a href="#React-router" class="headerlink" title="React router"></a>React router</h4><h5 id="是什么-1"><a href="#是什么-1" class="headerlink" title="是什么"></a>是什么</h5><p>react-router 等前端路由的原理⼤致相同，可以实现⽆刷新的条件下切换显示不同的⻚⾯<br>路由的本质就是⻚⾯的 URL 发⽣改变时，⻚⾯的显示结果可以根据 URL 的变化⽽变化，但是⻚⾯不会刷新因此，可以通过前端路由可以实现单⻚(SPA)应⽤</p>
-<h5 id="模式"><a href="#模式" class="headerlink" title="模式"></a>模式</h5><h6 id="HashRouter（Hash模式）"><a href="#HashRouter（Hash模式）" class="headerlink" title="HashRouter（Hash模式）"></a>HashRouter（Hash模式）</h6><ul>
-<li>采用监听 <code>window</code> 上的 <code>hashchange</code> 事件实现；</li>
-<li>path的表现形式是 <code>localhost:3000/#/demo/test</code>；</li>
-<li>服务器无须做额外配置（因为对于服务器而言，<code>http://example.com/#/home</code>和<code>http://example.com</code>这两个请求在服务器看来是完全一样的，因为服务器只处理<code>http://example.com</code>这个部分，而<code>#/home</code>这个哈希部分的变化不会触发新的服务器请求）</li>
-</ul>
-<h6 id="BrowserRouter（History模式）"><a href="#BrowserRouter（History模式）" class="headerlink" title="BrowserRouter（History模式）"></a>BrowserRouter（History模式）</h6><ul>
-<li><code>BrowserRouter</code>使用的是H5的history API来实现；</li>
-<li>path的表现形式是 <code>localhost:3000/demo/test</code>；</li>
-<li>服务器需要进行额外的配置（当path变化时，浏览器会向服务器发送请求。服务器需要能够识别这些请求并返回正确的页面或者资源。例如，在服务器重定向配置中，需要设置一个通配符路由（<code>*</code>）来处理所有可能的路由请求，将请求重定向到应用的入口文件（通常是<code>index.html</code>），这样客户端的 JavaScript 代码才能根据 URL 中的路径来正确地渲染页面）</li>
-</ul>
-<h4 id="lazyload"><a href="#lazyload" class="headerlink" title="lazyload"></a>lazyload</h4><h4 id="render-props、children"><a href="#render-props、children" class="headerlink" title="render props、children"></a>render props、children</h4><h4 id="Hooks相关"><a href="#Hooks相关" class="headerlink" title="Hooks相关"></a>Hooks相关</h4><h4 id="React-fiber"><a href="#React-fiber" class="headerlink" title="React fiber"></a>React fiber</h4><h4 id="React性能优化"><a href="#React性能优化" class="headerlink" title="React性能优化"></a>React性能优化</h4><h4 id="React状态管理"><a href="#React状态管理" class="headerlink" title="React状态管理"></a>React状态管理</h4><p><a href="https://huangyunt.github.io/2021/10/11/Redux/">Redux</a></p>
-<h4 id="react如何实现ssr"><a href="#react如何实现ssr" class="headerlink" title="react如何实现ssr"></a>react如何实现ssr</h4>]]></content>
-      <categories>
-        <category>React</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-        <tag>React</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>React生态</title>
     <url>/2021/09/30/React%E7%94%9F%E6%80%81/</url>
     <content><![CDATA[<h3 id="React-DevTools"><a href="#React-DevTools" class="headerlink" title="React DevTools"></a>React DevTools</h3><h5 id="General-设置"><a href="#General-设置" class="headerlink" title="General 设置"></a>General 设置</h5><p><img src="/../assets/image-20220222024702149.png" alt="image-20220222024702149.png"></p>
@@ -1510,8 +1612,34 @@
       </tags>
   </entry>
   <entry>
+    <title>React Fiber</title>
+    <url>/2021/11/27/React%20Fiber/</url>
+    <content><![CDATA[<p>React Fiber 本质上是一种基于<strong>双链表的数据结构和协调算法</strong>的结合体，它是 React 16.x 版本后对渲染机制的核心重构，它的主要目标是解决大型应用中渲染卡顿的问题，实现更高效的任务调度和更流畅的用户体验。</p>
+<h4 id="React的概念"><a href="#React的概念" class="headerlink" title="React的概念"></a>React的概念</h4><ul>
+<li>Virtual DOM 层，描述页面长什么样。</li>
+<li>Reconciler 层，负责调用组件生命周期方法，进行 Diff 运算等。</li>
+<li>Renderer 层，根据不同的平台，渲染出相应的页面，比较常见的是 ReactDOM 和<br>ReactNative。</li>
+</ul>
+<h4 id="为什么需要React-Fiber"><a href="#为什么需要React-Fiber" class="headerlink" title="为什么需要React Fiber"></a>为什么需要React Fiber</h4><h5 id="Reconciler"><a href="#Reconciler" class="headerlink" title="Reconciler"></a>Reconciler</h5><p>React 使用的算法将一棵树与另一棵树进行比较，”找不同”的过程就叫做 reconciliation 。<br>实际上，在每次更改时重新渲染整个应用程序仅适用于最琐碎的应用程序；在现实世界的应用程<br>序中，它在性能方面的成本高得令人望而却步。 React 进行了优化，可以在保持出色性能的同<br>时创建整个应用程序重新渲染的外观。<br>Reconciliation 是通常理解为“虚拟 DOM”背后的算法，”当你渲染一个 React 应用程序时，一个<br>描述应用程序的节点树被生成并保存在内存中。然后这个树被刷新到渲染环境——例如，在浏览<br>器应用程序的情况下，它被转换为一组 DOM 操作。当应用程序更新时（通常通过 setState），<br>会生成一棵新树。新树与之前的树进行比较，以计算需要哪些操作来更新呈现的应用程序</p>
+<h4 id="Fiber-Reconciler的执行过程"><a href="#Fiber-Reconciler的执行过程" class="headerlink" title="Fiber Reconciler的执行过程"></a>Fiber Reconciler的执行过程</h4><p>Fiber在执行过程，会分为两个阶段<br><img src="/../assets/fiber%E6%89%A7%E8%A1%8C.png" alt="alt text"></p>
+<h5 id="Reconciliation-Phase"><a href="#Reconciliation-Phase" class="headerlink" title="Reconciliation Phase"></a>Reconciliation Phase</h5><p>这些在react fiber中可能执行多次</p>
+<h5 id="Commit-Phase"><a href="#Commit-Phase" class="headerlink" title="Commit Phase"></a>Commit Phase</h5><p>这些只能执行一次</p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><h4 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h4><ul>
+<li><a href="https://juejin.cn/post/6844903582622285831">React Fiber</a></li>
+<li><a href="https://juejin.cn/post/6984949525928476703">React Fiber很难? 六个问题助你理解 React Fiber</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>React</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>React</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>React组件性能优化</title>
-    <url>/2021/10/14/React%E7%BB%84%E4%BB%B6%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</url>
+    <url>/2021/10/17/React%E7%BB%84%E4%BB%B6%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</url>
     <content><![CDATA[<h4 id="React-性能优化思路"><a href="#React-性能优化思路" class="headerlink" title="React 性能优化思路"></a>React 性能优化思路</h4><p>我觉得React 性能优化的理念的主要方向就是这两个：</p>
 <ol>
 <li><strong>减少重新 render 的次数。因为在 React 里最重(花时间最长)的一块就是 reconciliation(简单的可以理解为 diff)，如果不 render，就不会 reconciliation。</strong></li>
@@ -1606,6 +1734,71 @@
       <tags>
         <tag>JavaScript</tag>
         <tag>Hooks</tag>
+        <tag>React</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>React最佳实践</title>
+    <url>/2021/10/01/React%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/</url>
+    <content><![CDATA[<h3 id="React"><a href="#React" class="headerlink" title="React"></a>React</h3><h4 id="事件机制，合成事件"><a href="#事件机制，合成事件" class="headerlink" title="事件机制，合成事件"></a>事件机制，合成事件</h4><h5 id="是什么"><a href="#是什么" class="headerlink" title="是什么"></a>是什么</h5><p>React 基于浏览器的事件机制⾃身实现了⼀套事件机制，包括事件注册、事件的合成、事件冒泡、事件派发等。<br>在 React 中这套事件机制被称之为合成事件</p>
+<h5 id="工作过程"><a href="#工作过程" class="headerlink" title="工作过程"></a>工作过程</h5><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">React</span> <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">App</span> <span class="keyword">extends</span> <span class="title class_ inherited__">React.Component</span>&#123;</span><br><span class="line"> <span class="title function_">constructor</span>(<span class="params">props</span>) &#123;</span><br><span class="line">    <span class="variable language_">super</span>(props);</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">parentRef</span> = <span class="title class_">React</span>.<span class="title function_">createRef</span>();</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">childRef</span> = <span class="title class_">React</span>.<span class="title function_">createRef</span>();</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> <span class="title function_">componentDidMount</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;React componentDidMount！&quot;</span>);</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">parentRef</span>.<span class="property">current</span>?.<span class="title function_">addEventListener</span>(<span class="string">&quot;click&quot;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;原⽣事件：⽗元素 DOM 事件监听！&quot;</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">childRef</span>.<span class="property">current</span>?.<span class="title function_">addEventListener</span>(<span class="string">&quot;click&quot;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;原⽣事件：⼦元素 DOM 事件监听！&quot;</span>);</span><br><span class="line">    &#125;);</span><br><span class="line"> </span><br><span class="line">    <span class="variable language_">document</span>.<span class="title function_">addEventListener</span>(<span class="string">&quot;click&quot;</span>, <span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;原⽣事件：document DOM 事件监听！&quot;</span>);</span><br><span class="line">    &#125;);</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> parentClickFun = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;React 事件：⽗元素事件监听！&quot;</span>);</span><br><span class="line"> &#125;;</span><br><span class="line"></span><br><span class="line"> childClickFun = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;React 事件：⼦元素事件监听！&quot;</span>);</span><br><span class="line"> &#125;;</span><br><span class="line"></span><br><span class="line"> <span class="title function_">render</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">ref</span>=<span class="string">&#123;this.parentRef&#125;</span> <span class="attr">onClick</span>=<span class="string">&#123;this.parentClickFun&#125;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">ref</span>=<span class="string">&#123;this.childRef&#125;</span> <span class="attr">onClick</span>=<span class="string">&#123;this.childClickFun&#125;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">                分析事件执⾏顺序</span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    );</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">App</span>;</span><br></pre></td></tr></table></figure>
+<p>最终输出</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">原⽣事件：⼦元素 DOM 事件监听！</span><br><span class="line">原⽣事件：⽗元素 DOM 事件监听！</span><br><span class="line">React 事件：⼦元素事件监听！</span><br><span class="line">React 事件：⽗元素事件监听！</span><br><span class="line">原⽣事件：document DOM 事件监听！</span><br></pre></td></tr></table></figure>
+
+<h5 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h5><ul>
+<li>React 上注册的事件最终会绑定在document这个 DOM 上，⽽不是 React 组件对应的 DOM(减少内存开销就是因为所有的事件都绑定在 document 上，其他节点没有绑定事件)<!-- - React ⾃身实现了⼀套事件冒泡机制，所以这也就是为什么我们 event.stopPropagation()⽆效的原因。 --></li>
+<li>React 通过队列的形式，从触发的组件向⽗组件回溯，然后调⽤他们 JSX 中定义的 callback</li>
+<li>React 有⼀套⾃⼰的合成事件 SyntheticEvent</li>
+</ul>
+<h4 id="React中引入CSS"><a href="#React中引入CSS" class="headerlink" title="React中引入CSS"></a>React中引入CSS</h4><h5 id="在组件内直接使⽤"><a href="#在组件内直接使⽤" class="headerlink" title="在组件内直接使⽤"></a>在组件内直接使⽤</h5><p>内联style引入</p>
+<h5 id="组件中引⼊-css-⽂件"><a href="#组件中引⼊-css-⽂件" class="headerlink" title="组件中引⼊ .css ⽂件"></a>组件中引⼊ .css ⽂件</h5><p>全局生效，样式之间会互相影响</p>
+<h5 id="组件中引⼊-module-css-⽂件"><a href="#组件中引⼊-module-css-⽂件" class="headerlink" title="组件中引⼊ .module.css ⽂件"></a>组件中引⼊ .module.css ⽂件</h5><p>将 css ⽂件作为⼀个模块引⼊，这个模块中的所有 css ，只作⽤于当前组件。不会影响当前组件的后代组件<br>这种⽅式是 webpack 特⼯的⽅案，只需要配置 webpack 配置⽂件中 <code>modules:true</code> 即可</p>
+<h5 id="CSS-in-JS"><a href="#CSS-in-JS" class="headerlink" title="CSS in JS"></a>CSS in JS</h5><p>CSS-in-JS， 是指⼀种模式，其中 CSS 由 JavaScript ⽣成⽽不是在外部⽂件中定义<br>此功能并不是 React 的⼀部分，⽽是由第三⽅库提供，例如：</p>
+<ul>
+<li>styled-components</li>
+<li>emotion</li>
+<li>glamorous</li>
+</ul>
+<p>本质是通过函数的调⽤，最终创建出⼀个组件：</p>
+<ul>
+<li>这个组件会被⾃动添加上⼀个不重复的class</li>
+<li>styled-components会给该class添加相关的样式</li>
+</ul>
+<h4 id="组件通信"><a href="#组件通信" class="headerlink" title="组件通信"></a>组件通信</h4><h4 id="高阶组件"><a href="#高阶组件" class="headerlink" title="高阶组件"></a>高阶组件</h4><p>本质上是一个函数，接收一个或多个组件作为参数，并返回一个组件</p>
+<h4 id="错误边界"><a href="#错误边界" class="headerlink" title="错误边界"></a>错误边界</h4><p>错误边界是一种 React 组件，<strong>这种组件可以捕获发生在其子组件树任何位置的 JavaScript 错误，并打印这些错误，同时展示降级 UI</strong>，而并不会渲染那些发生崩溃的子组件树。错误边界可以捕获发生在整个子组件树的渲染期间、生命周期方法以及构造函数中的错误。</p>
+<p>形成错误边界组件的两个条件：</p>
+<ul>
+<li>使⽤了 <code>static getDerivedStateFromError()</code></li>
+<li>使⽤了 <code>componentDidCatch()</code><br>抛出错误后，使⽤ <code>static getDerivedStateFromError()</code> 渲染备⽤ UI ，使⽤ componentDidCatch() 打印错误信息，如下：</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">ErrorBoundary</span> <span class="keyword">extends</span> <span class="title class_ inherited__">React.Component</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">props</span>) &#123;</span><br><span class="line">    <span class="variable language_">super</span>(props);</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">state</span> = &#123; <span class="attr">hasError</span>: <span class="literal">false</span> &#125;;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">static</span> <span class="title function_">getDerivedStateFromError</span>(<span class="params">error</span>) &#123;</span><br><span class="line">    <span class="comment">// 更新 state 使下一次渲染能够显示降级后的 UI</span></span><br><span class="line">    <span class="keyword">return</span> &#123; <span class="attr">hasError</span>: <span class="literal">true</span> &#125;;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">componentDidCatch</span>(<span class="params">error, errorInfo</span>) &#123;</span><br><span class="line">    <span class="comment">// 你同样可以将错误日志上报给服务器</span></span><br><span class="line">    <span class="title function_">logErrorToMyService</span>(error, errorInfo);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">render</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="variable language_">this</span>.<span class="property">state</span>.<span class="property">hasError</span>) &#123;</span><br><span class="line">      <span class="comment">// 你可以自定义降级后的 UI 并渲染</span></span><br><span class="line">      <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>Something went wrong.<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">props</span>.<span class="property">children</span>; </span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>下⾯这些情况⽆法捕获到异常：</p>
+<ul>
+<li>事件处理</li>
+<li>异步代码（例如 setTimeout 或 requestAnimationFrame 回调函数）</li>
+<li>服务端渲染</li>
+<li>它自身抛出来的错误（仅能捕获子组件抛出的错误）</li>
+</ul>
+<h4 id="setState更新，批量更新"><a href="#setState更新，批量更新" class="headerlink" title="setState更新，批量更新"></a>setState更新，批量更新</h4><h4 id="render原理（jsx经过babel编译）、render触发时机"><a href="#render原理（jsx经过babel编译）、render触发时机" class="headerlink" title="render原理（jsx经过babel编译）、render触发时机"></a>render原理（jsx经过babel编译）、render触发时机</h4><h4 id="Diff算法"><a href="#Diff算法" class="headerlink" title="Diff算法"></a>Diff算法</h4><h4 id="React-Portal"><a href="#React-Portal" class="headerlink" title="React Portal"></a>React Portal</h4><p>Portal 提供了一种将子节点渲染到存在于父组件以外的 DOM 节点的优秀的方案。<br><code>ReactDOM.createPortal(child, container)</code><br>第一个参数（child）是任何可渲染的 React 子元素，例如一个元素，字符串或 fragment。第二个参数（container）是一个 DOM 元素。</p>
+<h4 id="React-router"><a href="#React-router" class="headerlink" title="React router"></a>React router</h4><h5 id="是什么-1"><a href="#是什么-1" class="headerlink" title="是什么"></a>是什么</h5><p>react-router 等前端路由的原理⼤致相同，可以实现⽆刷新的条件下切换显示不同的⻚⾯<br>路由的本质就是⻚⾯的 URL 发⽣改变时，⻚⾯的显示结果可以根据 URL 的变化⽽变化，但是⻚⾯不会刷新因此，可以通过前端路由可以实现单⻚(SPA)应⽤</p>
+<h5 id="模式"><a href="#模式" class="headerlink" title="模式"></a>模式</h5><h6 id="HashRouter（Hash模式）"><a href="#HashRouter（Hash模式）" class="headerlink" title="HashRouter（Hash模式）"></a>HashRouter（Hash模式）</h6><ul>
+<li>采用监听 <code>window</code> 上的 <code>hashchange</code> 事件实现；</li>
+<li>path的表现形式是 <code>localhost:3000/#/demo/test</code>；</li>
+<li>服务器无须做额外配置（因为对于服务器而言，<code>http://example.com/#/home</code>和<code>http://example.com</code>这两个请求在服务器看来是完全一样的，因为服务器只处理<code>http://example.com</code>这个部分，而<code>#/home</code>这个哈希部分的变化不会触发新的服务器请求）</li>
+</ul>
+<h6 id="BrowserRouter（History模式）"><a href="#BrowserRouter（History模式）" class="headerlink" title="BrowserRouter（History模式）"></a>BrowserRouter（History模式）</h6><ul>
+<li><code>BrowserRouter</code>使用的是H5的history API来实现；</li>
+<li>path的表现形式是 <code>localhost:3000/demo/test</code>；</li>
+<li>服务器需要进行额外的配置（当path变化时，浏览器会向服务器发送请求。服务器需要能够识别这些请求并返回正确的页面或者资源。例如，在服务器重定向配置中，需要设置一个通配符路由（<code>*</code>）来处理所有可能的路由请求，将请求重定向到应用的入口文件（通常是<code>index.html</code>），这样客户端的 JavaScript 代码才能根据 URL 中的路径来正确地渲染页面）</li>
+</ul>
+<h4 id="lazyload"><a href="#lazyload" class="headerlink" title="lazyload"></a>lazyload</h4><h4 id="render-props、children"><a href="#render-props、children" class="headerlink" title="render props、children"></a>render props、children</h4><h4 id="Hooks相关"><a href="#Hooks相关" class="headerlink" title="Hooks相关"></a>Hooks相关</h4><h4 id="React-fiber"><a href="#React-fiber" class="headerlink" title="React fiber"></a>React fiber</h4><h4 id="React性能优化"><a href="#React性能优化" class="headerlink" title="React性能优化"></a>React性能优化</h4><h4 id="React状态管理"><a href="#React状态管理" class="headerlink" title="React状态管理"></a>React状态管理</h4><p><a href="https://huangyunt.github.io/2021/10/11/Redux/">Redux</a></p>
+<h4 id="react如何实现ssr"><a href="#react如何实现ssr" class="headerlink" title="react如何实现ssr"></a>react如何实现ssr</h4>]]></content>
+      <categories>
+        <category>React</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
         <tag>React</tag>
       </tags>
   </entry>
@@ -1901,9 +2094,7 @@ let strLength: number = (someValue as string).length;
 </ul>
 </li>
 </ul>
-<h4 id="webpack"><a href="#webpack" class="headerlink" title="webpack"></a>webpack</h4><p>通常情况下，实际开发中我们都需要使用构建工具对代码进行打包，TS同样也可以结合构建工具一起使用，下边以webpack为例介绍一下如何结合构建工具使用TS。</p>
-<h5 id="步骤："><a href="#步骤：" class="headerlink" title="步骤："></a>步骤：</h5><h6 id="初始化项目"><a href="#初始化项目" class="headerlink" title="初始化项目"></a>初始化项目</h6><p>进入项目根目录，执行命令 <code> npm init -y</code><br>主要作用：创建package.json文件</p>
-<h6 id="下载构建工具"><a href="#下载构建工具" class="headerlink" title="下载构建工具"></a>下载构建工具</h6><p><code>npm i -D webpack webpack-cli webpack-dev-server typescript ts-loader clean-webpack-plugin</code><br>共安装了7个包：<br>1、webpack: 构建工具webpack<br>2、webpack-cli</p>
+<p><code>npm i -D webpack webpack-cli webpack-dev-server typescript ts-loader clean-webpack-plugin</code><br>共安装了7个包：<br>1、webpack: 构建工具webpack<br>2、webpack-cli</p>
 <ul>
 <li>webpack的命令行工具<br>3、webpack-dev-server</li>
 <li>webpack的开发服务器<br>4、typescript</li>
@@ -1967,6 +2158,144 @@ let strLength: number = (someValue as string).length;
        ```
 
      - 如此一来，使用ts编译后的文件将会再次被babel处理，使得代码可以在大部分浏览器中直接使用，可以在配置选项的targets中指定要兼容的浏览器版本。 -->]]></content>
+      <categories>
+        <category>Typescript</category>
+      </categories>
+      <tags>
+        <tag>TypeScript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>TypeScript进阶学习</title>
+    <url>/2021/10/15/Typescript%E8%BF%9B%E9%98%B6%E5%AD%A6%E4%B9%A0/</url>
+    <content><![CDATA[<h3 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a>面向对象</h3><h4 id="类的修饰符"><a href="#类的修饰符" class="headerlink" title="类的修饰符"></a>类的修饰符</h4><ul>
+<li>public：无访问限制</li>
+<li>protected：仅当前类中的方法或子类中的方法能访问</li>
+<li>private：	仅当前类的方法能访问，子类和外部都不行</li>
+</ul>
+<h4 id="类的继承"><a href="#类的继承" class="headerlink" title="类的继承"></a>类的继承</h4><p>可以使用 <code>extends</code> 复用父类的逻辑和属性</p>
+<h4 id="抽象类"><a href="#抽象类" class="headerlink" title="抽象类"></a>抽象类</h4><ul>
+<li>用<code>abstract</code>关键字修饰的类，不能直接实例化，只能被子类继承；</li>
+<li>抽象类中用<code>abstract</code>修饰的方法，只有方法签名，无函数体，子类必须实现；</li>
+<li>核心作用是统一子类的接口规范，同时复用一些通用逻辑</li>
+</ul>
+<p>示例代码：</p>
+<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 抽象类：用 abstract 修饰，不能直接实例化</span></span><br><span class="line"><span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">Shape</span> &#123;</span><br><span class="line">  <span class="comment">// 普通属性：可复用（有具体值）</span></span><br><span class="line">  <span class="keyword">public</span> <span class="attr">color</span>: <span class="built_in">string</span>;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params"><span class="attr">color</span>: <span class="built_in">string</span></span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">color</span> = color;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 普通方法：有具体实现，子类可直接复用</span></span><br><span class="line">  <span class="keyword">public</span> <span class="title function_">showColor</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`这个图形的颜色是：<span class="subst">$&#123;<span class="variable language_">this</span>.color&#125;</span>`</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 抽象方法：只有签名，无函数体，子类必须实现</span></span><br><span class="line">  <span class="keyword">abstract</span> <span class="title function_">getArea</span>(): <span class="built_in">number</span>; <span class="comment">// 计算面积</span></span><br><span class="line">  <span class="keyword">abstract</span> <span class="title function_">getPerimeter</span>(): <span class="built_in">number</span>; <span class="comment">// 计算周长</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 子类：圆形（继承抽象类 Shape）</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Circle</span> <span class="keyword">extends</span> <span class="title class_ inherited__">Shape</span> &#123;</span><br><span class="line">  <span class="comment">// 子类独有的属性</span></span><br><span class="line">  <span class="keyword">private</span> <span class="attr">radius</span>: <span class="built_in">number</span>;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params"><span class="attr">color</span>: <span class="built_in">string</span>, <span class="attr">radius</span>: <span class="built_in">number</span></span>) &#123;</span><br><span class="line">    <span class="comment">// 调用父类构造函数（抽象类也有构造函数）</span></span><br><span class="line">    <span class="variable language_">super</span>(color);</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">radius</span> = radius;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 必须实现抽象方法1：计算圆的面积</span></span><br><span class="line">  <span class="title function_">getArea</span>(): <span class="built_in">number</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="title class_">Math</span>.<span class="property">PI</span> * <span class="variable language_">this</span>.<span class="property">radius</span> **<span class="number">2</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 必须实现抽象方法2：计算圆的周长</span></span><br><span class="line">  <span class="title function_">getPerimeter</span>(): <span class="built_in">number</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">2</span> * <span class="title class_">Math</span>.<span class="property">PI</span> * <span class="variable language_">this</span>.<span class="property">radius</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h4 id="类实现接口"><a href="#类实现接口" class="headerlink" title="类实现接口"></a>类实现接口</h4><p>关键字<code>implements</code>：遵守规范，约束类的实现</p>
+<p>接口 VS 抽象类</p>
+<ul>
+<li>接口<code>interface</code>：仅定义规范，无任何逻辑，<code>class</code>可以<code>implements</code>多个接口</li>
+<li>抽象类：既定义规范（抽象方法），又提供可复用逻辑（普通方法）</li>
+</ul>
+<p>示例代码：</p>
+<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 接口：仅定义“契约”（属性/方法签名），无具体实现</span></span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">Flyable</span> &#123;</span><br><span class="line">  <span class="attr">speed</span>: <span class="built_in">number</span>;</span><br><span class="line">  <span class="title function_">fly</span>(): <span class="built_in">void</span>; <span class="comment">// 只定义方法签名，无函数体</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 类：implements 实现 Flyable 接口</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Bird</span> <span class="keyword">implements</span> <span class="title class_">Flyable</span> &#123;</span><br><span class="line">  <span class="comment">// 必须实现接口的所有属性</span></span><br><span class="line">  <span class="attr">speed</span>: <span class="built_in">number</span>;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params"><span class="attr">speed</span>: <span class="built_in">number</span></span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">speed</span> = speed;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 必须实现接口的所有方法（函数体自己写）</span></span><br><span class="line">  <span class="title function_">fly</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`鸟以 <span class="subst">$&#123;<span class="variable language_">this</span>.speed&#125;</span> km/h 的速度飞行`</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用</span></span><br><span class="line"><span class="keyword">const</span> sparrow = <span class="keyword">new</span> <span class="title class_">Bird</span>(<span class="number">30</span>);</span><br><span class="line">sparrow.<span class="title function_">fly</span>(); <span class="comment">// 鸟以 30 km/h 的速度飞行</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="泛型类"><a href="#泛型类" class="headerlink" title="泛型类"></a>泛型类</h4><p>在类名后用 <T>声明 “类型变量”，类的属性、方法、构造函数可使用这个类型变量，实例化时再传入具体类型</p>
+<h3 id="类型收窄"><a href="#类型收窄" class="headerlink" title="类型收窄"></a>类型收窄</h3><p>类型收窄：通过代码逻辑（如条件判断）让 TS <strong>自动推导变量的更具体类型</strong>（比如从 unknown 收窄到 string，从 string | number 收窄到 string），本质是缩小类型范围</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>适用场景</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>typeof</code></td>
+<td>原始类型（string&#x2F;number&#x2F;boolean…）</td>
+<td><code>if (typeof x === &quot;string&quot;) &#123; x.length &#125;</code></td>
+</tr>
+<tr>
+<td><code>instanceof</code></td>
+<td>类&#x2F;构造函数创建的对象（Array、Date、自定义类）</td>
+<td><code>if (x instanceof Array) &#123; x.push(1) &#125;</code></td>
+</tr>
+<tr>
+<td><code>in</code></td>
+<td>对象属性存在判断，区分不同对象类型</td>
+<td><code>if (&quot;name&quot; in x) &#123; console.log(x.name) &#125;</code></td>
+</tr>
+<tr>
+<td>等值判断</td>
+<td>字面量、联合类型（&#x3D;&#x3D;&#x3D; &#x2F; !&#x3D;&#x3D;）</td>
+<td><code>if (x === &quot;admin&quot;) &#123; ... &#125;</code></td>
+</tr>
+<tr>
+<td>类型守卫函数</td>
+<td>自定义接口&#x2F;复杂对象</td>
+<td><code>function isUser(x: unknown): x is User &#123; ... &#125;</code></td>
+</tr>
+<tr>
+<td>真值判断</td>
+<td>排除 null&#x2F;undefined&#x2F;假值</td>
+<td><code>if (x) &#123; x.doSomething() &#125;</code></td>
+</tr>
+</tbody></table>
+<h4 id="自定义类型守卫函数"><a href="#自定义类型守卫函数" class="headerlink" title="自定义类型守卫函数"></a>自定义类型守卫函数</h4><p>类型守卫函数：自定义收窄逻辑<br>通过返回 value is Type 的自定义函数（类型守卫），TS 会按照函数逻辑收窄类型（最灵活的场景）。</p>
+<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 定义类型守卫函数：判断是否为数字</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">isNumber</span>(<span class="params"><span class="attr">value</span>: <span class="built_in">unknown</span></span>): value is <span class="built_in">number</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">typeof</span> value === <span class="string">&quot;number&quot;</span> &amp;&amp; !<span class="built_in">isNaN</span>(value);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 初始类型：unknown</span></span><br><span class="line"><span class="keyword">let</span> <span class="attr">val</span>: <span class="built_in">unknown</span> = <span class="number">123</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用类型守卫</span></span><br><span class="line"><span class="keyword">if</span> (<span class="title function_">isNumber</span>(val)) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(val * <span class="number">2</span>); <span class="comment">// ✅ 收窄为 number</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="更好的类型收窄"><a href="#更好的类型收窄" class="headerlink" title="更好的类型收窄"></a>更好的类型收窄</h4><figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">interface</span> <span class="title class_">User</span> &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="built_in">string</span>;</span><br><span class="line">    <span class="attr">age</span>: <span class="built_in">number</span>;</span><br><span class="line">    <span class="attr">occupation</span>: <span class="built_in">string</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">Admin</span> &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="built_in">string</span>;</span><br><span class="line">    <span class="attr">age</span>: <span class="built_in">number</span>;</span><br><span class="line">    <span class="attr">role</span>: <span class="built_in">string</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">type</span> <span class="title class_">Person</span> = <span class="title class_">User</span> | <span class="title class_">Admin</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="attr">persons</span>: <span class="title class_">Person</span>[] = [</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">name</span>: <span class="string">&#x27;Max Mustermann&#x27;</span>,</span><br><span class="line">        <span class="attr">age</span>: <span class="number">25</span>,</span><br><span class="line">        <span class="attr">occupation</span>: <span class="string">&#x27;Chimney sweep&#x27;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">name</span>: <span class="string">&#x27;Jane Doe&#x27;</span>,</span><br><span class="line">        <span class="attr">age</span>: <span class="number">32</span>,</span><br><span class="line">        <span class="attr">role</span>: <span class="string">&#x27;Administrator&#x27;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">name</span>: <span class="string">&#x27;Kate Müller&#x27;</span>,</span><br><span class="line">        <span class="attr">age</span>: <span class="number">23</span>,</span><br><span class="line">        <span class="attr">occupation</span>: <span class="string">&#x27;Astronaut&#x27;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">name</span>: <span class="string">&#x27;Bruce Willis&#x27;</span>,</span><br><span class="line">        <span class="attr">age</span>: <span class="number">64</span>,</span><br><span class="line">        <span class="attr">role</span>: <span class="string">&#x27;World saver&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">logPerson</span>(<span class="params"><span class="attr">person</span>: <span class="title class_">Person</span></span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="attr">additionalInformation</span>: <span class="built_in">string</span>;</span><br><span class="line">    <span class="keyword">if</span> (person.<span class="property">role</span>) &#123;     <span class="comment">//  ❌ 应该改为 &#x27;role&#x27; in person来判断，这种方式下ts才会组做类型收窄</span></span><br><span class="line">        additionalInformation = person.<span class="property">role</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        additionalInformation = person.<span class="property">occupation</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">` - <span class="subst">$&#123;person.name&#125;</span>, <span class="subst">$&#123;person.age&#125;</span>, <span class="subst">$&#123;additionalInformation&#125;</span>`</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">persons.<span class="title function_">forEach</span>(logPerson);</span><br></pre></td></tr></table></figure>
+
+<h3 id="特殊类型"><a href="#特殊类型" class="headerlink" title="特殊类型"></a>特殊类型</h3><h4 id="交叉类型（-）"><a href="#交叉类型（-）" class="headerlink" title="交叉类型（&amp;）"></a>交叉类型（&amp;）</h4><p>简单理解就是合并两个属性</p>
+<ul>
+<li>若属性是基本类型：结果为两个类型的交叉（通常是 never）</li>
+<li>若属性是对象类型：会递归合并该属性的类型</li>
+</ul>
+<h4 id="联合类型（-）"><a href="#联合类型（-）" class="headerlink" title="联合类型（|）"></a>联合类型（|）</h4><p>允许一个变量是多种类型中的一种</p>
+<h4 id="never类型"><a href="#never类型" class="headerlink" title="never类型"></a>never类型</h4><p>never 代表永远不会有返回值、永远不会被执行到 或 永远无法匹配的类型，是 TS 中 “空” 的极致表达。</p>
+<ol>
+<li><p>场景：抛出错误的函数：永远不会正常返回</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">throwError</span>(<span class="params">message: string</span>): never &#123;</span><br><span class="line">  <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">Error</span>(message);</span><br><span class="line">  <span class="comment">// 后面的代码永远执行不到，返回值类型是 never</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. 无限循环的函数：永远不会结束</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">infiniteLoop</span>(<span class="params"></span>): never &#123;</span><br><span class="line">  <span class="keyword">while</span> (<span class="literal">true</span>) &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>场景：联合类型的 “空子集”</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 1. 互斥类型交叉 → never（没有值能同时是 string 和 number）</span></span><br><span class="line">type <span class="title class_">Impossible</span> = string &amp; number; <span class="comment">// never</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. 空联合类型 → never</span></span><br><span class="line">type <span class="title class_">EmptyUnion</span> = never | never; <span class="comment">// never</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h4 id="unknown类型"><a href="#unknown类型" class="headerlink" title="unknown类型"></a>unknown类型</h4><p>unknown 类型可以理解成是一个更安全的 any 类型，任何类型可赋值给 unknown<br><strong>与 any 不同的是，在将 unknown 类型赋值给其他类型之前，必须先进行类型检查或类型断言</strong></p>
+<p>示例：</p>
+<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 模拟接口请求函数（返回值类型未知）</span></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">fetchData</span>(<span class="params"><span class="attr">url</span>: <span class="built_in">string</span></span>): <span class="title class_">Promise</span>&lt;<span class="built_in">unknown</span>&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> res = <span class="keyword">await</span> <span class="title function_">fetch</span>(url);</span><br><span class="line">  <span class="keyword">return</span> res.<span class="title function_">json</span>(); <span class="comment">// 响应体可能是任意类型</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 安全处理返回值</span></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">handleData</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> data = <span class="keyword">await</span> <span class="title function_">fetchData</span>(<span class="string">&quot;/api/user&quot;</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 第一步：判断是否是对象（排除 null）</span></span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> data === <span class="string">&quot;object&quot;</span> &amp;&amp; data !== <span class="literal">null</span>) &#123;</span><br><span class="line">    <span class="comment">// 第二步：判断是否包含 name 属性</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="string">&quot;name&quot;</span> <span class="keyword">in</span> data &amp;&amp; <span class="title function_">typeof</span> (data <span class="keyword">as</span> &#123; <span class="attr">name</span>: <span class="built_in">unknown</span> &#125;).<span class="property">name</span> === <span class="string">&quot;string&quot;</span>) &#123;</span><br><span class="line">      <span class="comment">// 安全访问 name 属性</span></span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;用户名：&quot;</span>, (data <span class="keyword">as</span> &#123; <span class="attr">name</span>: <span class="built_in">string</span> &#125;).<span class="property">name</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 第三步：判断是否包含 age 属性</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="string">&quot;age&quot;</span> <span class="keyword">in</span> data &amp;&amp; <span class="title function_">typeof</span> (data <span class="keyword">as</span> &#123; <span class="attr">age</span>: <span class="built_in">unknown</span> &#125;).<span class="property">age</span> === <span class="string">&quot;number&quot;</span>) &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;年龄：&quot;</span>, (data <span class="keyword">as</span> &#123; <span class="attr">age</span>: <span class="built_in">number</span> &#125;).<span class="property">age</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="映射类型"><a href="#映射类型" class="headerlink" title="映射类型"></a>映射类型</h4><p>基本语法：<code>&#123; [K in Keys]: T &#125;</code><br>其实就类似 js 中的 for in语句，用于遍历 Keys 中的所有类型</p>
+<p>比较常见的语法</p>
+<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line">&#123; [ P <span class="keyword">in</span> K ] : T &#125;</span><br><span class="line">&#123; [ P <span class="keyword">in</span> K ] ?: T &#125;</span><br><span class="line">&#123; [ P <span class="keyword">in</span> K ] -?: T &#125;</span><br><span class="line">&#123; <span class="keyword">readonly</span> [ P <span class="keyword">in</span> K ] : T &#125;</span><br><span class="line">&#123; <span class="keyword">readonly</span> [ P <span class="keyword">in</span> K ] ?: T &#125;</span><br><span class="line">&#123; -<span class="keyword">readonly</span> [ P <span class="keyword">in</span> K ] ?: T &#125;</span><br></pre></td></tr></table></figure>
+
+<p>利用映射类型实现的utility type</p>
+<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">type</span> <span class="title class_">Getters</span>&lt;T&gt; = &#123;</span><br><span class="line">  [K <span class="keyword">in</span> keyof T <span class="keyword">as</span> <span class="string">`get<span class="subst">$&#123;Capitalize&lt;<span class="built_in">string</span> &amp; K&gt;&#125;</span>`</span>]: <span class="function">() =&gt;</span> T[K]</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">Person</span> &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="built_in">string</span>;</span><br><span class="line">    <span class="attr">age</span>: <span class="built_in">number</span>;</span><br><span class="line">    <span class="attr">location</span>: <span class="built_in">string</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> <span class="title class_">LazyPerson</span> = <span class="title class_">Getters</span>&lt;<span class="title class_">Person</span>&gt;;</span><br><span class="line"><span class="comment">// &#123;</span></span><br><span class="line"><span class="comment">//   getName: () =&gt; string;</span></span><br><span class="line"><span class="comment">//   getAge: () =&gt; number;</span></span><br><span class="line"><span class="comment">//   getLocation: () =&gt; string;</span></span><br><span class="line"><span class="comment">// &#125;</span></span><br></pre></td></tr></table></figure>
+<h4 id="条件类型"><a href="#条件类型" class="headerlink" title="条件类型"></a>条件类型</h4><p>基本语法：<code>T extends U ? X : Y</code></p>
+<p>常见用法：</p>
+<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">type</span> <span class="title class_">IsString</span>&lt;T&gt; = T <span class="keyword">extends</span> <span class="built_in">string</span> ? <span class="literal">true</span> : <span class="literal">false</span>;</span><br><span class="line">​</span><br><span class="line"><span class="keyword">type</span> <span class="variable constant_">I0</span> = <span class="title class_">IsString</span>&lt;<span class="built_in">number</span>&gt;;  <span class="comment">// false</span></span><br><span class="line"><span class="keyword">type</span> <span class="variable constant_">I1</span> = <span class="title class_">IsString</span>&lt;<span class="string">&quot;abc&quot;</span>&gt;;  <span class="comment">// true</span></span><br><span class="line"><span class="keyword">type</span> <span class="variable constant_">I2</span> = <span class="title class_">IsString</span>&lt;<span class="built_in">any</span>&gt;;  <span class="comment">// boolean</span></span><br><span class="line"><span class="keyword">type</span> <span class="variable constant_">I3</span> = <span class="title class_">IsString</span>&lt;<span class="built_in">never</span>&gt;;  <span class="comment">// never</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="特殊关键字"><a href="#特殊关键字" class="headerlink" title="特殊关键字"></a>特殊关键字</h3><h4 id="extends关键字"><a href="#extends关键字" class="headerlink" title="extends关键字"></a>extends关键字</h4><p>主要使用场景</p>
+<ul>
+<li>类继承</li>
+<li>接口继承</li>
+<li>泛型约束</li>
+<li>条件类型</li>
+</ul>
+<p>泛型约束使用场景：</p>
+<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 约束 K 必须是 T 的键（keyof T 是 T 所有键的联合类型）</span></span><br><span class="line"><span class="keyword">function</span> getProperty&lt;T, K <span class="keyword">extends</span> keyof T&gt;(<span class="attr">obj</span>: T, <span class="attr">key</span>: K): T[K] &#123;</span><br><span class="line">  <span class="keyword">return</span> obj[key];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> product = &#123; <span class="attr">name</span>: <span class="string">&quot;手机&quot;</span>, <span class="attr">price</span>: <span class="number">2999</span>, <span class="attr">stock</span>: <span class="number">100</span> &#125;;</span><br><span class="line"><span class="comment">// ✅ K 是 &quot;price&quot;（属于 keyof product）</span></span><br><span class="line"><span class="title function_">getProperty</span>(product, <span class="string">&quot;price&quot;</span>); <span class="comment">// 2999</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// ❌ K 是 &quot;color&quot;（不属于 keyof product）</span></span><br><span class="line"><span class="title function_">getProperty</span>(product, <span class="string">&quot;color&quot;</span>);</span><br><span class="line"><span class="comment">// 报错：Argument of type &#x27;&quot;color&quot;&#x27; is not assignable to parameter of type &#x27;&quot;name&quot; | &quot;price&quot; | &quot;stock&quot;&#x27;</span></span><br></pre></td></tr></table></figure>
+<h4 id="infer关键字"><a href="#infer关键字" class="headerlink" title="infer关键字"></a>infer关键字</h4><p>infer &#x3D; 类型层面的 “变量”，仅能在 T extends U ? X : Y 这种条件类型中使用<br>作用是「捕获 &#x2F; 提取」复杂类型的某一部分（比如函数返回值、数组元素类型），并给这部分类型起一个变量名供后续使用</p>
+<h5 id="提取数组元素类型"><a href="#提取数组元素类型" class="headerlink" title="提取数组元素类型"></a>提取数组元素类型</h5><figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">type</span> <span class="title class_">ArrayItem</span>&lt;T&gt; = T <span class="title function_">extends</span> (infer U)[] ? U : <span class="built_in">never</span>;</span><br><span class="line"><span class="comment">// 这里T extends (infer U)[] ? U : never;的意思是，如果T是某个待推断类型的数组，则返回推断的类型，否则返回never</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="提取函数返回值类型"><a href="#提取函数返回值类型" class="headerlink" title="提取函数返回值类型"></a>提取函数返回值类型</h5><figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">type</span> <span class="title class_">GetReturn</span>&lt;T&gt; = T <span class="title function_">extends</span> (...<span class="attr">args</span>: <span class="built_in">any</span>[]) =&gt; infer R ? R : <span class="built_in">never</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用</span></span><br><span class="line"><span class="keyword">type</span> <span class="title class_">Fn</span> = <span class="function">() =&gt;</span> &#123; <span class="attr">name</span>: <span class="built_in">string</span>; <span class="attr">age</span>: <span class="built_in">number</span> &#125;;</span><br><span class="line"><span class="keyword">type</span> <span class="title class_">FnReturn</span> = <span class="title class_">GetReturn</span>&lt;<span class="title class_">Fn</span>&gt;; <span class="comment">// &#123; name: string; age: number &#125;</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="React-中infer的使用"><a href="#React-中infer的使用" class="headerlink" title="React 中infer的使用"></a>React 中infer的使用</h5><p>以 <code>useReducer</code> 举例，如果我们这样使用 <code>useReducer</code></p>
+<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">reducer</span> = (<span class="params"><span class="attr">x</span>: <span class="built_in">number</span></span>) =&gt; x + <span class="number">1</span>;</span><br><span class="line"><span class="keyword">const</span> [state, dispatch] = <span class="title function_">useReducer</span>(reducer, <span class="string">&#x27;&#x27;</span>);</span><br><span class="line"><span class="comment">// Argument of type &quot;&quot; is not assignable to parameter of type &#x27;number&#x27;.</span></span><br></pre></td></tr></table></figure>
+<p>这里useReducer会报一个类型错误，说””不能赋值给number类型</p>
+<p>那React这里是如何通过reducer函数的类型来判断state的类型的？</p>
+<p>直接看源码：</p>
+<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> useReducer&lt;R <span class="keyword">extends</span> <span class="title class_">Reducer</span>&lt;<span class="built_in">any</span>, <span class="built_in">any</span>&gt;, I&gt;(</span><br><span class="line">  <span class="attr">reducer</span>: R,</span><br><span class="line">  <span class="comment">// ReducerState 推断类型</span></span><br><span class="line">  <span class="attr">initializerArg</span>: I &amp; <span class="title class_">ReducerState</span>&lt;R&gt;,</span><br><span class="line">  <span class="attr">initializer</span>: <span class="function">(<span class="params"><span class="attr">arg</span>: I &amp; <span class="title class_">ReducerState</span>&lt;R&gt;</span>) =&gt;</span> <span class="title class_">ReducerState</span>&lt;R&gt;</span><br><span class="line">): [<span class="title class_">ReducerState</span>&lt;R&gt;, <span class="title class_">Dispatch</span>&lt;<span class="title class_">ReducerAction</span>&lt;R&gt;&gt;];</span><br><span class="line"></span><br><span class="line"><span class="comment">// infer推断</span></span><br><span class="line"><span class="keyword">type</span> <span class="title class_">ReducerState</span>&lt;R <span class="keyword">extends</span> <span class="title class_">Reducer</span>&lt;<span class="built_in">any</span>, <span class="built_in">any</span>&gt;&gt; = R <span class="keyword">extends</span> <span class="title class_">Reducer</span>&lt;infer S, <span class="built_in">any</span>&gt;</span><br><span class="line">  ? S</span><br><span class="line">  : <span class="built_in">never</span>;</span><br><span class="line"><span class="comment">// Reducer类型</span></span><br><span class="line"><span class="keyword">type</span> <span class="title class_">Reducer</span>&lt;S, A&gt; = <span class="function">(<span class="params"><span class="attr">prevState</span>: S, <span class="attr">action</span>: A</span>) =&gt;</span> S;</span><br></pre></td></tr></table></figure>
+
+<h4 id="in关键字"><a href="#in关键字" class="headerlink" title="in关键字"></a>in关键字</h4><ul>
+<li>用法 1：见 <a href="#%E7%B1%BB%E5%9E%8B%E6%94%B6%E7%AA%84">类型收窄</a></li>
+<li>用法 2：见 <a href="#%E6%98%A0%E5%B0%84%E7%B1%BB%E5%9E%8B">映射类型</a></li>
+</ul>
+<h3 id="特殊操作符"><a href="#特殊操作符" class="headerlink" title="特殊操作符"></a>特殊操作符</h3><h4 id="非空断言操作符"><a href="#非空断言操作符" class="headerlink" title="! 非空断言操作符"></a>! 非空断言操作符</h4><h4 id="修饰符"><a href="#修饰符" class="headerlink" title="+- 修饰符"></a>+- 修饰符</h4><h3 id="Ts-challenge"><a href="#Ts-challenge" class="headerlink" title="Ts challenge"></a>Ts challenge</h3><h4 id="字段全改字符串"><a href="#字段全改字符串" class="headerlink" title="字段全改字符串"></a>字段全改字符串</h4><figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">type</span> <span class="title class_">Demo1</span> = &#123;</span><br><span class="line">    <span class="attr">a</span>: <span class="built_in">number</span>;</span><br><span class="line">    <span class="attr">b</span>: <span class="built_in">number</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> <span class="title class_">NewDemo1</span> = &#123;</span><br><span class="line">    [P <span class="keyword">in</span> keyof <span class="title class_">Demo1</span>]: <span class="built_in">string</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="字段全改函数，函数返回值是字段原本类型"><a href="#字段全改函数，函数返回值是字段原本类型" class="headerlink" title="字段全改函数，函数返回值是字段原本类型"></a>字段全改函数，函数返回值是字段原本类型</h4><figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">type</span> <span class="title class_">Demo1</span> = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="built_in">number</span>;</span><br><span class="line">    <span class="attr">age</span>: <span class="built_in">string</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> <span class="title class_">NewDemo1</span> = &#123;</span><br><span class="line">    [P <span class="keyword">in</span> keyof <span class="title class_">Demo1</span>]: <span class="function">() =&gt;</span> <span class="title class_">Demo1</span>[P];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 改成 &#123;getName: () =&gt; number, getAge: () =&gt; string&#125; 这种形式</span></span><br><span class="line"><span class="keyword">type</span> <span class="title class_">NewDemo1</span> = &#123;</span><br><span class="line">    [P <span class="keyword">in</span> keyof <span class="title class_">Demo1</span> <span class="keyword">as</span> <span class="string">`get<span class="subst">$&#123;Capitalize&lt;P&gt;&#125;</span>`</span>]: <span class="function">() =&gt;</span> <span class="title class_">Demo1</span>[P];</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="实现一个Optional（把一个类型里的部分字段变为可选）"><a href="#实现一个Optional（把一个类型里的部分字段变为可选）" class="headerlink" title="实现一个Optional（把一个类型里的部分字段变为可选）"></a>实现一个Optional（把一个类型里的部分字段变为可选）</h4><figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">type</span> <span class="title class_">Optional</span>&lt;T, K <span class="keyword">extends</span> keyof T&gt; = <span class="title class_">Omit</span>&lt;T, K&gt; &amp; <span class="title class_">Partial</span>&lt;<span class="title class_">Pick</span>&lt;T, K&gt;&gt;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="实现一个GetOptional（得到某个类型里面所有可选字段）"><a href="#实现一个GetOptional（得到某个类型里面所有可选字段）" class="headerlink" title="实现一个GetOptional（得到某个类型里面所有可选字段）"></a>实现一个GetOptional（得到某个类型里面所有可选字段）</h4><figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">type</span> <span class="title class_">GetOptional</span>&lt;T&gt; = [P <span class="keyword">in</span> keyof T]</span><br></pre></td></tr></table></figure>
+
+<h4 id="只保留对象类型中值为-string-类型的键值对"><a href="#只保留对象类型中值为-string-类型的键值对" class="headerlink" title="只保留对象类型中值为 string 类型的键值对"></a>只保留对象类型中值为 string 类型的键值对</h4><figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">type</span> <span class="title class_">PickStringValues</span>&lt;T&gt; = &#123;</span><br><span class="line">    [K <span class="keyword">in</span> keyof T <span class="keyword">as</span> T[K] <span class="keyword">extends</span> <span class="built_in">string</span> ? K : <span class="built_in">never</span>]: T[K]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>Typescript</category>
       </categories>
@@ -2178,36 +2507,6 @@ webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后�
       </tags>
   </entry>
   <entry>
-    <title>【前端面试】JavaScript相关</title>
-    <url>/2024/08/21/%E3%80%90%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E3%80%91JavaScript%E7%9B%B8%E5%85%B3/</url>
-    <content><![CDATA[<h4 id="let、const的区别"><a href="#let、const的区别" class="headerlink" title="let、const的区别"></a>let、const的区别</h4><ul>
-<li>块级作用域</li>
-<li>重复声明变量会报错</li>
-<li>不能在声明前访问</li>
-</ul>
-<span id="more"></span>
-
-<h4 id="Promise相关"><a href="#Promise相关" class="headerlink" title="Promise相关"></a>Promise相关</h4><ul>
-<li>解决回调地狱的问题</li>
-<li>异常穿透</li>
-<li>Promise.all</li>
-<li>Promise.allSettled</li>
-<li>Promise.race</li>
-<li>Promise.any</li>
-</ul>
-<h4 id="事件循环"><a href="#事件循环" class="headerlink" title="事件循环"></a>事件循环</h4><p>见：<a href="https://huangyunt.github.io/2021/10/09/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%9E%B6%E6%9E%84%E5%92%8C%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/">浏览器架构和事件循环</a></p>
-<h4 id="this相关"><a href="#this相关" class="headerlink" title="this相关"></a>this相关</h4><p>见：<a href="https://huangyunt.github.io/2021/02/17/Javascript%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87/#this-%E6%8C%87%E5%90%91">this指向</a></p>
-<h4 id="什么是-Iterable-对象，与-Array-有什么区别"><a href="#什么是-Iterable-对象，与-Array-有什么区别" class="headerlink" title="什么是 Iterable 对象，与 Array 有什么区别"></a>什么是 Iterable 对象，与 Array 有什么区别</h4><p>Iterable包含一个名为 [Symbol.iterator] 的方法，该方法返回一个迭代器（Iterator）对象。例如</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> myIterable = &#123;</span><br><span class="line">  <span class="attr">data</span>: [<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>],</span><br><span class="line">  [<span class="title class_">Symbol</span>.<span class="property">iterator</span>]() &#123;</span><br><span class="line">    <span class="keyword">let</span> index = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      <span class="attr">next</span>: <span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (index &lt; <span class="variable language_">this</span>.<span class="property">data</span>.<span class="property">length</span>) &#123;</span><br><span class="line">          <span class="keyword">return</span> &#123; <span class="attr">value</span>: <span class="variable language_">this</span>.<span class="property">data</span>[index++], <span class="attr">done</span>: <span class="literal">false</span> &#125;;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> &#123; <span class="attr">value</span>: <span class="literal">undefined</span>, <span class="attr">done</span>: <span class="literal">true</span> &#125;;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h4 id="异步加载-JS-脚本时，async-与-defer-有何区别"><a href="#异步加载-JS-脚本时，async-与-defer-有何区别" class="headerlink" title="异步加载 JS 脚本时，async 与 defer 有何区别"></a>异步加载 JS 脚本时，async 与 defer 有何区别</h4>]]></content>
-      <categories>
-        <category>前端面试</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>【前端面试】React相关</title>
     <url>/2024/08/23/%E3%80%90%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E3%80%91React%E7%9B%B8%E5%85%B3/</url>
     <content><![CDATA[<h4 id="useEffectEvent"><a href="#useEffectEvent" class="headerlink" title="useEffectEvent"></a>useEffectEvent</h4><h4 id="React闭包陷阱"><a href="#React闭包陷阱" class="headerlink" title="React闭包陷阱"></a>React闭包陷阱</h4><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">React</span>, &#123; useState, useEffect &#125; <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Counter</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> [count, setCount] = <span class="title function_">useState</span>(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">  <span class="title function_">useEffect</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 模拟一个异步操作，例如网络请求</span></span><br><span class="line">    <span class="keyword">const</span> intervalId = <span class="built_in">setInterval</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="comment">// 这里的 count 捕获的是 useEffect 第一次运行时 count 的值 (0)</span></span><br><span class="line">      <span class="comment">// 因此，每次执行都会是 0 + 1 = 1，而不是递增</span></span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;Stale count in setInterval:&#x27;</span>, count);</span><br><span class="line">      <span class="title function_">setCount</span>(count + <span class="number">1</span>); <span class="comment">// 这是一个闭包陷阱！</span></span><br><span class="line">    &#125;, <span class="number">1000</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="function">() =&gt;</span> <span class="built_in">clearInterval</span>(intervalId);</span><br><span class="line">  &#125;, []); <span class="comment">// 依赖项为空数组，表示只在组件挂载时执行一次</span></span><br><span class="line">          <span class="comment">// 导致 setInterval 内部的 count 始终是初始值 0</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">p</span>&gt;</span>Count: &#123;count&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;()</span> =&gt;</span> setCount(count + 1)&#125;&gt;Increment<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">Counter</span>;</span><br></pre></td></tr></table></figure>
@@ -2263,6 +2562,36 @@ webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后�
       </categories>
       <tags>
         <tag>React</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【前端面试】JavaScript相关</title>
+    <url>/2024/08/21/%E3%80%90%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E3%80%91JavaScript%E7%9B%B8%E5%85%B3/</url>
+    <content><![CDATA[<h4 id="let、const的区别"><a href="#let、const的区别" class="headerlink" title="let、const的区别"></a>let、const的区别</h4><ul>
+<li>块级作用域</li>
+<li>重复声明变量会报错</li>
+<li>不能在声明前访问</li>
+</ul>
+<span id="more"></span>
+
+<h4 id="Promise相关"><a href="#Promise相关" class="headerlink" title="Promise相关"></a>Promise相关</h4><ul>
+<li>解决回调地狱的问题</li>
+<li>异常穿透</li>
+<li>Promise.all</li>
+<li>Promise.allSettled</li>
+<li>Promise.race</li>
+<li>Promise.any</li>
+</ul>
+<h4 id="事件循环"><a href="#事件循环" class="headerlink" title="事件循环"></a>事件循环</h4><p>见：<a href="https://huangyunt.github.io/2021/10/09/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%9E%B6%E6%9E%84%E5%92%8C%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/">浏览器架构和事件循环</a></p>
+<h4 id="this相关"><a href="#this相关" class="headerlink" title="this相关"></a>this相关</h4><p>见：<a href="https://huangyunt.github.io/2021/02/17/Javascript%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87/#this-%E6%8C%87%E5%90%91">this指向</a></p>
+<h4 id="什么是-Iterable-对象，与-Array-有什么区别"><a href="#什么是-Iterable-对象，与-Array-有什么区别" class="headerlink" title="什么是 Iterable 对象，与 Array 有什么区别"></a>什么是 Iterable 对象，与 Array 有什么区别</h4><p>Iterable包含一个名为 [Symbol.iterator] 的方法，该方法返回一个迭代器（Iterator）对象。例如</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> myIterable = &#123;</span><br><span class="line">  <span class="attr">data</span>: [<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>],</span><br><span class="line">  [<span class="title class_">Symbol</span>.<span class="property">iterator</span>]() &#123;</span><br><span class="line">    <span class="keyword">let</span> index = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      <span class="attr">next</span>: <span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (index &lt; <span class="variable language_">this</span>.<span class="property">data</span>.<span class="property">length</span>) &#123;</span><br><span class="line">          <span class="keyword">return</span> &#123; <span class="attr">value</span>: <span class="variable language_">this</span>.<span class="property">data</span>[index++], <span class="attr">done</span>: <span class="literal">false</span> &#125;;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> &#123; <span class="attr">value</span>: <span class="literal">undefined</span>, <span class="attr">done</span>: <span class="literal">true</span> &#125;;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h4 id="异步加载-JS-脚本时，async-与-defer-有何区别"><a href="#异步加载-JS-脚本时，async-与-defer-有何区别" class="headerlink" title="异步加载 JS 脚本时，async 与 defer 有何区别"></a>异步加载 JS 脚本时，async 与 defer 有何区别</h4>]]></content>
+      <categories>
+        <category>前端面试</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
       </tags>
   </entry>
   <entry>
@@ -3058,18 +3387,6 @@ webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后�
       </tags>
   </entry>
   <entry>
-    <title>微信小程序开发</title>
-    <url>/2025/06/05/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91/</url>
-    <content><![CDATA[<h2 id="微信小程序开发"><a href="#微信小程序开发" class="headerlink" title="微信小程序开发"></a>微信小程序开发</h2>]]></content>
-      <categories>
-        <category>小程序</category>
-      </categories>
-      <tags>
-        <tag>前端</tag>
-        <tag>微信小程序</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>站点更新日志 / ChangeLog</title>
     <url>/2024/10/28/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97/</url>
     <content><![CDATA[<!-- ### 前言
@@ -3129,6 +3446,18 @@ webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后�
 <h5 id="标签、分类功能"><a href="#标签、分类功能" class="headerlink" title="标签、分类功能"></a>标签、分类功能</h5><p>所有文章整理了一版，对所有文章分标签、分类展示</p>
 <h5 id="文章显示字数统计、浏览时间"><a href="#文章显示字数统计、浏览时间" class="headerlink" title="文章显示字数统计、浏览时间"></a>文章显示字数统计、浏览时间</h5><p>引入<code>hexo-word-counter</code>这个插件来实现的，还会统计代码字数，算是个锦上添花的功能吧^^</p>
 ]]></content>
+  </entry>
+  <entry>
+    <title>微信小程序开发</title>
+    <url>/2025/06/05/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91/</url>
+    <content><![CDATA[<h2 id="微信小程序开发"><a href="#微信小程序开发" class="headerlink" title="微信小程序开发"></a>微信小程序开发</h2>]]></content>
+      <categories>
+        <category>小程序</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+        <tag>微信小程序</tag>
+      </tags>
   </entry>
   <entry>
     <title>比特币</title>
@@ -3229,116 +3558,86 @@ webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后�
   <entry>
     <title>浏览器架构和事件循环</title>
     <url>/2021/10/09/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%9E%B6%E6%9E%84%E5%92%8C%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/</url>
-    <content><![CDATA[<h3 id="chrome浏览器架构"><a href="#chrome浏览器架构" class="headerlink" title="chrome浏览器架构"></a>chrome浏览器架构</h3><p>Chrome 采用多进程架构，其顶层存在一个 Browser process 用以协调浏览器的其它进程。</p>
-<ul>
-<li>Browser Process：</li>
+    <content><![CDATA[<h3 id="Chrome浏览器架构"><a href="#Chrome浏览器架构" class="headerlink" title="Chrome浏览器架构"></a>Chrome浏览器架构</h3><p>Chrome 采用多进程架构，其顶层存在一个 Browser process 用以协调浏览器的其它进程。<br><img src="/../assets/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%A4%9A%E8%BF%9B%E7%A8%8B%E6%9E%B6%E6%9E%84.png" alt="image-20210930012419754"></p>
+<h4 id="Browser-Process"><a href="#Browser-Process" class="headerlink" title="Browser Process"></a>Browser Process</h4><ul>
+<li>子进程的管理（网络、渲染、GPU）</li>
+<li>负责包括地址栏，书签栏，前进后退按钮等部分的工作；</li>
+<li>负责处理浏览器的一些不可见的底层操作，比如网络请求和文件访问；</li>
 </ul>
-<ol>
-<li><p>负责包括地址栏，书签栏，前进后退按钮等部分的工作；</p>
-</li>
-<li><p>负责处理浏览器的一些不可见的底层操作，比如网络请求和文件访问；</p>
-</li>
-</ol>
-<ul>
-<li>Renderer Process：</li>
+<h4 id="Network-Service"><a href="#Network-Service" class="headerlink" title="Network Service"></a>Network Service</h4><ul>
+<li>负责加载网络资源。网络进程内部会启动多个线程来处理不同的网络任务</li>
 </ul>
-<ol>
-<li>负责一个 tab 内关于网页呈现的所有事情</li>
-</ol>
-<ul>
-<li>Plugin Process：</li>
+<h4 id="Renderer-Process"><a href="#Renderer-Process" class="headerlink" title="Renderer Process"></a>Renderer Process</h4><ul>
+<li>负责一个 tab 内关于网页呈现的所有事情，进程启动后，会开启一个渲染主线程，负责执行HTML、CSS、JavaScript代码</li>
 </ul>
-<ol>
+<h4 id="Plugin-Process"><a href="#Plugin-Process" class="headerlink" title="Plugin Process"></a>Plugin Process</h4><ul>
 <li>负责控制一个网页用到的所有插件，如 flash</li>
-</ol>
-<ul>
-<li>GPU Process</li>
 </ul>
-<ol>
+<h4 id="GPU-Process"><a href="#GPU-Process" class="headerlink" title="GPU Process"></a>GPU Process</h4><ul>
 <li>负责处理 GPU 相关的任务</li>
-</ol>
-<p><img src="/../assets/image-20210930012419754.png" alt="image-20210930012419754"></p>
+</ul>
 <p>由于一个tab标签页都有一个独立的渲染进程，所以一个tab异常崩溃后，其他tab不会受到影响。</p>
 <p>一个渲染进程包括</p>
 <ul>
-<li>JS引擎线程</li>
+<li>主线程</li>
 <li>HTTP请求线程</li>
 <li>定时触发线程</li>
 <li>事件触发线程</li>
 <li>GUI线程</li>
 </ul>
-<h3 id="浏览器JS异步执行原理"><a href="#浏览器JS异步执行原理" class="headerlink" title="浏览器JS异步执行原理"></a>浏览器JS异步执行原理</h3><p>执行JS代码的线程只有一个，是浏览器提供的JS引擎线程，浏览器中还有</p>
-<p><img src="/../image/image-20210930012033902.png" alt="image-20210930012033902"></p>
+<h4 id="渲染进程中的主线程是如何工作的"><a href="#渲染进程中的主线程是如何工作的" class="headerlink" title="渲染进程中的主线程是如何工作的"></a>渲染进程中的主线程是如何工作的</h4><p>包括但不限于</p>
+<ul>
+<li>解析HTML</li>
+<li>解析CSS</li>
+<li>计算样式</li>
+<li>布局</li>
+<li>处理图层</li>
+<li>每秒把页面绘制60次</li>
+<li>执行全局js代码</li>
+<li>执行事件处理函数</li>
+<li>执行计时器回调函数</li>
+</ul>
+<h3 id="浏览器JS异步执行原理"><a href="#浏览器JS异步执行原理" class="headerlink" title="浏览器JS异步执行原理"></a>浏览器JS异步执行原理</h3><ol>
+<li>所有任务都在主线程上执行，形成一个执行栈。</li>
+<li>主线程之外，还存在一个”任务队列”（task queue）。只要异步任务有了运行结果，就在”任务队列”之中放置一个事件。</li>
+<li>一旦”执行栈”中的所有同步任务执行完毕，系统就会读取”任务队列”。那些对应的异步任务，结束等待状态，进入执行栈并开始执行。</li>
+<li>主线程不断重复上面的第三步。</li>
+</ol>
 <span id="more"></span>
 
-<h3 id="浏览器中的事件循环"><a href="#浏览器中的事件循环" class="headerlink" title="浏览器中的事件循环"></a>浏览器中的事件循环</h3><p><img src="/../image/image-20210930190158487.png" alt="image-20210930190158487"></p>
-<p>js引擎解析代码时，遇到同步任务-&gt;放入执行栈直接执行，遇到异步任务（比如ajax），交给网络线程处理，完成后将对应回调放入异步任务队列，<strong>当执行栈清空时，循环检测异步任务队列，将异步队列中的回调放入执行栈中执行。</strong></p>
-<h4 id="宏任务和微任务"><a href="#宏任务和微任务" class="headerlink" title="宏任务和微任务"></a>宏任务和微任务</h4><p><strong>Dom渲染会在微任务结束后，宏任务执行前</strong></p>
-<h5 id="宏任务"><a href="#宏任务" class="headerlink" title="宏任务"></a>宏任务</h5><table>
-<thead>
-<tr>
-<th>#</th>
-<th>浏览器</th>
-<th>Node</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>I/O</code></td>
-<td>✅</td>
-<td>✅</td>
-</tr>
-<tr>
-<td><code>setTimeout</code></td>
-<td>✅</td>
-<td>✅</td>
-</tr>
-<tr>
-<td><code>setInterval</code></td>
-<td>✅</td>
-<td>✅</td>
-</tr>
-<tr>
-<td><code>setImmediate</code></td>
-<td>❌</td>
-<td>✅</td>
-</tr>
-<tr>
-<td><code>requestAnimationFrame</code></td>
-<td>✅</td>
-<td>❌</td>
-</tr>
-</tbody></table>
-<h5 id="微任务"><a href="#微任务" class="headerlink" title="微任务"></a>微任务</h5><table>
-<thead>
-<tr>
-<th>#</th>
-<th>浏览器</th>
-<th>Node</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>process.nextTick</code></td>
-<td>❌</td>
-<td>✅</td>
-</tr>
-<tr>
-<td><code>MutationObserver</code></td>
-<td>✅</td>
-<td>❌</td>
-</tr>
-<tr>
-<td><code>Promise.then catch finally</code></td>
-<td>✅</td>
-<td>✅</td>
-</tr>
-</tbody></table>
-<h4 id="事件循环加入宏任务微任务"><a href="#事件循环加入宏任务微任务" class="headerlink" title="事件循环加入宏任务微任务"></a>事件循环加入宏任务微任务</h4><ol>
-<li>Call Stack调用栈清空</li>
-<li><strong>清空</strong>当前微任务队列，若有新增微任务，会加入当前队列尾部继续执行。</li>
-<li>尝试DOM渲染</li>
-<li>执行event loop </li>
-<li>取出任务队列里的一个宏任务，入栈执行</li>
-<li>返回1</li>
+<h3 id="浏览器中的事件循环"><a href="#浏览器中的事件循环" class="headerlink" title="浏览器中的事件循环"></a>浏览器中的事件循环</h3><p>事件循环是浏览器渲染主线程的工作方式，主线程会将不同的任务交给不同线程处理，其他线程处理完后会把回调函数放到对应的队列里</p>
+<p><img src="/../assets/%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF.png" alt="image-20210930190158487"></p>
+<p>Event Loop(事件循环)中，每一次循环称为 <code>tick</code>, 每一次 <code>tick</code> 的任务如下：</p>
+<ol>
+<li>调用栈执行同步代码，遇到异步任务交给各自的线程处理（其他线程处理完后，会把异步任务的回调加到对应的任务队列中）</li>
+<li>调用栈清空后，检查 <code>Microtask</code> 队列是否存在 <code>Microtask</code>，如果存在则不停的执行，直至清空 <code>Microtask</code> 队列</li>
+<li>更新render，dom渲染(每一次事件循环，浏览器都可能会去更新渲染)</li>
+<li>从 <code>Task</code> 队列中取出一个 <code>Task</code> 执行</li>
+<li>重复以上步骤</li>
+</ol>
+<h4 id="任务队列（Task-Queue）"><a href="#任务队列（Task-Queue）" class="headerlink" title="任务队列（Task Queue）"></a>任务队列（Task Queue）</h4><h5 id="延时任务队列（Task）"><a href="#延时任务队列（Task）" class="headerlink" title="延时任务队列（Task）"></a>延时任务队列（Task）</h5><ul>
+<li>定时器API<code>setTimeout</code>和<code>setInterval</code> 相应的回调函数</li>
+</ul>
+<h5 id="交互任务队列"><a href="#交互任务队列" class="headerlink" title="交互任务队列"></a>交互任务队列</h5><ul>
+<li><p>一段新程序或子程序被直接执行时（比如从一个控制台，或在一个 script 元素中运行代码）。</p>
+</li>
+<li><p>触发了一个事件，将其回调函数添加到任务队列时，比如交互相关（用户点击、视口变化、键盘事件）</p>
+</li>
+<li><p>优先级：用户交互相关任务 &gt; 定时任务 &gt; 网络 &#x2F; 通信任务。</p>
+</li>
+</ul>
+<ol>
+<li><code>script标签</code>              </li>
+<li><code>UI交互（click、mousedown、keydown、touchstart 等）</code> </li>
+<li><code>网络I/O（XHR/Fetch 完成回调）</code>                </li>
+<li><code>setTimeout、setInterval</code>  </li>
+<li><code>requestAnimationFrame</code>  </li>
+<li><code>MessageChannel 的 onmessage 回调</code></li>
+</ol>
+<h4 id="微任务队列（MicroTask-Queue）"><a href="#微任务队列（MicroTask-Queue）" class="headerlink" title="微任务队列（MicroTask Queue）"></a>微任务队列（MicroTask Queue）</h4><ol>
+<li><code>MutationObserver</code>           </li>
+<li><code>Promise.then catch finally</code> </li>
+<li><code>queueMicrotask()</code></li>
 </ol>
 <p>对于以下demo</p>
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">r</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="title function_">r</span>();</span><br><span class="line">&#125;)</span><br><span class="line">.<span class="title function_">then</span>(<span class="function">() =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">1</span>))</span><br><span class="line">.<span class="title function_">then</span>(<span class="function">() =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">2</span>))</span><br><span class="line">.<span class="title function_">then</span>(<span class="function">() =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">3</span>))</span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">r</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="title function_">r</span>();</span><br><span class="line">&#125;)</span><br><span class="line">.<span class="title function_">then</span>(<span class="function">() =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">4</span>))</span><br><span class="line">.<span class="title function_">then</span>(<span class="function">() =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">5</span>))</span><br><span class="line">.<span class="title function_">then</span>(<span class="function">() =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">6</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment">// 输出</span></span><br><span class="line"><span class="comment">// 1 4 2 5 3 6</span></span><br></pre></td></tr></table></figure>
@@ -3347,31 +3646,34 @@ webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后�
 <p>如果 Promise 的状态是 pending，那么 <code>then</code> 会在该 Promise 上注册一个回调，当其状态发生变化时，对应的回调将作为一个微任务被推入微任务队列</p>
 <p>如果 Promise 的状态已经是 fulfilled 或 rejected，那么 <code>then()</code> 会立即创建一个微任务，将传入的对应的回调推入微任务队列</p>
 <p>对于以下demo：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;start&#x27;</span>)</span><br><span class="line"><span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;promise in timeout&#x27;</span>);</span><br><span class="line">            <span class="title function_">resolve</span>();</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;promise after timeout&#x27;</span>);</span><br><span class="line">    &#125;).<span class="title function_">then</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;promise4&#x27;</span>);</span><br><span class="line">        <span class="title class_">Promise</span>.<span class="title function_">resolve</span>().<span class="title function_">then</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;7777&#x27;</span>)</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;).<span class="title function_">then</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;promise5&#x27;</span>);</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;99999&#x27;</span>);</span><br><span class="line">    &#125;, <span class="number">0</span>);</span><br><span class="line">    <span class="title class_">Promise</span>.<span class="title function_">resolve</span>().<span class="title function_">then</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;promise3&#x27;</span>);</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;end&#x27;</span>);</span><br><span class="line"><span class="comment">// 输出：</span></span><br><span class="line"><span class="comment">// start</span></span><br><span class="line"><span class="comment">// promise after timeout</span></span><br><span class="line"><span class="comment">// end</span></span><br><span class="line"><span class="comment">// promise3</span></span><br><span class="line"><span class="comment">// promise in timeout</span></span><br><span class="line"><span class="comment">// promise4</span></span><br><span class="line"><span class="comment">// 7777</span></span><br><span class="line"><span class="comment">// promise5</span></span><br><span class="line"><span class="comment">// 99999</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;start&#x27;</span>)</span><br><span class="line"><span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;promise in timeout&#x27;</span>);</span><br><span class="line">        <span class="title function_">resolve</span>();</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;promise after timeout&#x27;</span>);</span><br><span class="line">&#125;).<span class="title function_">then</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;promise4&#x27;</span>);</span><br><span class="line">    <span class="title class_">Promise</span>.<span class="title function_">resolve</span>().<span class="title function_">then</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;7777&#x27;</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;).<span class="title function_">then</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;promise5&#x27;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;99999&#x27;</span>);</span><br><span class="line">&#125;, <span class="number">0</span>);</span><br><span class="line"><span class="title class_">Promise</span>.<span class="title function_">resolve</span>().<span class="title function_">then</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;promise3&#x27;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;end&#x27;</span>);</span><br><span class="line"><span class="comment">// 输出：</span></span><br><span class="line"><span class="comment">// start</span></span><br><span class="line"><span class="comment">// promise after timeout</span></span><br><span class="line"><span class="comment">// end</span></span><br><span class="line"><span class="comment">// promise3</span></span><br><span class="line"><span class="comment">// promise in timeout</span></span><br><span class="line"><span class="comment">// promise4</span></span><br><span class="line"><span class="comment">// 7777</span></span><br><span class="line"><span class="comment">// promise5</span></span><br><span class="line"><span class="comment">// 99999</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="Node中的事件循环"><a href="#Node中的事件循环" class="headerlink" title="Node中的事件循环"></a>Node中的事件循环</h3><ol>
-<li>执行同步代码</li>
-<li>执行<strong>nextTick队列</strong>里process.nextTick回调</li>
-<li>执行<strong>微任务队列</strong>Promise.then里的回调</li>
-<li>执行<strong>Timer队列</strong>里setTimeout，setInterval回调</li>
-<li>执行<strong>Poll队列</strong>里文件IO，网络IO相关操作</li>
-<li>执行<strong>Check队列</strong>里setImmediate回调</li>
-<li>在<strong>Poll队列</strong>等待，判断是否有新的异步任务，若Poll队列有任务，直接执行，若其他队列有任务，则继续下一个tick</li>
-</ol>
-<h4 id="Node中异步API分类"><a href="#Node中异步API分类" class="headerlink" title="Node中异步API分类"></a>Node中异步API分类</h4><ul>
-<li>定时器API：setTimeout、setInterval（Timer队列）</li>
-<li>IO操作：文件读写、数据库操作、网络请求（Poll队列）</li>
-<li>node独有：process.nextTick、setImmediate（Check队列）</li>
+<h3 id="Node中的事件循环"><a href="#Node中的事件循环" class="headerlink" title="Node中的事件循环"></a>Node中的事件循环</h3><h4 id="Node中的任务队列和异步API"><a href="#Node中的任务队列和异步API" class="headerlink" title="Node中的任务队列和异步API"></a>Node中的任务队列和异步API</h4><ul>
+<li><strong>Timer队列</strong>：定时器相关API，<code>setTimeout</code>、<code>setInterval</code></li>
+<li><strong>Poll队列</strong>：IO操作，文件读写、数据库操作、网络请求</li>
+<li><strong>Check队列</strong>：<code>setImmediate</code>（node环境中独有）</li>
+<li><strong>NextTick队列</strong>：<code>process.nextTick</code>（node环境中独有）</li>
 </ul>
-<p>Timer-&gt; Poll -&gt; Check（称之为一个Tick）<br>到Poll队列时，会暂停等待另外两个队列，此时如果有新的IO操作，会直接执行（因为Node的设计就是优先处理IO操作）</p>
+<h4 id="Node中事件循环执行流程"><a href="#Node中事件循环执行流程" class="headerlink" title="Node中事件循环执行流程"></a>Node中事件循环执行流程</h4><p><img src="/../assets/node%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF.png" alt="image-20210930190158487"></p>
+<ol>
+<li>调用栈执行同步代码，遇到异步任务交给各自的线程处理（其他线程处理完后，会把异步任务的回调加到对应的任务队列中）</li>
+<li>调用栈清空后，执行<strong>nextTick队列</strong>里<code>process.nextTick</code>回调，直至清空<strong>nextTick队列</strong></li>
+<li>清空<strong>微任务队列</strong>中<code>Promise.then</code>里的回调</li>
+<li>从<strong>Timer队列</strong>里取出<code>setTimeout</code>，<code>setInterval</code>回调执行，若<strong>nextTick队列</strong>和<strong>微任务队列</strong>不为空，重复步骤2&#x2F;3</li>
+<li>从<strong>Poll队列</strong>里取出文件IO，网络IO相关操作的回调执行，若<strong>nextTick队列</strong>和<strong>微任务队列</strong>不为空，重复步骤2&#x2F;3</li>
+<li>从<strong>Check队列</strong>里取出<code>setImmediate</code>回调执行，若<strong>nextTick队列</strong>和<strong>微任务队列</strong>不为空，重复步骤2&#x2F;3</li>
+<li>在<strong>Poll队列</strong>等待，判断是否有新的异步任务，若<strong>Poll队列</strong>有任务，直接执行，若其他队列有任务，则继续下一个 <strong>Tick</strong></li>
+</ol>
+<p><strong>Timer-&gt; Poll -&gt; Check</strong>称之为一个<strong>Tick</strong><br><strong>nextTick队列</strong>，总会在下个<strong>Tick</strong>运行之前执行</p>
+<p>遇到<strong>Poll队列</strong>时，会暂停等待另外两个队列，此时如果有新的IO操作，会直接执行（因为Node的设计就是<strong>优先处理IO操作</strong>）</p>
+<p>对于以下demo：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;sync&quot;</span>);</span><br><span class="line">process.<span class="title function_">nextTick</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;next tick 1&quot;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="title function_">setImmediate</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;setImmediate 1&quot;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="title class_">Promise</span>.<span class="title function_">resolve</span>().<span class="title function_">then</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;promise 1&quot;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">process.<span class="title function_">nextTick</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;next tick 2&quot;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;setTimeout 1&quot;</span>);</span><br><span class="line">&#125;, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="title function_">setImmediate</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;setImmediate 2&quot;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;setTimeout 2&quot;</span>);</span><br><span class="line">&#125;, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="title class_">Promise</span>.<span class="title function_">resolve</span>().<span class="title function_">then</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;promise 2&quot;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="title class_">Promise</span>.<span class="title function_">resolve</span>().<span class="title function_">then</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;promise 3&quot;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 输出：</span></span><br><span class="line"><span class="comment">// sync</span></span><br><span class="line"><span class="comment">// next tick 1</span></span><br><span class="line"><span class="comment">// next tick 2</span></span><br><span class="line"><span class="comment">// promise 1</span></span><br><span class="line"><span class="comment">// promise 2</span></span><br><span class="line"><span class="comment">// promise 3</span></span><br><span class="line"><span class="comment">// setTimeout 1</span></span><br><span class="line"><span class="comment">// setTimeout 2</span></span><br><span class="line"><span class="comment">// setImmediate 1</span></span><br><span class="line"><span class="comment">// setImmediate 2</span></span><br></pre></td></tr></table></figure>
+
 <h4 id="setTimeout和setImmediate的问题"><a href="#setTimeout和setImmediate的问题" class="headerlink" title="setTimeout和setImmediate的问题"></a>setTimeout和setImmediate的问题</h4><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;定时器&#x27;</span>)</span><br><span class="line">&#125;, <span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="title function_">setImmediate</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;setImmediate&#x27;</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 输出可能是先“定时器”，也可能是先“setImmediate”</span></span><br></pre></td></tr></table></figure>
 
 <p>setTimeout在node中延迟时间最小取值是1ms，而不是0ms（最快1ms调用），所以这里谁先输出是不一定的，若要让“setImmediate”先执行，可以包在文件IO的回调里</p>
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">fs.<span class="title function_">readFile</span>(_filename, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;定时器&#x27;</span>)</span><br><span class="line">    &#125;, <span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">    <span class="title function_">setImmediate</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;setImmediate&#x27;</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
-
-<h4 id="process-nextTick（nextTick队列）"><a href="#process-nextTick（nextTick队列）" class="headerlink" title="process.nextTick（nextTick队列）"></a>process.nextTick（nextTick队列）</h4><p>nextTick队列，总会在下个Tick运行之前执行</p>
-<h4 id="微任务队列"><a href="#微任务队列" class="headerlink" title="微任务队列"></a>微任务队列</h4><p>nextTick-&gt;微任务-&gt;Timer-&gt;Poll-&gt;Check</p>
 ]]></content>
       <categories>
         <category>Chore</category>
