@@ -572,40 +572,6 @@
       </tags>
   </entry>
   <entry>
-    <title>JavaScript API</title>
-    <url>/2024/12/30/JavaScript%20API/</url>
-    <content><![CDATA[<h2 id="InterSectionObserver"><a href="#InterSectionObserver" class="headerlink" title="InterSectionObserver"></a>InterSectionObserver</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 创建 IntersectionObserver 实例</span></span><br><span class="line"><span class="keyword">const</span> observer = <span class="keyword">new</span> <span class="title class_">IntersectionObserver</span>(<span class="function">(<span class="params">entries</span>) =&gt;</span> &#123;</span><br><span class="line">  entries.<span class="title function_">forEach</span>(<span class="function">(<span class="params">entry</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (entry.<span class="property">isIntersecting</span>) &#123;</span><br><span class="line">      <span class="comment">// 目标元素进入视口时的操作</span></span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`<span class="subst">$&#123;entry.target.id&#125;</span> 进入视口`</span>);</span><br><span class="line">      <span class="comment">// 例如在这里可以加载图片或触发其他动画效果</span></span><br><span class="line">      entry.<span class="property">target</span>.<span class="property">src</span> = <span class="string">&#x27;your_image.jpg&#x27;</span>;</span><br><span class="line">      <span class="comment">// 停止观察该元素（可选）</span></span><br><span class="line">      observer.<span class="title function_">unobserve</span>(entry.<span class="property">target</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 选择要观察的目标元素</span></span><br><span class="line"><span class="keyword">const</span> targetElement = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;your_element_id&#x27;</span>);</span><br><span class="line"><span class="comment">// 开始观察目标元素</span></span><br><span class="line">observer.<span class="title function_">observe</span>(targetElement);</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="MutationObserver"><a href="#MutationObserver" class="headerlink" title="MutationObserver"></a>MutationObserver</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 创建 MutationObserver 实例</span></span><br><span class="line"><span class="keyword">const</span> observer = <span class="keyword">new</span> <span class="title class_">MutationObserver</span>(<span class="function">(<span class="params">mutationsList</span>) =&gt;</span> &#123;</span><br><span class="line">  mutationsList.<span class="title function_">forEach</span>(<span class="function">(<span class="params">mutation</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (mutation.<span class="property">type</span> === <span class="string">&#x27;childList&#x27;</span>) &#123;</span><br><span class="line">      <span class="comment">// 子节点列表发生变化时的操作</span></span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;子节点列表发生变化&#x27;</span>);</span><br><span class="line">      <span class="comment">// 可以在这里对新增或删除的子节点进行进一步处理</span></span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (mutation.<span class="property">type</span> === <span class="string">&#x27;attributes&#x27;</span>) &#123;</span><br><span class="line">      <span class="comment">// 属性发生变化时的操作</span></span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`属性 <span class="subst">$&#123;mutation.attributeName&#125;</span> 发生变化`</span>);</span><br><span class="line">      <span class="comment">// 根据属性变化进行相应的样式更新或逻辑处理</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 选择要观察的目标节点</span></span><br><span class="line"><span class="keyword">const</span> targetNode = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;your_target_node_id&#x27;</span>);</span><br><span class="line"><span class="comment">// 配置观察选项</span></span><br><span class="line"><span class="keyword">const</span> config = &#123; <span class="attr">attributes</span>: <span class="literal">true</span>, <span class="attr">childList</span>: <span class="literal">true</span>, <span class="attr">subtree</span>: <span class="literal">true</span> &#125;;</span><br><span class="line"><span class="comment">// 开始观察目标节点</span></span><br><span class="line">observer.<span class="title function_">observe</span>(targetNode, config);</span><br></pre></td></tr></table></figure>
-
-<h2 id="PerformanceObserver"><a href="#PerformanceObserver" class="headerlink" title="PerformanceObserver"></a>PerformanceObserver</h2><h2 id="requestAnimationFrame"><a href="#requestAnimationFrame" class="headerlink" title="requestAnimationFrame"></a>requestAnimationFrame</h2><h3 id="requestAnimationFrame的概念"><a href="#requestAnimationFrame的概念" class="headerlink" title="requestAnimationFrame的概念"></a>requestAnimationFrame的概念</h3><p>通俗点讲就是该API能以浏览器的显示频率来作为其动画动作的频率，比如浏览器每10ms刷新一次，动画回调也每10ms调用一次，这样就不会存在过度绘制的问题，动画不会掉帧，自然流畅。</p>
-<h3 id="requestAnimationFrame的作用"><a href="#requestAnimationFrame的作用" class="headerlink" title="requestAnimationFrame的作用"></a>requestAnimationFrame的作用</h3><h3 id="requestAnimationFrame的优势"><a href="#requestAnimationFrame的优势" class="headerlink" title="requestAnimationFrame的优势"></a>requestAnimationFrame的优势</h3><h3 id="requestAnimationFrame的优势应用场景"><a href="#requestAnimationFrame的优势应用场景" class="headerlink" title="requestAnimationFrame的优势应用场景"></a>requestAnimationFrame的优势应用场景</h3><h2 id="requestIdleCallback"><a href="#requestIdleCallback" class="headerlink" title="requestIdleCallback"></a>requestIdleCallback</h2>]]></content>
-      <categories>
-        <category>JavaScript</category>
-      </categories>
-      <tags>
-        <tag>API</tag>
-        <tag>工程化</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Javascript二进制：File、Blob、FileReader、ArrayBuffer、Base64</title>
-    <url>/2025/09/06/JavaScript%E4%BA%8C%E8%BF%9B%E5%88%B6%EF%BC%9AFile%E3%80%81Blob%E3%80%81FileReader%E3%80%81ArrayBuffer%E3%80%81Base64/</url>
-    <content><![CDATA[<h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><blockquote>
-<p>JavaScript 提供了一些 API 来处理文件或原始文件数据，例如：File、Blob、FileReader、ArrayBuffer、base64 等</p>
-</blockquote>
-<p><img src="/../assets/js%E4%BA%8C%E8%BF%9B%E5%88%B6.png" alt="alt text"></p>
-]]></content>
-      <categories>
-        <category>JavaScript</category>
-      </categories>
-      <tags>
-        <tag>二进制</tag>
-        <tag>文件上传</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>JavaSrcipt原型</title>
     <url>/2021/02/17/JavaScript%E5%8E%9F%E5%9E%8B/</url>
     <content><![CDATA[<p>首先，要明确几个点：</p>
@@ -680,6 +646,40 @@
       </categories>
       <tags>
         <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JavaScript API</title>
+    <url>/2024/12/30/JavaScript%20API/</url>
+    <content><![CDATA[<h2 id="InterSectionObserver"><a href="#InterSectionObserver" class="headerlink" title="InterSectionObserver"></a>InterSectionObserver</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 创建 IntersectionObserver 实例</span></span><br><span class="line"><span class="keyword">const</span> observer = <span class="keyword">new</span> <span class="title class_">IntersectionObserver</span>(<span class="function">(<span class="params">entries</span>) =&gt;</span> &#123;</span><br><span class="line">  entries.<span class="title function_">forEach</span>(<span class="function">(<span class="params">entry</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (entry.<span class="property">isIntersecting</span>) &#123;</span><br><span class="line">      <span class="comment">// 目标元素进入视口时的操作</span></span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`<span class="subst">$&#123;entry.target.id&#125;</span> 进入视口`</span>);</span><br><span class="line">      <span class="comment">// 例如在这里可以加载图片或触发其他动画效果</span></span><br><span class="line">      entry.<span class="property">target</span>.<span class="property">src</span> = <span class="string">&#x27;your_image.jpg&#x27;</span>;</span><br><span class="line">      <span class="comment">// 停止观察该元素（可选）</span></span><br><span class="line">      observer.<span class="title function_">unobserve</span>(entry.<span class="property">target</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 选择要观察的目标元素</span></span><br><span class="line"><span class="keyword">const</span> targetElement = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;your_element_id&#x27;</span>);</span><br><span class="line"><span class="comment">// 开始观察目标元素</span></span><br><span class="line">observer.<span class="title function_">observe</span>(targetElement);</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="MutationObserver"><a href="#MutationObserver" class="headerlink" title="MutationObserver"></a>MutationObserver</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 创建 MutationObserver 实例</span></span><br><span class="line"><span class="keyword">const</span> observer = <span class="keyword">new</span> <span class="title class_">MutationObserver</span>(<span class="function">(<span class="params">mutationsList</span>) =&gt;</span> &#123;</span><br><span class="line">  mutationsList.<span class="title function_">forEach</span>(<span class="function">(<span class="params">mutation</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (mutation.<span class="property">type</span> === <span class="string">&#x27;childList&#x27;</span>) &#123;</span><br><span class="line">      <span class="comment">// 子节点列表发生变化时的操作</span></span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;子节点列表发生变化&#x27;</span>);</span><br><span class="line">      <span class="comment">// 可以在这里对新增或删除的子节点进行进一步处理</span></span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (mutation.<span class="property">type</span> === <span class="string">&#x27;attributes&#x27;</span>) &#123;</span><br><span class="line">      <span class="comment">// 属性发生变化时的操作</span></span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`属性 <span class="subst">$&#123;mutation.attributeName&#125;</span> 发生变化`</span>);</span><br><span class="line">      <span class="comment">// 根据属性变化进行相应的样式更新或逻辑处理</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 选择要观察的目标节点</span></span><br><span class="line"><span class="keyword">const</span> targetNode = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;your_target_node_id&#x27;</span>);</span><br><span class="line"><span class="comment">// 配置观察选项</span></span><br><span class="line"><span class="keyword">const</span> config = &#123; <span class="attr">attributes</span>: <span class="literal">true</span>, <span class="attr">childList</span>: <span class="literal">true</span>, <span class="attr">subtree</span>: <span class="literal">true</span> &#125;;</span><br><span class="line"><span class="comment">// 开始观察目标节点</span></span><br><span class="line">observer.<span class="title function_">observe</span>(targetNode, config);</span><br></pre></td></tr></table></figure>
+
+<h2 id="PerformanceObserver"><a href="#PerformanceObserver" class="headerlink" title="PerformanceObserver"></a>PerformanceObserver</h2><h2 id="requestAnimationFrame"><a href="#requestAnimationFrame" class="headerlink" title="requestAnimationFrame"></a>requestAnimationFrame</h2><h3 id="requestAnimationFrame的概念"><a href="#requestAnimationFrame的概念" class="headerlink" title="requestAnimationFrame的概念"></a>requestAnimationFrame的概念</h3><p>通俗点讲就是该API能以浏览器的显示频率来作为其动画动作的频率，比如浏览器每10ms刷新一次，动画回调也每10ms调用一次，这样就不会存在过度绘制的问题，动画不会掉帧，自然流畅。</p>
+<h3 id="requestAnimationFrame的作用"><a href="#requestAnimationFrame的作用" class="headerlink" title="requestAnimationFrame的作用"></a>requestAnimationFrame的作用</h3><h3 id="requestAnimationFrame的优势"><a href="#requestAnimationFrame的优势" class="headerlink" title="requestAnimationFrame的优势"></a>requestAnimationFrame的优势</h3><h3 id="requestAnimationFrame的优势应用场景"><a href="#requestAnimationFrame的优势应用场景" class="headerlink" title="requestAnimationFrame的优势应用场景"></a>requestAnimationFrame的优势应用场景</h3><h2 id="requestIdleCallback"><a href="#requestIdleCallback" class="headerlink" title="requestIdleCallback"></a>requestIdleCallback</h2>]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>API</tag>
+        <tag>工程化</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Javascript二进制：File、Blob、FileReader、ArrayBuffer、Base64</title>
+    <url>/2025/09/06/JavaScript%E4%BA%8C%E8%BF%9B%E5%88%B6%EF%BC%9AFile%E3%80%81Blob%E3%80%81FileReader%E3%80%81ArrayBuffer%E3%80%81Base64/</url>
+    <content><![CDATA[<h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><blockquote>
+<p>JavaScript 提供了一些 API 来处理文件或原始文件数据，例如：File、Blob、FileReader、ArrayBuffer、base64 等</p>
+</blockquote>
+<p><img src="/../assets/js%E4%BA%8C%E8%BF%9B%E5%88%B6.png" alt="alt text"></p>
+]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>二进制</tag>
+        <tag>文件上传</tag>
       </tags>
   </entry>
   <entry>
@@ -988,7 +988,7 @@
       </tags>
   </entry>
   <entry>
-    <title>NextJS学习【渲染】</title>
+    <title>NextJS学习【渲染篇】</title>
     <url>/2025/12/29/NextJS%E5%AD%A6%E4%B9%A0%E3%80%90%E6%B8%B2%E6%9F%93%E7%AF%87%E3%80%91/</url>
     <content><![CDATA[]]></content>
       <categories>
@@ -998,6 +998,108 @@
         <tag>JavaScript</tag>
         <tag>React</tag>
         <tag>NextJS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Node中的process.env</title>
+    <url>/2022/03/11/Node%E4%B8%AD%E7%9A%84process.env/</url>
+    <content><![CDATA[<h4 id="process-env"><a href="#process-env" class="headerlink" title="process.env"></a>process.env</h4><p><code>process</code> 是 <code>Node.js</code> 中的 一个全局变量，提供来有关当前 Node.js 进程的信息并对其进行控制。而<code>process</code> 中的 <code>env</code> 则是返回包含用户环境的对象。可以通过 <code>process.env</code> 拿到当前项目运行环境的信息。</p>
+<h4 id="设置环境变量"><a href="#设置环境变量" class="headerlink" title="设置环境变量"></a>设置环境变量</h4><h5 id="通过cli的方式进行设置"><a href="#通过cli的方式进行设置" class="headerlink" title="通过cli的方式进行设置"></a>通过cli的方式进行设置</h5><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// index.js中</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(process.<span class="property">env</span>.<span class="property">PROT</span>)</span><br></pre></td></tr></table></figure>
+
+<p><strong>Windows (cmd.exe)</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">set</span> PROT=10086 &amp;&amp; node index.js</span><br></pre></td></tr></table></figure>
+
+<p><strong>Linux, macOS (Bash)</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">PROT=10086 node index.js</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<h5 id="env文件"><a href="#env文件" class="headerlink" title=".env文件"></a><a name="env">.env文件</a></h5><ul>
+<li>创建</li>
+</ul>
+<p>直接在项目根目录中创建 <code>.env</code> 文件，然后键入环境变量及其值。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">NDOE_ENV=development</span><br><span class="line">PROT=10086</span><br><span class="line">APP_KEY=***********</span><br><span class="line">HOST_URL=**********</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p><strong>⚠️注意</strong>：不要把<code>.env</code>文入放入代码版本管理中，因为这些环境变量都是项目中的隐私数据。</p>
+<ul>
+<li>读取</li>
+</ul>
+<p><strong>在cra创建的项目中，自带了dotenv解析.env，所以创建.env文件后即可</strong>。</p>
+<p>创建 <code>.env</code> 文件后，可以自己编写代码来查找解析文件并将其写入到你的项目中，或者利用第三方的<code>npm</code>包，比如 <a href="https://link.juejin.cn/?target=https://github.com/motdotla/dotenv"><code>dotenv</code></a> 。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">yarn add dotenv</span><br><span class="line"></span><br><span class="line"><span class="comment">// .env</span></span><br><span class="line"><span class="variable constant_">PROT</span>=<span class="number">10086</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// index.js</span></span><br><span class="line"><span class="keyword">const</span> dotenv = <span class="built_in">require</span>(<span class="string">&#x27;dotenv&#x27;</span>);</span><br><span class="line">dotenv.<span class="title function_">config</span>(); </span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(process.<span class="property">env</span>.<span class="property">PROT</span>); <span class="comment">// 10086</span></span><br></pre></td></tr></table></figure>
+
+<p>现在当你执行命令脚本的时候就不用传入环境变量及其值了，在 <code>.env</code> 文件里也能更直观的看到和管理各环境变量的配置。</p>
+<h5 id="更好的组织"><a href="#更好的组织" class="headerlink" title="更好的组织"></a>更好的组织</h5><p>一旦环境变量变多，就需要对所有环境变量进行集中式的管理，因为在所有需要使用的地直接引用变量与集中管理相比，重构和维护会更加困难。</p>
+<p>所以<strong>创建一个负责收集环境变量的模块</strong>是一个更好的方式，这样可以轻松地一次查看环境变量并将它们映射为可读的名称。</p>
+<ul>
+<li>手动整理</li>
+</ul>
+<p>创建一个名为 <code>config.js</code> 的文件，然后写入变量，将其命名为具有良好可读性的属性进行并导出它们。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> dotenv = <span class="built_in">require</span>（<span class="string">&#x27;dotenv&#x27;</span>）; </span><br><span class="line"></span><br><span class="line">dotenv.<span class="property">config</span>（）; </span><br><span class="line"></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123; </span><br><span class="line">  hostUrl：process.<span class="property">env</span>.<span class="property">HOST_URL</span>，</span><br><span class="line">  secretKey：process.<span class="property">env</span>.<span class="property">API_KEY</span>，</span><br><span class="line">  port：process.<span class="property">env</span>.<span class="property">PORT</span> </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>然后就可以这样进行使用：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123;port&#125; = <span class="built_in">require</span>（<span class="string">&#x27;./ config&#x27;</span>）; </span><br><span class="line"><span class="variable language_">console</span>.<span class="property">log</span>（<span class="string">`端口为：$ &#123;port&#125;`</span>）; <span class="comment">// 10086</span></span><br></pre></td></tr></table></figure>
+
+<p>这样有什么好处呢？</p>
+<ol>
+<li><p>项目文件组织更为直观合理</p>
+</li>
+<li><p>清楚的知道环境变量的映射关系</p>
+</li>
+<li><p>变量重命名为更具可读性的属性</p>
+</li>
+<li><p>可以添加其他非环境变量的配置属性</p>
+</li>
+</ol>
+<p>但是如果要添加新的环境变量时，就必须将其添加到<code>config</code>模块中。</p>
+<ul>
+<li>自动整理</li>
+</ul>
+<p>前面提到的第三方 <code>NPM</code> 包 <code>dotenv</code> 就可以做到。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// config.js </span></span><br><span class="line"><span class="keyword">const</span> dotenv = <span class="built_in">require</span>(<span class="string">&#x27;dotenv&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> result = dotenv.<span class="title function_">config</span>();</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (result.<span class="property">error</span>) &#123;</span><br><span class="line">  <span class="keyword">throw</span> result.<span class="property">error</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> &#123; <span class="attr">parsed</span>: envs &#125; = result;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(envs);</span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = envs;</span><br></pre></td></tr></table></figure>
+
+<p>然后就可以其他模块中这样引用：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123; <span class="variable constant_">HOST_URL</span>, <span class="variable constant_">API_KEY</span>, <span class="variable constant_">PROT</span> &#125; = <span class="built_in">require</span>(<span class="string">&#x27;./config&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="CRA创建的项目使用环境变量"><a href="#CRA创建的项目使用环境变量" class="headerlink" title="CRA创建的项目使用环境变量"></a>CRA创建的项目使用环境变量</h4><p>必须以 <code>REACT_APP_</code> 开头创建自定义环境变量，环境变量在构建期间嵌入。</p>
+<h5 id="设置临时环境变量"><a href="#设置临时环境变量" class="headerlink" title="设置临时环境变量"></a>设置临时环境变量</h5><p><strong>Windows (cmd.exe)</strong></p>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="built_in">set</span> <span class="string">&quot;REACT_APP_SECRET_CODE=abcdef&quot;</span> &amp;&amp; npm <span class="built_in">start</span></span><br></pre></td></tr></table></figure>
+
+<p>（注意：变量赋值需要用引号包裹，以避免尾随空格。）</p>
+<p><strong>Windows (Powershell)</strong></p>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">(<span class="variable">$env:REACT_APP_SECRET_CODE</span> = <span class="string">&quot;abcdef&quot;</span>) <span class="operator">-and</span> (npm <span class="built_in">start</span>)</span><br></pre></td></tr></table></figure>
+
+<p><strong>Linux, macOS (Bash)</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">REACT_APP_SECRET_CODE=abcdef npm start</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="env-中添加环境变量"><a href="#env-中添加环境变量" class="headerlink" title=".env 中添加环境变量"></a><code>.env</code> 中添加环境变量</h5><p>见<a href="#env">上文</a>设置。</p>
+<h5 id="其他-env-文件"><a href="#其他-env-文件" class="headerlink" title="其他 .env 文件"></a>其他 <code>.env</code> 文件</h5><blockquote>
+<p>注意：此功能 <strong>适用于 <code>react-scripts@1.0.0</code> 及更高版本</strong>。</p>
+</blockquote>
+<ul>
+<li><code>.env</code>：默认。</li>
+<li><code>.env.local</code>：本地覆盖。<strong>除 test 之外的所有环境都加载此文件</strong>。</li>
+<li><code>.env.development</code>, <code>.env.test</code>, <code>.env.production</code>：设置特定环境。</li>
+<li><code>.env.development.local</code>, <code>.env.test.local</code>, <code>.env.production.local</code>：设置特定环境的本地覆盖。</li>
+</ul>
+<p>左侧的文件比右侧的文件具有更高的优先级：</p>
+<ul>
+<li><code>npm start</code>: <code>.env.development.local</code>, <code>.env.development</code>, <code>.env.local</code>, <code>.env</code></li>
+<li><code>npm run build</code>: <code>.env.production.local</code>, <code>.env.production</code>, <code>.env.local</code>, <code>.env</code></li>
+<li><code>npm test</code>: <code>.env.test.local</code>, <code>.env.test</code>, <code>.env</code> (注意没有 <code>.env.local</code> )</li>
+</ul>
+<h5 id="NODE-ENV-的特殊内置环境变量"><a href="#NODE-ENV-的特殊内置环境变量" class="headerlink" title="NODE_ENV 的特殊内置环境变量"></a><code>NODE_ENV</code> 的特殊内置环境变量</h5><p>有一个名为 <code>NODE_ENV</code> 的特殊内置环境变量。可以从 <code>process.env.NODE_ENV</code> 中读取。运行 <code>npm start</code> 时，它总是等于 <code>&#39;development&#39;</code> ，运行 <code>npm test</code> 它总是等于 <code>&#39;test&#39;</code> ，运行 <code>npm run build</code> 来生成一个生产 bundle(包) 时，它总是等于 <code>&#39;production&#39;</code> 。**<code>NODE_ENV</code>无法手动覆盖。** </p>
+]]></content>
+      <categories>
+        <category>NodeJS</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>Node</tag>
       </tags>
   </entry>
   <entry>
@@ -1181,108 +1283,6 @@
         <tag>JavaScript</tag>
         <tag>React</tag>
         <tag>NextJS</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Node中的process.env</title>
-    <url>/2022/03/11/Node%E4%B8%AD%E7%9A%84process.env/</url>
-    <content><![CDATA[<h4 id="process-env"><a href="#process-env" class="headerlink" title="process.env"></a>process.env</h4><p><code>process</code> 是 <code>Node.js</code> 中的 一个全局变量，提供来有关当前 Node.js 进程的信息并对其进行控制。而<code>process</code> 中的 <code>env</code> 则是返回包含用户环境的对象。可以通过 <code>process.env</code> 拿到当前项目运行环境的信息。</p>
-<h4 id="设置环境变量"><a href="#设置环境变量" class="headerlink" title="设置环境变量"></a>设置环境变量</h4><h5 id="通过cli的方式进行设置"><a href="#通过cli的方式进行设置" class="headerlink" title="通过cli的方式进行设置"></a>通过cli的方式进行设置</h5><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// index.js中</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(process.<span class="property">env</span>.<span class="property">PROT</span>)</span><br></pre></td></tr></table></figure>
-
-<p><strong>Windows (cmd.exe)</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">set</span> PROT=10086 &amp;&amp; node index.js</span><br></pre></td></tr></table></figure>
-
-<p><strong>Linux, macOS (Bash)</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">PROT=10086 node index.js</span><br></pre></td></tr></table></figure>
-
-<span id="more"></span>
-
-<h5 id="env文件"><a href="#env文件" class="headerlink" title=".env文件"></a><a name="env">.env文件</a></h5><ul>
-<li>创建</li>
-</ul>
-<p>直接在项目根目录中创建 <code>.env</code> 文件，然后键入环境变量及其值。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">NDOE_ENV=development</span><br><span class="line">PROT=10086</span><br><span class="line">APP_KEY=***********</span><br><span class="line">HOST_URL=**********</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
-
-<p><strong>⚠️注意</strong>：不要把<code>.env</code>文入放入代码版本管理中，因为这些环境变量都是项目中的隐私数据。</p>
-<ul>
-<li>读取</li>
-</ul>
-<p><strong>在cra创建的项目中，自带了dotenv解析.env，所以创建.env文件后即可</strong>。</p>
-<p>创建 <code>.env</code> 文件后，可以自己编写代码来查找解析文件并将其写入到你的项目中，或者利用第三方的<code>npm</code>包，比如 <a href="https://link.juejin.cn/?target=https://github.com/motdotla/dotenv"><code>dotenv</code></a> 。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">yarn add dotenv</span><br><span class="line"></span><br><span class="line"><span class="comment">// .env</span></span><br><span class="line"><span class="variable constant_">PROT</span>=<span class="number">10086</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// index.js</span></span><br><span class="line"><span class="keyword">const</span> dotenv = <span class="built_in">require</span>(<span class="string">&#x27;dotenv&#x27;</span>);</span><br><span class="line">dotenv.<span class="title function_">config</span>(); </span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(process.<span class="property">env</span>.<span class="property">PROT</span>); <span class="comment">// 10086</span></span><br></pre></td></tr></table></figure>
-
-<p>现在当你执行命令脚本的时候就不用传入环境变量及其值了，在 <code>.env</code> 文件里也能更直观的看到和管理各环境变量的配置。</p>
-<h5 id="更好的组织"><a href="#更好的组织" class="headerlink" title="更好的组织"></a>更好的组织</h5><p>一旦环境变量变多，就需要对所有环境变量进行集中式的管理，因为在所有需要使用的地直接引用变量与集中管理相比，重构和维护会更加困难。</p>
-<p>所以<strong>创建一个负责收集环境变量的模块</strong>是一个更好的方式，这样可以轻松地一次查看环境变量并将它们映射为可读的名称。</p>
-<ul>
-<li>手动整理</li>
-</ul>
-<p>创建一个名为 <code>config.js</code> 的文件，然后写入变量，将其命名为具有良好可读性的属性进行并导出它们。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> dotenv = <span class="built_in">require</span>（<span class="string">&#x27;dotenv&#x27;</span>）; </span><br><span class="line"></span><br><span class="line">dotenv.<span class="property">config</span>（）; </span><br><span class="line"></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123; </span><br><span class="line">  hostUrl：process.<span class="property">env</span>.<span class="property">HOST_URL</span>，</span><br><span class="line">  secretKey：process.<span class="property">env</span>.<span class="property">API_KEY</span>，</span><br><span class="line">  port：process.<span class="property">env</span>.<span class="property">PORT</span> </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>然后就可以这样进行使用：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123;port&#125; = <span class="built_in">require</span>（<span class="string">&#x27;./ config&#x27;</span>）; </span><br><span class="line"><span class="variable language_">console</span>.<span class="property">log</span>（<span class="string">`端口为：$ &#123;port&#125;`</span>）; <span class="comment">// 10086</span></span><br></pre></td></tr></table></figure>
-
-<p>这样有什么好处呢？</p>
-<ol>
-<li><p>项目文件组织更为直观合理</p>
-</li>
-<li><p>清楚的知道环境变量的映射关系</p>
-</li>
-<li><p>变量重命名为更具可读性的属性</p>
-</li>
-<li><p>可以添加其他非环境变量的配置属性</p>
-</li>
-</ol>
-<p>但是如果要添加新的环境变量时，就必须将其添加到<code>config</code>模块中。</p>
-<ul>
-<li>自动整理</li>
-</ul>
-<p>前面提到的第三方 <code>NPM</code> 包 <code>dotenv</code> 就可以做到。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// config.js </span></span><br><span class="line"><span class="keyword">const</span> dotenv = <span class="built_in">require</span>(<span class="string">&#x27;dotenv&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> result = dotenv.<span class="title function_">config</span>();</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (result.<span class="property">error</span>) &#123;</span><br><span class="line">  <span class="keyword">throw</span> result.<span class="property">error</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> &#123; <span class="attr">parsed</span>: envs &#125; = result;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(envs);</span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = envs;</span><br></pre></td></tr></table></figure>
-
-<p>然后就可以其他模块中这样引用：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123; <span class="variable constant_">HOST_URL</span>, <span class="variable constant_">API_KEY</span>, <span class="variable constant_">PROT</span> &#125; = <span class="built_in">require</span>(<span class="string">&#x27;./config&#x27;</span>);</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="CRA创建的项目使用环境变量"><a href="#CRA创建的项目使用环境变量" class="headerlink" title="CRA创建的项目使用环境变量"></a>CRA创建的项目使用环境变量</h4><p>必须以 <code>REACT_APP_</code> 开头创建自定义环境变量，环境变量在构建期间嵌入。</p>
-<h5 id="设置临时环境变量"><a href="#设置临时环境变量" class="headerlink" title="设置临时环境变量"></a>设置临时环境变量</h5><p><strong>Windows (cmd.exe)</strong></p>
-<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="built_in">set</span> <span class="string">&quot;REACT_APP_SECRET_CODE=abcdef&quot;</span> &amp;&amp; npm <span class="built_in">start</span></span><br></pre></td></tr></table></figure>
-
-<p>（注意：变量赋值需要用引号包裹，以避免尾随空格。）</p>
-<p><strong>Windows (Powershell)</strong></p>
-<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">(<span class="variable">$env:REACT_APP_SECRET_CODE</span> = <span class="string">&quot;abcdef&quot;</span>) <span class="operator">-and</span> (npm <span class="built_in">start</span>)</span><br></pre></td></tr></table></figure>
-
-<p><strong>Linux, macOS (Bash)</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">REACT_APP_SECRET_CODE=abcdef npm start</span><br></pre></td></tr></table></figure>
-
-
-
-<h5 id="env-中添加环境变量"><a href="#env-中添加环境变量" class="headerlink" title=".env 中添加环境变量"></a><code>.env</code> 中添加环境变量</h5><p>见<a href="#env">上文</a>设置。</p>
-<h5 id="其他-env-文件"><a href="#其他-env-文件" class="headerlink" title="其他 .env 文件"></a>其他 <code>.env</code> 文件</h5><blockquote>
-<p>注意：此功能 <strong>适用于 <code>react-scripts@1.0.0</code> 及更高版本</strong>。</p>
-</blockquote>
-<ul>
-<li><code>.env</code>：默认。</li>
-<li><code>.env.local</code>：本地覆盖。<strong>除 test 之外的所有环境都加载此文件</strong>。</li>
-<li><code>.env.development</code>, <code>.env.test</code>, <code>.env.production</code>：设置特定环境。</li>
-<li><code>.env.development.local</code>, <code>.env.test.local</code>, <code>.env.production.local</code>：设置特定环境的本地覆盖。</li>
-</ul>
-<p>左侧的文件比右侧的文件具有更高的优先级：</p>
-<ul>
-<li><code>npm start</code>: <code>.env.development.local</code>, <code>.env.development</code>, <code>.env.local</code>, <code>.env</code></li>
-<li><code>npm run build</code>: <code>.env.production.local</code>, <code>.env.production</code>, <code>.env.local</code>, <code>.env</code></li>
-<li><code>npm test</code>: <code>.env.test.local</code>, <code>.env.test</code>, <code>.env</code> (注意没有 <code>.env.local</code> )</li>
-</ul>
-<h5 id="NODE-ENV-的特殊内置环境变量"><a href="#NODE-ENV-的特殊内置环境变量" class="headerlink" title="NODE_ENV 的特殊内置环境变量"></a><code>NODE_ENV</code> 的特殊内置环境变量</h5><p>有一个名为 <code>NODE_ENV</code> 的特殊内置环境变量。可以从 <code>process.env.NODE_ENV</code> 中读取。运行 <code>npm start</code> 时，它总是等于 <code>&#39;development&#39;</code> ，运行 <code>npm test</code> 它总是等于 <code>&#39;test&#39;</code> ，运行 <code>npm run build</code> 来生成一个生产 bundle(包) 时，它总是等于 <code>&#39;production&#39;</code> 。**<code>NODE_ENV</code>无法手动覆盖。** </p>
-]]></content>
-      <categories>
-        <category>NodeJS</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-        <tag>Node</tag>
       </tags>
   </entry>
   <entry>
@@ -1558,6 +1558,71 @@
       </tags>
   </entry>
   <entry>
+    <title>React最佳实践</title>
+    <url>/2021/10/01/React%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/</url>
+    <content><![CDATA[<h3 id="React"><a href="#React" class="headerlink" title="React"></a>React</h3><h4 id="事件机制，合成事件"><a href="#事件机制，合成事件" class="headerlink" title="事件机制，合成事件"></a>事件机制，合成事件</h4><h5 id="是什么"><a href="#是什么" class="headerlink" title="是什么"></a>是什么</h5><p>React 基于浏览器的事件机制⾃身实现了⼀套事件机制，包括事件注册、事件的合成、事件冒泡、事件派发等。<br>在 React 中这套事件机制被称之为合成事件</p>
+<h5 id="工作过程"><a href="#工作过程" class="headerlink" title="工作过程"></a>工作过程</h5><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">React</span> <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">App</span> <span class="keyword">extends</span> <span class="title class_ inherited__">React.Component</span>&#123;</span><br><span class="line"> <span class="title function_">constructor</span>(<span class="params">props</span>) &#123;</span><br><span class="line">    <span class="variable language_">super</span>(props);</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">parentRef</span> = <span class="title class_">React</span>.<span class="title function_">createRef</span>();</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">childRef</span> = <span class="title class_">React</span>.<span class="title function_">createRef</span>();</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> <span class="title function_">componentDidMount</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;React componentDidMount！&quot;</span>);</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">parentRef</span>.<span class="property">current</span>?.<span class="title function_">addEventListener</span>(<span class="string">&quot;click&quot;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;原⽣事件：⽗元素 DOM 事件监听！&quot;</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">childRef</span>.<span class="property">current</span>?.<span class="title function_">addEventListener</span>(<span class="string">&quot;click&quot;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;原⽣事件：⼦元素 DOM 事件监听！&quot;</span>);</span><br><span class="line">    &#125;);</span><br><span class="line"> </span><br><span class="line">    <span class="variable language_">document</span>.<span class="title function_">addEventListener</span>(<span class="string">&quot;click&quot;</span>, <span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;原⽣事件：document DOM 事件监听！&quot;</span>);</span><br><span class="line">    &#125;);</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> parentClickFun = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;React 事件：⽗元素事件监听！&quot;</span>);</span><br><span class="line"> &#125;;</span><br><span class="line"></span><br><span class="line"> childClickFun = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;React 事件：⼦元素事件监听！&quot;</span>);</span><br><span class="line"> &#125;;</span><br><span class="line"></span><br><span class="line"> <span class="title function_">render</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">ref</span>=<span class="string">&#123;this.parentRef&#125;</span> <span class="attr">onClick</span>=<span class="string">&#123;this.parentClickFun&#125;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">ref</span>=<span class="string">&#123;this.childRef&#125;</span> <span class="attr">onClick</span>=<span class="string">&#123;this.childClickFun&#125;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">                分析事件执⾏顺序</span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    );</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">App</span>;</span><br></pre></td></tr></table></figure>
+<p>最终输出</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">原⽣事件：⼦元素 DOM 事件监听！</span><br><span class="line">原⽣事件：⽗元素 DOM 事件监听！</span><br><span class="line">React 事件：⼦元素事件监听！</span><br><span class="line">React 事件：⽗元素事件监听！</span><br><span class="line">原⽣事件：document DOM 事件监听！</span><br></pre></td></tr></table></figure>
+
+<h5 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h5><ul>
+<li>React 上注册的事件最终会绑定在document这个 DOM 上，⽽不是 React 组件对应的 DOM(减少内存开销就是因为所有的事件都绑定在 document 上，其他节点没有绑定事件)<!-- - React ⾃身实现了⼀套事件冒泡机制，所以这也就是为什么我们 event.stopPropagation()⽆效的原因。 --></li>
+<li>React 通过队列的形式，从触发的组件向⽗组件回溯，然后调⽤他们 JSX 中定义的 callback</li>
+<li>React 有⼀套⾃⼰的合成事件 SyntheticEvent</li>
+</ul>
+<h4 id="React中引入CSS"><a href="#React中引入CSS" class="headerlink" title="React中引入CSS"></a>React中引入CSS</h4><h5 id="在组件内直接使⽤"><a href="#在组件内直接使⽤" class="headerlink" title="在组件内直接使⽤"></a>在组件内直接使⽤</h5><p>内联style引入</p>
+<h5 id="组件中引⼊-css-⽂件"><a href="#组件中引⼊-css-⽂件" class="headerlink" title="组件中引⼊ .css ⽂件"></a>组件中引⼊ .css ⽂件</h5><p>全局生效，样式之间会互相影响</p>
+<h5 id="组件中引⼊-module-css-⽂件"><a href="#组件中引⼊-module-css-⽂件" class="headerlink" title="组件中引⼊ .module.css ⽂件"></a>组件中引⼊ .module.css ⽂件</h5><p>将 css ⽂件作为⼀个模块引⼊，这个模块中的所有 css ，只作⽤于当前组件。不会影响当前组件的后代组件<br>这种⽅式是 webpack 特⼯的⽅案，只需要配置 webpack 配置⽂件中 <code>modules:true</code> 即可</p>
+<h5 id="CSS-in-JS"><a href="#CSS-in-JS" class="headerlink" title="CSS in JS"></a>CSS in JS</h5><p>CSS-in-JS， 是指⼀种模式，其中 CSS 由 JavaScript ⽣成⽽不是在外部⽂件中定义<br>此功能并不是 React 的⼀部分，⽽是由第三⽅库提供，例如：</p>
+<ul>
+<li>styled-components</li>
+<li>emotion</li>
+<li>glamorous</li>
+</ul>
+<p>本质是通过函数的调⽤，最终创建出⼀个组件：</p>
+<ul>
+<li>这个组件会被⾃动添加上⼀个不重复的class</li>
+<li>styled-components会给该class添加相关的样式</li>
+</ul>
+<h4 id="组件通信"><a href="#组件通信" class="headerlink" title="组件通信"></a>组件通信</h4><h4 id="高阶组件"><a href="#高阶组件" class="headerlink" title="高阶组件"></a>高阶组件</h4><p>本质上是一个函数，接收一个或多个组件作为参数，并返回一个组件</p>
+<h4 id="错误边界"><a href="#错误边界" class="headerlink" title="错误边界"></a>错误边界</h4><p>错误边界是一种 React 组件，<strong>这种组件可以捕获发生在其子组件树任何位置的 JavaScript 错误，并打印这些错误，同时展示降级 UI</strong>，而并不会渲染那些发生崩溃的子组件树。错误边界可以捕获发生在整个子组件树的渲染期间、生命周期方法以及构造函数中的错误。</p>
+<p>形成错误边界组件的两个条件：</p>
+<ul>
+<li>使⽤了 <code>static getDerivedStateFromError()</code></li>
+<li>使⽤了 <code>componentDidCatch()</code><br>抛出错误后，使⽤ <code>static getDerivedStateFromError()</code> 渲染备⽤ UI ，使⽤ componentDidCatch() 打印错误信息，如下：</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">ErrorBoundary</span> <span class="keyword">extends</span> <span class="title class_ inherited__">React.Component</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">props</span>) &#123;</span><br><span class="line">    <span class="variable language_">super</span>(props);</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">state</span> = &#123; <span class="attr">hasError</span>: <span class="literal">false</span> &#125;;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">static</span> <span class="title function_">getDerivedStateFromError</span>(<span class="params">error</span>) &#123;</span><br><span class="line">    <span class="comment">// 更新 state 使下一次渲染能够显示降级后的 UI</span></span><br><span class="line">    <span class="keyword">return</span> &#123; <span class="attr">hasError</span>: <span class="literal">true</span> &#125;;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">componentDidCatch</span>(<span class="params">error, errorInfo</span>) &#123;</span><br><span class="line">    <span class="comment">// 你同样可以将错误日志上报给服务器</span></span><br><span class="line">    <span class="title function_">logErrorToMyService</span>(error, errorInfo);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">render</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="variable language_">this</span>.<span class="property">state</span>.<span class="property">hasError</span>) &#123;</span><br><span class="line">      <span class="comment">// 你可以自定义降级后的 UI 并渲染</span></span><br><span class="line">      <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>Something went wrong.<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">props</span>.<span class="property">children</span>; </span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>下⾯这些情况⽆法捕获到异常：</p>
+<ul>
+<li>事件处理</li>
+<li>异步代码（例如 setTimeout 或 requestAnimationFrame 回调函数）</li>
+<li>服务端渲染</li>
+<li>它自身抛出来的错误（仅能捕获子组件抛出的错误）</li>
+</ul>
+<h4 id="setState更新，批量更新"><a href="#setState更新，批量更新" class="headerlink" title="setState更新，批量更新"></a>setState更新，批量更新</h4><h4 id="render原理（jsx经过babel编译）、render触发时机"><a href="#render原理（jsx经过babel编译）、render触发时机" class="headerlink" title="render原理（jsx经过babel编译）、render触发时机"></a>render原理（jsx经过babel编译）、render触发时机</h4><h4 id="Diff算法"><a href="#Diff算法" class="headerlink" title="Diff算法"></a>Diff算法</h4><h4 id="React-Portal"><a href="#React-Portal" class="headerlink" title="React Portal"></a>React Portal</h4><p>Portal 提供了一种将子节点渲染到存在于父组件以外的 DOM 节点的优秀的方案。<br><code>ReactDOM.createPortal(child, container)</code><br>第一个参数（child）是任何可渲染的 React 子元素，例如一个元素，字符串或 fragment。第二个参数（container）是一个 DOM 元素。</p>
+<h4 id="React-router"><a href="#React-router" class="headerlink" title="React router"></a>React router</h4><h5 id="是什么-1"><a href="#是什么-1" class="headerlink" title="是什么"></a>是什么</h5><p>react-router 等前端路由的原理⼤致相同，可以实现⽆刷新的条件下切换显示不同的⻚⾯<br>路由的本质就是⻚⾯的 URL 发⽣改变时，⻚⾯的显示结果可以根据 URL 的变化⽽变化，但是⻚⾯不会刷新因此，可以通过前端路由可以实现单⻚(SPA)应⽤</p>
+<h5 id="模式"><a href="#模式" class="headerlink" title="模式"></a>模式</h5><h6 id="HashRouter（Hash模式）"><a href="#HashRouter（Hash模式）" class="headerlink" title="HashRouter（Hash模式）"></a>HashRouter（Hash模式）</h6><ul>
+<li>采用监听 <code>window</code> 上的 <code>hashchange</code> 事件实现；</li>
+<li>path的表现形式是 <code>localhost:3000/#/demo/test</code>；</li>
+<li>服务器无须做额外配置（因为对于服务器而言，<code>http://example.com/#/home</code>和<code>http://example.com</code>这两个请求在服务器看来是完全一样的，因为服务器只处理<code>http://example.com</code>这个部分，而<code>#/home</code>这个哈希部分的变化不会触发新的服务器请求）</li>
+</ul>
+<h6 id="BrowserRouter（History模式）"><a href="#BrowserRouter（History模式）" class="headerlink" title="BrowserRouter（History模式）"></a>BrowserRouter（History模式）</h6><ul>
+<li><code>BrowserRouter</code>使用的是H5的history API来实现；</li>
+<li>path的表现形式是 <code>localhost:3000/demo/test</code>；</li>
+<li>服务器需要进行额外的配置（当path变化时，浏览器会向服务器发送请求。服务器需要能够识别这些请求并返回正确的页面或者资源。例如，在服务器重定向配置中，需要设置一个通配符路由（<code>*</code>）来处理所有可能的路由请求，将请求重定向到应用的入口文件（通常是<code>index.html</code>），这样客户端的 JavaScript 代码才能根据 URL 中的路径来正确地渲染页面）</li>
+</ul>
+<h4 id="lazyload"><a href="#lazyload" class="headerlink" title="lazyload"></a>lazyload</h4><h4 id="render-props、children"><a href="#render-props、children" class="headerlink" title="render props、children"></a>render props、children</h4><h4 id="Hooks相关"><a href="#Hooks相关" class="headerlink" title="Hooks相关"></a>Hooks相关</h4><h4 id="React-fiber"><a href="#React-fiber" class="headerlink" title="React fiber"></a>React fiber</h4><h4 id="React性能优化"><a href="#React性能优化" class="headerlink" title="React性能优化"></a>React性能优化</h4><h4 id="React状态管理"><a href="#React状态管理" class="headerlink" title="React状态管理"></a>React状态管理</h4><p><a href="https://huangyunt.github.io/2021/10/11/Redux/">Redux</a></p>
+<h4 id="react如何实现ssr"><a href="#react如何实现ssr" class="headerlink" title="react如何实现ssr"></a>react如何实现ssr</h4>]]></content>
+      <categories>
+        <category>React</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>React</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>React生态</title>
     <url>/2021/09/30/React%E7%94%9F%E6%80%81/</url>
     <content><![CDATA[<h3 id="React-DevTools"><a href="#React-DevTools" class="headerlink" title="React DevTools"></a>React DevTools</h3><h5 id="General-设置"><a href="#General-设置" class="headerlink" title="General 设置"></a>General 设置</h5><p><img src="/../assets/image-20220222024702149.png" alt="image-20220222024702149.png"></p>
@@ -1671,71 +1736,6 @@
       </tags>
   </entry>
   <entry>
-    <title>React最佳实践</title>
-    <url>/2021/10/01/React%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/</url>
-    <content><![CDATA[<h3 id="React"><a href="#React" class="headerlink" title="React"></a>React</h3><h4 id="事件机制，合成事件"><a href="#事件机制，合成事件" class="headerlink" title="事件机制，合成事件"></a>事件机制，合成事件</h4><h5 id="是什么"><a href="#是什么" class="headerlink" title="是什么"></a>是什么</h5><p>React 基于浏览器的事件机制⾃身实现了⼀套事件机制，包括事件注册、事件的合成、事件冒泡、事件派发等。<br>在 React 中这套事件机制被称之为合成事件</p>
-<h5 id="工作过程"><a href="#工作过程" class="headerlink" title="工作过程"></a>工作过程</h5><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">React</span> <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">App</span> <span class="keyword">extends</span> <span class="title class_ inherited__">React.Component</span>&#123;</span><br><span class="line"> <span class="title function_">constructor</span>(<span class="params">props</span>) &#123;</span><br><span class="line">    <span class="variable language_">super</span>(props);</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">parentRef</span> = <span class="title class_">React</span>.<span class="title function_">createRef</span>();</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">childRef</span> = <span class="title class_">React</span>.<span class="title function_">createRef</span>();</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> <span class="title function_">componentDidMount</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;React componentDidMount！&quot;</span>);</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">parentRef</span>.<span class="property">current</span>?.<span class="title function_">addEventListener</span>(<span class="string">&quot;click&quot;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;原⽣事件：⽗元素 DOM 事件监听！&quot;</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">childRef</span>.<span class="property">current</span>?.<span class="title function_">addEventListener</span>(<span class="string">&quot;click&quot;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;原⽣事件：⼦元素 DOM 事件监听！&quot;</span>);</span><br><span class="line">    &#125;);</span><br><span class="line"> </span><br><span class="line">    <span class="variable language_">document</span>.<span class="title function_">addEventListener</span>(<span class="string">&quot;click&quot;</span>, <span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;原⽣事件：document DOM 事件监听！&quot;</span>);</span><br><span class="line">    &#125;);</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> parentClickFun = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;React 事件：⽗元素事件监听！&quot;</span>);</span><br><span class="line"> &#125;;</span><br><span class="line"></span><br><span class="line"> childClickFun = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;React 事件：⼦元素事件监听！&quot;</span>);</span><br><span class="line"> &#125;;</span><br><span class="line"></span><br><span class="line"> <span class="title function_">render</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">ref</span>=<span class="string">&#123;this.parentRef&#125;</span> <span class="attr">onClick</span>=<span class="string">&#123;this.parentClickFun&#125;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">ref</span>=<span class="string">&#123;this.childRef&#125;</span> <span class="attr">onClick</span>=<span class="string">&#123;this.childClickFun&#125;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">                分析事件执⾏顺序</span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    );</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">App</span>;</span><br></pre></td></tr></table></figure>
-<p>最终输出</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">原⽣事件：⼦元素 DOM 事件监听！</span><br><span class="line">原⽣事件：⽗元素 DOM 事件监听！</span><br><span class="line">React 事件：⼦元素事件监听！</span><br><span class="line">React 事件：⽗元素事件监听！</span><br><span class="line">原⽣事件：document DOM 事件监听！</span><br></pre></td></tr></table></figure>
-
-<h5 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h5><ul>
-<li>React 上注册的事件最终会绑定在document这个 DOM 上，⽽不是 React 组件对应的 DOM(减少内存开销就是因为所有的事件都绑定在 document 上，其他节点没有绑定事件)<!-- - React ⾃身实现了⼀套事件冒泡机制，所以这也就是为什么我们 event.stopPropagation()⽆效的原因。 --></li>
-<li>React 通过队列的形式，从触发的组件向⽗组件回溯，然后调⽤他们 JSX 中定义的 callback</li>
-<li>React 有⼀套⾃⼰的合成事件 SyntheticEvent</li>
-</ul>
-<h4 id="React中引入CSS"><a href="#React中引入CSS" class="headerlink" title="React中引入CSS"></a>React中引入CSS</h4><h5 id="在组件内直接使⽤"><a href="#在组件内直接使⽤" class="headerlink" title="在组件内直接使⽤"></a>在组件内直接使⽤</h5><p>内联style引入</p>
-<h5 id="组件中引⼊-css-⽂件"><a href="#组件中引⼊-css-⽂件" class="headerlink" title="组件中引⼊ .css ⽂件"></a>组件中引⼊ .css ⽂件</h5><p>全局生效，样式之间会互相影响</p>
-<h5 id="组件中引⼊-module-css-⽂件"><a href="#组件中引⼊-module-css-⽂件" class="headerlink" title="组件中引⼊ .module.css ⽂件"></a>组件中引⼊ .module.css ⽂件</h5><p>将 css ⽂件作为⼀个模块引⼊，这个模块中的所有 css ，只作⽤于当前组件。不会影响当前组件的后代组件<br>这种⽅式是 webpack 特⼯的⽅案，只需要配置 webpack 配置⽂件中 <code>modules:true</code> 即可</p>
-<h5 id="CSS-in-JS"><a href="#CSS-in-JS" class="headerlink" title="CSS in JS"></a>CSS in JS</h5><p>CSS-in-JS， 是指⼀种模式，其中 CSS 由 JavaScript ⽣成⽽不是在外部⽂件中定义<br>此功能并不是 React 的⼀部分，⽽是由第三⽅库提供，例如：</p>
-<ul>
-<li>styled-components</li>
-<li>emotion</li>
-<li>glamorous</li>
-</ul>
-<p>本质是通过函数的调⽤，最终创建出⼀个组件：</p>
-<ul>
-<li>这个组件会被⾃动添加上⼀个不重复的class</li>
-<li>styled-components会给该class添加相关的样式</li>
-</ul>
-<h4 id="组件通信"><a href="#组件通信" class="headerlink" title="组件通信"></a>组件通信</h4><h4 id="高阶组件"><a href="#高阶组件" class="headerlink" title="高阶组件"></a>高阶组件</h4><p>本质上是一个函数，接收一个或多个组件作为参数，并返回一个组件</p>
-<h4 id="错误边界"><a href="#错误边界" class="headerlink" title="错误边界"></a>错误边界</h4><p>错误边界是一种 React 组件，<strong>这种组件可以捕获发生在其子组件树任何位置的 JavaScript 错误，并打印这些错误，同时展示降级 UI</strong>，而并不会渲染那些发生崩溃的子组件树。错误边界可以捕获发生在整个子组件树的渲染期间、生命周期方法以及构造函数中的错误。</p>
-<p>形成错误边界组件的两个条件：</p>
-<ul>
-<li>使⽤了 <code>static getDerivedStateFromError()</code></li>
-<li>使⽤了 <code>componentDidCatch()</code><br>抛出错误后，使⽤ <code>static getDerivedStateFromError()</code> 渲染备⽤ UI ，使⽤ componentDidCatch() 打印错误信息，如下：</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">ErrorBoundary</span> <span class="keyword">extends</span> <span class="title class_ inherited__">React.Component</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">props</span>) &#123;</span><br><span class="line">    <span class="variable language_">super</span>(props);</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">state</span> = &#123; <span class="attr">hasError</span>: <span class="literal">false</span> &#125;;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">static</span> <span class="title function_">getDerivedStateFromError</span>(<span class="params">error</span>) &#123;</span><br><span class="line">    <span class="comment">// 更新 state 使下一次渲染能够显示降级后的 UI</span></span><br><span class="line">    <span class="keyword">return</span> &#123; <span class="attr">hasError</span>: <span class="literal">true</span> &#125;;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">componentDidCatch</span>(<span class="params">error, errorInfo</span>) &#123;</span><br><span class="line">    <span class="comment">// 你同样可以将错误日志上报给服务器</span></span><br><span class="line">    <span class="title function_">logErrorToMyService</span>(error, errorInfo);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">render</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="variable language_">this</span>.<span class="property">state</span>.<span class="property">hasError</span>) &#123;</span><br><span class="line">      <span class="comment">// 你可以自定义降级后的 UI 并渲染</span></span><br><span class="line">      <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>Something went wrong.<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">props</span>.<span class="property">children</span>; </span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>下⾯这些情况⽆法捕获到异常：</p>
-<ul>
-<li>事件处理</li>
-<li>异步代码（例如 setTimeout 或 requestAnimationFrame 回调函数）</li>
-<li>服务端渲染</li>
-<li>它自身抛出来的错误（仅能捕获子组件抛出的错误）</li>
-</ul>
-<h4 id="setState更新，批量更新"><a href="#setState更新，批量更新" class="headerlink" title="setState更新，批量更新"></a>setState更新，批量更新</h4><h4 id="render原理（jsx经过babel编译）、render触发时机"><a href="#render原理（jsx经过babel编译）、render触发时机" class="headerlink" title="render原理（jsx经过babel编译）、render触发时机"></a>render原理（jsx经过babel编译）、render触发时机</h4><h4 id="Diff算法"><a href="#Diff算法" class="headerlink" title="Diff算法"></a>Diff算法</h4><h4 id="React-Portal"><a href="#React-Portal" class="headerlink" title="React Portal"></a>React Portal</h4><p>Portal 提供了一种将子节点渲染到存在于父组件以外的 DOM 节点的优秀的方案。<br><code>ReactDOM.createPortal(child, container)</code><br>第一个参数（child）是任何可渲染的 React 子元素，例如一个元素，字符串或 fragment。第二个参数（container）是一个 DOM 元素。</p>
-<h4 id="React-router"><a href="#React-router" class="headerlink" title="React router"></a>React router</h4><h5 id="是什么-1"><a href="#是什么-1" class="headerlink" title="是什么"></a>是什么</h5><p>react-router 等前端路由的原理⼤致相同，可以实现⽆刷新的条件下切换显示不同的⻚⾯<br>路由的本质就是⻚⾯的 URL 发⽣改变时，⻚⾯的显示结果可以根据 URL 的变化⽽变化，但是⻚⾯不会刷新因此，可以通过前端路由可以实现单⻚(SPA)应⽤</p>
-<h5 id="模式"><a href="#模式" class="headerlink" title="模式"></a>模式</h5><h6 id="HashRouter（Hash模式）"><a href="#HashRouter（Hash模式）" class="headerlink" title="HashRouter（Hash模式）"></a>HashRouter（Hash模式）</h6><ul>
-<li>采用监听 <code>window</code> 上的 <code>hashchange</code> 事件实现；</li>
-<li>path的表现形式是 <code>localhost:3000/#/demo/test</code>；</li>
-<li>服务器无须做额外配置（因为对于服务器而言，<code>http://example.com/#/home</code>和<code>http://example.com</code>这两个请求在服务器看来是完全一样的，因为服务器只处理<code>http://example.com</code>这个部分，而<code>#/home</code>这个哈希部分的变化不会触发新的服务器请求）</li>
-</ul>
-<h6 id="BrowserRouter（History模式）"><a href="#BrowserRouter（History模式）" class="headerlink" title="BrowserRouter（History模式）"></a>BrowserRouter（History模式）</h6><ul>
-<li><code>BrowserRouter</code>使用的是H5的history API来实现；</li>
-<li>path的表现形式是 <code>localhost:3000/demo/test</code>；</li>
-<li>服务器需要进行额外的配置（当path变化时，浏览器会向服务器发送请求。服务器需要能够识别这些请求并返回正确的页面或者资源。例如，在服务器重定向配置中，需要设置一个通配符路由（<code>*</code>）来处理所有可能的路由请求，将请求重定向到应用的入口文件（通常是<code>index.html</code>），这样客户端的 JavaScript 代码才能根据 URL 中的路径来正确地渲染页面）</li>
-</ul>
-<h4 id="lazyload"><a href="#lazyload" class="headerlink" title="lazyload"></a>lazyload</h4><h4 id="render-props、children"><a href="#render-props、children" class="headerlink" title="render props、children"></a>render props、children</h4><h4 id="Hooks相关"><a href="#Hooks相关" class="headerlink" title="Hooks相关"></a>Hooks相关</h4><h4 id="React-fiber"><a href="#React-fiber" class="headerlink" title="React fiber"></a>React fiber</h4><h4 id="React性能优化"><a href="#React性能优化" class="headerlink" title="React性能优化"></a>React性能优化</h4><h4 id="React状态管理"><a href="#React状态管理" class="headerlink" title="React状态管理"></a>React状态管理</h4><p><a href="https://huangyunt.github.io/2021/10/11/Redux/">Redux</a></p>
-<h4 id="react如何实现ssr"><a href="#react如何实现ssr" class="headerlink" title="react如何实现ssr"></a>react如何实现ssr</h4>]]></content>
-      <categories>
-        <category>React</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-        <tag>React</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>React组件通信</title>
     <url>/2021/10/07/React%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1/</url>
     <content><![CDATA[<h3 id="组件通信"><a href="#组件通信" class="headerlink" title="组件通信"></a>组件通信</h3><h5 id="爷孙组件通信"><a href="#爷孙组件通信" class="headerlink" title="爷孙组件通信"></a>爷孙组件通信</h5><p>爷孙组件通信主要有 3 种方式：</p>
@@ -1775,6 +1775,94 @@
         <tag>JavaScript</tag>
         <tag>Hooks</tag>
         <tag>React</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Redux</title>
+    <url>/2021/10/11/Redux/</url>
+    <content><![CDATA[<h3 id="Redux"><a href="#Redux" class="headerlink" title="Redux"></a>Redux</h3><h4 id="设计思想"><a href="#设计思想" class="headerlink" title="设计思想"></a>设计思想</h4><ul>
+<li>（1）Web 应用是一个状态机，视图与状态是一一对应的。</li>
+<li>（2）所有的状态，保存在一个对象里面。</li>
+</ul>
+<h4 id="Action"><a href="#Action" class="headerlink" title="Action"></a>Action</h4><ol>
+<li><p>Action 就是 View 发出的通知，表示 State 应该要发生变化了。</p>
+</li>
+<li><p>Action 是一个对象，其中的<code>type</code>属性是必须的，表示 Action 的名称，Action 描述当前发生的事情。</p>
+</li>
+<li><p>改变 State 的唯一办法，就是使用 Action。</p>
+</li>
+</ol>
+<p>可以定义一个函数来生成 Action，这个函数就叫 Action Creator，示例如下</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="variable constant_">ADD_TODO</span> = <span class="string">&#x27;添加 TODO&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">addTodo</span>(<span class="params">text</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    <span class="attr">type</span>: <span class="variable constant_">ADD_TODO</span>,</span><br><span class="line">    text</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> action = <span class="title function_">addTodo</span>(<span class="string">&#x27;Learn Redux&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+
+<h4 id="Reducer"><a href="#Reducer" class="headerlink" title="Reducer"></a>Reducer</h4><ol>
+<li><p>Store 收到 Action 以后，必须给出一个新的 State，这样 View 才会发生变化。这种 State 的计算过程就叫做 Reducer。</p>
+</li>
+<li><p>Reducer 是一个函数，它接受 Action 和当前 State 作为参数，返回一个新的 State。</p>
+</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> initState = &#123;</span><br><span class="line">    <span class="attr">value</span>: <span class="string">&#x27;init&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> <span class="title function_">reducer</span> = (<span class="params">state = initState, action</span>) =&gt; &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;reducer:&#x27;</span>, state, action);</span><br><span class="line">    <span class="keyword">switch</span>(action.<span class="property">type</span>)&#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;send_type&#x27;</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="title class_">Object</span>.<span class="title function_">assign</span>(&#123;&#125;, state, action);</span><br><span class="line">        <span class="attr">default</span>:</span><br><span class="line">            <span class="keyword">return</span> state;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="Store"><a href="#Store" class="headerlink" title="Store"></a>Store</h4><h5 id="store-subscribe"><a href="#store-subscribe" class="headerlink" title="store.subscribe()"></a>store.subscribe()</h5><p>添加一个变化监听器。每当 <code>dispatch action</code> 的时候就会执行，<code>state</code> 树中的一部分可能已经变化。可以在回调函数里调用<code>getState()</code>来拿到当前 <code>state</code>，并且让<code>View</code>重新渲染<br>  <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">listerner</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">let</span> newState = store.<span class="title function_">getState</span>();</span><br><span class="line">  component.<span class="title function_">setState</span>(newState);   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h5 id="store-dispatch"><a href="#store-dispatch" class="headerlink" title="store.dispatch()"></a>store.dispatch()</h5><p><code>store.dispatch()</code>是 <code>View</code> 发出 <code>Action</code> 的唯一方法，将使用当前 <code>getState()</code>的结果和传入的 <code>action</code> 以同步方式的调用 <code>store</code> 的 <code>reducer</code> 函数。它的返回值会被作为下一个 <code>state</code>。从现在开始，这就成为了 <code>getState()</code>的返回值，同时变化监听器(change listener)会被触发。</p>
+<blockquote>
+</blockquote>
+<ul>
+<li><p>流程：</p>
+<p>组件 – <code>store.dispatch(action)</code> – 触发reducer的执行 – 根据type区分返回的state – 返回值给store – 更新state – <code>store.subscribe(listener)</code>中listener回调函数执行。</p>
+</li>
+</ul>
+<p><img src="/../assets/image-20210309183756689.png" alt="image-20210309183756689"></p>
+<hr>
+<h3 id="中间件和异步操作"><a href="#中间件和异步操作" class="headerlink" title="中间件和异步操作"></a>中间件和异步操作</h3><h4 id="中间件的概念"><a href="#中间件的概念" class="headerlink" title="中间件的概念"></a>中间件的概念</h4><p>本质上就是对原方法进行了重定义，以<code>redux-logger</code>为例</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> next = store.<span class="property">dispatch</span>;</span><br><span class="line">store.<span class="property">dispatch</span> = <span class="keyword">function</span> <span class="title function_">dispatchAndLog</span>(<span class="params">action</span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;dispatching&#x27;</span>, action);</span><br><span class="line">  <span class="title function_">next</span>(action);</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;next state&#x27;</span>, store.<span class="title function_">getState</span>());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="中间件的用法"><a href="#中间件的用法" class="headerlink" title="中间件的用法"></a>中间件的用法</h4><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; applyMiddleware, createStore &#125; <span class="keyword">from</span> <span class="string">&#x27;redux&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> createLogger <span class="keyword">from</span> <span class="string">&#x27;redux-logger&#x27;</span>;</span><br><span class="line"><span class="keyword">const</span> logger = <span class="title function_">createLogger</span>();</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> store = <span class="title function_">createStore</span>(</span><br><span class="line">  reducer,</span><br><span class="line">  <span class="comment">// 中间件的次序有要求</span></span><br><span class="line">  <span class="title function_">applyMiddleware</span>(thunk, promise, logger)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<h4 id="异步操作的思路"><a href="#异步操作的思路" class="headerlink" title="异步操作的思路"></a>异步操作的思路</h4><blockquote>
+<p>同步操作只需要一种<code>Action</code>，而异步操作需要发出三种<code>Action</code></p>
+</blockquote>
+<ul>
+<li>操作发起时的 <code>Action</code></li>
+<li>操作成功时的 <code>Action</code></li>
+<li>操作失败时的 <code>Action</code></li>
+</ul>
+<blockquote>
+<p>异步操作的 <code>State</code> 也要进行改造，整个过程如下</p>
+</blockquote>
+<ul>
+<li>操作开始时，送出一个 <code>Action</code>，触发 <code>State</code> 更新为”正在操作”状态，<code>View</code> 重新渲染</li>
+<li>操作结束后，再送出一个 <code>Action</code>，触发 <code>State</code> 更新为”操作结束”状态，<code>View</code> 再一次重新渲染</li>
+</ul>
+<h4 id="Redux-thunk中间件"><a href="#Redux-thunk中间件" class="headerlink" title="Redux-thunk中间件"></a>Redux-thunk中间件</h4><hr>
+<h3 id="React-redux"><a href="#React-redux" class="headerlink" title="React-redux"></a>React-redux</h3><h4 id="UI组件和容器组件"><a href="#UI组件和容器组件" class="headerlink" title="UI组件和容器组件"></a>UI组件和容器组件</h4><h4 id="provider"><a href="#provider" class="headerlink" title="provider"></a>provider</h4><p><img src="/../assets/image-20210309200347890.png" alt="image-20210309200347890"></p>
+<h4 id="connect"><a href="#connect" class="headerlink" title="connect"></a>connect</h4><p><code>connect</code>方法接受两个参数：<code>mapStateT.oProps</code>和<code>mapDispatchToProps</code>。它们定义了 UI 组件的业务逻辑。前者负责输入逻辑，即将<code>state</code>映射到 UI 组件的参数（<code>props</code>），后者负责输出逻辑，即将用户对 UI 组件的操作映射成 Action。</p>
+<h5 id="mapStateToProps"><a href="#mapStateToProps" class="headerlink" title="mapStateToProps"></a><code>mapStateToProps</code></h5><p>  <code>mapStateToProps</code>是一个函数。它的作用就是像它的名字那样，建立一个从（外部的）<code>state</code>对象到（UI 组件的）<code>props</code>对象的映射关系。</p>
+  <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">mapStateToProps</span> = (<span class="params">state</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    <span class="attr">todos</span>: <span class="title function_">getVisibleTodos</span>(state.<span class="property">todos</span>, state.<span class="property">visibilityFilter</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>  <code>mapStateToProps</code>会订阅 Store，每当<code>state</code>更新的时候，就会自动执行，重新计算 UI 组件的参数，从而触发 UI 组件的重新渲染。</p>
+<p>  <code>mapStateToProps</code>的第一个参数总是<code>state</code>对象，还可以使用第二个参数，代表容器组件的<code>props</code>对象。</p>
+<p>  <code>connect</code>方法可以省略<code>mapStateToProps</code>参数，那样的话，UI 组件就不会订阅Store，就是说 Store 的更新不会引起 UI 组件的更新。</p>
+<h5 id="mapDispatchToProps"><a href="#mapDispatchToProps" class="headerlink" title="mapDispatchToProps"></a><code>mapDispatchToProps</code></h5><p>  <code>mapDispatchToProps</code>是<code>connect</code>函数的第二个参数，用来建立 UI 组件的参数到<code>store.dispatch</code>方法的映射</p>
+<p>  如果<code>mapDispatchToProps</code>是一个函数，会得到<code>dispatch</code>和<code>ownProps</code></p>
+  <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">mapDispatchToProps</span> = (<span class="params"></span></span><br><span class="line"><span class="params">  dispatch,</span></span><br><span class="line"><span class="params">  ownProps</span></span><br><span class="line"><span class="params"></span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    <span class="attr">onClick</span>: <span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="title function_">dispatch</span>(&#123;</span><br><span class="line">        <span class="attr">type</span>: <span class="string">&#x27;SET_VISIBILITY_FILTER&#x27;</span>,</span><br><span class="line">        <span class="attr">filter</span>: ownProps.<span class="property">filter</span></span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>  如果<code>mapDispatchToProps</code>是一个对象，它的每个键名也是对应 UI 组件的同名参数，键值应该是一个函数，会被当作 Action creator ，返回的 Action 会由 Redux 自动发出(dispatch).</p>
+  <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> mapDispatchToProps = &#123;</span><br><span class="line">  <span class="attr">onClick</span>: <span class="function">(<span class="params">filter</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="attr">type</span>: <span class="string">&#x27;SET_VISIBILITY_FILTER&#x27;</span>,</span><br><span class="line">    <span class="attr">filter</span>: filter</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="计数器Demo："><a href="#计数器Demo：" class="headerlink" title="计数器Demo："></a>计数器Demo：</h4><p>  两个组件，按钮ComA和文本ComB，点击按钮+1，用react-redux实现通信的过程</p>
+<p><img src="/../assets/image-20210310173423401.png" alt="image-20210310173423401"></p>
+]]></content>
+      <categories>
+        <category>React</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>React</tag>
+        <tag>Redux</tag>
       </tags>
   </entry>
   <entry>
@@ -2050,94 +2138,6 @@ let strLength: number = (someValue as string).length;
       </categories>
       <tags>
         <tag>TypeScript</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Redux</title>
-    <url>/2021/10/11/Redux/</url>
-    <content><![CDATA[<h3 id="Redux"><a href="#Redux" class="headerlink" title="Redux"></a>Redux</h3><h4 id="设计思想"><a href="#设计思想" class="headerlink" title="设计思想"></a>设计思想</h4><ul>
-<li>（1）Web 应用是一个状态机，视图与状态是一一对应的。</li>
-<li>（2）所有的状态，保存在一个对象里面。</li>
-</ul>
-<h4 id="Action"><a href="#Action" class="headerlink" title="Action"></a>Action</h4><ol>
-<li><p>Action 就是 View 发出的通知，表示 State 应该要发生变化了。</p>
-</li>
-<li><p>Action 是一个对象，其中的<code>type</code>属性是必须的，表示 Action 的名称，Action 描述当前发生的事情。</p>
-</li>
-<li><p>改变 State 的唯一办法，就是使用 Action。</p>
-</li>
-</ol>
-<p>可以定义一个函数来生成 Action，这个函数就叫 Action Creator，示例如下</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="variable constant_">ADD_TODO</span> = <span class="string">&#x27;添加 TODO&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">addTodo</span>(<span class="params">text</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    <span class="attr">type</span>: <span class="variable constant_">ADD_TODO</span>,</span><br><span class="line">    text</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> action = <span class="title function_">addTodo</span>(<span class="string">&#x27;Learn Redux&#x27;</span>);</span><br></pre></td></tr></table></figure>
-
-<span id="more"></span>
-
-
-<h4 id="Reducer"><a href="#Reducer" class="headerlink" title="Reducer"></a>Reducer</h4><ol>
-<li><p>Store 收到 Action 以后，必须给出一个新的 State，这样 View 才会发生变化。这种 State 的计算过程就叫做 Reducer。</p>
-</li>
-<li><p>Reducer 是一个函数，它接受 Action 和当前 State 作为参数，返回一个新的 State。</p>
-</li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> initState = &#123;</span><br><span class="line">    <span class="attr">value</span>: <span class="string">&#x27;init&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> <span class="title function_">reducer</span> = (<span class="params">state = initState, action</span>) =&gt; &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;reducer:&#x27;</span>, state, action);</span><br><span class="line">    <span class="keyword">switch</span>(action.<span class="property">type</span>)&#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;send_type&#x27;</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="title class_">Object</span>.<span class="title function_">assign</span>(&#123;&#125;, state, action);</span><br><span class="line">        <span class="attr">default</span>:</span><br><span class="line">            <span class="keyword">return</span> state;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="Store"><a href="#Store" class="headerlink" title="Store"></a>Store</h4><h5 id="store-subscribe"><a href="#store-subscribe" class="headerlink" title="store.subscribe()"></a>store.subscribe()</h5><p>添加一个变化监听器。每当 <code>dispatch action</code> 的时候就会执行，<code>state</code> 树中的一部分可能已经变化。可以在回调函数里调用<code>getState()</code>来拿到当前 <code>state</code>，并且让<code>View</code>重新渲染<br>  <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">listerner</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">let</span> newState = store.<span class="title function_">getState</span>();</span><br><span class="line">  component.<span class="title function_">setState</span>(newState);   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h5 id="store-dispatch"><a href="#store-dispatch" class="headerlink" title="store.dispatch()"></a>store.dispatch()</h5><p><code>store.dispatch()</code>是 <code>View</code> 发出 <code>Action</code> 的唯一方法，将使用当前 <code>getState()</code>的结果和传入的 <code>action</code> 以同步方式的调用 <code>store</code> 的 <code>reducer</code> 函数。它的返回值会被作为下一个 <code>state</code>。从现在开始，这就成为了 <code>getState()</code>的返回值，同时变化监听器(change listener)会被触发。</p>
-<blockquote>
-</blockquote>
-<ul>
-<li><p>流程：</p>
-<p>组件 – <code>store.dispatch(action)</code> – 触发reducer的执行 – 根据type区分返回的state – 返回值给store – 更新state – <code>store.subscribe(listener)</code>中listener回调函数执行。</p>
-</li>
-</ul>
-<p><img src="/../assets/image-20210309183756689.png" alt="image-20210309183756689"></p>
-<hr>
-<h3 id="中间件和异步操作"><a href="#中间件和异步操作" class="headerlink" title="中间件和异步操作"></a>中间件和异步操作</h3><h4 id="中间件的概念"><a href="#中间件的概念" class="headerlink" title="中间件的概念"></a>中间件的概念</h4><p>本质上就是对原方法进行了重定义，以<code>redux-logger</code>为例</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> next = store.<span class="property">dispatch</span>;</span><br><span class="line">store.<span class="property">dispatch</span> = <span class="keyword">function</span> <span class="title function_">dispatchAndLog</span>(<span class="params">action</span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;dispatching&#x27;</span>, action);</span><br><span class="line">  <span class="title function_">next</span>(action);</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;next state&#x27;</span>, store.<span class="title function_">getState</span>());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="中间件的用法"><a href="#中间件的用法" class="headerlink" title="中间件的用法"></a>中间件的用法</h4><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; applyMiddleware, createStore &#125; <span class="keyword">from</span> <span class="string">&#x27;redux&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> createLogger <span class="keyword">from</span> <span class="string">&#x27;redux-logger&#x27;</span>;</span><br><span class="line"><span class="keyword">const</span> logger = <span class="title function_">createLogger</span>();</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> store = <span class="title function_">createStore</span>(</span><br><span class="line">  reducer,</span><br><span class="line">  <span class="comment">// 中间件的次序有要求</span></span><br><span class="line">  <span class="title function_">applyMiddleware</span>(thunk, promise, logger)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-<h4 id="异步操作的思路"><a href="#异步操作的思路" class="headerlink" title="异步操作的思路"></a>异步操作的思路</h4><blockquote>
-<p>同步操作只需要一种<code>Action</code>，而异步操作需要发出三种<code>Action</code></p>
-</blockquote>
-<ul>
-<li>操作发起时的 <code>Action</code></li>
-<li>操作成功时的 <code>Action</code></li>
-<li>操作失败时的 <code>Action</code></li>
-</ul>
-<blockquote>
-<p>异步操作的 <code>State</code> 也要进行改造，整个过程如下</p>
-</blockquote>
-<ul>
-<li>操作开始时，送出一个 <code>Action</code>，触发 <code>State</code> 更新为”正在操作”状态，<code>View</code> 重新渲染</li>
-<li>操作结束后，再送出一个 <code>Action</code>，触发 <code>State</code> 更新为”操作结束”状态，<code>View</code> 再一次重新渲染</li>
-</ul>
-<h4 id="Redux-thunk中间件"><a href="#Redux-thunk中间件" class="headerlink" title="Redux-thunk中间件"></a>Redux-thunk中间件</h4><hr>
-<h3 id="React-redux"><a href="#React-redux" class="headerlink" title="React-redux"></a>React-redux</h3><h4 id="UI组件和容器组件"><a href="#UI组件和容器组件" class="headerlink" title="UI组件和容器组件"></a>UI组件和容器组件</h4><h4 id="provider"><a href="#provider" class="headerlink" title="provider"></a>provider</h4><p><img src="/../assets/image-20210309200347890.png" alt="image-20210309200347890"></p>
-<h4 id="connect"><a href="#connect" class="headerlink" title="connect"></a>connect</h4><p><code>connect</code>方法接受两个参数：<code>mapStateT.oProps</code>和<code>mapDispatchToProps</code>。它们定义了 UI 组件的业务逻辑。前者负责输入逻辑，即将<code>state</code>映射到 UI 组件的参数（<code>props</code>），后者负责输出逻辑，即将用户对 UI 组件的操作映射成 Action。</p>
-<h5 id="mapStateToProps"><a href="#mapStateToProps" class="headerlink" title="mapStateToProps"></a><code>mapStateToProps</code></h5><p>  <code>mapStateToProps</code>是一个函数。它的作用就是像它的名字那样，建立一个从（外部的）<code>state</code>对象到（UI 组件的）<code>props</code>对象的映射关系。</p>
-  <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">mapStateToProps</span> = (<span class="params">state</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    <span class="attr">todos</span>: <span class="title function_">getVisibleTodos</span>(state.<span class="property">todos</span>, state.<span class="property">visibilityFilter</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>  <code>mapStateToProps</code>会订阅 Store，每当<code>state</code>更新的时候，就会自动执行，重新计算 UI 组件的参数，从而触发 UI 组件的重新渲染。</p>
-<p>  <code>mapStateToProps</code>的第一个参数总是<code>state</code>对象，还可以使用第二个参数，代表容器组件的<code>props</code>对象。</p>
-<p>  <code>connect</code>方法可以省略<code>mapStateToProps</code>参数，那样的话，UI 组件就不会订阅Store，就是说 Store 的更新不会引起 UI 组件的更新。</p>
-<h5 id="mapDispatchToProps"><a href="#mapDispatchToProps" class="headerlink" title="mapDispatchToProps"></a><code>mapDispatchToProps</code></h5><p>  <code>mapDispatchToProps</code>是<code>connect</code>函数的第二个参数，用来建立 UI 组件的参数到<code>store.dispatch</code>方法的映射</p>
-<p>  如果<code>mapDispatchToProps</code>是一个函数，会得到<code>dispatch</code>和<code>ownProps</code></p>
-  <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">mapDispatchToProps</span> = (<span class="params"></span></span><br><span class="line"><span class="params">  dispatch,</span></span><br><span class="line"><span class="params">  ownProps</span></span><br><span class="line"><span class="params"></span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    <span class="attr">onClick</span>: <span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="title function_">dispatch</span>(&#123;</span><br><span class="line">        <span class="attr">type</span>: <span class="string">&#x27;SET_VISIBILITY_FILTER&#x27;</span>,</span><br><span class="line">        <span class="attr">filter</span>: ownProps.<span class="property">filter</span></span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>  如果<code>mapDispatchToProps</code>是一个对象，它的每个键名也是对应 UI 组件的同名参数，键值应该是一个函数，会被当作 Action creator ，返回的 Action 会由 Redux 自动发出(dispatch).</p>
-  <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> mapDispatchToProps = &#123;</span><br><span class="line">  <span class="attr">onClick</span>: <span class="function">(<span class="params">filter</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="attr">type</span>: <span class="string">&#x27;SET_VISIBILITY_FILTER&#x27;</span>,</span><br><span class="line">    <span class="attr">filter</span>: filter</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="计数器Demo："><a href="#计数器Demo：" class="headerlink" title="计数器Demo："></a>计数器Demo：</h4><p>  两个组件，按钮ComA和文本ComB，点击按钮+1，用react-redux实现通信的过程</p>
-<p><img src="/../assets/image-20210310173423401.png" alt="image-20210310173423401"></p>
-]]></content>
-      <categories>
-        <category>React</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-        <tag>React</tag>
-        <tag>Redux</tag>
       </tags>
   </entry>
   <entry>
@@ -2832,80 +2832,6 @@ webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后�
       </tags>
   </entry>
   <entry>
-    <title>前端安全相关</title>
-    <url>/2025/01/12/%E5%89%8D%E7%AB%AF%E5%AE%89%E5%85%A8%E7%9B%B8%E5%85%B3/</url>
-    <content><![CDATA[<h3 id="XSS"><a href="#XSS" class="headerlink" title="XSS"></a>XSS</h3><p><strong>跨站脚本攻击（XSS，Cross - Site Scripting）</strong> 攻击者通过在目标网站中注入恶意脚本，来获取用户的敏感信息、执行恶意操作等。这些恶意脚本通常是 JavaScript</p>
-<p><strong>本质上就是在任何前端js可能读取的地方插入恶意脚本</strong></p>
-<h4 id="整体过程"><a href="#整体过程" class="headerlink" title="整体过程"></a>整体过程</h4><p>攻击者提交恶意代码 -&gt; 浏览器执行恶意代码</p>
-<h4 id="反射型XSS"><a href="#反射型XSS" class="headerlink" title="反射型XSS"></a>反射型XSS</h4><p>示例：一个简单的搜索功能，用户在搜索框输入内容后，服务器将用户输入的内容直接在页面上显示。攻击者构造一个类似 <code>http://example.com/search?q=&lt;script&gt;alert(&#39;XSS&#39;)&lt;/script&gt;</code> 的 URL，当用户点击这个链接，就会弹出一个警告框显示 “XSS”。</p>
-<span id="more"></span>
-<h4 id="存储型XSS"><a href="#存储型XSS" class="headerlink" title="存储型XSS"></a>存储型XSS</h4><p>原理：攻击者将恶意脚本存储在目标服务器上，如存储在数据库、文件系统等。当其他用户访问包含该恶意脚本的页面时，浏览器就会执行这个脚本。这种类型的 XSS 通常出现在用户可以提交内容并且这些内容会被长期存储和展示的场景中，比如论坛、博客的评论区等。<br>示例：在一个论坛系统中，攻击者在评论区提交一个包含恶意脚本 <code>&lt;script&gt;stealCookie()&lt;/script&gt;</code>（假设存在一个名为 stealCookie 的恶意函数）的评论。当其他用户查看这个评论时，他们的浏览器会执行这个脚本，导致他们的 Cookie 信息可能被窃取。</p>
-<h4 id="DOM型XSS"><a href="#DOM型XSS" class="headerlink" title="DOM型XSS"></a>DOM型XSS</h4><p>原理：这种类型的 XSS 是由于 HTML 页面中，JavaScript 通过 DOM 操作动态地修改页面内容而导致的。攻击者利用 JavaScript 代码中的漏洞，修改 DOM 来注入恶意脚本。与前面两种不同的是，它不依赖于服务器端对数据的反射或者存储，而是完全在客户端浏览器环境中发生。<br>示例：有一个网页，其中有一段 JavaScript 代码如下：</p>
-<figure class="highlight jsx"><table><tr><td class="code"><pre><span class="line"><span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;userInput&#x27;</span>).<span class="property">innerHTML</span> = location.<span class="property">hash</span>.<span class="title function_">substr</span>(<span class="number">1</span>);</span><br></pre></td></tr></table></figure>
-
-<p>攻击者可以构造一个 URL，如 <code>http://example.com/page.html#&lt;script&gt;alert(&#39;XSS&#39;)&lt;/script&gt;</code>，当用户访问这个 URL 时，浏览器会执行这个恶意脚本，弹出警告框。</p>
-<h4 id="预防漏洞的思路"><a href="#预防漏洞的思路" class="headerlink" title="预防漏洞的思路"></a>预防漏洞的思路</h4><ul>
-<li>前端提交时过滤（请求可以绕过前端）</li>
-<li>后端过滤（不能预防dom型XSS）</li>
-<li>前端渲染时转义（完美）</li>
-</ul>
-<h4 id="其他安全措施"><a href="#其他安全措施" class="headerlink" title="其他安全措施"></a>其他安全措施</h4><h5 id="CSP内容安全策略（Content-Security-Policy）："><a href="#CSP内容安全策略（Content-Security-Policy）：" class="headerlink" title="CSP内容安全策略（Content Security Policy）："></a>CSP内容安全策略（Content Security Policy）：</h5><ul>
-<li>禁止内联脚本的执行</li>
-<li>只加载信任域名的外联JS</li>
-<li>禁止 eval</li>
-<li>禁止 form 提交到第三方<br><strong>CSP设置方式</strong></li>
-<li>Nginx 返回Html文件的响应头设置<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen <span class="number">80</span>;</span><br><span class="line">    server_name your-domain.com; # 你的域名</span><br><span class="line">    root /usr/share/nginx/html; # 前端静态资源目录</span><br><span class="line"></span><br><span class="line">    # 核心：设置 CSP HTTP 头（Vue/React 通用基础规则）</span><br><span class="line">    add_header Content-Security-Policy <span class="string">&quot;</span></span><br><span class="line"><span class="string">        default-src &#x27;self&#x27;; # 默认只允许同域</span></span><br><span class="line"><span class="string">        script-src &#x27;self&#x27; https://cdn.jsdelivr.net; # JS 允许同域 + 指定 CDN</span></span><br><span class="line"><span class="string">        style-src &#x27;self&#x27; &#x27;unsafe-inline&#x27;; # 样式允许同域 + 内联（兼容大部分项目）</span></span><br><span class="line"><span class="string">        img-src &#x27;self&#x27; data:; # 图片允许同域 + base64</span></span><br><span class="line"><span class="string">        connect-src &#x27;self&#x27; https://api.your-domain.com; # 接口允许同域 + 后端接口</span></span><br><span class="line"><span class="string">        font-src &#x27;self&#x27;; # 字体允许同域</span></span><br><span class="line"><span class="string">        object-src &#x27;none&#x27;; # 禁止插件（如 flash）</span></span><br><span class="line"><span class="string">        frame-ancestors &#x27;none&#x27;; # 禁止被嵌入 iframe（防点击劫持）</span></span><br><span class="line"><span class="string">    &quot;</span>;</span><br><span class="line"></span><br><span class="line">    # 其他 Nginx 配置（静态资源/路由等）</span><br><span class="line">    location / &#123;</span><br><span class="line">        try_files $uri $uri/ /index.html;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li>Html文件meta标签设置<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> </span></span><br><span class="line"><span class="tag">  <span class="attr">http-equiv</span>=<span class="string">&quot;Content-Security-Policy&quot;</span> </span></span><br><span class="line"><span class="tag">  <span class="attr">content</span>=<span class="string">&quot;default-src &#x27;self&#x27;;script-src &#x27;self&#x27; https://cdn.example.com;&quot;</span></span></span><br><span class="line"><span class="tag">&gt;</span></span><br></pre></td></tr></table></figure></li>
-</ul>
-<h5 id="HTTP-only-Cookie"><a href="#HTTP-only-Cookie" class="headerlink" title="HTTP-only Cookie"></a>HTTP-only Cookie</h5><p>禁止 JavaScript 读取某些敏感 Cookie，攻击者完成 XSS 注入后也无法窃取此 Cookie。</p>
-<h5 id="验证码"><a href="#验证码" class="headerlink" title="验证码"></a>验证码</h5><p>防止脚本冒充用户提交危险操作。</p>
-<hr>
-<h3 id="CSRF"><a href="#CSRF" class="headerlink" title="CSRF"></a>CSRF</h3><p><strong>CSRF（Cross-site request forgery）跨站请求伪造</strong>：攻击者诱导受害者进入第三方网站，在第三方网站中，向被攻击网站发送跨站请求。利用受害者在被攻击网站<strong>已经获取的注册凭证</strong>，绕过后台的用户验证，达到冒充用户对被攻击的网站执行某项操作的目的。</p>
-<p><strong>本质上是因为浏览器有cookie这么个东西，并且针对同一个域名的请求会自动带上cookie</strong></p>
-<p>一个典型的CSRF攻击有着如下的流程：</p>
-<ul>
-<li>受害者登录a.com，并保留了登录凭证（Cookie）。</li>
-<li>攻击者引诱受害者访问了b.com。</li>
-<li>b.com 向 a.com 发送了一个请求：a.com&#x2F;act&#x3D;xx。浏览器会默认携带a.com的Cookie。</li>
-<li>a.com接收到请求后，对请求进行验证，并确认是受害者的凭证，误以为是受害者自己发送的请求。</li>
-<li>a.com以受害者的名义执行了act&#x3D;xx。</li>
-<li>攻击完成，攻击者在受害者不知情的情况下，冒充受害者，让a.com执行了自己定义的操作。</li>
-</ul>
-<h4 id="预防漏洞的思路-1"><a href="#预防漏洞的思路-1" class="headerlink" title="预防漏洞的思路"></a>预防漏洞的思路</h4><h5 id="阻止不明外域的访问"><a href="#阻止不明外域的访问" class="headerlink" title="阻止不明外域的访问"></a>阻止不明外域的访问</h5><blockquote>
-<p>同源检测、Samesite Cookie</p>
-</blockquote>
-<ul>
-<li><code>Samesite Cookie = Strict</code><br>同源请求才会带上cookie</li>
-<li><code>Samesite Cookie = Lax</code><br>条件放宽，某些不同源的请求也会带上cookie，比如get请求，访问一个页面链接时。因为一般不会使用get请求修改数据，安全性较高</li>
-<li><code>Samesite Cookie = None</code><br>不管是否同源请求都会带上cookie，只在cookie设置为secrue时生效（非https协议不会传cookie）</li>
-</ul>
-<h5 id="提交时要求附加本域才能获取的信息"><a href="#提交时要求附加本域才能获取的信息" class="headerlink" title="提交时要求附加本域才能获取的信息"></a>提交时要求附加本域才能获取的信息</h5><blockquote>
-<p>CSRF Token、双重Cookie验证</p>
-</blockquote>
-<p>一种详细的web端方案是前端存储 CSRF Token + 请求头 &#x2F; 参数携带：</p>
-<ol>
-<li><p>后端生成并下发 CSRF Token（两种方式下发）</p>
-<blockquote>
-<p>存在「非 HttpOnly 的 Cookie」中（让前端能读取）；<br>或返回给前端，让前端存在 localStorage</p>
-</blockquote>
-</li>
-<li><p>前端读取 CSRF Token 并携带到请求中<br>前端从 Cookie 读取 CSRF Token，在请求头 &#x2F; 参数中携带（不能放在 Cookie 中，否则会被自动携带，失去意义）</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 前端日常请求（复用已有的 CSRF Token）</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">updateUserInfo</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="comment">// 读取登录时下发的 CSRF Token（一直存在 Cookie 中，直到登出/过期）</span></span><br><span class="line">  <span class="keyword">const</span> csrfToken = <span class="title function_">getCsrfToken</span>(); </span><br><span class="line">  <span class="title function_">fetch</span>(<span class="string">&#x27;/api/update&#x27;</span>, &#123;</span><br><span class="line">    <span class="attr">method</span>: <span class="string">&#x27;POST&#x27;</span>,</span><br><span class="line">    <span class="attr">headers</span>: &#123;</span><br><span class="line">      <span class="string">&#x27;X-CSRF-Token&#x27;</span>: csrfToken, <span class="comment">// 复用 Token</span></span><br><span class="line">      <span class="string">&#x27;Content-Type&#x27;</span>: <span class="string">&#x27;application/json&#x27;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">body</span>: <span class="title class_">JSON</span>.<span class="title function_">stringify</span>(&#123; <span class="attr">nickname</span>: <span class="string">&#x27;新昵称&#x27;</span> &#125;)</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ol>
-<p>这种方案能实现防护的一个根本原因是<strong>同源策略不允许跨域的读取Cookie</strong>，也就是说攻击者的站点做不到用js跨域的从我们网站读取cookie来伪造请求</p>
-<blockquote>
-<p>A 网站的 JS 只能读取 A 网站的 Cookie &#x2F; 存储，绝对无法读取 B 网站的 Cookie &#x2F; 存储。</p>
-</blockquote>
-<p>同源策略详细可见：<a href="https://huangyunt.github.io/2021/09/21/%E5%90%8C%E6%BA%90%E5%92%8C%E8%B7%A8%E5%9F%9F/">同源与跨域</a></p>
-]]></content>
-      <categories>
-        <category>计算机网络</category>
-      </categories>
-      <tags>
-        <tag>网络安全相关</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>前端模块化</title>
     <url>/2025/03/27/%E5%89%8D%E7%AB%AF%E6%A8%A1%E5%9D%97%E5%8C%96/</url>
     <content><![CDATA[<h4 id="CommonJS"><a href="#CommonJS" class="headerlink" title="CommonJS"></a>CommonJS</h4><ul>
@@ -3023,6 +2949,80 @@ webpack会以 .&#x2F;src&#x2F;index.js 为入口文件开始打包，打包后�
       <tags>
         <tag>前端</tag>
         <tag>工程化</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>前端安全相关</title>
+    <url>/2025/01/12/%E5%89%8D%E7%AB%AF%E5%AE%89%E5%85%A8%E7%9B%B8%E5%85%B3/</url>
+    <content><![CDATA[<h3 id="XSS"><a href="#XSS" class="headerlink" title="XSS"></a>XSS</h3><p><strong>跨站脚本攻击（XSS，Cross - Site Scripting）</strong> 攻击者通过在目标网站中注入恶意脚本，来获取用户的敏感信息、执行恶意操作等。这些恶意脚本通常是 JavaScript</p>
+<p><strong>本质上就是在任何前端js可能读取的地方插入恶意脚本</strong></p>
+<h4 id="整体过程"><a href="#整体过程" class="headerlink" title="整体过程"></a>整体过程</h4><p>攻击者提交恶意代码 -&gt; 浏览器执行恶意代码</p>
+<h4 id="反射型XSS"><a href="#反射型XSS" class="headerlink" title="反射型XSS"></a>反射型XSS</h4><p>示例：一个简单的搜索功能，用户在搜索框输入内容后，服务器将用户输入的内容直接在页面上显示。攻击者构造一个类似 <code>http://example.com/search?q=&lt;script&gt;alert(&#39;XSS&#39;)&lt;/script&gt;</code> 的 URL，当用户点击这个链接，就会弹出一个警告框显示 “XSS”。</p>
+<span id="more"></span>
+<h4 id="存储型XSS"><a href="#存储型XSS" class="headerlink" title="存储型XSS"></a>存储型XSS</h4><p>原理：攻击者将恶意脚本存储在目标服务器上，如存储在数据库、文件系统等。当其他用户访问包含该恶意脚本的页面时，浏览器就会执行这个脚本。这种类型的 XSS 通常出现在用户可以提交内容并且这些内容会被长期存储和展示的场景中，比如论坛、博客的评论区等。<br>示例：在一个论坛系统中，攻击者在评论区提交一个包含恶意脚本 <code>&lt;script&gt;stealCookie()&lt;/script&gt;</code>（假设存在一个名为 stealCookie 的恶意函数）的评论。当其他用户查看这个评论时，他们的浏览器会执行这个脚本，导致他们的 Cookie 信息可能被窃取。</p>
+<h4 id="DOM型XSS"><a href="#DOM型XSS" class="headerlink" title="DOM型XSS"></a>DOM型XSS</h4><p>原理：这种类型的 XSS 是由于 HTML 页面中，JavaScript 通过 DOM 操作动态地修改页面内容而导致的。攻击者利用 JavaScript 代码中的漏洞，修改 DOM 来注入恶意脚本。与前面两种不同的是，它不依赖于服务器端对数据的反射或者存储，而是完全在客户端浏览器环境中发生。<br>示例：有一个网页，其中有一段 JavaScript 代码如下：</p>
+<figure class="highlight jsx"><table><tr><td class="code"><pre><span class="line"><span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;userInput&#x27;</span>).<span class="property">innerHTML</span> = location.<span class="property">hash</span>.<span class="title function_">substr</span>(<span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+
+<p>攻击者可以构造一个 URL，如 <code>http://example.com/page.html#&lt;script&gt;alert(&#39;XSS&#39;)&lt;/script&gt;</code>，当用户访问这个 URL 时，浏览器会执行这个恶意脚本，弹出警告框。</p>
+<h4 id="预防漏洞的思路"><a href="#预防漏洞的思路" class="headerlink" title="预防漏洞的思路"></a>预防漏洞的思路</h4><ul>
+<li>前端提交时过滤（请求可以绕过前端）</li>
+<li>后端过滤（不能预防dom型XSS）</li>
+<li>前端渲染时转义（完美）</li>
+</ul>
+<h4 id="其他安全措施"><a href="#其他安全措施" class="headerlink" title="其他安全措施"></a>其他安全措施</h4><h5 id="CSP内容安全策略（Content-Security-Policy）："><a href="#CSP内容安全策略（Content-Security-Policy）：" class="headerlink" title="CSP内容安全策略（Content Security Policy）："></a>CSP内容安全策略（Content Security Policy）：</h5><ul>
+<li>禁止内联脚本的执行</li>
+<li>只加载信任域名的外联JS</li>
+<li>禁止 eval</li>
+<li>禁止 form 提交到第三方<br><strong>CSP设置方式</strong></li>
+<li>Nginx 返回Html文件的响应头设置<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen <span class="number">80</span>;</span><br><span class="line">    server_name your-domain.com; # 你的域名</span><br><span class="line">    root /usr/share/nginx/html; # 前端静态资源目录</span><br><span class="line"></span><br><span class="line">    # 核心：设置 CSP HTTP 头（Vue/React 通用基础规则）</span><br><span class="line">    add_header Content-Security-Policy <span class="string">&quot;</span></span><br><span class="line"><span class="string">        default-src &#x27;self&#x27;; # 默认只允许同域</span></span><br><span class="line"><span class="string">        script-src &#x27;self&#x27; https://cdn.jsdelivr.net; # JS 允许同域 + 指定 CDN</span></span><br><span class="line"><span class="string">        style-src &#x27;self&#x27; &#x27;unsafe-inline&#x27;; # 样式允许同域 + 内联（兼容大部分项目）</span></span><br><span class="line"><span class="string">        img-src &#x27;self&#x27; data:; # 图片允许同域 + base64</span></span><br><span class="line"><span class="string">        connect-src &#x27;self&#x27; https://api.your-domain.com; # 接口允许同域 + 后端接口</span></span><br><span class="line"><span class="string">        font-src &#x27;self&#x27;; # 字体允许同域</span></span><br><span class="line"><span class="string">        object-src &#x27;none&#x27;; # 禁止插件（如 flash）</span></span><br><span class="line"><span class="string">        frame-ancestors &#x27;none&#x27;; # 禁止被嵌入 iframe（防点击劫持）</span></span><br><span class="line"><span class="string">    &quot;</span>;</span><br><span class="line"></span><br><span class="line">    # 其他 Nginx 配置（静态资源/路由等）</span><br><span class="line">    location / &#123;</span><br><span class="line">        try_files $uri $uri/ /index.html;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>Html文件meta标签设置<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> </span></span><br><span class="line"><span class="tag">  <span class="attr">http-equiv</span>=<span class="string">&quot;Content-Security-Policy&quot;</span> </span></span><br><span class="line"><span class="tag">  <span class="attr">content</span>=<span class="string">&quot;default-src &#x27;self&#x27;;script-src &#x27;self&#x27; https://cdn.example.com;&quot;</span></span></span><br><span class="line"><span class="tag">&gt;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h5 id="HTTP-only-Cookie"><a href="#HTTP-only-Cookie" class="headerlink" title="HTTP-only Cookie"></a>HTTP-only Cookie</h5><p>禁止 JavaScript 读取某些敏感 Cookie，攻击者完成 XSS 注入后也无法窃取此 Cookie。</p>
+<h5 id="验证码"><a href="#验证码" class="headerlink" title="验证码"></a>验证码</h5><p>防止脚本冒充用户提交危险操作。</p>
+<hr>
+<h3 id="CSRF"><a href="#CSRF" class="headerlink" title="CSRF"></a>CSRF</h3><p><strong>CSRF（Cross-site request forgery）跨站请求伪造</strong>：攻击者诱导受害者进入第三方网站，在第三方网站中，向被攻击网站发送跨站请求。利用受害者在被攻击网站<strong>已经获取的注册凭证</strong>，绕过后台的用户验证，达到冒充用户对被攻击的网站执行某项操作的目的。</p>
+<p><strong>本质上是因为浏览器有cookie这么个东西，并且针对同一个域名的请求会自动带上cookie</strong></p>
+<p>一个典型的CSRF攻击有着如下的流程：</p>
+<ul>
+<li>受害者登录a.com，并保留了登录凭证（Cookie）。</li>
+<li>攻击者引诱受害者访问了b.com。</li>
+<li>b.com 向 a.com 发送了一个请求：a.com&#x2F;act&#x3D;xx。浏览器会默认携带a.com的Cookie。</li>
+<li>a.com接收到请求后，对请求进行验证，并确认是受害者的凭证，误以为是受害者自己发送的请求。</li>
+<li>a.com以受害者的名义执行了act&#x3D;xx。</li>
+<li>攻击完成，攻击者在受害者不知情的情况下，冒充受害者，让a.com执行了自己定义的操作。</li>
+</ul>
+<h4 id="预防漏洞的思路-1"><a href="#预防漏洞的思路-1" class="headerlink" title="预防漏洞的思路"></a>预防漏洞的思路</h4><h5 id="阻止不明外域的访问"><a href="#阻止不明外域的访问" class="headerlink" title="阻止不明外域的访问"></a>阻止不明外域的访问</h5><blockquote>
+<p>同源检测、Samesite Cookie</p>
+</blockquote>
+<ul>
+<li><code>Samesite Cookie = Strict</code><br>同源请求才会带上cookie</li>
+<li><code>Samesite Cookie = Lax</code><br>条件放宽，某些不同源的请求也会带上cookie，比如get请求，访问一个页面链接时。因为一般不会使用get请求修改数据，安全性较高</li>
+<li><code>Samesite Cookie = None</code><br>不管是否同源请求都会带上cookie，只在cookie设置为secrue时生效（非https协议不会传cookie）</li>
+</ul>
+<h5 id="提交时要求附加本域才能获取的信息"><a href="#提交时要求附加本域才能获取的信息" class="headerlink" title="提交时要求附加本域才能获取的信息"></a>提交时要求附加本域才能获取的信息</h5><blockquote>
+<p>CSRF Token、双重Cookie验证</p>
+</blockquote>
+<p>一种详细的web端方案是前端存储 CSRF Token + 请求头 &#x2F; 参数携带：</p>
+<ol>
+<li><p>后端生成并下发 CSRF Token（两种方式下发）</p>
+<blockquote>
+<p>存在「非 HttpOnly 的 Cookie」中（让前端能读取）；<br>或返回给前端，让前端存在 localStorage</p>
+</blockquote>
+</li>
+<li><p>前端读取 CSRF Token 并携带到请求中<br>前端从 Cookie 读取 CSRF Token，在请求头 &#x2F; 参数中携带（不能放在 Cookie 中，否则会被自动携带，失去意义）</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 前端日常请求（复用已有的 CSRF Token）</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">updateUserInfo</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="comment">// 读取登录时下发的 CSRF Token（一直存在 Cookie 中，直到登出/过期）</span></span><br><span class="line">  <span class="keyword">const</span> csrfToken = <span class="title function_">getCsrfToken</span>(); </span><br><span class="line">  <span class="title function_">fetch</span>(<span class="string">&#x27;/api/update&#x27;</span>, &#123;</span><br><span class="line">    <span class="attr">method</span>: <span class="string">&#x27;POST&#x27;</span>,</span><br><span class="line">    <span class="attr">headers</span>: &#123;</span><br><span class="line">      <span class="string">&#x27;X-CSRF-Token&#x27;</span>: csrfToken, <span class="comment">// 复用 Token</span></span><br><span class="line">      <span class="string">&#x27;Content-Type&#x27;</span>: <span class="string">&#x27;application/json&#x27;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">body</span>: <span class="title class_">JSON</span>.<span class="title function_">stringify</span>(&#123; <span class="attr">nickname</span>: <span class="string">&#x27;新昵称&#x27;</span> &#125;)</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>这种方案能实现防护的一个根本原因是<strong>同源策略不允许跨域的读取Cookie</strong>，也就是说攻击者的站点做不到用js跨域的从我们网站读取cookie来伪造请求</p>
+<blockquote>
+<p>A 网站的 JS 只能读取 A 网站的 Cookie &#x2F; 存储，绝对无法读取 B 网站的 Cookie &#x2F; 存储。</p>
+</blockquote>
+<p>同源策略详细可见：<a href="https://huangyunt.github.io/2021/09/21/%E5%90%8C%E6%BA%90%E5%92%8C%E8%B7%A8%E5%9F%9F/">同源与跨域</a></p>
+]]></content>
+      <categories>
+        <category>计算机网络</category>
+      </categories>
+      <tags>
+        <tag>网络安全相关</tag>
       </tags>
   </entry>
   <entry>
