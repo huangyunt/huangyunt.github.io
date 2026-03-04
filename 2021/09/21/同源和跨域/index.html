@@ -19,17 +19,17 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.21.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="比较杂的知识点，同源跨域、服务器代理、简单请求非简单请求  为什么要有同源策略 本质上是浏览器有cookie这么个玩意，比如移动端app就没有同源限制 防止CSRF攻击  同源策略 不能读取对方的 CookieA 网站的 JS 永远读不到 B 网站的 Cookie这就是为什么 第三方恶意网站永远拿不到你的 CSRF Token 不能读取对方的 localStorage &#x2F;session">
+    <meta name="description" content="比较杂的知识点，同源跨域、服务器代理、简单请求非简单请求  为什么要有同源策略 本质上是浏览器有cookie这么个玩意，比如移动端app就没有同源限制 防止CSRF攻击，CSRF攻击可见：CSRF  同源策略 网络：限制了xhr，fetch等跨域请求 数据：同源策略不允许不同源的两个页面互相访问浏览器存储，Cookie、IndexedDB和LocalStorage等 dom节点：同源策略不允许不">
 <meta property="og:type" content="article">
 <meta property="og:title" content="同源和跨域">
 <meta property="og:url" content="http://example.com/2021/09/21/%E5%90%8C%E6%BA%90%E5%92%8C%E8%B7%A8%E5%9F%9F/index.html">
 <meta property="og:site_name" content="Huangyuntse">
-<meta property="og:description" content="比较杂的知识点，同源跨域、服务器代理、简单请求非简单请求  为什么要有同源策略 本质上是浏览器有cookie这么个玩意，比如移动端app就没有同源限制 防止CSRF攻击  同源策略 不能读取对方的 CookieA 网站的 JS 永远读不到 B 网站的 Cookie这就是为什么 第三方恶意网站永远拿不到你的 CSRF Token 不能读取对方的 localStorage &#x2F;session">
+<meta property="og:description" content="比较杂的知识点，同源跨域、服务器代理、简单请求非简单请求  为什么要有同源策略 本质上是浏览器有cookie这么个玩意，比如移动端app就没有同源限制 防止CSRF攻击，CSRF攻击可见：CSRF  同源策略 网络：限制了xhr，fetch等跨域请求 数据：同源策略不允许不同源的两个页面互相访问浏览器存储，Cookie、IndexedDB和LocalStorage等 dom节点：同源策略不允许不">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-09-21T02:00:00.000Z">
-<meta property="article:modified_time" content="2026-03-04T10:11:16.424Z">
+<meta property="article:modified_time" content="2026-03-04T10:40:13.791Z">
 <meta property="article:author" content="Huangyuntse">
-<meta property="article:tag" content="前端安全">
+<meta property="article:tag" content="网络安全相关">
 <meta name="twitter:card" content="summary">
 
 
@@ -88,7 +88,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-文章"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>文章</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">15</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">64</span></a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">44</span></a></li><li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-文章"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>文章</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">15</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">63</span></a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">43</span></a></li><li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -139,7 +139,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E6%9C%89%E5%90%8C%E6%BA%90%E7%AD%96%E7%95%A5"><span class="nav-number">1.</span> <span class="nav-text">为什么要有同源策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%8C%E6%BA%90%E7%AD%96%E7%95%A5"><span class="nav-number">2.</span> <span class="nav-text">同源策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98"><span class="nav-number">3.</span> <span class="nav-text">如何解决跨域问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BB%A3%E7%90%86"><span class="nav-number">3.1.</span> <span class="nav-text">服务器代理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CORS"><span class="nav-number">3.2.</span> <span class="nav-text">CORS</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E8%AF%B7%E6%B1%82%E5%92%8C%E9%9D%9E%E7%AE%80%E5%8D%95%E8%AF%B7%E6%B1%82"><span class="nav-number">3.2.1.</span> <span class="nav-text">简单请求和非简单请求</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E8%AF%B7%E6%B1%82%E5%92%8C%E9%9D%9E%E7%AE%80%E5%8D%95%E8%AF%B7%E6%B1%82%E7%9A%84CORS%E6%A0%A1%E9%AA%8C%E8%BF%87%E7%A8%8B"><span class="nav-number">3.2.2.</span> <span class="nav-text">简单请求和非简单请求的CORS校验过程</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#JSONP"><span class="nav-number">3.3.</span> <span class="nav-text">JSONP</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E6%9C%89%E5%90%8C%E6%BA%90%E7%AD%96%E7%95%A5"><span class="nav-number">1.</span> <span class="nav-text">为什么要有同源策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%8C%E6%BA%90%E7%AD%96%E7%95%A5"><span class="nav-number">2.</span> <span class="nav-text">同源策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98"><span class="nav-number">3.</span> <span class="nav-text">如何解决跨域问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BB%A3%E7%90%86"><span class="nav-number">3.1.</span> <span class="nav-text">服务器代理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CORS"><span class="nav-number">3.2.</span> <span class="nav-text">CORS</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E8%AF%B7%E6%B1%82%E5%92%8C%E9%9D%9E%E7%AE%80%E5%8D%95%E8%AF%B7%E6%B1%82"><span class="nav-number">3.2.1.</span> <span class="nav-text">简单请求和非简单请求</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E8%AF%B7%E6%B1%82%E5%92%8C%E9%9D%9E%E7%AE%80%E5%8D%95%E8%AF%B7%E6%B1%82%E7%9A%84CORS%E6%A0%A1%E9%AA%8C%E8%BF%87%E7%A8%8B"><span class="nav-number">3.2.2.</span> <span class="nav-text">简单请求和非简单请求的CORS校验过程</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#JSONP"><span class="nav-number">3.3.</span> <span class="nav-text">JSONP</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AD%A3%E5%90%91%E4%BB%A3%E7%90%86%E5%92%8C%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86"><span class="nav-number">4.</span> <span class="nav-text">正向代理和反向代理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%AD%A3%E5%90%91%E4%BB%A3%E7%90%86"><span class="nav-number">4.1.</span> <span class="nav-text">正向代理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86"><span class="nav-number">4.2.</span> <span class="nav-text">反向代理</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -154,7 +154,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">64</span>
+          <span class="site-state-item-count">63</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -165,7 +165,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">44</span>
+        <span class="site-state-item-count">43</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -247,7 +247,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>1.1k</span>
+      <span>1.2k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -267,26 +267,26 @@
     <div class="post-body" itemprop="articleBody"><blockquote>
 <p>比较杂的知识点，同源跨域、服务器代理、简单请求非简单请求</p>
 </blockquote>
-<h3 id="为什么要有同源策略"><a href="#为什么要有同源策略" class="headerlink" title="为什么要有同源策略"></a>为什么要有同源策略</h3><ol>
+<h3 id="为什么要有同源策略"><a href="#为什么要有同源策略" class="headerlink" title="为什么要有同源策略"></a>为什么要有同源策略</h3><ul>
 <li>本质上是浏览器有cookie这么个玩意，比如移动端app就没有同源限制</li>
-<li>防止CSRF攻击</li>
-</ol>
-<h3 id="同源策略"><a href="#同源策略" class="headerlink" title="同源策略"></a>同源策略</h3><ol>
-<li>不能读取对方的 Cookie<br>A 网站的 JS 永远读不到 B 网站的 Cookie<br>这就是为什么 第三方恶意网站永远拿不到你的 CSRF Token</li>
-<li>不能读取对方的 localStorage &#x2F;sessionStorage<br>跨域网站完全看不到你的本地存储</li>
-<li>不能发送跨域请求获取数据（默认被拦截）<br>不同源的 AJAX&#x2F;fetch 请求，返回结果会被浏览器拦截</li>
-</ol>
-<span id="more"></span>
-
+<li>防止CSRF攻击，CSRF攻击可见：<a target="_blank" rel="noopener" href="https://huangyunt.github.io/2025/01/12/%E5%89%8D%E7%AB%AF%E5%AE%89%E5%85%A8%E7%9B%B8%E5%85%B3/#CSRF">CSRF</a></li>
+</ul>
+<h3 id="同源策略"><a href="#同源策略" class="headerlink" title="同源策略"></a>同源策略</h3><ul>
+<li>网络：限制了xhr，fetch等跨域请求</li>
+<li>数据：同源策略不允许不同源的两个页面互相访问浏览器存储，Cookie、IndexedDB和LocalStorage等</li>
+<li>dom节点：同源策略不允许不同源的两个页面通过JavaScript访问对方的dom节点<span id="more"></span></li>
+</ul>
 <h3 id="如何解决跨域问题"><a href="#如何解决跨域问题" class="headerlink" title="如何解决跨域问题"></a>如何解决跨域问题</h3><h4 id="服务器代理"><a href="#服务器代理" class="headerlink" title="服务器代理"></a>服务器代理</h4><ul>
 <li>开发环境webpack-dev-server</li>
 <li>生产环境nginx代理服务器部署在同源域名下，转发请求到对应的服务器上（印象中公司项目的配置：某个域名下的某个路径，关联到后端appkey上）</li>
 </ul>
-<h4 id="CORS"><a href="#CORS" class="headerlink" title="CORS"></a>CORS</h4><p>| 本质上是通过服务端来允许<br>配置受信任的域名，允许受信任域名的跨域请求</p>
-<h5 id="简单请求和非简单请求"><a href="#简单请求和非简单请求" class="headerlink" title="简单请求和非简单请求"></a>简单请求和非简单请求</h5><p>满足以下条件就是一个简单请求:</p>
+<h4 id="CORS"><a href="#CORS" class="headerlink" title="CORS"></a>CORS</h4><blockquote>
+<p>本质上是通过服务端来允许配置受信任的域名，允许受信任域名的跨域请求</p>
+</blockquote>
+<h5 id="简单请求和非简单请求"><a href="#简单请求和非简单请求" class="headerlink" title="简单请求和非简单请求"></a>简单请求和非简单请求</h5><p>同时满足以下条件就是一个简单请求:</p>
 <ol>
 <li><code>Method</code>: 请求的方法是 <code>GET</code>、<code>POST</code> 及 <code>HEAD</code></li>
-<li><code>Header</code>: 请求头是 <code>Content-Type</code>、<code>Accept-Language</code>、<code>Content-Language</code> 等</li>
+<li><code>Header</code>: 请求头是 <code>Content-Type</code>、<code>Accept-Language</code>、<code>Content-Language</code> 等只包含标准的、无自定义值的首部字段</li>
 <li><code>Content-Type</code>: 请求类型是 <code>application/x-www-form-urlencoded</code>、<code>multipart/form-data</code> 或 <code>text/plain</code></li>
 </ol>
 <p><strong>当一个请求跨域且不是简单请求时就会发送 <code>OPTIONS</code> 预检请求</strong></p>
@@ -305,6 +305,10 @@
 <h4 id="JSONP"><a href="#JSONP" class="headerlink" title="JSONP"></a>JSONP</h4><p><strong>jsonp</strong>的原理就是利用<code>&lt;script&gt;</code>标签没有跨域限制，通过<code>&lt;script&gt;</code>标签src属性，发送带有callback参数的GET请求，服务端将接口返回数据拼凑到callback函数中，返回给浏览器，浏览器解析执行，从而前端拿到callback函数返回的数据。</p>
 <figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">createScriptTag</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> script = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&#x27;script&#x27;</span>);</span><br><span class="line">  script.<span class="property">type</span> = <span class="string">&#x27;text/javascript&#x27;</span>;</span><br><span class="line">  <span class="comment">// 设置请求的URL，假设服务端接口为http://example.com/api/data，同时指定回调函数名为handleData</span></span><br><span class="line">  script.<span class="property">src</span> = <span class="string">&#x27;http://example.com/api/data?callback=handleData&#x27;</span>;</span><br><span class="line">  <span class="variable language_">document</span>.<span class="property">body</span>.<span class="title function_">appendChild</span>(script);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义回调函数</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">handleData</span>(<span class="params">data</span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(data);</span><br><span class="line">  <span class="comment">// 在这里可以对返回的JSON数据进行处理，如更新页面内容等</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>服务器会返回一个函数调用，类似于 <code>handleData(&#123;&quot;data&quot;: &quot;value&quot;&#125;)</code> 的内容</p>
+<h3 id="正向代理和反向代理"><a href="#正向代理和反向代理" class="headerlink" title="正向代理和反向代理"></a>正向代理和反向代理</h3><h4 id="正向代理"><a href="#正向代理" class="headerlink" title="正向代理"></a>正向代理</h4><p>正向代理是代理客户端，服务器无法感知客户端，客户端的请求都发往代理服务器，代理服务器替客户端发送请求给服务器，并把服务器响应的数据返回给客户端</p>
+<p>应用：翻墙，接口转发实现跨域</p>
+<h4 id="反向代理"><a href="#反向代理" class="headerlink" title="反向代理"></a>反向代理</h4><p>反向代理是代理服务器，客户端无法感知服务器</p>
+<p>应用：负载均衡</p>
 
     </div>
 
@@ -314,7 +318,7 @@
 
     <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/%E5%89%8D%E7%AB%AF%E5%AE%89%E5%85%A8/" rel="tag"># 前端安全</a>
+              <a href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%9B%B8%E5%85%B3/" rel="tag"># 网络安全相关</a>
           </div>
 
         
