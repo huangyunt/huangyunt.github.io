@@ -85,7 +85,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-文章"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>文章</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">16</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">64</span></a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">42</span></a></li><li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-文章"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>文章</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">15</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">64</span></a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">44</span></a></li><li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -156,12 +156,12 @@
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-count">15</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">42</span>
+        <span class="site-state-item-count">44</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -820,14 +820,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>1k</span>
+      <span>1.4k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>4 分钟</span>
+      <span>5 分钟</span>
     </span>
 </div>
 
@@ -867,7 +867,7 @@
 <p>Last-Modified&#x2F;If-Modified-Since 的值代表的是文件的最后修改时间</p>
 </blockquote>
 <h5 id="如何实现ETag？"><a href="#如何实现ETag？" class="headerlink" title="如何实现ETag？"></a>如何实现ETag？</h5><p>Nginx中ETag是如何实现的： 上次修改时间 + content-length</p>
-<h4 id="缓存策略"><a href="#缓存策略" class="headerlink" title="缓存策略"></a>缓存策略</h4><blockquote>
+<h4 id="缓存配置"><a href="#缓存配置" class="headerlink" title="缓存配置"></a>缓存配置</h4><blockquote>
 <p>题目：<a target="_blank" rel="noopener" href="https://q.shanyue.tech/fe/http/193">简述你们前端项目中资源的缓存配置策略</a><br>  题目：<a target="_blank" rel="noopener" href="https://q.shanyue.tech/fe/http/600">现代前端应用应如何配置 HTTP 缓存机制</a><br>  关于 http 缓存配置的最佳实践为以下两条：</p>
 </blockquote>
 <ul>
@@ -887,7 +887,8 @@
 <li><strong>jspdf</strong>: 不常用且过大的第三方模块单独打包</li>
 </ol>
 <hr>
-
+<h5 id="Nginx配置缓存"><a href="#Nginx配置缓存" class="headerlink" title="Nginx配置缓存"></a>Nginx配置缓存</h5><p>通常是通过Nginx来托管静态资源，缓存、跨域等配置也是在Nginx中进行配置</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"># nginx.conf 核心配置</span><br><span class="line">server &#123;</span><br><span class="line">    listen <span class="number">80</span>;</span><br><span class="line">    server_name your-domain.com; # 你的域名</span><br><span class="line"></span><br><span class="line">    # <span class="number">1.</span> 静态资源根目录（前端打包后的 dist 目录）</span><br><span class="line">    root /usr/share/nginx/html;</span><br><span class="line">    index index.html;</span><br><span class="line"></span><br><span class="line">    # <span class="number">2.</span> 缓存配置（不同资源不同缓存策略）</span><br><span class="line">    location ~* \.(js|css|png|jpg|jpeg|gif|ico)$ &#123;</span><br><span class="line">        expires <span class="number">7d</span>; # 强缓存：<span class="number">7</span>天</span><br><span class="line">        add_header Cache-Control <span class="string">&quot;public, max-age=604800&quot;</span>; # 协商缓存</span><br><span class="line">        add_header ETag $etag; # 生成文件唯一标识</span><br><span class="line"></span><br><span class="line">        # <span class="number">3.</span> Gzip 压缩（文本资源必开）</span><br><span class="line">        gzip on;</span><br><span class="line">        gzip_types application/javascript text/css text/html;</span><br><span class="line">        gzip_min_length 1k; # 大于1k的文件才压缩</span><br><span class="line"></span><br><span class="line">        # <span class="number">4.</span> 防盗链（仅允许自己的域名访问）</span><br><span class="line">        valid_referers your-domain.com *.your-domain.com;</span><br><span class="line">        <span class="keyword">if</span> ($invalid_referer) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">403</span>; # 非允许域名返回<span class="number">403</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    # <span class="number">5.</span> 单页应用路由适配（history 模式）</span><br><span class="line">    location / &#123;</span><br><span class="line">        try_files $uri $uri/ /index.html; # 找不到文件时返回 index.html</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    # <span class="number">6.</span> 跨域配置（如果需要访问其他域名接口）</span><br><span class="line">    location /api/ &#123;</span><br><span class="line">        proxy_pass https:<span class="comment">//api.your-domain.com/; # 反向代理到接口服务器</span></span><br><span class="line">        add_header Access-Control-Allow-Origin *; # 允许所有域名跨域（生产环境建议指定域名）</span><br><span class="line">        add_header Access-Control-Allow-Methods <span class="string">&quot;GET, POST, OPTIONS&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    # <span class="number">7.</span> 重定向到 HTTPS（可选）</span><br><span class="line">    <span class="keyword">return</span> <span class="number">301</span> https:<span class="comment">//$host$request_uri;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># HTTPS 配置（可选）</span><br><span class="line">server &#123;</span><br><span class="line">    listen <span class="number">443</span> ssl;</span><br><span class="line">    server_name your-domain.com;</span><br><span class="line"></span><br><span class="line">    ssl_certificate /path/to/your/cert.pem; # SSL 证书路径</span><br><span class="line">    ssl_certificate_key /path/to/your/key.pem;</span><br><span class="line"></span><br><span class="line">    # 其余配置和上面一致（根目录、缓存、压缩等）</span><br><span class="line">    root /usr/share/nginx/html;</span><br><span class="line">    index index.html;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -1347,7 +1348,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">3:16</span>
+    <span title="站点阅读时长">3:17</span>
   </span>
 </div>
 
