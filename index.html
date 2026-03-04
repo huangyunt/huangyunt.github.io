@@ -1100,14 +1100,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>1.1k</span>
+      <span>1.6k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>4 分钟</span>
+      <span>6 分钟</span>
     </span>
 </div>
 
@@ -1118,9 +1118,10 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h4 id="XSS"><a href="#XSS" class="headerlink" title="XSS"></a>XSS</h4><p><strong>跨站脚本攻击（XSS，Cross - Site Scripting）</strong> 攻击者通过在目标网站中注入恶意脚本，来获取用户的敏感信息、执行恶意操作等。这些恶意脚本通常是 JavaScript</p>
-<h5 id="整体过程"><a href="#整体过程" class="headerlink" title="整体过程"></a>整体过程</h5><p>攻击者提交恶意代码 -&gt; 浏览器执行恶意代码</p>
-<h5 id="反射型XSS"><a href="#反射型XSS" class="headerlink" title="反射型XSS"></a>反射型XSS</h5><p>示例：一个简单的搜索功能，用户在搜索框输入内容后，服务器将用户输入的内容直接在页面上显示。攻击者构造一个类似 <code>http://example.com/search?q=&lt;script&gt;alert(&#39;XSS&#39;)&lt;/script&gt;</code> 的 URL，当用户点击这个链接，就会弹出一个警告框显示 “XSS”。</p>
+          <h3 id="XSS"><a href="#XSS" class="headerlink" title="XSS"></a>XSS</h3><p><strong>跨站脚本攻击（XSS，Cross - Site Scripting）</strong> 攻击者通过在目标网站中注入恶意脚本，来获取用户的敏感信息、执行恶意操作等。这些恶意脚本通常是 JavaScript</p>
+<p><strong>本质上就是在任何前端js可能读取的地方插入恶意脚本</strong></p>
+<h4 id="整体过程"><a href="#整体过程" class="headerlink" title="整体过程"></a>整体过程</h4><p>攻击者提交恶意代码 -&gt; 浏览器执行恶意代码</p>
+<h4 id="反射型XSS"><a href="#反射型XSS" class="headerlink" title="反射型XSS"></a>反射型XSS</h4><p>示例：一个简单的搜索功能，用户在搜索框输入内容后，服务器将用户输入的内容直接在页面上显示。攻击者构造一个类似 <code>http://example.com/search?q=&lt;script&gt;alert(&#39;XSS&#39;)&lt;/script&gt;</code> 的 URL，当用户点击这个链接，就会弹出一个警告框显示 “XSS”。</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2025/01/12/%E5%89%8D%E7%AB%AF%E5%AE%89%E5%85%A8%E7%9B%B8%E5%85%B3/#more" rel="contents">
@@ -1260,13 +1261,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">54k</span>
+    <span title="站点总字数">55k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">3:17</span>
+    <span title="站点阅读时长">3:19</span>
   </span>
 </div>
 
