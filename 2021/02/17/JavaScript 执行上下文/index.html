@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha256-5eIC48iZUHmSlSUz9XtjRyK2mzQkHScZY1WdMaoz74E=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.21.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="前言：在看js垃圾回收时遇到相关问题，感觉自己对上下文对象理解的还是不够透彻（实在是太菜了）这就回来恶补。  执行上下文（Execution Context） 执行上下文是 JS 引擎为代码执行创建的运行环境，ES6 规范其由：this 绑定词法环境（Lexical Environment）变量环境（Variable Environment）三部分构成，三者在上下文的「创建阶段」初始化，「执行阶">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript执行上下文">
+<meta property="og:url" content="http://example.com/2021/02/17/JavaScript%20%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87/index.html">
+<meta property="og:site_name" content="Huangyuntse">
+<meta property="og:description" content="前言：在看js垃圾回收时遇到相关问题，感觉自己对上下文对象理解的还是不够透彻（实在是太菜了）这就回来恶补。  执行上下文（Execution Context） 执行上下文是 JS 引擎为代码执行创建的运行环境，ES6 规范其由：this 绑定词法环境（Lexical Environment）变量环境（Variable Environment）三部分构成，三者在上下文的「创建阶段」初始化，「执行阶">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/assets/image-20210414214146564.png">
+<meta property="article:published_time" content="2021-02-17T02:00:00.000Z">
+<meta property="article:modified_time" content="2026-03-12T17:56:05.939Z">
+<meta property="article:author" content="Huangyuntse">
+<meta property="article:tag" content="JavaScript">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/assets/image-20210414214146564.png">
+
+
+<link rel="canonical" href="http://example.com/2021/02/17/JavaScript%20%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2021/02/17/JavaScript%20%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87/","path":"2021/02/17/JavaScript 执行上下文/","title":"JavaScript执行上下文"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>JavaScript执行上下文 | Huangyuntse</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Huangyuntse</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-文章"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>文章</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">15</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">62</span></a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">43</span></a></li><li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87%EF%BC%88Execution-Context%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">执行上下文（Execution Context）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AF%8D%E6%B3%95%E7%8E%AF%E5%A2%83%EF%BC%88Lexical-Environment%EF%BC%89%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">1.1.</span> <span class="nav-text">词法环境（Lexical Environment）初始化</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E8%AE%B0%E5%BD%95%EF%BC%88Environment-Record%EF%BC%89"><span class="nav-number">1.1.1.</span> <span class="nav-text">环境记录（Environment Record）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%A4%96%E9%83%A8%E7%8E%AF%E5%A2%83%E5%BC%95%E7%94%A8%EF%BC%88Outer-Environment-Reference%EF%BC%89"><span class="nav-number">1.1.2.</span> <span class="nav-text">外部环境引用（Outer Environment Reference）</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%98%E9%87%8F%E7%8E%AF%E5%A2%83%EF%BC%88Variable-Environment%EF%BC%89%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">1.2.</span> <span class="nav-text">变量环境（Variable Environment）初始化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%9C%E7%94%A8%E5%9F%9F%E9%93%BE"><span class="nav-number">1.3.</span> <span class="nav-text">作用域链</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BB%91%E5%AE%9A-this-%E6%8C%87%E5%90%91"><span class="nav-number">1.4.</span> <span class="nav-text">绑定 this 指向</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%85%A8%E5%B1%80%E4%B8%8A%E4%B8%8B%E6%96%87%E4%B8%AD-this"><span class="nav-number">1.4.1.</span> <span class="nav-text">全局上下文中 this</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E4%B8%AD-this"><span class="nav-number">1.4.2.</span> <span class="nav-text">函数中 this</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E4%B8%AD-this"><span class="nav-number">1.4.3.</span> <span class="nav-text">构造函数中 this</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0%E7%9A%84-this"><span class="nav-number">1.4.4.</span> <span class="nav-text">箭头函数的 this</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%B6%E4%BB%96"><span class="nav-number">1.5.</span> <span class="nav-text">其他</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%9D%97%E7%BA%A7%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%92%8C%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="nav-number">1.5.1.</span> <span class="nav-text">块级作用域和执行上下文的关系</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Huangyuntse"
+      src="https://avatars.githubusercontent.com/u/73687768?v=4">
+  <p class="site-author-name" itemprop="name">Huangyuntse</p>
+  <div class="site-description" itemprop="description">也无风雨也无晴</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">62</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/huangyunt" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;huangyunt" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:973113137@qq.com" title="E-Mail → mailto:973113137@qq.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/02/17/JavaScript%20%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/73687768?v=4">
+      <meta itemprop="name" content="Huangyuntse">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Huangyuntse">
+      <meta itemprop="description" content="也无风雨也无晴">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="JavaScript执行上下文 | Huangyuntse">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          JavaScript执行上下文
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-02-17 10:00:00" itemprop="dateCreated datePublished" datetime="2021-02-17T10:00:00+08:00">2021-02-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>2.7k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>10 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><blockquote>
+<p>前言：在看js垃圾回收时遇到相关问题，感觉自己对上下文对象理解的还是不够透彻（实在是太菜了）这就回来恶补。</p>
+</blockquote>
+<h3 id="执行上下文（Execution-Context）"><a href="#执行上下文（Execution-Context）" class="headerlink" title="执行上下文（Execution Context）"></a>执行上下文（Execution Context）</h3><blockquote>
+<p><strong>执行上下文是 JS 引擎为代码执行创建的运行环境</strong>，ES6 规范其由：<br><strong>this 绑定</strong><br><strong>词法环境（Lexical Environment）</strong><br><strong>变量环境（Variable Environment）</strong><br>三部分构成，三者在上下文的「创建阶段」初始化，「执行阶段」完成赋值与执行。</p>
+</blockquote>
+<p>在 JavaScript 中，运行环境主要包含了<strong>全局环境</strong>和<strong>函数环境</strong>。</p>
+<p>在 JavaScript 代码运行过程中，最先进入的是全局环境，而在函数被调用时则进入相应的函数环境。全局环境和函数环境所对应的执行上下文我们分别称为<strong>全局上下文</strong>和<strong>函数上下文</strong>。</p>
+<p>在一个 JavaScript 文件中，经常会有多个函数被调用，也就是说在 JavaScript 代码运行过程中很可能会产生多个执行上下文，那么如何去管理这多个执行上下文呢？</p>
+<p>执行上下文是以栈（一种 LIFO 的数据结构）的方式被存放起来的，我们称之为<strong>执行上下文栈（Execution Context Stack）</strong>。</p>
+<p><strong>在 JavaScript 代码开始执行时，首先进入全局环境，此时全局上下文被创建并入栈，之后当调用函数时则进入相应的函数环境，此时相应函数上下文被创建并入栈，当处于栈顶的执行上下文代码执行完毕后，则会将其出栈。</strong></p>
+<p>所以在执行上下文栈中，栈底永远是全局上下文，而栈顶则是当前正在执行的函数上下文。</p>
+<span id="more"></span>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">fn2</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;fn2&#x27;</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">fn1</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;fn1&#x27;</span>)</span><br><span class="line">  <span class="title function_">fn2</span>();</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">fn1</span>();</span><br></pre></td></tr></table></figure>
+
+<p>对于如上代码</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 伪代码 以数组来表示执行上下文栈 ECStack=[] */</span></span><br><span class="line"><span class="comment">// 代码执行时最先进入全局环境，全局上下文被创建并入栈</span></span><br><span class="line"><span class="title class_">ECStack</span>.<span class="title function_">push</span>(global_EC);</span><br><span class="line"><span class="comment">// fn1 被调用，fn1 函数上下文被创建并入栈</span></span><br><span class="line"><span class="title class_">ECStack</span>.<span class="title function_">push</span>(fn1_EC);</span><br><span class="line"><span class="comment">// fn1 中调用 fn2，fn2 函数上下文被创建并入栈</span></span><br><span class="line"><span class="title class_">ECStack</span>.<span class="title function_">push</span>(fn2_EC);</span><br><span class="line"><span class="comment">// fn2 执行完毕，fn2 函数上下文出栈</span></span><br><span class="line"><span class="title class_">ECStack</span>.<span class="title function_">pop</span>();</span><br><span class="line"><span class="comment">// fn1 执行完毕，fn1 函数上下文出栈</span></span><br><span class="line"><span class="title class_">ECStack</span>.<span class="title function_">pop</span>();</span><br><span class="line"><span class="comment">// 代码执行完毕，全局上下文出栈</span></span><br><span class="line"><span class="title class_">ECStack</span>.<span class="title function_">pop</span>();</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../assets/image-20210414214146564.png" alt="image-20210414214146564"></p>
+<p><strong>执行上下文的创建阶段，还会完成 this的绑定、词法环境的创建、变量环境的创建：</strong></p>
+<hr>
+<h4 id="词法环境（Lexical-Environment）初始化"><a href="#词法环境（Lexical-Environment）初始化" class="headerlink" title="词法环境（Lexical Environment）初始化"></a>词法环境（Lexical Environment）初始化</h4><blockquote>
+<p>词法环境实际上在函数定义就已经确定了，只是在上下文创建阶段才会进行初始化，生成作用域链。由两个组成部分：</p>
+<ol>
+<li>环境记录（environment record）</li>
+<li>对外部环境的引用</li>
+</ol>
+</blockquote>
+<h5 id="环境记录（Environment-Record）"><a href="#环境记录（Environment-Record）" class="headerlink" title="环境记录（Environment Record）"></a>环境记录（Environment Record）</h5><p>存储当前上下文的变量 &#x2F; 函数，细分两类：</p>
+<ul>
+<li>函数上下文的环境记录：存储 let&#x2F;const&#x2F; 函数声明 &#x2F;class 声明，包含 arguments 对象（函数参数）；</li>
+<li>全局上下文的环境记录：存储 let&#x2F;const&#x2F; 函数声明 &#x2F;class 声明，关联全局对象（如 window）；</li>
+</ul>
+<h5 id="外部环境引用（Outer-Environment-Reference）"><a href="#外部环境引用（Outer-Environment-Reference）" class="headerlink" title="外部环境引用（Outer Environment Reference）"></a>外部环境引用（Outer Environment Reference）</h5><p>指向外层函数（<strong>这里的外层指的是代码编写时的外层，不是执行上下文的上层调用栈</strong>）的词法环境（形成作用域链），全局上下文的外部引用为 null。</p>
+<p><strong>环境记录是存储变量和函数声明的实际位置，对外部环境的引用意味着它可以访问其外部词法环境。</strong></p>
+<hr>
+<h4 id="变量环境（Variable-Environment）初始化"><a href="#变量环境（Variable-Environment）初始化" class="headerlink" title="变量环境（Variable Environment）初始化"></a>变量环境（Variable Environment）初始化</h4><p>变量环境结构与词法环境完全一致（环境记录 + 外部引用）；<br><strong>唯一差异</strong>：仅存储 var 声明的变量（含函数表达式中的 var 变量）</p>
+<p>变量环境中，var 声明的变量会被 “提升” 并初始化为 undefined（这是 var 变量提升的根源）。</p>
+<p>结合代码理解：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="number">20</span>;  </span><br><span class="line"><span class="keyword">const</span> b = <span class="number">30</span>;  </span><br><span class="line"><span class="keyword">var</span> c;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">multiply</span>(<span class="params">e, f</span>) &#123;  </span><br><span class="line"> <span class="keyword">var</span> g = <span class="number">20</span>;  </span><br><span class="line"> <span class="keyword">return</span> e * f * g;  </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">c = <span class="title function_">multiply</span>(<span class="number">20</span>, <span class="number">30</span>);</span><br></pre></td></tr></table></figure>
+
+<p>这段代码的执行上下文：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">GlobalExectionContext = &#123;</span><br><span class="line"></span><br><span class="line">  ThisBinding: &lt;Global Object&gt;,</span><br><span class="line"></span><br><span class="line">  LexicalEnvironment: &#123;  </span><br><span class="line">    EnvironmentRecord: &#123;  </span><br><span class="line">      Type: <span class="string">&quot;Object&quot;</span>,  </span><br><span class="line">      <span class="comment">// 标识符绑定在这里  </span></span><br><span class="line">      a: &lt; uninitialized &gt;,  </span><br><span class="line">      b: &lt; uninitialized &gt;,  </span><br><span class="line">      multiply: &lt; func &gt;  </span><br><span class="line">    &#125;  </span><br><span class="line">    outer: &lt;<span class="literal">null</span>&gt;  </span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  VariableEnvironment: &#123;  </span><br><span class="line">    EnvironmentRecord: &#123;  </span><br><span class="line">      Type: <span class="string">&quot;Object&quot;</span>,  </span><br><span class="line">      <span class="comment">// 标识符绑定在这里  </span></span><br><span class="line">      c: undefined,  </span><br><span class="line">    &#125;  </span><br><span class="line">    outer: &lt;<span class="literal">null</span>&gt;  </span><br><span class="line">  &#125;  </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">FunctionExectionContext = &#123;  </span><br><span class="line">   </span><br><span class="line">  ThisBinding: &lt;Global Object&gt;,</span><br><span class="line"></span><br><span class="line">  LexicalEnvironment: &#123;  </span><br><span class="line">    EnvironmentRecord: &#123;  </span><br><span class="line">      Type: <span class="string">&quot;Declarative&quot;</span>,  </span><br><span class="line">      <span class="comment">// 标识符绑定在这里  </span></span><br><span class="line">      Arguments: &#123;<span class="number">0</span>: <span class="number">20</span>, <span class="number">1</span>: <span class="number">30</span>, length: <span class="number">2</span>&#125;,  </span><br><span class="line">    &#125;,  </span><br><span class="line">    outer: &lt;GlobalLexicalEnvironment&gt;  </span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  VariableEnvironment: &#123;  </span><br><span class="line">    EnvironmentRecord: &#123;  </span><br><span class="line">      Type: <span class="string">&quot;Declarative&quot;</span>,  </span><br><span class="line">      <span class="comment">// 标识符绑定在这里  </span></span><br><span class="line">      g: undefined  </span><br><span class="line">    &#125;,  </span><br><span class="line">    outer: &lt;GlobalLexicalEnvironment&gt;  </span><br><span class="line">  &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>注意</strong>： 只有在遇到函数 multiply 的调用时才会创建函数执行上下文。<br>这里的 let 和 const 定义的变量没有任何与之关联的值，但 var 定义的变量设置为 undefined。<br>这是因为在创建阶段，代码会被扫描并解析变量和函数声明，其中函数声明存储在环境中，而变量会被设置为 undefined（在 var 的情况下）或保持未初始化（在 let 和 const 的情况下）。<br>这就是为什么可以在声明之前访问 var 定义的变量（尽管是 undefined ），但如果在声明之前访问 let 和 const 定义的变量就会提示引用错误的原因，也就是所谓的<strong>变量提升</strong></p>
+<hr>
+<h4 id="作用域链"><a href="#作用域链" class="headerlink" title="作用域链"></a>作用域链</h4><blockquote>
+<p>作用域链：决定执行上下文的变量查找机制<br>作用域链 &#x3D; 「（当前词法环境 + 当前变量环境） → （外层词法环境 + 外层变量环境） → … → 全局词法环境」<br><strong>注意</strong>：作用域链的构建依据是 “词法位置”（代码书写时的嵌套关系），而非函数调用顺序（与执行上下文栈无关）；</p>
+</blockquote>
+<p>全局执行上下文的外部环境引用为 null，是作用域链的终点；<br>执行上下文栈管理上下文的 “执行顺序”，作用域链管理上下文的 “变量查找规则”，二者独立但配合工作。</p>
+<p>以代码示例说明：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 全局执行上下文</span></span><br><span class="line"><span class="keyword">var</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">fn1</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="comment">// fn1 执行上下文：外部环境引用 → 全局词法环境</span></span><br><span class="line">  <span class="keyword">var</span> b = <span class="number">2</span>;</span><br><span class="line">  <span class="keyword">function</span> <span class="title function_">fn2</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="comment">// fn2 执行上下文：外部环境引用 → fn1 词法环境</span></span><br><span class="line">    <span class="keyword">var</span> c = <span class="number">3</span>;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(a + b + c); <span class="comment">// 查找链：fn2 → fn1 → 全局</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="title function_">fn2</span>();</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">fn1</span>();</span><br></pre></td></tr></table></figure>
+
+<p>执行 fn2 时，其作用域链为：fn2 词法环境 → fn1 词法环境 → 全局词法环境；<br>查找 a：fn2 环境无 → 向上到 fn1 环境无 → 全局环境找到 a&#x3D;1；<br>查找 b：fn2 环境无 → fn1 环境找到 b&#x3D;2；<br>查找 c：fn2 环境直接找到 c&#x3D;3。</p>
+<hr>
+<h4 id="绑定-this-指向"><a href="#绑定-this-指向" class="headerlink" title="绑定 this 指向"></a>绑定 this 指向</h4><p><strong>this 的指向，是在函数被调用的时候确定的。</strong>也就是执行上下文被创建时确定的。</p>
+<p>关于 this 的指向，其实最主要的是三种场景，分别是<strong>全局上下文中 this</strong>、<strong>函数中 this</strong> 和<strong>构造函数中 this</strong>。</p>
+<h5 id="全局上下文中-this"><a href="#全局上下文中-this" class="headerlink" title="全局上下文中 this"></a>全局上下文中 this</h5><p>在全局上下文中，this 指代全局对象。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在浏览器环境中，全局对象是 window 对象：</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span> === <span class="variable language_">window</span>); <span class="comment">// true</span></span><br><span class="line">a = <span class="number">1</span>;</span><br><span class="line"><span class="variable language_">this</span>.<span class="property">b</span> = <span class="number">2</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">window</span>.<span class="property">a</span>); <span class="comment">// 1</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">window</span>.<span class="property">b</span>); <span class="comment">// 2</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(b); <span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="函数中-this"><a href="#函数中-this" class="headerlink" title="函数中 this"></a>函数中 this</h5><p>函数中的 this 指向是怎样一种情况呢？</p>
+<p><strong>如果被调用的函数，被某一个对象所拥有，那么其内部的 this 指向该对象；如果该函数被独立调用，那么其内部的 this 指向 window（严格模式下指向undefined）。</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">fn</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">a</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">  <span class="attr">a</span>: <span class="number">2</span>,</span><br><span class="line">  <span class="attr">fn</span>: fn</span><br><span class="line">&#125;</span><br><span class="line">obj.<span class="title function_">fn</span>(); <span class="comment">// 2</span></span><br><span class="line"><span class="title function_">fn</span>(); <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
+
+<p>还有一种比较特殊的情况</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> o = &#123;</span><br><span class="line">    <span class="attr">a</span>:<span class="number">8</span>,</span><br><span class="line">    <span class="attr">b</span>:&#123;</span><br><span class="line">        <span class="attr">a</span>:<span class="number">15</span>,</span><br><span class="line">        <span class="attr">fn</span>:<span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">a</span>); <span class="comment">//undefined</span></span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>); <span class="comment">//window</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> j = o.<span class="property">b</span>.<span class="property">fn</span>;</span><br><span class="line"><span class="title function_">j</span>();</span><br></pre></td></tr></table></figure>
+<p>this永远指向的是最后调用它的对象，也就是看它执行的时候是谁调用的，上例中虽然函数fn是被对象b所引用，但是在将fn赋值给变量j的时候并没有执行所以最终指向的是window</p>
+<h5 id="构造函数中-this"><a href="#构造函数中-this" class="headerlink" title="构造函数中 this"></a>构造函数中 this</h5><p>要清楚构造函数中 this 的指向，则必须先了解通过 new 操作符调用构造函数时所经历的阶段。</p>
+<p>通过 new 操作符调用构造函数时所经历的阶段如下：</p>
+<ol>
+<li>创建一个新对象；</li>
+<li>将构造函数的 this 指向这个新对象；</li>
+<li>执行构造函数内部代码；</li>
+<li>返回这个新对象。</li>
+</ol>
+<p>所以从上述流程可知，<strong>对于构造函数来说，其内部 this 指向新创建的对象实例</strong>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Person</span>(<span class="params">name, age</span>) &#123;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">name</span> = name;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">age</span> = age;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> ttsy = <span class="keyword">new</span> <span class="title class_">Person</span>(<span class="string">&#x27;ttsy&#x27;</span>, <span class="number">24</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(ttsy.<span class="property">name</span>);  <span class="comment">// ttsy</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(ttsy.<span class="property">age</span>);  <span class="comment">// 24</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="箭头函数的-this"><a href="#箭头函数的-this" class="headerlink" title="箭头函数的 this"></a>箭头函数的 this</h5><blockquote>
+<p>箭头函数的 this 是基于词法作用域链查找的，箭头函数的this等于外层上下文创建时绑定的this<br>相当于箭头函数的this是静态的，绑定后不会因为函数的调用方式或者 call&#x2F;apply&#x2F;bind 修改</p>
+</blockquote>
+<p>代码示例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 全局上下文 G（this=window）</span></span><br><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&quot;obj&quot;</span>,</span><br><span class="line">  <span class="comment">// 普通函数：绑定执行时栈上层的上下文</span></span><br><span class="line">  <span class="attr">normalFn</span>: <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="comment">// 普通函数：返回一个新的普通函数</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;普通函数 this：&quot;</span>, <span class="variable language_">this</span>.<span class="property">name</span>); </span><br><span class="line">      <span class="comment">// 执行时栈上层是全局/调用者，this 动态绑定</span></span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 箭头函数：绑定定义时的词法外层上下文</span></span><br><span class="line">  <span class="attr">arrowFnWrapper</span>: <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="comment">// 箭头函数定义时的词法外层 = arrowFnWrapper 的上下文（this=obj）</span></span><br><span class="line">    <span class="keyword">return</span> <span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;箭头函数 this：&quot;</span>, <span class="variable language_">this</span>.<span class="property">name</span>); </span><br><span class="line">      <span class="comment">// 复用定义时的词法外层 this，与执行时栈无关</span></span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 1. 调用普通函数返回的函数</span></span><br><span class="line"><span class="keyword">const</span> normalReturned = obj.<span class="title function_">normalFn</span>(); </span><br><span class="line"><span class="title function_">normalReturned</span>(); <span class="comment">// 执行时栈：G → normalReturned</span></span><br><span class="line"><span class="comment">// 输出：普通函数 this：undefined（this=window，无 name）</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. 调用箭头函数返回的函数</span></span><br><span class="line"><span class="keyword">const</span> arrowReturned = obj.<span class="title function_">arrowFnWrapper</span>();</span><br><span class="line"><span class="keyword">const</span> returned = arrowReturned.<span class="title function_">call</span>(&#123;<span class="attr">name</span>: <span class="string">&quot;hhh&quot;</span>&#125;) <span class="comment">// 箭头函数在这里被定义，绑定 &#123;name: &quot;hhh&quot;&#125;</span></span><br><span class="line"><span class="title function_">returned</span>(); </span><br><span class="line"><span class="comment">// 输出：箭头函数 this： hhh</span></span><br></pre></td></tr></table></figure>
+
+<p>示例2：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">globalThis.<span class="property">a</span> = <span class="number">100</span>;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">fn</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    <span class="attr">a</span>: <span class="number">200</span>,</span><br><span class="line">    <span class="attr">m</span>: <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">a</span>);</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">n</span>: <span class="function">()=&gt;</span>&#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">a</span>);</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">k</span>: <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">a</span>)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> fn0 = <span class="title function_">fn</span>();</span><br><span class="line">fn0.<span class="title function_">m</span>(); <span class="comment">// 输出 200，this 指向 &#123;a, m, n&#125;</span></span><br><span class="line">fn0.<span class="title function_">n</span>(); <span class="comment">// 输出 100，this 指向 globalThis</span></span><br><span class="line">fn0.<span class="title function_">k</span>()(); <span class="comment">// 输出 100, this 指向 globalThis</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> context = &#123;<span class="attr">a</span>: <span class="number">300</span>&#125;</span><br><span class="line"><span class="keyword">const</span> fn1 = fn.<span class="title function_">call</span>(context); <span class="comment">// 改变箭头函数 this 指向</span></span><br><span class="line">fn1.<span class="title function_">m</span>(); <span class="comment">// 输出 200，this 指向 &#123;a, m, n&#125;</span></span><br><span class="line">fn1.<span class="title function_">n</span>(); <span class="comment">// 输出 300，this 指向 context</span></span><br><span class="line">fn1.<span class="title function_">k</span>().<span class="title function_">call</span>(context); <span class="comment">// 输出 300，this 指向 context</span></span><br></pre></td></tr></table></figure>
+<h4 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h4><h5 id="块级作用域和执行上下文的关系"><a href="#块级作用域和执行上下文的关系" class="headerlink" title="块级作用域和执行上下文的关系"></a>块级作用域和执行上下文的关系</h5><blockquote>
+<p>块级作用域（{} 包裹的代码块，如 if&#x2F;for&#x2F;直接 {}）是词法环境的 “子环境”，依附于当前执行上下文（全局 &#x2F; 函数）存在，<strong>不会创建</strong>独立的执行上下文；块级作用域仅扩展执行上下文内词法环境的存储与查找规则。</p>
+</blockquote>
+<p>以代码示例说明：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 全局执行上下文（无独立块级执行上下文）：</span></span><br><span class="line"><span class="comment">// 词法环境 G：存储 let b = 4</span></span><br><span class="line"><span class="comment">// 变量环境 VG：存储 var a = undefined</span></span><br><span class="line"><span class="comment">// 外层词法环境 OG: 无</span></span><br><span class="line"><span class="keyword">var</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">let</span> b = <span class="number">4</span></span><br><span class="line"><span class="comment">// 块级作用域：创建块级词法环境 B，外部引用 → G</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="comment">// 块级词法环境 B：存储 let b = undefined、const c = undefined</span></span><br><span class="line">  <span class="keyword">let</span> b = <span class="number">2</span>;</span><br><span class="line">  <span class="keyword">const</span> c = <span class="number">3</span>;</span><br><span class="line">  <span class="keyword">var</span> d = <span class="number">4</span>; <span class="comment">// 存入全局变量环境 VG，无块级约束</span></span><br><span class="line">  </span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(a); <span class="comment">// 查找：B → G → VG → 找到 a=1</span></span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(b); <span class="comment">// 查找：B → 找到 b=2</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(b); <span class="comment">// 报错（块级词法环境 B 已销毁，G 中无 b）</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(d); <span class="comment">// 查找：G → VG → 找到 d=4（var 无块级约束）</span></span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/02/07/CSS/" rel="prev" title="CSS">
+                  <i class="fa fa-angle-left"></i> CSS
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/02/17/JavaScript%20%E5%8E%9F%E5%9E%8B/" rel="next" title="JavaSrcipt原型">
+                  JavaSrcipt原型 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2021 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Huangyuntse</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">59k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">3:34</span>
+  </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/huangyunt" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

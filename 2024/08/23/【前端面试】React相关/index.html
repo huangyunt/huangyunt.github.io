@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha256-5eIC48iZUHmSlSUz9XtjRyK2mzQkHScZY1WdMaoz74E=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.21.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="React 渲染与 Diff &#x2F; Fiber 机制见：React渲染原理 React Hooks见：Hooks 状态更新与批量更新机制setState 是同步还是异步的 setState 是一个异步方法，但是在 setTimeout &#x2F; setInterval 等定时器里会逃脱 React 的批处理控制，表现得更像同步更新。 实现机制类似于 vue 的 $nextTick 和浏">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【前端面试】React相关">
+<meta property="og:url" content="http://example.com/2024/08/23/%E3%80%90%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E3%80%91React%E7%9B%B8%E5%85%B3/index.html">
+<meta property="og:site_name" content="Huangyuntse">
+<meta property="og:description" content="React 渲染与 Diff &#x2F; Fiber 机制见：React渲染原理 React Hooks见：Hooks 状态更新与批量更新机制setState 是同步还是异步的 setState 是一个异步方法，但是在 setTimeout &#x2F; setInterval 等定时器里会逃脱 React 的批处理控制，表现得更像同步更新。 实现机制类似于 vue 的 $nextTick 和浏">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-08-23T02:00:00.000Z">
+<meta property="article:modified_time" content="2026-03-12T17:56:05.942Z">
+<meta property="article:author" content="Huangyuntse">
+<meta property="article:tag" content="React">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2024/08/23/%E3%80%90%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E3%80%91React%E7%9B%B8%E5%85%B3/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2024/08/23/%E3%80%90%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E3%80%91React%E7%9B%B8%E5%85%B3/","path":"2024/08/23/【前端面试】React相关/","title":"【前端面试】React相关"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>【前端面试】React相关 | Huangyuntse</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Huangyuntse</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-文章"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>文章</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">15</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">62</span></a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">43</span></a></li><li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#React-%E6%B8%B2%E6%9F%93%E4%B8%8E-Diff-Fiber-%E6%9C%BA%E5%88%B6"><span class="nav-number">1.</span> <span class="nav-text">React 渲染与 Diff &#x2F; Fiber 机制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#React-Hooks"><span class="nav-number">2.</span> <span class="nav-text">React Hooks</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8A%B6%E6%80%81%E6%9B%B4%E6%96%B0%E4%B8%8E%E6%89%B9%E9%87%8F%E6%9B%B4%E6%96%B0%E6%9C%BA%E5%88%B6"><span class="nav-number">3.</span> <span class="nav-text">状态更新与批量更新机制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#setState-%E6%98%AF%E5%90%8C%E6%AD%A5%E8%BF%98%E6%98%AF%E5%BC%82%E6%AD%A5%E7%9A%84"><span class="nav-number">3.1.</span> <span class="nav-text">setState 是同步还是异步的</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#React18-%E7%9A%84%E8%87%AA%E5%8A%A8%E6%89%B9%E5%A4%84%E7%90%86%E4%B8%8E-flushSync"><span class="nav-number">3.2.</span> <span class="nav-text">React18 的自动批处理与 flushSync</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B9%B6%E5%8F%91%E7%89%B9%E6%80%A7%E4%B8%8E-React18-19-%E6%96%B0%E7%89%B9%E6%80%A7"><span class="nav-number">4.</span> <span class="nav-text">并发特性与 React18&#x2F;19 新特性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#setState-%E8%87%AA%E5%8A%A8%E6%89%B9%E5%A4%84%E7%90%86%EF%BC%88%E6%A6%82%E5%BF%B5%E5%BD%92%E7%B1%BB%E8%87%B3%E6%AD%A4%EF%BC%89"><span class="nav-number">4.1.</span> <span class="nav-text">setState 自动批处理（概念归类至此）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B9%B6%E5%8F%91%E6%B8%B2%E6%9F%93"><span class="nav-number">4.2.</span> <span class="nav-text">并发渲染</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%B9%B6%E5%8F%91%E6%9C%BA%E5%88%B6%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="nav-number">4.2.1.</span> <span class="nav-text">并发机制的工作原理</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%B9%B6%E5%8F%91%E6%9C%BA%E5%88%B6%E7%9A%84%E4%BC%98%E5%8A%BF"><span class="nav-number">4.2.2.</span> <span class="nav-text">并发机制的优势</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%90%AF%E7%94%A8%E5%B9%B6%E5%8F%91%E6%A8%A1%E5%BC%8F"><span class="nav-number">4.2.3.</span> <span class="nav-text">如何启用并发模式</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%B6%E4%BB%96-React18-19-%E6%96%B0%E7%89%B9%E6%80%A7"><span class="nav-number">4.3.</span> <span class="nav-text">其他 React18&#x2F;19 新特性</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%81%E8%A3%85%E8%87%AA%E5%AE%9A%E4%B9%89-Hooks"><span class="nav-number">5.</span> <span class="nav-text">封装自定义 Hooks</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0-useTimeout-hook"><span class="nav-number">5.1.</span> <span class="nav-text">实现 useTimeout hook</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA-dom-%E5%8F%AF%E8%A7%81%E6%80%A7%E7%9A%84-hook"><span class="nav-number">5.2.</span> <span class="nav-text">实现一个 dom 可见性的 hook</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8A%B6%E6%80%81%E7%AE%A1%E7%90%86%E7%9B%B8%E5%85%B3"><span class="nav-number">6.</span> <span class="nav-text">状态管理相关</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#React-Hooks-%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E7%B1%BB%E4%BC%BC-Redux-%E7%9A%84%E7%8A%B6%E6%80%81%E7%AE%A1%E7%90%86"><span class="nav-number">6.1.</span> <span class="nav-text">React Hooks 如何实现类似 Redux 的状态管理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Redux-%E6%80%A7%E8%83%BD%E9%97%AE%E9%A2%98%EF%BC%88%E5%BE%85%E8%A1%A5%E5%85%85%EF%BC%89"><span class="nav-number">6.2.</span> <span class="nav-text">Redux 性能问题（待补充）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Redux-vs-Mobx%EF%BC%88%E5%BE%85%E8%A1%A5%E5%85%85%EF%BC%89"><span class="nav-number">6.3.</span> <span class="nav-text">Redux vs Mobx（待补充）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#React-Router-%E8%B7%AF%E7%94%B1%E6%A8%A1%E5%BC%8F%E4%B8%8E%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86"><span class="nav-number">7.</span> <span class="nav-text">React Router 路由模式与实现原理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%87%A0%E7%A7%8D%E6%A8%A1%E5%BC%8F"><span class="nav-number">7.1.</span> <span class="nav-text">几种模式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#hash-%E6%A8%A1%E5%BC%8F%E5%8E%9F%E7%90%86"><span class="nav-number">7.2.</span> <span class="nav-text">hash 模式原理</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Huangyuntse"
+      src="https://avatars.githubusercontent.com/u/73687768?v=4">
+  <p class="site-author-name" itemprop="name">Huangyuntse</p>
+  <div class="site-description" itemprop="description">也无风雨也无晴</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">62</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/huangyunt" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;huangyunt" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:973113137@qq.com" title="E-Mail → mailto:973113137@qq.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/08/23/%E3%80%90%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E3%80%91React%E7%9B%B8%E5%85%B3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/73687768?v=4">
+      <meta itemprop="name" content="Huangyuntse">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Huangyuntse">
+      <meta itemprop="description" content="也无风雨也无晴">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="【前端面试】React相关 | Huangyuntse">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【前端面试】React相关
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-08-23 10:00:00" itemprop="dateCreated datePublished" datetime="2024-08-23T10:00:00+08:00">2024-08-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">前端面试</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.5k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>5 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h3 id="React-渲染与-Diff-Fiber-机制"><a href="#React-渲染与-Diff-Fiber-机制" class="headerlink" title="React 渲染与 Diff &#x2F; Fiber 机制"></a>React 渲染与 Diff &#x2F; Fiber 机制</h3><p>见：<a target="_blank" rel="noopener" href="https://huangyunt.github.io/2021/09/29/React%E6%B8%B2%E6%9F%93%E5%8E%9F%E7%90%86/">React渲染原理</a></p>
+<h3 id="React-Hooks"><a href="#React-Hooks" class="headerlink" title="React Hooks"></a>React Hooks</h3><p>见：<a target="_blank" rel="noopener" href="https://huangyunt.github.io/2021/10/12/Hooks/">Hooks</a></p>
+<h3 id="状态更新与批量更新机制"><a href="#状态更新与批量更新机制" class="headerlink" title="状态更新与批量更新机制"></a>状态更新与批量更新机制</h3><h4 id="setState-是同步还是异步的"><a href="#setState-是同步还是异步的" class="headerlink" title="setState 是同步还是异步的"></a>setState 是同步还是异步的</h4><ul>
+<li>setState 是一个异步方法，但是在 setTimeout &#x2F; setInterval 等定时器里会逃脱 React 的批处理控制，表现得更像同步更新。</li>
+<li>实现机制类似于 vue 的 $nextTick 和浏览器的事件循环机制：每个 setState 都会被 React 加入任务队列，多次对同一个 state 使用 setState 只会返回最后一次的结果，因为它不是立刻更新，而是先放在队列中，等时机成熟再执行批量更新。</li>
+<li>React18 以后，使用了 createRoot API 后，所有 setState 都是异步批量执行的。</li>
+</ul>
+<h4 id="React18-的自动批处理与-flushSync"><a href="#React18-的自动批处理与-flushSync" class="headerlink" title="React18 的自动批处理与 flushSync"></a>React18 的自动批处理与 flushSync</h4><ul>
+<li>在 react17 中，只有 React 事件会进行批处理，原生 js 事件、promise，setTimeout、setInterval 不会。</li>
+<li>react18 中，将所有事件都进行批处理，即多次 setState 会被合并为 1 次执行，提高了性能。</li>
+</ul>
+<p>flushSync：退出批量更新，强制立即刷新视图。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">React</span>,&#123;useState&#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span></span><br><span class="line"><span class="keyword">import</span> &#123;flushSync&#125; <span class="keyword">from</span> <span class="string">&quot;react-dom&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">App</span>=(<span class="params"></span>)=&gt;&#123;</span><br><span class="line">  <span class="keyword">const</span> [count,setCount]=<span class="title function_">useState</span>(<span class="number">0</span>)</span><br><span class="line">  <span class="keyword">const</span> [count2,setCount2]=<span class="title function_">useState</span>(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;App&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">(()</span>=&gt;</span>&#123;</span></span><br><span class="line"><span class="language-xml">        // 第一次更新</span></span><br><span class="line"><span class="language-xml">        flushSync(()=&gt;&#123;</span></span><br><span class="line"><span class="language-xml">          setCount(count=&gt;count+1)</span></span><br><span class="line"><span class="language-xml">        &#125;)</span></span><br><span class="line"><span class="language-xml">        // 第二次更新</span></span><br><span class="line"><span class="language-xml">        flushSync(()=&gt;&#123;</span></span><br><span class="line"><span class="language-xml">          setCount2(count2=&gt;count2+1)</span></span><br><span class="line"><span class="language-xml">        &#125;)</span></span><br><span class="line"><span class="language-xml">      &#125;)&gt;点击<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">span</span>&gt;</span>count:&#123;count&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">span</span>&gt;</span>count2:&#123;count2&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span>	</span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span>	</span><br><span class="line">  )</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">App</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="并发特性与-React18-19-新特性"><a href="#并发特性与-React18-19-新特性" class="headerlink" title="并发特性与 React18&#x2F;19 新特性"></a>并发特性与 React18&#x2F;19 新特性</h3><h4 id="setState-自动批处理（概念归类至此）"><a href="#setState-自动批处理（概念归类至此）" class="headerlink" title="setState 自动批处理（概念归类至此）"></a>setState 自动批处理（概念归类至此）</h4><p>见上文第三部分。</p>
+<h4 id="并发渲染"><a href="#并发渲染" class="headerlink" title="并发渲染"></a>并发渲染</h4><blockquote>
+<p>支持 new concurrent renderer（并发模式的渲染）</p>
+</blockquote>
+<ul>
+<li>并发模式不是一个功能，而是一个底层设计。</li>
+<li>它可以帮助应用保持响应，根据用户的设备性能和网速进行调整。</li>
+<li>通过渲染可中断来修复阻塞渲染机制。在 concurrent 模式中，React 可以同时更新多个状态。</li>
+<li>区别就是使同步不可中断更新变成了异步可中断更新。</li>
+<li>useDeferredValue 和 startTransition 用来标记一次非紧急更新。</li>
+</ul>
+<p>starTransition：用于标记非紧急的更新，用 starTransition 包裹起来就是告诉 React，这部分代码渲染的优先级不高，可以优先处理其它更重要的渲染。</p>
+<p>useTransition：除了能提供 startTransition 以外，还能提供一个变量来跟踪当前渲染的执行状态。</p>
+<p>React 的并发机制允许 React 在渲染过程中根据任务的优先级进行调度和中断，从而确保高优先级的更新能够及时渲染，而不会被低优先级的任务阻塞。</p>
+<h5 id="并发机制的工作原理"><a href="#并发机制的工作原理" class="headerlink" title="并发机制的工作原理"></a>并发机制的工作原理</h5><p>时间分片（Time Slicing）： React 将渲染任务拆分为多个小片段，每个片段在主线程空闲时执行。这使得浏览器可以在渲染过程中处理用户输入和其他高优先级任务，避免长时间的渲染阻塞用户交互。</p>
+<p>优先级调度（Priority Scheduling）： React 为不同的更新分配不同的优先级。高优先级的更新（如用户输入）会被优先处理，而低优先级的更新（如数据预加载）可以在空闲时处理。</p>
+<p>可中断渲染（Interruptible Rendering）： 在并发模式下，React 可以中断当前的渲染任务，处理更高优先级的任务，然后再恢复之前的渲染。这确保了应用在长时间渲染过程中仍能保持响应性。</p>
+<h5 id="并发机制的优势"><a href="#并发机制的优势" class="headerlink" title="并发机制的优势"></a>并发机制的优势</h5><ul>
+<li>提升响应性： 通过优先处理高优先级任务，React 能够更快地响应用户输入，提升用户体验。</li>
+<li>优化性能： 将渲染任务拆分为小片段，避免长时间的渲染阻塞，提升应用的整体性能。</li>
+<li>更好的资源利用： 在主线程空闲时处理低优先级任务，充分利用系统资源。</li>
+</ul>
+<h5 id="如何启用并发模式"><a href="#如何启用并发模式" class="headerlink" title="如何启用并发模式"></a>如何启用并发模式</h5><p>要在 React 应用中启用并发模式，需要使用 createRoot API：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">React</span> <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span></span><br><span class="line"><span class="keyword">import</span> <span class="title class_">ReactDOM</span> <span class="keyword">from</span> <span class="string">&#x27;react-dom/client&#x27;</span></span><br><span class="line"><span class="keyword">import</span> <span class="title class_">App</span> <span class="keyword">from</span> <span class="string">&#x27;./App&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> root = <span class="title class_">ReactDOM</span>.<span class="title function_">createRoot</span>(<span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;root&#x27;</span>))</span><br><span class="line">root.<span class="title function_">render</span>(<span class="language-xml"><span class="tag">&lt;<span class="name">App</span> /&gt;</span></span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>在并发模式下，React 会自动根据任务的优先级进行调度和渲染。</p>
+<h4 id="其他-React18-19-新特性"><a href="#其他-React18-19-新特性" class="headerlink" title="其他 React18&#x2F;19 新特性"></a>其他 React18&#x2F;19 新特性</h4><ul>
+<li>放弃对 IE 浏览器的支持：react18&#x2F;19 引入的新特性全部基于现代浏览器，如需支持需要退回到 react17 版本。</li>
+<li>Suspense 不再需要 fallback 捕获。</li>
+<li>支持 useId：在服务器和客户端生成相同的唯一一个 id，避免 hydrating 的不兼容。</li>
+<li>useSyncExternalStore：用于解决外部数据撕裂问题。</li>
+<li>useInsertionEffect：这个 hooks 只建议在 css in js 库中使用，这个 hooks 执行时机在 DOM 生成之后，useLayoutEffect 执行之前，无法访问 DOM 节点引用，一般用于提前注入脚本。</li>
+</ul>
+<h3 id="封装自定义-Hooks"><a href="#封装自定义-Hooks" class="headerlink" title="封装自定义 Hooks"></a>封装自定义 Hooks</h3><h4 id="实现-useTimeout-hook"><a href="#实现-useTimeout-hook" class="headerlink" title="实现 useTimeout hook"></a>实现 useTimeout hook</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// callback 回调函数， delay 延迟时间</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">useTimeout</span>(<span class="params">callback, delay</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> memorizeCallback = <span class="title function_">useRef</span>();</span><br><span class="line"></span><br><span class="line">  <span class="title function_">useEffect</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    memorizeCallback.<span class="property">current</span> = callback;</span><br><span class="line">  &#125;, [callback]);</span><br><span class="line"></span><br><span class="line">  <span class="title function_">useEffect</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (delay !== <span class="literal">null</span>) &#123;</span><br><span class="line">      <span class="keyword">const</span> timer = <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        memorizeCallback.<span class="title function_">current</span>();</span><br><span class="line">      &#125;, delay);</span><br><span class="line">      <span class="keyword">return</span> <span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">clearTimeout</span>(timer);</span><br><span class="line">      &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;, [delay]);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="实现一个-dom-可见性的-hook"><a href="#实现一个-dom-可见性的-hook" class="headerlink" title="实现一个 dom 可见性的 hook"></a>实现一个 dom 可见性的 hook</h4><blockquote>
+<p>实现的一个关键点是 Ref 的更新在 useEffect 执行前</p>
+</blockquote>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; useEffect, useState, useRef &#125; <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="title function_">useInView</span> = (<span class="params"></span></span><br><span class="line"><span class="params">    options = &#123;</span></span><br><span class="line"><span class="params">        root: <span class="literal">null</span>,</span></span><br><span class="line"><span class="params">        rootMargin: <span class="string">&#x27;0px 0px&#x27;</span>,</span></span><br><span class="line"><span class="params">        threshold: <span class="number">1</span>,</span></span><br><span class="line"><span class="params">    &#125;,</span></span><br><span class="line"><span class="params">    triggerOnce = <span class="literal">false</span>, <span class="comment">// 是否只触发一次</span></span></span><br><span class="line"><span class="params"></span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">const</span> [inView, setInView] = <span class="title function_">useState</span>(<span class="literal">false</span>);</span><br><span class="line">    <span class="keyword">const</span> targetRef = <span class="title function_">useRef</span>(<span class="literal">null</span>);</span><br><span class="line"></span><br><span class="line">    <span class="title function_">useEffect</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> observer = <span class="keyword">new</span> <span class="title class_">IntersectionObserver</span>(<span class="function">(<span class="params">entries</span>) =&gt;</span> &#123;</span><br><span class="line">            entries.<span class="title function_">forEach</span>(<span class="function">(<span class="params">entry</span>) =&gt;</span> &#123;</span><br><span class="line">                <span class="keyword">if</span> (entry.<span class="property">isIntersecting</span>) &#123;</span><br><span class="line">                    <span class="title function_">setInView</span>(<span class="literal">true</span>);</span><br><span class="line">                    <span class="keyword">if</span> (triggerOnce) &#123;</span><br><span class="line">                        <span class="comment">// 触发一次后结束监听</span></span><br><span class="line">                        observer.<span class="title function_">unobserve</span>(entry.<span class="property">target</span>);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="title function_">setInView</span>(<span class="literal">false</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;, options);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (targetRef.<span class="property">current</span>) &#123;</span><br><span class="line">            <span class="comment">// 开始监听</span></span><br><span class="line">            observer.<span class="title function_">observe</span>(targetRef.<span class="property">current</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="function">() =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (targetRef.<span class="property">current</span>) &#123;</span><br><span class="line">                <span class="comment">// 组件卸载时结束监听</span></span><br><span class="line">                observer.<span class="title function_">unobserve</span>(targetRef.<span class="property">current</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;, [options, triggerOnce]);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> [targetRef, inView];</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> useInView;</span><br></pre></td></tr></table></figure>
+
+<h3 id="状态管理相关"><a href="#状态管理相关" class="headerlink" title="状态管理相关"></a>状态管理相关</h3><h4 id="React-Hooks-如何实现类似-Redux-的状态管理"><a href="#React-Hooks-如何实现类似-Redux-的状态管理" class="headerlink" title="React Hooks 如何实现类似 Redux 的状态管理"></a>React Hooks 如何实现类似 Redux 的状态管理</h4><p>useContext + useReducer。</p>
+<h4 id="Redux-性能问题（待补充）"><a href="#Redux-性能问题（待补充）" class="headerlink" title="Redux 性能问题（待补充）"></a>Redux 性能问题（待补充）</h4><h4 id="Redux-vs-Mobx（待补充）"><a href="#Redux-vs-Mobx（待补充）" class="headerlink" title="Redux vs Mobx（待补充）"></a>Redux vs Mobx（待补充）</h4><h3 id="React-Router-路由模式与实现原理"><a href="#React-Router-路由模式与实现原理" class="headerlink" title="React Router 路由模式与实现原理"></a>React Router 路由模式与实现原理</h3><h4 id="几种模式"><a href="#几种模式" class="headerlink" title="几种模式"></a>几种模式</h4><ul>
+<li>hash 模式：在 url 后面加上 #，如 <a target="_blank" rel="noopener" href="http://127.0.0.1:5500/home/#/page1">http://127.0.0.1:5500/home/#/page1</a></li>
+<li>history 模式：允许操作浏览器的曾经在标签页或者框架里访问的会话历史记录</li>
+</ul>
+<h4 id="hash-模式原理"><a href="#hash-模式原理" class="headerlink" title="hash 模式原理"></a>hash 模式原理</h4><p>hash 值改变，触发全局 window 对象上的 hashchange 事件。所以 hash 模式路由就是利用 hashchange 事件监听 URL 的变化，从而进行 DOM 操作来模拟页面跳转。</p>
+<p>通过 window.addEventListener(‘hashChange’, callback) 监听 hash 值的变化，并传递给其嵌套的组件。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/React/" rel="tag"># React</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/08/21/%E3%80%90%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E3%80%91JavaScript%E7%9B%B8%E5%85%B3/" rel="prev" title="【前端面试】JavaScript相关">
+                  <i class="fa fa-angle-left"></i> 【前端面试】JavaScript相关
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2024/08/27/%E3%80%90%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E3%80%91%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%9B%B8%E5%85%B3/" rel="next" title="【前端面试】工程化相关">
+                  【前端面试】工程化相关 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2021 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Huangyuntse</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">59k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">3:34</span>
+  </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/huangyunt" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

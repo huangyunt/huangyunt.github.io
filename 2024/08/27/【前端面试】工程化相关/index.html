@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha256-5eIC48iZUHmSlSUz9XtjRyK2mzQkHScZY1WdMaoz74E=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.21.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="包管理器Pnpm是怎么解决幽灵依赖的hard link + symbolic link 如何确定一个项目用的包管理器版本：enigne字段1234&quot;engines&quot;: &#123;  &quot;node&quot;: &quot;&gt;&#x3D;14.0.0&quot;,  &quot;npm&quot;: &quot;&gt;&#x3D;7.0.0&quot;  &#x2F;&#x2F; 项目要求的 npm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【前端面试】工程化相关">
+<meta property="og:url" content="http://example.com/2024/08/27/%E3%80%90%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E3%80%91%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%9B%B8%E5%85%B3/index.html">
+<meta property="og:site_name" content="Huangyuntse">
+<meta property="og:description" content="包管理器Pnpm是怎么解决幽灵依赖的hard link + symbolic link 如何确定一个项目用的包管理器版本：enigne字段1234&quot;engines&quot;: &#123;  &quot;node&quot;: &quot;&gt;&#x3D;14.0.0&quot;,  &quot;npm&quot;: &quot;&gt;&#x3D;7.0.0&quot;  &#x2F;&#x2F; 项目要求的 npm">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/assets/antd%20packagejson%E7%A4%BA%E4%BE%8B.png">
+<meta property="og:image" content="http://example.com/assets/%E5%A6%82%E4%BD%95%E8%AE%A1%E7%AE%97%E9%A6%96%E5%B1%8F%E6%80%A7%E8%83%BD.png">
+<meta property="article:published_time" content="2024-08-27T02:00:00.000Z">
+<meta property="article:modified_time" content="2026-03-12T17:56:05.943Z">
+<meta property="article:author" content="Huangyuntse">
+<meta property="article:tag" content="前端工程化">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/assets/antd%20packagejson%E7%A4%BA%E4%BE%8B.png">
+
+
+<link rel="canonical" href="http://example.com/2024/08/27/%E3%80%90%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E3%80%91%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%9B%B8%E5%85%B3/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2024/08/27/%E3%80%90%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E3%80%91%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%9B%B8%E5%85%B3/","path":"2024/08/27/【前端面试】工程化相关/","title":"【前端面试】工程化相关"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>【前端面试】工程化相关 | Huangyuntse</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Huangyuntse</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-文章"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>文章</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">15</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">62</span></a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">43</span></a></li><li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8C%85%E7%AE%A1%E7%90%86%E5%99%A8"><span class="nav-number">1.</span> <span class="nav-text">包管理器</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Pnpm%E6%98%AF%E6%80%8E%E4%B9%88%E8%A7%A3%E5%86%B3%E5%B9%BD%E7%81%B5%E4%BE%9D%E8%B5%96%E7%9A%84"><span class="nav-number">1.1.</span> <span class="nav-text">Pnpm是怎么解决幽灵依赖的</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E7%A1%AE%E5%AE%9A%E4%B8%80%E4%B8%AA%E9%A1%B9%E7%9B%AE%E7%94%A8%E7%9A%84%E5%8C%85%E7%AE%A1%E7%90%86%E5%99%A8%E7%89%88%E6%9C%AC%EF%BC%9Aenigne%E5%AD%97%E6%AE%B5"><span class="nav-number">1.2.</span> <span class="nav-text">如何确定一个项目用的包管理器版本：enigne字段</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E9%81%BF%E5%85%8D%E4%B8%9A%E5%8A%A1%E9%A1%B9%E7%9B%AE%E8%A2%AB%E5%8F%91%E5%88%B0npm%E4%B8%8A"><span class="nav-number">1.3.</span> <span class="nav-text">如何避免业务项目被发到npm上</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%9C%A8-package-json-%E4%B8%AD%E6%B7%BB%E5%8A%A0-private-%E5%AD%97%E6%AE%B5"><span class="nav-number">1.4.</span> <span class="nav-text">在 package.json 中添加 private 字段</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-npmignore-%E6%88%96-gitignore-%E6%96%87%E4%BB%B6"><span class="nav-number">1.5.</span> <span class="nav-text">使用 .npmignore 或 .gitignore 文件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E9%A2%84%E5%8F%91%E5%B8%83%E9%92%A9%E5%AD%90"><span class="nav-number">1.6.</span> <span class="nav-text">设置预发布钩子</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-npmrc-%E6%96%87%E4%BB%B6%E9%94%81%E5%AE%9A%E5%8F%91%E5%B8%83%E6%BA%90"><span class="nav-number">1.7.</span> <span class="nav-text">使用 .npmrc 文件锁定发布源</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#package-json"><span class="nav-number">2.</span> <span class="nav-text">package.json</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#package-json-%E4%B8%AD-main-module-browser-exports-%E5%AD%97%E6%AE%B5%E6%9C%89%E4%BD%95%E5%8C%BA%E5%88%AB"><span class="nav-number">2.1.</span> <span class="nav-text">package.json 中 main&#x2F;module&#x2F;browser&#x2F;exports 字段有何区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#peerdependencies%E7%9B%B8%E5%85%B3"><span class="nav-number">2.2.</span> <span class="nav-text">peerdependencies相关</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Webpack"><span class="nav-number">3.</span> <span class="nav-text">Webpack</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#webpack-%E7%9A%84-loader-%E7%9A%84%E6%9C%BA%E5%88%B6%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%8C%E6%9C%89%E5%93%AA%E4%BA%9B%E5%B8%B8%E7%94%A8%E7%9A%84loader%EF%BC%9F"><span class="nav-number">3.1.</span> <span class="nav-text">webpack 的 loader 的机制是什么，有哪些常用的loader？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#webpack%E9%BB%98%E8%AE%A4%E6%89%93%E5%8C%85%E6%88%90%E4%BB%80%E4%B9%88%E4%BA%A7%E7%89%A9%EF%BC%9FUMD%E3%80%81CJS%E3%80%81ESM"><span class="nav-number">3.2.</span> <span class="nav-text">webpack默认打包成什么产物？UMD、CJS、ESM</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#webpack-%E7%9A%84%E6%8F%92%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%8C%E6%9C%89%E5%93%AA%E4%BA%9B%E5%B8%B8%E7%94%A8%E7%9A%84plugin%EF%BC%9F"><span class="nav-number">3.3.</span> <span class="nav-text">webpack 的插件系统是什么，有哪些常用的plugin？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#webpack%E6%9C%89%E5%93%AA%E4%B8%A4%E7%A7%8D%E4%BB%A3%E7%A0%81%E5%88%86%E5%89%B2%E6%A8%A1%E5%BC%8F"><span class="nav-number">3.4.</span> <span class="nav-text">webpack有哪两种代码分割模式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#webpack-splitchunk%E6%9C%89%E5%93%AA%E4%BA%9B%E9%85%8D%E7%BD%AE"><span class="nav-number">3.5.</span> <span class="nav-text">webpack splitchunk有哪些配置</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96"><span class="nav-number">4.</span> <span class="nav-text">性能优化</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9C%89%E5%93%AA%E4%BA%9B%E5%B8%B8%E8%A7%81%E7%9A%84%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E6%8C%87%E6%A0%87%EF%BC%8C%E5%A6%82%E4%BD%95%E8%AE%A1%E7%AE%97%E5%87%BA%E8%BF%99%E4%BA%9B%E6%8C%87%E6%A0%87"><span class="nav-number">4.1.</span> <span class="nav-text">有哪些常见的性能优化指标，如何计算出这些指标</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%85%B3%E6%B3%A8%E5%93%AA%E4%BA%9B%E6%80%A7%E8%83%BD%E6%8C%87%E6%A0%87%EF%BC%8C%E6%80%8E%E4%B9%88%E5%AE%9E%E7%8E%B0%E7%9A%84"><span class="nav-number">4.2.</span> <span class="nav-text">关注哪些性能指标，怎么实现的</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E9%A6%96%E5%AD%97%E8%8A%82%E6%97%B6%E9%97%B4"><span class="nav-number">4.2.1.</span> <span class="nav-text">首字节时间</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#DomReady%E6%97%B6%E9%97%B4"><span class="nav-number">4.2.2.</span> <span class="nav-text">DomReady时间</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E9%A6%96%E5%B1%8F%E6%97%B6%E9%97%B4"><span class="nav-number">4.2.3.</span> <span class="nav-text">首屏时间</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%9C%A8%E5%81%9A%E6%8C%89%E9%9C%80%E5%8A%A0%E8%BD%BD%E6%97%B6%EF%BC%8C%E5%A6%82%E4%BD%95%E5%8E%BB%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AAasyncComponent"><span class="nav-number">4.3.</span> <span class="nav-text">在做按需加载时，如何去实现一个asyncComponent</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Huangyuntse"
+      src="https://avatars.githubusercontent.com/u/73687768?v=4">
+  <p class="site-author-name" itemprop="name">Huangyuntse</p>
+  <div class="site-description" itemprop="description">也无风雨也无晴</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">62</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/huangyunt" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;huangyunt" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:973113137@qq.com" title="E-Mail → mailto:973113137@qq.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/08/27/%E3%80%90%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E3%80%91%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%9B%B8%E5%85%B3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/73687768?v=4">
+      <meta itemprop="name" content="Huangyuntse">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Huangyuntse">
+      <meta itemprop="description" content="也无风雨也无晴">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="【前端面试】工程化相关 | Huangyuntse">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【前端面试】工程化相关
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-08-27 10:00:00" itemprop="dateCreated datePublished" datetime="2024-08-27T10:00:00+08:00">2024-08-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">前端面试</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.3k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>5 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h4 id="包管理器"><a href="#包管理器" class="headerlink" title="包管理器"></a>包管理器</h4><h5 id="Pnpm是怎么解决幽灵依赖的"><a href="#Pnpm是怎么解决幽灵依赖的" class="headerlink" title="Pnpm是怎么解决幽灵依赖的"></a>Pnpm是怎么解决幽灵依赖的</h5><p>hard link + symbolic link</p>
+<h5 id="如何确定一个项目用的包管理器版本：enigne字段"><a href="#如何确定一个项目用的包管理器版本：enigne字段" class="headerlink" title="如何确定一个项目用的包管理器版本：enigne字段"></a>如何确定一个项目用的包管理器版本：enigne字段</h5><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">&quot;engines&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;node&quot;</span><span class="punctuation">:</span> <span class="string">&quot;&gt;=14.0.0&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;npm&quot;</span><span class="punctuation">:</span> <span class="string">&quot;&gt;=7.0.0&quot;</span>  <span class="comment">// 项目要求的 npm 最低版本</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="如何避免业务项目被发到npm上"><a href="#如何避免业务项目被发到npm上" class="headerlink" title="如何避免业务项目被发到npm上"></a>如何避免业务项目被发到npm上</h5><h5 id="在-package-json-中添加-private-字段"><a href="#在-package-json-中添加-private-字段" class="headerlink" title="在 package.json 中添加 private 字段"></a>在 package.json 中添加 private 字段</h5><p>在项目的 package.json 文件中添加 private: true 字段，这是最直接的方式。当 private 为 true 时，npm 会拒绝发布该项目。</p>
+<h5 id="使用-npmignore-或-gitignore-文件"><a href="#使用-npmignore-或-gitignore-文件" class="headerlink" title="使用 .npmignore 或 .gitignore 文件"></a>使用 .npmignore 或 .gitignore 文件</h5><p>将项目中的所有文件添加到忽略列表，确保没有文件被发布。.npmignore 会覆盖 .gitignore 的规则。</p>
+<h5 id="设置预发布钩子"><a href="#设置预发布钩子" class="headerlink" title="设置预发布钩子"></a>设置预发布钩子</h5><p>在 package.json 中添加 prepublishOnly 脚本，使其在发布前失败：</p>
+<h5 id="使用-npmrc-文件锁定发布源"><a href="#使用-npmrc-文件锁定发布源" class="headerlink" title="使用 .npmrc 文件锁定发布源"></a>使用 .npmrc 文件锁定发布源</h5><p>在项目根目录创建 .npmrc 文件，设置为私有源或无效源：</p>
+<span id="more"></span>
+
+<hr>
+<h4 id="package-json"><a href="#package-json" class="headerlink" title="package.json"></a>package.json</h4><h5 id="package-json-中-main-module-browser-exports-字段有何区别"><a href="#package-json-中-main-module-browser-exports-字段有何区别" class="headerlink" title="package.json 中 main&#x2F;module&#x2F;browser&#x2F;exports 字段有何区别"></a>package.json 中 main&#x2F;module&#x2F;browser&#x2F;exports 字段有何区别</h5><p>以antd为例，main一般放Commonjs入口，module放ESModule入口，unpkg放UMD入口<br><img src="/../assets/antd%20packagejson%E7%A4%BA%E4%BE%8B.png" alt="alt text"></p>
+<h5 id="peerdependencies相关"><a href="#peerdependencies相关" class="headerlink" title="peerdependencies相关"></a>peerdependencies相关</h5><p>peerDependencies用于声明当前包依赖的宿主环境必须安装的依赖，主要作用是约束宿主项目的依赖版本，确保插件与宿主环境兼容</p>
+<hr>
+<h4 id="Webpack"><a href="#Webpack" class="headerlink" title="Webpack"></a>Webpack</h4><h5 id="webpack-的-loader-的机制是什么，有哪些常用的loader？"><a href="#webpack-的-loader-的机制是什么，有哪些常用的loader？" class="headerlink" title="webpack 的 loader 的机制是什么，有哪些常用的loader？"></a>webpack 的 loader 的机制是什么，有哪些常用的loader？</h5><p>本质上是一个函数，做文件转换，处理的操作，输入输出都是文件，常用loader有ts-loader，less-loader，babel-loader</p>
+<h5 id="webpack默认打包成什么产物？UMD、CJS、ESM"><a href="#webpack默认打包成什么产物？UMD、CJS、ESM" class="headerlink" title="webpack默认打包成什么产物？UMD、CJS、ESM"></a>webpack默认打包成什么产物？UMD、CJS、ESM</h5><p>类似于UMD的那种iife</p>
+<h5 id="webpack-的插件系统是什么，有哪些常用的plugin？"><a href="#webpack-的插件系统是什么，有哪些常用的plugin？" class="headerlink" title="webpack 的插件系统是什么，有哪些常用的plugin？"></a>webpack 的插件系统是什么，有哪些常用的plugin？</h5><p>用于在webpack打包构建的生命周期里去做一些逻辑，常用plugin有：</p>
+<ul>
+<li><strong>HtmlWebpackPlugin</strong>：生成 HTML 文件并自动注入打包后的 JS&#x2F;CSS</li>
+<li><strong>TerserPlugin</strong>：压缩和混淆 JavaScript 代码</li>
+<li><strong>SplitChunksPlugin</strong>：自动分割公共代码和第三方库（Webpack 内置）</li>
+<li><strong>BundleAnalyzerPlugin</strong>：产物体积分析</li>
+</ul>
+<h5 id="webpack有哪两种代码分割模式"><a href="#webpack有哪两种代码分割模式" class="headerlink" title="webpack有哪两种代码分割模式"></a>webpack有哪两种代码分割模式</h5><p><strong>打包分离（bundle spliting）</strong></p>
+<blockquote>
+<p>为了更好的缓存，把代码分割成一个个小文件，见下文splitchunk<br><strong>代码分离（code spliting）</strong><br>动态，按需的加载代码，通过 import()实现<br>import() 函数是由 TS39 提出的一种动态加载模块的规范实现，其返回是一个 promise。<br>webpack 检测到这种import() 函数语法<strong>会自动代码分割，把这段代码打包成单独的chunk</strong>。使用这种动态导入语法代替以前的静态引入，可以让组件在渲染的时候，再去加载组件对应的资源，<br>webpack 通过<strong>创建 script 标签</strong>来实现动态加载，找出依赖对应的 chunk 信息，然后生成 script 标签来动态加载 chunk，每个 chunk 都有对应的状态：未加载、加载中、已加载。</p>
+</blockquote>
+<h5 id="webpack-splitchunk有哪些配置"><a href="#webpack-splitchunk有哪些配置" class="headerlink" title="webpack splitchunk有哪些配置"></a>webpack splitchunk有哪些配置</h5><ul>
+<li><strong>chunks</strong>: ‘async’,      &#x2F;&#x2F; 分割哪些类型的模块（async、initial、all）</li>
+<li><strong>minSize</strong>: 20000,       &#x2F;&#x2F; 生成 chunk 的最小体积（字节）</li>
+<li><strong>minRemainingSize</strong>: 0,  &#x2F;&#x2F; 确保拆分后剩余的最小 chunk 体积</li>
+<li><strong>minChunks</strong>: 1,         &#x2F;&#x2F; 被多少模块共享时才分割</li>
+<li><strong>maxAsyncRequests</strong>: 30, &#x2F;&#x2F; 按需加载时的最大并行请求数</li>
+<li><strong>maxInitialRequests</strong>: 30, &#x2F;&#x2F; 入口点的最大并行请求数</li>
+<li><strong>enforceSizeThreshold</strong>: 50000, &#x2F;&#x2F; 强制拆分阈值</li>
+<li><strong>cacheGroups</strong>: {        &#x2F;&#x2F; 缓存组，自定义拆分策略<br>  defaultVendors: {<br>  test: &#x2F;[\&#x2F;]node_modules[\&#x2F;]&#x2F;, &#x2F;&#x2F; 匹配 node_modules 中的模块<br>  priority: -10,                 &#x2F;&#x2F; 优先级<br>  reuseExistingChunk: true,      &#x2F;&#x2F; 复用已存在的 chunk<br>  },<br>  default: {<br>  minChunks: 2,<br>  priority: -20,<br>  reuseExistingChunk: true,<br>  },<br>},</li>
+</ul>
+<hr>
+<h4 id="性能优化"><a href="#性能优化" class="headerlink" title="性能优化"></a>性能优化</h4><h5 id="有哪些常见的性能优化指标，如何计算出这些指标"><a href="#有哪些常见的性能优化指标，如何计算出这些指标" class="headerlink" title="有哪些常见的性能优化指标，如何计算出这些指标"></a>有哪些常见的性能优化指标，如何计算出这些指标</h5><p>如何计算：通过Performance API获取<br><code>performance.getEntriesByType(&#39;paint&#39;)</code></p>
+<ul>
+<li><strong>FP（首次绘制）</strong><br>表示渲染出第一个像素点。FP一般在HTML解析完成或者解析一部分时候触发。标志着页面开始有视觉反馈</li>
+<li><strong>FCP（首次内容绘制）</strong><br>表示渲染出第一个内容，这里的“内容”可以是文本、图片、canvas。用户首次看到实际内容的时间，更贴近真实体验。</li>
+<li><strong>LCP（最大内容渲染）</strong><br>最大内容绘制，可视区域内最大的内容元素完成渲染的时间点，用于衡量主内容可见的时间，反映首屏加载速度</li>
+<li><strong>DCL（DOMContentLoaded）</strong><br>HTML 解析完成且 DOM 树已构建完毕时触发，但此时 CSS、图片等外部资源可能仍在加载中。标志着可以安全操作 DOM，是前端交互初始化的重要时机。</li>
+<li><strong>FID（首次输入延迟）</strong><br>用户首次与页面交互（点击按钮、输入框等）到浏览器实际能够处理该交互的时间差。</li>
+<li><strong>TTI（可交互时间）</strong><br>页面不仅完成渲染（如 LCP），且能可靠响应用户输入的时间点。</li>
+</ul>
+<h5 id="关注哪些性能指标，怎么实现的"><a href="#关注哪些性能指标，怎么实现的" class="headerlink" title="关注哪些性能指标，怎么实现的"></a>关注哪些性能指标，怎么实现的</h5><h6 id="首字节时间"><a href="#首字节时间" class="headerlink" title="首字节时间"></a>首字节时间</h6><p>HTML解析完成，开始渲染第一个字节的时间。<br>应该也是借助Performance API实现</p>
+<h6 id="DomReady时间"><a href="#DomReady时间" class="headerlink" title="DomReady时间"></a>DomReady时间</h6><p>和DCL一致，HTML文档被完全加载和解析后触发，此时外部资源可能仍然在下载</p>
+<h6 id="首屏时间"><a href="#首屏时间" class="headerlink" title="首屏时间"></a>首屏时间</h6><p>页面完全渲染完毕的结束时间。<br>借助MutationObserver和PerformanceObserver实现</p>
+<ul>
+<li><strong>MutationObserver</strong>：<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/MutationObserver">MDN: MutationObserver</a></li>
+<li><strong>PerformanceObserver</strong>：<a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/API/PerformanceObserver">MDN: PerformanceObserver</a></li>
+<li><strong>实现方案</strong>：<br><img src="/../assets/%E5%A6%82%E4%BD%95%E8%AE%A1%E7%AE%97%E9%A6%96%E5%B1%8F%E6%80%A7%E8%83%BD.png" alt="alt text"></li>
+</ul>
+<h5 id="在做按需加载时，如何去实现一个asyncComponent"><a href="#在做按需加载时，如何去实现一个asyncComponent" class="headerlink" title="在做按需加载时，如何去实现一个asyncComponent"></a>在做按需加载时，如何去实现一个asyncComponent</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title class_">Home</span> = <span class="title class_">AsyncComponent</span>(<span class="function">() =&gt;</span> <span class="string">&#x27;./test.tsx&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">AsyncComponent</span> = (<span class="params">importComponent</span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="title function_">funciton</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">const</span> [component, setComponent] = <span class="title function_">useState</span>(<span class="literal">null</span>)</span><br><span class="line">        <span class="title function_">useEffect</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">            importComponent.<span class="title function_">then</span>(<span class="function">(<span class="params">cmp</span>) =&gt;</span> &#123;</span><br><span class="line">                <span class="title function_">setComponent</span>(cmp.<span class="property">default</span>)</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;, [])</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> component ? <span class="language-xml"><span class="tag">&lt;<span class="name">component</span>/&gt;</span></span> : <span class="literal">null</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%8C%96/" rel="tag"># 前端工程化</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/08/23/%E3%80%90%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E3%80%91React%E7%9B%B8%E5%85%B3/" rel="prev" title="【前端面试】React相关">
+                  <i class="fa fa-angle-left"></i> 【前端面试】React相关
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2024/08/27/%E3%80%90%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E3%80%91%E5%9C%BA%E6%99%AF%E9%A2%98/" rel="next" title="【前端面试】场景题">
+                  【前端面试】场景题 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2021 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Huangyuntse</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">59k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">3:34</span>
+  </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/huangyunt" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
