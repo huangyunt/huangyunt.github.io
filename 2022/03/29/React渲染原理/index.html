@@ -35,7 +35,7 @@
 <meta property="og:image" content="http://example.com/assets/completeWork.png">
 <meta property="og:image" content="http://example.com/assets/update.png">
 <meta property="article:published_time" content="2022-03-29T02:00:00.000Z">
-<meta property="article:modified_time" content="2026-03-19T10:08:39.609Z">
+<meta property="article:modified_time" content="2026-03-19T10:31:36.695Z">
 <meta property="article:author" content="Huangyuntse">
 <meta property="article:tag" content="JavaScript">
 <meta property="article:tag" content="React">
@@ -1247,9 +1247,15 @@ next：与其他Update连接形成链表。 -->
 <p>Lane 相比老的“单一优先级数值”的优势：</p>
 <p><strong>可以同时表示多个更新类别</strong>：</p>
 <ul>
-<li>一次 render 可以处理多个 lane 的更新（<code>renderLanes</code> 是一个 lanes 集合）；<br><strong>易于合并与拆分</strong>：</li>
+<li>一次 render 可以处理多个 lane 的更新（<code>renderLanes</code> 是一个 lanes 集合）；</li>
+</ul>
+<p><strong>易于合并与拆分</strong>：</p>
+<ul>
 <li>多个更新可以打在同一条 lane 上（同优先级）；</li>
-<li>某次调度可以一次性“吃掉”一组 lane；<br><strong>方便按语义做特殊处理</strong>：</li>
+<li>某次调度可以一次性“吃掉”一组 lane；</li>
+</ul>
+<p><strong>方便按语义做特殊处理</strong>：</p>
+<ul>
 <li><code>SyncLane</code>：必须立刻处理的同步更新；</li>
 <li><code>TransitionLanes</code>：可以中断、可以延后的过渡更新；</li>
 <li><code>IdleLanes</code>：只有页面很空闲时才处理。</li>
