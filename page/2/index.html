@@ -547,7 +547,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>2.2k</span>
+      <span>2.3k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -615,6 +615,8 @@ reconcileChildren 内部会根据有没有 current 来选择：
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">React</span> <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span></span><br><span class="line"><span class="keyword">import</span> <span class="title class_">ReactDOM</span> <span class="keyword">from</span> <span class="string">&#x27;react-dom/client&#x27;</span></span><br><span class="line"><span class="keyword">import</span> <span class="title class_">App</span> <span class="keyword">from</span> <span class="string">&#x27;./App&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> root = <span class="title class_">ReactDOM</span>.<span class="title function_">createRoot</span>(<span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;root&#x27;</span>))</span><br><span class="line">root.<span class="title function_">render</span>(<span class="language-xml"><span class="tag">&lt;<span class="name">App</span> /&gt;</span></span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p>在并发模式下，React 会自动根据任务的优先级进行调度和渲染。</p>
+<p>useTransition 本质：把一部分更新标记到“过渡 lane（低优先级车道）”，让紧急更新（输入、点击）先渲染，过渡更新可以被打断、延后。</p>
+<p>useDeferredValue 本质：把某个值的更新“映射”到过渡 lane，上游状态先变，依赖这个值的重渲染滞后一点，起到“值级别的 useTransition”效果。</p>
 <h4 id="什么是lane模型"><a href="#什么是lane模型" class="headerlink" title="什么是lane模型"></a>什么是lane模型</h4><h4 id="状态更新与批量更新机制"><a href="#状态更新与批量更新机制" class="headerlink" title="状态更新与批量更新机制"></a>状态更新与批量更新机制</h4><h4 id="setState-是同步还是异步的"><a href="#setState-是同步还是异步的" class="headerlink" title="setState 是同步还是异步的"></a>setState 是同步还是异步的</h4><ul>
 <li>setState 是一个异步方法，但是在 setTimeout &#x2F; setInterval 等定时器里会逃脱 React 的批处理控制，表现得更像同步更新。</li>
 <li>实现机制类似于 vue 的 $nextTick 和浏览器的事件循环机制：每个 setState 都会被 React 加入任务队列，多次对同一个 state 使用 setState 只会返回最后一次的结果，因为它不是立刻更新，而是先放在队列中，等时机成熟再执行批量更新。</li>
@@ -1142,14 +1144,14 @@ reconcileChildren 内部会根据有没有 current 来选择：
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>15k</span>
+      <span>18k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>55 分钟</span>
+      <span>1:07</span>
     </span>
 </div>
 
@@ -1325,13 +1327,13 @@ reconcileChildren 内部会根据有没有 current 来选择：
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">73k</span>
+    <span title="站点总字数">76k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">4:25</span>
+    <span title="站点阅读时长">4:37</span>
   </span>
 </div>
 
