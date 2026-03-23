@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha256-5eIC48iZUHmSlSUz9XtjRyK2mzQkHScZY1WdMaoz74E=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.21.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="JSBridge是什么JSBridge本质就是：Web端和客户端Native之间的通信桥梁，让混合开发模式中的Web端和Native端能够互相通信，实现双向调用。 Web端调用Native端在Webview中注入JS API通过WebView提供的接口，App将Native的相关接口注入到JS的Context（window）的对象中Web端就可以直接在全局 window 下使用这个暴露的全局JS对">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JSBridge实现原理">
+<meta property="og:url" content="http://example.com/2025/12/19/JSBridge%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/index.html">
+<meta property="og:site_name" content="Huangyuntse">
+<meta property="og:description" content="JSBridge是什么JSBridge本质就是：Web端和客户端Native之间的通信桥梁，让混合开发模式中的Web端和Native端能够互相通信，实现双向调用。 Web端调用Native端在Webview中注入JS API通过WebView提供的接口，App将Native的相关接口注入到JS的Context（window）的对象中Web端就可以直接在全局 window 下使用这个暴露的全局JS对">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-12-19T02:00:00.000Z">
+<meta property="article:modified_time" content="2026-03-23T17:12:56.601Z">
+<meta property="article:author" content="Huangyuntse">
+<meta property="article:tag" content="H5">
+<meta property="article:tag" content="移动端">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2025/12/19/JSBridge%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2025/12/19/JSBridge%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/","path":"2025/12/19/JSBridge实现原理/","title":"JSBridge实现原理"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>JSBridge实现原理 | Huangyuntse</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Huangyuntse</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-文章"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>文章</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">17</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">60</span></a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">44</span></a></li><li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#JSBridge%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-number">1.</span> <span class="nav-text">JSBridge是什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Web%E7%AB%AF%E8%B0%83%E7%94%A8Native%E7%AB%AF"><span class="nav-number">2.</span> <span class="nav-text">Web端调用Native端</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9C%A8Webview%E4%B8%AD%E6%B3%A8%E5%85%A5JS-API"><span class="nav-number">2.1.</span> <span class="nav-text">在Webview中注入JS API</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#URL-Schema"><span class="nav-number">2.2.</span> <span class="nav-text">URL Schema</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Native%E7%AB%AF%E5%A6%82%E4%BD%95%E8%B0%83%E7%94%A8Web%E7%AB%AF"><span class="nav-number">3.</span> <span class="nav-text">Native端如何调用Web端</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Android"><span class="nav-number">3.1.</span> <span class="nav-text">Android</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#IOS"><span class="nav-number">3.2.</span> <span class="nav-text">IOS</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E7%A7%8DJSBridge%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F"><span class="nav-number">4.</span> <span class="nav-text">一种JSBridge的实现方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%A6%E4%B8%80%E7%A7%8D%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F%EF%BC%9A%E4%BA%8B%E4%BB%B6%E6%B4%BE%E5%8F%91"><span class="nav-number">5.</span> <span class="nav-text">另一种实现方式：事件派发</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Huangyuntse"
+      src="https://avatars.githubusercontent.com/u/73687768?v=4">
+  <p class="site-author-name" itemprop="name">Huangyuntse</p>
+  <div class="site-description" itemprop="description">也无风雨也无晴</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">60</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">44</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/huangyunt" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;huangyunt" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:973113137@qq.com" title="E-Mail → mailto:973113137@qq.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/12/19/JSBridge%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/73687768?v=4">
+      <meta itemprop="name" content="Huangyuntse">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Huangyuntse">
+      <meta itemprop="description" content="也无风雨也无晴">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="JSBridge实现原理 | Huangyuntse">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          JSBridge实现原理
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-12-19 10:00:00" itemprop="dateCreated datePublished" datetime="2025-12-19T10:00:00+08:00">2025-12-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/H5/" itemprop="url" rel="index"><span itemprop="name">H5</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.9k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>7 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h3 id="JSBridge是什么"><a href="#JSBridge是什么" class="headerlink" title="JSBridge是什么"></a>JSBridge是什么</h3><p>JSBridge本质就是：Web端和客户端Native之间的通信桥梁，让混合开发模式中的Web端和Native端能够互相通信，实现双向调用。</p>
+<h3 id="Web端调用Native端"><a href="#Web端调用Native端" class="headerlink" title="Web端调用Native端"></a>Web端调用Native端</h3><h4 id="在Webview中注入JS-API"><a href="#在Webview中注入JS-API" class="headerlink" title="在Webview中注入JS API"></a>在Webview中注入JS API</h4><p>通过WebView提供的接口，App将Native的相关接口注入到JS的Context（window）的对象中<br>Web端就可以直接在全局 window 下使用这个暴露的全局JS对象，进而调用原生端的方法</p>
+<p><strong>Android注入方法：</strong></p>
+<ul>
+<li><code>addJavascriptInterface</code>配合<code>@JavascriptInterface</code>：Android 4.2+ 配合 @JavascriptInterface 才安全可用</li>
+</ul>
+<p><strong>IOS注入方法：</strong></p>
+<ul>
+<li><code>WKWebView + WKScriptMessageHandler</code> 是 iOS 官方方案，推荐新项目优先使用，链路更清晰。</li>
+<li><code>WebViewJavascriptBridge</code> 是常见历史封装方案，接入快、兼容旧项目，但初始化握手和调试成本更高。</li>
+</ul>
+<span id="more"></span>
+<p>示例代码:</p>
+<blockquote>
+<p>IOS走<code>WebViewJavascriptBridge</code>方案、Android走<code>addJavascriptInterface</code>方案</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Android 侧：通过 addJavascriptInterface 注入 JSAPI</span></span><br><span class="line">webView.addJavascriptInterface(<span class="keyword">new</span> <span class="title class_">NativeBridge</span>(<span class="built_in">this</span>), <span class="string">&quot;NativeBridge&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">NativeBridge</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> Context ctx;</span><br><span class="line">    NativeBridge(Context ctx) &#123; <span class="built_in">this</span>.ctx = ctx; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@JavascriptInterface</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">showNativeDialog</span><span class="params">(String text)</span> &#123;</span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">AlertDialog</span>.Builder(ctx).setMessage(text).create().show();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// iOS 侧（示意）：WebViewJavascriptBridge 注册 handler</span><br><span class="line">bridge.registerHandler(&quot;showNativeDialog&quot;) &#123; data, responseCallback in</span><br><span class="line">    let text = (data as? [String: Any])?[&quot;text&quot;] as? String ?? &quot;&quot;</span><br><span class="line">    // 展示原生弹窗...</span><br><span class="line">    responseCallback?([&quot;code&quot;: 0, &quot;msg&quot;: &quot;ok&quot;])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// H5 侧：统一入口，按环境分发调用</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">isAndroidBridge</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> !!<span class="variable language_">window</span>.<span class="property">NativeBridge</span> &amp;&amp; <span class="keyword">typeof</span> <span class="variable language_">window</span>.<span class="property">NativeBridge</span>.<span class="property">showNativeDialog</span> === <span class="string">&quot;function&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">isiOSBridgeReady</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> !!<span class="variable language_">window</span>.<span class="property">WebViewJavascriptBridge</span> &amp;&amp; <span class="keyword">typeof</span> <span class="variable language_">window</span>.<span class="property">WebViewJavascriptBridge</span>.<span class="property">callHandler</span> === <span class="string">&quot;function&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// IOS适配比较复杂，因为iOS里bridge注入是握手注入，H5触发__bridge_loaded__才注入桥</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">setupIOSBridge</span>(<span class="params">callback</span>) &#123;</span><br><span class="line">  <span class="comment">// 1) 桥已经注入完成：直接拿 bridge 调用</span></span><br><span class="line">  <span class="keyword">if</span> (<span class="title function_">isiOSBridgeReady</span>()) <span class="keyword">return</span> <span class="title function_">callback</span>(<span class="variable language_">window</span>.<span class="property">WebViewJavascriptBridge</span>);</span><br><span class="line">  <span class="comment">// 2) 桥还没就绪，但初始化流程已经开始：把当前回调先缓存起来</span></span><br><span class="line">  <span class="keyword">if</span> (<span class="variable language_">window</span>.<span class="property">WVJBCallbacks</span>) <span class="keyword">return</span> <span class="variable language_">window</span>.<span class="property">WVJBCallbacks</span>.<span class="title function_">push</span>(callback);</span><br><span class="line">  <span class="comment">// 3) 首次初始化：创建回调队列，并触发一次“桥初始化信号”</span></span><br><span class="line">  <span class="variable language_">window</span>.<span class="property">WVJBCallbacks</span> = [callback];</span><br><span class="line">  <span class="keyword">const</span> iframe = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&quot;iframe&quot;</span>);</span><br><span class="line">  iframe.<span class="property">style</span>.<span class="property">display</span> = <span class="string">&quot;none&quot;</span>;</span><br><span class="line">  <span class="comment">// 通知 Native 注入 WebViewJavascriptBridge</span></span><br><span class="line">  iframe.<span class="property">src</span> = <span class="string">&quot;https://__bridge_loaded__&quot;</span>;</span><br><span class="line">  <span class="variable language_">document</span>.<span class="property">documentElement</span>.<span class="title function_">appendChild</span>(iframe);</span><br><span class="line">  <span class="comment">// 信号发出后移除 iframe，避免污染 DOM</span></span><br><span class="line">  <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> <span class="variable language_">document</span>.<span class="property">documentElement</span>.<span class="title function_">removeChild</span>(iframe), <span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">showDialog</span>(<span class="params">text</span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="title function_">isAndroidBridge</span>()) &#123;</span><br><span class="line">    <span class="comment">// Android: addJavascriptInterface 注入到 window.NativeBridge</span></span><br><span class="line">    <span class="variable language_">window</span>.<span class="property">NativeBridge</span>.<span class="title function_">showNativeDialog</span>(text);</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">setupIOSBridge</span>(<span class="function">(<span class="params">bridge</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// iOS: WebViewJavascriptBridge</span></span><br><span class="line">    bridge.<span class="title function_">callHandler</span>(<span class="string">&quot;showNativeDialog&quot;</span>, &#123; text &#125;, <span class="keyword">function</span> (<span class="params">res</span>) &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;ios callback:&quot;</span>, res);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">showDialog</span>(<span class="string">&quot;hello from h5&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h4 id="URL-Schema"><a href="#URL-Schema" class="headerlink" title="URL Schema"></a>URL Schema</h4><p>URL Schema是类URL的一种请求格式，格式如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;protocol&gt;://&lt;host&gt;/&lt;path&gt;?&lt;qeury&gt;<span class="comment">#fragment</span></span><br><span class="line"></span><br><span class="line">// 我们可以自定义JSBridge通信的URL Schema，比如：</span><br><span class="line">hellobike://showToast?text=hello</span><br></pre></td></tr></table></figure>
+
+<p>Native加载WebView之后，<strong>Web发送的所有请求都会经过WebView组件</strong>，所以Native可以重写WebView里的方法，从来拦截Web发起的请求，我们对请求的格式进行判断：</p>
+<p>符合我们自定义的URL Schema，对URL进行解析，拿到相关操作、操作，进而调用原生Native的方法<br>不符合我们自定义的URL Schema，我们直接转发，请求真正的服务</p>
+<p>例如</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">get</span> <span class="title function_">existOrderRedirect</span>() &#123;</span><br><span class="line">  <span class="keyword">let</span> <span class="attr">url</span>: string;</span><br><span class="line">  <span class="keyword">if</span> (<span class="variable language_">this</span>.<span class="property">env</span>.<span class="property">isHelloBikeApp</span>) &#123;</span><br><span class="line">    url = <span class="string">&#x27;hellobike://hellobike.com/xxxxx_xxx?from_type=xxxx&amp;selected_tab=xxxxx&#x27;</span>;</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="variable language_">this</span>.<span class="property">env</span>.<span class="property">isSFCApp</span>) &#123;</span><br><span class="line">    url = <span class="string">&#x27;hellohitch://hellohitch.com/xxx/xxxx?bottomTab=xxxx&#x27;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> url;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>URL Schema 这套桥接本质就是：</p>
+<ul>
+<li>Web 侧构造一个特定 URL（如 myapp:&#x2F;&#x2F;share?…）</li>
+<li>通过 location.href &#x2F; iframe.src &#x2F; a 标签触发一次“导航请求”</li>
+<li>Native 侧在 WebView 的导航拦截回调里识别这个 URL</li>
+<li>命中自定义 schema 就不真的跳转页面，而是解析参数并调用对应 Native 能力</li>
+<li>未命中就放行，正常加载网页链接</li>
+</ul>
+<p>这种方式从早期就存在，<strong>兼容性</strong>很好，但是由于是基于URL的方式，<strong>长度</strong>受到限制而且不太直观，同时<strong>数据格式</strong>有限制，而且建立请求有时间耗时。</p>
+<h3 id="Native端如何调用Web端"><a href="#Native端如何调用Web端" class="headerlink" title="Native端如何调用Web端"></a>Native端如何调用Web端</h3><blockquote>
+<p>Native端调用Web端，本质上其实是Natvie有运行JS的能力（WebView），所以Web端把方法挂在Window上，Native就能够执行这段JS代码</p>
+</blockquote>
+<h4 id="Android"><a href="#Android" class="headerlink" title="Android"></a>Android</h4><p>Android提供了<code>evaluateJavascript</code>来执行JS代码，并且可以获取返回值执行回调：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">jsCode</span> <span class="operator">=</span> String.format(<span class="string">&quot;window.showWebDialog(&#x27;%s&#x27;)&quot;</span>, text);</span><br><span class="line">webView.evaluateJavascript(jsCode, <span class="keyword">new</span> <span class="title class_">ValueCallback</span>&lt;String&gt;() &#123;</span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onReceiveValue</span><span class="params">(String value)</span> &#123;</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h4 id="IOS"><a href="#IOS" class="headerlink" title="IOS"></a>IOS</h4><p>IOS的WKWebView使用<code>evaluateJavaScript</code>：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[webView evaluateJavaScript:@<span class="string">&quot;执行的JS代码&quot;</span></span><br><span class="line">  completionHandler:<span class="operator">^</span>(id _Nullable response, <span class="type">NSError</span> <span class="operator">*</span> _Nullable error) &#123;</span><br><span class="line">  <span class="comment">//</span></span><br><span class="line">&#125;];</span><br></pre></td></tr></table></figure>
+
+<h3 id="一种JSBridge的实现方式"><a href="#一种JSBridge的实现方式" class="headerlink" title="一种JSBridge的实现方式"></a>一种JSBridge的实现方式</h3><blockquote>
+<p>Web侧挂全局函数：Web端在每次调用Native方法后在window上挂返回结果的回调，Native端把调用方法的结果通过返回结果的回调传回给Web端</p>
+</blockquote>
+<p>可能有点绕，直接看下代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MainActivity</span> <span class="keyword">extends</span> <span class="title class_">AppCompatActivity</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> WebView webView;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">onCreate</span><span class="params">(Bundle savedInstanceState)</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.webview_layout);</span><br><span class="line">        webView = findViewById(R.id.webview);</span><br><span class="line">        <span class="type">WebSettings</span> <span class="variable">webSettings</span> <span class="operator">=</span> webView.getSettings();</span><br><span class="line">        webSettings.setJavaScriptEnabled(<span class="literal">true</span>);</span><br><span class="line">        <span class="comment">// window 上添加 JsBridge 对象</span></span><br><span class="line">        webView.addJavascriptInterface(<span class="keyword">new</span> <span class="title class_">JsBridge</span>(), <span class="string">&quot;JsBridge&quot;</span>);</span><br><span class="line">        webView.loadUrl(<span class="string">&quot;http://10.168.2.149:5500/h5-test.html&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 通过 addJavascriptInterface 方法在 window 上添加 JsBridge 对象</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">JsBridge</span> &#123;</span><br><span class="line">        <span class="comment">// 添加 sendDataToApp 到 window.JsBridge 上</span></span><br><span class="line">        <span class="meta">@JavascriptInterface</span></span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">sendDataToApp</span><span class="params">(String value)</span> &#123;</span><br><span class="line">            <span class="comment">// 获取数据</span></span><br><span class="line">            sendResponseToH5(value);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 把返回结果返回给Web侧</span></span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">sendResponseToH5</span><span class="params">(<span class="keyword">final</span> String data)</span> &#123;</span><br><span class="line">            runOnUiThread(() -&gt; &#123;</span><br><span class="line">                webView.evaluateJavascript(<span class="string">&quot;javascript:window.JsBridge.receiveDataFromApp(&#x27;&quot;</span> + data + <span class="string">&quot;&#x27;)&quot;</span>, <span class="literal">null</span>);</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">sendDataToApp</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="variable language_">window</span>.<span class="property">JsBridge</span> &amp;&amp; <span class="keyword">typeof</span> <span class="variable language_">window</span>.<span class="property">JsBridge</span>.<span class="property">sendDataToApp</span> === <span class="string">&quot;function&quot;</span>) &#123;</span><br><span class="line">    <span class="comment">// Web侧把返回结果的方法挂在Window上，Native侧通过该方法返回结果</span></span><br><span class="line">    <span class="variable language_">window</span>.<span class="property">JsBridge</span>.<span class="property">receiveDataFromApp</span> = <span class="keyword">function</span> (<span class="params">data</span>) &#123;</span><br><span class="line">      <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;app&quot;</span>).<span class="property">innerHTML</span> =</span><br><span class="line">        <span class="string">&quot;Received data from App: &quot;</span> + data;</span><br><span class="line">      <span class="keyword">delete</span> <span class="variable language_">window</span>.<span class="property">window</span>.<span class="property">JsBridge</span>.<span class="property">receiveDataFromApp</span>;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Web侧调用Native方法</span></span><br><span class="line">    <span class="variable language_">window</span>.<span class="property">JsBridge</span>.<span class="title function_">sendDataToApp</span>(<span class="string">&quot;Hello from Web&quot;</span>);</span><br><span class="line">    <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;log&quot;</span>).<span class="property">innerHTML</span> = <span class="string">&quot;Data sent to App&quot;</span>;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;log&quot;</span>).<span class="property">innerHTML</span> = <span class="string">&quot;sent data failed&quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这种实现方式缺点其实很明显：</p>
+<ul>
+<li>全局污染：挂了一堆临时全局函数。</li>
+<li>不支持并发调用：后面挂的全局函数会覆盖前面的</li>
+</ul>
+<h3 id="另一种实现方式：事件派发"><a href="#另一种实现方式：事件派发" class="headerlink" title="另一种实现方式：事件派发"></a>另一种实现方式：事件派发</h3><blockquote>
+<p>Native在返回结果时不直接调某个全局函数，而是通过事件派发的方式</p>
+</blockquote>
+<p>这种方式的核心是：</p>
+<ul>
+<li>Web 调 Native 前先生成一个<code>requestId</code>，吊用Native方法时带上这个<code>requestId</code></li>
+<li>Native 返回时统一触发同一个事件（例如 <code>native:callback</code>），并传回<code>requestId</code></li>
+<li>Web 通过 <code>requestId</code> 判断这条回包是不是自己的</li>
+</ul>
+<p>直接看示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MainActivity</span> <span class="keyword">extends</span> <span class="title class_">AppCompatActivity</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> WebView webView;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">onCreate</span><span class="params">(Bundle savedInstanceState)</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.webview_layout);</span><br><span class="line">        webView = findViewById(R.id.webview);</span><br><span class="line">        <span class="type">WebSettings</span> <span class="variable">webSettings</span> <span class="operator">=</span> webView.getSettings();</span><br><span class="line">        webSettings.setJavaScriptEnabled(<span class="literal">true</span>);</span><br><span class="line">        webView.addJavascriptInterface(<span class="keyword">new</span> <span class="title class_">JsBridge</span>(), <span class="string">&quot;JsBridge&quot;</span>);</span><br><span class="line">        webView.loadUrl(<span class="string">&quot;http://10.168.2.149:5500/h5-test.html&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">JsBridge</span> &#123;</span><br><span class="line">        <span class="meta">@JavascriptInterface</span></span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">sendDataToApp</span><span class="params">(String value)</span> &#123;</span><br><span class="line">            <span class="comment">// 假设 value 为 &#123;&quot;requestId&quot;:&quot;xxx&quot;,&quot;payload&quot;:&quot;Hello from Web&quot;&#125;</span></span><br><span class="line">            sendResponseToH5(value);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">sendResponseToH5</span><span class="params">(<span class="keyword">final</span> String data)</span> &#123;</span><br><span class="line">            runOnUiThread(() -&gt; &#123;</span><br><span class="line">                <span class="comment">// Native 通过 dispatchEvent 触发统一事件通道</span></span><br><span class="line">                <span class="type">String</span> <span class="variable">jsCode</span> <span class="operator">=</span> <span class="string">&quot;window.dispatchEvent(new CustomEvent(&#x27;native:callback&#x27;, &#123; detail: &quot;</span> + data + <span class="string">&quot; &#125;))&quot;</span>;</span><br><span class="line">                webView.evaluateJavascript(jsCode, <span class="literal">null</span>);</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">sendDataToAppByEventBus</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="variable language_">window</span>.<span class="property">JsBridge</span> &amp;&amp; <span class="keyword">typeof</span> <span class="variable language_">window</span>.<span class="property">JsBridge</span>.<span class="property">sendDataToApp</span> === <span class="string">&quot;function&quot;</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> requestId = <span class="string">`req_<span class="subst">$&#123;<span class="built_in">Date</span>.now()&#125;</span>_<span class="subst">$&#123;<span class="built_in">Math</span>.random().toString(<span class="number">16</span>).slice(<span class="number">2</span>)&#125;</span>`</span>;</span><br><span class="line">    <span class="keyword">const</span> payload = &#123;</span><br><span class="line">      requestId,</span><br><span class="line">      <span class="attr">payload</span>: <span class="string">&quot;Hello from Web&quot;</span>,</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> <span class="title function_">callback</span> = (<span class="params">event</span>) =&gt; &#123;</span><br><span class="line">      <span class="keyword">if</span> (!(event <span class="keyword">instanceof</span> <span class="title class_">CustomEvent</span>)) <span class="keyword">return</span>;</span><br><span class="line">      <span class="keyword">const</span> detail = event.<span class="property">detail</span> || &#123;&#125;;</span><br><span class="line"></span><br><span class="line">      <span class="comment">// 只处理当前请求对应的回包</span></span><br><span class="line">      <span class="keyword">if</span> (detail.<span class="property">requestId</span> !== requestId) <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">      <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;app&quot;</span>).<span class="property">innerHTML</span> =</span><br><span class="line">        <span class="string">&quot;Received data from App: &quot;</span> + <span class="title class_">JSON</span>.<span class="title function_">stringify</span>(detail);</span><br><span class="line"></span><br><span class="line">      <span class="comment">// 处理完移除监听，避免泄漏</span></span><br><span class="line">      <span class="variable language_">window</span>.<span class="title function_">removeEventListener</span>(<span class="string">&quot;native:callback&quot;</span>, callback);</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 监听统一事件通道</span></span><br><span class="line">    <span class="variable language_">window</span>.<span class="title function_">addEventListener</span>(<span class="string">&quot;native:callback&quot;</span>, callback);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Web 调 Native</span></span><br><span class="line">    <span class="variable language_">window</span>.<span class="property">JsBridge</span>.<span class="title function_">sendDataToApp</span>(<span class="title class_">JSON</span>.<span class="title function_">stringify</span>(payload));</span><br><span class="line">    <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;log&quot;</span>).<span class="property">innerHTML</span> = <span class="string">&quot;Data sent to App by event bus&quot;</span>;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;log&quot;</span>).<span class="property">innerHTML</span> = <span class="string">&quot;sent data failed&quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这种方式相比“全局函数回调”更适合并发场景：</p>
+<ul>
+<li>可以同时监听多次调用，不会出现 <code>window.xxxResult</code> 被覆盖的问题</li>
+<li>通过 <code>requestId</code> 可以准确匹配每次调用的返回结果</li>
+</ul>
+<!-- ### 通用JSBridge的实现方案 -->
+<blockquote>
+<p>真实项目中的JSBridge还需要实现如下能力：</p>
+</blockquote>
+<!-- 1. **串行调用**：基于异步任务队列实现Native方法的串行调用，保证调用稳定
+2. **版本校验**：校验当前APP版本是否提供了该Native方法，版本不够返回错误
+3. **处理平台差异**：根据Android和IOS环境调用不同方法，并统一处理返回结果
+4. **异步回调的能力**：
+5. 事件总线 + requestId
+
+eventCBFnArr：事件总线 + requestId
+Native 不直接调某个全局函数，而是派发事件 o2:native:callback
+事件里带 requestId
+H5 监听事件后按 requestId 过滤，只收自己的响应
+这是“统一事件通道协议”，并发友好一些。
+
+#### 为什么要用异步任务队列的实现方式
+> 核心原因是某些 Native 能力本身就不支持并发
+
+像扫码、支付、分享、定位弹窗这类能力，Native 端常常设计成“一次只能处理一个请求”。
+并发调用会出现：
+
+- 后一个覆盖前一个
+- 前一个 Promise 永远不 resolve
+- 返回结果对应错调用方 -->
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/H5/" rel="tag"># H5</a>
+              <a href="/tags/%E7%A7%BB%E5%8A%A8%E7%AB%AF/" rel="tag"># 移动端</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/10/21/H5%E7%A6%BB%E7%BA%BF%E5%8C%85/" rel="prev" title="H5离线包">
+                  <i class="fa fa-angle-left"></i> H5离线包
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2025/12/27/NextJS%E5%AD%A6%E4%B9%A0%E3%80%90%E8%B7%AF%E7%94%B1%E7%AF%87%E3%80%91/" rel="next" title="NextJS学习【路由篇】">
+                  NextJS学习【路由篇】 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2021 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Huangyuntse</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">80k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">4:52</span>
+  </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/huangyunt" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
