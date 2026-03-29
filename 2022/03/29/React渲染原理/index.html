@@ -35,7 +35,7 @@
 <meta property="og:image" content="http://example.com/assets/completeWork.png">
 <meta property="og:image" content="http://example.com/assets/update.png">
 <meta property="article:published_time" content="2022-03-29T02:00:00.000Z">
-<meta property="article:modified_time" content="2026-03-19T10:31:36.695Z">
+<meta property="article:modified_time" content="2026-03-27T09:04:53.898Z">
 <meta property="article:author" content="Huangyuntse">
 <meta property="article:tag" content="JavaScript">
 <meta property="article:tag" content="React">
@@ -874,7 +874,7 @@
 <li>如果可复用，i++，继续比较<code>newChildren[i]</code>与<code>oldFiber.sibling</code>，可以复用则继续遍历。</li>
 <li>如果不可复用，分两种情况：<ul>
 <li>key不同导致不可复用，立即跳出整个遍历，第一轮遍历结束。</li>
-<li>key相同type不同导致不可复用，会将<code>oldFiber</code>标记为DELETION，并继续遍历</li>
+<li>key 相同但 type 不同，旧 Fiber 不可复用：将 oldFiber 标记为 Deletion，同时创建 newFiber 并标记 Placement，后续在 commit 阶段完成替换。</li>
 </ul>
 </li>
 <li>如果<code>newChildren</code>遍历完（即<code>i === newChildren.length - 1</code>）或者<code>oldFiber</code>遍历完（即<code>oldFiber.sibling === null</code>），跳出遍历，第一轮遍历结束。</li>
@@ -1317,13 +1317,13 @@ next：与其他Update连接形成链表。 -->
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">80k</span>
+    <span title="站点总字数">82k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">4:52</span>
+    <span title="站点阅读时长">4:57</span>
   </span>
 </div>
 
