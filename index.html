@@ -533,6 +533,197 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/11/02/Nginx%E5%AD%A6%E4%B9%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/73687768?v=4">
+      <meta itemprop="name" content="Huangyuntse">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Huangyuntse">
+      <meta itemprop="description" content="也无风雨也无晴">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Huangyuntse">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/11/02/Nginx%E5%AD%A6%E4%B9%A0/" class="post-title-link" itemprop="url">Nginx学习</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-11-02 10:00:00" itemprop="dateCreated datePublished" datetime="2025-11-02T10:00:00+08:00">2025-11-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Chore/" itemprop="url" rel="index"><span itemprop="name">Chore</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.3k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>5 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="Nginx是什么"><a href="#Nginx是什么" class="headerlink" title="Nginx是什么"></a>Nginx是什么</h3><p>Nginx 是一个高性能的 Web 服务器和反向代理服务器<br>最常见的作用有这几个：</p>
+<ul>
+<li>静态资源服务器：直接返回 html&#x2F;js&#x2F;css&#x2F;img</li>
+<li>反向代理：把请求转发给后端服务（Node&#x2F;Java&#x2F;Python）</li>
+<li>负载均衡：把流量分发到多台后端</li>
+<li>网关能力：HTTPS 终止、重定向、缓存、压缩（gzip&#x2F;brotli）、跨域头等</li>
+</ul>
+<h3 id="Nginx的配置文件"><a href="#Nginx的配置文件" class="headerlink" title="Nginx的配置文件"></a>Nginx的配置文件</h3><p>在 nginx 中，其中比较重要的有以下几个文件，它们都是有层层关联的:</p>
+<p><code>/etc/nginx/nginx.conf</code><br><code>/etc/nginx/conf.d/default.conf</code></p>
+<h4 id="etc-nginx-nginx-conf"><a href="#etc-nginx-nginx-conf" class="headerlink" title="&#x2F;etc&#x2F;nginx&#x2F;nginx.conf"></a>&#x2F;etc&#x2F;nginx&#x2F;nginx.conf</h4><p>nginx 主配置文件，引用了 &#x2F;etc&#x2F;nginx&#x2F;conf.d&#x2F; 目录下的所有配置文件。</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">user</span>  nginx;</span><br><span class="line"><span class="attribute">worker_processes</span>  auto;</span><br><span class="line"></span><br><span class="line"><span class="attribute">error_log</span>  /var/log/nginx/<span class="literal">error</span>.log <span class="literal">notice</span>;</span><br><span class="line"><span class="attribute">pid</span>        /run/nginx.pid;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="section">events</span> &#123;</span><br><span class="line">    <span class="attribute">worker_connections</span>  <span class="number">1024</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="section">http</span> &#123;</span><br><span class="line">    <span class="attribute">include</span>       /etc/nginx/mime.types;</span><br><span class="line">    <span class="attribute">default_type</span>  application/octet-stream;</span><br><span class="line"></span><br><span class="line">    <span class="attribute">log_format</span>  main  <span class="string">&#x27;<span class="variable">$remote_addr</span> - <span class="variable">$remote_user</span> [<span class="variable">$time_local</span>] &quot;<span class="variable">$request</span>&quot; &#x27;</span></span><br><span class="line">                      <span class="string">&#x27;<span class="variable">$status</span> <span class="variable">$body_bytes_sent</span> &quot;<span class="variable">$http_referer</span>&quot; &#x27;</span></span><br><span class="line">                      <span class="string">&#x27;&quot;<span class="variable">$http_user_agent</span>&quot; &quot;<span class="variable">$http_x_forwarded_for</span>&quot;&#x27;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="attribute">access_log</span>  /var/log/nginx/access.log  main;</span><br><span class="line"></span><br><span class="line">    <span class="attribute">sendfile</span>        <span class="literal">on</span>;</span><br><span class="line">    <span class="comment">#tcp_nopush     on;</span></span><br><span class="line"></span><br><span class="line">    <span class="attribute">keepalive_timeout</span>  <span class="number">65</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">#gzip  on;</span></span><br><span class="line"></span><br><span class="line">    <span class="attribute">include</span> /etc/nginx/conf.d/<span class="regexp">*.conf</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="etc-nginx-conf-d-default-conf"><a href="#etc-nginx-conf-d-default-conf" class="headerlink" title="&#x2F;etc&#x2F;nginx&#x2F;conf.d&#x2F;default.conf"></a>&#x2F;etc&#x2F;nginx&#x2F;conf.d&#x2F;default.conf</h4><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">    <span class="attribute">listen</span>       <span class="number">80</span>;</span><br><span class="line">    <span class="attribute">server_name</span>  localhost;</span><br><span class="line">    <span class="section">location</span> / &#123;</span><br><span class="line">        <span class="attribute">root</span>   /usr/share/nginx/html;</span><br><span class="line">        <span class="attribute">index</span>  index.html index.htm;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="attribute">error_page</span>   <span class="number">500</span> <span class="number">502</span> <span class="number">503</span> <span class="number">504</span>  /50x.html;</span><br><span class="line">    <span class="section">location</span> = /50x.html &#123;</span><br><span class="line">        <span class="attribute">root</span>   /usr/share/nginx/html;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="usr-share-nginx-html"><a href="#usr-share-nginx-html" class="headerlink" title="&#x2F;usr&#x2F;share&#x2F;nginx&#x2F;html"></a>&#x2F;usr&#x2F;share&#x2F;nginx&#x2F;html</h4><p>默认的静态资源目录，其目录下的 index.html 就是 nginx 的欢迎页面。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Welcome to nginx!<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css">      <span class="selector-tag">html</span> &#123;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">color-scheme</span>: light dark;</span></span><br><span class="line"><span class="language-css">      &#125;</span></span><br><span class="line"><span class="language-css">      <span class="selector-tag">body</span> &#123;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">width</span>: <span class="number">35em</span>;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">margin</span>: <span class="number">0</span> auto;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">font-family</span>: Tahoma, Verdana, Arial, sans-serif;</span></span><br><span class="line"><span class="language-css">      &#125;</span></span><br><span class="line"><span class="language-css">    </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Welcome to nginx!<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">      If you see this page, the nginx web server is successfully installed and</span><br><span class="line">      working. Further configuration is required.</span><br><span class="line">    <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">      For online documentation and support please refer to</span><br><span class="line">      <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;http://nginx.org/&quot;</span>&gt;</span>nginx.org<span class="tag">&lt;/<span class="name">a</span>&gt;</span>.<span class="tag">&lt;<span class="name">br</span> /&gt;</span></span><br><span class="line">      Commercial support is available at</span><br><span class="line">      <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;http://nginx.com/&quot;</span>&gt;</span>nginx.com<span class="tag">&lt;/<span class="name">a</span>&gt;</span>.</span><br><span class="line">    <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;<span class="name">em</span>&gt;</span>Thank you for using nginx.<span class="tag">&lt;/<span class="name">em</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="利用Docker启动Nginx镜像"><a href="#利用Docker启动Nginx镜像" class="headerlink" title="利用Docker启动Nginx镜像"></a>利用Docker启动Nginx镜像</h3><figure class="highlight docker"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="keyword">run</span><span class="language-bash"> -it --<span class="built_in">rm</span> -p 9000:80 nginx:alpine</span></span><br></pre></td></tr></table></figure>
+
+<!-- ![nginx](../assets/nginx.png) -->
+
+<hr>
+<h3 id="root和index"><a href="#root和index" class="headerlink" title="root和index"></a>root和index</h3><ul>
+<li>root: 静态资源的根路径。见文档 <a target="_blank" rel="noopener" href="https://nginx.org/en/docs/http/ngx_http_core_module.html#root">https://nginx.org/en/docs/http/ngx_http_core_module.html#root</a></li>
+<li>index: 当请求路径以 &#x2F; 结尾时，则自动寻找该路径下的 index 文件。见文档 <a target="_blank" rel="noopener" href="https://nginx.org/en/docs/http/ngx_http_index_module.html#index">https://nginx.org/en/docs/http/ngx_http_index_module.html#index</a></li>
+</ul>
+<hr>
+<h3 id="location"><a href="#location" class="headerlink" title="location"></a>location</h3><p>location 用以匹配路由，配置语法如下</p>
+<p>location [ &#x3D; | ~ | <del>* | ^</del> ] uri { … }</p>
+<p>其中 uri 前可提供以下修饰符</p>
+<ul>
+<li>&#x3D; 精确匹配，优先级最高。</li>
+<li>^~ 前缀匹配，优先级其次。如果同样是前缀匹配，走最长路径。</li>
+<li>~ 正则匹配，优先级再次 (~* 只是不区分大小写，不单列)。如果同样是正则匹配，走第一个路径。</li>
+<li>&#x2F; 通用匹配，优先级再次。</li>
+</ul>
+<h4 id="location修饰符"><a href="#location修饰符" class="headerlink" title="location修饰符"></a>location修饰符</h4><h4 id="location优先级"><a href="#location优先级" class="headerlink" title="location优先级"></a>location优先级</h4><hr>
+<h3 id="proxy-pass"><a href="#proxy-pass" class="headerlink" title="proxy_pass"></a>proxy_pass</h3><p>proxy_pass 反向代理，也就是用来解决跨域的配置</p>
+<p>当使用 proxy_pass 代理路径时，有两种情况</p>
+<p><strong>1. 转发时 保留 &#x2F;api 路径</strong></p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">location</span> /api/ &#123;</span><br><span class="line">    <span class="attribute">proxy_pass</span> http://localhost:3000;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>结尾没有 &#x2F; 斜杠<br>前端请求：&#x2F;api&#x2F;user –&gt; 转发到后端：<a target="_blank" rel="noopener" href="http://localhost:3000/api/user">http://localhost:3000/api/user</a></p>
+<p><strong>2. 转发时 去掉 &#x2F;api 路径</strong></p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">location</span> /api/ &#123;</span><br><span class="line">    <span class="attribute">proxy_pass</span> http://localhost:3000/;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>末尾加 &#x2F; 斜杠<br>前端请求：&#x2F;api&#x2F;user –&gt; 转发到后端：<a target="_blank" rel="noopener" href="http://localhost:3000/user">http://localhost:3000/user</a></p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">    <span class="attribute">listen</span>       <span class="number">80</span>;</span><br><span class="line">    <span class="attribute">server_name</span>  localhost;</span><br><span class="line"></span><br><span class="line">    <span class="attribute">root</span>   /usr/share/nginx/html;</span><br><span class="line">    <span class="attribute">index</span>  index.html index.htm;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 建议使用此种 proxy_pass 不加 URI 的写法，原样路径即可</span></span><br><span class="line">    <span class="comment"># http://localhost:8300/api1/hello -&gt; proxy:3000/api1/hello</span></span><br><span class="line">    <span class="section">location</span> /api1 &#123;</span><br><span class="line">        <span class="comment"># 可通过查看响应头来判断是否成功返回</span></span><br><span class="line">        <span class="attribute">add_header</span> X-Config A;</span><br><span class="line">        <span class="attribute">proxy_pass</span> http://api:3000;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># http://localhost:8300/api2/hello -&gt; proxy:3000/hello</span></span><br><span class="line">    <span class="section">location</span> /api2/ &#123;</span><br><span class="line">        <span class="attribute">add_header</span> X-Config B;</span><br><span class="line">        <span class="attribute">proxy_pass</span> http://api:3000/;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># http://localhost:8300/api3/hello -&gt; proxy:3000/hello/hello</span></span><br><span class="line">    <span class="section">location</span> /api3 &#123;</span><br><span class="line">        <span class="attribute">add_header</span> X-Config C;</span><br><span class="line">        <span class="attribute">proxy_pass</span> http://api:3000/hello;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># http://localhost:8300/api4/hello -&gt; proxy:3000//hello</span></span><br><span class="line">    <span class="section">location</span> /api4 &#123;</span><br><span class="line">        <span class="attribute">add_header</span> X-Config D;</span><br><span class="line">        <span class="attribute">proxy_pass</span> http://api:3000/;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="add-header"><a href="#add-header" class="headerlink" title="add_header"></a>add_header</h3><p>控制响应头。</p>
+<p>很多特性都是通过响应头控制，因此基于此指令可做很多事情，比如:</p>
+<p>Cache<br>CORS<br>HSTS<br>CSP<br>…</p>
+<h4 id="Cache"><a href="#Cache" class="headerlink" title="Cache"></a>Cache</h4><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">location</span> /static &#123;</span><br><span class="line">    <span class="attribute">add_header</span> Cache-Control max-age=<span class="number">31536000</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="CORS"><a href="#CORS" class="headerlink" title="CORS"></a>CORS</h4><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">location</span> /api &#123;</span><br><span class="line">    <span class="attribute">add_header</span> Access-Control-Allow-Origin *;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="HSTS"><a href="#HSTS" class="headerlink" title="HSTS"></a>HSTS</h4><p>HTTPS，SSL相关</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">location</span> / &#123;</span><br><span class="line">    <span class="attribute">listen</span> <span class="number">443</span> ssl;</span><br><span class="line"></span><br><span class="line">    <span class="attribute">add_header</span> Strict-Transport-Security max-age=<span class="number">7200</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="CSP"><a href="#CSP" class="headerlink" title="CSP"></a>CSP</h4><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">location</span> / &#123;</span><br><span class="line">    <span class="attribute">add_header</span> Content-Security-Policy <span class="string">&quot;default-src &#x27;self&#x27;;&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="最佳实践"><a href="#最佳实践" class="headerlink" title="最佳实践"></a>最佳实践</h3><ul>
+<li>&#x2F;index.html：304</li>
+<li>&#x2F;assets&#x2F;*.[hash].(js|css|…)：一年强缓存 + immutable</li>
+<li>gzip&#x2F;brotli 开启</li>
+<li>SPA try_files 回退</li>
+<li>redirect、rewrite配置</li>
+<li>HTTPS + HTTP2 + 基础安全头</li>
+<li>发布前 nginx -t，发布后灰度验证</li>
+</ul>
+<h4 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h4><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># HTML 走协商缓存（每次都向服务端校验）</span></span><br><span class="line"><span class="section">location</span> <span class="regexp">~* \.html?$</span> &#123;</span><br><span class="line">    <span class="attribute">expires</span> -<span class="number">1</span>;                       <span class="comment"># 不走 Expires 强缓存</span></span><br><span class="line">    <span class="attribute">add_header</span> Cache-Control <span class="string">&quot;no-cache&quot;</span>;</span><br><span class="line">    <span class="attribute">etag</span> <span class="literal">on</span>;                          <span class="comment"># 默认一般就是 on，显式写更清晰</span></span><br><span class="line">    <span class="attribute">if_modified_since</span> exact;          <span class="comment"># 默认即可，显式写</span></span><br><span class="line">    <span class="attribute">try_files</span> <span class="variable">$uri</span> =<span class="number">404</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># JS，CSS走强缓存</span></span><br><span class="line"><span class="section">location</span> /static/ &#123;</span><br><span class="line">    <span class="attribute">expires</span> <span class="number">30d</span>;</span><br><span class="line">    <span class="attribute">add_header</span> Cache-Control <span class="string">&quot;public, max-age=2592000, immutable&quot;</span>;</span><br><span class="line">    <span class="attribute">try_files</span> <span class="variable">$uri</span> =<span class="number">404</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="接口转发解决跨域"><a href="#接口转发解决跨域" class="headerlink" title="接口转发解决跨域"></a>接口转发解决跨域</h4><h4 id="Gzip压缩"><a href="#Gzip压缩" class="headerlink" title="Gzip压缩"></a>Gzip压缩</h4><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 开启 gzip</span></span><br><span class="line"><span class="attribute">gzip</span> <span class="literal">on</span>;</span><br><span class="line"><span class="attribute">gzip_vary</span> <span class="literal">on</span>;                 <span class="comment"># 响应头加 Vary: Accept-Encoding，避免代理缓存错配</span></span><br><span class="line"><span class="attribute">gzip_proxied</span> any;             <span class="comment"># 被代理请求也允许压缩</span></span><br><span class="line"><span class="attribute">gzip_comp_level</span> <span class="number">6</span>;            <span class="comment"># 压缩等级 1-9，6 是常用平衡点</span></span><br><span class="line"><span class="attribute">gzip_min_length</span> <span class="number">1024</span>;         <span class="comment"># 小于 1KB 不压缩</span></span><br><span class="line"><span class="attribute">gzip_buffers</span> <span class="number">16</span> <span class="number">8k</span>;</span><br><span class="line"><span class="attribute">gzip_http_version</span> <span class="number">1</span>.<span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 压缩的 MIME 类型（注意 text/html 通常默认已启用）</span></span><br><span class="line"><span class="attribute">gzip_types</span></span><br><span class="line">    text/plain</span><br><span class="line">    text/css</span><br><span class="line">    text/javascript</span><br><span class="line">    application/javascript</span><br><span class="line">    application/json</span><br><span class="line">    application/xml</span><br><span class="line">    application/rss+xml</span><br><span class="line">    image/svg+xml</span><br><span class="line">    font/ttf</span><br><span class="line">    font/otf</span><br><span class="line">    application/vnd.ms-fontobject</span><br><span class="line">    application/x-font-ttf</span><br><span class="line">    application/font-woff</span><br><span class="line">    application/font-woff2;</span><br></pre></td></tr></table></figure>
+
+<h4 id="History路由"><a href="#History路由" class="headerlink" title="History路由"></a>History路由</h4><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">location</span> / &#123;</span><br><span class="line">    <span class="attribute">try_files</span> <span class="variable">$uri</span> /index.html;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Redirect重定向"><a href="#Redirect重定向" class="headerlink" title="Redirect重定向"></a>Redirect重定向</h4><p>Redirect（重定向）：告诉浏览器“去另一个 URL”，浏览器地址栏会变，状态码通常是 301&#x2F;302&#x2F;307&#x2F;308</p>
+<p>使用场景：</p>
+<ul>
+<li>域名跳转（a.com -&gt; b.com）</li>
+<li>协议跳转（http -&gt; https）</li>
+<li>旧链接永久迁移（SEO 友好，用 301&#x2F;308）</li>
+</ul>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">location</span> = /old-path &#123;</span><br><span class="line">    <span class="attribute">return</span> <span class="number">301</span> /new-path;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Rewrite重写"><a href="#Rewrite重写" class="headerlink" title="Rewrite重写"></a>Rewrite重写</h4><p>Rewrite（重写）：Nginx 在服务器内部改 URI 去匹配资源，通常不告诉浏览器，地址栏不变</p>
+<p>使用场景：</p>
+<ul>
+<li>SPA 回退（try_files $uri &#x2F;index.html 本质类似内部重写思路）</li>
+<li>历史路径内部兼容映射</li>
+<li>隐藏后端真实路径结构</li>
+</ul>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">location</span> /old/ &#123;</span><br><span class="line">    <span class="attribute">rewrite</span><span class="regexp"> ^/old/(.*)$</span> /new/<span class="variable">$1</span> <span class="literal">last</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="限制访问source-map文件"><a href="#限制访问source-map文件" class="headerlink" title="限制访问source-map文件"></a>限制访问source-map文件</h4><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 禁止访问 sourcemap</span></span><br><span class="line"><span class="section">location</span> <span class="regexp">~* \.map$</span> &#123;</span><br><span class="line">    <span class="attribute">access_log</span> <span class="literal">off</span>;</span><br><span class="line">    <span class="attribute">log_not_found</span> <span class="literal">off</span>;</span><br><span class="line">    <span class="attribute">add_header</span> Cache-Control <span class="string">&quot;no-store&quot;</span> always;</span><br><span class="line">    <span class="attribute">return</span> <span class="number">404</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="黑白名单配置"><a href="#黑白名单配置" class="headerlink" title="黑白名单配置"></a>黑白名单配置</h4>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="http://example.com/2025/11/01/Docker%E5%AD%A6%E4%B9%A0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1169,109 +1360,6 @@
 </blockquote>
 <p><img src="/../assets/js%E4%BA%8C%E8%BF%9B%E5%88%B6.png" alt="alt text"></p>
 
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2025/04/26/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8TradingView%E7%9A%84%E8%87%AA%E5%AE%9A%E4%B9%89Plugin/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/73687768?v=4">
-      <meta itemprop="name" content="Huangyuntse">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Huangyuntse">
-      <meta itemprop="description" content="也无风雨也无晴">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Huangyuntse">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2025/04/26/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8TradingView%E7%9A%84%E8%87%AA%E5%AE%9A%E4%B9%89Plugin/" class="post-title-link" itemprop="url">如何使用TradingView的自定义Plugin</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2025-04-26 10:00:00" itemprop="dateCreated datePublished" datetime="2025-04-26T10:00:00+08:00">2025-04-26</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%BC%80%E5%8F%91%E6%9D%82%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">开发杂记</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>489</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>2 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>结合官方文档：<a target="_blank" rel="noopener" href="https://tradingview.github.io/lightweight-charts/docs/plugins/intro">https://tradingview.github.io/lightweight-charts/docs/plugins/intro</a> 食用<br>代码见：<a target="_blank" rel="noopener" href="https://github.com/huangyunt/Learning-Demo/tree/master/tradingview%E7%A4%BA%E4%BE%8B%EF%BC%9AK%E7%BA%BF%E5%9B%BE%E7%BB%98%E5%88%B6%E5%9B%BE%E7%89%87">tradingview示例：K线图绘制图片</a></p>
-<h4 id="Series-Primitives"><a href="#Series-Primitives" class="headerlink" title="Series Primitives"></a>Series Primitives</h4><h5 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h5><ul>
-<li>attached：添加到图表时触发，附加方法通过一个参数调用，该参数包含图表、系列以及用于请求更新的回调函数</li>
-<li>detached：移除图表时触发</li>
-</ul>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2025/04/26/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8TradingView%E7%9A%84%E8%87%AA%E5%AE%9A%E4%B9%89Plugin/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
       
     </div>
 
