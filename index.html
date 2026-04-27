@@ -392,7 +392,20 @@
 编辑 docker-compose.yaml 配置文件如下所示。当然，由于这是一个最简项目，因此配置文件也极其简单。 -->
 
 <p><img src="/../assets/docker-compose.png" alt="docker-compose"></p>
-<h4 id="基于Nginx镜像的部署"><a href="#基于Nginx镜像的部署" class="headerlink" title="基于Nginx镜像的部署"></a>基于Nginx镜像的部署</h4>
+<h4 id="基于Nginx镜像的部署"><a href="#基于Nginx镜像的部署" class="headerlink" title="基于Nginx镜像的部署"></a>基于Nginx镜像的部署</h4><hr>
+<h3 id="单页应用部署"><a href="#单页应用部署" class="headerlink" title="单页应用部署"></a>单页应用部署</h3><h4 id="单页应用的静态资源"><a href="#单页应用的静态资源" class="headerlink" title="单页应用的静态资源"></a>单页应用的静态资源</h4><p>所有的前端单页应用对于部署，最重要的就是两点：</p>
+<ul>
+<li>静态资源如何构建：大部分项目都是 npm run build</li>
+<li>静态资源目录在哪：有的项目是 &#x2F;dist，有的项目是 &#x2F;build。CRA 是 &#x2F;build 目录</li>
+</ul>
+<p>一个最简单的Dockerfile：</p>
+<figure class="highlight docker"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> node:<span class="number">14</span>-alpine</span><br><span class="line"> </span><br><span class="line"><span class="keyword">WORKDIR</span><span class="language-bash"> /code</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">ADD</span><span class="language-bash"> . /code</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> yarn &amp;&amp; npm run build</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">CMD</span><span class="language-bash"> npx serve -s build</span></span><br><span class="line"><span class="keyword">EXPOSE</span> <span class="number">3000</span></span><br></pre></td></tr></table></figure>
+
+<p>这样其实就已经完成构建了，然而还可以针对以下两点进行优化：</p>
+<ul>
+<li>构建镜像时间过长，优化构建时间</li>
+<li>构建镜像文件过大，优化镜像体积</li>
+</ul>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2026/04/19/%E5%89%8D%E7%AB%AF%E9%83%A8%E7%BD%B2%E7%9B%B8%E5%85%B3/#more" rel="contents">
@@ -689,7 +702,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>1.3k</span>
+      <span>1.4k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -805,7 +818,10 @@
 
 <h4 id="限制访问source-map文件"><a href="#限制访问source-map文件" class="headerlink" title="限制访问source-map文件"></a>限制访问source-map文件</h4><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 禁止访问 sourcemap</span></span><br><span class="line"><span class="section">location</span> <span class="regexp">~* \.map$</span> &#123;</span><br><span class="line">    <span class="attribute">access_log</span> <span class="literal">off</span>;</span><br><span class="line">    <span class="attribute">log_not_found</span> <span class="literal">off</span>;</span><br><span class="line">    <span class="attribute">add_header</span> Cache-Control <span class="string">&quot;no-store&quot;</span> always;</span><br><span class="line">    <span class="attribute">return</span> <span class="number">404</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-
+<h4 id="实现业务逻辑"><a href="#实现业务逻辑" class="headerlink" title="实现业务逻辑"></a>实现业务逻辑</h4><blockquote>
+<p>比如实现移动端跳转xx链接，pc端不变</p>
+</blockquote>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">  <span class="attribute">listen</span> <span class="number">80</span>;</span><br><span class="line">  <span class="attribute">server_name</span> example.com;</span><br><span class="line"></span><br><span class="line">  <span class="section">location</span> / &#123;</span><br><span class="line">    <span class="comment"># 默认不跳转</span></span><br><span class="line">    <span class="attribute">set</span> <span class="variable">$is_mobile</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 简单 UA 判断</span></span><br><span class="line">    <span class="attribute">if</span> (<span class="variable">$http_user_agent</span> <span class="regexp">~* &quot;(Android|iPhone|iPad|iPod|Mobile)&quot;)</span> &#123;</span><br><span class="line">      <span class="attribute">set</span> <span class="variable">$is_mobile</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 移动端跳到 H5/落地页</span></span><br><span class="line">    <span class="attribute">if</span> (<span class="variable">$is_mobile</span> = <span class="number">1</span>) &#123;</span><br><span class="line">      <span class="attribute">return</span> <span class="number">302</span> https://m.example.com<span class="variable">$request_uri</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># PC 保持原页面</span></span><br><span class="line">    <span class="attribute">proxy_pass</span> http://pc_upstream;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h4 id="黑白名单配置"><a href="#黑白名单配置" class="headerlink" title="黑白名单配置"></a>黑白名单配置</h4>
       
