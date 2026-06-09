@@ -364,7 +364,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>3.7k</span>
+      <span>3.8k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -396,18 +396,21 @@
 <p>创建 Schema 大致是</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="title class_">Schema</span>(&#123;</span><br><span class="line">  <span class="attr">nodes</span>: &#123; doc, paragraph, text, <span class="comment">/* ... */</span> &#125;,</span><br><span class="line">  <span class="attr">marks</span>: &#123; strong, link, <span class="comment">/* ... */</span> &#125;,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
+<p>Schema 由两部分 Spec 组成，实例化后会编译成可查询的类型表：</p>
+<p><strong>Nodes</strong></p>
 <ul>
-<li><p>nodes：名字 → NodeSpec 的映射。其中必须有一个 根节点（通常叫 doc），且 Schema 会把它当作 schema.topNode（整篇文档的根类型）。</p>
+<li>必须包含一个根节点（通常叫 <code>doc</code>），Schema 会把它记为 <code>schema.topNode</code>，代表整篇文档的最外层类型。</li>
+<li><code>content</code>：内容表达式，规定该节点<strong>允许哪些子节点、以什么顺序出现</strong>（语法类似正则，如 <code>block+</code> 表示至少一个 block，<code>inline*</code> 表示 0 个或多个 inline）。</li>
+<li><code>group</code>：给节点打标签，便于在 <code>content</code> 里按组引用（如 <code>paragraph</code> 标为 <code>block</code>，<code>text</code> 标为 <code>inline</code>）。<code>inline</code> &#x2F; <code>block</code> 与 HTML 的 inline &#x2F; block 概念相近；<code>tile</code>（如后文的 <code>block_tile</code>）则是业务自定义分组，并非 ProseMirror 内置。</li>
+</ul>
+<p><strong>Marks</strong></p>
 <ul>
-<li>content：</li>
-<li>group：inline、block、tile分组（其概念与 html 节点的 inline 节点与 block 节点一致）</li>
-<li>marks：</li>
+<li>描述可叠加在文本上的样式或语义（加粗、链接等），不参与文档的树形嵌套，而是附着在 inline 内容上。</li>
 </ul>
-</li>
-<li><p>marks：名字 → MarkSpec 的映射（加粗、链接等）。<br>编译后会得到 schema.nodes &#x2F; schema.marks：从名字查到 NodeType &#x2F; MarkType（带上了已解析的 content 规则、默认属性等）。</p>
-</li>
+<p><strong>编译结果</strong></p>
+<ul>
+<li><code>schema.nodes</code> &#x2F; <code>schema.marks</code>：由名字查到 <code>NodeType</code> &#x2F; <code>MarkType</code>，类型对象上已解析好 content 规则、默认属性等，后续用它们创建文档节点。</li>
 </ul>
-<p><strong>prosemirror 不允许有空文本节点，我们看到在 p 标签中， 文本内容为空时，会填入一个 br 标签。</strong></p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2026/05/06/ProseMirror%E5%AD%A6%E4%B9%A0/#more" rel="contents">
