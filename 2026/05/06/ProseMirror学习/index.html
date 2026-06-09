@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha256-5eIC48iZUHmSlSUz9XtjRyK2mzQkHScZY1WdMaoz74E=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.21.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="ProseMirror prosemirror-model prosemirror-state prosemirror-view prosemirror-transform   Schema 原文：https:&#x2F;&#x2F;prosemirror.net&#x2F;docs&#x2F;ref&#x2F;#model.Document_Schema  Schema 描述的是：这篇文档允许出现哪些结构——能有哪些节点（Node）、哪些标记（">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ProseMirror学习">
+<meta property="og:url" content="http://example.com/2026/05/06/ProseMirror%E5%AD%A6%E4%B9%A0/index.html">
+<meta property="og:site_name" content="Huangyuntse">
+<meta property="og:description" content="ProseMirror prosemirror-model prosemirror-state prosemirror-view prosemirror-transform   Schema 原文：https:&#x2F;&#x2F;prosemirror.net&#x2F;docs&#x2F;ref&#x2F;#model.Document_Schema  Schema 描述的是：这篇文档允许出现哪些结构——能有哪些节点（Node）、哪些标记（">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/assets/node.png">
+<meta property="og:image" content="http://example.com/assets/%E9%80%89%E5%8C%BA%E7%B3%BB%E7%BB%9F.png">
+<meta property="og:image" content="http://example.com/assets/selection.png">
+<meta property="og:image" content="http://example.com/assets/decoration.png">
+<meta property="article:published_time" content="2026-05-06T02:00:00.000Z">
+<meta property="article:modified_time" content="2026-06-09T06:05:54.570Z">
+<meta property="article:author" content="Huangyuntse">
+<meta property="article:tag" content="在线协同文档">
+<meta property="article:tag" content="富文本">
+<meta property="article:tag" content="ProseMirror">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/assets/node.png">
+
+
+<link rel="canonical" href="http://example.com/2026/05/06/ProseMirror%E5%AD%A6%E4%B9%A0/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2026/05/06/ProseMirror%E5%AD%A6%E4%B9%A0/","path":"2026/05/06/ProseMirror学习/","title":"ProseMirror学习"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>ProseMirror学习 | Huangyuntse</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Huangyuntse</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-文章"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>文章</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">18</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">67</span></a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">58</span></a></li><li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#ProseMirror"><span class="nav-number">1.</span> <span class="nav-text">ProseMirror</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Schema"><span class="nav-number">2.</span> <span class="nav-text">Schema</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#schema%E4%B8%AD%E7%9A%84%E5%B7%A5%E5%85%B7%E6%96%B9%E6%B3%95"><span class="nav-number">2.1.</span> <span class="nav-text">schema中的工具方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Node"><span class="nav-number">3.</span> <span class="nav-text">Node</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#NodeType%E3%80%81NodeSpec%E3%80%81Node%E6%A6%82%E5%BF%B5"><span class="nav-number">3.1.</span> <span class="nav-text">NodeType、NodeSpec、Node概念</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89Node"><span class="nav-number">3.2.</span> <span class="nav-text">定义Node</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%9A%E8%BF%87API%E6%8F%92%E5%85%A5Node"><span class="nav-number">3.3.</span> <span class="nav-text">通过API插入Node</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%A3%E6%9E%90%E5%A4%8D%E5%88%B6%E8%BF%9B%E6%9D%A5%E7%9A%84HTML"><span class="nav-number">3.4.</span> <span class="nav-text">解析复制进来的HTML</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Node%E4%B8%AD%E7%9A%84%E5%85%B6%E4%BB%96%E7%89%B9%E6%AE%8A%E5%B1%9E%E6%80%A7"><span class="nav-number">3.5.</span> <span class="nav-text">Node中的其他特殊属性</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#defining"><span class="nav-number">3.5.1.</span> <span class="nav-text">defining</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#isolating"><span class="nav-number">3.5.2.</span> <span class="nav-text">isolating</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#draggable-%E4%B8%8E-selectable"><span class="nav-number">3.5.3.</span> <span class="nav-text">draggable 与 selectable</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#atom"><span class="nav-number">3.5.4.</span> <span class="nav-text">atom</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mark"><span class="nav-number">4.</span> <span class="nav-text">Mark</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Mark%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="nav-number">4.1.</span> <span class="nav-text">Mark的定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#NodeSpec%E4%B8%AD%E7%9A%84Mark%E5%AD%97%E6%AE%B5"><span class="nav-number">4.2.</span> <span class="nav-text">NodeSpec中的Mark字段</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Mark-%E7%9A%84%E5%AE%9E%E9%99%85%E6%93%8D%E4%BD%9C%E4%B8%8E%E7%89%B9%E6%AE%8A%E5%B1%9E%E6%80%A7"><span class="nav-number">4.3.</span> <span class="nav-text">Mark 的实际操作与特殊属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E5%8A%A0%E7%B2%97%E6%96%9C%E4%BD%93%E7%AD%89%E6%A0%B7%E5%BC%8Fdemo"><span class="nav-number">4.4.</span> <span class="nav-text">实现加粗斜体等样式demo</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Mark%E4%B8%AD%E7%9A%84%E7%89%B9%E6%AE%8A%E5%B1%9E%E6%80%A7"><span class="nav-number">4.5.</span> <span class="nav-text">Mark中的特殊属性</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#inclusive"><span class="nav-number">4.5.1.</span> <span class="nav-text">inclusive</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#excludes"><span class="nav-number">4.5.2.</span> <span class="nav-text">excludes</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#spanning"><span class="nav-number">4.5.3.</span> <span class="nav-text">spanning</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Selection-%E9%80%89%E5%8C%BA%E7%B3%BB%E7%BB%9F"><span class="nav-number">5.</span> <span class="nav-text">Selection 选区系统</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Prosemirror-%E4%B8%AD%E7%9A%84%E5%85%89%E6%A0%87%E7%B3%BB%E7%BB%9F"><span class="nav-number">5.1.</span> <span class="nav-text">Prosemirror 中的光标系统</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Prosemirror-%E4%B8%AD%E7%9A%84-Selection"><span class="nav-number">5.2.</span> <span class="nav-text">Prosemirror 中的 Selection</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Range-%E4%B8%8E-Selection-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">5.2.1.</span> <span class="nav-text">Range 与 Selection 的区别</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Plugin-%E6%8F%92%E4%BB%B6%E7%B3%BB%E7%BB%9F"><span class="nav-number">6.</span> <span class="nav-text">Plugin 插件系统</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Command%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-number">6.1.</span> <span class="nav-text">Command是什么</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Command%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86"><span class="nav-number">6.1.1.</span> <span class="nav-text">Command实现原理</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Plugin"><span class="nav-number">6.2.</span> <span class="nav-text">Plugin</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Plugin%E7%BB%84%E6%88%90"><span class="nav-number">6.2.1.</span> <span class="nav-text">Plugin组成</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Plugin%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="nav-number">6.2.2.</span> <span class="nav-text">Plugin生命周期</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E5%88%B6UI"><span class="nav-number">7.</span> <span class="nav-text">定制UI</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ProseMirror%E5%AE%9A%E5%88%B6UI%E7%9A%84%E6%96%B9%E6%B3%95"><span class="nav-number">7.1.</span> <span class="nav-text">ProseMirror定制UI的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Schema%E4%B8%AD%E7%9A%84toDOM%EF%BC%9A%E5%AE%9A%E4%B9%89%E5%9C%A8schema%E9%87%8C%EF%BC%8C%E5%AE%9E%E7%8E%B0%E7%AE%80%E5%8D%95"><span class="nav-number">7.1.1.</span> <span class="nav-text">Schema中的toDOM：定义在schema里，实现简单</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#NodeView-%E5%92%8C-MarkView%EF%BC%9A%E8%87%AA%E5%B7%B1%E5%86%99-DOM-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="nav-number">7.1.2.</span> <span class="nav-text">NodeView 和 MarkView：自己写 DOM + 生命周期</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Decoration-%E8%AE%BE%E7%BD%AE%E6%A0%B7%E5%BC%8F"><span class="nav-number">7.1.3.</span> <span class="nav-text">Decoration 设置样式</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E4%BB%A3%E7%A0%81%E5%9D%97%E6%8F%92%E4%BB%B6"><span class="nav-number">7.2.</span> <span class="nav-text">实现代码块插件</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Steps-%E5%8E%9F%E5%AD%90%E6%93%8D%E4%BD%9C"><span class="nav-number">8.</span> <span class="nav-text">Steps 原子操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Steps%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="nav-number">8.1.</span> <span class="nav-text">Steps的定义</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Position-Mapping-%E4%BD%8D%E7%BD%AE%E6%98%A0%E5%B0%84"><span class="nav-number">9.</span> <span class="nav-text">Position Mapping 位置映射</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Document-transforms-%E6%96%87%E6%A1%A3%E8%BD%AC%E6%8D%A2"><span class="nav-number">10.</span> <span class="nav-text">Document transforms 文档转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TipTap"><span class="nav-number">11.</span> <span class="nav-text">TipTap</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Huangyuntse"
+      src="https://avatars.githubusercontent.com/u/73687768?v=4">
+  <p class="site-author-name" itemprop="name">Huangyuntse</p>
+  <div class="site-description" itemprop="description">也无风雨也无晴</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">67</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">58</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/huangyunt" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;huangyunt" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:973113137@qq.com" title="E-Mail → mailto:973113137@qq.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/05/06/ProseMirror%E5%AD%A6%E4%B9%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/73687768?v=4">
+      <meta itemprop="name" content="Huangyuntse">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Huangyuntse">
+      <meta itemprop="description" content="也无风雨也无晴">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="ProseMirror学习 | Huangyuntse">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          ProseMirror学习
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-05-06 10:00:00" itemprop="dateCreated datePublished" datetime="2026-05-06T10:00:00+08:00">2026-05-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Chore/" itemprop="url" rel="index"><span itemprop="name">Chore</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>3.7k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>14 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h3 id="ProseMirror"><a href="#ProseMirror" class="headerlink" title="ProseMirror"></a>ProseMirror</h3><ul>
+<li>prosemirror-model</li>
+<li>prosemirror-state</li>
+<li>prosemirror-view</li>
+<li>prosemirror-transform</li>
+</ul>
+<hr>
+<h3 id="Schema"><a href="#Schema" class="headerlink" title="Schema"></a>Schema</h3><blockquote>
+<p>原文：<a target="_blank" rel="noopener" href="https://prosemirror.net/docs/ref/#model.Document_Schema">https://prosemirror.net/docs/ref/#model.Document_Schema</a></p>
+</blockquote>
+<p>Schema 描述的是：这篇文档允许出现哪些结构——能有哪些节点（Node）、哪些标记（Mark），以及它们之间如何嵌套、谁里能装谁</p>
+<p>创建 Schema 大致是</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="title class_">Schema</span>(&#123;</span><br><span class="line">  <span class="attr">nodes</span>: &#123; doc, paragraph, text, <span class="comment">/* ... */</span> &#125;,</span><br><span class="line">  <span class="attr">marks</span>: &#123; strong, link, <span class="comment">/* ... */</span> &#125;,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>nodes：名字 → NodeSpec 的映射。其中必须有一个 根节点（通常叫 doc），且 Schema 会把它当作 schema.topNode（整篇文档的根类型）。</p>
+<ul>
+<li>content：</li>
+<li>group：inline、block、tile分组（其概念与 html 节点的 inline 节点与 block 节点一致）</li>
+<li>marks：</li>
+</ul>
+</li>
+<li><p>marks：名字 → MarkSpec 的映射（加粗、链接等）。<br>编译后会得到 schema.nodes &#x2F; schema.marks：从名字查到 NodeType &#x2F; MarkType（带上了已解析的 content 规则、默认属性等）。</p>
+</li>
+</ul>
+<p><strong>prosemirror 不允许有空文本节点，我们看到在 p 标签中， 文本内容为空时，会填入一个 br 标签。</strong></p>
+<span id="more"></span>
+
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">Schema</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;prosemirror-model&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> schema = <span class="keyword">new</span> <span class="title class_">Schema</span>(&#123;</span><br><span class="line">  <span class="attr">nodes</span>: &#123;</span><br><span class="line">    <span class="comment">// 整个文档</span></span><br><span class="line">    <span class="attr">doc</span>: &#123;</span><br><span class="line">      <span class="comment">// 文档内容规定必须是 block 类型的节点（block 与 HTML 中的 block 概念差不多） `+` 号代表可以有一个或多个（规则类似正则）</span></span><br><span class="line">      <span class="attr">content</span>: <span class="string">&#x27;block+&#x27;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// 文档段落</span></span><br><span class="line">    <span class="attr">paragraph</span>: &#123;</span><br><span class="line">      <span class="comment">// 段落内容规定必须是 inline 类型的节点（inline 与 HTML 中 inline 概念差不多）, `*` 号代表可以有 0 个或多个（规则类似正则）</span></span><br><span class="line">      <span class="attr">content</span>: <span class="string">&#x27;inline*&#x27;</span>,</span><br><span class="line">      <span class="comment">// 分组：当前节点所在的分组为 block，意味着它是个 block 节点</span></span><br><span class="line">      <span class="attr">group</span>: <span class="string">&#x27;block&#x27;</span>,</span><br><span class="line">      <span class="comment">// 渲染为 html 时候，使用 p 标签渲染，第二个参数 0 念做 “洞”，类似 vue 中 slot 插槽的概念，</span></span><br><span class="line">      <span class="comment">// 证明它有子节点，以后子节点就填充在 p 标签中</span></span><br><span class="line">      <span class="attr">toDOM</span>: <span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> [<span class="string">&#x27;p&#x27;</span>, <span class="number">0</span>]</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="comment">// 从别处复制过来的富文本，如果包含 p 标签，将 p 标签序列化为当前的 p 节点后进行展示</span></span><br><span class="line">      <span class="attr">parseDOM</span>: [&#123;</span><br><span class="line">        <span class="attr">tag</span>: <span class="string">&#x27;p&#x27;</span></span><br><span class="line">      &#125;]</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// 段落中的文本</span></span><br><span class="line">    <span class="attr">text</span>: &#123;</span><br><span class="line">      <span class="comment">// 当前处于 inline 分株，意味着它是个 inline 节点。代表输入的文本</span></span><br><span class="line">      <span class="attr">group</span>: <span class="string">&#x27;inline&#x27;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// 1-6 级标题</span></span><br><span class="line">    <span class="attr">heading</span>: &#123;</span><br><span class="line">      <span class="comment">// attrs 与 vue/react 组件中 props 的概念类似，代表定义当前节点有哪些属性，这里定义了 level 属性，默认值 1</span></span><br><span class="line">      <span class="attr">attrs</span>: &#123;</span><br><span class="line">        <span class="attr">level</span>: &#123;</span><br><span class="line">          <span class="attr">default</span>: <span class="number">1</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="comment">// 当前节点内容可以是 0 个或多个 inline 节点</span></span><br><span class="line">      <span class="attr">content</span>: <span class="string">&#x27;inline*&#x27;</span>,</span><br><span class="line">      <span class="comment">// 当前节点分组为 block 分组</span></span><br><span class="line">      <span class="attr">group</span>: <span class="string">&#x27;block&#x27;</span>,</span><br><span class="line">      <span class="comment">// defining: 特殊属性，为 true 代表如果在当前标签内（以 h1 为例），全选内容，直接粘贴新的内容后，这些内容还会被 h1 标签包裹</span></span><br><span class="line">      <span class="comment">// 如果为 false, 整个 h1 标签（包括内容与标签本身）将会被替换为其他内容，删除亦如此。</span></span><br><span class="line">      <span class="comment">// 还有其他的特殊属性，后续细说</span></span><br><span class="line">      <span class="attr">defining</span>: <span class="literal">true</span>,</span><br><span class="line">      <span class="comment">// 转为 html 标签时，根据当前的 level 属性，生成对应的 h1 - h6 标签，节点的内容填充在 h 标签中（“洞”在）。</span></span><br><span class="line">      <span class="title function_">toDOM</span>(<span class="params">node</span>) &#123;</span><br><span class="line">        <span class="keyword">const</span> tag = <span class="string">`h<span class="subst">$&#123;node.attrs.level&#125;</span>`</span></span><br><span class="line">        <span class="keyword">return</span> [tag, <span class="number">0</span>]</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="comment">// 从别处复制进来的富文本内容，根据标签序列化为当前 heading 节点，并填充对应的 level 属性</span></span><br><span class="line">      <span class="attr">parseDOM</span>: [</span><br><span class="line">        &#123;<span class="attr">tag</span>: <span class="string">&quot;h1&quot;</span>, <span class="attr">attrs</span>: &#123;<span class="attr">level</span>: <span class="number">1</span>&#125;&#125;,</span><br><span class="line">        &#123;<span class="attr">tag</span>: <span class="string">&quot;h2&quot;</span>, <span class="attr">attrs</span>: &#123;<span class="attr">level</span>: <span class="number">2</span>&#125;&#125;,</span><br><span class="line">        &#123;<span class="attr">tag</span>: <span class="string">&quot;h3&quot;</span>, <span class="attr">attrs</span>: &#123;<span class="attr">level</span>: <span class="number">3</span>&#125;&#125;,</span><br><span class="line">        &#123;<span class="attr">tag</span>: <span class="string">&quot;h4&quot;</span>, <span class="attr">attrs</span>: &#123;<span class="attr">level</span>: <span class="number">4</span>&#125;&#125;,</span><br><span class="line">        &#123;<span class="attr">tag</span>: <span class="string">&quot;h5&quot;</span>, <span class="attr">attrs</span>: &#123;<span class="attr">level</span>: <span class="number">5</span>&#125;&#125;,</span><br><span class="line">        &#123;<span class="attr">tag</span>: <span class="string">&quot;h6&quot;</span>, <span class="attr">attrs</span>: &#123;<span class="attr">level</span>: <span class="number">6</span>&#125;&#125;</span><br><span class="line">      ],</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// 除了上面定义 node 节点，一些富文本样式，可以通过 marks 定义</span></span><br><span class="line">  <span class="attr">marks</span>: &#123;</span><br><span class="line">    <span class="comment">// 文本加粗</span></span><br><span class="line">    <span class="attr">strong</span>: &#123;</span><br><span class="line">      <span class="comment">// 对于加粗的部分，使用 strong 标签包裹，加粗的内容位于 strong 标签内(这里定义的 0 与上面一致，也念做 “洞”，也类似 vue 中的 slot)</span></span><br><span class="line">      <span class="title function_">toDOM</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> [<span class="string">&#x27;strong&#x27;</span>, <span class="number">0</span>]</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="comment">// 从别的地方复制过来的富文本，如果有 strong 标签，则被解析为一个 strong mark</span></span><br><span class="line">      <span class="attr">parseDOM</span>: [</span><br><span class="line">        &#123; <span class="attr">tag</span>: <span class="string">&#x27;strong&#x27;</span> &#125;,</span><br><span class="line">      ],</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>从现象看，prosemirror 会寻找到我们第一个定义的 block 元素来初始化默认的 state。因此，在定义 schema 的时候，需要注意两点：</p>
+<p>Schema 中必要的节点要定义<br>节点的定义顺序可能会影响编辑器初始内容，如果遇到类似问题，可以排查 schema 中 node 的定义顺序</p>
+<h4 id="schema中的工具方法"><a href="#schema中的工具方法" class="headerlink" title="schema中的工具方法"></a>schema中的工具方法</h4><ol>
+<li>schema.cached 中绑定的 domParser 可以将 dom 节点解析为 node 节点</li>
+<li>domSerializer 可以将 node 内容序列化为 dom 节点。</li>
+<li></li>
+</ol>
+<hr>
+<h3 id="Node"><a href="#Node" class="headerlink" title="Node"></a>Node</h3><blockquote>
+<p>对于 Node 的类型，只有两种，即 block 与 inline</p>
+</blockquote>
+<h4 id="NodeType、NodeSpec、Node概念"><a href="#NodeType、NodeSpec、Node概念" class="headerlink" title="NodeType、NodeSpec、Node概念"></a>NodeType、NodeSpec、Node概念</h4><ul>
+<li>NodeSpec 就是之前在 Schema 中填写的 Node 相关的描述</li>
+<li>NodeType 是 Schema 实例化过程中，根据传入的 nodeSpec 规格说明书创建的 NodeType 实例，可以认为是 node 数据的工厂，后续所有的 node 类型都需要遵循它的定义，它也能像帮我们创造出一个 node 数据</li>
+<li>最后生成的 Node 实例则是文档中对应到 dom 的一个具体数据</li>
+</ul>
+<p><img src="/../assets/node.png" alt="node"></p>
+<p>inline 元素与 block 元素不能混合，即 content 里面要么只能是 inline 类型的，要么只能是 block 类型的，不能混合排列，如 paragraph|text* 就会报错。</p>
+<h4 id="定义Node"><a href="#定义Node" class="headerlink" title="定义Node"></a>定义Node</h4><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">      <span class="comment">// 段落内容规定必须是 inline 类型的节点（inline 与 HTML 中 inline 概念差不多）, `*` 号代表可以有 0 个或多个（规则类似正则）</span></span><br><span class="line">      content<span class="punctuation">:</span> &#x27;inline*&#x27;<span class="punctuation">,</span></span><br><span class="line">      <span class="comment">// 分组：当前节点所在的分组为 block，意味着它是个 block 节点</span></span><br><span class="line">      group<span class="punctuation">:</span> &#x27;block&#x27;<span class="punctuation">,</span></span><br><span class="line">      <span class="comment">// 渲染为 html 时候，使用 p 标签渲染，第二个参数 0 念做 “洞”，类似 vue 中 slot 插槽的概念，</span></span><br><span class="line">      <span class="comment">// 证明它有子节点，以后子节点就填充在 p 标签中</span></span><br><span class="line">      toDOM<span class="punctuation">:</span> () =&gt; <span class="punctuation">&#123;</span></span><br><span class="line">        return <span class="punctuation">[</span>&#x27;p&#x27;<span class="punctuation">,</span> <span class="number">0</span><span class="punctuation">]</span></span><br><span class="line">      <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="comment">// 从别处复制过来的富文本，如果包含 p 标签，将 p 标签序列化为当前的 p 节点后进行展示</span></span><br><span class="line">      parseDOM<span class="punctuation">:</span> <span class="punctuation">[</span><span class="punctuation">&#123;</span></span><br><span class="line">        tag<span class="punctuation">:</span> &#x27;p&#x27;</span><br><span class="line">      <span class="punctuation">&#125;</span><span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="通过API插入Node"><a href="#通过API插入Node" class="headerlink" title="通过API插入Node"></a>通过API插入Node</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">EditorView</span> &#125; <span class="keyword">from</span> <span class="string">&quot;prosemirror-view&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; schema &#125; <span class="keyword">from</span> <span class="string">&#x27;../schema-learning/schema&#x27;</span>;</span><br><span class="line"></span><br><span class="line">type <span class="title class_">Schema</span> = <span class="keyword">typeof</span> schema;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 插入段落</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> editorView </span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> content </span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">insertParagraph</span>(<span class="params">editorView: EditorView, content: string</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; state, dispatch &#125; = editorView;</span><br><span class="line">  <span class="keyword">const</span> schema = state.<span class="property">schema</span> <span class="keyword">as</span> <span class="title class_">Schema</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 通过 schema.node 创建一个 paragraph 节点，这里用的是字符串，对应 paragraph 的名字（对应在创建 schema 时候的 key）</span></span><br><span class="line">  <span class="comment">// 第二个参数是 attrs，即对应到 Vue React 中的 props，如果没有需要传 空对象</span></span><br><span class="line">  <span class="comment">// 内容为 文本，文本内容为 content 对应字符串，schema.text 可以快速创建文本结点</span></span><br><span class="line">  <span class="keyword">const</span> paragraph = schema.<span class="title function_">node</span>(<span class="string">&#x27;paragraph&#x27;</span>, &#123;&#125;, schema.<span class="title function_">text</span>(content));</span><br><span class="line">  <span class="comment">// 这里通过 schema.node 创建一个 block_tile 节点，这里通过直接拿到 block_tile 对应的 NodeType 来创建，内容为上面的段落</span></span><br><span class="line">  <span class="keyword">const</span> block_tile = schema.<span class="title function_">node</span>(<span class="string">&#x27;block_tile&#x27;</span>, &#123;&#125;, paragraph);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 这里通过 state.selection 可以获取到选区，通过 seletion.anchor 可以获取到选区开头的位置，我们在开头插入</span></span><br><span class="line">  <span class="comment">// 对于 选区没有概念的，可以翻看我对浏览器原生 Selection 与 Range 的讲解文章，这里的 anchor 差不多，但直接是个位置</span></span><br><span class="line">  <span class="keyword">const</span> pos = state.<span class="property">selection</span>.<span class="property">anchor</span>;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 通过 tr.insert 在 pos 位置将我们上面创建的节点插入到文档中</span></span><br><span class="line">  <span class="keyword">const</span> tr = state.<span class="property">tr</span>.<span class="title function_">insert</span>(pos, block_tile);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 派发更新</span></span><br><span class="line">  <span class="title function_">dispatch</span>(tr);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 插入标题</span></span><br><span class="line"><span class="comment"> * </span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> editorView </span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> content </span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> level </span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">insertHeading</span>(<span class="params">editorView: EditorView, content: string, level = <span class="number">1</span></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; state, dispatch &#125; = editorView;</span><br><span class="line">  <span class="keyword">const</span> schema = state.<span class="property">schema</span> <span class="keyword">as</span> <span class="title class_">Schema</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// const heading = schema.node(schema.nodes.heading, &#123; level &#125;, schema.text(content))</span></span><br><span class="line">  <span class="comment">// 也可以这样定义: 直接通过 node（这里的 node 对应的是我们上面讲到的 NodeType） 工厂方法创建一个 heading 实例，</span></span><br><span class="line">  <span class="keyword">const</span> heading = schema.<span class="property">nodes</span>.<span class="property">heading</span>.<span class="title function_">create</span>(&#123; level &#125;, schema.<span class="title function_">text</span>(content))</span><br><span class="line">  <span class="keyword">const</span> block_tile = schema.<span class="title function_">node</span>(schema.<span class="property">nodes</span>.<span class="property">block_tile</span>, &#123;&#125;, heading);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 将当前选区选中的内容都替换为 block_tile，比如输入的时候刚好选中一段文本，插入的时候，这段文本就应该被删掉，再插入一个 block_tile</span></span><br><span class="line">  <span class="keyword">const</span> tr = state.<span class="property">tr</span>.<span class="title function_">replaceSelectionWith</span>(block_tile);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// prosemirror 触发更新都是通过派发一个 tr </span></span><br><span class="line">  <span class="comment">// (第一篇文章讲过，它是 Transaction 事务的实例，Transaction 是 prosemirror-transform 包中 Transform 的子类)</span></span><br><span class="line">  <span class="comment">// (在 MVC 模式中对应 controller 的角色，专门用来操作数据，上面就是根据 state.tr 上的方法替换了内容，之后返回一个新的 tr)</span></span><br><span class="line">  <span class="comment">// 通过 view.dispatch(tr) 可以将 tr 派发出去，实现视图的更新</span></span><br><span class="line">  <span class="title function_">dispatch</span>(tr);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="解析复制进来的HTML"><a href="#解析复制进来的HTML" class="headerlink" title="解析复制进来的HTML"></a>解析复制进来的HTML</h4><p>parseDOM字段，根据优先级匹配</p>
+<h4 id="Node中的其他特殊属性"><a href="#Node中的其他特殊属性" class="headerlink" title="Node中的其他特殊属性"></a>Node中的其他特殊属性</h4><h5 id="defining"><a href="#defining" class="headerlink" title="defining"></a>defining</h5><p>defining: true 告诉编辑器当前这种这种块在改文档时要保留结构，好让粘贴、拆分等默认行为时会带上结构</p>
+<p>​	为一个块增加了 defining 定义后，复制这个块中的内容，粘贴进其他块（且该块内容全选或者是一个空的块）的时候，会将当前块转换为加了 defining 的块，然后将文本粘贴进去。当从其他块中复制了内容，要粘贴到 defining 中时候，仅仅会替换文本。</p>
+<h5 id="isolating"><a href="#isolating" class="headerlink" title="isolating"></a>isolating</h5><p>添加了 isolating 后，在当前块内删除元素，删到头的时候，再按删除也无法删除当前块；<br>并且复制了 defining 块的内容，也会按照 isolating: true 的 node 的结构渲染</p>
+<h5 id="draggable-与-selectable"><a href="#draggable-与-selectable" class="headerlink" title="draggable 与 selectable"></a>draggable 与 selectable</h5><p>draggable 控制元素是否可以被拖拽（默认不行），selectable 控制元素是否可以被选中</p>
+<h5 id="atom"><a href="#atom" class="headerlink" title="atom"></a>atom</h5><p>atom 为原子化，则代表其为一个最小单元，这种类型的节点，内部就不应该有可编辑的内容了，它的 content 属性也不需要再声明了，它的 nodeSize 大小始终都是1，会被 prosemirror 作为独立的单元对待</p>
+<hr>
+<h3 id="Mark"><a href="#Mark" class="headerlink" title="Mark"></a>Mark</h3><blockquote>
+<p>Node 主要是用来构成 Prosemirror 的文档结构的，而 Marks 主要是用来设置文本格式的</p>
+</blockquote>
+<h4 id="Mark的定义"><a href="#Mark的定义" class="headerlink" title="Mark的定义"></a>Mark的定义</h4><p>在 Prosemirror 中，Mark 的定义最关心的两个属性是 toDOM（类似 React 中定义组件，node用什么html来渲染） 与 parseDOM（解析粘贴进来的 html）</p>
+<p>​	对于 parseDOM，其规则则与 Node 中的规则完全一致，特别注意的是下面使用的 getAttrs，在通过 tag 匹配内容时， getAttrs 参数为 domNode，通过 style 匹配规则时，参数为字符串，字符串是对应 style 的值。getAttrs 返回 false 表示当前规则不匹配，不匹配的则不会被解析为当前的 mark，返回 undefined 或 null 则会为当前 mark 创建一个空的 attrs，如果正常返回内容，返回的内容则为从当前规则中解析出来的 attrs。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> schema = <span class="keyword">new</span> <span class="title class_">Schema</span>(&#123;</span><br><span class="line">  ...</span><br><span class="line">  <span class="attr">marks</span>: &#123;</span><br><span class="line">    <span class="comment">// 常见的 mark</span></span><br><span class="line">    <span class="comment">// 加粗 b, strong(语义化)</span></span><br><span class="line">    <span class="attr">bold</span>: &#123;</span><br><span class="line">      <span class="attr">toDOM</span>: <span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> [<span class="string">&#x27;strong&#x27;</span>, <span class="number">0</span>]</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="attr">parseDOM</span>: [</span><br><span class="line">        &#123; <span class="attr">tag</span>: <span class="string">&#x27;strong&#x27;</span> &#125;,</span><br><span class="line">        &#123; <span class="attr">tag</span>: <span class="string">&#x27;b&#x27;</span>, <span class="attr">getAttrs</span>: <span class="function">(<span class="params">domNode</span>) =&gt;</span> (domNode <span class="keyword">as</span> <span class="title class_">HTMLElement</span>).<span class="property">style</span>.<span class="property">fontWeight</span> !== <span class="string">&#x27;normal&#x27;</span> &amp;&amp; <span class="literal">null</span> &#125;,</span><br><span class="line">        &#123; <span class="attr">style</span>: <span class="string">&#x27;font-weight&#x27;</span>, <span class="attr">getAttrs</span>: <span class="function">(<span class="params">value</span>) =&gt;</span> <span class="regexp">/^(bold(er)?|[5-9]\d&#123;2&#125;)$/</span>.<span class="title function_">test</span>(value <span class="keyword">as</span> string) &amp;&amp; <span class="literal">null</span> &#125;</span><br><span class="line">      ]</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// 斜体 em</span></span><br><span class="line">    <span class="attr">italic</span>: &#123;</span><br><span class="line">      <span class="attr">group</span>: <span class="string">&#x27;heading&#x27;</span>,</span><br><span class="line">      <span class="attr">toDOM</span>: <span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> [<span class="string">&#x27;em&#x27;</span>, <span class="number">0</span>]</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="attr">parseDOM</span>: [</span><br><span class="line">        &#123; <span class="attr">tag</span>: <span class="string">&#x27;em&#x27;</span> &#125;,</span><br><span class="line">        &#123; <span class="attr">tag</span>: <span class="string">&#x27;i&#x27;</span>, <span class="attr">getAttrs</span>: <span class="function">(<span class="params">domNode</span>) =&gt;</span> (domNode <span class="keyword">as</span> <span class="title class_">HTMLElement</span>).<span class="property">style</span>.<span class="property">fontStyle</span> !== <span class="string">&#x27;normal&#x27;</span> &amp;&amp; <span class="literal">null</span>&#125;,</span><br><span class="line">        &#123; <span class="attr">style</span>: <span class="string">&#x27;font-style=italic&#x27;</span> &#125;,</span><br><span class="line">      ]</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// 链接</span></span><br><span class="line">  <span class="attr">link</span>: &#123;</span><br><span class="line">      <span class="attr">group</span>: <span class="string">&#x27;heading&#x27;</span>,</span><br><span class="line">      <span class="attr">attrs</span>: &#123;</span><br><span class="line">        <span class="attr">href</span>: &#123;</span><br><span class="line">          <span class="attr">default</span>: <span class="literal">null</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">ref</span>: &#123;</span><br><span class="line">          <span class="attr">default</span>: <span class="string">&#x27;noopener noreferrer nofollow&#x27;</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">target</span>: &#123;</span><br><span class="line">          <span class="attr">default</span>: <span class="string">&#x27;_blank&#x27;</span></span><br><span class="line">        &#125;,</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="attr">toDOM</span>: <span class="function">(<span class="params">mark</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> &#123; href, ref, target &#125; = mark.<span class="property">attrs</span>;</span><br><span class="line">        <span class="keyword">return</span> [<span class="string">&#x27;a&#x27;</span>, &#123; href, ref, target  &#125;, <span class="number">0</span>]</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="attr">parseDOM</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">          <span class="attr">tag</span>: <span class="string">&#x27;a[href]:not([href *= &quot;javascript:&quot; i])&#x27;</span></span><br><span class="line">        &#125;</span><br><span class="line">      ]</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;)	</span><br></pre></td></tr></table></figure>
+
+<h4 id="NodeSpec中的Mark字段"><a href="#NodeSpec中的Mark字段" class="headerlink" title="NodeSpec中的Mark字段"></a>NodeSpec中的Mark字段</h4><h4 id="Mark-的实际操作与特殊属性"><a href="#Mark-的实际操作与特殊属性" class="headerlink" title="Mark 的实际操作与特殊属性"></a>Mark 的实际操作与特殊属性</h4><h4 id="实现加粗斜体等样式demo"><a href="#实现加粗斜体等样式demo" class="headerlink" title="实现加粗斜体等样式demo"></a>实现加粗斜体等样式demo</h4><h4 id="Mark中的特殊属性"><a href="#Mark中的特殊属性" class="headerlink" title="Mark中的特殊属性"></a>Mark中的特殊属性</h4><h5 id="inclusive"><a href="#inclusive" class="headerlink" title="inclusive"></a>inclusive</h5><p>控制 mark 结尾继续输入是否延续 mark 效果</p>
+<h5 id="excludes"><a href="#excludes" class="headerlink" title="excludes"></a>excludes</h5><p>设置当前 mark 的互斥 mark</p>
+<h5 id="spanning"><a href="#spanning" class="headerlink" title="spanning"></a>spanning</h5><p>是否允许跨越多个节点</p>
+<hr>
+<h3 id="Selection-选区系统"><a href="#Selection-选区系统" class="headerlink" title="Selection 选区系统"></a>Selection 选区系统</h3><blockquote>
+<p>原文：<a target="_blank" rel="noopener" href="https://prosemirror.net/docs/ref/#state.Selection">https://prosemirror.net/docs/ref/#state.Selection</a></p>
+</blockquote>
+<h4 id="Prosemirror-中的光标系统"><a href="#Prosemirror-中的光标系统" class="headerlink" title="Prosemirror 中的光标系统"></a>Prosemirror 中的光标系统</h4><p>Prosemirror 中的光标系统是基于 Node 算的</p>
+<p><img src="/../assets/%E9%80%89%E5%8C%BA%E7%B3%BB%E7%BB%9F.png" alt="选区"></p>
+<h4 id="Prosemirror-中的-Selection"><a href="#Prosemirror-中的-Selection" class="headerlink" title="Prosemirror 中的 Selection"></a>Prosemirror 中的 Selection</h4><p>鼠标开始点击的地方叫做 anchor 锚点（下锚定住的基本点），鼠标选择结束后停止的地方叫做 head 头部</p>
+<p>还有 from 与 to，是不分方向的，from 始终是小的那一边，to 始终是大的那一边</p>
+<p><img src="/../assets/selection.png" alt="selection"></p>
+<p>当仅仅是光标时，这几个值都是相同的，并且 empty 时 true。</p>
+<p>还有一套带 $ 符号，命名相同的变量，存在当前这个 pos 位置的更丰富的信息:例如当前位置的 depth，pos，父元素 parent,后面一个节点 nodeAfter, 前面一个节点 nodeBefore，以及 path 当前节点的路径等。通常需要根据一个位置快速获取到当前位置的节点是什么，这个 api 计算的结果就很有用</p>
+<h5 id="Range-与-Selection-的区别"><a href="#Range-与-Selection-的区别" class="headerlink" title="Range 与 Selection 的区别"></a>Range 与 Selection 的区别</h5><hr>
+<h3 id="Plugin-插件系统"><a href="#Plugin-插件系统" class="headerlink" title="Plugin 插件系统"></a>Plugin 插件系统</h3><blockquote>
+<p>原文：<a target="_blank" rel="noopener" href="https://prosemirror.net/docs/ref/#state.Plugin_System">https://prosemirror.net/docs/ref/#state.Plugin_System</a></p>
+</blockquote>
+<h4 id="Command是什么"><a href="#Command是什么" class="headerlink" title="Command是什么"></a>Command是什么</h4><p>本质上是个函数签名，绑定事件，拦截事件，修改ProseMirror视图</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// Commands are functions that take a state and a an optional</span></span><br><span class="line"><span class="comment">/// transaction dispatch function and...</span></span><br><span class="line"><span class="comment">///</span></span><br><span class="line"><span class="comment">///  - determine whether they apply to this state</span></span><br><span class="line"><span class="comment">///  - if not, return false</span></span><br><span class="line"><span class="comment">///  - if `dispatch` was passed, perform their effect, possibly by</span></span><br><span class="line"><span class="comment">///    passing a transaction to `dispatch`</span></span><br><span class="line"><span class="comment">///  - return true</span></span><br><span class="line"><span class="comment">///</span></span><br><span class="line"><span class="comment">/// In some cases, the editor view is passed as a third argument.</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">type</span> <span class="title class_">Command</span> = <span class="function">(<span class="params"><span class="attr">state</span>: <span class="title class_">EditorState</span>, dispatch?: (tr: Transaction) =&gt; <span class="built_in">void</span>, view?: <span class="title class_">EditorView</span></span>) =&gt;</span> <span class="built_in">boolean</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="Command实现原理"><a href="#Command实现原理" class="headerlink" title="Command实现原理"></a>Command实现原理</h5><p>在 Prosemirror 中，将 Command 定义为一种类型是为了给大家提供一个命令的标准或协议，即一种规范，但并没有实际实现它。Command 的实现是在 prosemirror-keymap 包中完成的，而 keymap 则是一个插件。使用起来非常简单，通过 {key: command} 的键值对将快捷键与命令绑定，按下对应的按键时，就会执行相应的 Command。</p>
+<p>false：当前状态不满足<br>true：命令适用；若提供了 dispatch，则已完成修改</p>
+<h4 id="Plugin"><a href="#Plugin" class="headerlink" title="Plugin"></a>Plugin</h4><h5 id="Plugin组成"><a href="#Plugin组成" class="headerlink" title="Plugin组成"></a>Plugin组成</h5><p>能力	作用</p>
+<ul>
+<li>key: PluginKey</li>
+<li>state: { init, apply }</li>
+<li>props</li>
+<li>view(view) &#x3D;&gt; PluginView</li>
+<li>filterTransaction</li>
+<li>appendTransaction</li>
+</ul>
+<h5 id="Plugin生命周期"><a href="#Plugin生命周期" class="headerlink" title="Plugin生命周期"></a>Plugin生命周期</h5><ul>
+<li>EditorState.create({ plugins: […] })：对每个插件调 state.init，得到初始插件状态。</li>
+<li>用户输入或代码 dispatch(tr)：EditorState.apply(tr) 依次更新文档、选区、各插件 state.apply、以及插件里其它钩子约定。</li>
+<li>new EditorView(…, { state })：对每个带 view 的插件创建 PluginView，之后每次文档&#x2F;状态更新会调 PluginView.update（若存在）。</li>
+<li>view.destroy()：各 PluginView.destroy 做清理。</li>
+</ul>
+<h3 id="定制UI"><a href="#定制UI" class="headerlink" title="定制UI"></a>定制UI</h3><h4 id="ProseMirror定制UI的方法"><a href="#ProseMirror定制UI的方法" class="headerlink" title="ProseMirror定制UI的方法"></a>ProseMirror定制UI的方法</h4><h5 id="Schema中的toDOM：定义在schema里，实现简单"><a href="#Schema中的toDOM：定义在schema里，实现简单" class="headerlink" title="Schema中的toDOM：定义在schema里，实现简单"></a>Schema中的toDOM：定义在schema里，实现简单</h5><h5 id="NodeView-和-MarkView：自己写-DOM-生命周期"><a href="#NodeView-和-MarkView：自己写-DOM-生命周期" class="headerlink" title="NodeView 和 MarkView：自己写 DOM + 生命周期"></a>NodeView 和 MarkView：自己写 DOM + 生命周期</h5><p>一个 NodeView 通常负责：</p>
+<ul>
+<li>创建 DOM — 返回 { dom, contentDOM? }<ul>
+<li>dom：这个节点对应的外层元素</li>
+<li>contentDOM（可选）：子内容（如段落里的文字）插在这里；没有则表示 atom 节点，内容不可编辑</li>
+</ul>
+</li>
+<li>更新 — Node 的 attrs 变了，怎么更新 DOM</li>
+<li>选区 &#x2F; 光标 — 点击、聚焦时的行为</li>
+<li>销毁 — 节点从文档移除时清理（解绑事件等）</li>
+<li>（可选）忽略某些 mutation — 防止 ProseMirror 和你手动改的 DOM 冲突</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">codeBlockViewConstructor</span>(<span class="params">node, view, getPos</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> dom = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&#x27;div&#x27;</span>)</span><br><span class="line">  dom.<span class="property">className</span> = <span class="string">&#x27;code-block-wrapper&#x27;</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> pre = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&#x27;pre&#x27;</span>)</span><br><span class="line">  <span class="keyword">const</span> code = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&#x27;code&#x27;</span>)</span><br><span class="line">  pre.<span class="title function_">appendChild</span>(code)</span><br><span class="line">  dom.<span class="title function_">appendChild</span>(pre)</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 可编辑区域：用户输入的 text 会渲染在 contentDOM 里</span></span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    dom,</span><br><span class="line">    <span class="attr">contentDOM</span>: code,</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 注册</span></span><br><span class="line"><span class="keyword">new</span> <span class="title class_">EditorView</span>(root, &#123;</span><br><span class="line">  state,</span><br><span class="line">  <span class="attr">nodeViews</span>: &#123;</span><br><span class="line">    <span class="attr">code_block</span>: codeBlockViewConstructor,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h5 id="Decoration-设置样式"><a href="#Decoration-设置样式" class="headerlink" title="Decoration 设置样式"></a>Decoration 设置样式</h5><p>Decoration（装饰） 是 ProseMirror 在 View 层 给文档某段位置「加视觉效果或额外 DOM」的机制。</p>
+<p>核心特点：</p>
+<ul>
+<li>不影响 node 结构，即便 decoration 添加了 dom 的标签、属性，也不影响位置计算、node.textContent，只浮于表面</li>
+<li>每次tr的提交，都会使decoration重新执行</li>
+<li>适合搜索高亮、拼写错误下划线、协作光标、评论锚点等 临时 UI</li>
+</ul>
+<ol>
+<li>Decoration.inline — 行内样式</li>
+<li>Decoration.widget — 插入 DOM 小部件</li>
+<li>Decoration.node — 整块节点样式</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 先创建一个固定的文本</span></span><br><span class="line"><span class="keyword">var</span> doc = schema.<span class="title function_">nodeFromJSON</span>(&#123;</span><br><span class="line">  <span class="string">&quot;type&quot;</span>: <span class="string">&quot;doc&quot;</span>,</span><br><span class="line">  <span class="string">&quot;content&quot;</span>: [</span><br><span class="line">      &#123;</span><br><span class="line">          <span class="string">&quot;type&quot;</span>: <span class="string">&quot;block_tile&quot;</span>,</span><br><span class="line">          <span class="string">&quot;content&quot;</span>: [</span><br><span class="line">              &#123;</span><br><span class="line">                  <span class="string">&quot;type&quot;</span>: <span class="string">&quot;paragraph&quot;</span>,</span><br><span class="line">                  <span class="string">&quot;content&quot;</span>: [</span><br><span class="line">                      &#123;</span><br><span class="line">                          <span class="string">&quot;type&quot;</span>: <span class="string">&quot;text&quot;</span>,</span><br><span class="line">                          <span class="string">&quot;text&quot;</span>: <span class="string">&quot;123456789&quot;</span></span><br><span class="line">                      &#125;</span><br><span class="line">                  ]</span><br><span class="line">              &#125;</span><br><span class="line">          ]</span><br><span class="line">      &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 加入到 state 中</span></span><br><span class="line"><span class="keyword">const</span> editorState = <span class="title class_">EditorState</span>.<span class="title function_">create</span>(&#123;</span><br><span class="line">  schema,</span><br><span class="line">  <span class="attr">plugins</span>: [</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">  ],</span><br><span class="line">  doc</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> editorView = <span class="keyword">new</span> <span class="title class_">EditorView</span>(editorRoot, &#123;</span><br><span class="line">  <span class="attr">state</span>: editorState,</span><br><span class="line">  <span class="attr">nodeViews</span>: &#123;</span><br><span class="line">    <span class="attr">code_block</span>: codeBlockViewConstructor</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// editor View 中增加一个 decorations，通过  Decoration.inline 指定在位置 从 5 -&gt; 10 的文本上，添加 style 样式，为红色</span></span><br><span class="line">  <span class="title function_">decorations</span>(<span class="params">state</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> decoration = <span class="title class_">Decoration</span>.<span class="title function_">inline</span>(<span class="number">5</span>,<span class="number">10</span>, &#123; <span class="attr">style</span>: <span class="string">&#x27;color: red&#x27;</span> &#125;);</span><br><span class="line">    <span class="comment">// 返回的 decoration 必须是个 DecorationSet</span></span><br><span class="line">    <span class="keyword">return</span> <span class="title class_">DecorationSet</span>.<span class="title function_">create</span>(state.<span class="property">doc</span>, [decoration]);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>最终它的效果就是在 5 -&gt; 10 的位置，将内容变为红色</p>
+<p><img src="/../assets/decoration.png" alt="decoration"></p>
+<h4 id="实现代码块插件"><a href="#实现代码块插件" class="headerlink" title="实现代码块插件"></a>实现代码块插件</h4><h3 id="Steps-原子操作"><a href="#Steps-原子操作" class="headerlink" title="Steps 原子操作"></a>Steps 原子操作</h3><blockquote>
+<p>原文：<a target="_blank" rel="noopener" href="https://prosemirror.net/docs/ref/#transform.Steps">https://prosemirror.net/docs/ref/#transform.Steps</a></p>
+</blockquote>
+<h4 id="Steps的定义"><a href="#Steps的定义" class="headerlink" title="Steps的定义"></a>Steps的定义</h4><h3 id="Position-Mapping-位置映射"><a href="#Position-Mapping-位置映射" class="headerlink" title="Position Mapping 位置映射"></a>Position Mapping 位置映射</h3><h3 id="Document-transforms-文档转换"><a href="#Document-transforms-文档转换" class="headerlink" title="Document transforms 文档转换"></a>Document transforms 文档转换</h3><p>核心概念：原始 doc → 应用多个 Step → 新 doc</p>
+<h3 id="TipTap"><a href="#TipTap" class="headerlink" title="TipTap"></a>TipTap</h3>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%9C%A8%E7%BA%BF%E5%8D%8F%E5%90%8C%E6%96%87%E6%A1%A3/" rel="tag"># 在线协同文档</a>
+              <a href="/tags/%E5%AF%8C%E6%96%87%E6%9C%AC/" rel="tag"># 富文本</a>
+              <a href="/tags/ProseMirror/" rel="tag"># ProseMirror</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/04/30/%E5%8D%8F%E5%90%8C%E6%96%87%E6%A1%A3%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/" rel="prev" title="协同文档相关学习">
+                  <i class="fa fa-angle-left"></i> 协同文档相关学习
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2021 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Huangyuntse</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">97k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">5:53</span>
+  </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/huangyunt" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

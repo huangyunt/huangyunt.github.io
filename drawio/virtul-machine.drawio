@@ -1,0 +1,67 @@
+<mxfile host="65bd71144e">
+    <diagram id="docker-kernel-share" name="Docker 容器与内核">
+        <mxGraphModel dx="929" dy="865" grid="0" gridSize="10" guides="1" tooltips="1" connect="0" arrows="0" fold="1" page="1" pageScale="1" pageWidth="900" pageHeight="620" background="#ffffff" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="kernel" value="&lt;font color=&quot;#000000&quot;&gt;宿主机操作系统内核&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#E65100;strokeWidth=2;fillColor=#FFF3E0;fontSize=15;fontStyle=1;align=center;verticalAlign=middle;sketch=1;curveFitting=1;jiggle=2;" parent="1" vertex="1">
+                    <mxGeometry x="52" y="474" width="800" height="56" as="geometry"/>
+                </mxCell>
+                <mxCell id="c1-frame" value="" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#666666;strokeWidth=2;fillColor=#f5f5f5;dashed=0;shadow=0;glass=0;fontColor=#333333;sketch=1;curveFitting=1;jiggle=2;" parent="1" vertex="1">
+                    <mxGeometry x="50" y="40" width="240" height="412" as="geometry"/>
+                </mxCell>
+                <mxCell id="c1-title" value="&lt;font color=&quot;#000000&quot;&gt;虚拟机&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=top;fontSize=14;fontStyle=1;fontColor=#2E7D32;" parent="1" vertex="1">
+                    <mxGeometry x="50" y="48" width="240" height="24" as="geometry"/>
+                </mxCell>
+                <mxCell id="c1-app" value="&lt;font color=&quot;#000000&quot;&gt;程序&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#36393d;strokeWidth=2;fillColor=#ffcc99;fontSize=14;fontStyle=1;align=center;verticalAlign=middle;sketch=1;curveFitting=1;jiggle=2;" parent="1" vertex="1">
+                    <mxGeometry x="70" y="88" width="200" height="72" as="geometry"/>
+                </mxCell>
+                <mxCell id="c1-dep" value="&lt;font color=&quot;#000000&quot;&gt;依赖库&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#36393d;strokeWidth=2;fillColor=#cce5ff;fontSize=14;fontStyle=1;align=center;verticalAlign=middle;sketch=1;curveFitting=1;jiggle=2;" parent="1" vertex="1">
+                    <mxGeometry x="70" y="178" width="200" height="72" as="geometry"/>
+                </mxCell>
+                <mxCell id="c1-fs" value="&lt;font color=&quot;#000000&quot;&gt;文件系统&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#36393d;strokeWidth=2;fillColor=#cdeb8b;fontSize=14;fontStyle=1;align=center;verticalAlign=middle;sketch=1;curveFitting=1;jiggle=2;" parent="1" vertex="1">
+                    <mxGeometry x="70" y="268" width="200" height="72" as="geometry"/>
+                </mxCell>
+                <mxCell id="12" value="" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#666666;strokeWidth=2;fillColor=#f5f5f5;dashed=0;shadow=0;glass=0;sketch=1;curveFitting=1;jiggle=2;fontColor=#333333;" parent="1" vertex="1">
+                    <mxGeometry x="320" y="37" width="240" height="415" as="geometry"/>
+                </mxCell>
+                <mxCell id="13" value="&lt;font color=&quot;#000000&quot;&gt;虚拟机&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=top;fontSize=14;fontStyle=1;fontColor=#2E7D32;" parent="1" vertex="1">
+                    <mxGeometry x="320" y="45" width="240" height="24" as="geometry"/>
+                </mxCell>
+                <mxCell id="14" value="&lt;font color=&quot;#000000&quot;&gt;程序&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#36393d;strokeWidth=2;fillColor=#ffcc99;fontSize=14;fontStyle=1;align=center;verticalAlign=middle;sketch=1;curveFitting=1;jiggle=2;" parent="1" vertex="1">
+                    <mxGeometry x="340" y="85" width="200" height="72" as="geometry"/>
+                </mxCell>
+                <mxCell id="15" value="&lt;font color=&quot;#000000&quot;&gt;依赖库&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#36393d;strokeWidth=2;fillColor=#cce5ff;fontSize=14;fontStyle=1;align=center;verticalAlign=middle;sketch=1;curveFitting=1;jiggle=2;" parent="1" vertex="1">
+                    <mxGeometry x="340" y="175" width="200" height="72" as="geometry"/>
+                </mxCell>
+                <mxCell id="16" value="&lt;font color=&quot;#000000&quot;&gt;文件系统&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#36393d;strokeWidth=2;fillColor=#cdeb8b;fontSize=14;fontStyle=1;align=center;verticalAlign=middle;sketch=1;curveFitting=1;jiggle=2;" parent="1" vertex="1">
+                    <mxGeometry x="340" y="265" width="200" height="72" as="geometry"/>
+                </mxCell>
+                <mxCell id="17" value="" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#666666;strokeWidth=2;fillColor=#f5f5f5;dashed=0;shadow=0;glass=0;sketch=1;curveFitting=1;jiggle=2;fontColor=#333333;" parent="1" vertex="1">
+                    <mxGeometry x="607" y="37" width="240" height="411" as="geometry"/>
+                </mxCell>
+                <mxCell id="18" value="&lt;font color=&quot;#000000&quot;&gt;虚拟机&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=top;fontSize=14;fontStyle=1;fontColor=#2E7D32;" parent="1" vertex="1">
+                    <mxGeometry x="607" y="45" width="240" height="24" as="geometry"/>
+                </mxCell>
+                <mxCell id="19" value="&lt;font color=&quot;#000000&quot;&gt;程序&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#36393d;strokeWidth=2;fillColor=#ffcc99;fontSize=14;fontStyle=1;align=center;verticalAlign=middle;sketch=1;curveFitting=1;jiggle=2;" parent="1" vertex="1">
+                    <mxGeometry x="627" y="85" width="200" height="72" as="geometry"/>
+                </mxCell>
+                <mxCell id="20" value="&lt;font color=&quot;#000000&quot;&gt;依赖库&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#36393d;strokeWidth=2;fillColor=#cce5ff;fontSize=14;fontStyle=1;align=center;verticalAlign=middle;sketch=1;curveFitting=1;jiggle=2;" parent="1" vertex="1">
+                    <mxGeometry x="627" y="175" width="200" height="72" as="geometry"/>
+                </mxCell>
+                <mxCell id="21" value="&lt;font color=&quot;#000000&quot;&gt;文件系统&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#36393d;strokeWidth=2;fillColor=#cdeb8b;fontSize=14;fontStyle=1;align=center;verticalAlign=middle;sketch=1;curveFitting=1;jiggle=2;" parent="1" vertex="1">
+                    <mxGeometry x="627" y="265" width="200" height="72" as="geometry"/>
+                </mxCell>
+                <mxCell id="22" value="&lt;font color=&quot;#000000&quot;&gt;操作系统&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#36393d;strokeWidth=2;fillColor=#ffff88;fontSize=14;fontStyle=1;align=center;verticalAlign=middle;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+                    <mxGeometry x="73" y="362" width="200" height="72" as="geometry"/>
+                </mxCell>
+                <mxCell id="23" value="&lt;font color=&quot;#000000&quot;&gt;操作系统&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#36393d;strokeWidth=2;fillColor=#ffff88;fontSize=14;fontStyle=1;align=center;verticalAlign=middle;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+                    <mxGeometry x="340" y="362" width="200" height="72" as="geometry"/>
+                </mxCell>
+                <mxCell id="24" value="&lt;font color=&quot;#000000&quot;&gt;操作系统&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#36393d;strokeWidth=2;fillColor=#ffff88;fontSize=14;fontStyle=1;align=center;verticalAlign=middle;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+                    <mxGeometry x="631" y="362" width="200" height="72" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

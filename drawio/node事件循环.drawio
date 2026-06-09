@@ -1,0 +1,60 @@
+<mxfile host="65bd71144e">
+    <diagram id="t8Yg7FFrz0b2ezcWgAui" name="Node.js事件循环全流程">
+        <mxGraphModel dx="1370" dy="624" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="3" value="&lt;h4&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;调用栈&lt;/font&gt;&lt;/span&gt;&lt;/h4&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#808080;strokeColor=#000000;fontColor=#ffffff;align=center;" vertex="1" parent="1">
+                    <mxGeometry x="87" y="106" width="117" height="296" as="geometry"/>
+                </mxCell>
+                <mxCell id="4" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#808080;strokeColor=#000000;align=center;" vertex="1" parent="1">
+                    <mxGeometry x="237" y="106" width="530" height="200" as="geometry"/>
+                </mxCell>
+                <mxCell id="5" value="nextTick 队列" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#222222;strokeColor=#000000;fontColor=#ffffff;align=center;" vertex="1" parent="1">
+                    <mxGeometry x="258" y="136" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="6" value="nextTick 回调" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFF99;strokeColor=#000000;align=center;" vertex="1" parent="1">
+                    <mxGeometry x="394" y="136" width="350" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="7" value="微任务队列 (Microtasks)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#222222;strokeColor=#000000;fontColor=#ffffff;align=center;" vertex="1" parent="1">
+                    <mxGeometry x="258" y="216" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="8" value="Promise 回调" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFF99;strokeColor=#000000;align=center;" vertex="1" parent="1">
+                    <mxGeometry x="394" y="216" width="350" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="9" value="事件循环 (Event Loop Phases)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#999999;strokeColor=#000000;align=center;" vertex="1" parent="1">
+                    <mxGeometry x="243" y="332" width="524" height="270" as="geometry"/>
+                </mxCell>
+                <mxCell id="10" value="Timer 阶段 (setTimeout/setInterval)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dddddd;strokeColor=#000000;align=center;" vertex="1" parent="1">
+                    <mxGeometry x="298" y="360" width="419" height="56" as="geometry"/>
+                </mxCell>
+                <mxCell id="11" value="Poll 阶段 (I/O 事件回调)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dddddd;strokeColor=#000000;align=center;" vertex="1" parent="1">
+                    <mxGeometry x="298" y="440" width="419" height="56" as="geometry"/>
+                </mxCell>
+                <mxCell id="12" value="Check 阶段 (setImmediate)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dddddd;strokeColor=#000000;align=center;" vertex="1" parent="1">
+                    <mxGeometry x="298" y="517" width="419" height="59" as="geometry"/>
+                </mxCell>
+                <mxCell id="17" value="" style="endArrow=block;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" target="10">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="508" y="306" as="sourcePoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="18" value="" style="endArrow=block;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="10" target="11">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="19" value="" style="endArrow=block;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="11" target="12">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="22" value="" style="endArrow=classic;html=1;" edge="1" parent="1" source="9">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="367" y="386" as="sourcePoint"/>
+                        <mxPoint x="123" y="470" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="23" value="&lt;b&gt;&lt;font style=&quot;font-size: 20px;&quot;&gt;Tick&lt;/font&gt;&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+                    <mxGeometry x="61" y="452" width="60" height="40" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
